@@ -3,24 +3,19 @@
 This plugin try to propose a new UX/UI for Redmine.
 * Status : in development please don't use it yet
 
-## Presentation
+[Presentation](doc/presentation.md)
+[Development](doc/development.md)
 
-### Why?
+## Installation
 
-Redmine is really powerful. Really. Many features and customizable.
-But I have to say that after 10 years of using it, the UX and the UI are quite old and not so attractive that it used to be at the begining, well at least in my point of view.
+This plugin has been tested with Redmine 5.x+
 
-So let's try to do something different.
-
-### How?
-
-* Plugin instead of a theme so that we can reorder items and add stimulus
-* Tailwind css
-* Stimulus for interactivity
-
-## Test
-
-todo
+```
+cd $REDMINE_ROOT
+git clone https://github.com/tantic/redmine_asap_theme.git plugins/redmine_asap_theme
+bundle install
+bundle exec rake redmine:plugins:migrate RAILS_ENV=production
+```
 
 ## Contributing
 
