@@ -1,3 +1,58 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+html{
+  height: calc(100vh - 3.5rem);
+  @apply font-light;
+}
+
+/* Navbar */
+
+/* Project jumpbox */
+.drdn-content{
+  display: none;
+}
+
+.expanded .drdn-content{
+  @apply flex flex-col absolute shadow-md bg-white;
+}
+
+.expanded .drdn-content .drdn-items{
+  @apply cursor-pointer;
+}
+
+.expanded .drdn-content .drdn-items .label-group{
+  @apply p-4 uppercase text-xs text-gray-400;
+}
+
+.expanded .drdn-content .drdn-items a{
+  @apply hover:bg-gray-50 hover:border-l-2 hover:border-blue-800 hover:pl-3.5 px-4 py-2 text-sm;
+}
+
+.expanded .drdn-content .all-projects{
+  @apply w-full;
+}
+
+.expanded .drdn-content .all-projects a{
+  @apply hover:bg-gray-50 mt-4 flex px-4 py-2 w-full border-t hover:border-t-white border-gray-50;
+}
+
+.drdn-trigger:after{
+  display: inline-flex;
+  content: '';
+  margin-left: 10px;
+  background-image: url('../images/icon_chevron_down.svg');
+  background-size: 16px 16px;
+  height: 16px;
+  width: 16px;
+}
+
+.expanded .drdn-content .projects{
+  display: flex;
+  flex-direction: column;
+}
+
+.drdn-trigger{
+  @apply h-full flex items-center text-sm justify-center px-4 hover:bg-gray-50 cursor-pointer;
+}
