@@ -3,7 +3,8 @@
 ## General UX/UI
 
 - [ ] Layout
-- [ ] Navbar
+- [x] Navbar (WIP)
+- [x] Project jumpbox
 - [ ] Navigation in a project
 - [ ] Contextual menu
 - [ ] Responsive navigation (mobile, tablet, laptop, desktop)
