@@ -1,10 +1,12 @@
 # Redmine asap theme
 
-This plugin try to propose a new UX/UI for Redmine.
-* Status : in development please don't use it yet
+This plugin try to propose a new UX/UI for Redmine and try new tools like stimulus and Tailwindcss (one day Hotwire :-)).
+Status : in development and for fun not a real plugin for now
 
-[Presentation](doc/presentation.md)
-[Development](doc/development.md)
+## Documentation
+
+* [Presentation](doc/presentation.md)
+* [Development](doc/development.md)
 
 ## Installation
 
@@ -18,6 +20,8 @@ bundle exec rake redmine:plugins:migrate RAILS_ENV=production
 ```
 
 ## Contributing
+
+I'm not a designer neither a real developer so I would be really happy to have help on this.
 
 * Fork it
 * Create your feature branch (git checkout -b my-new-feature)
