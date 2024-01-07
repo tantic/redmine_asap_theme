@@ -1,11 +1,13 @@
 # Redmine asap theme
 
 This plugin try to propose a new UX/UI for Redmine and try new tools like stimulus and Tailwindcss (one day Hotwire :-)).
+
 Status : in development and for fun not a real plugin for now
 
 ## Documentation
 
 * [Presentation](doc/presentation.md)
+* [Features](doc/features.md)
 * [Development](doc/development.md)
 
 ## Installation
