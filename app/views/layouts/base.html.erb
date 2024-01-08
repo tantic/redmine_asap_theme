@@ -12,7 +12,8 @@
 <%= stylesheet_link_tag 'jquery/jquery-ui-1.13.2', 'tribute-5.1.3',  'responsive', :media => 'all' %>
 <%= stylesheet_link_tag 'rtl', :media => 'all' if l(:direction) == 'rtl' %>
 <%= stylesheet_link_tag "application.css", :plugin => 'redmine_asap_theme' %>
-<%= javascript_include_tag 'menu-breadcrumb.js', :plugin => 'redmine_asap_theme' %>
+<%= javascript_include_tag 'stimulus.umd.js', :plugin => 'redmine_asap_theme' %>
+<%= javascript_include_tag 'application.js', :type => "module", :plugin => 'redmine_asap_theme' %>
 <%= javascript_heads %>
 <%= heads_for_theme %>
 <%= heads_for_auto_complete(@project) %>
@@ -35,7 +36,45 @@
           <%= render_project_jump_box %>
         <% end %>
       <% end %>
+      <div class="ml-auto flex">
+        <div data-controller="usermenu" class="flex text-sm relative items-center justify-center">
+          <% if User.current.admin?  %>
+            <%= link_to admin_path, :class => "cursor-pointer p-2 rounded-full hover:bg-gray-200 text-gray-700 dark:text-gray-400 dark:hover:text-gray-300 dark:hover:bg-gray-700 hover:text-gray-800" do %>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-gray-800 transition duration-75 dark:text-gray-400 hover:text-gray-900 dark:group-hover:text-white">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12a7.5 7.5 0 0 0 15 0m-15 0a7.5 7.5 0 1 1 15 0m-15 0H3m16.5 0H21m-1.5 0H12m-8.457 3.077 1.41-.513m14.095-5.13 1.41-.513M5.106 17.785l1.15-.964m11.49-9.642 1.149-.964M7.501 19.795l.75-1.3m7.5-12.99.75-1.3m-6.063 16.658.26-1.477m2.605-14.772.26-1.477m0 17.726-.26-1.477M10.698 4.614l-.26-1.477M16.5 19.794l-.75-1.299M7.5 4.205 12 12m6.894 5.785-1.149-.964M6.256 7.178l-1.15-.964m15.352 8.864-1.41-.513M4.954 9.435l-1.41-.514M12.002 12l-3.75 6.495" />
+              </svg>
+            <% end %>
+          <% end %>
+          <div data-action="click->usermenu#toggle" class="cursor-pointer p-2 h-full flex items-center justify-center">
+            <div class="relative inline-flex items-center justify-center w-10 h-10 overflow-hidden bg-gray-100  hover:bg-gray-200 rounded-full dark:bg-gray-600">
+                <span class="font-medium text-gray-600 dark:text-gray-300">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
+                  </svg>
+                </span>
+            </div>
+          </div>
+          <div class="absolute right-0 shadow rounded-md border border-gray-50 mt bg-white z-50 w-60 top-14 hidden" data-usermenu-target="usersubmenu">
+            <div class="p-4 font-normal">
+              <%= User.current %>
+            </div>
+            <div class="border-t border-gray-50">
+              <%= link_to user_path(User.current), :class => "flex items-center text-gray-900 hover:bg-gray-50 hover:border-l-2 hover:border-blue-800 hover:pl-3.5 px-4 py-2 text-sm" do %>
+                  <%= l(:label_profile) %>
+              <% end %>
+              <%= link_to my_account_path(User.current), :class => "flex items-center text-gray-900 hover:bg-gray-50 hover:border-l-2 hover:border-blue-800 hover:pl-3.5 px-4 py-2 text-sm" do %>
+                  <%= l(:label_my_account) %>
+              <% end %>
+              <hr class="border-t border-l-0 border-r-0 border-b-0 border-solid border-gray-100 my-0.5" />
+              <%= link_to "/logout", method: :post, :class => "flex items-center text-gray-900 hover:bg-gray-50 hover:border-l-2 hover:border-blue-800 hover:pl-3.5 px-4 py-2 text-sm" do %>
+                  <%= l(:label_logout) %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+
   </nav>
 
   <main class="w-full h-full dark:bg-slate-800 dark:text-gray-400 mt-14">

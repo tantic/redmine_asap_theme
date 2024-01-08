@@ -1,0 +1,1 @@
+gem 'stimulus-rails'
