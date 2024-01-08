@@ -37,6 +37,54 @@ module RedmineAsapTheme
       end
       s
     end
+
+    def project_parent_breadcrumb
+      if @project.nil? || @project.new_record?
+        # content_tag(:div, '&#47;'.html_safe, :id => 'menu-breadcrumb-empty')
+      else
+          b = []
+          c = []
+          ancestors = (@project.root? ? [] : @project.ancestors.visible.to_a)
+          if ancestors.any?
+              b << content_tag(:div, '&#47;'.html_safe, :id => 'menu-breadcrumb')
+              root = ancestors.shift
+              c << link_to_project(root, {:jump => current_menu_item}, :class => 'root')
+              c += ancestors.collect {|p| link_to_project(p, {:jump => current_menu_item}, :class => 'ancestor') }
+          end
+          if c.size > 0
+              separator = content_tag(:span, ' &#47; '.html_safe, class: 'separator')
+              path = safe_join(c[0..-1], separator)
+              b = [content_tag(:div, path.html_safe, id: 'breadcrumbs', style: "display:none"), b]
+          else
+              # b << content_tag(:div, '&#47;'.html_safe, :id => 'menu-breadcrumb-empty')
+          end
+          safe_join b.reverse
+      end
+    end
+
+    def project_children_breadcrumb
+        if @project.nil? || @project.new_record?
+
+        else
+            b = []
+            c = []
+            children = @project.children.visible.to_a
+            chevron = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M13.172 12l-4.95-4.95 1.414-1.414L16 12l-6.364 6.364-1.414-1.414z" fill="rgba(255,255,255,1)"/></svg>'
+            if children.any?
+                icone = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 3c-.825 0-1.5.675-1.5 1.5S11.175 6 12 6s1.5-.675 1.5-1.5S12.825 3 12 3zm0 15c-.825 0-1.5.675-1.5 1.5S11.175 21 12 21s1.5-.675 1.5-1.5S12.825 18 12 18zm0-7.5c-.825 0-1.5.675-1.5 1.5s.675 1.5 1.5 1.5 1.5-.675 1.5-1.5-.675-1.5-1.5-1.5z" fill="rgba(255,255,255,1)"/></svg>'
+                b << content_tag(:a, icone.html_safe, :href => "#", :id => 'menu-breadcrumb-children')
+                root = children.shift
+                c << link_to_project(root, {:jump => current_menu_item}, :class => 'root')
+                c += children.collect {|p| link_to_project(p, {:jump => current_menu_item}, :class => 'ancestor') }
+            end
+            if c.size > 0
+                path = safe_join c
+                b = [content_tag(:div, path.html_safe, id: 'breadcrumbs-children'), b]
+            end
+            safe_join b.reverse
+        end
+    end
+
   end
 end
 

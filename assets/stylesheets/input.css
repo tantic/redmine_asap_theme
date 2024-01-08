@@ -56,3 +56,24 @@ html{
 .drdn-trigger{
   @apply h-full flex items-center text-sm justify-center px-4 hover:bg-gray-50 cursor-pointer;
 }
+
+#menu-breadcrumb{
+  @apply h-14 w-14 flex items-center text-sm justify-center px-4 bg-gray-50 hover:bg-gray-100 cursor-pointer;
+}
+
+#menu-breadcrumb-empty{
+  @apply h-14 w-14 flex items-center text-sm justify-center px-4 ;
+}
+
+
+#breadcrumbs{
+  @apply absolute top-14 left-14 bg-white shadow flex flex-row;
+}
+
+#breadcrumbs > * {
+  @apply flex items-center text-sm justify-center p-4 h-14;
+}
+
+#breadcrumbs > a {
+  @apply hover:bg-gray-100;
+}
