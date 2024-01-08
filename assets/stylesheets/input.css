@@ -77,3 +77,15 @@ html{
 #breadcrumbs > a {
   @apply hover:bg-gray-100;
 }
+
+.tribute-container{
+  @apply shadow mt-3  bg-white;
+}
+
+.tribute-container ul{
+  @apply  shadow-xl;
+}
+
+.tribute-container li.highlight{
+  @apply shadow-xl p-2 w-48 text-sm bg-white hover:bg-gray-50;
+}

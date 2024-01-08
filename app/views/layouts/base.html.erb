@@ -38,6 +38,25 @@
       <% end %>
       <div class="ml-auto flex">
         <div data-controller="usermenu" class="flex text-sm relative items-center justify-center">
+          <% if User.current.logged? || !Setting.login_required? %>
+            <div id="quick-search" class="hidden" data-usermenu-target="search">
+              <%= form_tag({:controller => 'search', :action => 'index', :id => @project}, :method => :get ) do %>
+                <%= hidden_field_tag 'scope', default_search_project_scope, :id => nil %>
+                <%= hidden_field_tag(controller.default_search_scope, 1, :id => nil) if controller.default_search_scope %>
+                <%= text_field_tag 'q', @question,
+                          :size => 20,
+                          :class => 'text-sm bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-3 py-1.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500',
+                          :accesskey => accesskey(:quick_search),
+                          :placeholder => l(:label_search),
+                          :data => {:auto_complete => true, :autofocus => true, :usermenu_target => "searchinput"} %>
+              <% end %>
+            </div>
+          <% end %>
+          <div data-action="click->usermenu#search" class="cursor-pointer ml-1 p-2 rounded-full hover:bg-gray-200 text-gray-700 dark:text-gray-400 dark:hover:text-gray-300 dark:hover:bg-gray-700 hover:text-gray-800">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-gray-800 transition duration-75 dark:text-gray-400 hover:text-gray-900 dark:group-hover:text-white">
+              <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+            </svg>
+          </div>
           <% if User.current.admin?  %>
             <%= link_to admin_path, :class => "cursor-pointer p-2 rounded-full hover:bg-gray-200 text-gray-700 dark:text-gray-400 dark:hover:text-gray-300 dark:hover:bg-gray-700 hover:text-gray-800" do %>
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-gray-800 transition duration-75 dark:text-gray-400 hover:text-gray-900 dark:group-hover:text-white">
