@@ -3,8 +3,7 @@
 ## General UX/UI
 
 - [ ] Layout
-- [x] Navbar (WIP)
-- [x] Project jumpbox
+- [x] Navbar : logo, Project jumpbox, search, admin, user menu (my account, my profile, logout)
 - [ ] Navigation in a project
 - [ ] Contextual menu
 - [ ] Responsive navigation (mobile, tablet, laptop, desktop)
