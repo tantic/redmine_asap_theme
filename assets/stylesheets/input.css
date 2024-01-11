@@ -7,11 +7,23 @@ html{
   @apply font-light;
 }
 
+body {
+  @apply text-sm;
+}
+
 /* Navbar */
 
 /* Project jumpbox */
 .drdn-content{
   display: none;
+}
+
+#project-jump.drdn {
+  @apply relative h-14 pl-0 pr-0;
+}
+
+#project-jump.drdn-trigger{
+  @apply overflow-x-auto pl-0 pr-0;
 }
 
 .expanded .drdn-content{
@@ -46,6 +58,15 @@ html{
   background-size: 16px 16px;
   height: 16px;
   width: 16px;
+}
+
+@media screen and (max-width: 640px) {
+  #project-jump .drdn-trigger {
+    @apply text-gray-800 font-light text-xs flex items-center ;
+  }
+  .drdn-trigger:after{
+    background-image: none;
+  }
 }
 
 .expanded .drdn-content .projects{

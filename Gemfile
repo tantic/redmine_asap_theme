@@ -1,1 +1,1 @@
-gem 'stimulus-rails'
+gem 'letter_avatar'

@@ -1,5 +1,17 @@
+require_dependency "application_helper"
 module RedmineAsapTheme
   module ApplicationHelperPatch
+    def self.included(base)
+      base.class_eval do
+          alias_method :project_parent_breadcrumb_patch, :project_parent_breadcrumb
+          alias_method :project_parent_breadcrumb, :project_parent_breadcrumb_patch
+
+          alias_method :project_children_breadcrumb_patch, :project_children_breadcrumb
+          alias_method :project_children_breadcrumb, :project_children_breadcrumb_patch
+      end
+    end
+
+
     def render_projects_for_jump_box(projects, selected: nil, query: nil)
       if query.blank?
         jump_box = Redmine::ProjectJumpBox.new User.current
@@ -88,6 +100,8 @@ module RedmineAsapTheme
   end
 end
 
-Rails.application.config.after_initialize do
-  ApplicationController.send(:helper, RedmineAsapTheme::ApplicationHelperPatch)
-end
+# Rails.application.config.after_initialize do
+#   ApplicationController.send(:helper, RedmineAsapTheme::ApplicationHelperPatch)
+# end
+ApplicationHelper.prepend RedmineAsapTheme::ApplicationHelperPatch
+ActionView::Base.prepend ApplicationHelper

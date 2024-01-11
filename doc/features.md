@@ -8,10 +8,11 @@
 - [ ] Contextual menu
 - [ ] Responsive navigation (mobile, tablet, laptop, desktop)
 - [ ] Dark theme
+- [x] Add letter avatar to project
 
 ## Pages
 
-- [ ] Welcome page
+- [ ] Welcome page (WIP)
 - [ ] Projects
 - [ ] Search
 
