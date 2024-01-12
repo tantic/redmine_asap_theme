@@ -1480,8 +1480,9 @@ body {
 }
 
 #project-menu ul li a {
-  display: flex;
+  display: block;
   align-items: center;
+  white-space: nowrap;
   border-radius: 0.5rem;
   padding: 0.5rem;
   --tw-text-opacity: 1;
@@ -1505,6 +1506,18 @@ body {
   }
 }
 
+@media (min-width: 640px) {
+  #project-menu ul li a {
+    overflow: hidden;
+  }
+}
+
+@media (min-width: 768px) {
+  #project-menu ul li a {
+    display: flex;
+  }
+}
+
 #project-menu ul li a.selected {
   --tw-bg-opacity: 1;
   background-color: rgb(243 244 246 / var(--tw-bg-opacity));
@@ -1520,7 +1533,7 @@ body {
 #project-menu ul li a.calendar::before{
   display: inline-flex;
   content: '';
-  margin-right: 15px;
+  margin-right: 20px;
   background-image: url('../images/calendar.svg');
   background-size: 22px 22px;
   height: 22px;
@@ -1531,7 +1544,7 @@ body {
 #project-menu ul li a.gantt::before{
   display: inline-flex;
   content: '';
-  margin-right: 15px;
+  margin-right: 20px;
   background-image: url('../images/gantt.svg');
   background-size: 22px 22px;
   height: 22px;
@@ -1542,7 +1555,7 @@ body {
 #project-menu ul li a.time-entries::before{
   display: inline-flex;
   content: '';
-  margin-right: 15px;
+  margin-right: 20px;
   background-image: url('../images/time.svg');
   background-size: 22px 22px;
   height: 22px;
@@ -1553,7 +1566,7 @@ body {
 #project-menu ul li a.issues::before{
   display: inline-flex;
   content: '';
-  margin-right: 15px;
+  margin-right: 20px;
   background-image: url('../images/issues.svg');
   background-size: 22px 22px;
   height: 22px;
@@ -1564,7 +1577,7 @@ body {
 #project-menu ul li a.activity::before{
   display: inline-flex;
   content: '';
-  margin-right: 15px;
+  margin-right: 20px;
   background-image: url('../images/activity.svg');
   background-size: 22px 22px;
   height: 22px;
@@ -1575,7 +1588,7 @@ body {
 #project-menu ul li a.news::before{
   display: inline-flex;
   content: '';
-  margin-right: 15px;
+  margin-right: 20px;
   background-image: url('../images/megaphone.svg');
   background-size: 22px 22px;
   height: 22px;
@@ -1586,7 +1599,7 @@ body {
 #project-menu ul li a.documents::before{
   display: inline-flex;
   content: '';
-  margin-right: 15px;
+  margin-right: 20px;
   background-image: url('../images/documents.svg');
   background-size: 22px 22px;
   height: 22px;
@@ -1597,7 +1610,7 @@ body {
 #project-menu ul li a.wiki::before{
   display: inline-flex;
   content: '';
-  margin-right: 15px;
+  margin-right: 20px;
   background-image: url('../images/wiki.svg');
   background-size: 22px 22px;
   height: 22px;
@@ -1608,7 +1621,7 @@ body {
 #project-menu ul li a.settings::before{
   display: inline-flex;
   content: '';
-  margin-right: 15px;
+  margin-right: 20px;
   background-image: url('../images/settings.svg');
   background-size: 22px 22px;
   height: 22px;
@@ -1619,7 +1632,7 @@ body {
 #project-menu ul li a.repository::before{
   display: inline-flex;
   content: '';
-  margin-right: 15px;
+  margin-right: 20px;
   background-image: url('../images/repository.svg');
   background-size: 22px 22px;
   height: 22px;
@@ -1630,7 +1643,7 @@ body {
 #project-menu ul li a.boards::before{
   display: inline-flex;
   content: '';
-  margin-right: 15px;
+  margin-right: 20px;
   background-image: url('../images/boards.svg');
   background-size: 22px 22px;
   height: 22px;
@@ -1641,7 +1654,7 @@ body {
 #project-menu ul li a.overview::before{
   display: inline-flex;
   content: '';
-  margin-right: 15px;
+  margin-right: 20px;
   background-image: url('../images/home.svg');
   background-size: 22px 22px;
   height: 22px;
@@ -1652,7 +1665,7 @@ body {
 #project-menu ul li a.files::before{
   display: inline-flex;
   content: '';
-  margin-right: 15px;
+  margin-right: 20px;
   background-image: url('../images/files.svg');
   background-size: 22px 22px;
   height: 22px;
