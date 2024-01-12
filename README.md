@@ -11,6 +11,7 @@ Look at a first try with the navbar
 
 * [Presentation](doc/presentation.md)
 * [Features](doc/features.md)
+* [Progress & demo](doc/progress.md)
 * [Development](doc/development.md)
 
 ## Installation
