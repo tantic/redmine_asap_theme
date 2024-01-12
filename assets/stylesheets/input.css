@@ -110,3 +110,164 @@ body {
 .tribute-container li.highlight{
   @apply shadow-xl p-2 w-48 text-sm bg-white hover:bg-gray-50;
 }
+
+
+#project-menu ul li:first-child{
+  display: none;
+}
+
+#project-menu ul{
+  @apply space-y-0.5 font-light;
+}
+
+#project-menu ul li a{
+  @apply flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 ;
+}
+
+#project-menu ul li a.selected{
+  @apply bg-gray-100 dark:bg-gray-700
+}
+
+#project-menu ul li a.calendar::before{
+  display: inline-flex;
+  content: '';
+  margin-right: 15px;
+  background-image: url('../images/calendar.svg');
+  background-size: 22px 22px;
+  height: 22px;
+  width: 22px;
+  color: #f1f5f9;
+}
+
+#project-menu ul li a.gantt::before{
+  display: inline-flex;
+  content: '';
+  margin-right: 15px;
+  background-image: url('../images/gantt.svg');
+  background-size: 22px 22px;
+  height: 22px;
+  width: 22px;
+  color: #f1f5f9;
+}
+
+#project-menu ul li a.time-entries::before{
+  display: inline-flex;
+  content: '';
+  margin-right: 15px;
+  background-image: url('../images/time.svg');
+  background-size: 22px 22px;
+  height: 22px;
+  width: 22px;
+  color: #f1f5f9;
+}
+
+#project-menu ul li a.issues::before{
+  display: inline-flex;
+  content: '';
+  margin-right: 15px;
+  background-image: url('../images/issues.svg');
+  background-size: 22px 22px;
+  height: 22px;
+  width: 22px;
+  color: #f1f5f9;
+}
+
+#project-menu ul li a.activity::before{
+  display: inline-flex;
+  content: '';
+  margin-right: 15px;
+  background-image: url('../images/activity.svg');
+  background-size: 22px 22px;
+  height: 22px;
+  width: 22px;
+  color: #f1f5f9;
+}
+
+#project-menu ul li a.news::before{
+  display: inline-flex;
+  content: '';
+  margin-right: 15px;
+  background-image: url('../images/megaphone.svg');
+  background-size: 22px 22px;
+  height: 22px;
+  width: 22px;
+  color: #f1f5f9;
+}
+
+#project-menu ul li a.documents::before{
+  display: inline-flex;
+  content: '';
+  margin-right: 15px;
+  background-image: url('../images/documents.svg');
+  background-size: 22px 22px;
+  height: 22px;
+  width: 22px;
+  color: #f1f5f9;
+}
+
+#project-menu ul li a.wiki::before{
+  display: inline-flex;
+  content: '';
+  margin-right: 15px;
+  background-image: url('../images/wiki.svg');
+  background-size: 22px 22px;
+  height: 22px;
+  width: 22px;
+  color: #f1f5f9;
+}
+
+#project-menu ul li a.settings::before{
+  display: inline-flex;
+  content: '';
+  margin-right: 15px;
+  background-image: url('../images/settings.svg');
+  background-size: 22px 22px;
+  height: 22px;
+  width: 22px;
+  color: #f1f5f9;
+}
+
+#project-menu ul li a.repository::before{
+  display: inline-flex;
+  content: '';
+  margin-right: 15px;
+  background-image: url('../images/repository.svg');
+  background-size: 22px 22px;
+  height: 22px;
+  width: 22px;
+  color: #f1f5f9;
+}
+
+
+#project-menu ul li a.boards::before{
+  display: inline-flex;
+  content: '';
+  margin-right: 15px;
+  background-image: url('../images/boards.svg');
+  background-size: 22px 22px;
+  height: 22px;
+  width: 22px;
+  color: #f1f5f9;
+}
+
+#project-menu ul li a.overview::before{
+  display: inline-flex;
+  content: '';
+  margin-right: 15px;
+  background-image: url('../images/home.svg');
+  background-size: 22px 22px;
+  height: 22px;
+  width: 22px;
+  color: #f1f5f9;
+}
+
+#project-menu ul li a.files::before{
+  display: inline-flex;
+  content: '';
+  margin-right: 15px;
+  background-image: url('../images/files.svg');
+  background-size: 22px 22px;
+  height: 22px;
+  width: 22px;
+  color: #f1f5f9;
+}

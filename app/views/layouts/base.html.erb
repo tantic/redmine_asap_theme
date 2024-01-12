@@ -107,11 +107,9 @@
     -->
 
     <% if display_main_menu?(@project) %>
-    <aside class="fixed overflow-y-auto flex flex-col top-14 py-10 px-4 shadow bg-zinc-50  dark:bg-gray-800  h-full w-16 md:w-64">
-      <%= render_main_menu(@project) %>
-      <div class="tabs-buttons" style="display:none;">
-          <button class="tab-left" onclick="moveTabLeft(this); return false;"></button>
-          <button class="tab-right" onclick="moveTabRight(this); return false;"></button>
+    <aside id="project-menu" class="fixed overflow-y-auto flex flex-col top-14 shadow bg-white  dark:bg-gray-800  h-full w-16 md:w-64">
+      <div class="h-full px-2 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800">
+        <%= render_main_menu(@project) %>
       </div>
     </aside>
     <% end %>

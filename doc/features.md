@@ -9,10 +9,12 @@
 - [ ] Responsive navigation (mobile, tablet, laptop, desktop)
 - [ ] Dark theme
 - [x] Add letter avatar to project
+- [ ] Notification panel available from the navbar
+- [ ] Access to last seen issues + personal activity in a panel
 
 ## Pages
 
-- [ ] Welcome page (WIP)
+- [ ] Welcome page (WIP) : last seen projects, bookmarked and projects (limit 12) + search + last seen issues
 - [ ] Projects
 - [ ] Search
 
@@ -51,6 +53,12 @@ Account
 - [ ] Settings
 
 - [ ] Query
+- [ ] Ability to access subprojects more quickly
+
+## Issue
+
+- [ ] UX/UI of an issue
+- [ ] Ability to add reaction to issues
 
 ## Personal
 
@@ -74,3 +82,8 @@ Account
 - [ ] LDAP Authentication
 - [ ] Plugins
 - [ ] Information
+
+## Compatibility
+
+- [ ] Redmine maintenance
+- [ ] Agile plugin
