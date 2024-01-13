@@ -1,4 +1,5 @@
 import "./controllers/usermenu_controller.js"
+import "./controllers/projectmenu_controller.js"
 
 document.addEventListener("DOMContentLoaded", function(e) {
   if(document.querySelector('#menu-breadcrumb')){

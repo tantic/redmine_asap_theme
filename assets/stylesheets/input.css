@@ -28,27 +28,23 @@ body {
 
 .expanded .drdn-content{
   @apply flex flex-col absolute shadow-md bg-white;
+  .drdn-items{
+    @apply cursor-pointer;
+    .label-group{
+      @apply p-4 uppercase text-xs text-gray-400;
+    }
+    a{
+      @apply hover:bg-gray-50 hover:border-l-2 hover:border-blue-800 hover:pl-3.5 px-4 py-2 text-sm;
+    }
+  }
+  .all-projects{
+    @apply w-full;
+    a{
+      @apply hover:bg-gray-50 mt-4 flex px-4 py-2 w-full border-t hover:border-t-white border-gray-50;
+    }
+  }
 }
 
-.expanded .drdn-content .drdn-items{
-  @apply cursor-pointer;
-}
-
-.expanded .drdn-content .drdn-items .label-group{
-  @apply p-4 uppercase text-xs text-gray-400;
-}
-
-.expanded .drdn-content .drdn-items a{
-  @apply hover:bg-gray-50 hover:border-l-2 hover:border-blue-800 hover:pl-3.5 px-4 py-2 text-sm;
-}
-
-.expanded .drdn-content .all-projects{
-  @apply w-full;
-}
-
-.expanded .drdn-content .all-projects a{
-  @apply hover:bg-gray-50 mt-4 flex px-4 py-2 w-full border-t hover:border-t-white border-gray-50;
-}
 
 .drdn-trigger:after{
   display: inline-flex;
@@ -76,6 +72,49 @@ body {
 
 .drdn-trigger{
   @apply h-full flex items-center text-sm justify-center px-4 hover:bg-gray-50 cursor-pointer;
+}
+
+.has-main-menu .drdn-trigger{
+  @apply bg-white text-gray-800 hover:bg-blue-50 border-r border-gray-100;
+  &::after{
+    @apply text-white;
+  }
+}
+
+
+#project-menu-actions{
+  ul:first-child > li:not(:first-child){
+    display:none;
+  }
+  ul > li:first-child > .new-object{
+    display:none;
+  }
+  ul{
+    li{
+      a{
+        @apply flex items-center text-gray-900 hover:bg-gray-50 hover:border-l-2 hover:border-blue-800 hover:pl-3.5 px-4 py-2 text-sm
+      }
+      a.selected{
+        @apply border-l-2 border-blue-800 pl-3.5 bg-gray-50;
+      }
+    }
+  }
+}
+
+#project-menu-submenus{
+  ul > li:first-child{
+    display:none;
+  }
+  ul{
+    li{
+      a{
+        @apply flex items-center text-gray-900 hover:bg-gray-50 hover:border-l-2 hover:border-blue-800 hover:pl-3.5 px-4 py-2 text-sm
+      }
+      a.selected{
+        @apply border-l-2 border-blue-800 pl-3.5 bg-gray-50;
+      }
+    }
+  }
 }
 
 #menu-breadcrumb{
@@ -112,21 +151,21 @@ body {
 }
 
 
-#project-menu ul li:first-child{
-  display: none;
+#project-menu{
+  ul{
+    @apply space-y-0.5 font-light;
+    li:first-child{
+      display: none;
+    }
+    li a{
+      @apply  whitespace-nowrap block md:flex sm:overflow-hidden  items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 ;
+      &.selected{
+        @apply bg-gray-100 dark:bg-gray-700
+      }
+    }
+  }
 }
 
-#project-menu ul{
-  @apply space-y-0.5 font-light;
-}
-
-#project-menu ul li a{
-  @apply  whitespace-nowrap block md:flex sm:overflow-hidden  items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 ;
-}
-
-#project-menu ul li a.selected{
-  @apply bg-gray-100 dark:bg-gray-700
-}
 
 #project-menu ul li a.calendar::before{
   display: inline-flex;
