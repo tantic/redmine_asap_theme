@@ -5,7 +5,7 @@
 <%= hidden_field_tag 'back_url', url_for(:params => request.query_parameters), :id => nil %>
 <%= query_columns_hidden_tags(query) %>
 <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-<table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 list issues odd-even <%= query.css_classes %>">
+<table class="w-full text-xs text-left rtl:text-right text-gray-500 dark:text-gray-400 list issues odd-even <%= query.css_classes %>">
   <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
     <tr>
       <th class="px-6 py-3">
@@ -31,7 +31,7 @@
       </td>
     </tr>
   <% end %>
-  <tr id="issue-<%= issue.id %>" class="hascontextmenu odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700 <%= cycle('odd', 'even') %> <%= issue.css_classes %> <%= level > 0 ? "idnt idnt-#{level}" : nil %>">
+  <tr id="issue-<%= issue.id %>" class="hascontextmenu text-gray-800 odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700 <%= cycle('odd', 'even') %> <%= issue.css_classes %> <%= level > 0 ? "idnt idnt-#{level}" : nil %>">
     <td class="checkbox hide-when-print"><%= check_box_tag("ids[]", issue.id, false, :id => nil) %></td>
     <% query.inline_columns.each do |column| %>
     <%= content_tag('td', column_content(column, issue), :class => 'px-6 py-4') %>
