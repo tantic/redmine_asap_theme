@@ -1318,6 +1318,12 @@ body {
       padding-left: 0.875rem;
     }
   }
+  .projects {
+    height: 20rem;
+  }
+  .projects {
+    overflow-y: auto;
+  }
   .all-projects {
     width: 100%;
   }
