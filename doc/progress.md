@@ -17,3 +17,7 @@ Add project menu in the navbar
 Finally add issue menu
 
 ![Three](img/three.png)
+
+And start issues list
+
+![first-issues](img/first-issues.png)
