@@ -78,7 +78,7 @@ body {
 }
 
 .has-main-menu .drdn-trigger{
-  @apply bg-white text-gray-800 hover:bg-blue-50 border-r border-gray-100;
+  @apply bg-white text-gray-800 hover:bg-gray-50 border-r border-gray-100;
   &::after{
     @apply text-white;
   }
@@ -121,7 +121,7 @@ body {
 }
 
 #menu-breadcrumb{
-  @apply h-14 w-14 flex items-center text-sm justify-center px-4 bg-gray-50 hover:bg-gray-100 cursor-pointer;
+  @apply h-14 w-14 flex items-center text-sm justify-center px-4 border-r border-gray-100  hover:bg-gray-50 cursor-pointer;
 }
 
 #menu-breadcrumb-empty{
