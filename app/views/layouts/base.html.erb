@@ -45,12 +45,31 @@
     </aside>
     <% end %>
     -->
-    <section id="content" class="p-8 md:px-16 mb-auto w-full  h-full">
-      <%= render_flash_messages %>
-      <%= yield %>
-      <%= call_hook :view_layouts_base_content %>
-      <div style="clear:both;"></div>
-    </section>
+    <% if controller_name == "issues" && action_name == "show" %>
+      <div class="flex">
+        <aside class="w-80 shadow bg-gray-50">
+          <div class="flex flex-col h-full overflow-y-auto">
+          <% @issues.each do |issue| %>
+            <%= link_to issue.subject, issue_path(issue), class: 'p-4 hover:bg-gray-100' %>
+          <% end %>
+          </div>
+        </aside>
+        <section id="content" class="w-full bg-gray-50 h-full flex">
+
+          <%= yield %>
+          <%= call_hook :view_layouts_base_content %>
+          <div style="clear:both;"></div>
+        </section>
+
+      </div>
+    <% else %>
+      <section id="content" class="p-8 md:px-16 mb-auto w-full  h-full">
+        <%= render_flash_messages %>
+        <%= yield %>
+        <%= call_hook :view_layouts_base_content %>
+        <div style="clear:both;"></div>
+      </section>
+    <% end %>
   </main>
 
   <!--
