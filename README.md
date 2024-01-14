@@ -3,6 +3,7 @@
 This plugin try to propose a new UX/UI for Redmine and try new tools like stimulus and Tailwindcss (one day Hotwire :smiley:).
 
 Status : in development and for fun not a real plugin for now.
+
 Look at a first try with the navbar
 
 ![Welcome page](doc/img/Redmine-asap-theme_welcome-page.png)

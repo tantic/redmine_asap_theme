@@ -5,7 +5,7 @@
 Redmine is really powerful. Really. Many features and really customizables.
 But I have to say that after 10 years of using it, the UX and the UI are now quite old and not as attractive as it used to be, well at least in my point of view.
 
-So let's try to do something different!
+So let's try to do something different! First version just a new version not a revolution, we'll see later how this could better.
 
 ## What?
 
