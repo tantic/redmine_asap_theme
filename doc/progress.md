@@ -21,3 +21,12 @@ Finally add issue menu
 And start issues list
 
 ![first-issues](img/first-issues.png)
+
+Tried something with issue (3 columns but only the one in the middle for now)
+
+![first-issue](img/first-issue.png)
+
+The idea : add a navigation on the left to go from one issue to another one.
+In the middle, focus on the issue, all attributes are moved to the right panel.
+
+Need to be improve and test

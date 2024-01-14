@@ -313,3 +313,16 @@ body {
   width: 22px;
   color: #f1f5f9;
 }
+
+
+.badge-status-open{
+  @apply rounded py-0.5 px-2 text-xs inline-block font-semibold leading-normal  bg-blue-200 text-blue-700;
+}
+
+.badge-status-closed{
+  @apply rounded py-0.5 px-2 text-xs inline-block font-semibold leading-normal  bg-gray-200 text-gray-700;
+}
+
+.selected{
+  @apply  text-blue-600 border-b-2 border-blue-600;
+}

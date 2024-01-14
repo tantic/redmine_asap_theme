@@ -20,7 +20,7 @@ A brand new theme whith a new layout and some principles
 ## How?
 
 * Plugin instead of a theme so that we can reorder items and add stimulus
-* Tailwind css
+* Tailwind css and sometimes flowbite
 * Stimulus for interactivity
 * integration of small improvments seen in open sources plugins
 * try to keep the compatibility with plugins when possible
