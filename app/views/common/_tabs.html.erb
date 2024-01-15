@@ -21,7 +21,7 @@
   <%= content_tag('div', (render(:partial => tab[:partial], :locals => {:tab => tab}) if tab[:partial]) ,
                        :id => "tab-content-#{tab[:name]}",
                        :style => (tab[:name] != selected_tab ? 'display:none' : nil),
-                       :class => 'tab-content pt-4') if tab[:partial] || tab[:remote] %>
+                       :class => 'tab-content px-4 py-6') if tab[:partial] || tab[:remote] %>
 <% end -%>
 
 <%= javascript_tag default_action if default_action %>
