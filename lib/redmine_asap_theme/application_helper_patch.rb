@@ -97,6 +97,14 @@ module RedmineAsapTheme
         end
     end
 
+    def copy_object_url_link(url)
+      link_to_function(
+        l(:button_copy_link), 'copyTextToClipboard(this);',
+        class: 'icon icon-copy-link flex items-center text-gray-900 hover:bg-gray-50 hover:border-l-2 hover:border-blue-800 hover:pl-3.5 px-4 py-2 text-sm',
+        data: {'clipboard-text' => url}
+      )
+    end
+
   end
 end
 

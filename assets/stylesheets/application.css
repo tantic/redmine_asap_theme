@@ -781,6 +781,10 @@ select {
   position: relative;
 }
 
+.-start-3 {
+  inset-inline-start: -0.75rem;
+}
+
 .left-0 {
   left: 0px;
 }
@@ -805,8 +809,12 @@ select {
   top: 3.5rem;
 }
 
-.-start-3 {
-  inset-inline-start: -0.75rem;
+.top-2 {
+  top: 0.5rem;
+}
+
+.top-10 {
+  top: 2.5rem;
 }
 
 .z-50 {
@@ -848,12 +856,25 @@ select {
   margin-bottom: 2rem;
 }
 
+.my-4 {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
 .-mb-px {
   margin-bottom: -1px;
 }
 
+.mb-1 {
+  margin-bottom: 0.25rem;
+}
+
 .mb-2 {
   margin-bottom: 0.5rem;
+}
+
+.mb-4 {
+  margin-bottom: 1rem;
 }
 
 .mb-8 {
@@ -880,6 +901,10 @@ select {
   margin-left: 1rem;
 }
 
+.ml-80 {
+  margin-left: 20rem;
+}
+
 .ml-auto {
   margin-left: auto;
 }
@@ -890,6 +915,14 @@ select {
 
 .mr-4 {
   margin-right: 1rem;
+}
+
+.mr-80 {
+  margin-right: 20rem;
+}
+
+.ms-6 {
+  margin-inline-start: 1.5rem;
 }
 
 .mt-0 {
@@ -912,20 +945,8 @@ select {
   margin-top: 2rem;
 }
 
-.mb-4 {
-  margin-bottom: 1rem;
-}
-
-.mb-10 {
-  margin-bottom: 2.5rem;
-}
-
-.ms-6 {
-  margin-inline-start: 1.5rem;
-}
-
-.mb-1 {
-  margin-bottom: 0.25rem;
+.mr-8 {
+  margin-right: 2rem;
 }
 
 .block {
@@ -1036,6 +1057,18 @@ select {
   width: 100%;
 }
 
+.w-72 {
+  width: 18rem;
+}
+
+.w-44 {
+  width: 11rem;
+}
+
+.w-auto {
+  width: auto;
+}
+
 .flex-none {
   flex: none;
 }
@@ -1137,12 +1170,12 @@ select {
   border-right-width: 0px;
 }
 
-.border-t {
-  border-top-width: 1px;
-}
-
 .border-s {
   border-inline-start-width: 1px;
+}
+
+.border-t {
+  border-top-width: 1px;
 }
 
 .border-solid {
@@ -1173,6 +1206,11 @@ select {
   border-color: transparent;
 }
 
+.bg-blue-100 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(219 234 254 / var(--tw-bg-opacity));
+}
+
 .bg-blue-700 {
   --tw-bg-opacity: 1;
   background-color: rgb(29 78 216 / var(--tw-bg-opacity));
@@ -1196,11 +1234,6 @@ select {
 .bg-white {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
-}
-
-.bg-blue-100 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(219 234 254 / var(--tw-bg-opacity));
 }
 
 .p-2 {
@@ -2373,12 +2406,12 @@ body {
     order: 9999;
   }
 
-  .sm\:mt-8 {
-    margin-top: 2rem;
-  }
-
   .sm\:mb-0 {
     margin-bottom: 0px;
+  }
+
+  .sm\:mt-8 {
+    margin-top: 2rem;
   }
 
   .sm\:flex {
