@@ -3,13 +3,13 @@ require_dependency 'issues_controller'
 module RedmineAsapTheme
   module IssuesControllerPatch
     def show
-      # use_session = !request.format.csv?
-      # retrieve_default_query(use_session)
-      # retrieve_query(IssueQuery, use_session)
-      # if @query.valid?
-      #   @issues = @query.issues()
-      # end
-      @issues = Issue.where(:project_id => @issue.project.id)
+      use_session = !request.format.csv?
+      retrieve_default_query(use_session)
+      retrieve_query(IssueQuery, use_session)
+      if @query.valid?
+        @issues = @query.issues()
+      end
+      # @issues = Issue.where(:project_id => @issue.project.id)
 
       @journals = @issue.visible_journals_with_index
       @has_changesets = @issue.changesets.visible.preload(:repository, :user).exists?

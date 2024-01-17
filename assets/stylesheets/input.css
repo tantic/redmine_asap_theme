@@ -95,10 +95,10 @@ body {
   ul{
     li{
       a{
-        @apply flex items-center text-gray-900 hover:bg-gray-50 hover:border-l-2 hover:border-blue-800 hover:pl-3.5 px-4 py-2 text-sm
+        @apply flex items-center text-gray-900 hover:bg-gray-50 hover:border-l-2 hover:border-l-blue-800 hover:pl-3.5 px-4 py-2 text-sm
       }
       a.selected{
-        @apply border-l-2 border-blue-800 pl-3.5 bg-gray-50;
+        @apply border-l-2 border-l-blue-800 pl-3.5 bg-gray-50;
       }
     }
   }
@@ -111,10 +111,10 @@ body {
   ul{
     li{
       a{
-        @apply flex items-center text-gray-900 hover:bg-gray-50 hover:border-l-2 hover:border-blue-800 hover:pl-3.5 px-4 py-2 text-sm
+        @apply flex items-center text-gray-900 hover:bg-gray-50 hover:border-l-2 hover:border-l-blue-800 hover:pl-3.5 px-4 py-2 text-sm
       }
       a.selected{
-        @apply border-l-2 border-blue-800 pl-3.5 bg-gray-50;
+        @apply border-l-2 border-l-blue-800 pl-3.5 bg-gray-50;
       }
     }
   }
@@ -316,13 +316,10 @@ body {
 
 
 .badge-status-open{
-  @apply rounded py-0.5 px-2 text-xs inline-block font-semibold leading-normal  bg-blue-200 text-blue-700;
+  @apply rounded py-0.5 px-2 text-xs inline-block font-semibold leading-normal  bg-green-200 text-green-700;
 }
 
 .badge-status-closed{
   @apply rounded py-0.5 px-2 text-xs inline-block font-semibold leading-normal  bg-gray-200 text-gray-700;
 }
 
-.selected{
-  @apply  text-blue-600 border-b-2 border-blue-600;
-}

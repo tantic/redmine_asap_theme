@@ -1,9 +1,14 @@
-<div class="dark:bg-gray-800 mr-8 w-full bg-white shadow p-8 md:p-16  mb-8 mt-0 md:mt-8 flex flex-col">
+<div class="dark:bg-gray-800 h-fit mr-8 w-full bg-white shadow p-8 md:p-16  mb-8 mt-0 md:mt-8 flex flex-col">
   <%= render_flash_messages %>
 
   <header class="flex flex-col items-center justify-center">
     <div class="flex w-full border-b border-gray-100 pb-4 items-center">
-      <h2 class="flex-none flex w-auto font-medium mr-2">
+      <h2 class="flex-none flex w-auto items-center font-medium mr-2">
+        <div data-action="click->issue#toggleNavigation" class="cursor-pointer p-2 mr-2 rounded-full hover:bg-gray-100 text-gray-700 dark:text-gray-400 dark:hover:text-gray-300 dark:hover:bg-gray-700 hover:text-gray-800">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+          </svg>
+        </div>
         <%= issue_heading(@issue) %>
         <div class="flex items-center mx-2">
           <%= issue_status_type_badge(@issue.status) %>
@@ -16,37 +21,8 @@
           </span>
         <% end %>
       </h2>
-      <div class="grow w-full text-gray-600">
-        <% if @prev_issue_id || @next_issue_id %>
-          <div class="next-prev-links contextual flex justify-center">
-            <% if @prev_issue_id %>
-              <%= link_to_if @prev_issue_id,
-                            "\xc2\xab #{l(:label_previous)}",
-                            (@prev_issue_id ? issue_path(@prev_issue_id) : nil),
-                            :title => "##{@prev_issue_id}",
-                            :accesskey => accesskey(:previous),
-                            class: 'mr-2 hover:text-gray-800' %> |
-            <% end %>
-            <% if @issue_position && @issue_count %>
-              <span class="position mx-2 hover:text-gray-800">
-                <%= link_to_if @query_path,
-                              l(:label_item_position, :position => @issue_position, :count => @issue_count),
-                              @query_path %>
-              </span>
-            <% end %>
-            <% if @next_issue_id %>
-             |
-              <%= link_to_if @next_issue_id,
-                            "#{l(:label_next)} \xc2\xbb",
-                            (@next_issue_id ? issue_path(@next_issue_id) : nil),
-                            :title => "##{@next_issue_id}",
-                            :accesskey => accesskey(:next),
-                            class: 'ml-2 hover:text-gray-800' %>
-            <% end %>
-          </div>
-        <% end %>
-      </div>
-      <div class="flex-none w-auto">
+
+      <div class="ml-auto w-auto">
         <div class="flex justify-end">
           <%= render :partial => 'action_menu' %>
         </div>
@@ -76,11 +52,6 @@
       <%= author_avatar(@issue.author, :size => "50") %>
       <%= assignee_avatar(@issue.assigned_to, :size => "22", :class => "gravatar-child") if @issue.assigned_to %>
     </div>
-
-
-
-
-
 
   <% if @issue.description? %>
 
@@ -121,7 +92,7 @@
   <%= render_tabs issue_history_tabs, issue_history_default_tab %>
   </div>
 
-  <%= render partial: 'action_menu_edit' unless User.current.wants_comments_in_reverse_order? %>
+  <%#= render partial: 'action_menu_edit' unless User.current.wants_comments_in_reverse_order? %>
 
   <% other_formats_links do |f| %>
     <%= f.link_to 'Atom', :url => {:key => User.current.atom_key} %>
@@ -151,36 +122,96 @@
 <aside class="w-80 shadow bg-gray-50 p-8 bg-white ml-auto fixed top-14 right-0 h-full">
 
 
-  <div class="attributes">
+  <div class="space-y-1">
+    <div class="flex w-full">
+      <div class="mr-2 text-gray-400 w-1/3"><%= l(:field_status) %></div>
+      <div class="w-2/3"><%= @issue.status.name %></div>
+    </div>
+    <div class="flex w-full">
+      <div class="mr-2 text-gray-400 w-1/3"><%= l(:field_priority) %></div>
+      <div class="w-2/3"><%= @issue.priority.name %></div>
+    </div>
+    <% unless @issue.disabled_core_fields.include?('assigned_to_id') %>
+    <div class="flex w-full">
+      <div class="mr-2 text-gray-400 w-1/3"><%= l(:field_assigned_to) %></div>
+      <div class="w-2/3"><%= @issue.assigned_to ? link_to_principal(@issue.assigned_to) : "-" %></div>
+    </div>
+    <% end %>
+    <% unless @issue.disabled_core_fields.include?('category_id') || (@issue.category.nil? && @issue.project.issue_categories.none?) %>
+    <div class="flex w-full">
+      <div class="mr-2 text-gray-400 w-1/3"><%= l(:field_category) %></div>
+      <div class="w-2/3"><%= @issue.category ? @issue.category.name : "-" %></div>
+    </div>
+    <% end %>
+    <% unless @issue.disabled_core_fields.include?('fixed_version_id') || (@issue.fixed_version.nil? && @issue.assignable_versions.none?) %>
+    <div class="flex w-full">
+      <div class="mr-2 text-gray-400 w-1/3"><%= l(:field_fixed_version) %></div>
+      <div class="w-2/3"><%= @issue.fixed_version ? link_to_version(@issue.fixed_version) : "-" %></div>
+    </div>
+    <% end %>
+    <% unless @issue.disabled_core_fields.include?('start_date') %>
+    <div class="flex w-full">
+      <div class="mr-2 text-gray-400 w-1/3"><%= l(:field_start_date) %></div>
+      <div class="w-2/3"><%= format_date(@issue.start_date) %></div>
+    </div>
+    <% end %>
+    <% unless @issue.disabled_core_fields.include?('due_date') %>
+    <div class="flex w-full">
+      <div class="mr-2 text-gray-400 w-1/3"><%= l(:field_due_date) %></div>
+      <div class="w-2/3"><%= issue_due_date_details(@issue) %></div>
+    </div>
+    <% end %>
+    <% unless @issue.disabled_core_fields.include?('done_ratio') %>
+    <div class="flex w-full">
+      <div class="mr-2 text-gray-400 w-1/3"><%= l(:field_done_ratio) %></div>
+      <div class="w-2/3 flex items-center">
+        <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
+          <div class="bg-green-500 h-2.5 rounded-full text-green-50 text-[8px] flex items-center px-2" style="width: <%= @issue.done_ratio%>%"><%= @issue.done_ratio %>%</div>
+        </div>
+      </div>
+    </div>
+    <% end %>
+    <% unless @issue.disabled_core_fields.include?('estimated_hours') %>
+    <div class="flex w-full">
+      <div class="mr-2 text-gray-400 w-1/3"><%= l(:field_estimated_hours) %></div>
+      <div class="w-2/3"><%= issue_estimated_hours_details(@issue) %></div>
+    </div>
+    <% end %>
+    <% if User.current.allowed_to?(:view_time_entries, @project) && @issue.total_spent_hours > 0 %>
+    <div class="flex w-full">
+      <div class="mr-2 text-gray-400 w-1/3"><%= l(:label_spent_time) %></div>
+      <div class="w-2/3"><%= issue_spent_hours_details(@issue) %></div>
+    </div>
+    <% end %>
   <%= issue_fields_rows do |rows|
-    rows.left l(:field_status), @issue.status.name, :class => 'status'
-    rows.left l(:field_priority), @issue.priority.name, :class => 'priority'
+    # rows.left l(:field_status), @issue.status.name, :class => 'status'
+    # rows.left l(:field_priority), @issue.priority.name, :class => 'priority'
 
-    unless @issue.disabled_core_fields.include?('assigned_to_id')
-      rows.left l(:field_assigned_to), (@issue.assigned_to ? link_to_principal(@issue.assigned_to) : "-"), :class => 'assigned-to'
-    end
-    unless @issue.disabled_core_fields.include?('category_id') || (@issue.category.nil? && @issue.project.issue_categories.none?)
-      rows.left l(:field_category), (@issue.category ? @issue.category.name : "-"), :class => 'category'
-    end
-    unless @issue.disabled_core_fields.include?('fixed_version_id') || (@issue.fixed_version.nil? && @issue.assignable_versions.none?)
-      rows.left l(:field_fixed_version), (@issue.fixed_version ? link_to_version(@issue.fixed_version) : "-"), :class => 'fixed-version'
-    end
+    # unless @issue.disabled_core_fields.include?('assigned_to_id')
+    #   rows.left l(:field_assigned_to), (@issue.assigned_to ? link_to_principal(@issue.assigned_to) : "-"), :class => 'assigned-to'
+    # end
+    # unless @issue.disabled_core_fields.include?('category_id') || (@issue.category.nil? && @issue.project.issue_categories.none?)
+    #   rows.left l(:field_category), (@issue.category ? @issue.category.name : "-"), :class => 'category'
+    # end
+    # unless @issue.disabled_core_fields.include?('fixed_version_id') || (@issue.fixed_version.nil? && @issue.assignable_versions.none?)
+    #   rows.left l(:field_fixed_version), (@issue.fixed_version ? link_to_version(@issue.fixed_version) : "-"), :class => 'fixed-version'
+    # end
 
-    unless @issue.disabled_core_fields.include?('start_date')
-      rows.right l(:field_start_date), format_date(@issue.start_date), :class => 'start-date'
-    end
-    unless @issue.disabled_core_fields.include?('due_date')
-      rows.right l(:field_due_date), issue_due_date_details(@issue), :class => 'due-date'
-    end
-    unless @issue.disabled_core_fields.include?('done_ratio')
-      rows.right l(:field_done_ratio), progress_bar(@issue.done_ratio, :legend => "#{@issue.done_ratio}%"), :class => 'progress'
-    end
-    unless @issue.disabled_core_fields.include?('estimated_hours')
-      rows.right l(:field_estimated_hours), issue_estimated_hours_details(@issue), :class => 'estimated-hours'
-    end
-    if User.current.allowed_to?(:view_time_entries, @project) && @issue.total_spent_hours > 0
-      rows.right l(:label_spent_time), issue_spent_hours_details(@issue), :class => 'spent-time'
-    end
+    # unless @issue.disabled_core_fields.include?('start_date')
+    #   rows.right l(:field_start_date), format_date(@issue.start_date), :class => 'start-date'
+    # end
+    # unless @issue.disabled_core_fields.include?('due_date')
+    #   rows.right l(:field_due_date), issue_due_date_details(@issue), :class => 'due-date'
+    # end
+    # unless @issue.disabled_core_fields.include?('done_ratio')
+    #   rows.right l(:field_done_ratio), progress_bar(@issue.done_ratio, :legend => "#{@issue.done_ratio}%"), :class => 'progress'
+    # end
+    # unless @issue.disabled_core_fields.include?('estimated_hours')
+    #   rows.right l(:field_estimated_hours), issue_estimated_hours_details(@issue), :class => 'estimated-hours'
+    # end
+    # if User.current.allowed_to?(:view_time_entries, @project) && @issue.total_spent_hours > 0
+    #   rows.right l(:label_spent_time), issue_spent_hours_details(@issue), :class => 'spent-time'
+    # end
   end %>
   <%= render_half_width_custom_fields_rows(@issue) %>
   <%= call_hook(:view_issues_show_details_bottom, :issue => @issue) %>
