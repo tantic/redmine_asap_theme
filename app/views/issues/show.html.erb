@@ -74,9 +74,9 @@
   </div>
   <% end %>
   <% if @issue.attachments.any? %>
-
-    <p><strong><%=l(:label_attachment_plural)%></strong></p>
-    <%= link_to_attachments @issue, :thumbnails => true %>
+    <div class="my-8">
+      <%= link_to_attachments @issue, :thumbnails => true %>
+    </div>
   <% end %>
 
   <%= render_full_width_custom_fields_rows(@issue) %>
@@ -119,9 +119,7 @@
   <%= context_menu %>
 </div>
 
-<aside class="w-80 shadow bg-gray-50 p-8 bg-white ml-auto fixed top-14 right-0 h-full">
-
-
+<aside class="w-80 shadow  p-8 bg-white dark:bg-gray-800 ml-auto overflow-y-auto fixed top-14 right-0 h-full">
   <div class="space-y-1">
     <div class="flex w-full">
       <div class="mr-2 text-gray-400 w-1/3"><%= l(:field_status) %></div>
@@ -183,38 +181,9 @@
       <div class="w-2/3"><%= issue_spent_hours_details(@issue) %></div>
     </div>
     <% end %>
-  <%= issue_fields_rows do |rows|
-    # rows.left l(:field_status), @issue.status.name, :class => 'status'
-    # rows.left l(:field_priority), @issue.priority.name, :class => 'priority'
 
-    # unless @issue.disabled_core_fields.include?('assigned_to_id')
-    #   rows.left l(:field_assigned_to), (@issue.assigned_to ? link_to_principal(@issue.assigned_to) : "-"), :class => 'assigned-to'
-    # end
-    # unless @issue.disabled_core_fields.include?('category_id') || (@issue.category.nil? && @issue.project.issue_categories.none?)
-    #   rows.left l(:field_category), (@issue.category ? @issue.category.name : "-"), :class => 'category'
-    # end
-    # unless @issue.disabled_core_fields.include?('fixed_version_id') || (@issue.fixed_version.nil? && @issue.assignable_versions.none?)
-    #   rows.left l(:field_fixed_version), (@issue.fixed_version ? link_to_version(@issue.fixed_version) : "-"), :class => 'fixed-version'
-    # end
-
-    # unless @issue.disabled_core_fields.include?('start_date')
-    #   rows.right l(:field_start_date), format_date(@issue.start_date), :class => 'start-date'
-    # end
-    # unless @issue.disabled_core_fields.include?('due_date')
-    #   rows.right l(:field_due_date), issue_due_date_details(@issue), :class => 'due-date'
-    # end
-    # unless @issue.disabled_core_fields.include?('done_ratio')
-    #   rows.right l(:field_done_ratio), progress_bar(@issue.done_ratio, :legend => "#{@issue.done_ratio}%"), :class => 'progress'
-    # end
-    # unless @issue.disabled_core_fields.include?('estimated_hours')
-    #   rows.right l(:field_estimated_hours), issue_estimated_hours_details(@issue), :class => 'estimated-hours'
-    # end
-    # if User.current.allowed_to?(:view_time_entries, @project) && @issue.total_spent_hours > 0
-    #   rows.right l(:label_spent_time), issue_spent_hours_details(@issue), :class => 'spent-time'
-    # end
-  end %>
-  <%= render_half_width_custom_fields_rows(@issue) %>
-  <%= call_hook(:view_issues_show_details_bottom, :issue => @issue) %>
+    <%= render_half_width_custom_fields_rows(@issue) %>
+    <%= call_hook(:view_issues_show_details_bottom, :issue => @issue) %>
   </div>
 
   <% if !@issue.leaf? || User.current.allowed_to?(:manage_subtasks, @project) %>

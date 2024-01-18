@@ -22,6 +22,8 @@ And start issues list
 
 ![first-issues](img/first-issues.png)
 
+## Issue
+
 Tried something with issue (3 columns but only the one in the middle for now)
 
 ![first-issue](img/first-issue.png)
@@ -30,3 +32,12 @@ The idea : add a navigation on the left to go from one issue to another one.
 In the middle, focus on the issue, all attributes are moved to the right panel.
 
 Need to be improved and test
+
+Issue with attachment and navigation on the left
+
+
+![Issue](img/issue_20240118.png)
+
+Let see it in action
+
+![Issue](img/issue_20240118.gif)

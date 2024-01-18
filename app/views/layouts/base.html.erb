@@ -21,7 +21,7 @@
 <!-- page specific tags -->
 <%= yield :header_tags -%>
 </head>
-<body  class="<%= body_css_classes %> h-full">
+<body  class="<%= body_css_classes %> h-full dark:bg-slate-900">
 
   <% if User.current.logged? || !Setting.login_required? %>
     <%= render "layouts/navbar" %>
@@ -30,26 +30,11 @@
   <main class="w-full h-full dark:bg-slate-800 dark:text-gray-400 mt-14">
     <%= call_hook :view_layouts_base_body_top %>
 
-    <!--
-    <aside class="flex fixed overflow-y-auto  flex-col top-14 py-10 px-0 md:px-2 shadow bg-blue-900 shadow-md h-full w-16 md:w-64">
-      <%= yield :sidebar %>
-      <%= view_layouts_base_sidebar_hook_response %>
-    </aside>
-    -->
-  <!--
-    <% if display_main_menu?(@project) %>
-    <aside id="project-menu" class="fixed overflow-y-auto flex flex-col top-14 shadow bg-white  dark:bg-gray-800  h-full w-14 md:w-64">
-      <div class="h-full px-2 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800">
-        <%= render_main_menu(@project) %>
-      </div>
-    </aside>
-    <% end %>
-    -->
     <% if controller_name == "issues" && action_name == "show" %>
-      <div data-controller="issue" class="flex bg-gray-50 h-full">
-        <aside data-issue-target="navigation" class="w-72 shadow bg-white fixed top-14 left-0 h-full hidden">
+      <div data-controller="issue" class="flex bg-gray-50 dark:bg-slate-900 h-full">
+        <aside data-issue-target="navigation" class="w-72 shadow bg-white dark:bg-gray-800 fixed top-14 left-0 h-full hidden">
           <div class="flex flex-col h-full overflow-y-auto">
-            <div class="w-full text-gray-600 border-b border-gray-50 py-4">
+            <div class="w-full text-gray-600 dark:text-gray-200 border-b border-gray-50 dark:border-gray-600 py-4">
               <% if @prev_issue_id || @next_issue_id %>
                 <div class="next-prev-links contextual flex justify-center">
                   <% if @prev_issue_id %>
@@ -58,10 +43,10 @@
                                   (@prev_issue_id ? issue_path(@prev_issue_id) : nil),
                                   :title => "##{@prev_issue_id}",
                                   :accesskey => accesskey(:previous),
-                                  class: 'mr-2 hover:text-gray-800' %> |
+                                  class: 'mr-2 hover:text-gray-800 dark:hover:text-gray-50' %> |
                   <% end %>
                   <% if @issue_position && @issue_count %>
-                    <span class="position mx-2 hover:text-gray-800">
+                    <span class="position mx-2 hover:text-gray-800 dark:hover:text-gray-50">
                       <%= link_to_if @query_path,
                                     l(:label_item_position, :position => @issue_position, :count => @issue_count),
                                     @query_path %>
@@ -74,19 +59,19 @@
                                   (@next_issue_id ? issue_path(@next_issue_id) : nil),
                                   :title => "##{@next_issue_id}",
                                   :accesskey => accesskey(:next),
-                                  class: 'ml-2 hover:text-gray-800' %>
+                                  class: 'ml-2 hover:text-gray-800 dark:hover:text-gray-50' %>
                   <% end %>
                 </div>
               <% end %>
             </div>
           <% @issues.each do |issue| %>
-            <%= link_to issue_path(issue), class:"flex flex-col text-gray-900 hover:bg-gray-50 cursor-pointer hover:border-l-2 hover:border-l-blue-800 border-b border-b-gray-50 hover:pl-3.5 p-4 text-sm" do %>
+            <%= link_to issue_path(issue), class:"flex flex-col text-gray-900 dark:text-gray-100 hover:bg-gray-50 dark:hover:bg-gray-900 cursor-pointer hover:border-l-2 hover:border-l-blue-800 border-b border-b-gray-50 dark:border-b-gray-600 hover:pl-3.5 p-4 text-sm" do %>
               <div class="flex items-center">
                 <div class="mr-2">#<%= issue.id %></div>
                 <%= issue.subject %>
               </div>
               <% if issue.description? %>
-              <div class="text-xs text-gray-700 font-thin ml-6">
+              <div class="text-xs text-gray-700 dark:text-gray-100 font-thin ml-6">
                 <% the_text = textilizable issue, :description %>
                 <%= the_text.truncate(100) %>
               </div>
@@ -95,13 +80,11 @@
           <% end %>
           </div>
         </aside>
-        <section  data-issue-target="section" id="content" class="w-full bg-gray-50 h-full flex ml-8 mr-80">
-
+        <section  data-issue-target="section" id="content" class="w-full bg-gray-50 dark:bg-slate-900 h-full flex ml-8 mr-80">
           <%= yield %>
           <%= call_hook :view_layouts_base_content %>
           <div style="clear:both;"></div>
         </section>
-
       </div>
     <% else %>
       <section id="content" class="p-8 md:px-16 mb-auto w-full  h-full">

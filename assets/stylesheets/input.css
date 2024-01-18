@@ -19,15 +19,15 @@ body {
 }
 
 #project-jump.drdn {
-  @apply relative h-14 pl-0 pr-0;
+  @apply relative h-14 pl-0 pr-0 dark:bg-slate-900;
 }
 
 #project-jump.drdn-trigger{
-  @apply overflow-x-auto pl-0 pr-0;
+  @apply overflow-x-auto pl-0 pr-0 dark:bg-slate-900;
 }
 
 .expanded .drdn-content{
-  @apply flex flex-col absolute shadow-md bg-white;
+  @apply flex flex-col absolute shadow-md bg-white dark:bg-slate-900;
   .drdn-items{
     @apply cursor-pointer;
     .label-group{
@@ -74,7 +74,7 @@ body {
 }
 
 .drdn-trigger{
-  @apply h-full flex items-center text-sm justify-center px-4 hover:bg-gray-50 cursor-pointer;
+  @apply h-full flex items-center text-sm justify-center px-4 hover:bg-gray-50 dark:bg-slate-900 cursor-pointer;
 }
 
 .has-main-menu .drdn-trigger{
