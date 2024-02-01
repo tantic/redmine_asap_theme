@@ -2,7 +2,7 @@
 
 ## General UX/UI
 
-- [ ] Layout
+- [x] Layout
 - [x] Navbar : logo, Project jumpbox, search, admin, user menu (my account, my profile, logout)
 - [ ] Navigation in a project
 - [ ] Contextual menu
@@ -14,7 +14,7 @@
 
 ## Pages
 
-- [ ] Welcome page (WIP) : last seen projects, bookmarked and projects (limit 12) + search + last seen issues
+- [x] Welcome page (WIP) : last seen projects, bookmarked and projects (limit 12) + search + last seen issues
 - [ ] Projects
 - [ ] Search
 
@@ -57,14 +57,16 @@ Account
 
 ## Issue
 
-- [ ] UX/UI of an issue
+- [x] UX/UI of an issue (WIP)
 - [ ] Ability to add reaction to issues
+- [ ] Reactions on comments
 
 ## Personal
 
 - [ ] My page
 - [ ] My account
 - [ ] My profile
+- [ ] Avatar from file
 
 ## Administration
 

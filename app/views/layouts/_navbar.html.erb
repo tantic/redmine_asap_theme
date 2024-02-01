@@ -9,7 +9,9 @@
     <%= render_project_jump_box %>
     <% if display_main_menu?(@project) %>
       <div data-controller="projectmenu" class="h-full relative flex items-center justify-center">
-        <%= link_to "Issues",project_issues_path(@project), class: "h-full p-4 hover:bg-gray-50" %>
+        <% if @project %>
+        <%= link_to t("label_issue_plural"),project_issues_path(@project), class: "h-full p-4 hover:bg-gray-50" %>
+        <% end %>
         <div data-action="click->projectmenu#toggle" class="cursor-pointer ml-1 p-2 rounded-full hover:bg-gray-100 text-gray-700 dark:text-gray-400 dark:hover:text-gray-300 dark:hover:bg-gray-700 hover:text-gray-800">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-gray-800 transition duration-75 dark:text-gray-400 hover:text-gray-900 dark:group-hover:text-white">
             <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM12.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM18.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />

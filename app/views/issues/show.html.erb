@@ -187,15 +187,15 @@
   </div>
 
   <% if !@issue.leaf? || User.current.allowed_to?(:manage_subtasks, @project) %>
-  <hr />
-  <div id="issue_tree">
+
+  <div id="issue_tree" class="my-8 border-t border-gray-50">
   <%= render :partial => 'subtasks' %>
   </div>
   <% end %>
 
   <% if @relations.present? || User.current.allowed_to?(:manage_issue_relations, @project) %>
-  <hr />
-  <div id="relations">
+
+  <div id="relations" class="my-8 border-t border-gray-50">
   <%= render :partial => 'relations' %>
   </div>
   <% end %>

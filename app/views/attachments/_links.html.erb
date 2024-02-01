@@ -23,9 +23,9 @@
       <% end %>
     </div>
   </div>
-  <div class="flex flex-wrap">
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 2xl:grid-cols-6 gap-4">
     <% for attachment in attachments %>
-      <div class="flex flex-col group min-h-44 shadow relative mr-4 mb-4">
+      <div class="flex flex-col group min-h-24 shadow relative mr-4 mb-4 ">
         <% if options[:deletable] %>
           <%= link_to attachment_path(attachment),
                 :data => {:confirm => l(:text_are_you_sure)},
@@ -37,14 +37,14 @@
             </svg>
           <% end %>
         <% end %>
-        <div class="flex-1 flex items-center justify-center"><%= thumbnail_tag(attachment) %></div>
-        <div class="flex align-bottom hover:bg-gray-100 bg-gray-50 ">
-          <%= link_to named_attachment_path(:id => attachment.id, :filename => attachment.filename), class: 'p-4' do %>
-            <h3><%= attachment.filename %></h3>
+        <div id="attachment-thumbnail" class="flex-1 flex items-center justify-center py-4"><%= thumbnail_tag(attachment) %></div>
+        <div class="flex align-bottom hover:bg-gray-100 bg-gray-50 w-full overflow-hidden">
+          <%= link_to named_attachment_path(:id => attachment.id, :filename => attachment.filename), class: 'p-4 w-2/3' do %>
+            <h3 class="truncate"><%= attachment.filename %></h3>
             <p class="text-gray-400 text-xs font-light"><%= attachment.description unless attachment.description.blank? %></p>
             <span class="size text-xs">(<%= number_to_human_size attachment.filesize %>)</span>
           <% end %>
-          <%= link_to download_named_attachment_path(:id => attachment.id, :filename => attachment.filename), download: true, class: 'flex p-4 bg-gray-100 items-center justify-center hover:bg-gray-200' do %>
+          <%= link_to download_named_attachment_path(:id => attachment.id, :filename => attachment.filename), download: true, class: 'flex w-1/3 p-4 bg-gray-100 items-center justify-center hover:bg-gray-200' do %>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
               <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3" />
             </svg>

@@ -1,0 +1,19 @@
+<div class="contextual flex items-center">
+  <div class="flex items-center ">
+    <h3 class="font-light text-gray-400 uppercase text-xs py-4 mr-0.5"><%=l(:label_subtask_plural)%></h3>
+    <span class="text-xs text-gray-400"><%= render_descendants_stats(@issue) unless @issue.leaf? %></span>
+  </div>
+  <% if User.current.allowed_to?(:manage_subtasks, @project) %>
+    <div class="ml-auto">
+      <%= link_to url_for_new_subtask(@issue), class:'flex cursor-pointer ml-1 p-2 rounded-full hover:bg-gray-100 text-gray-700 dark:text-gray-400 dark:hover:text-gray-300 dark:hover:bg-gray-700 hover:text-gray-800' do %>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+        </svg>
+      <% end %>
+    </div>
+  <% end %>
+</div>
+
+<%= form_tag({}, :data => {:cm_url => issues_context_menu_path}) do %>
+  <%= render_descendants_tree(@issue) unless @issue.leaf? %>
+<% end %>

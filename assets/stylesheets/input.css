@@ -19,7 +19,7 @@ body {
 }
 
 #project-jump.drdn {
-  @apply relative h-14 pl-0 pr-0 dark:bg-slate-900;
+  @apply relative w-auto flex items-center justify-center h-full pl-0 pr-0 dark:bg-slate-900;
 }
 
 #project-jump.drdn-trigger{
@@ -27,7 +27,7 @@ body {
 }
 
 .expanded .drdn-content{
-  @apply flex flex-col absolute shadow-md bg-white dark:bg-slate-900;
+  @apply flex flex-col absolute top-14 left-0 shadow-md bg-white dark:bg-slate-900;
   .drdn-items{
     @apply cursor-pointer;
     .label-group{
@@ -59,14 +59,14 @@ body {
   width: 16px;
 }
 
-@media screen and (max-width: 640px) {
+/* @media screen and (max-width: 640px) {
   #project-jump .drdn-trigger {
     @apply text-gray-800 font-light text-xs flex items-center ;
   }
   .drdn-trigger:after{
     background-image: none;
   }
-}
+} */
 
 .expanded .drdn-content .projects{
   display: flex;
@@ -323,3 +323,11 @@ body {
   @apply rounded py-0.5 px-2 text-xs inline-block font-semibold leading-normal  bg-gray-200 text-gray-700;
 }
 
+#attachment-thumbnail > a > img{
+  @apply w-12
+}
+
+#context-menu li.folder > ul
+{
+  left: 140px !important;
+}
