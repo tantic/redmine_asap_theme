@@ -3,8 +3,8 @@
 ## Build assets
 
 ```
-cd $REDMINE_ROOT/plugins/redmine_asap_theme/assets/stylesheets
-npx tailwindcss -i ./input.css -o ./application.css --watch
+cd $REDMINE_ROOT/plugins/redmine_asap_theme/assets/
+npm run dev
 ```
 
 TODO

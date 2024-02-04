@@ -45,3 +45,7 @@ Let see it in action
 ## Calendar
 
 ![Calendar](img/redmine_calendar.png)
+
+And when the user click on the filter icon on the right
+
+![Calendar](img/redmine_calendar_filters.png)

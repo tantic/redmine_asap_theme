@@ -62,7 +62,7 @@ Account
 
 ## Issue
 
-- [] UX/UI of an issue (WIP)
+- [ ] UX/UI of an issue (WIP)
   - [x] General layout
   - [ ] Tabs for history and notes
   - [ ] Sidebar
