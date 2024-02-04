@@ -44,4 +44,4 @@ Let see it in action
 
 ## Calendar
 
-![Calendar](img/redmine_calendar.gif)
+![Calendar](img/redmine_calendar.png)

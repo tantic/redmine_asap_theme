@@ -46,7 +46,9 @@ Account
 - [ ] Issues
 - [ ] Spent time
 - [ ] Gantt
-- [x] Calendar
+- [ ] Calendar
+  - [x] General UX and UI
+  - [ ] Multiple days events
 - [ ] News
 - [ ] Forum
 - [ ] Documents
