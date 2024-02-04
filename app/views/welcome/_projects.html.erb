@@ -1,5 +1,5 @@
 <h1 class="uppercase my-8 text-gray-400 font-light"><%=l(:my_projects)%></h1>
-<div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+<div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 2xl:grid-cols-8 gap-4">
   <% if @bookmarked %>
     <% @bookmarked.each do |project|%>
       <%= link_to(project,:class => 'bg-white uppercase flex items-center text-gray-800 font-light text-sm rounded shadow p-4 hover:bg-gray-50 transition ease-in-out delay-75 hover:-translate-y-1 hover:scale-105 duration-100') do %>

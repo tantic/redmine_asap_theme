@@ -86,6 +86,13 @@
           <div style="clear:both;"></div>
         </section>
       </div>
+    <% elsif controller_name == "calendars" %>
+      <section id="content" class="p-8 md:px-16 mb-auto w-full  h-full bg-gray-50 dark:bg-slate-900">
+        <%= render_flash_messages %>
+        <%= yield %>
+        <%= call_hook :view_layouts_base_content %>
+        <div style="clear:both;"></div>
+      </section>
     <% else %>
       <section id="content" class="p-8 md:px-16 mb-auto w-full  h-full">
         <%= render_flash_messages %>

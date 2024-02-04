@@ -1,0 +1,30 @@
+
+@import "./base.css";
+@import "./navigation.css";
+@import "./form.css";
+@import "./buttons.css";
+
+
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+
+
+
+.badge-status-open{
+  @apply rounded py-0.5 px-2 text-xs inline-block font-semibold leading-normal  bg-green-200 text-green-700;
+}
+
+.badge-status-closed{
+  @apply rounded py-0.5 px-2 text-xs inline-block font-semibold leading-normal  bg-gray-200 text-gray-700;
+}
+
+#attachment-thumbnail > a > img{
+  @apply w-12
+}
+
+#context-menu li.folder > ul
+{
+  left: 140px !important;
+}

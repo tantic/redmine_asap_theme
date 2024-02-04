@@ -14,7 +14,10 @@
 
 ## Pages
 
-- [x] Welcome page (WIP) : last seen projects, bookmarked and projects (limit 12) + search + last seen issues
+- [ ] Welcome page (WIP) : last seen projects, bookmarked and projects (limit 12) + search + last seen issues
+  - [x] Display projects
+  - [ ] News from listed projects
+  - [ ] Ability for user to display details on projects
 - [ ] Projects
 - [ ] Search
 
@@ -43,7 +46,7 @@ Account
 - [ ] Issues
 - [ ] Spent time
 - [ ] Gantt
-- [ ] Calendar
+- [x] Calendar
 - [ ] News
 - [ ] Forum
 - [ ] Documents
@@ -57,7 +60,11 @@ Account
 
 ## Issue
 
-- [x] UX/UI of an issue (WIP)
+- [] UX/UI of an issue (WIP)
+  - [x] General layout
+  - [ ] Tabs for history and notes
+  - [ ] Sidebar
+  - [ ] subtasks and relations
 - [ ] Ability to add reaction to issues
 - [ ] Reactions on comments
 

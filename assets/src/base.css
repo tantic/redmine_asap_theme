@@ -1,0 +1,8 @@
+html{
+  height: calc(100vh - 3.5rem);
+  @apply font-light;
+}
+
+body {
+  @apply text-sm;
+}

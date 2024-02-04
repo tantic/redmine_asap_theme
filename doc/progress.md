@@ -41,3 +41,7 @@ Issue with attachment and navigation on the left
 Let see it in action
 
 ![Issue](img/issue_20240118.gif)
+
+## Calendar
+
+![Calendar](img/redmine_calendar.gif)
