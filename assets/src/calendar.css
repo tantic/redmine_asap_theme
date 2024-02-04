@@ -1,0 +1,10 @@
+.today{
+  @apply bg-green-100;
+  .top>span{
+    @apply text-green-700 font-medium;
+  }
+}
+
+.odd{
+  @apply bg-gray-50;
+}

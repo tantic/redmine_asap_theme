@@ -3,6 +3,7 @@
 @import "./navigation.css";
 @import "./form.css";
 @import "./buttons.css";
+@import "./calendar.css";
 
 
 @import 'tailwindcss/base';
