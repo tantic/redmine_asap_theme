@@ -60,4 +60,4 @@ First version but need extra work
 
 About in a modal
 
-![Modal](img/redmine_modal.png)
+![Modal](img/redmine_about.png)
