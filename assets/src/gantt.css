@@ -1,0 +1,108 @@
+.controller-gantts .controller-gantts form + table, .controller-gantts table.gantt-table
+{
+  border-collapse: collapse;
+}
+
+.controller-gantts .controller-gantts form + table td, .controller-gantts table.gantt-table td
+{
+  padding: 0;
+  vertical-align: top;
+}
+
+.controller-gantts .gantt_subjects div, .controller-gantts .gantt_selected_column_content div
+{
+  white-space: nowrap;
+  line-height: 16px;
+}
+
+.controller-gantts .gantt_subjects div, .controller-gantts .gantt_selected_column_content div
+{
+  /* overflow: hidden; */
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100%;
+  /* height: 16px;
+  line-height: 16px; */
+}
+
+.controller-gantts .task_todo{
+  @apply border border-violet-300 bg-violet-50 z-50 block absolute;
+}
+
+.controller-gantts .gantt_subjects
+{
+  position: relative;
+  z-index: 1;
+  font-size: .96em;
+}
+
+.controller-gantts .gantt_hdr{
+  @apply absolute top-0 h-6 overflow-hidden border-gray-50 text-center z-10;
+}
+
+
+.controller-gantts .tooltip span.tip
+{
+  box-shadow: 0 8px 16px -3px rgba(0,0,0,.25),0 2px 4px rgba(0,0,0,.3);
+  display: none;
+  position: absolute;
+  top: 12px;
+  width: 270px;
+  padding: 6px;
+  border: 0 solid #6b7280;
+  background-color: #fff;
+  color: #1f2937;
+  font-size: .96em;
+  text-align: left;
+}
+
+.controller-gantts .tooltip
+{
+  position: relative;
+  z-index: 24;
+}
+
+.controller-gantts .project.task_late, .controller-gantts .project.task_done, .controller-gantts .project.task_todo, .controller-gantts .version.task_late, .controller-gantts .version.task_done, .controller-gantts .version.task_todo
+{
+  height: 2px;
+  margin-top: 3px;
+}
+
+.controller-gantts .project.marker, .controller-gantts .version.marker
+{
+  margin-top: 1px;
+  margin-left: -4px;
+  border: 0 none;
+  background-image: url("../../../images/version_marker.png");
+  background-repeat: no-repeat;
+}
+
+.controller-gantts .task.label
+{
+  @apply w-full h-4 my-2 p-0 text-xs z-50 !important;
+}
+
+.controller-gantts .task{
+  @apply absolute h-4 my-2 p-0 text-xs rounded
+}
+
+.issue-subject{
+  @apply border-t h-4 my-2 border-gray-50;
+}
+
+.project-name{
+  @apply flex h-8 !important;
+  >span.icon-expanded{
+
+  }
+  >span.icon-projects{
+    @apply flex w-full;
+  }
+  a{
+    @apply w-full p-2 hover:bg-gray-50;
+  }
+}
+
+.ui-helper-hidden-accessible{
+  display:none;
+}

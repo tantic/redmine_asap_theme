@@ -49,3 +49,9 @@ Let see it in action
 And when the user click on the filter icon on the right
 
 ![Calendar](img/redmine_calendar_filters.png)
+
+## Gantt
+
+First version but need extra work
+
+![Gantt](img/redmine_gantt_v0.png)

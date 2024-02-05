@@ -677,6 +677,27 @@ input[type='text']:focus, input[type='password']:focus{
   box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
 }
 
+input[type='number']{
+  margin-top: 0.25rem;
+  display: block;
+  border-radius: 0.375rem;
+  border-color: transparent;
+  --tw-bg-opacity: 1;
+  background-color: rgb(243 244 246 / var(--tw-bg-opacity));
+  font-size: 0.75rem;
+  line-height: 1rem;
+}
+
+input[type='number']:focus{
+  --tw-border-opacity: 1;
+  border-color: rgb(107 114 128 / var(--tw-border-opacity));
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(0px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+}
+
 textarea{
   margin-top: 0.25rem;
   display: block;
@@ -834,6 +855,151 @@ a.icon:focus{
 .odd{
   --tw-bg-opacity: 1;
   background-color: rgb(249 250 251 / var(--tw-bg-opacity));
+}
+
+.controller-gantts .controller-gantts form + table, .controller-gantts table.gantt-table
+{
+  border-collapse: collapse;
+}
+
+.controller-gantts .controller-gantts form + table td, .controller-gantts table.gantt-table td
+{
+  padding: 0;
+  vertical-align: top;
+}
+
+.controller-gantts .gantt_subjects div, .controller-gantts .gantt_selected_column_content div
+{
+  line-height: 16px;
+  /* overflow: hidden; */
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100%;
+  /* height: 16px;
+  line-height: 16px; */
+}
+
+.controller-gantts .task_todo{
+  position: absolute;
+  z-index: 50;
+  display: block;
+  border-width: 1px;
+  --tw-border-opacity: 1;
+  border-color: rgb(196 181 253 / var(--tw-border-opacity));
+  --tw-bg-opacity: 1;
+  background-color: rgb(245 243 255 / var(--tw-bg-opacity));
+}
+
+.controller-gantts .gantt_subjects
+{
+  position: relative;
+  z-index: 1;
+  font-size: .96em;
+}
+
+.controller-gantts .gantt_hdr{
+  position: absolute;
+  top: 0px;
+  z-index: 10;
+  height: 1.5rem;
+  overflow: hidden;
+  --tw-border-opacity: 1;
+  border-color: rgb(249 250 251 / var(--tw-border-opacity));
+  text-align: center;
+}
+
+.controller-gantts .tooltip span.tip
+{
+  box-shadow: 0 8px 16px -3px rgba(0,0,0,.25),0 2px 4px rgba(0,0,0,.3);
+  display: none;
+  position: absolute;
+  top: 12px;
+  width: 270px;
+  padding: 6px;
+  border: 0 solid #6b7280;
+  background-color: #fff;
+  color: #1f2937;
+  font-size: .96em;
+  text-align: left;
+}
+
+.controller-gantts .tooltip
+{
+  position: relative;
+  z-index: 24;
+}
+
+.controller-gantts .project.task_late, .controller-gantts .project.task_done, .controller-gantts .project.task_todo, .controller-gantts .version.task_late, .controller-gantts .version.task_done, .controller-gantts .version.task_todo
+{
+  height: 2px;
+  margin-top: 3px;
+}
+
+.controller-gantts .project.marker, .controller-gantts .version.marker
+{
+  margin-top: 1px;
+  margin-left: -4px;
+  border: 0 none;
+  background-image: url("../../../images/version_marker.png");
+  background-repeat: no-repeat;
+}
+
+.controller-gantts .task.label{
+  z-index: 50 !important;
+  margin-top: 0.5rem !important;
+  margin-bottom: 0.5rem !important;
+  height: 1rem !important;
+  width: 100% !important;
+  padding: 0px !important;
+  font-size: 0.75rem !important;
+  line-height: 1rem !important;
+}
+
+.controller-gantts .task{
+  position: absolute;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  height: 1rem;
+  border-radius: 0.25rem;
+  padding: 0px;
+  font-size: 0.75rem;
+  line-height: 1rem;
+}
+
+.issue-subject{
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  height: 1rem;
+  border-top-width: 1px;
+  --tw-border-opacity: 1;
+  border-color: rgb(249 250 251 / var(--tw-border-opacity));
+}
+
+.project-name{
+  display: flex !important;
+  height: 2rem !important;
+  >span.icon-expanded{
+  }
+  >span.icon-projects{
+    display: flex;
+  }
+  >span.icon-projects{
+    width: 100%;
+  }
+  a{
+    width: 100%;
+  }
+  a{
+    padding: 0.5rem;
+  }
+  a:hover{
+    --tw-bg-opacity: 1;
+    background-color: rgb(249 250 251 / var(--tw-bg-opacity));
+  }
+}
+
+.ui-helper-hidden-accessible{
+  display:none;
 }
 
 /* ! tailwindcss v3.3.6 | MIT License | https://tailwindcss.com */
@@ -1717,6 +1883,10 @@ select{
   top: 3.5rem;
 }
 
+.z-10{
+  z-index: 10;
+}
+
 .z-50{
   z-index: 50;
 }
@@ -1954,8 +2124,16 @@ select{
   height: 100%;
 }
 
+.h-px{
+  height: 1px;
+}
+
 .w-1\/3{
   width: 33.333333%;
+}
+
+.w-1\/4{
+  width: 25%;
 }
 
 .w-10{
@@ -2028,6 +2206,10 @@ select{
 
 .cursor-pointer{
   cursor: pointer;
+}
+
+.resize{
+  resize: both;
 }
 
 .grid-cols-1{
@@ -2129,6 +2311,10 @@ select{
 
 .border{
   border-width: 1px;
+}
+
+.border-0{
+  border-width: 0px;
 }
 
 .border-b{
@@ -2948,14 +3134,6 @@ select{
 
   .xl\:w-40{
     width: 10rem;
-  }
-
-  .xl\:w-36{
-    width: 9rem;
-  }
-
-  .xl\:w-32{
-    width: 8rem;
   }
 
   .xl\:grid-cols-6{
