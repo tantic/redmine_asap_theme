@@ -3,6 +3,7 @@ import "./controllers/projectmenu_controller.js"
 import "./controllers/issues_controller.js"
 import "./controllers/issue_controller.js"
 import "./controllers/query_controller.js"
+import "./controllers/application_controller.js"
 
 document.addEventListener("DOMContentLoaded", function(e) {
   if(document.querySelector('#menu-breadcrumb')){

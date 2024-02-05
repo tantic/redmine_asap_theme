@@ -21,7 +21,7 @@
 <!-- page specific tags -->
 <%= yield :header_tags -%>
 </head>
-<body  class="<%= body_css_classes %> h-full dark:bg-slate-900">
+<body  data-controller="application" class="<%= body_css_classes %> h-full dark:bg-slate-900">
 
   <% if User.current.logged? || !Setting.login_required? %>
     <%= render "layouts/navbar" %>
@@ -111,6 +111,35 @@
 
   <div id="ajax-indicator" style="display:none;"><span><%= l(:label_loading) %></span></div>
   <div id="ajax-modal" style="display:none;"></div>
+
+  <div data-application-target="modal" id="default-modal" tabindex="-1" aria-hidden="true" class="hidden  flex items-center bg-gray-700 bg-opacity-50 overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-screen max-h-full">
+    <div data-application-target="modalbody" class="relative hidden p-4 w-full max-w-2xl max-h-full">
+      <!-- Modal content -->
+      <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+        <!-- Modal header -->
+        <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+          <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+            <%= t("label_about") %>
+          </h3>
+
+        </div>
+        <!-- Modal body -->
+        <div class="p-4 md:p-5 space-y-4">
+          <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
+            <a href="<%= Redmine::Info.url %>" class="text-blue-600" target="_blank"><%= Redmine::Info.versioned_name %></a>
+          </p>
+          <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
+            <a href="<%= Redmine::Info.help_url %>" class="text-blue-600" target="_blank"><%= t("label_help") %></a>
+          </p>
+          <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
+              Powered by <%= link_to Redmine::Info.app_name, Redmine::Info.url %> &copy; 2006-2023 Jean-Philippe Lang
+          </p>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
 
   <%= call_hook :view_layouts_base_body_bottom %>
 </body>

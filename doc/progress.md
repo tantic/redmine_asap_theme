@@ -55,3 +55,9 @@ And when the user click on the filter icon on the right
 First version but need extra work
 
 ![Gantt](img/redmine_gantt_v0.png)
+
+## About
+
+About in a modal
+
+![Modal](img/redmine_modal.png)
