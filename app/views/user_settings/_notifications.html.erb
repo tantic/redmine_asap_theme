@@ -1,0 +1,12 @@
+<%= labelled_form_for :user, @user,
+                              :url => { :action => "update" },
+                              :html => { :id => 'update_settings_form',
+                                          :method => :put, :multipart => true } do |f| %>
+  <fieldset class="box">
+    <%= render :partial => 'users/mail_notifications' %>
+  </fieldset>
+
+  <div class="flex w-full">
+    <div class="ml-auto button-submit"><%= submit_tag l(:button_save) %></div>
+  </div>
+<% end %>

@@ -1,0 +1,50 @@
+<%= labelled_form_for :user, @user,
+                              :url => { :action => "update" },
+                              :html => { :id => 'update_settings_form',
+                                          :method => :put, :multipart => true } do |f| %>
+    <div class="flex w-full">
+      <div class="w-3/4">
+        <div class="mb-6">
+          <%= f.text_field :firstname, :required => true, class: "text-sm" %>
+        </div>
+        <div class="mb-6"><%= f.text_field :lastname, :required => true, class: "text-sm" %></div>
+      </div>
+      <div class="w-1/4 flex items-center justify-center">
+          <%= avatar_edit_link(@user, :size => "50") %>
+      </div>
+    </div>
+
+    <div class="mb-6"><%= f.text_field :mail, :required => true, class: "text-sm" %></div>
+    <%= labelled_fields_for :pref, @user.pref do |pref_fields| %>
+    <div class="mb-6 hide-email"><%= pref_fields.check_box :hide_mail %></div>
+    <% end %>
+
+    <% if Setting.twofa? -%>
+    <div class="flex w-full mb-6">
+      <label class="mr-4"><%=l :setting_twofa -%></label>
+      <% if @user.twofa_active? %>
+        <%=l 'twofa_currently_active', twofa_scheme_name: l("twofa__#{@user.twofa_scheme}__name") -%><br/>
+        <%= link_to l('button_disable'), { controller: 'twofa', action: 'deactivate_init', scheme: @user.twofa_scheme }, method: :post, class: "text-blue-700 hover:text-blue-800 dark:text-blue-100 dark-hover:text-blue-200" -%><br/>
+        <%= link_to l('twofa_generate_backup_codes'), { controller: 'twofa_backup_codes', action: 'init' }, method: :post, data: { confirm: Redmine::Twofa.for_user(User.current).backup_codes.any? ? t('twofa_text_generate_backup_codes_confirmation') : nil }, class: "text-blue-700 hover:text-blue-800 dark:text-blue-100 dark-hover:text-blue-200" -%>
+      <% else %>
+        <% Redmine::Twofa.available_schemes.each do |s| %>
+          <%= link_to l("twofa__#{s}__label_activate"), { controller: 'twofa', action: 'activate_init', scheme: s }, method: :post, class: "text-blue-700 hover:text-blue-800 dark:text-blue-100 dark-hover:text-blue-200" -%>
+        <% end %>
+      <% end %>
+    </div>
+    <% end -%>
+
+
+    <% unless @user.force_default_language? %>
+      <div class="mb-6"><%= f.select :language, lang_options_for_select, class: "text-sm" %></div>
+    <% end %>
+
+    <%= labelled_fields_for :pref, @user.pref do |pref_fields| %>
+      <div class="mb-6"><%= pref_fields.time_zone_select :time_zone, nil, :include_blank => true %></div>
+    <% end %>
+
+    <div class="flex w-full">
+      <div class="ml-auto button-submit"><%= submit_tag l(:button_save) %></div>
+    </div>
+
+  <% end %>

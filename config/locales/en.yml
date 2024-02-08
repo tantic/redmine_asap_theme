@@ -5,3 +5,8 @@ en:
   my_projects: My projects
   label_filters: "Filters"
   label_about: About
+  label_settings: Settings
+  label_settings_general: General
+  label_settings_preferences: Preferences
+  label_settings_notifications: Notifications
+  label_settings_appearance: Appearance

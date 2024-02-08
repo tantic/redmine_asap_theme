@@ -1,6 +1,10 @@
 
   input, textarea, select{
-    @apply text-xs
+    @apply text-sm
+  }
+
+  form label{
+    @apply font-normal;
   }
 
   input[type='text'], input[type='password']{
@@ -30,5 +34,12 @@ table#filters-table{
     >span{
       @apply h-full flex;
     }
+  }
+}
+
+.hide-email{
+  @apply flex items-center;
+  > label{
+    @apply mr-4
   }
 }

@@ -25,6 +25,10 @@
      );
     }
 
+    hide(){
+      this.usersubmenuTarget.classList.add('hidden')
+    }
+
     search(event) {
       event.preventDefault();
       this.searchTargets.forEach((search) => {

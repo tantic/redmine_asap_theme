@@ -61,3 +61,8 @@ First version but need extra work
 About in a modal
 
 ![Modal](img/redmine_about.png)
+
+## User settings (ex : my account)
+
+
+![User settings](img/user-settings.gif)

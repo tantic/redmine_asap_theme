@@ -6,3 +6,9 @@ html{
 body {
   @apply text-sm;
 }
+
+#tabs{
+  .tab.active {
+    @apply bg-gray-100
+  }
+}

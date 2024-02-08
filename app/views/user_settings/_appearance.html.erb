@@ -1,0 +1,4 @@
+
+<%= labelled_fields_for :pref, @user.pref do |pref_fields| %>
+<div class="mb-6"><%= pref_fields.select :textarea_font, textarea_font_options %></div>
+<% end %>

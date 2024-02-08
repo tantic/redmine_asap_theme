@@ -1,0 +1,20 @@
+<%= labelled_form_for :user, @user,
+                              :url => { :action => "update" },
+                              :html => { :id => 'update_settings_form',
+                                          :method => :put, :multipart => true } do |f| %>
+
+  <% @user.custom_field_values.select(&:editable?).each do |value| %>
+    <p><%= custom_field_tag_with_label :user, value %></p>
+  <% end %>
+
+  <fieldset class="box tabular">
+    <%= render :partial => 'users/preferences' %>
+    <%= call_hook(:view_my_account_preferences, :user => @user, :form => f) %>
+  </fieldset>
+
+  <%= call_hook(:view_my_account, :user => @user, :form => f) %>
+
+  <div class="flex w-full">
+    <div class="ml-auto button-submit"><%= submit_tag l(:button_save) %></div>
+  </div>
+<% end %>
