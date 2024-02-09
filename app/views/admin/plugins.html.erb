@@ -1,5 +1,4 @@
-<%= title l(:label_plugins) %>
-
+<div class="dark:bg-gray-800 h-fit mr-8 w-full bg-white shadow p-8 md:p-16  mb-8 mt-0 md:mt-8 flex flex-col">
 <% if @plugins.any? %>
 <div class="autoscroll">
   <table class="list plugins">
@@ -63,3 +62,4 @@ $(document).ready(function(){
   });
 });
 <% end if @plugins.any? %>
+</div>

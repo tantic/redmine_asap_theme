@@ -10,3 +10,20 @@ en:
   label_settings_preferences: Preferences
   label_settings_notifications: Notifications
   label_settings_appearance: Appearance
+  label_redmine_configuration: Configuration
+  label_redmine_environment: Environment
+  label_redmine_versioned_name: Redmine version
+  label_redmine_ruby: Ruby
+  label_redmine_ruby_platform: Ruby platform
+  label_redmine_rails: Rails
+  label_redmine_environment: Environment
+  label_redmine_database_adapter: Database adapter
+  label_redmine_mailer_queue: Mailer queue
+  label_redmine_mailer_delivery: Mailer delivery
+  label_redmine_plugins: Plugins
+  label_redmine_plugins_none: No plugin installed
+  label_redmine_statistics: Statistiques
+  label_redmine_projects_number: Projects
+  label_redmine_users: Users
+  label_redmine_groups: Groups
+  label_redmine_issues: Issues

@@ -5,6 +5,7 @@
 @import "./buttons.css";
 @import "./calendar.css";
 @import "./gantt.css";
+@import "./admin.css";
 
 
 @import 'tailwindcss/base';
