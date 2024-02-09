@@ -1,50 +1,75 @@
-<div class="dark:bg-gray-800 h-fit mr-8 w-full bg-white shadow p-8 md:p-16  mb-8 mt-0 md:mt-8 flex flex-col">
-<div class="contextual">
-<%= link_to l(:label_project_new), new_project_path, :class => 'icon icon-add' %>
-</div>
+<div class="ml-60">
+  <div class="flex w-full">
+    <%= link_to l(:label_project_new), new_project_path, :class => 'icon icon-add ml-auto flex text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded text-sm px-3 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800' %>
+  </div>
 
-<%= title l(:label_project_plural) %>
+
 
 <%= form_tag({}, :method => :get) do %>
-<fieldset><legend><%= l(:label_filter_plural) %></legend>
-<label for='status'><%= l(:field_status) %>:</label>
-<%= select_tag 'status', project_status_options_for_select(@status), :class => "small", :onchange => "this.form.submit(); return false;"  %>
-<label for='name'><%= l(:label_project) %>:</label>
-<%= text_field_tag 'name', params[:name], :size => 30 %>
-<%= submit_tag l(:button_apply), :class => "small", :name => nil %>
-<%= link_to l(:button_clear), admin_projects_path, :class => 'icon icon-reload' %>
-</fieldset>
+  <div class="dark:bg-gray-800 h-fit mr-8 w-full bg-white shadow p-8   mb-8 mt-0 md:mt-8 flex items-center">
+    <div class="flex items-center mr-8">
+      <label for='status' class="mr-3"><%= l(:field_status) %>:</label>
+      <%= select_tag 'status', project_status_options_for_select(@status), :class => "small", :onchange => "this.form.submit(); return false;"  %>
+    </div>
+    <div class="flex items-center mr-8">
+      <label for='name' class="mr-3"><%= l(:label_project) %>:</label>
+      <%= text_field_tag 'name', params[:name], :size => 30 %>
+    </div>
+    <div class="flex">
+      <%= submit_tag l(:button_apply), :class => "small cursor-pointer flex text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded text-sm px-3 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800", :name => nil %>
+      <%= link_to l(:button_clear), admin_projects_path, :class => 'icon icon-reload ml-3 py-2 px-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700' %>
+    </div>
+  </div>
 <% end %>
-&nbsp;
+
 
 <% if @projects.any? %>
-<div class="autoscroll">
-<table class="list">
-  <thead><tr>
-  <th><%=l(:label_project)%></th>
-  <th><%=l(:field_is_public)%></th>
-  <th><%=l(:field_created_on)%></th>
-  <th></th>
-  </tr></thead>
+<div class="dark:bg-gray-800 relative overflow-x-auto h-fit mr-8 w-full bg-white shadow p-8   mb-8 mt-0 md:mt-8 flex flex-col">
+
+<table class="list w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+  <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+    <tr>
+      <th class="px-6 py-3"><%=l(:label_project)%></th>
+      <th class="px-6 py-3"><%=l(:field_is_public)%></th>
+      <th class="px-6 py-3"><%=l(:field_created_on)%></th>
+      <th class="px-6 py-3"></th>
+    </tr>
+  </thead>
   <tbody>
-<% project_tree(@projects, :init_level => true) do |project, level| %>
-  <tr class="<%= project.css_classes %> <%= level > 0 ? "idnt idnt-#{level}" : nil %>">
-  <td class="name"><span><%= link_to_project_settings(project, {}, :title => project.short_description) %></span></td>
-  <td><%= checked_image project.is_public? %></td>
-  <td><%= format_date(project.created_on) %></td>
-  <td class="buttons">
-    <%= link_to(l(:button_archive), archive_project_path(project, :status => params[:status]), :data => {:confirm => l(:text_are_you_sure)}, :method => :post, :class => 'icon icon-lock') unless project.archived? %>
-    <%= link_to(l(:button_unarchive), unarchive_project_path(project, :status => params[:status]), :method => :post, :class => 'icon icon-unlock') if project.archived? %>
-    <%= link_to(l(:button_copy), copy_project_path(project), :class => 'icon icon-copy') %>
-    <%= link_to(l(:button_delete), project_path(project), :method => :delete, :class => 'icon icon-del') %>
-  </td>
-  </tr>
-<% end %>
+    <% project_tree(@projects, :init_level => true) do |project, level| %>
+      <tr class="<%= project.css_classes %> <%= level > 0 ? "idnt idnt-#{level}" : nil %> odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
+        <td class="name px-6 py-2">
+          <%= link_to settings_project_path(project),:class => 'uppercase flex items-center text-gray-800 font-light text-sm  p-1 hover:bg-gray-100 transition ease-in-out delay-75' do %>
+            <%= letter_avatar_tag(project.name, 300, class: 'w-8 h-8 mr-4') %> <span class="text-xs"><%= project.name%></span>
+          <% end %>
+
+        </td>
+        <td class="px-6 py-2">
+          <% if project.is_public? %>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+          </svg>
+          <% end %>
+        </td>
+        <td class="px-6 py-2"><%= format_date(project.created_on) %></td>
+        <td class="buttons px-6 py-2 text-right">
+          <%= link_to(l(:button_archive), archive_project_path(project, :status => params[:status]), :data => {:confirm => l(:text_are_you_sure)}, :method => :post, :class => 'icon icon-lock') unless project.archived? %>
+          <%= link_to(l(:button_unarchive), unarchive_project_path(project, :status => params[:status]), :method => :post, :class => 'icon icon-unlock') if project.archived? %>
+          <%= link_to(l(:button_copy), copy_project_path(project), :class => 'icon icon-copy') %>
+          <%= link_to(l(:button_delete), project_path(project), :method => :delete, :class => 'icon icon-del') %>
+        </td>
+      </tr>
+    <% end %>
   </tbody>
 </table>
 </div>
-<span class="pagination"><%= pagination_links_full @project_pages, @project_count %></span>
+<div class="pagination w-full flex items-center justify-center mb-8">
+  <div class="">
+    <%= pagination_links_full @project_pages, @project_count %>
+  </div>
+</div>
 <% else %>
 <p class="nodata"><%= l(:label_no_data) %></p>
 <% end %>
+</div>
 </div>

@@ -47,7 +47,11 @@
         <div style="clear:both;"></div>
       </section>
     <% else %>
-      <section id="content" class="p-8 md:px-16 mb-auto w-full  h-full">
+      <div id="sidebar">
+        <%= yield :sidebar %>
+        <%= view_layouts_base_sidebar_hook_response %>
+      </div>
+      <section id="content" class="p-8 lg:px-16 mb-auto w-full  h-full">
         <%= render_flash_messages %>
         <%= yield %>
         <%= call_hook :view_layouts_base_content %>
