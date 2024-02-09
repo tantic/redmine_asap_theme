@@ -66,3 +66,16 @@ About in a modal
 
 
 ![User settings](img/user-settings.gif)
+
+
+## Admin
+
+Administration is available from the navbar. A dropdown menu allow admin user to jump directly to the differents pages
+
+![Admin menu](img/admin-menu.png)
+
+![Admin menu](img/admin-projects.png)
+
+![Admin menu](img/admin-plugins.png)
+
+![Admin menu](img/admin-infos.png)
