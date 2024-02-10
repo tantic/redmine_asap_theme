@@ -32,10 +32,10 @@ Account
 ## Multi-projects
 
 - [ ] Activities
-- [ ] Issues
+- [x] Issues
 - [ ] Spent time
-- [ ] Gantt
-- [ ] Calendar
+- [x] Gantt
+- [x] Calendar
 - [ ] News
 
 ## Project
@@ -43,10 +43,11 @@ Account
 - [ ] Overview
 - [ ] Activity
 - [ ] Roadmap
-- [ ] Issues
+- [x] Issues
 - [ ] Spent time
-- [ ] Gantt
-- [ ] Calendar
+- [x] Gantt
+  - [ ] task display
+- [x] Calendar
   - [x] General UX and UI
   - [ ] Multiple days events
 - [ ] News
@@ -73,15 +74,15 @@ Account
 ## Personal
 
 - [ ] My page
-- [ ] My account
+- [x] My account => modal
 - [ ] My profile
 - [ ] Avatar from file
 
 ## Administration
 
-- [ ] Overview
-- [ ] Projects
-- [ ] Users
+- [x] Overview => this page is not used anymore because administration is available from a dropdown menu
+- [x] Projects
+- [x] Users
 - [ ] Groups
 - [ ] Roles and permissions
 - [ ] Trackers
@@ -91,8 +92,8 @@ Account
 - [ ] Enumerations
 - [ ] Settings
 - [ ] LDAP Authentication
-- [ ] Plugins
-- [ ] Information
+- [x] Plugins
+- [x] Information
 
 ## Compatibility
 
