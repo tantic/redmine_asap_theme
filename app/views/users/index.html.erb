@@ -1,81 +1,101 @@
 <div class="ml-60">
-<div class="contextual">
-<%= link_to l(:label_user_new), new_user_path, :class => 'icon icon-add' %>
-  <%= actions_dropdown do %>
-    <% if User.current.allowed_to?(:import_users, nil, :global => true) %>
-      <%= link_to l(:button_import), new_users_import_path, :class => 'icon icon-import' %>
+  <div class="dark:bg-gray-800 h-fit mr-8 w-full bg-white shadow p-8  mb-8 mt-0 flex items-center">
+    <%= form_tag(users_path, { :method => :get, :id => 'users_form', class:'flex' }) do %>
+      <div class="flex items-center mr-8">
+        <label for='status' class="mr-3"><%= l(:field_status) %>:</label>
+        <%= select_tag 'status', users_status_options_for_select(@status), :class => "small", :onchange => "this.form.submit(); return false;"  %>
+      </div>
+
+      <% if @groups.present? %>
+        <div class="flex items-center mr-8">
+          <label for='group_id' class="mr-3"><%= l(:label_group) %>:</label>
+          <%= select_tag 'group_id', content_tag('option') + options_from_collection_for_select(@groups, :id, :name, params[:group_id].to_i), :onchange => "this.form.submit(); return false;"  %>
+        </div>
+      <% end %>
+
+      <% if Setting.twofa_required? || Setting.twofa_optional? %>
+        <div class="flex items-center mr-8">
+          <label for='twofa' class="mr-3"><%= l(:setting_twofa) %>:</label>
+         <%= select_tag 'twofa', options_for_select([[l(:general_text_yes), "1"], [l(:general_text_no), "0"]], params[:twofa]), :onchange => "this.form.submit(); return false;", :include_blank => true %>
+        </div>
+      <% end %>
+
+      <div class="flex items-center mr-8">
+        <label for='name' class="mr-3"><%= l(:label_user) %>:</label>
+        <%= text_field_tag 'name', params[:name], :size => 30 %>
+      </div>
+      <div class="flex">
+        <%= submit_tag l(:button_apply), :class => "small cursor-pointer flex text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded text-sm px-3 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800", :name => nil %>
+        <%= link_to l(:button_clear), users_path, :class => 'icon icon-reload ml-3 py-2 px-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700' %>
+      </div>
+      <%= hidden_field_tag 'encoding', l(:general_csv_encoding) unless l(:general_csv_encoding).casecmp('UTF-8') == 0 %>
     <% end %>
-  <% end %>
-</div>
+    <div class="flex ml-auto">
+      <%= link_to l(:label_user_new), new_user_path, :class => 'icon icon-add flex text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded text-sm px-3 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800' %>
+      <% if User.current.allowed_to?(:import_users, nil, :global => true) %>
+        <%= link_to l(:button_import), new_users_import_path, :class => 'icon icon-import ml-3 flex text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded text-sm px-3 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800' %>
+      <% end %>
+    </div>
+  </div>
 
-<h2><%=l(:label_user_plural)%></h2>
-
-<%= form_tag(users_path, { :method => :get, :id => 'users_form' }) do %>
-<fieldset><legend><%= l(:label_filter_plural) %></legend>
-<label for='status'><%= l(:field_status) %>:</label>
-<%= select_tag 'status', users_status_options_for_select(@status), :class => "small", :onchange => "this.form.submit(); return false;"  %>
-
-<% if @groups.present? %>
-<label for='group_id'><%= l(:label_group) %>:</label>
-<%= select_tag 'group_id', content_tag('option') + options_from_collection_for_select(@groups, :id, :name, params[:group_id].to_i), :onchange => "this.form.submit(); return false;"  %>
-<% end %>
-
-<% if Setting.twofa_required? || Setting.twofa_optional? %>
-  <label for='twofa'><%= l(:setting_twofa) %>:</label>
-  <%= select_tag 'twofa', options_for_select([[l(:general_text_yes), "1"], [l(:general_text_no), "0"]], params[:twofa]), :onchange => "this.form.submit(); return false;", :include_blank => true %>
-<% end %>
-
-<label for='name'><%= l(:label_user) %>:</label>
-<%= text_field_tag 'name', params[:name], :size => 30 %>
-<%= submit_tag l(:button_apply), :class => "small", :name => nil %>
-<%= link_to l(:button_clear), users_path, :class => 'icon icon-reload' %>
-</fieldset>
-<%= hidden_field_tag 'encoding', l(:general_csv_encoding) unless l(:general_csv_encoding).casecmp('UTF-8') == 0 %>
-<% end %>
-&nbsp;
 
 <% if @users.any? %>
-<div class="autoscroll">
-<table class="list users">
-  <thead><tr>
-  <%= sort_header_tag('login', :caption => l(:field_login)) %>
-  <%= sort_header_tag('firstname', :caption => l(:field_firstname)) %>
-  <%= sort_header_tag('lastname', :caption => l(:field_lastname)) %>
-  <th><%= l(:field_mail) %></th>
-  <%= sort_header_tag('admin', :caption => l(:field_admin), :default_order => 'desc') %>
-  <% if Setting.twofa_required? || Setting.twofa_optional? %>
-    <th class="whitespace-normal"><%= l(:setting_twofa) %></th>
+  <div class="dark:bg-gray-800 relative overflow-x-auto h-fit mr-8 w-full bg-white shadow p-8   mb-8 mt-0 md:mt-8 flex flex-col">
+    <table class="list users w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+      <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+        <tr>
+          <%= sort_header_tag('login', :caption => l(:field_login), class: 'px-6 py-3') %>
+          <%= sort_header_tag('firstname', :caption => l(:field_firstname), class: 'px-6 py-3') %>
+          <%= sort_header_tag('lastname', :caption => l(:field_lastname), class: 'px-6 py-3') %>
+          <th class="px-6 py-3"><%= l(:field_mail) %></th>
+          <%= sort_header_tag('admin', :caption => l(:field_admin), :default_order => 'desc', class: 'px-6 py-3') %>
+          <% if Setting.twofa_required? || Setting.twofa_optional? %>
+            <th class="whitespace-normal px-6 py-3"><%= l(:setting_twofa) %></th>
+          <% end %>
+          <%= sort_header_tag('created_on', :caption => l(:field_created_on), :default_order => 'desc', class: 'px-6 py-3') %>
+          <%= sort_header_tag('last_login_on', :caption => l(:field_last_login_on), :default_order => 'desc', class: 'px-6 py-3') %>
+          <th class="px-6 py-3"></th>
+        </tr>
+      </thead>
+      <tbody>
+      <% for user in @users -%>
+        <tr class="<%= user.css_classes %> odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
+          <td class="username px-6 py-2">
+            <%= link_to edit_user_path(user), class: "flex items-center text-gray-800 font-light text-sm  p-1 hover:bg-gray-100 transition ease-in-out delay-75" do %>
+              <span class="mr-4"><%= avatar(user, :size => "14") %></span>
+              <span class="text-sm"><%= user.login %></span>
+            <% end %>
+          </td>
+          <td class="firstname px-6 py-2"><%= user.firstname %></td>
+          <td class="lastname px-6 py-2"><%= user.lastname %></td>
+          <td class="email px-6 py-2"><%= mail_to(user.mail) %></td>
+          <td class="tick px-6 py-2"><%= checked_image user.admin? %></td>
+          <% if Setting.twofa_required? || Setting.twofa_optional? %>
+            <td class="twofa tick px-6 py-2"><%= checked_image user.twofa_active? %></td>
+          <% end %>
+          <td class="created_on px-6 py-2"><%= format_time(user.created_on) %></td>
+          <td class="last_login_on px-6 py-2"><%= format_time(user.last_login_on) unless user.last_login_on.nil? %></td>
+          <td class="buttons px-6 py-2">
+            <%= change_status_link(user) %>
+            <%= delete_link user_path(user, :back_url => request.original_fullpath), :data => {} unless User.current == user %>
+          </td>
+        </tr>
+      <% end -%>
+      </tbody>
+    </table>
+  </div>
+  <div class="pagination w-full flex items-center justify-center mb-8">
+    <div class="">
+      <%= pagination_links_full @user_pages, @user_count %>
+    </div>
+  </div>
+
+<div class="w-full text-right">
+  <% other_formats_links do |f| %>
+    <%= f.link_to_with_query_parameters 'CSV', {}, :onclick => "showModal('csv-export-options', '330px'); return false;" %>
   <% end %>
-  <%= sort_header_tag('created_on', :caption => l(:field_created_on), :default_order => 'desc') %>
-  <%= sort_header_tag('last_login_on', :caption => l(:field_last_login_on), :default_order => 'desc') %>
-    <th></th>
-  </tr></thead>
-  <tbody>
-<% for user in @users -%>
-  <tr class="<%= user.css_classes %>">
-  <td class="username"><%= avatar(user, :size => "14") %><%= link_to user.login, edit_user_path(user) %></td>
-  <td class="firstname"><%= user.firstname %></td>
-  <td class="lastname"><%= user.lastname %></td>
-  <td class="email"><%= mail_to(user.mail) %></td>
-  <td class="tick"><%= checked_image user.admin? %></td>
-  <% if Setting.twofa_required? || Setting.twofa_optional? %>
-    <td class="twofa tick"><%= checked_image user.twofa_active? %></td>
-  <% end %>
-  <td class="created_on"><%= format_time(user.created_on) %></td>
-  <td class="last_login_on"><%= format_time(user.last_login_on) unless user.last_login_on.nil? %></td>
-    <td class="buttons">
-      <%= change_status_link(user) %>
-      <%= delete_link user_path(user, :back_url => request.original_fullpath), :data => {} unless User.current == user %>
-    </td>
-  </tr>
-<% end -%>
-  </tbody>
-</table>
 </div>
-<span class="pagination"><%= pagination_links_full @user_pages, @user_count %></span>
-<% other_formats_links do |f| %>
-  <%= f.link_to_with_query_parameters 'CSV', {}, :onclick => "showModal('csv-export-options', '330px'); return false;" %>
-<% end %>
+
 <div id="csv-export-options" style="display: none;">
   <h3 class="title"><%= l(:label_export_options, :export_format => 'CSV') %></h3>
   <%= export_csv_encoding_select_tag %>

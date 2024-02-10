@@ -70,11 +70,13 @@ About in a modal
 
 ## Admin
 
-Administration is available from the navbar. A dropdown menu allow admin user to jump directly to the differents pages
+Administration is available from the navbar. A dropdown menu allow admin user to jump directly to the differents pages.
 
 ![Admin menu](img/admin-menu.png)
 
 ![Admin menu](img/admin-projects.png)
+
+![Admin menu](img/admin-users.png)
 
 ![Admin menu](img/admin-plugins.png)
 
