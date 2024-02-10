@@ -1187,6 +1187,15 @@ table#filters-table{
   }
 }
 
+.icon-sort-handle:after{
+  display: inline-flex;
+  content: '';
+  background-image: url('../images/arrow-pointing.svg');
+  background-size: 24px 24px;
+  height: 24px;
+  width: 24px;
+}
+
 /* ! tailwindcss v3.3.6 | MIT License | https://tailwindcss.com */
 
 /*
@@ -2248,6 +2257,10 @@ select{
   margin-top: 2rem;
 }
 
+.mr-6{
+  margin-right: 1.5rem;
+}
+
 .block{
   display: block;
 }
@@ -2343,6 +2356,10 @@ select{
 
 .h-screen{
   height: 100vh;
+}
+
+.h-12{
+  height: 3rem;
 }
 
 .max-h-full{
@@ -2806,6 +2823,10 @@ select{
   text-align: right;
 }
 
+.align-middle{
+  vertical-align: middle;
+}
+
 .align-bottom{
   vertical-align: bottom;
 }
@@ -2977,6 +2998,10 @@ select{
   --tw-ring-color: rgb(255 255 255 / var(--tw-ring-opacity));
 }
 
+.filter{
+  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
+}
+
 .transition{
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
@@ -3005,8 +3030,16 @@ select{
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+.\[eoform\:tracker\]{
+  eoform: tracker;
+}
+
 .\[eoform\:user\]{
   eoform: user;
+}
+
+.\[form\:tracker\]{
+  form: tracker;
 }
 
 .\[form\:user\]{

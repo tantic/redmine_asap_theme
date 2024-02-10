@@ -1,5 +1,5 @@
 <div class="ml-60">
-  <div class="dark:bg-gray-800 h-fit mr-8 w-full bg-white shadow p-8  mb-8 mt-0 flex items-center">
+  <div class="dark:bg-gray-800 h-fit mr-6 w-full bg-white shadow p-8  mb-8 mt-0 flex items-center">
     <%= form_tag(users_path, { :method => :get, :id => 'users_form', class:'flex' }) do %>
       <div class="flex items-center mr-8">
         <label for='status' class="mr-3"><%= l(:field_status) %>:</label>
@@ -7,20 +7,20 @@
       </div>
 
       <% if @groups.present? %>
-        <div class="flex items-center mr-8">
+        <div class="flex items-center mr-6">
           <label for='group_id' class="mr-3"><%= l(:label_group) %>:</label>
           <%= select_tag 'group_id', content_tag('option') + options_from_collection_for_select(@groups, :id, :name, params[:group_id].to_i), :onchange => "this.form.submit(); return false;"  %>
         </div>
       <% end %>
 
       <% if Setting.twofa_required? || Setting.twofa_optional? %>
-        <div class="flex items-center mr-8">
+        <div class="flex items-center mr-6">
           <label for='twofa' class="mr-3"><%= l(:setting_twofa) %>:</label>
          <%= select_tag 'twofa', options_for_select([[l(:general_text_yes), "1"], [l(:general_text_no), "0"]], params[:twofa]), :onchange => "this.form.submit(); return false;", :include_blank => true %>
         </div>
       <% end %>
 
-      <div class="flex items-center mr-8">
+      <div class="flex items-center mr-6">
         <label for='name' class="mr-3"><%= l(:label_user) %>:</label>
         <%= text_field_tag 'name', params[:name], :size => 30 %>
       </div>

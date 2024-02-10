@@ -83,10 +83,10 @@ Account
 - [x] Overview => this page is not used anymore because administration is available from a dropdown menu
 - [x] Projects
 - [x] Users
-- [ ] Groups
-- [ ] Roles and permissions
-- [ ] Trackers
-- [ ] Issues statuses
+- [x] Groups
+- [x] Roles and permissions
+- [x] Trackers
+- [x] Issues statuses
 - [ ] Workflow
 - [ ] Custom fields
 - [ ] Enumerations

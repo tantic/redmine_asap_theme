@@ -1,32 +1,38 @@
 <div class="ml-60">
-<div class="contextual">
-<%= link_to l(:label_auth_source_new), {:action => 'new'}, :class => 'icon icon-add' %>
-</div>
+  <div class="dark:bg-gray-800 h-fit mr-6 w-full bg-white shadow p-8  mb-8 mt-0 flex items-center">
+    <%= link_to l(:label_auth_source_new), {:action => 'new'}, :class => 'icon icon-add ml-auto flex text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded text-sm px-3 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-80' %>
+  </div>
 
-
-<table class="list">
-  <thead><tr>
-    <th><%=l(:field_name)%></th>
-    <th><%=l(:field_type)%></th>
-    <th><%=l(:field_host)%></th>
-    <th><%=l(:label_user_plural)%></th>
-    <th></th>
-  </tr></thead>
-  <tbody>
-<% for source in @auth_sources %>
-  <tr id="auth-source-<%= source.id %>">
-    <td class="name"><%= link_to(source.name, :action => 'edit', :id => source)%></td>
-    <td><%= source.auth_method_name %></td>
-    <td><%= source.host %></td>
-    <td><%= source.users.count %></td>
-    <td class="buttons">
-      <%= link_to l(:button_test), try_connection_auth_source_path(source), :class => 'icon icon-test' %>
-      <%= delete_link auth_source_path(source) %>
-    </td>
-  </tr>
-<% end %>
-  </tbody>
-</table>
-
-<span class="pagination"><%= pagination_links_full @auth_source_pages %></span>
+  <div class="dark:bg-gray-800 relative overflow-x-auto h-fit mr-8 w-full bg-white shadow p-8   mb-8 mt-0 md:mt-8 flex flex-col">
+    <table class="list w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+      <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+        <tr>
+          <th class="px-6 py-3"><%=l(:field_name)%></th>
+          <th class="px-6 py-3"><%=l(:field_type)%></th>
+          <th class="px-6 py-3"><%=l(:field_host)%></th>
+          <th class="px-6 py-3"><%=l(:label_user_plural)%></th>
+          <th class="px-6 py-3"></th>
+        </tr>
+      </thead>
+      <tbody>
+      <% for source in @auth_sources %>
+        <tr id="auth-source-<%= source.id %>" class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
+          <td class="name px-6 py-2 text-gray-800"><%= link_to(source.name, :action => 'edit', :id => source)%></td>
+          <td class="px-6 py-2"><%= source.auth_method_name %></td>
+          <td class="px-6 py-2"><%= source.host %></td>
+          <td class="px-6 py-2"><%= source.users.count %></td>
+          <td class="buttons px-6 py-2 flex items-center">
+            <%= link_to l(:button_test), try_connection_auth_source_path(source), :class => 'icon icon-test mr-3' %>
+            <%= delete_link auth_source_path(source) %>
+          </td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+  <div class="pagination w-full flex items-center justify-center mb-8">
+    <div class="">
+      <%= pagination_links_full @auth_source_pages %>
+    </div>
+  </div>
 </div>
