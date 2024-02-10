@@ -78,6 +78,10 @@ Administration is available from the navbar. A dropdown menu allow admin user to
 
 ![Admin menu](img/admin-users.png)
 
+![Admin menu](img/admin-groups.png)
+
+![Admin menu](img/admin-roles.png)
+
 ![Admin menu](img/admin-plugins.png)
 
 ![Admin menu](img/admin-infos.png)
