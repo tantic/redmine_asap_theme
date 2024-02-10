@@ -31,10 +31,10 @@
       <%= hidden_field_tag 'encoding', l(:general_csv_encoding) unless l(:general_csv_encoding).casecmp('UTF-8') == 0 %>
     <% end %>
     <div class="flex ml-auto">
-      <%= link_to l(:label_user_new), new_user_path, :class => 'icon icon-add flex text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded text-sm px-3 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800' %>
       <% if User.current.allowed_to?(:import_users, nil, :global => true) %>
-        <%= link_to l(:button_import), new_users_import_path, :class => 'icon icon-import ml-3 flex text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded text-sm px-3 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800' %>
+        <%= link_to l(:button_import), new_users_import_path, :class => 'icon icon-import mr-3 flex text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded text-sm px-3 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800' %>
       <% end %>
+      <%= link_to l(:label_user_new), new_user_path, :class => 'icon icon-add flex text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded text-sm px-3 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800' %>
     </div>
   </div>
 
@@ -115,7 +115,7 @@ $(document).ready(function(){
 });
 <% end %>
 <% else %>
-<p class="nodata"><%= l(:label_no_data) %></p>
+<div class="nodata w-full flex items-center justify-center bg-gray-50 dark:bg-gray-800 p-16 rounded"><%= l(:label_no_data) %></p>
 <% end %>
 
 <% html_title(l(:label_user_plural)) -%>

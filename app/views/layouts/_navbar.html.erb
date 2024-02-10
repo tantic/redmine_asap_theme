@@ -9,7 +9,7 @@
     <%= render_project_jump_box %>
     <% if display_main_menu?(@project) %>
       <div data-controller="projectmenu" class="h-full relative flex items-center justify-center">
-        <% if @project %>
+        <% if @project && @project.id %>
         <%= link_to t("label_issue_plural"),project_issues_path(@project), class: "h-full p-4 hover:bg-gray-50" %>
         <% end %>
         <div data-action="click->projectmenu#toggle" class="cursor-pointer ml-1 p-2 rounded-full hover:bg-gray-100 text-gray-700 dark:text-gray-400 dark:hover:text-gray-300 dark:hover:bg-gray-700 hover:text-gray-800">
