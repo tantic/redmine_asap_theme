@@ -43,3 +43,56 @@ table#filters-table{
     @apply mr-4
   }
 }
+
+.jstTabs.tabs{
+  ul{
+    width: 100%;
+    height: auto;
+    border-bottom: 0;
+    box-sizing: border-box;
+    margin: 0;
+    padding-left: 0;
+    list-style: none;
+    display: flex;
+    flex-wrap: nowrap;
+    li{
+      height: auto;
+      margin: 0;
+      align-self: flex-end;
+      flex: 0 1 auto;
+      a{
+        display: inline-block;
+        padding: 5px 8px;
+        vertical-align: bottom;
+        line-height: 19px;
+        border-bottom: 1px solid transparent;
+        box-sizing: border-box;
+        min-width: 3em;
+        height: 30px;
+        margin-right: 2px;
+        border: 1px solid transparent;
+        border-radius: 3px 3px 0 0;
+        text-align: center;
+        white-space: nowrap;
+      }
+      a.selected{
+        border-color: #e5e7eb #e5e7eb #f9fafb;
+        background: #f9fafb;
+        color: #111827;
+      }
+    }
+    li.tab-elements{
+      flex: 1;
+      margin-left: 5px;
+      position:relative;
+    }
+    .jstElements {
+      padding: 0;
+      height: auto;
+      line-height: normal;
+    }
+  }
+}
+.wiki-edit{
+  @apply rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0
+}

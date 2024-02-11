@@ -1,0 +1,12 @@
+<%= form_tag({:action => 'edit', :tab => 'api'}) do %>
+
+<div class="box tabular settings">
+<p><%= setting_check_box :rest_api_enabled %></p>
+
+<p><%= setting_check_box :jsonp_enabled %></p>
+</div>
+
+<div class="w-full my-8">
+  <%= submit_tag l(:button_save), class: "ml-auto cursor-pointer flex text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded text-sm px-3 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" %>
+</div>
+<% end %>

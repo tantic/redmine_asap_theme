@@ -86,8 +86,9 @@ Administration is available from the navbar. A dropdown menu allow admin user to
 
 ![Admin menu](img/admin-issues-statuses.png)
 
-![Admin menu](img/admin-ldap.png)
+![Admin menu](img/admin-settings-general.png)
 
+![Admin menu](img/admin-ldap.png)
 
 ![Admin menu](img/admin-plugins.png)
 
