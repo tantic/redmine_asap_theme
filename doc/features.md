@@ -88,10 +88,22 @@ Account
 - [x] Trackers
 - [x] Issues statuses
 - [ ] Workflow
-- [ ] Custom fields
+- [x] Custom fields (WIP)
 - [ ] Enumerations
 - [ ] Settings
-- [ ] LDAP Authentication
+  - [x] General
+  - [ ] Display
+  - [ ] Authentication
+  - [ ] API
+  - [ ] Projects
+  - [ ] Users
+  - [ ] Issue tracking
+  - [ ] Time tracking
+  - [ ] Files
+  - [ ] Email notifications
+  - [ ] Incoming emails
+  - [ ] Repositories
+- [x] LDAP Authentication
 - [x] Plugins
 - [x] Information
 
