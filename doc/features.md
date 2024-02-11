@@ -87,12 +87,16 @@ Account
 - [x] Roles and permissions
 - [x] Trackers
 - [x] Issues statuses
-- [ ] Workflow
+- [x] Workflow
+  - [x] Edit
+  - [x] Permissions
+  - [x] Summary
+  - [ ] Copy
 - [x] Custom fields (WIP)
 - [ ] Enumerations
 - [ ] Settings
   - [x] General
-  - [ ] Display
+  - [x] Display
   - [ ] Authentication
   - [ ] API
   - [ ] Projects

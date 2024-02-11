@@ -86,6 +86,8 @@ Administration is available from the navbar. A dropdown menu allow admin user to
 
 ![Admin menu](img/admin-issues-statuses.png)
 
+![Admin menu](img/admin-workflow.png)
+
 ![Admin menu](img/admin-settings-general.png)
 
 ![Admin menu](img/admin-ldap.png)
@@ -97,4 +99,4 @@ Administration is available from the navbar. A dropdown menu allow admin user to
 
 ## Add turbo
 
-Include turbo 8 which has a uge effect on performances. Drawbacks are that adjustments have to be done on specifig js.
+Include turbo 8 which has a uge effect on performances. Drawbacks are that adjustments have to be done on specific js. For example, some work on the navbar have to be done.
