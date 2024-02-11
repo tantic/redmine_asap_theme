@@ -1,47 +1,51 @@
-<div class="ml-60">
-<%= render :partial => 'action_menu' %>
+<div class="ml-60 mb-16">
+  <%= render :partial => 'action_menu' %>
 
-<%= title l(:label_workflow) %>
+  <div class="tabs text-sm font-medium text-center text-gray-500  dark:text-gray-400 dark:border-gray-700">
+    <ul class="flex flex-nowrap overflow-x-auto -mb-px">
+      <li><%= link_to l(:label_status_transitions), edit_workflows_path(:role_id => @roles, :tracker_id => @trackers), :class => 'selected inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300' %></li>
+      <li><%= link_to l(:label_fields_permissions), permissions_workflows_path(:role_id => @roles, :tracker_id => @trackers), class: 'inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300' %></li>
+    </ul>
+  </div>
 
-<div class="tabs">
-  <ul>
-    <li><%= link_to l(:label_status_transitions), edit_workflows_path(:role_id => @roles, :tracker_id => @trackers), :class => 'selected' %></li>
-    <li><%= link_to l(:label_fields_permissions), permissions_workflows_path(:role_id => @roles, :tracker_id => @trackers) %></li>
-  </ul>
-</div>
+  <%= form_tag({}, :method => 'get') do %>
+    <div class="dark:bg-gray-800 h-fit mr-6 w-full bg-white shadow p-8 mb-8 mt-0 flex items-center">
+      <div class="flex mr-3 items-center">
+        <label class="mr-2"><%=l(:label_role)%></label>
+        <%= options_for_workflow_select 'role_id[]', Role.sorted.select(&:consider_workflow?), @roles, :id => 'role_id', :class => 'expandable' %>
+        <span class="toggle-multiselect icon-only"></span>
+      </div>
 
-<p><%=l(:text_workflow_edit)%>:</p>
+      <div class="flex mr-3 items-center">
+        <label class="mr-2"><%=l(:label_tracker)%></label>
+        <%= options_for_workflow_select 'tracker_id[]', Tracker.sorted, @trackers, :id => 'tracker_id', :class => 'expandable' %>
+        <span class="toggle-multiselect icon-only"></span>
+      </div>
 
-<%= form_tag({}, :method => 'get') do %>
-<p>
-  <label><%=l(:label_role)%>:
-  <%= options_for_workflow_select 'role_id[]', Role.sorted.select(&:consider_workflow?), @roles, :id => 'role_id', :class => 'expandable' %>
-  <span class="toggle-multiselect icon-only"></span>
-  </label>
+      <%= submit_tag l(:button_edit), :name => nil, class: 'cursor-pointer flex text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded text-sm px-3 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800' %>
 
-  <label><%=l(:label_tracker)%>:
-  <%= options_for_workflow_select 'tracker_id[]', Tracker.sorted, @trackers, :id => 'tracker_id', :class => 'expandable' %>
-  <span class="toggle-multiselect icon-only"></span>
-  </label>
-
-  <%= submit_tag l(:button_edit), :name => nil %>
-
-  <%= hidden_field_tag 'used_statuses_only', '0', :id => nil %>
-  <label><%= check_box_tag 'used_statuses_only', '1', @used_statuses_only %> <%= l(:label_display_used_statuses_only) %></label>
-
-</p>
-<% end %>
+      <div class="flex items-center h-full">
+        <%= hidden_field_tag 'used_statuses_only', '0', :id => nil %>
+        <label class="ml-3 text-gray-500"><%= check_box_tag 'used_statuses_only', '1', @used_statuses_only %> <%= l(:label_display_used_statuses_only) %></label>
+      </div>
+    </div>
+  <% end %>
 
 <% if @trackers && @roles && @statuses.any? %>
   <%= form_tag workflows_path, method: :patch, id: 'workflow_form' do %>
     <%= @trackers.map {|tracker| hidden_field_tag 'tracker_id[]', tracker.id, :id => nil}.join.html_safe %>
     <%= @roles.map {|role| hidden_field_tag 'role_id[]', role.id, :id => nil}.join.html_safe %>
     <%= hidden_field_tag 'used_statuses_only', params[:used_statuses_only], :id => nil %>
-    <div class="autoscroll">
+    <div class="autoscroll dark:bg-gray-800 h-fit mr-6 w-full bg-white shadow p-8 mb-8 mt-0">
       <%= render :partial => 'form', :locals => {:name => 'always', :workflows => @workflows['always']} %>
 
       <fieldset class="collapsible" style="padding: 0; margin-top: 0.5em;">
-        <legend onclick="toggleFieldset(this);" class="icon icon-collapsed"><%= l(:label_additional_workflow_transitions_for_author) %></legend>
+        <span class="flex items-center mt-6 ">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 mr-2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+          </svg>
+          <legend onclick="toggleFieldset(this);" class="icon icon-collapsed cursor-pointer text-blue-700 hover:text-blue-800 dark:text-blue-100 dark-hover:text-blue-200"><%= l(:label_additional_workflow_transitions_for_author) %></legend>
+        </span>
         <div id="author_workflows" style="margin: 0.5em 0 0.5em 0;">
           <%= render :partial => 'form', :locals => {:name => 'author', :workflows => @workflows['author']} %>
         </div>
@@ -49,14 +53,21 @@
       <%= javascript_tag "hideFieldset($('#author_workflows'))" unless @workflows['author'].present? %>
 
       <fieldset class="collapsible" style="padding: 0;">
-        <legend onclick="toggleFieldset(this);" class="icon icon-collapsed"><%= l(:label_additional_workflow_transitions_for_assignee) %></legend>
+        <span class="flex items-center mt-6">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 mr-2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+          </svg>
+          <legend onclick="toggleFieldset(this);" class="icon icon-collapsed cursor-pointer text-blue-700 hover:text-blue-800 dark:text-blue-100 dark-hover:text-blue-200"><%= l(:label_additional_workflow_transitions_for_assignee) %></legend>
+        </span>
         <div id="assignee_workflows" style="margin: 0.5em 0 0.5em 0;">
-      <%= render :partial => 'form', :locals => {:name => 'assignee', :workflows => @workflows['assignee']} %>
+          <%= render :partial => 'form', :locals => {:name => 'assignee', :workflows => @workflows['assignee']} %>
         </div>
       </fieldset>
       <%= javascript_tag "hideFieldset($('#assignee_workflows'))" unless @workflows['assignee'].present? %>
     </div>
-    <%= submit_tag l(:button_save) %>
+    <div class="flex">
+      <%= submit_tag l(:button_save), class: 'ml-auto cursor-pointer flex text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded text-sm px-3 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800' %>
+    </div>
   <% end %>
 <% end %>
 </div>

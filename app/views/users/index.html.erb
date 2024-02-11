@@ -1,6 +1,17 @@
 <div class="ml-60">
-  <div class="dark:bg-gray-800 h-fit mr-6 w-full bg-white shadow p-8  mb-8 mt-0 flex items-center">
-    <%= form_tag(users_path, { :method => :get, :id => 'users_form', class:'flex' }) do %>
+  <div class="dark:bg-gray-800 h-fit mr-6 w-full bg-white  mb-8 mt-0 flex items-center">
+    <div class="flex ml-auto">
+      <% if User.current.allowed_to?(:import_users, nil, :global => true) %>
+        <%= link_to l(:button_import), new_users_import_path, :class => 'icon icon-import mr-3 flex text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded text-sm px-3 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800' %>
+      <% end %>
+      <%= link_to l(:label_user_new), new_user_path, :class => 'icon icon-add flex text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded text-sm px-3 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800' %>
+    </div>
+  </div>
+
+
+<% if @users.any? %>
+  <div class="dark:bg-gray-800 relative h-fit mr-8 w-full bg-white shadow p-8   mb-8 mt-0 md:mt-8 flex flex-col">
+    <%= form_tag(users_path, { :method => :get, :id => 'users_form', class:'flex mb-8' }) do %>
       <div class="flex items-center mr-8">
         <label for='status' class="mr-3"><%= l(:field_status) %>:</label>
         <%= select_tag 'status', users_status_options_for_select(@status), :class => "small", :onchange => "this.form.submit(); return false;"  %>
@@ -30,17 +41,6 @@
       </div>
       <%= hidden_field_tag 'encoding', l(:general_csv_encoding) unless l(:general_csv_encoding).casecmp('UTF-8') == 0 %>
     <% end %>
-    <div class="flex ml-auto">
-      <% if User.current.allowed_to?(:import_users, nil, :global => true) %>
-        <%= link_to l(:button_import), new_users_import_path, :class => 'icon icon-import mr-3 flex text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded text-sm px-3 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800' %>
-      <% end %>
-      <%= link_to l(:label_user_new), new_user_path, :class => 'icon icon-add flex text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded text-sm px-3 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800' %>
-    </div>
-  </div>
-
-
-<% if @users.any? %>
-  <div class="dark:bg-gray-800 relative overflow-x-auto h-fit mr-8 w-full bg-white shadow p-8   mb-8 mt-0 md:mt-8 flex flex-col">
     <table class="list users w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
       <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
         <tr>

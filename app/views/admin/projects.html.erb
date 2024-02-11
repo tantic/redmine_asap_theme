@@ -1,6 +1,13 @@
 <div class="ml-60">
-  <div class="dark:bg-gray-800 h-fit mr-8 w-full bg-white shadow p-8  mb-8 mt-0 flex items-center">
-    <%= form_tag({}, :method => :get, class:'flex w-full') do %>
+  <div class="dark:bg-gray-800 h-fit mr-8 w-full bg-white mb-8 mt-0 flex items-center">
+    <div class="flex w-full">
+      <%= link_to l(:label_project_new), new_project_path, :class => 'icon icon-add ml-auto flex text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded text-sm px-3 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800' %>
+    </div>
+  </div>
+
+  <% if @projects.any? %>
+    <div class="dark:bg-gray-800 relative overflow-x-auto h-fit mr-8 w-full bg-white shadow p-8   mb-8 mt-0 md:mt-8 flex flex-col">
+      <%= form_tag({}, :method => :get, class:'flex w-full mb-8') do %>
       <div class="flex items-center mr-8">
         <label for='status' class="mr-3"><%= l(:field_status) %>:</label>
         <%= select_tag 'status', project_status_options_for_select(@status), :class => "small", :onchange => "this.form.submit(); return false;"  %>
@@ -14,13 +21,6 @@
         <%= link_to l(:button_clear), admin_projects_path, :class => 'icon icon-reload ml-3 py-2 px-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700' %>
       </div>
     <% end %>
-    <div class="flex w-full">
-      <%= link_to l(:label_project_new), new_project_path, :class => 'icon icon-add ml-auto flex text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded text-sm px-3 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800' %>
-    </div>
-  </div>
-
-  <% if @projects.any? %>
-    <div class="dark:bg-gray-800 relative overflow-x-auto h-fit mr-8 w-full bg-white shadow p-8   mb-8 mt-0 md:mt-8 flex flex-col">
       <table class="list w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
           <tr>

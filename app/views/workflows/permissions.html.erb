@@ -1,0 +1,117 @@
+<div class="ml-60">
+  <%= render :partial => 'action_menu' %>
+
+  <div class="tabs text-sm font-medium text-center text-gray-500  dark:text-gray-400 dark:border-gray-700">
+    <ul class="flex flex-nowrap overflow-x-auto -mb-px">
+      <li><%= link_to l(:label_status_transitions), edit_workflows_path(:role_id => @roles, :tracker_id => @trackers), :class => 'inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300' %></li>
+      <li><%= link_to l(:label_fields_permissions), permissions_workflows_path(:role_id => @roles, :tracker_id => @trackers), class: 'selected inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300' %></li>
+    </ul>
+  </div>
+
+  <%= form_tag({}, :method => 'get') do %>
+    <div class="dark:bg-gray-800 h-fit mr-6 w-full bg-white shadow p-8 mb-8 mt-0 flex items-center">
+      <div class="flex mr-3 items-center">
+        <label class="mr-2"><%=l(:label_role)%></label>
+        <%= options_for_workflow_select 'role_id[]', Role.sorted.select(&:consider_workflow?), @roles, :id => 'role_id', :class => 'expandable' %>
+        <span class="toggle-multiselect icon-only"></span>
+      </div>
+
+      <div class="flex mr-3 items-center">
+        <label class="mr-2"><%=l(:label_tracker)%></label>
+        <%= options_for_workflow_select 'tracker_id[]', Tracker.sorted, @trackers, :id => 'tracker_id', :class => 'expandable' %>
+        <span class="toggle-multiselect icon-only"></span>
+      </div>
+
+      <%= submit_tag l(:button_edit), :name => nil, class: 'cursor-pointer flex text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded text-sm px-3 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800' %>
+
+      <div class="flex items-center h-full">
+        <%= hidden_field_tag 'used_statuses_only', '0', :id => nil %>
+        <label class="ml-3 text-gray-500"><%= check_box_tag 'used_statuses_only', '1', @used_statuses_only %> <%= l(:label_display_used_statuses_only) %></label>
+      </div>
+    </div>
+  <% end %>
+
+
+<% if @trackers && @roles && @statuses.any? %>
+  <%= form_tag update_permissions_workflows_path, method: :patch, id: 'workflow_form' do %>
+    <%= @trackers.map {|tracker| hidden_field_tag 'tracker_id[]', tracker.id, :id => nil}.join.html_safe %>
+    <%= @roles.map {|role| hidden_field_tag 'role_id[]', role.id, :id => nil}.join.html_safe %>
+    <%= hidden_field_tag 'used_statuses_only', params[:used_statuses_only], :id => nil %>
+    <div class="autoscroll dark:bg-gray-800 h-fit mr-6 w-full bg-white shadow p-8 mb-8 mt-0">
+    <table class="list workflows fields_permissions  w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+      <tr>
+        <th>
+        </th>
+        <th colspan="<%= @statuses.length %>" class="py-3 align-middle text-center bg-gray-100"><%=l(:label_issue_status)%></th>
+      </tr>
+      <tr>
+        <td></td>
+        <% for status in @statuses %>
+        <td class="py-3 align-middle text-center" style="width:<%= 75 / @statuses.size %>%;">
+          <%= status.name %>
+        </td>
+        <% end %>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="group open">
+        <td colspan="<%= @statuses.size + 1 %>">
+          <span class="expander icon icon-expanded" onclick="toggleRowGroup(this);">&nbsp;</span>
+          <%= l(:field_core_fields) %>
+        </td>
+      </tr>
+      <% @fields.each do |field, name| %>
+      <tr>
+        <td class="name px-6 bg-gray-50 border-t border-white">
+          <%= name %> <%= content_tag('span', '*', :class => 'required') if field_required?(field) %>
+        </td>
+        <% for status in @statuses -%>
+        <td class="align-top <%= @permissions[status.id][field].try(:join, ' ') %>" title="<%= name %> (<%= status.name %>)">
+          <div class="flex flex-col">
+          <div><%= field_permission_tag(@permissions, status, field, @roles) %></div>
+          <% unless status == @statuses.last %>
+            <a href="#" class="repeat-value flex items-center justify-center w-full py-1 hover:bg-blue-200 bg-blue-100 text-blue-700" title="<%= l(:button_copy) %>">&#187;</a>
+          <% end %>
+          </div>
+        </td>
+        <% end -%>
+      </tr>
+      <% end %>
+      <% if @custom_fields.any? %>
+        <tr class="group open">
+          <td colspan="<%= @statuses.size + 1 %>">
+            <span class="expander icon icon-expanded" onclick="toggleRowGroup(this);">&nbsp;</span>
+            <%= l(:label_custom_field_plural) %>
+          </td>
+        </tr>
+        <% @custom_fields.each do |field| %>
+        <tr>
+          <td class="name">
+            <%= field.name %> <%= content_tag('span', '*', :class => 'required') if field_required?(field) %>
+          </td>
+          <% for status in @statuses -%>
+          <td class="<%= @permissions[status.id][field.id.to_s].try(:join, ' ') %>" title="<%= field.name %> (<%= status.name %>)">
+            <%= field_permission_tag(@permissions, status, field, @roles) %>
+            <% unless status == @statuses.last %><a href="#" class="repeat-value">&#187;</a><% end %>
+          </td>
+          <% end -%>
+        </tr>
+        <% end %>
+      <% end %>
+    </tbody>
+    </table>
+    </div>
+    <%= submit_tag l(:button_save) %>
+  <% end %>
+<% end %>
+
+<%= javascript_tag do %>
+$("a.repeat-value").click(function(e){
+  e.preventDefault();
+  var td = $(this).closest('td');
+  var selected = td.find("select").find(":selected").val();
+  td.nextAll('td').find("select").val(selected);
+});
+<% end %>
+</div>

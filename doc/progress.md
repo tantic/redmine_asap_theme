@@ -97,4 +97,4 @@ Administration is available from the navbar. A dropdown menu allow admin user to
 
 ## Add turbo
 
-Include turbo 8 which help performances
+Include turbo 8 which has a uge effect on performances. Drawbacks are that adjustments have to be done on specifig js.
