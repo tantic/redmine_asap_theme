@@ -93,3 +93,8 @@ Administration is available from the navbar. A dropdown menu allow admin user to
 ![Admin menu](img/admin-plugins.png)
 
 ![Admin menu](img/admin-infos.png)
+
+
+## Add turbo
+
+Include turbo 8 which help performances

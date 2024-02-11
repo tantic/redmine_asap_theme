@@ -6,6 +6,7 @@ import "./controllers/query_controller.js"
 import "./controllers/application_controller.js"
 import "./controllers/tabs_controller.js"
 
+
 document.addEventListener("DOMContentLoaded", function(e) {
   if(document.querySelector('#menu-breadcrumb')){
     document.querySelector('#menu-breadcrumb').addEventListener('click', function(event){

@@ -30,19 +30,21 @@
           </div>
         <% end %>
       </div>
-    <% @issues.each do |issue| %>
-      <%= link_to issue_path(issue), class:"flex flex-col text-gray-900 dark:text-gray-100 hover:bg-gray-50 dark:hover:bg-gray-900 cursor-pointer hover:border-l-2 hover:border-l-blue-800 border-b border-b-gray-50 dark:border-b-gray-600 hover:pl-3.5 p-4 text-sm" do %>
-        <div class="flex items-center">
-          <div class="mr-2">#<%= issue.id %></div>
-          <%= issue.subject %>
-        </div>
-        <% if issue.description? %>
-        <div class="text-xs text-gray-500 dark:text-gray-100 font-light ml-6">
-          <% the_text = textilizable issue, :description %>
-          <%= the_text.truncate(100) %>
-        </div>
+      <% if @issues %>
+        <% @issues.each do |issue| %>
+          <%= link_to issue_path(issue), class:"flex flex-col text-gray-900 dark:text-gray-100 hover:bg-gray-50 dark:hover:bg-gray-900 cursor-pointer hover:border-l-2 hover:border-l-blue-800 border-b border-b-gray-50 dark:border-b-gray-600 hover:pl-3.5 p-4 text-sm" do %>
+            <div class="flex items-center">
+              <div class="mr-2">#<%= issue.id %></div>
+              <%= issue.subject %>
+            </div>
+            <% if issue.description? %>
+            <div class="text-xs text-gray-500 dark:text-gray-100 font-light ml-6">
+              <% the_text = textilizable issue, :description %>
+              <%= the_text.truncate(100) %>
+            </div>
+            <% end %>
+          <% end %>
         <% end %>
-      <% end %>
-    <% end %>
+        <% end %>
     </div>
   </aside>
