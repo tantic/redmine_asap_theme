@@ -93,7 +93,7 @@ Account
   - [x] Summary
   - [ ] Copy
 - [x] Custom fields
-- [ ] Enumerations
+- [x] Enumerations
 - [ ] Settings
   - [x] General
   - [x] Display
