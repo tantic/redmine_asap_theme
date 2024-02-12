@@ -9,26 +9,31 @@
           <%= avatar(e.event_author) %></div>
         <% end %>
       </span>
-      <div class="flex-col w-full mb-4 justify-between p-4 bg-white border border-gray-200 rounded-lg shadow-sm sm:flex dark:bg-gray-700 dark:border-gray-600">
-        <%= content_tag('div', e.project, :class => 'project text-blue-600 mr-3') if @project.nil? || @project != e.project %>
-
-        <div class="flex">
+      <div class="w-full items-start mb-4 p-4 bg-white border border-gray-200 rounded-lg shadow-sm sm:flex dark:bg-gray-700 dark:border-gray-600">
+        <% if @project.nil? || @project != e.project %>
+          <%= link_to project_path(e.project),:class => 'uppercase mr-3 flex items-center text-gray-800 font-light text-sm  p-1 hover:bg-gray-100 transition ease-in-out delay-75' do %>
+            <%= letter_avatar_tag(e.project.name, 300, class: 'w-8 h-8') %></span>
+          <% end %>
+        <% end %>
+        <div class="flex flex-col w-full">
           <div class="flex">
-            <span class="author mr-3"><%= link_to_user(e.event_author) if e.respond_to?(:event_author) %></span>
-          </div>
-          <time class="ml-auto  text-xs font-normal text-gray-400 sm:order-last sm:mb-0"><%= format_time(e.event_datetime, false) %></time>
-        </div>
-        <div class="text-sm w-full mr-3 font-normal text-gray-500 dark:text-gray-300">
-          <div class="<%= e.event_type %> icon icon-<%= e.event_type %> <%= "grouped" if in_group %> <%= User.current.logged? && e.respond_to?(:event_author) && User.current == e.event_author ? 'me' : nil %>">
             <div class="flex">
-              <%= link_to format_activity_title(e.event_title), e.event_url %>
+              <span class="author mr-3"><%= link_to_user(e.event_author) if e.respond_to?(:event_author) %></span>
             </div>
-            <% if e.event_description.length > 0 %>
-            <div class="<%= "grouped" if in_group %>  w-full text-xs bg-gray-100 rounded-xl text-gray-700 p-4 my-2">
-              <span class="description"><%= format_activity_description(e.event_description) %></span>
-            </div>
+            <time class="ml-auto  text-xs font-normal text-gray-400 sm:order-last sm:mb-0"><%= format_time(e.event_datetime, false) %></time>
+          </div>
+          <div class="text-sm w-full mr-3 font-normal text-gray-500 dark:text-gray-300">
+            <div class="<%= e.event_type %> icon icon-<%= e.event_type %> <%= "grouped" if in_group %> <%= User.current.logged? && e.respond_to?(:event_author) && User.current == e.event_author ? 'me' : nil %>">
+              <div class="flex">
+                <%= link_to format_activity_title(e.event_title), e.event_url %>
+              </div>
+              <% if e.event_description.length > 0 %>
+              <div class="<%= "grouped" if in_group %>  w-full text-xs bg-gray-50 rounded-md text-gray-700 p-4 my-2">
+                <span class="description"><%= format_activity_description(e.event_description) %></span>
+              </div>
 
-            <% end %>
+              <% end %>
+            </div>
           </div>
         </div>
       </div>
