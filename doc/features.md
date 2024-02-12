@@ -80,7 +80,7 @@ Account
 
 - [ ] My page
 - [x] My account => modal
-- [ ] My profile
+- [x] My profile
 - [ ] Avatar from file
 
 ## Administration
