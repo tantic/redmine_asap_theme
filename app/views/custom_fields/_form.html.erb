@@ -1,0 +1,78 @@
+<%= error_messages_for 'custom_field' %>
+
+<div class="splitcontent flex w-full">
+  <div class="splitcontentleft w-1/2 pr-4">
+    <div class="box tabular">
+      <div class="mb-6">
+        <%= f.select :field_format, custom_field_formats_for_select(@custom_field), {}, :disabled => !@custom_field.new_record? %>
+      </div>
+      <div class="mb-6">
+        <%= f.text_field :name, :size => 50, :required => true %>
+      </div>
+      <div class="mb-6">
+        <%= f.text_area :description, :rows => 7 %>
+      </div>
+
+      <% if @custom_field.format.multiple_supported %>
+      <p>
+        <%= f.check_box :multiple %>
+        <% if !@custom_field.new_record? && @custom_field.multiple %>
+        <em class="info"><%= l(:text_turning_multiple_off) %></em>
+        <% end %>
+      </p>
+      <% end %>
+
+      <%= render_custom_field_format_partial f, @custom_field %>
+
+      <%= call_hook(:view_custom_fields_form_upper_box, :custom_field => @custom_field, :form => f) %>
+    </div>
+
+  </div>
+
+<div class="splitcontentright w-1/2 pl-4">
+  <div class="box tabular mb-6">
+    <p><%= f.check_box :is_required %></p>
+
+    <% if %w(UserCustomField).include?(@custom_field.class.name) %>
+      <p><%= f.check_box :visible %></p>
+    <% end %>
+
+    <% if @custom_field.is_a?(UserCustomField) %>
+      <p><%= f.check_box :editable %></p>
+    <% end %>
+
+    <% if %w(IssueCustomField UserCustomField ProjectCustomField VersionCustomField GroupCustomField TimeEntryCustomField).include?(@custom_field.class.name) &&
+        @custom_field.format.is_filter_supported %>
+      <p><%= f.check_box :is_filter %></p>
+    <% end %>
+
+    <% if %w(IssueCustomField ProjectCustomField).include?(@custom_field.class.name) && @custom_field.format.searchable_supported %>
+      <p><%= f.check_box :searchable %></p>
+    <% end %>
+    <%= call_hook(:"view_custom_fields_form_#{@custom_field.type.to_s.underscore}", :custom_field => @custom_field, :form => f) %>
+  </div>
+
+  <% if %w(IssueCustomField TimeEntryCustomField ProjectCustomField VersionCustomField).include?(@custom_field.class.name) %>
+    <%= render :partial => 'visibility_by_role_selector', :locals => { :f => f } %>
+  <% end %>
+
+  <% if @custom_field.is_a?(IssueCustomField) %>
+    <%= render :partial => 'visibility_by_tracker_selector', :locals => { :f => f } %>
+
+    <%= render :partial => 'visibility_by_project_selector', :locals => { :f => f } %>
+  <% end %>
+</div>
+</div>
+
+<div class="flex w-full my-8">
+  <% if @custom_field.new_record? %>
+    <div class="ml-auto flex">
+      <%= submit_tag l(:button_create), :class => "small cursor-pointer flex text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded text-sm px-3 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" %>
+      <%= submit_tag l(:button_create_and_continue), :name => 'continue', :class => "small ml-3 cursor-pointer flex text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded text-sm px-3 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" %>
+    </div>
+  <% else %>
+    <%= submit_tag l(:button_save), :class => "small ml-auto cursor-pointer flex text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded text-sm px-3 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" %>
+  <% end %>
+</div>
+
+<% include_calendar_headers_tags %>

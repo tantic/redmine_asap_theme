@@ -96,3 +96,13 @@ table#filters-table{
 .wiki-edit{
   @apply rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0
 }
+
+#custom-fields-radios{
+  input{
+    @apply mr-3;
+  }
+}
+
+label{
+  @apply mr-3;
+}

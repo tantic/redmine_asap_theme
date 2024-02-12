@@ -92,7 +92,7 @@ Account
   - [x] Permissions
   - [x] Summary
   - [ ] Copy
-- [x] Custom fields (WIP)
+- [x] Custom fields
 - [ ] Enumerations
 - [ ] Settings
   - [x] General

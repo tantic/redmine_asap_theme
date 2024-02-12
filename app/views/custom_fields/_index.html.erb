@@ -1,0 +1,33 @@
+<table class="list custom_fields w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+  <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+    <tr>
+      <th class="px-6 py-3"><%=l(:field_name)%></th>
+      <th class="px-6 py-3"><%=l(:field_field_format)%></th>
+      <th class="px-6 py-3"><%=l(:field_is_required)%></th>
+      <% if tab[:name] == 'IssueCustomField' %>
+        <th class="px-6 py-3"><%=l(:field_is_for_all)%></th>
+        <th class="px-6 py-3"><%=l(:label_used_by)%></th>
+      <% end %>
+      <th class="px-6 py-3"></th>
+    </tr>
+  </thead>
+  <tbody>
+  <% (@custom_fields_by_type[tab[:name]] || []).sort.each do |custom_field| -%>
+    <% back_url = custom_fields_path(:tab => tab[:name]) %>
+    <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
+      <td class="name px-6 py-2 text-gray-800"><%= link_to custom_field.name, edit_custom_field_path(custom_field) %></td>
+      <td class="px-6 py-2"><%= l(custom_field.format.label) %></td>
+      <td class="px-6 py-2"><%= checked_image custom_field.is_required? %></td>
+      <% if tab[:name] == 'IssueCustomField' %>
+      <td class="px-6 py-2"><%= checked_image custom_field.is_for_all? %></td>
+      <td class="px-6 py-2"><%= l(:label_x_projects, :count => @custom_fields_projects_count[custom_field.id] || 0) if custom_field.is_a? IssueCustomField and !custom_field.is_for_all? %></td>
+      <% end %>
+      <td class="buttons px-6 py-2 flex items-center">
+        <%= reorder_handle(custom_field, :url => custom_field_path(custom_field), :param => 'custom_field') %>
+        <%= link_to_function l(:button_copy), "location.href = '#{new_custom_field_path(:copy => custom_field)}&type=' + encodeURIComponent(($('.tabs a.selected').attr('id')||'').split('tab-').pop())", :class => 'icon icon-copy mx-2' %>
+        <%= delete_link custom_field_path(custom_field) %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

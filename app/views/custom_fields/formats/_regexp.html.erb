@@ -1,0 +1,10 @@
+<div class="flex items-center w-full mb-6">
+  <label for="custom_field_min_length" class="mr-3"><%=l(:label_min_max_length)%></label>
+  <div class="w-1/4 mr-2"><%= f.text_field :min_length, :size => 5, :no_label => true %></div>
+  <span>-</span>
+  <div class="w-1/4 ml-2"><%= f.text_field :max_length, :size => 5, :no_label => true %></div>
+</div>
+<div class="mb-6">
+  <%= f.text_field :regexp, :size => 50 %>
+  <div class="text-xs italic text-gray-400"><%= l(:text_regexp_info) %></div>
+</div>
