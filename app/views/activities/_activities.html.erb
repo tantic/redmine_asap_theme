@@ -27,7 +27,7 @@
               <div class="flex">
                 <%= link_to format_activity_title(e.event_title), e.event_url %>
               </div>
-              <% if e.event && e.event_description.length > 0 %>
+              <% if e && e.event_description && e.event_description.length > 0 %>
               <div class="<%= "grouped" if in_group %>  w-full text-xs bg-gray-50 rounded-md text-gray-700 p-4 my-2">
                 <span class="description"><%= format_activity_description(e.event_description) %></span>
               </div>
