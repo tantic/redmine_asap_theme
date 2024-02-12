@@ -1,19 +1,29 @@
 <%= form_tag({:action => 'edit', :tab => 'projects'}) do %>
 
 <div class="box tabular settings">
-<p><%= setting_check_box :default_projects_public %></p>
+  <div class="mb-6">
+    <%= setting_check_box :default_projects_public %>
+  </div>
 
-<p><%= setting_multiselect(:default_projects_modules,
-        Redmine::AccessControl.available_project_modules.collect {|m| [l_or_humanize(m, :prefix => "project_module_"), m.to_s]}) %></p>
+  <div class="mb-6">
+    <%= setting_multiselect(:default_projects_modules,
+        Redmine::AccessControl.available_project_modules.collect {|m| [l_or_humanize(m, :prefix => "project_module_"), m.to_s]}) %>
+  </div>
 
-<p><%= setting_multiselect(:default_projects_tracker_ids,
-        Tracker.sorted.collect {|t| [t.name, t.id.to_s]}) %></p>
+  <div class="mb-6">
+    <%= setting_multiselect(:default_projects_tracker_ids,
+        Tracker.sorted.collect {|t| [t.name, t.id.to_s]}) %>
+  </div>
 
-<p><%= setting_check_box :sequential_project_identifiers %></p>
+  <div class="mb-6">
+    <%= setting_check_box :sequential_project_identifiers %>
+  </div>
 
-<p><%= setting_select :new_project_user_role_id,
+  <div class="mb-6">
+    <%= setting_select :new_project_user_role_id,
                       Role.find_all_givable.collect {|r| [r.name, r.id.to_s]},
-                      :blank => "--- #{l(:actionview_instancetag_blank_option)} ---" %></p>
+                      :blank => "--- #{l(:actionview_instancetag_blank_option)} ---" %>
+  </div>
 </div>
 
 <fieldset class="box">

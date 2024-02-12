@@ -1,27 +1,45 @@
 <%= form_tag({:action => 'edit', :tab => 'users'}) do %>
 
-  <div class="box tabular settings">
-    <p><%= setting_text_field :max_additional_emails, :size => 6 %></p>
+  <div class="box tabular settings mb-6">
+    <div class="mb-6">
+      <%= setting_text_field :max_additional_emails, :size => 6 %>
+    </div>
 
-    <p><%= setting_text_area :email_domains_allowed %>
-    <em class="info"><%= l(:text_comma_separated) %> <%= l(:label_example) %>: example.com, example.org</em></p>
+    <div class="mb-6">
+      <%= setting_text_area :email_domains_allowed %>
+      <div class="info text-xs italic text-gray-400">
+        <%= l(:text_comma_separated) %> <%= l(:label_example) %>: example.com, example.org
+      </div>
+    </div>
 
-    <p><%= setting_text_area :email_domains_denied %>
-    <em class="info"><%= l(:text_comma_separated) %> <%= l(:label_example) %>: .example.com, foo.example.org, example.net</em></p>
+    <div class="mb-6">
+      <%= setting_text_area :email_domains_denied %>
+      <div class="info text-xs italic text-gray-400">
+        <%= l(:text_comma_separated) %> <%= l(:label_example) %>: .example.com, foo.example.org, example.net
+      </div>
+    </div>
 
-    <p><%= setting_check_box :unsubscribe %></p>
+    <div class="mb-6"><%= setting_check_box :unsubscribe %></div>
   </div>
 
   <fieldset class="box tabular settings">
-    <legend><%= l(:label_default_values_for_new_users) %></legend>
+    <legend class="uppercase text-gray-500"><%= l(:label_default_values_for_new_users) %></legend>
 
-    <p><%= setting_check_box :default_users_hide_mail, :label => :field_hide_mail %></p>
+    <div class="mb-6">
+      <%= setting_check_box :default_users_hide_mail, :label => :field_hide_mail %>
+    </div>
 
-    <p><%= setting_select(:default_notification_option, User.valid_notification_options.collect {|o| [l(o.last), o.first.to_s]}) %></p>
+    <div class="mb-6">
+      <%= setting_select(:default_notification_option, User.valid_notification_options.collect {|o| [l(o.last), o.first.to_s]}) %>
+    </div>
 
-    <p><%= setting_check_box :default_users_no_self_notified, :label => :label_user_mail_no_self_notified %></p>
+    <div class="mb-6">
+      <%= setting_check_box :default_users_no_self_notified, :label => :label_user_mail_no_self_notified %>
+    </div>
 
-    <p><%= setting_select :default_users_time_zone, ActiveSupport::TimeZone.all.collect {|z| [ z.to_s, z.name ]}, :label => :field_time_zone, :blank => :label_none %></p>
+    <div class="mb-6">
+      <%= setting_select :default_users_time_zone, ActiveSupport::TimeZone.all.collect {|z| [ z.to_s, z.name ]}, :label => :field_time_zone, :blank => :label_none %>
+    </div>
   </fieldset>
 
   <div class="w-full my-8">

@@ -1,6 +1,6 @@
 <% default_action = false %>
 
-<div class="tabs text-sm font-medium text-center text-gray-500  dark:text-gray-400 dark:border-gray-700">
+<div class="tabs text-sm font-medium text-center text-gray-500  dark:text-gray-400 dark:border-gray-700 mb-6">
   <ul class="flex flex-nowrap overflow-x-auto -mb-px">
   <% tabs.each do |tab| -%>
     <% action = get_tab_action(tab) %>
@@ -21,7 +21,7 @@
   <%= content_tag('div', (render(:partial => tab[:partial], :locals => {:tab => tab}) if tab[:partial]) ,
                        :id => "tab-content-#{tab[:name]}",
                        :style => (tab[:name] != selected_tab ? 'display:none' : nil),
-                       :class => 'tab-content p-8 shadow mb-8') if tab[:partial] || tab[:remote] %>
+                       :class => 'tab-content') if tab[:partial] || tab[:remote] %>
 <% end -%>
 
 <%= javascript_tag default_action if default_action %>

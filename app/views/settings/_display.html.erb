@@ -1,6 +1,6 @@
 <%= form_tag({:action => 'edit', :tab => 'display'}) do %>
 
-<div class="py-8 border-b border-gray-100">
+<div class="box mb-6">
   <div class="mb-6 flex w-full">
     <div class="w-1/2 pr-4">
       <p><%= setting_select :ui_theme, Redmine::Themes.themes.collect {|t| [t.name, t.id]}, :blank => :label_default, :label => :label_theme %></p>
@@ -20,26 +20,34 @@
   </div>
 </div>
 
-<div class="py-8 border-b border-gray-100 flex w-full">
+<div class="box mb-6 flex w-full">
   <div class="w-1/2 pr-4">
-    <div class="mb-6"><%= setting_select :start_of_week, [[day_name(1),'1'], [day_name(6),'6'], [day_name(7),'7']], :blank => :label_language_based %></div>
+    <div class="mb-6">
+      <%= setting_select :start_of_week, [[day_name(1),'1'], [day_name(6),'6'], [day_name(7),'7']], :blank => :label_language_based %>
+    </div>
     <% locale = User.current.language.blank? ? ::I18n.locale : User.current.language %>
     <p><%= setting_select :date_format, date_format_setting_options(locale), :blank => :label_language_based %></p>
   </div>
   <div class="w-1/2 pl-4">
-    <div class="mb-6"><%= setting_select :time_format, Setting::TIME_FORMATS.collect {|f| [::I18n.l(Time.now, :locale => locale, :format => f), f]}, :blank => :label_language_based %></div>
+    <div class="mb-6">
+      <%= setting_select :time_format, Setting::TIME_FORMATS.collect {|f| [::I18n.l(Time.now, :locale => locale, :format => f), f]}, :blank => :label_language_based %>
+    </div>
     <p><%= setting_select :timespan_format, [["%.2f" % 0.75, 'decimal'], ['0:45 h', 'minutes']], :blank => false %></p>
   </div>
 </div>
 
-<div class="py-8 border-b border-gray-100 flex w-full">
+<div class="box mb-6 flex w-full">
   <div class="w-1/2 pr-4">
     <div class="mb-6">
-    <p><%= setting_check_box :gravatar_enabled, :data => {:enables => '#settings_gravatar_default'} %></p>
-    <div class="text-xs italic text-gray-400"><%= t(:text_avatar_server_config_html, :url => Redmine::Configuration['avatar_server_url']) %></div>
+      <p><%= setting_check_box :gravatar_enabled, :data => {:enables => '#settings_gravatar_default'} %></p>
+      <div class="text-xs italic text-gray-400"><%= t(:text_avatar_server_config_html, :url => Redmine::Configuration['avatar_server_url']) %></div>
     </div>
-    <div class="mb-6"><%= setting_select :gravatar_default, gravatar_default_setting_options, :blank => :label_none %></div>
-    <div class="mb-6"><%= setting_check_box :thumbnails_enabled, :data => {:enables => '#settings_thumbnails_size'} %></div>
+    <div class="mb-6">
+      <%= setting_select :gravatar_default, gravatar_default_setting_options, :blank => :label_none %>
+    </div>
+    <div class="mb-6">
+      <%= setting_check_box :thumbnails_enabled, :data => {:enables => '#settings_thumbnails_size'} %>
+    </div>
     <p><%= setting_text_field :thumbnails_size, :size => 6 %></p>
   </div>
   <div class="w-1/2 pl-4">

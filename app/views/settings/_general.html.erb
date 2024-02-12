@@ -1,6 +1,6 @@
 <%= form_tag({:action => 'edit'}) do %>
 
-<div class="py-8 border-b border-gray-100">
+<div class="box mb-2">
   <div class="mb-6">
     <%= setting_text_field :app_title, :size => 30 %>
   </div>
@@ -11,11 +11,11 @@
   </div>
 </div>
 
-<div class="py-8 border-b border-gray-100 flex w-full">
+<div class="box mb-2 flex w-full">
   <div class="w-1/2 pr-4">
     <div class="mb-6">
       <%= setting_text_field :per_page_options, :size => 20 %>
-      <div class="text-xs italic text-gray-400"><%= l(:text_comma_separated) %></div>
+      <div class="info text-xs italic text-gray-400"><%= l(:text_comma_separated) %></div>
     </div>
 
     <div class="mb-6">
@@ -35,7 +35,7 @@
 
 </div>
 
-<div class="py-8 border-b border-gray-100 flex w-full">
+<div class="box mb-2 flex w-full">
   <div class="w-1/2 pr-4">
     <p><%= setting_text_field :host_name, :size => 60 %>
     <div class="text-xs italic text-gray-400"><%= l(:label_example) %>: <%= @guessed_host_and_path %></div>
@@ -45,7 +45,7 @@
   </div>
 </div>
 
-<div class="py-8 border-b border-gray-100 flex w-full">
+<div class="box mb-2 flex w-full">
   <div class="w-1/2 pr-4">
     <%= setting_select :text_formatting, Redmine::WikiFormatting.formats_for_select, :blank => :label_none, class: "mb-6" %>
     <span id="common_mark_info" class="<%= "hidden" unless Setting.text_formatting == "common_mark" %>">

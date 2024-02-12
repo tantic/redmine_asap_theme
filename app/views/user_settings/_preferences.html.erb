@@ -7,7 +7,7 @@
     <p><%= custom_field_tag_with_label :user, value %></p>
   <% end %>
 
-  <fieldset class="box tabular">
+  <fieldset class="tabular">
     <%= render :partial => 'users/preferences' %>
     <%= call_hook(:view_my_account_preferences, :user => @user, :form => f) %>
   </fieldset>

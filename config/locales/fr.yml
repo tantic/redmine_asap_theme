@@ -1,0 +1,29 @@
+# English strings go here for Rails i18n
+en:
+  # my_label: "My label"
+  no_project: Vous n'avez pas encore de projets...
+  my_projects: Mes projets
+  label_filters: Filtres
+  label_about: A propos
+  label_settings_menu: Paramètres
+  label_settings_general: Général
+  label_settings_preferences: Préférences
+  label_settings_notifications: Notifications
+  label_settings_appearance: Apparence
+  label_redmine_configuration: Configuration
+  label_redmine_environment: Environnement
+  label_redmine_versioned_name: Version Redmine
+  label_redmine_ruby: Ruby
+  label_redmine_ruby_platform: Plateforme Ruby
+  label_redmine_rails: Rails
+  label_redmine_environment: Environnement
+  label_redmine_database_adapter: Connecteur BDD
+  label_redmine_mailer_queue: Mailer queue
+  label_redmine_mailer_delivery: Mailer delivery
+  label_redmine_plugins: Plugins
+  label_redmine_plugins_none: Aucun plugin installé
+  label_redmine_statistics: Statistiques
+  label_redmine_projects_number: Projets
+  label_redmine_users: Utilisateurs
+  label_redmine_groups: Groupes
+  label_redmine_issues: Demandes

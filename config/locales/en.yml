@@ -5,7 +5,7 @@ en:
   my_projects: My projects
   label_filters: "Filters"
   label_about: About
-  label_settings: Settings
+  label_settings_menu: Settings
   label_settings_general: General
   label_settings_preferences: Preferences
   label_settings_notifications: Notifications
@@ -22,7 +22,7 @@ en:
   label_redmine_mailer_delivery: Mailer delivery
   label_redmine_plugins: Plugins
   label_redmine_plugins_none: No plugin installed
-  label_redmine_statistics: Statistiques
+  label_redmine_statistics: Statistics
   label_redmine_projects_number: Projects
   label_redmine_users: Users
   label_redmine_groups: Groups
