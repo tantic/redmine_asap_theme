@@ -104,3 +104,7 @@ Administration is available from the navbar. A dropdown menu allow admin user to
 ## Add turbo
 
 Include turbo 8 which has a uge effect on performances. Drawbacks are that adjustments have to be done on specific js. For example, some work on the navbar have to be done.
+
+## User profile page
+
+![User profile](img/user-profile.png)

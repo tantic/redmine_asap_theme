@@ -1,135 +1,140 @@
-<div class="contextual">
-<%= link_to(l(:button_edit), edit_user_path(@user), :class => 'icon icon-edit') if User.current.admin? && @user.logged? %>
+<div class="dark:bg-gray-800 h-fit mr-8 w-full bg-white shadow p-8 md:p-16  mb-8 mt-0 md:mt-8 flex flex-col">
+  <div class="ml-auto">
+    <%= link_to(l(:button_edit), edit_user_path(@user), :class => 'icon icon-edit cursor-pointer flex text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded text-sm px-3 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800') if User.current.admin? && @user.logged? %>
+  </div>
+
+  <div class="flex flex-col w-full items-center justify-center py-4">
+    <div><%= avatar @user, :size => "50" %></div>
+    <h2 class="text-lg pt-4"><%= @user.name %></h2>
+    <div class="text-gray-500">@<%= @user.login %></div>
+    <% unless @user.pref.hide_mail %>
+    <div class="text-gray-500"><%=l(:field_mail)%>: <%= user_emails(@user) %></div>
+     <% end %>
+    <div class="text-gray-500 text-xs flex my-2">
+      <div><%=l(:label_registered_on)%>: <%= format_date(@user.created_on) %></div>
+      <% unless @user.last_login_on.nil? %>
+        <div class="ml-4"><%=l(:field_last_login_on)%>: <%= format_date(@user.last_login_on) %></div>
+      <% end %>
+      <% @user.visible_custom_field_values.each do |custom_value| %>
+        <% if !custom_value.value.blank? %>
+          <div class="<%= custom_value.custom_field.css_classes %>"><%= custom_value.custom_field.name %>: <%= show_value(custom_value) %></div>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="splitcontent flex w-full my-8">
+    <div class="splitcontentleft w-1/2 mr-4">
+
+      <h3 class="uppercase text-gray-500 my-4"><%=l(:label_issue_plural)%></h3>
+      <table class="list issue-report w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+          <tr>
+            <th class="py-3"></th>
+            <th class="py-3"><%=l(:label_open_issues_plural)%></th>
+            <th class="py-3"><%=l(:label_closed_issues_plural)%></th>
+            <th class="py-3"><%=l(:label_total)%></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% assigned_to_ids = ([@user.id] + @user.group_ids).join("|") %>
+          <% sort_cond = 'priority:desc,updated_on:desc' %>
+          <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
+            <td class="name  py-2 text-gray-800">
+              <%= link_to l(:label_assigned_issues),
+                issues_path(:set_filter => 1, :assigned_to_id => assigned_to_ids, :sort => sort_cond) %>
+            </td>
+            <td class="px-6 py-2">
+              <%= link_to @issue_counts[:assigned][:open],
+                issues_path(:set_filter => 1, :assigned_to_id => assigned_to_ids, :sort => sort_cond) %>
+            </td>
+            <td class="px-6 py-2">
+              <%= link_to @issue_counts[:assigned][:total] - @issue_counts[:assigned][:open],
+                issues_path(:set_filter => 1, :status_id => 'c', :assigned_to_id => assigned_to_ids, :sort => sort_cond) %>
+            </td>
+            <td class="total px-6 py-2">
+              <%= link_to @issue_counts[:assigned][:total],
+                issues_path(:set_filter => 1, :status_id => '*', :assigned_to_id => assigned_to_ids, :sort => sort_cond) %>
+            </td>
+          </tr>
+          <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
+            <td class="name py-2 text-gray-800">
+              <%= link_to l(:label_reported_issues),
+                issues_path(:set_filter => 1, :author_id => @user.id, :sort => sort_cond) %>
+            </td>
+            <td class="px-6 py-2">
+              <%= link_to @issue_counts[:reported][:open],
+                issues_path(:set_filter => 1, :author_id => @user.id, :sort => sort_cond) %>
+            </td>
+            <td class="px-6 py-2">
+              <%= link_to @issue_counts[:reported][:total] - @issue_counts[:reported][:open],
+                issues_path(:set_filter => 1, :status_id => 'c', :author_id => @user.id, :sort => sort_cond) %>
+            </td>
+            <td class="total px-6 py-2">
+              <%= link_to @issue_counts[:reported][:total],
+                issues_path(:set_filter => 1, :status_id => '*', :author_id => @user.id, :sort => sort_cond) %>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <% unless @memberships.empty? %>
+      <h3 class="uppercase text-gray-500 mb-4 mt-8"><%=l(:label_project_plural)%></h3>
+      <table class="list projects w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+          <tr>
+            <th class="py-3"><%=l(:label_project)%></th>
+            <th class="py-3"><%=l(:label_role_plural)%></th>
+            <th class="py-3"><%=l(:label_registered_on)%></th>
+          </tr>
+        </thead>
+        <tbody>
+        <% memberships_by_project = @memberships.group_by(&:project) %>
+        <% project_tree(memberships_by_project.keys, :init_level => true) do |project, level| %>
+          <% membership = memberships_by_project[project].first %>
+          <tr class="<%= project.css_classes %> <%= level > 0 ? "idnt idnt-#{level}" : nil %> odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
+            <td class="name py-2 text-gray-800"><span><%= link_to_project(project) %></span></td>
+            <td class="roles px-6 py-2"><%= membership.roles.sort.collect(&:to_s).join(', ') %></td>
+            <td class="px-6 py-2"><%= format_date(membership.created_on) %></td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+      <% end %>
+
+      <% if (User.current == @user || User.current.admin?) && @user.groups.any? %>
+      <div id="groups">
+        <h3 class="uppercase text-gray-500 mb-4 mt-8"><%=l(:label_group_plural)%></h3>
+        <ul>
+        <% for group in @user.groups %>
+          <li><%= link_to_group(group) %>
+        <% end %>
+        </ul>
+      </div>
+      <% end %>
+
+      <%= call_hook :view_account_left_bottom, :user => @user %>
 </div>
 
-<h2><%= avatar @user, :size => "50" %> <%= @user.name %></h2>
+<div class="splitcontentright w-1/2 ml-4">
 
-<div class="splitcontent">
-<div class="splitcontentleft">
-<ul>
-  <li><%=l(:field_login)%>: <%= @user.login %></li>
-  <% unless @user.pref.hide_mail %>
-    <li><%=l(:field_mail)%>: <%= user_emails(@user) %></li>
-  <% end %>
-  <% @user.visible_custom_field_values.each do |custom_value| %>
-  <% if !custom_value.value.blank? %>
-    <li class="<%= custom_value.custom_field.css_classes %>"><%= custom_value.custom_field.name %>: <%= show_value(custom_value) %></li>
-  <% end %>
-  <% end %>
-    <li><%=l(:label_registered_on)%>: <%= format_date(@user.created_on) %></li>
-  <% unless @user.last_login_on.nil? %>
-    <li><%=l(:field_last_login_on)%>: <%= format_date(@user.last_login_on) %></li>
-  <% end %>
-</ul>
-
-<h3><%=l(:label_issue_plural)%></h3>
-
-<table class="list issue-report">
-<thead>
-  <tr>
-    <th></th>
-    <th><%=l(:label_open_issues_plural)%></th>
-    <th><%=l(:label_closed_issues_plural)%></th>
-    <th><%=l(:label_total)%></th>
-  </tr>
-</thead>
-<tbody>
-  <% assigned_to_ids = ([@user.id] + @user.group_ids).join("|") %>
-  <% sort_cond = 'priority:desc,updated_on:desc' %>
-  <tr>
-    <td class="name">
-      <%= link_to l(:label_assigned_issues),
-        issues_path(:set_filter => 1, :assigned_to_id => assigned_to_ids, :sort => sort_cond) %>
-    </td>
-    <td>
-      <%= link_to @issue_counts[:assigned][:open],
-        issues_path(:set_filter => 1, :assigned_to_id => assigned_to_ids, :sort => sort_cond) %>
-    </td>
-    <td>
-      <%= link_to @issue_counts[:assigned][:total] - @issue_counts[:assigned][:open],
-        issues_path(:set_filter => 1, :status_id => 'c', :assigned_to_id => assigned_to_ids, :sort => sort_cond) %>
-    </td>
-    <td class="total">
-      <%= link_to @issue_counts[:assigned][:total],
-        issues_path(:set_filter => 1, :status_id => '*', :assigned_to_id => assigned_to_ids, :sort => sort_cond) %>
-    </td>
-  </tr>
-  <tr>
-    <td class="name">
-      <%= link_to l(:label_reported_issues),
-        issues_path(:set_filter => 1, :author_id => @user.id, :sort => sort_cond) %>
-    </td>
-    <td>
-      <%= link_to @issue_counts[:reported][:open],
-        issues_path(:set_filter => 1, :author_id => @user.id, :sort => sort_cond) %>
-    </td>
-    <td>
-      <%= link_to @issue_counts[:reported][:total] - @issue_counts[:reported][:open],
-        issues_path(:set_filter => 1, :status_id => 'c', :author_id => @user.id, :sort => sort_cond) %>
-    </td>
-    <td class="total">
-      <%= link_to @issue_counts[:reported][:total],
-        issues_path(:set_filter => 1, :status_id => '*', :author_id => @user.id, :sort => sort_cond) %>
-    </td>
-  </tr>
-</tbody>
-</table>
-
-<% unless @memberships.empty? %>
-<h3><%=l(:label_project_plural)%></h3>
-<table class="list projects">
-<thead>
-  <tr>
-    <th><%=l(:label_project)%></th>
-    <th><%=l(:label_role_plural)%></th>
-    <th><%=l(:label_registered_on)%></th>
-  </tr>
-</thead>
-<tbody>
-<% memberships_by_project = @memberships.group_by(&:project) %>
-<% project_tree(memberships_by_project.keys, :init_level => true) do |project, level| %>
-  <% membership = memberships_by_project[project].first %>
-  <tr class="<%= project.css_classes %> <%= level > 0 ? "idnt idnt-#{level}" : nil %>">
-    <td class="name"><span><%= link_to_project(project) %></span></td>
-    <td class="roles"><%= membership.roles.sort.collect(&:to_s).join(', ') %></td>
-    <td><%= format_date(membership.created_on) %></td>
-  </tr>
-<% end %>
-</tbody>
-</table>
-<% end %>
-
-<% if (User.current == @user || User.current.admin?) && @user.groups.any? %>
-<div id="groups">
-  <h3><%=l(:label_group_plural)%></h3>
-  <ul>
-  <% for group in @user.groups %>
-    <li><%= link_to_group(group) %>
-  <% end %>
-  </ul>
-</div>
-<% end %>
-
-<%= call_hook :view_account_left_bottom, :user => @user %>
-</div>
-
-<div class="splitcontentright">
-
-<% unless @events_by_day.empty? %>
-<h3><%= link_to l(:label_activity), :controller => 'activities',
+  <% unless @events_by_day.empty? %>
+  <h3 class="uppercase text-gray-500 my-4"><%= link_to l(:label_activity), :controller => 'activities',
                 :action => 'index', :id => nil, :user_id => @user,
                 :from => @events_by_day.keys.first %></h3>
-<%= render :partial => 'activities/activities', :locals => {:events_by_day => @events_by_day} %>
 
-<% other_formats_links do |f| %>
-  <%= f.link_to 'Atom', :url => {:controller => 'activities', :action => 'index', :id => nil, :user_id => @user, :key => User.current.atom_key} %>
-<% end %>
+  <%= render :partial => 'activities/activities', :locals => {:events_by_day => @events_by_day} %>
 
-<% content_for :header_tags do %>
-  <%= auto_discovery_link_tag(:atom, :controller => 'activities', :action => 'index', :user_id => @user, :format => :atom, :key => User.current.atom_key) %>
-<% end %>
+  <% other_formats_links do |f| %>
+    <%= f.link_to 'Atom', :url => {:controller => 'activities', :action => 'index', :id => nil, :user_id => @user, :key => User.current.atom_key} %>
+  <% end %>
+
+  <% content_for :header_tags do %>
+    <%= auto_discovery_link_tag(:atom, :controller => 'activities', :action => 'index', :user_id => @user, :format => :atom, :key => User.current.atom_key) %>
+  <% end %>
 <% end %>
 <%= call_hook :view_account_right_bottom, :user => @user %>
 </div>
 </div>
 <% html_title @user.name %>
+</div>

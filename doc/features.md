@@ -7,6 +7,11 @@
 - [ ] Navigation in a project
 - [ ] Contextual menu
 - [ ] Responsive navigation (mobile, tablet, laptop, desktop)
+  - [ ] sm @media (min-width: 640px) { ... }
+  - [ ] md @media (min-width: 768px) { ... }
+  - [ ] lg @media (min-width: 1024px) { ... }
+  - [ ] xl @media (min-width: 1280px) { ... }
+  - [ ] 2xl @media (min-width: 1536px) { ... }
 - [ ] Dark theme
 - [x] Add letter avatar to project
 - [ ] Notification panel available from the navbar
@@ -97,9 +102,9 @@ Account
 - [ ] Settings
   - [x] General
   - [x] Display
-  - [ ] Authentication
-  - [ ] API
-  - [ ] Projects
+  - [x] Authentication
+  - [x] API
+  - [x] Projects
   - [ ] Users
   - [ ] Issue tracking
   - [ ] Time tracking
