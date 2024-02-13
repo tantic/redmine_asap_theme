@@ -1,0 +1,46 @@
+<%= call_hook :view_account_login_top %>
+
+<div id="login-form" class="w-full h-full bg-fixed flex"  style="background-image: url(/plugin_assets/redmine_asap_theme/images/fond1.jpg)">
+  <div class="flex flex-col justify-start md:justify-center h-3/5 md:h-96 items-center overflow-hidden md:flex-row w-full md:w-4/5 lg:w-3/5 xl:w-2/5 my-auto mx-8 md:mx-auto bg-white shadow bg-opacity-30 backdrop-blur-sm">
+    <div class="p-8 h-auto md:h-full flex items-center justify-center flex-col w-full md:w-2/5 bg-blue-900 bg-opacity-80 backdrop-blur-sm">
+      <div class="hidden md:flex items-center justify-center">
+        <%= image_tag 'redmine_white.svg', :plugin => 'redmine_asap_theme', class: 'w-22 h-22' %>
+      </div>
+      <div class="text-center text-blue-100 w-full my-0 md:my-4 font-medium text-lg">
+        <%= Setting.app_title %>
+      </div>
+      <div class="hidden md:flex text-gray-400 font-light text-center text-xs">
+        <%= textilizable Setting.welcome_text %>
+      </div>
+    </div>
+    <%= form_tag(signin_path, onsubmit: 'return keepAnchorOnSignIn(this);', class:"w-full md:w-3/5 flex flex-col px-12 py-8 md:py-24") do %>
+      <%= back_url_hidden_field_tag %>
+
+      <div class="mb-6">
+        <label for="username"><%=l(:field_login)%></label>
+        <%= text_field_tag 'username', params[:username], :tabindex => '1' %>
+      </div>
+
+      <div class="mb-6">
+        <label for="password">
+          <%=l(:field_password)%>
+        </label>
+        <%= password_field_tag 'password', nil, :tabindex => '2' %>
+        <%= link_to l(:label_password_lost), lost_password_path, :class => "lost_password ml-auto text-blue-700 hover:text-blue-800 dark:text-blue-100 dark:hover:text-blue-200 text-xs" if Setting.lost_password? %>
+      </div>
+
+      <% if Setting.autologin? %>
+        <label for="autologin"><%= check_box_tag 'autologin', 1, false, :tabindex => 4 %> <%= l(:label_stay_logged_in) %></label>
+      <% end %>
+
+      <input type="submit" name="login" value="<%=l(:button_login)%>" tabindex="5" id="login-submit" class="w-full cursor-pointer flex text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded text-sm px-3 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" />
+    <% end %>
+
+    <%= call_hook :view_account_login_bottom %>
+  </div>
+
+<% if params[:username].present? %>
+<%= javascript_tag "$('#password').focus();" %>
+<% else %>
+<%= javascript_tag "$('#username').focus();" %>
+<% end %>

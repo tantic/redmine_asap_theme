@@ -27,7 +27,8 @@
 - [ ] Search
 
 Account
-- [ ] Login
+- [x] Login
+  - [ ] Settings of the plugin : choose the background image
 - [ ] Logout
 - [ ] Lost password
 - [ ] Password recovery

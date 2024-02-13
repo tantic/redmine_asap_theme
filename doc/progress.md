@@ -108,3 +108,10 @@ Include turbo 8 which has a uge effect on performances. Drawbacks are that adjus
 ## User profile page
 
 ![User profile](img/user-profile.png)
+
+## Login page
+
+Todo : as an admin user, i'd like to choose the background image (or none) in the settings of the plugin
+
+![Login page](img/login.png)
+
