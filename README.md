@@ -6,12 +6,17 @@ Status : in development and for fun not a real plugin for now.
 
 Look at a first try with the navbar
 
+
+![Login page](doc/img/login.png)
+
 ![Welcome page](doc/img/Redmine-asap-theme_welcome-page.png)
+
 
 ## Documentation
 
 * [Presentation](doc/presentation.md)
 * [Features](doc/features.md)
+* [Screenshots](doc/screenshots.md)
 * [Progress & demo](doc/progress.md)
 * [Development](doc/development.md)
 
