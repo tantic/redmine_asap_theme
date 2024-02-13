@@ -1,0 +1,13 @@
+<%
+  theme_tabs = [
+    {
+      name:    'asap_theme_login',
+      partial: 'settings/redmine_asap_theme/login',
+      label:   :label_redmine_asap_theme_login
+    },
+  ]
+%>
+
+<% html_title l(:label_settings), l(:general) %>
+
+<%= render_tabs theme_tabs %>

@@ -1,0 +1,12 @@
+<div class="ml-60">
+  <%= title [l(:label_plugins), {:controller => 'admin', :action => 'plugins'}], @plugin.name %>
+
+  <div id="settings" class="plugin plugin-<%= @plugin.id %>">
+    <%= form_tag({:action => 'plugin'}) do %>
+      <div class="box tabular settings my-4">
+        <%= render :partial => @partial, :locals => {:settings => @settings}%>
+      </div>
+      <%= submit_tag l(:button_apply), class: "ml-auto cursor-pointer flex text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded text-sm px-3 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" %>
+    <% end %>
+  </div>
+</div>

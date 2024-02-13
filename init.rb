@@ -7,6 +7,8 @@ Redmine::Plugin.register :redmine_asap_theme do
   version '0.0.1'
   url 'https://github.com/tantic/redmine_asap_theme'
   author_url 'https://github.com/tantic'
+
+  settings :default => {'empty' => true}, :partial => 'settings/redmine_asap_theme/settings'
 end
 
 lib_dir = File.join(File.dirname(__FILE__), 'lib', 'redmine_asap_theme')

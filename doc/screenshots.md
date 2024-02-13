@@ -64,6 +64,14 @@
 
 ![Admin menu](img/admin-infos.png)
 
+## Redmine asap theme settings
+
+Settings for the plugin
+
+Ability to change the background
+
+![Login page](img/admin-plugin-redmine-asap-theme.png)
+
 ## About
 
 ![Modal](img/redmine_about.png)
