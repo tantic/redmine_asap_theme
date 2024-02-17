@@ -1,9 +1,10 @@
+<div class="ml-60">
 <%= title [l(:label_tracker_plural), trackers_path], l(:field_summary) %>
 
 <% if @trackers.any? %>
   <%= form_tag fields_trackers_path do %>
-    <div class="autoscroll">
-    <table class="list tracker-summary">
+    <div class="autoscroll my-4">
+    <table class="list tracker-summary table">
     <thead>
       <tr>
         <th></th>
@@ -68,7 +69,11 @@
     </tbody>
     </table>
     </div>
-    <p><%= submit_tag l(:button_save) %></p>
+    <div class="w-full flex">
+      <div class="ml-auto">
+        <%= submit_tag l(:button_save) %>
+      </div>
+    </div>
     <% @trackers.each do |tracker| %>
       <%= hidden_field_tag "trackers[#{tracker.id}][core_fields][]", '' %>
       <%= hidden_field_tag "trackers[#{tracker.id}][custom_field_ids][]", '' %>
@@ -77,3 +82,4 @@
 <% else %>
   <p class="nodata"><%= l(:label_no_data) %></p>
 <% end %>
+</div>
