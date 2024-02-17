@@ -29,7 +29,7 @@
       <%= hidden_field_tag "permissions[#{role.id}][]", '', :id => nil %>
   <% end %>
   <div class="autoscroll">
-  <table class="list permissions">
+  <table class="list permissions table">
   <thead>
       <tr>
       <th><%=l(:label_permissions)%></th>
@@ -83,8 +83,12 @@
   </tbody>
   </table>
   </div>
-  <p><%= check_all_links 'permissions_form' %></p>
-  <p><%= submit_tag l(:button_save) %></p>
+  <div class="my-4">
+    <%= check_all_links 'permissions_form' %>
+  </div>
+  <div class="flex w-full">
+    <div class="ml-auto"><%= submit_tag l(:button_save) %></div>
+  </div>
   <% end %>
   <% other_formats_links do |f| %>
     <%= f.link_to_with_query_parameters 'CSV', {}, :onclick => "showModal('csv-export-options', '330px'); return false;" %>
