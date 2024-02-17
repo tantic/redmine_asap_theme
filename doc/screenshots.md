@@ -46,6 +46,8 @@
 
 ![Admin menu](img/admin-roles.png)
 
+![Admin menu](img/admin-roles-edit.png)
+
 ![Admin menu](img/admin-trackers.png)
 
 ![Admin menu](img/admin-issues-statuses.png)

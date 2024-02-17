@@ -24,6 +24,11 @@
     @apply block w-full mt-1 rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 !important;
   }
 
+
+  input[type='submit']{
+    @apply cursor-pointer text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded text-sm px-5 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800;
+  }
+
 /* Query form filters */
 table#filters-table{
   .field label{
@@ -105,4 +110,8 @@ table#filters-table{
 
 label{
   @apply mr-3;
+}
+
+fieldset{
+  @apply bg-gray-50 rounded p-6 !important;
 }

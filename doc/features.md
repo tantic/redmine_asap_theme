@@ -19,7 +19,7 @@
 
 ## Pages
 
-- [ ] Welcome page (WIP) : last seen projects, bookmarked and projects (limit 12) + search + last seen issues
+- [x] Welcome page (WIP) : last seen projects, bookmarked and projects (limit 12) + search + last seen issues
   - [x] Display projects
   - [ ] News from listed projects
   - [ ] Ability for user to display details on projects
@@ -28,7 +28,8 @@
 
 Account
 - [x] Login
-  - [ ] Settings of the plugin : choose the background image
+  - [x] Login page
+  - [x] Settings of the plugin : choose the background image
 - [ ] Logout
 - [ ] Lost password
 - [ ] Password recovery
@@ -53,7 +54,7 @@ Account
 - [ ] Spent time
 - [x] Gantt
   - [ ] task display
-- [x] Calendar
+- [x] Calendar (WIP)
   - [x] General UX and UI
   - [ ] Multiple days events
 - [ ] News
@@ -69,7 +70,7 @@ Account
 
 ## Issue
 
-- [ ] UX/UI of an issue (WIP)
+- [x] UX/UI of an issue (WIP)
   - [x] General layout
   - [ ] Tabs for history and notes
   - [ ] Sidebar
@@ -91,6 +92,10 @@ Account
 - [x] Users
 - [x] Groups
 - [x] Roles and permissions
+  - [x] List
+  - [x] Edit
+  - [x] New
+  - [ ] Permissions (report)
 - [x] Trackers
 - [x] Issues statuses
 - [x] Workflow
@@ -100,7 +105,7 @@ Account
   - [ ] Copy
 - [x] Custom fields
 - [x] Enumerations
-- [ ] Settings
+- [x] Settings (WIP)
   - [x] General
   - [x] Display
   - [x] Authentication

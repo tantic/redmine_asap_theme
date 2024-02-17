@@ -4,13 +4,17 @@ This plugin try to propose a new UX/UI for Redmine and try new tools like stimul
 
 Status : in development and for fun not a real plugin for now.
 
-Look at a first try with the navbar
-
+Look at a first try
 
 ![Login page](doc/img/login.png)
 
 ![Welcome page](doc/img/Redmine-asap-theme_welcome-page.png)
 
+## Progress
+
+See page [Features](doc/features.md)
+* Done or WIP : 29 items
+* Total (known) : 65 items
 
 ## Documentation
 

@@ -1,0 +1,10 @@
+<div class="ml-60">
+  <%= title [l(:label_role_plural), roles_path], @role.name %>
+
+  <%= labelled_form_for @role do |f| %>
+    <%= render :partial => 'form', :locals => { :f => f } %>
+    <div class="flex w-full my-4">
+      <%= submit_tag l(:button_save), class: "ml-auto button-submit" %>
+    </div>
+  <% end %>
+</div

@@ -120,3 +120,7 @@ Todo : as an admin user, i'd like to choose the background image (or none) in th
 Ability to choose background image for the login page
 
 ![Login page](img/admin-plugin-redmine-asap-theme.png)
+
+## Admin role edit
+
+![Role edit](img/admin-role-edit.png)
