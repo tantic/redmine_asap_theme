@@ -13,7 +13,7 @@
     <% end %>
   <% end %>
   <% if @project.deletable? %>
-    <%= link_to l(:button_delete), project_path(@project), :method => :delete, data: {turbo: false}, :class => 'icon icon-del' %>
+    <%= link_to l(:button_delete), project_path(@project), :method => :delete, :class => 'icon icon-del' %>
   <% end %>
   <%= link_to_if_authorized l(:label_settings),
               {:controller => 'projects', :action => 'settings', :id => @project},
@@ -137,7 +137,11 @@
 	<ul class="subprojects">
 	  <% @subprojects.each do |project| %>
 	  <li><%= link_to(project.name, project_path(project), :class => project.css_classes).html_safe %></li>
+<<<<<<< HEAD
 	  <% end %>
+=======
+	  <% end %>
+>>>>>>> c01ffa0 (upgrade to 5.1.1)
     </ul>
   </div>
   <% end %>
