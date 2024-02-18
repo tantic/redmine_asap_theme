@@ -1,69 +1,38 @@
 <%= form_tag({}, :data => {:cm_url => issues_context_menu_path}) do -%>
-<%= hidden_field_tag 'back_url', url_for(:params => request.query_parameters), :id => nil %>
-<div class="wrapper bg-white rounded shadow w-full mt-4 overflow-auto">
-  <table class="cal w-full">
-  <thead>
-    <tr>
-      <th scope="col" title="<%= l(:label_week) %>" class="week-number p-2 border-r h-10 w-10 xl:text-sm text-xs"></th>
-      <% 7.times do |i| %>
-        <th scope="col"  class="p-2 border-r h-10 xl:w-40 lg:w-30 md:w-30 sm:w-20 w-10 xl:text-sm text-xs">
-          <span class="xl:block lg:block md:block sm:block hidden">
-            <%= day_name((calendar.first_wday + i) % 7) %>
-          </span>
-        </th>
-      <% end %>
-    </tr>
-  </thead>
-  <tbody>
-    <tr class="h-20">
-      <% day = calendar.startdt %>
-      <% while day <= calendar.enddt %>
-        <% if day.cwday == calendar.first_wday %>
-          <td class='week-number  bg-gray-50  border p-1 h-40 w-10 overflow-auto transition cursor-pointer duration-500 ease hover:bg-gray-300' title='<%= l(:label_week) %>'>
-
-            <div class="flex flex-col h-40 mx-auto w-10 mx-auto overflow-hidden">
-              <div class="top h-5 w-full">
-                <span class="text-gray-500"><%= (day + (11 - day.cwday) % 7).cweek %></span>
-              </div>
-              <div class="bottom flex-grow h-30 py-1 w-full cursor-pointer"></div>
-            </div>
-
-          </td>
-        <% end %>
-      <td class="<%= calendar_day_css_classes(calendar, day) %> border p-1 h-40 xl:w-40 lg:w-30 md:w-30 sm:w-20 w-10 overflow-auto transition cursor-pointer duration-500 ease hover:bg-gray-300">
-        <div class="flex flex-col h-40 mx-auto xl:w-40 lg:w-30 md:w-30 sm:w-full w-10 mx-auto overflow-hidden">
-          <div class="top h-5 w-full">
-            <span class="text-gray-500"><%= day.day %></span>
-          </div>
-          <div class="bottom flex-grow h-30 py-1 w-full cursor-pointer">
-            <% calendar.events_on(day).each do |i| %>
-              <% if i.is_a? Issue %>
-              <div class="<%= i.css_classes %> <%= 'starting' if day == i.start_date %> <%= 'ending' if day == i.due_date %> tooltip hascontextmenu bg-purple-400 text-white rounded p-1 text-sm mb-1">
+  <%= hidden_field_tag 'back_url', url_for(:params => request.query_parameters), :id => nil %>
+  <ul class="cal">
+    <li scope="col" title="<%= l(:label_week) %>" class="calhead week-number"></li>
+    <% 7.times do |i| %>
+      <li scope="col" class="calhead"><%= day_name((calendar.first_wday + i) % 7) %></li>
+    <% end %>
+    <% calendar.format_month.each_slice(7) do |week| %>
+      <li class='week-number'>
+        <span class="label-week"><%= l(:label_week) %></span> <%= calendar.week_number week.first %>
+      </li>
+      <% week.each do |day| %>
+      <li class="<%= calendar.day_css_classes day %> calbody">
+        <p class="day-num"><%= day.day %>
+          <span class="abbr-day">(<%= abbr_day_name(day.cwday) %>)</span>
+        </p>
+        <% calendar.events_on(day).each do |i| %>
+          <% if i.is_a? Issue %>
+            <%= tag.div class: [ i.css_classes, 'tooltip hascontextmenu', starting: day == i.start_date, ending: day == i.due_date] do %>
               <%= "#{i.project} -" unless @project && @project == i.project %>
               <%= link_to_issue i, :truncate => 30 %>
-              <!-- <span class="tip"><%= render_issue_tooltip i %></span> -->
+              <span class="tip"><%= render_issue_tooltip i %></span>
               <%= check_box_tag 'ids[]', i.id, false, :style => 'display:none;', :id => nil %>
-              </div>
-              <% else %>
-              <span class="icon icon-package">
-                <%= "#{i.project} -" unless @project && @project == i.project %>
-                <%= link_to_version i %>
-              </span>
-              <% end %>
             <% end %>
-          </div>
-        </div>
-
-
-      </td>
-      <% if day.cwday==calendar.last_wday and day!=calendar.enddt %>
-        </tr><tr>
+          <% else %>
+            <span class="icon icon-package">
+              <%= "#{i.project} -" unless @project && @project == i.project %>
+              <%= link_to_version i %>
+            </span>
+          <% end %>
+        <% end %>
+      </li>
       <% end %>
-      <% day = day + 1 %>
     <% end %>
-  </tr>
-  </tbody>
-  </table>
-  <% end %>
-  <%= context_menu %>
-</div>
+  </ul>
+<% end %>
+
+<%= context_menu %>
