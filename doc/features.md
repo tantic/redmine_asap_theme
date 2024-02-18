@@ -97,6 +97,9 @@ Account
   - [x] New
   - [ ] Permissions (report)
 - [x] Trackers
+  - [x] List
+  - [x] New
+  - [x] Edit
 - [x] Issues statuses
 - [x] Workflow
   - [x] Edit

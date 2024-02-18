@@ -16,6 +16,8 @@ body{
 }
 
 .box{
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
   border-radius: 0.25rem;
   padding: 2rem;
   --tw-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
@@ -1016,9 +1018,33 @@ label{
 
 fieldset{
   border-radius: 0.25rem !important;
-  --tw-bg-opacity: 1 !important;
-  background-color: rgb(249 250 251 / var(--tw-bg-opacity)) !important;
   padding: 1.5rem !important;
+  >legend{
+    --tw-bg-opacity: 1;
+    background-color: rgb(229 231 235 / var(--tw-bg-opacity));
+  }
+  >legend{
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  >legend{
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+  }
+  >legend{
+    font-size: 0.75rem;
+    line-height: 1rem;
+  }
+  >legend{
+    font-weight: 300;
+  }
+  >legend{
+    text-transform: uppercase;
+  }
+  >legend{
+    --tw-text-opacity: 1;
+    color: rgb(17 24 39 / var(--tw-text-opacity));
+  }
 }
 
 /* a.icon{
