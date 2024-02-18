@@ -15,7 +15,7 @@ class UserSettingsController < ApplicationController
   helper :custom_fields
   helper :queries
   helper :activities
-  helper :calendars
+  # helper :calendars
 
   def show
     @user = User.current

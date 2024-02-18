@@ -3448,12 +3448,20 @@ select{
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+.\[eoform\:project\]{
+  eoform: project;
+}
+
 .\[eoform\:tracker\]{
   eoform: tracker;
 }
 
 .\[eoform\:user\]{
   eoform: user;
+}
+
+.\[form\:project\]{
+  form: project;
 }
 
 .\[form\:tracker\]{
