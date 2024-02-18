@@ -2,7 +2,8 @@
 
 This plugin try to propose a new UX/UI for Redmine and try new tools like stimulus/turbo and Tailwindcss (one day Hotwire :smiley:).
 
-Status : in development and for fun not a real plugin for now.
+* Status : in development and for fun not a real plugin for now.
+* Compatibility : Redmine 5.0.7
 
 Look at a first try
 
