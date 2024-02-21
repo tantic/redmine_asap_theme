@@ -5,6 +5,7 @@ import "./controllers/issue_controller.js"
 import "./controllers/query_controller.js"
 import "./controllers/application_controller.js"
 import "./controllers/tabs_controller.js"
+import "./controllers/notification_controller.js"
 
 
 document.addEventListener("DOMContentLoaded", function(e) {
