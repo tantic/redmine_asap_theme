@@ -77,3 +77,7 @@ Ability to change the background
 ## About
 
 ![Modal](img/redmine_about.png)
+
+## Flash message
+
+![Flash](img/flash-message.png)
