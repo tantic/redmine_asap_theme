@@ -15,17 +15,13 @@
     }
 
     initialize() {
-      console.log("ajout ti")
       if (this.timeValue) {
-        console.log("ajout timer")
         this.timer()
       }
     }
 
     close() {
-      console.log("ferme")
       if (this.hiddenClassValue === '') {
-        console.error('Set [data-alert-hidden-class-value]')
         return
       }
 

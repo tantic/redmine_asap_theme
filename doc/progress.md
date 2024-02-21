@@ -124,3 +124,9 @@ Ability to choose background image for the login page
 ## Admin role edit
 
 ![Role edit](img/admin-role-edit.png)
+
+## Flash message
+
+Display a notification type alert for flash messages
+
+![Flash](img/flash-message.png)
