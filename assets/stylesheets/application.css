@@ -3507,16 +3507,11 @@ select{
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 177306c (add notice flash message)
 .ease-out{
   transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
 }
 
-=======
->>>>>>> c01ffa0 (upgrade to 5.1.1)
+
 .\[eoform\:project\]{
   eoform: project;
 }
