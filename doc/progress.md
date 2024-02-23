@@ -130,3 +130,7 @@ Ability to choose background image for the login page
 Display a notification type alert for flash messages
 
 ![Flash](img/flash-message.png)
+
+## Rework all the admin project page
+
+![Admin project](img/admin-projects-2.png)
