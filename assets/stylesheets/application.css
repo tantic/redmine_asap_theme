@@ -681,10 +681,42 @@ body{
 }
 
 .expanded .drdn-content{
+  .quick-search{
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  .quick-search{
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+  }
   .drdn-items{
     cursor: pointer;
   }
   .drdn-items{
+    strong{
+      margin-bottom: 0.5rem;
+    }
+    strong{
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+    strong{
+      padding-top: 1rem;
+    }
+    strong{
+      font-size: 0.75rem;
+      line-height: 1rem;
+    }
+    strong{
+      font-weight: 300;
+    }
+    strong{
+      text-transform: uppercase;
+    }
+    strong{
+      --tw-text-opacity: 1;
+      color: rgb(156 163 175 / var(--tw-text-opacity));
+    }
     .label-group{
       padding: 1rem;
     }
@@ -700,34 +732,28 @@ body{
       color: rgb(156 163 175 / var(--tw-text-opacity));
     }
     a{
-      padding-left: 1rem;
-      padding-right: 1rem;
+      margin-left: 1rem;
+      margin-right: 1rem;
     }
     a{
-      padding-top: 0.5rem;
-      padding-bottom: 0.5rem;
+      margin-top: 0.25rem;
+      margin-bottom: 0.25rem;
+    }
+    a{
+      padding-left: 1rem;
+      padding-right: 1rem;
     }
     a{
       font-size: 0.875rem;
       line-height: 1.25rem;
     }
     a:hover{
-      border-left-width: 2px;
-    }
-    a:hover{
-      --tw-border-opacity: 1;
-      border-color: rgb(30 64 175 / var(--tw-border-opacity));
-    }
-    a:hover{
       --tw-bg-opacity: 1;
       background-color: rgb(249 250 251 / var(--tw-bg-opacity));
     }
-    a:hover{
-      padding-left: 0.875rem;
-    }
   }
   .projects{
-    height: 20rem;
+    max-height: 20rem;
   }
   .projects{
     overflow-y: auto;
@@ -736,6 +762,10 @@ body{
     width: 100%;
   }
   .all-projects{
+    a{
+      margin-left: 0px;
+      margin-right: 0px;
+    }
     a{
       margin-top: 1rem;
     }
@@ -746,11 +776,8 @@ body{
       width: 100%;
     }
     a{
-      border-top-width: 1px;
-    }
-    a{
-      --tw-border-opacity: 1;
-      border-color: rgb(249 250 251 / var(--tw-border-opacity));
+      --tw-bg-opacity: 1;
+      background-color: rgb(249 250 251 / var(--tw-bg-opacity));
     }
     a{
       padding-left: 1rem;
@@ -762,11 +789,11 @@ body{
     }
     a:hover{
       --tw-border-opacity: 1;
-      border-top-color: rgb(255 255 255 / var(--tw-border-opacity));
+      border-color: rgb(243 244 246 / var(--tw-border-opacity));
     }
     a:hover{
-      --tw-bg-opacity: 1;
-      background-color: rgb(249 250 251 / var(--tw-bg-opacity));
+      --tw-border-opacity: 1;
+      border-top-color: rgb(255 255 255 / var(--tw-border-opacity));
     }
   }
 }

@@ -17,23 +17,30 @@
 }
 
 .expanded .drdn-content{
-  @apply flex flex-col absolute top-14 left-0 shadow-md bg-white dark:bg-slate-900 w-64;
+  @apply flex flex-col absolute top-14  left-0 shadow-md bg-white dark:bg-slate-900 w-64;
+  .quick-search{
+    @apply px-4 py-1;
+  }
   .drdn-items{
     @apply cursor-pointer;
+
+    strong{
+      @apply mb-2 px-4 pt-4 text-gray-400 uppercase font-light text-xs;
+    }
     .label-group{
       @apply p-4 uppercase text-xs text-gray-400;
     }
     a{
-      @apply hover:bg-gray-50 hover:border-l-2 hover:border-blue-800 hover:pl-3.5 px-4 py-2 text-sm;
+      @apply hover:bg-gray-50 px-4 mx-4 my-1 text-sm;
     }
   }
   .projects{
-    @apply  h-80 overflow-y-auto;
+    @apply  max-h-80 overflow-y-auto;
   }
   .all-projects{
     @apply w-full;
     a{
-      @apply hover:bg-gray-50 mt-4 flex px-4 py-2 w-full border-t hover:border-t-white border-gray-50;
+      @apply bg-gray-50 mt-4 mx-0 flex px-4 py-2 w-full  hover:border-t-white hover:border-gray-100;
     }
   }
 }

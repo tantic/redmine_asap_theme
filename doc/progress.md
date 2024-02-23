@@ -134,3 +134,9 @@ Display a notification type alert for flash messages
 ## Rework all the admin project page
 
 ![Admin project](img/admin-projects-2.png)
+
+## Rework all the navigation project
+
+![Navigation](img/navigation.png)
+
+![Navigation](img/navigation-2.png)

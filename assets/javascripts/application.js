@@ -9,7 +9,7 @@ import "./controllers/notification_controller.js"
 
 // Turbo.session.drive = false
 
-document.addEventListener("DOMContentLoaded", function(e) {
+document.addEventListener("turbo:load", function(e) {
   if(document.querySelector('#menu-breadcrumb')){
     document.querySelector('#menu-breadcrumb').addEventListener('click', function(event){
       event.stopPropagation();
