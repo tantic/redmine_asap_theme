@@ -13,14 +13,14 @@ $(document).ready(function(){
   <% end %>
 });
 <% end %>
+
 <div class="flex">
   <table id="filters-table">
   </table>
 
-  <div class="add-filter ml-auto flex w-auto items-center">
-  <%= label_tag('add_filter_select', l(:label_filter_add), class: "text-xs w-24 flex") %>
-  <%= select_tag 'add_filter_select', filters_options_for_select(query), :name => nil %>
-  </div>
+</div>
+<div class="ml-auto">
+  <%= select_tag 'add_filter_select', filters_options_for_select(@query), :name => nil %>
 </div>
 <%= hidden_field_tag 'f[]', '' %>
 <% include_calendar_headers_tags %>

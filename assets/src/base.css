@@ -26,10 +26,54 @@ body {
   }
   tbody{
     tr{
-      @apply odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700;
+      @apply odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700;
       td{
         @apply px-6 py-2
       }
+      td.name{
+        @apply text-gray-900 font-medium;
+      }
+    }
+  }
+}
+
+.pagination{
+  @apply flex flex-col;
+  ul.pages{
+    @apply inline-flex -space-x-px text-sm mb-6;
+    li.previous{
+      span{
+        @apply cursor-pointer flex items-center justify-center px-3 h-8 ms-0 leading-tight  border border-e-0 border-gray-300 rounded-s-lg bg-gray-100 text-gray-400 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white;
+      }
+      a{
+        @apply flex items-center justify-center px-3 h-8 ms-0 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white;
+      }
+    }
+    li.page{
+      a{
+        @apply flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white
+      }
+    }
+    li.current{
+      span{
+        @apply z-10 flex items-center justify-center px-3 h-8 leading-tight text-blue-600 border border-blue-300 bg-blue-50 hover:bg-blue-100 hover:text-blue-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white
+      }
+    }
+    li.next{
+      span{
+        @apply cursor-pointer flex items-center justify-center px-3 h-8 leading-tight border border-gray-300 rounded-e-lg bg-gray-100 text-gray-400 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white
+      }
+      a{
+        @apply flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white
+      }
+    }
+  }
+  .per-page{
+    .selected{
+
+    }
+    a{
+      @apply text-blue-600 hover:text-blue-700;
     }
   }
 }
