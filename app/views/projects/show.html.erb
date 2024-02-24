@@ -1,5 +1,4 @@
 <div class="contextual">
-  <%= bookmark_link @project %>
 
   <%= actions_dropdown do %>
   <% if User.current.allowed_to?(:add_subprojects, @project) %>
@@ -20,8 +19,6 @@
               :class => 'icon icon-settings' if User.current.allowed_to?(:edit_project, @project) %>
   <% end %>
 </div>
-
-<h2><%=l(:label_overview)%></h2>
 
 <% unless @project.active? %>
   <p class="warning"><span class="icon icon-lock"><%= l(:text_project_closed) %></span></p>

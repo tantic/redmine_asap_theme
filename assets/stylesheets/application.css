@@ -620,6 +620,66 @@ body{
   }
 }
 
+#main-menu{
+  height: 100%;
+  ul{
+    display: flex;
+  }
+  ul{
+    height: 100%;
+  }
+  ul{
+    li{
+      display: flex;
+    }
+    li{
+      height: 100%;
+    }
+    li{
+      align-items: center;
+    }
+    li{
+      justify-content: center;
+    }
+    li{
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+    li:hover{
+      --tw-bg-opacity: 1;
+      background-color: rgb(243 244 246 / var(--tw-bg-opacity));
+    }
+    li{
+      a.selected{
+        display: flex;
+      }
+      a.selected{
+        height: 100%;
+      }
+      a.selected{
+        align-items: center;
+      }
+      a.selected{
+        border-bottom-width: 2px;
+      }
+      a.selected{
+        --tw-border-opacity: 1;
+        border-color: rgb(29 78 216 / var(--tw-border-opacity));
+      }
+      a.selected{
+        font-weight: 500;
+      }
+      a.selected{
+        --tw-text-opacity: 1;
+        color: rgb(29 78 216 / var(--tw-text-opacity));
+      }
+    }
+    li:first-child{
+      display: none;
+    }
+  }
+}
+
 /* Navbar */
 
 /* Project jumpbox */
@@ -3651,6 +3711,11 @@ select{
   border-color: rgb(255 255 255 / var(--tw-border-opacity));
 }
 
+.border-blue-700{
+  --tw-border-opacity: 1;
+  border-color: rgb(29 78 216 / var(--tw-border-opacity));
+}
+
 .border-b-gray-50{
   --tw-border-opacity: 1;
   border-bottom-color: rgb(249 250 251 / var(--tw-border-opacity));
@@ -4047,6 +4112,11 @@ select{
   color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
+.text-yellow-400{
+  --tw-text-opacity: 1;
+  color: rgb(250 204 21 / var(--tw-text-opacity));
+}
+
 .opacity-0{
   opacity: 0;
 }
@@ -4283,6 +4353,11 @@ select{
   background-color: rgb(254 226 226 / var(--tw-bg-opacity));
 }
 
+.hover\:bg-yellow-100:hover{
+  --tw-bg-opacity: 1;
+  background-color: rgb(254 249 195 / var(--tw-bg-opacity));
+}
+
 .hover\:pl-3:hover{
   padding-left: 0.75rem;
 }
@@ -4324,6 +4399,11 @@ select{
 .hover\:text-red-800:hover{
   --tw-text-opacity: 1;
   color: rgb(153 27 27 / var(--tw-text-opacity));
+}
+
+.hover\:text-yellow-500:hover{
+  --tw-text-opacity: 1;
+  color: rgb(234 179 8 / var(--tw-text-opacity));
 }
 
 .hover\:underline:hover{

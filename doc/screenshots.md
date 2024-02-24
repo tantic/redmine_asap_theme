@@ -38,7 +38,7 @@
 
 ![Admin menu](img/admin-menu.png)
 
-![Admin menu](img/admin-projects.png)
+![Admin project](img/admin-projects-2.png)
 
 ![Admin menu](img/admin-users.png)
 
