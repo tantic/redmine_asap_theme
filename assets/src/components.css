@@ -3,3 +3,11 @@
     @apply rounded bg-red-50 p-4 text-red-700;
   }
 }
+
+#issue-table{
+  thead{
+    th{
+      @apply px-2 text-xs font-medium text-gray-700;
+    }
+  }
+}

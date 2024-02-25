@@ -4,18 +4,36 @@
   application.register("queries", class extends Stimulus.Controller {
 
     static get targets() {
-      return [ "filters", "options", "buttonDisplay", "buttonFilter" ]
+      return [ "filters", "issuesfilters", "options", "buttonDisplay", "buttonFilter", "actions" ]
     }
 
     connect() {}
 
     toggle(event){
       this.filtersTarget.classList.toggle('hidden');
-      if(this.buttonFilterTarget.classList.contains('bg-gray-100')){
-        this.buttonFilterTarget.classList.remove('bg-gray-100')
-      }else{
-        this.buttonFilterTarget.classList.add('bg-gray-100')
-      }
+      this.dismissOnClick(this.filtersTarget);
+      // if(this.buttonFilterTarget.classList.contains('bg-gray-100')){
+      //   this.buttonFilterTarget.classList.remove('bg-gray-100')
+      // }else{
+      //   this.buttonFilterTarget.classList.add('bg-gray-100')
+      // }
+    }
+
+    toggleIssuesFilters(event){
+      this.issuesfiltersTarget.classList.toggle('hidden');
+      this.filtersTarget.classList.toggle('hidden');
+      this.optionsTarget.classList.toggle('hidden');
+      this.dismissOnClick(this.issuesfiltersTarget);
+      // if(this.buttonFilterTarget.classList.contains('bg-gray-100')){
+      //   this.buttonFilterTarget.classList.remove('bg-gray-100')
+      // }else{
+      //   this.buttonFilterTarget.classList.add('bg-gray-100')
+      // }
+    }
+
+    toggleActions(event){
+      this.actionsTarget.classList.toggle('hidden');
+      this.dismissOnClick(this.actionsTarget);
     }
 
     display(event){

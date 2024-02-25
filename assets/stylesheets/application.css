@@ -2187,6 +2187,26 @@ fieldset{
   }
 }
 
+#issue-table{
+  thead{
+    th{
+      padding-left: 0.5rem;
+      padding-right: 0.5rem;
+    }
+    th{
+      font-size: 0.75rem;
+      line-height: 1rem;
+    }
+    th{
+      font-weight: 500;
+    }
+    th{
+      --tw-text-opacity: 1;
+      color: rgb(55 65 81 / var(--tw-text-opacity));
+    }
+  }
+}
+
 /* ! tailwindcss v3.3.6 | MIT License | https://tailwindcss.com */
 
 /*
@@ -3899,11 +3919,6 @@ select{
 .py-2{
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
-}
-
-.py-2\.5{
-  padding-top: 0.625rem;
-  padding-bottom: 0.625rem;
 }
 
 .py-3{

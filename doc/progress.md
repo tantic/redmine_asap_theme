@@ -144,3 +144,7 @@ Display a notification type alert for flash messages
 ## Rework on the navigation project
 
 ![Navigation](img/project_navigation.png)
+
+## Rework on the issues page
+
+![Issues](img/issues.png)
