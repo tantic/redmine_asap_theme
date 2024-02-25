@@ -8,21 +8,38 @@
     <%= project_parent_breadcrumb %>
     <%= render_project_jump_box %>
     <% if @project && @project.id %>
-    <div class="contextual w-10 h-full relative flex items-center justify-center">
-      <%= bookmark_link @project %>
-    </div>
-    <div class="contextual w-10 h-full relative flex items-center justify-center">
-      <% if controller_name == 'projects' %>
-      <% selected = 'bg-gray-100'  %>
-      <% else %>
-      <% selected = 'bg-white'  %>
+      <% if @project.children.any? %>
+      <div data-controller="projectmenu" class="h-full relative flex items-center justify-center">
+        <div data-action="click->projectmenu#toggleSubprojects" class="cursor-pointer ml-1 p-2 rounded-full hover:bg-gray-100 text-gray-700 dark:text-gray-400 dark:hover:text-gray-300 dark:hover:bg-gray-700 hover:text-gray-800">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-gray-800 transition duration-75 dark:text-gray-400 hover:text-gray-900 dark:group-hover:text-white">
+            <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+          </svg>
+        </div>
+        <div id="project-menu-subprojects" class="absolute left-0 shadow border border-gray-50 mt bg-white z-50 w-60 top-14 hidden" data-projectmenu-target="projectsubprojects">
+          <% @project.children.each do |project| %>
+           <%= link_to project_path(project), :title => project.name, :class => 'flex items-center hover:bg-gray-50 px-2 py-2' do %>
+              <%= letter_avatar_tag(project.name, 300, class: 'w-8 h-8 mr-2') %>
+              <span class="uppercase font-normal text-xs"><%= project.name %></span>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
       <% end %>
-      <%= link_to @project, class: "p-2 rounded-full hover:bg-gray-100 text-gray-700 dark:text-gray-400 dark:hover:text-gray-300 dark:hover:bg-gray-700 hover:text-gray-800 #{selected}" do %>
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-gray-800 transition duration-75 dark:text-gray-400 hover:text-gray-900 dark:group-hover:text-white">
-          <path stroke-linecap="round" stroke-linejoin="round" d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
-        </svg>
-      <% end %>
-    </div>
+      <div class="contextual w-10 h-full relative flex items-center justify-center">
+        <%= bookmark_link @project %>
+      </div>
+      <div class="contextual w-10 h-full relative flex items-center justify-center">
+        <% if controller_name == 'projects' && action_name == 'show' %>
+        <% selected = 'bg-gray-100'  %>
+        <% else %>
+        <% selected = 'bg-white'  %>
+        <% end %>
+        <%= link_to @project, class: "p-2 rounded-full hover:bg-gray-100 text-gray-700 dark:text-gray-400 dark:hover:text-gray-300 dark:hover:bg-gray-700 hover:text-gray-800 #{selected}" do %>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-gray-800 transition duration-75 dark:text-gray-400 hover:text-gray-900 dark:group-hover:text-white">
+            <path stroke-linecap="round" stroke-linejoin="round" d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+          </svg>
+        <% end %>
+      </div>
     <% end %>
     <% if display_main_menu?(@project) %>
       <div data-controller="projectmenu" class="h-full relative flex items-center justify-center">
@@ -41,6 +58,26 @@
         </div>
         <div id="project-menu-submenus" class="absolute left-20 shadow rounded-md border border-gray-50 mt bg-white z-50 w-60 top-14 hidden" data-projectmenu-target="projectsubmenu">
           <%= render_main_menu(@project) %>
+          <% if @project && @project.id %>
+            <div class="flex flex-col border-t border-gray-1">
+              <%= link_to_if_authorized l(:label_settings),
+                          {:controller => 'projects', :action => 'settings', :id => @project},
+                          :class => 'icon icon-settings flex items-center text-gray-900 hover:bg-gray-50 hover:border-l-2 hover:border-l-blue-800 hover:pl-3.5 px-4 py-2 text-sm' if User.current.allowed_to?(:edit_project, @project) %>
+              <% if User.current.allowed_to?(:add_subprojects, @project) %>
+                <%= link_to l(:label_subproject_new), new_project_path(:parent_id => @project), :class => 'icon icon-add flex items-center text-gray-900 hover:bg-gray-50 hover:border-l-2 hover:border-l-blue-800 hover:pl-3.5 px-4 py-2 text-sm' %>
+              <% end %>
+              <% if User.current.allowed_to?(:close_project, @project) %>
+                <% if @project.active? %>
+                  <%= link_to l(:button_close), close_project_path(@project), :data => {:confirm => l(:text_project_close_confirmation, @project.to_s)}, :method => :post, :class => 'icon icon-lock flex items-center text-gray-900 hover:bg-gray-50 hover:border-l-2 hover:border-l-blue-800 hover:pl-3.5 px-4 py-2 text-sm' %>
+                <% else %>
+                  <%= link_to l(:button_reopen), reopen_project_path(@project), :data => {:confirm => l(:text_project_reopen_confirmation, @project.to_s)}, :method => :post, :class => 'icon icon-unlock flex items-center text-gray-900 hover:bg-gray-50 hover:border-l-2 hover:border-l-blue-800 hover:pl-3.5 px-4 py-2 text-sm' %>
+                <% end %>
+              <% end %>
+              <% if @project.deletable? %>
+                <%= link_to l(:button_delete), project_path(@project), :method => :delete, data: {turbo: false}, :class => 'icon icon-del flex items-center text-gray-900 hover:bg-gray-50 hover:border-l-2 hover:border-l-blue-800 hover:pl-3.5 px-4 py-2 text-sm' %>
+              <% end %>
+            </div>
+          <% end %>
         </div>
 
       </div>

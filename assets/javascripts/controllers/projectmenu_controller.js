@@ -4,7 +4,7 @@
   application.register("projectmenu", class extends Stimulus.Controller {
 
     static get targets() {
-      return [ "projectsubmenu", "projectactionsubmenu"]
+      return [ "projectsubmenu", "projectactionsubmenu", "projectsubprojects"]
     }
 
     connect() {}
@@ -12,6 +12,11 @@
     toggle(event){
       this.projectsubmenuTarget.classList.toggle('hidden');
       this.dismissOnClick(this.projectsubmenuTarget);
+    }
+
+    toggleSubprojects(event){
+      this.projectsubprojectsTarget.classList.toggle('hidden');
+      this.dismissOnClick(this.projectsubprojectsTarget);
     }
 
     toggleAction(event){

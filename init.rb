@@ -11,6 +11,7 @@ Redmine::Plugin.register :redmine_asap_theme do
   settings :default => {'empty' => true}, :partial => 'settings/redmine_asap_theme/settings'
   delete_menu_item :project_menu, :issues
   delete_menu_item :project_menu, :overview
+  delete_menu_item :project_menu, :settings
 
 end
 

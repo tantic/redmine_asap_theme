@@ -2170,6 +2170,23 @@ fieldset{
   width: 24px;
 }
 
+#errorExplanation{
+  ul{
+    border-radius: 0.25rem;
+  }
+  ul{
+    --tw-bg-opacity: 1;
+    background-color: rgb(254 242 242 / var(--tw-bg-opacity));
+  }
+  ul{
+    padding: 1rem;
+  }
+  ul{
+    --tw-text-opacity: 1;
+    color: rgb(185 28 28 / var(--tw-text-opacity));
+  }
+}
+
 /* ! tailwindcss v3.3.6 | MIT License | https://tailwindcss.com */
 
 /*
@@ -3047,10 +3064,6 @@ select{
   left: 5rem;
 }
 
-.left-32{
-  left: 8rem;
-}
-
 .right-0{
   right: 0px;
 }
@@ -3682,6 +3695,11 @@ select{
   border-color: rgb(239 246 255 / var(--tw-border-opacity));
 }
 
+.border-blue-700{
+  --tw-border-opacity: 1;
+  border-color: rgb(29 78 216 / var(--tw-border-opacity));
+}
+
 .border-gray-100{
   --tw-border-opacity: 1;
   border-color: rgb(243 244 246 / var(--tw-border-opacity));
@@ -3709,11 +3727,6 @@ select{
 .border-white{
   --tw-border-opacity: 1;
   border-color: rgb(255 255 255 / var(--tw-border-opacity));
-}
-
-.border-blue-700{
-  --tw-border-opacity: 1;
-  border-color: rgb(29 78 216 / var(--tw-border-opacity));
 }
 
 .border-b-gray-50{

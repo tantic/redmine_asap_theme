@@ -1,0 +1,5 @@
+#errorExplanation{
+  ul{
+    @apply rounded bg-red-50 p-4 text-red-700;
+  }
+}
