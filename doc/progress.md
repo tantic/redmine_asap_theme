@@ -150,3 +150,5 @@ Display a notification type alert for flash messages
 ![Issues](img/issues.png)
 
 ![Issues](img/issues2.png)
+
+![Issues](img/issues3.png)
