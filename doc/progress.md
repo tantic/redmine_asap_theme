@@ -148,3 +148,5 @@ Display a notification type alert for flash messages
 ## Rework on the issues page
 
 ![Issues](img/issues.png)
+
+![Issues](img/issues2.png)
