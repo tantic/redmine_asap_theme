@@ -2205,6 +2205,129 @@ fieldset{
       color: rgb(55 65 81 / var(--tw-text-opacity));
     }
   }
+  tbody{
+    tr:hover{
+      --tw-bg-opacity: 1;
+      background-color: rgb(243 244 246 / var(--tw-bg-opacity));
+    }
+  }
+}
+
+#sidebar-list{
+  h3{
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+  h3{
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+  h3{
+    font-size: 0.75rem;
+    line-height: 1rem;
+  }
+  h3{
+    text-transform: uppercase;
+  }
+  h3{
+    --tw-text-opacity: 1;
+    color: rgb(107 114 128 / var(--tw-text-opacity));
+  }
+  .queries{
+    margin: 0px;
+  }
+  .queries{
+    width: 100%;
+  }
+  .queries{
+    padding: 0px;
+  }
+  .queries{
+    li{
+      display: flex;
+    }
+    li{
+      width: 100%;
+    }
+    li{
+      a{
+        margin-left: 1rem;
+        margin-right: 1rem;
+      }
+      a{
+        margin-bottom: 0.125rem;
+      }
+      a{
+        display: flex;
+      }
+      a{
+        width: 100%;
+      }
+      a{
+        border-radius: 0.25rem;
+      }
+      a{
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
+      }
+      a{
+        padding-left: 1rem;
+        padding-right: 1rem;
+      }
+      a:hover{
+        --tw-bg-opacity: 1;
+        background-color: rgb(243 244 246 / var(--tw-bg-opacity));
+      }
+      a.icon-clear-query{
+        margin-left: 0px;
+      }
+      a.icon-clear-query{
+        display: flex;
+      }
+      a.icon-clear-query{
+        width: 4rem;
+      }
+      a.icon-clear-query{
+        align-items: center;
+      }
+      a.icon-clear-query{
+        justify-content: center;
+      }
+      a.icon-clear-query{
+        border-radius: 0.375rem;
+      }
+      a.icon-clear-query{
+        --tw-bg-opacity: 1;
+        background-color: rgb(29 78 216 / var(--tw-bg-opacity));
+      }
+      a.icon-clear-query{
+        --tw-text-opacity: 1;
+        color: rgb(239 246 255 / var(--tw-text-opacity));
+      }
+      a.icon-clear-query:hover{
+        --tw-bg-opacity: 1;
+        background-color: rgb(30 64 175 / var(--tw-bg-opacity));
+      }
+      a.selected{
+        margin-right: 0px;
+      }
+      a.selected{
+        border-left-width: 2px;
+      }
+      a.selected{
+        --tw-border-opacity: 1;
+        border-color: rgb(29 78 216 / var(--tw-border-opacity));
+      }
+      a.selected{
+        --tw-bg-opacity: 1;
+        background-color: rgb(243 244 246 / var(--tw-bg-opacity));
+      }
+      a.selected{
+        padding-left: 0.75rem;
+        padding-right: 0.75rem;
+      }
+    }
+  }
 }
 
 /* ! tailwindcss v3.3.6 | MIT License | https://tailwindcss.com */
@@ -3492,6 +3615,10 @@ select{
   width: 20rem;
 }
 
+.w-96{
+  width: 24rem;
+}
+
 .w-auto{
   width: auto;
 }
@@ -3684,6 +3811,10 @@ select{
 
 .border-b-2{
   border-bottom-width: 2px;
+}
+
+.border-l{
+  border-left-width: 1px;
 }
 
 .border-l-0{

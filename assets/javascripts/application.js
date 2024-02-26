@@ -6,6 +6,7 @@ import "./controllers/query_controller.js"
 import "./controllers/application_controller.js"
 import "./controllers/tabs_controller.js"
 import "./controllers/notification_controller.js"
+import "./controllers/sidebar_controller.js"
 
 // Turbo.session.drive = false
 

@@ -10,4 +10,30 @@
       @apply px-2 text-xs font-medium text-gray-700;
     }
   }
+  tbody{
+    tr{
+      @apply hover:bg-gray-100;
+    }
+  }
+}
+
+#sidebar-list{
+  h3{
+    @apply text-gray-500 uppercase text-xs my-6 px-8
+  }
+  .queries{
+    @apply w-full m-0 p-0;
+    li{
+      @apply w-full flex;
+      a{
+        @apply flex w-full hover:bg-gray-100 py-2 px-4 mb-0.5 mx-4 rounded;
+      }
+      a.icon-clear-query{
+        @apply w-16 flex justify-center items-center rounded-md bg-blue-700 text-blue-50 ml-0 hover:bg-blue-800;
+      }
+      a.selected{
+        @apply bg-gray-100 border-l-2 border-blue-700 px-3 mr-0;
+      }
+    }
+  }
 }

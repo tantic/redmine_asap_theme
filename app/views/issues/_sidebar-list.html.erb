@@ -1,0 +1,8 @@
+<aside id="sidebar-list" data-sidebar-target="sidebar" data-issue-target="navigation" class="w-96 z-50 shadow-lg bg-white border-l border-gray-50 dark:bg-gray-800 fixed top-14 right-0 h-full hidden">
+  <%= call_hook(:view_issues_sidebar_issues_bottom) %>
+  <%= call_hook(:view_issues_sidebar_planning_bottom) %>
+
+  <%= render_sidebar_queries(IssueQuery, @project) %>
+  <%= call_hook(:view_issues_sidebar_queries_bottom) %>
+
+  </aside>
