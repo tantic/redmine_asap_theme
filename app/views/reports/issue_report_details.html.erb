@@ -1,0 +1,9 @@
+<div class="flex mb-6">
+  <h2 class="uppercase font-medium"><%= link_to l(:label_report_plural), project_issues_report_path(@project) %> »</h2>
+  <h3 class=""><%=@report_title%></h3>
+</div>
+<%= render :partial => 'details', :locals => { :data => @data, :field_name => @field, :rows => @rows } %>
+<br />
+<div class="flex w-full">
+  <%= link_to l(:button_back), project_issues_report_path(@project), class: "button-blue" %>
+</div>

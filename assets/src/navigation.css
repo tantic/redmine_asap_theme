@@ -302,3 +302,19 @@
   color: #f1f5f9;
 }
 
+
+#main-menu{
+  @apply h-full;
+  ul{
+    @apply flex h-full;
+    li{
+      @apply flex h-full items-center justify-center px-4 hover:bg-gray-100;
+      a.selected{
+        @apply text-blue-700 border-b-2 font-medium border-blue-700 h-full flex items-center
+      }
+    }
+    li:first-child{
+      display: none;
+    }
+  }
+}
