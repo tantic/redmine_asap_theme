@@ -14,6 +14,68 @@
     tr{
       @apply hover:bg-gray-100;
     }
+    tr.issue.idnt-1 td.subject {
+      padding-left: 10px;
+      background-position: 5px 50%;
+    }
+    tr.issue.idnt-2 td.subject {
+      padding-left: 20px;
+      background-position: 5px 50%;
+    }
+    tr.issue.idnt-3 td.subject {
+      padding-left: 30px;
+      background-position: 5px 50%;
+    }
+    tr.issue.idnt-4 td.subject {
+      padding-left: 40px;
+      background-position: 5px 50%;
+    }
+    tr.issue.idnt-5 td.subject {
+      padding-left: 50px;
+      background-position: 5px 50%;
+    }
+    td{
+      @apply px-2 py-2;
+    }
+    td.buttons{
+      padding: 0;
+      vertical-align: middle;
+      a{
+        @apply flex items-center justify-center w-full h-full p-0 ;
+      }
+      a{
+        font-size: 0 !important;
+      }
+    }
+    .icon-actions::before {
+      @apply hover:bg-gray-200  flex items-center rounded-full p-2;
+      content: '';
+      background-image: url('../icons/ellipsis-h.svg');
+      background-size: 24px 24px;
+      height: 24px;
+      width: 24px;
+    }
+    td.subject{
+      @apply font-medium;
+    }
+    tr.idnt{
+      td.subject{
+        display: flex;
+        align-items: center;
+      }
+      td.subject::before{
+        display: flex;
+        align-items: center;
+        content: '';
+        background-image: url('../icons/chevron-right.svg');
+        background-size: 16px 16px;
+        height: 16px;
+        width: 16px;
+      }
+    }
+    td.updated_on{
+      @apply text-xs;
+    }
   }
 }
 

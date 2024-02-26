@@ -34,7 +34,7 @@
   <tr id="issue-<%= issue.id %>" class="hascontextmenu text-gray-800 odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700 <%= cycle('odd', 'even') %> <%= issue.css_classes %> <%= level > 0 ? "idnt idnt-#{level}" : nil %>">
     <td class="checkbox hide-when-print text-center"><%= check_box_tag("ids[]", issue.id, false, :id => nil) %></td>
     <% query.inline_columns.each do |column| %>
-    <%= content_tag('td', column_content(column, issue), :class => 'px-2 py-2') %>
+    <%= content_tag('td', column_content(column, issue), :class => column.css_classes) %>
     <% end %>
     <td class="buttons"><%= link_to_context_menu %></td>
   </tr>
