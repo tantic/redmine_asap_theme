@@ -49,6 +49,14 @@
             <div style="clear:both;"></div>
           </section>
         </div>
+      <% elsif controller_name == "wiki" %>
+        <%= render "wiki/navigation" %>
+        <section id="content" class="ml-72 w-auto h-full bg-gray-50 dark:bg-slate-900">
+          <%= render "layouts/flash_messages" %>
+          <%= yield %>
+          <%= call_hook :view_layouts_base_content %>
+          <div style="clear:both;"></div>
+        </section>
       <% elsif controller_name == "calendars" %>
         <section id="content" class="p-8 md:px-16 mb-auto w-full  h-full bg-gray-50 dark:bg-slate-900">
           <%= render "layouts/flash_messages" %>
