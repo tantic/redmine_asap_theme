@@ -5,17 +5,16 @@ This plugin try to propose a new UX/UI for Redmine and try new tools like stimul
 * Status : in development and for fun not a real plugin for now.
 * Compatibility : Redmine 5.1.1
 
-Look at a first try
+If you want to test it quickly with docker, you can use the repo https://github.com/tantic/redmine_asap_docker.git
+
+Here are some screenshots
 
 ![Login page](doc/img/login.png)
 
 ![Welcome page](doc/img/Redmine-asap-theme_welcome-page.png)
 
-## Progress
+![Issues](img/issues2.png)
 
-See page [Features](doc/features.md)
-* Done or WIP : 29 items
-* Total (known) : 65 items
 
 ## Documentation
 
@@ -27,7 +26,7 @@ See page [Features](doc/features.md)
 
 ## Installation
 
-This plugin has been tested with Redmine 5.x+
+This plugin has been tested with Redmine 5.1.x
 
 ```
 cd $REDMINE_ROOT
