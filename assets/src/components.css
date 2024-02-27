@@ -415,3 +415,10 @@ tr.status-5{
     background-clip: content-box;
   }
 }
+
+
+
+
+.modal{
+  @apply bg-white z-50;
+}

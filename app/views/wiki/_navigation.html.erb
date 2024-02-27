@@ -1,3 +1,4 @@
-<aside class="w-72 h-full fixed bg-white shadow">
+<aside id="wiki-navigation" class="w-72 h-full fixed bg-white shadow">
 
+  <%= render_page_hierarchy(wiki.pages.group_by(&:parent_id), nil, :timestamp => false) %>
 </aside>

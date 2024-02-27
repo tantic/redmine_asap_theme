@@ -37,7 +37,7 @@
       <%= render "layouts/navbar" %>
     <% end %>
 
-    <main class="w-full h-[calc(100vh - 3.5rem)] dark:bg-slate-900 dark:text-gray-400 mt-14">
+    <main class="w-full flex h-[calc(100vh-3.5rem)] dark:bg-slate-900 dark:text-gray-400 mt-14">
       <%= call_hook :view_layouts_base_body_top %>
 
       <% if controller_name == "issues" && action_name == "show" %>
@@ -50,8 +50,8 @@
           </section>
         </div>
       <% elsif controller_name == "wiki" %>
-        <%= render "wiki/navigation" %>
-        <section id="content" class="ml-72 w-auto h-full bg-gray-50 dark:bg-slate-900">
+        <%= render :partial => "wiki/navigation", :locals => {:wiki => @wiki} %>
+        <section id="content" class="ml-72 w-full flex flex-col h-full bg-gray-50 dark:bg-slate-900">
           <%= render "layouts/flash_messages" %>
           <%= yield %>
           <%= call_hook :view_layouts_base_content %>

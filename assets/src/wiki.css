@@ -1,0 +1,400 @@
+#wiki-navigation{
+  >ul.pages-hierarchy{
+    @apply space-y-1 font-light ;
+    /* a{
+      @apply flex items-center text-sm p-2 rounded-lg dark:text-white hover:bg-gray-50 dark:hover:bg-gray-700
+    }
+    a.selected{
+      @apply bg-gray-50 dark:bg-gray-900 text-sm dark:hover:bg-gray-800;
+    } */
+
+    >li{
+      >a{
+        @apply text-lg flex justify-center p-8 mb-4 rounded-lg dark:text-white hover:bg-gray-50 dark:hover:bg-gray-700;
+      }
+      >ul.pages-hierarchy{
+        @apply ml-0 text-sm flex flex-col justify-start px-4 w-full;
+        >li{
+          @apply w-full py-2 border-t border-gray-100;
+          >a{
+            @apply text-sm py-2 font-semibold flex w-full;
+          }
+          >ul.pages-hierarchy{
+            @apply ml-0 my-2 text-sm;
+            >li{
+              @apply w-full;
+              >a{
+                @apply w-full flex text-sm px-4 py-2 font-light border-l rounded-none border-gray-300  mx-0 dark:text-white hover:bg-gray-50 dark:hover:bg-gray-700;
+              }
+              >ul.pages-hierarchy{
+                @apply ml-4 my-2 text-sm;;
+                >li{
+                  @apply w-full;
+                  >a{
+                    @apply w-full flex text-sm px-4 py-1 font-light border-l rounded-none border-gray-300  mx-0 dark:text-white hover:bg-gray-50 dark:hover:bg-gray-700;
+                  }
+                }
+              }
+            }
+          }
+        }
+
+      }
+    }
+
+
+  }
+}
+
+p.breadcrumb{
+  @apply flex items-center;
+  a{
+    @apply px-4 font-normal text-xs text-gray-900;
+  }
+}
+
+.controller-wiki {
+  .wiki > .preview,
+  .wiki.wiki-preview {
+    font-size: 12px;
+  }
+}
+
+
+div.wiki {
+  @apply text-base leading-3;
+
+  h1, .h1,
+  h2, .h2,
+  h3, .h3,
+  h4, .h4,
+  h5, .h5,
+  h6, .h6 {
+    @apply my-3 font-light leading-4;
+  }
+
+  h1, .h1 {
+    @apply pb-6 border-b border-gray-100 text-lg leading-3 mb-8;
+  }
+
+  h2, .h2 {
+    padding-top: 10px;
+    padding-bottom: .6em;
+    border-bottom: 1px solid #ccc;
+    font-size: 20px;
+    line-height: 1.225;
+  }
+
+  h3, .h3 {
+    font-size: 18px;
+    line-height: 1.43;
+    padding-top: 5px;
+    padding-bottom: .3em;
+  }
+
+  h4, .h4 {
+    font-size: 16px;
+    padding-top: 5px;
+    padding-bottom: .3em;
+  }
+
+  h5, .h5 {
+    font-size: 14px;
+    padding-top: 5px;
+    padding-bottom: .3em;
+  }
+
+  h6, .h6 {
+    font-size: 12px;
+    padding-top: 5px;
+    padding-bottom: .3em;
+  }
+
+
+  a{
+    @apply text-blue-800;
+  }
+
+  > a:first-child {
+    + h1,
+    + h2,
+    + h3,
+    + h4,
+    + h5,
+    + h6 {
+      margin-top: 0;
+    }
+  }
+
+  > a:target {
+    + h2,
+    + h3,
+    + h4,
+    + h5,
+    + h6 {
+      &::before {
+        content: "#";
+        display: inline-block;
+        width: .7em;
+        margin-left: -.7em;
+      }
+    }
+  }
+
+  > :last-child {
+    margin-bottom: 0;
+  }
+
+  blockquote {
+    > :first-child {
+      margin-top: 0;
+    }
+
+    > :last-child {
+      margin-bottom: 0;
+    }
+  }
+
+
+  a {
+    word-break: break-all;
+    word-break: break-word;
+  }
+
+  p,
+  ul,
+  ol {
+    margin-bottom: 1em;
+  }
+
+  p{
+    @apply text-sm
+  }
+
+  ul,
+  ol {
+    padding-left: 1.5em;
+
+    ul,
+    ol {
+      margin-bottom: 0;
+    }
+  }
+
+
+
+  table {
+    display: block;
+    margin-bottom: 12px;
+    overflow: auto;
+    word-break: normal;
+    word-break: keep-all;
+    &.issues{
+      tr{
+        &.closed{
+          .id{
+            a{
+              position: relative;
+              text-decoration: none;
+              &::after {
+                content: "";
+                display: block;
+                position: absolute;
+                right: 5px;
+                bottom: 0;
+                left: 5px;
+                height: calc(50% - 2px / 2);
+                transform: rotate(-4deg);
+              }
+              &:hover::after {
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+
+
+  td,
+  th {
+    padding: 10px;
+    border: 1px solid #ccc;
+  }
+
+  .noborder,
+  .wiki-class-noborder {
+    border: 0 none;
+
+    td,
+    th {
+      border: 0 none;
+    }
+  }
+
+  a.new {
+    @apply text-red-600;
+  }
+
+  code {
+    @apply p-8 rounded bg-gray-950 text-gray-50 text-xs;
+  }
+
+  pre {
+    width: auto;
+    margin-bottom: 1.15em;
+    padding: 4px 8px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    border: 1px solid #ccc;
+
+
+    code {
+      padding: 0;
+      border-radius: 0;
+      background-color: transparent;
+      font-size: 1em;
+    }
+  }
+
+  img {
+    max-width: 100%;
+    vertical-align: middle;
+  }
+
+  .toc {
+    margin-left: 0;
+    padding: 0;
+    list-style-type: none;
+
+    &.right,
+    &.left {
+      max-width: 45%;
+      padding: 8px;
+
+
+      a {
+
+        text-decoration: none;
+
+        &:hover {
+           text-decoration: underline;
+        }
+      }
+    }
+
+    &.right {
+      margin-right: 0;
+      float: right;
+    }
+
+    &.left {
+      margin-left: 0;
+      float: left;
+    }
+
+    ul {
+      margin: 0;
+      padding: 0;
+
+      ul {
+        font-size: 1em;
+      }
+    }
+
+    li {
+      margin: 0;
+
+      li {
+        margin-left: 1.5em;
+        list-style-type: disc;
+
+        li {
+          list-style-type: circle;
+
+          li {
+            list-style-type: square;
+          }
+        }
+      }
+    }
+  }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  .wiki-anchor {
+    display: none;
+    position: relative;
+    top: -(1em - 12px);
+    margin-left: 5px;
+    font-size: 10px;
+    text-decoration: none !important;
+  }
+
+  &:hover {
+    .wiki-anchor {
+      display: inline;
+    }
+  }
+
+  img {
+    display: inline-block;
+    max-width: 100%;
+    vertical-align: middle;
+  }
+}
+
+p.footnote {
+  margin-bottom: 5px;
+
+  &::before {
+    content: "";
+    display: block;
+    width: 300px;
+    margin-top: 12px;
+    padding-top: math.div(12px, 2);
+  }
+
+  + p.footnote::before {
+    display: none;
+  }
+}
+
+.ltr,
+.wiki-class-ltr {
+  direction: ltr;
+}
+
+.rtl,
+.wiki-class-rtl {
+  direction: rtl;
+}
+
+
+
+#wiki_add_attachment {
+
+  > p {
+    margin-bottom: 0;
+    float: left;
+  }
+
+  > form {
+    clear: left;
+  }
+
+  .collapsible & {
+    padding-top: 0;
+    border-top: 0;
+
+    > form {
+      padding-top: 0;
+    }
+  }
+}
