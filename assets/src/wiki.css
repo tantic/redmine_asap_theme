@@ -62,7 +62,7 @@ p.breadcrumb{
 
 
 div.wiki {
-  @apply text-base leading-3;
+  @apply text-base;
 
   h1, .h1,
   h2, .h2,
@@ -70,19 +70,15 @@ div.wiki {
   h4, .h4,
   h5, .h5,
   h6, .h6 {
-    @apply my-3 font-light leading-4;
+    @apply my-3 font-light;
   }
 
   h1, .h1 {
-    @apply pb-6 border-b border-gray-100 text-lg leading-3 mb-8;
+    @apply pb-6 border-b border-gray-100 text-lg mb-8;
   }
 
   h2, .h2 {
-    padding-top: 10px;
-    padding-bottom: .6em;
-    border-bottom: 1px solid #ccc;
-    font-size: 20px;
-    line-height: 1.225;
+    @apply text-base my-6 pb-2 border-b border-gray-100;
   }
 
   h3, .h3 {
@@ -173,11 +169,9 @@ div.wiki {
 
   ul,
   ol {
-    padding-left: 1.5em;
+    @apply text-sm  max-w-md space-y-1 list-disc list-inside dark:text-gray-400;
+    li{
 
-    ul,
-    ol {
-      margin-bottom: 0;
     }
   }
 
@@ -215,6 +209,9 @@ div.wiki {
     }
   }
 
+  .wiki-edit{
+    @apply bg-white !important;
+  }
 
 
   td,
@@ -237,25 +234,15 @@ div.wiki {
     @apply text-red-600;
   }
 
-  code {
-    @apply p-8 rounded bg-gray-950 text-gray-50 text-xs;
+  .contextual{
+    @apply float-right;
+    a{
+      @apply text-sm
+    }
   }
 
   pre {
-    width: auto;
-    margin-bottom: 1.15em;
-    padding: 4px 8px;
-    overflow-x: auto;
-    overflow-y: hidden;
-    border: 1px solid #ccc;
-
-
-    code {
-      padding: 0;
-      border-radius: 0;
-      background-color: transparent;
-      font-size: 1em;
-    }
+    @apply p-6 my-4 rounded bg-slate-800 text-slate-100 text-xs
   }
 
   img {
@@ -294,32 +281,11 @@ div.wiki {
       float: left;
     }
 
-    ul {
-      margin: 0;
-      padding: 0;
-
-      ul {
-        font-size: 1em;
-      }
-    }
-
-    li {
-      margin: 0;
-
-      li {
-        margin-left: 1.5em;
-        list-style-type: disc;
-
-        li {
-          list-style-type: circle;
-
-          li {
-            list-style-type: square;
-          }
-        }
-      }
-    }
   }
+}
+
+.wiki-edit{
+  @apply bg-white !important;
 }
 
 h1,
@@ -333,7 +299,6 @@ h6 {
     position: relative;
     top: -(1em - 12px);
     margin-left: 5px;
-    font-size: 10px;
     text-decoration: none !important;
   }
 

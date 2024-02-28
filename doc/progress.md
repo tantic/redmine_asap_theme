@@ -152,3 +152,9 @@ Display a notification type alert for flash messages
 ![Issues](img/issues2.png)
 
 ![Issues](img/issues3.png)
+
+## Wiki page
+
+First start on the wiki page
+
+![Wiki](img/wiki.png)

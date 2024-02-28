@@ -61,8 +61,8 @@
 
 <%= render(:partial => "wiki/content", :locals => {:content => @content}) %>
 
-<fieldset class="collapsible collapsed hide-when-print">
-  <legend onclick="toggleFieldset(this);" class="icon icon-collapsed"><%= l(:label_attachment_plural) %> (<%= @page.attachments.length %>)</legend>
+<fieldset class="collapsible collapsed hide-when-print mx-8 my-4 bg-white p-8">
+  <legend onclick="toggleFieldset(this);" class="icon icon-collapsed cursor-pointer"><%= l(:label_attachment_plural) %> (<%= @page.attachments.length %>)</legend>
   <div style="display: none;">
 
   <%= link_to_attachments @page, :thumbnails => true %>
@@ -82,7 +82,7 @@
 </div>
 </fieldset>
 
-<p class="wiki-update-info">
+<p class="wiki-update-info text-gray-400 text-xs mx-8">
   <% if User.current.allowed_to?(:view_wiki_edits, @project) %>
     <%= wiki_content_update_info(@content) %>
     · <%= link_to l(:label_x_revisions, :count => @content.version), {:action => 'history', :id => @page.title} %>
@@ -92,12 +92,13 @@
   <% end %>
 </p>
 
+<div class="mx-8 text-gray-400 text-xs">
 <% other_formats_links do |f| %>
   <%= f.link_to 'PDF', :url => {:id => @page.title, :version => params[:version]} %>
   <%= f.link_to 'HTML', :url => {:id => @page.title, :version => params[:version]} %>
   <%= f.link_to 'TXT', :url => {:id => @page.title, :version => params[:version]} %>
 <% end if User.current.allowed_to?(:export_wiki_pages, @project) %>
-
+</div>
 <% content_for :sidebar do %>
   <%= render :partial => 'sidebar' %>
   <% if User.current.allowed_to?(:add_wiki_page_watchers, @project) ||

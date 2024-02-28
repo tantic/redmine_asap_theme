@@ -4124,7 +4124,7 @@ p.breadcrumb{
 
 div.wiki{
   font-size: 1rem;
-  line-height: .75rem;
+  line-height: 1.5rem;
   h1, .h1,
   h2, .h2,
   h3, .h3,
@@ -4141,14 +4141,6 @@ div.wiki{
   h5, .h5,
   h6, .h6{
     font-weight: 300;
-  }
-  h1, .h1,
-  h2, .h2,
-  h3, .h3,
-  h4, .h4,
-  h5, .h5,
-  h6, .h6{
-    line-height: 1rem;
   }
   h1, .h1{
     margin-bottom: 2rem;
@@ -4167,15 +4159,23 @@ div.wiki{
     font-size: 1.125rem;
     line-height: 1.75rem;
   }
-  h1, .h1{
-    line-height: .75rem;
+  h2, .h2{
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
   }
-  h2, .h2 {
-    padding-top: 10px;
-    padding-bottom: .6em;
-    border-bottom: 1px solid #ccc;
-    font-size: 20px;
-    line-height: 1.225;
+  h2, .h2{
+    border-bottom-width: 1px;
+  }
+  h2, .h2{
+    --tw-border-opacity: 1;
+    border-color: rgb(243 244 246 / var(--tw-border-opacity));
+  }
+  h2, .h2{
+    padding-bottom: 0.5rem;
+  }
+  h2, .h2{
+    font-size: 1rem;
+    line-height: 1.5rem;
   }
   h3, .h3 {
     font-size: 18px;
@@ -4251,11 +4251,38 @@ div.wiki{
     line-height: 1.25rem;
   }
   ul,
-  ol {
-    padding-left: 1.5em;
+  ol{
+    max-width: 28rem;
+  }
+  ul,
+  ol{
+    list-style-position: inside;
+  }
+  ul,
+  ol{
+    list-style-type: disc;
+  }
+  ul > :not([hidden]) ~ :not([hidden]),
+  ol > :not([hidden]) ~ :not([hidden]){
+    --tw-space-y-reverse: 0;
+    margin-top: calc(0.25rem * calc(1 - var(--tw-space-y-reverse)));
+    margin-bottom: calc(0.25rem * var(--tw-space-y-reverse));
+  }
+  ul,
+  ol{
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+  }
+  @media (prefers-color-scheme: dark){
     ul,
-    ol {
-      margin-bottom: 0;
+  ol{
+      --tw-text-opacity: 1;
+      color: rgb(156 163 175 / var(--tw-text-opacity));
+    }
+  }
+  ul,
+  ol {
+    li{
     }
   }
   table {
@@ -4289,6 +4316,10 @@ div.wiki{
       }
     }
   }
+  .wiki-edit{
+    --tw-bg-opacity: 1 !important;
+    background-color: rgb(255 255 255 / var(--tw-bg-opacity)) !important;
+  }
   td,
   th {
     padding: 10px;
@@ -4306,37 +4337,36 @@ div.wiki{
     --tw-text-opacity: 1;
     color: rgb(220 38 38 / var(--tw-text-opacity));
   }
-  code{
+  .contextual{
+    float: right;
+  }
+  .contextual{
+    a{
+      font-size: 0.875rem;
+      line-height: 1.25rem;
+    }
+  }
+  pre{
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+  pre{
     border-radius: 0.25rem;
   }
-  code{
+  pre{
     --tw-bg-opacity: 1;
-    background-color: rgb(3 7 18 / var(--tw-bg-opacity));
+    background-color: rgb(30 41 59 / var(--tw-bg-opacity));
   }
-  code{
-    padding: 2rem;
+  pre{
+    padding: 1.5rem;
   }
-  code{
+  pre{
     font-size: 0.75rem;
     line-height: 1rem;
   }
-  code{
+  pre{
     --tw-text-opacity: 1;
-    color: rgb(249 250 251 / var(--tw-text-opacity));
-  }
-  pre {
-    width: auto;
-    margin-bottom: 1.15em;
-    padding: 4px 8px;
-    overflow-x: auto;
-    overflow-y: hidden;
-    border: 1px solid #ccc;
-    code {
-      padding: 0;
-      border-radius: 0;
-      background-color: transparent;
-      font-size: 1em;
-    }
+    color: rgb(241 245 249 / var(--tw-text-opacity));
   }
   img {
     max-width: 100%;
@@ -4365,27 +4395,12 @@ div.wiki{
       margin-left: 0;
       float: left;
     }
-    ul {
-      margin: 0;
-      padding: 0;
-      ul {
-        font-size: 1em;
-      }
-    }
-    li {
-      margin: 0;
-      li {
-        margin-left: 1.5em;
-        list-style-type: disc;
-        li {
-          list-style-type: circle;
-          li {
-            list-style-type: square;
-          }
-        }
-      }
-    }
   }
+}
+
+.wiki-edit{
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity)) !important;
 }
 
 h1,
@@ -4399,7 +4414,6 @@ h6 {
     position: relative;
     top: -(1em - 12px);
     margin-left: 5px;
-    font-size: 10px;
     text-decoration: none !important;
   }
   &:hover {
