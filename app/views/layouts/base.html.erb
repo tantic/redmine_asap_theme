@@ -41,7 +41,7 @@
       <%= call_hook :view_layouts_base_body_top %>
 
       <% if controller_name == "issues" && action_name == "show" %>
-        <div data-controller="issue" class="flex bg-gray-50 dark:bg-slate-900 h-full">
+        <div data-controller="issue" class="w-full flex bg-gray-50 dark:bg-slate-900 h-full">
           <%= render "issues/sidebar" %>
           <section  data-issue-target="section" id="content" class="w-full bg-gray-50 dark:bg-slate-900 h-full flex ml-8 mr-80">
             <%= yield %>

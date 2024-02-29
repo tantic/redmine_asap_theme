@@ -5465,14 +5465,6 @@ select{
   top: 5rem;
 }
 
-.top-32{
-  top: 8rem;
-}
-
-.top-24{
-  top: 6rem;
-}
-
 .top-28{
   top: 7rem;
 }
@@ -6345,6 +6337,10 @@ select{
   padding-right: 1rem;
 }
 
+.pr-6{
+  padding-right: 1.5rem;
+}
+
 .ps-3{
   padding-inline-start: 0.75rem;
 }
@@ -6359,14 +6355,6 @@ select{
 
 .pt-4{
   padding-top: 1rem;
-}
-
-.pr-8{
-  padding-right: 2rem;
-}
-
-.pr-6{
-  padding-right: 1.5rem;
 }
 
 .text-left{
