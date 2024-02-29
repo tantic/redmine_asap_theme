@@ -1,7 +1,7 @@
 <div class="pb-16" data-controller="wiki">
-  <div class="contextual bg-white shadow flex mb-8 h-14">
+  <div class="contextual bg-white shadow grid grid-cols-3 gap-4 justify-items-start mb-8 h-14">
     <div class="pl-4 flex"><%= wiki_page_breadcrumb(@page) %></div>
-    <div class="ml-auto relative flex items-center pr-6">
+    <div class="relative flex justify-self-center items-center pr-6">
       <% if @editable %>
         <% if @content.current_version? %>
           <% if authorize_for('wiki', 'edit') %>
@@ -26,25 +26,42 @@
         </svg>
       </div>
 
+      <div  class="absolute flex flex-col shadow rounded-md border border-gray-50 top-14 bg-white z-50 w-60 hidden" data-wiki-target="actions">
+        <%#= watcher_link(@page, User.current) %>
+        <%
+          # TODO : put this in an helper
+          objects = Array.wrap(@page)
+        %>
+        <% if objects.any? %>
+          <%
+            watched = Watcher.any_watched?(objects, User.current)
+            text = watched ? l(:button_unwatch) : l(:button_watch)
+            url = watch_path(
+              :object_type => objects.first.class.to_s.underscore,
+              :object_id => (objects.size == 1 ? objects.first.id : objects.map(&:id).sort)
+            )
+            method = watched ? 'delete' : 'post'
+          %>
+          <%= link_to text, url,  :method => method, :class => 'flex items-center text-gray-900 hover:bg-gray-50 hover:border-l-2 hover:border-blue-800 hover:pl-3.5 px-4 py-2 text-sm' %>
+        <% end %>
+        <%= link_to_if_authorized(l(:label_history), {:action => 'history', :id => @page.title}, :class => 'icon icon-history flex items-center text-gray-900 hover:bg-gray-50 hover:border-l-2 hover:border-blue-800 hover:pl-3.5 px-4 py-2 text-sm') %>
 
-    </div>
-    <div  class="absolute flex flex-col right-0 shadow rounded-md border border-gray-50 top-28 bg-white z-50 w-60 hidden" data-wiki-target="actions">
-      <%= link_to_if_authorized(l(:label_history), {:action => 'history', :id => @page.title}, :class => 'icon icon-history flex items-center text-gray-900 hover:bg-gray-50 hover:border-l-2 hover:border-blue-800 hover:pl-3.5 px-4 py-2 text-sm') %>
+        <% if @editable %>
+          <% if @content.current_version? %>
+            <%= link_to_if_authorized(l(:button_lock), {:action => 'protect', :id => @page.title, :protected => 1}, :method => :post, :class => 'icon icon-lock flex items-center text-gray-900 hover:bg-gray-50 hover:border-l-2 hover:border-blue-800 hover:pl-3.5 px-4 py-2 text-sm') if !@page.protected? %>
+            <%= link_to_if_authorized(l(:button_unlock), {:action => 'protect', :id => @page.title, :protected => 0}, :method => :post, :class => 'icon icon-unlock flex items-center text-gray-900 hover:bg-gray-50 hover:border-l-2 hover:border-blue-800 hover:pl-3.5 px-4 py-2 text-sm') if @page.protected? %>
+            <%= link_to_if_authorized(l(:button_rename), {:action => 'rename', :id => @page.title}, :class => 'icon icon-move flex items-center text-gray-900 hover:bg-gray-50 hover:border-l-2 hover:border-blue-800 hover:pl-3.5 px-4 py-2 text-sm') %>
+            <%= link_to_if_authorized(l(:button_delete), {:action => 'destroy', :id => @page.title}, :method => :delete, :data => {:confirm => l(:text_are_you_sure)}, :class => 'icon icon-del flex items-center text-gray-900 hover:bg-gray-50 hover:border-l-2 hover:border-blue-800 hover:pl-3.5 px-4 py-2 text-sm') %>
+          <% else %>
+            <%= link_to_if_authorized(l(:button_rollback), {:action => 'edit', :id => @page.title, :version => @content.version }, :class => 'icon icon-cancel flex items-center text-gray-900 hover:bg-gray-50 hover:border-l-2 hover:border-blue-800 hover:pl-3.5 px-4 py-2 text-sm') %>
+          <% end %>
 
-      <% if @editable %>
-        <% if @content.current_version? %>
-          <%= link_to_if_authorized(l(:button_lock), {:action => 'protect', :id => @page.title, :protected => 1}, :method => :post, :class => 'icon icon-lock flex items-center text-gray-900 hover:bg-gray-50 hover:border-l-2 hover:border-blue-800 hover:pl-3.5 px-4 py-2 text-sm') if !@page.protected? %>
-          <%= link_to_if_authorized(l(:button_unlock), {:action => 'protect', :id => @page.title, :protected => 0}, :method => :post, :class => 'icon icon-unlock flex items-center text-gray-900 hover:bg-gray-50 hover:border-l-2 hover:border-blue-800 hover:pl-3.5 px-4 py-2 text-sm') if @page.protected? %>
-          <%= link_to_if_authorized(l(:button_rename), {:action => 'rename', :id => @page.title}, :class => 'icon icon-move flex items-center text-gray-900 hover:bg-gray-50 hover:border-l-2 hover:border-blue-800 hover:pl-3.5 px-4 py-2 text-sm') %>
-          <%= link_to_if_authorized(l(:button_delete), {:action => 'destroy', :id => @page.title}, :method => :delete, :data => {:confirm => l(:text_are_you_sure)}, :class => 'icon icon-del flex items-center text-gray-900 hover:bg-gray-50 hover:border-l-2 hover:border-blue-800 hover:pl-3.5 px-4 py-2 text-sm') %>
-        <% else %>
-          <%= link_to_if_authorized(l(:button_rollback), {:action => 'edit', :id => @page.title, :version => @content.version }, :class => 'icon icon-cancel flex items-center text-gray-900 hover:bg-gray-50 hover:border-l-2 hover:border-blue-800 hover:pl-3.5 px-4 py-2 text-sm') %>
+
         <% end %>
 
-        <%= watcher_link(@page, User.current) %>
-      <% end %>
-
+      </div>
     </div>
+
   </div>
 
 

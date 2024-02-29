@@ -162,3 +162,7 @@ First start on the wiki page with left navigation
 Second one with action bar and typography on the content
 
 ![Wiki](img/wiki2.png)
+
+With menu centered
+
+![Wiki](img/wiki3.png)
