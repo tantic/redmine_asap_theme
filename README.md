@@ -11,9 +11,7 @@ Here are some screenshots
 
 ![Login page](doc/img/login.png)
 
-![Welcome page](doc/img/Redmine-asap-theme_welcome-page.png)
-
-![Issues](img/issues2.png)
+![Issues](doc/img/issues_20240229.png)
 
 
 ## Documentation
