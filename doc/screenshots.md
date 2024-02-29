@@ -6,13 +6,13 @@
 
 ## Navigation
 
-![Three](img/three.png)
+![Three](img/navbar.png)
 
 ## Issues and views
 
 ### List
 
-![first-issues](img/first-issues.png)
+![first-issues](img/issues_20240229.png)
 
 ### Calendar
 
@@ -25,6 +25,11 @@
 ## Issue
 
 ![Issue](img/issue_20240118.png)
+
+## Wiki
+
+![Wiki](img/wiki3.png)
+
 
 ## User settings (ex my account)
 
