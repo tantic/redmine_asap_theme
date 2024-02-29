@@ -1,116 +1,136 @@
-<div class="contextual bg-white shadow flex mb-8">
-  <%= wiki_page_breadcrumb(@page) %>
-  <div class="ml-auto flex items-center">
-    <% if @editable %>
-      <% if @content.current_version? %>
-        <%= link_to_if_authorized(l(:button_edit), {:action => 'edit', :id => @page.title}, :class => 'icon icon-edit', :accesskey => accesskey(:edit)) %>
+<div class="pb-16" data-controller="wiki">
+  <div class="contextual bg-white shadow flex mb-8 h-14">
+    <div class="pl-4 flex"><%= wiki_page_breadcrumb(@page) %></div>
+    <div class="ml-auto relative flex items-center pr-6">
+      <% if @editable %>
+        <% if @content.current_version? %>
+          <% if authorize_for('wiki', 'edit') %>
+            <%= link_to edit_project_wiki_page_path(:id => @page.title), :class => 'icon icon-edit text-white flex bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm p-2 mr-3 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800', :accesskey => accesskey(:edit) do %>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+                <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L6.832 19.82a4.5 4.5 0 0 1-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 0 1 1.13-1.897L16.863 4.487Zm0 0L19.5 7.125" />
+              </svg>
+            <% end %>
+          <% end %>
+        <% end %>
+      <% end %>
+      <% if User.current.allowed_to?(:edit_wiki_pages, @project) %>
+        <%= link_to new_project_wiki_page_path(@project, :parent => @page.title), :remote => true, :class => 'icon icon-add p-2 rounded-full hover:bg-gray-100 text-gray-700 dark:text-gray-400 dark:hover:text-gray-300 dark:hover:bg-gray-700 hover:text-gray-800' do %>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+          </svg>
+        <% end %>
+      <% end %>
+      <div data-action="click->wiki#toggle" class="text-gray-900 cursor-pointer flex items-center justify-center bg-white  focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-full text-sm p-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5ZM12 12.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5ZM12 18.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5Z" />
+        </svg>
+      </div>
+
+
+    </div>
+    <div  class="absolute flex flex-col right-0 shadow rounded-md border border-gray-50 top-28 bg-white z-50 w-60 hidden" data-wiki-target="actions">
+      <%= link_to_if_authorized(l(:label_history), {:action => 'history', :id => @page.title}, :class => 'icon icon-history flex items-center text-gray-900 hover:bg-gray-50 hover:border-l-2 hover:border-blue-800 hover:pl-3.5 px-4 py-2 text-sm') %>
+
+      <% if @editable %>
+        <% if @content.current_version? %>
+          <%= link_to_if_authorized(l(:button_lock), {:action => 'protect', :id => @page.title, :protected => 1}, :method => :post, :class => 'icon icon-lock flex items-center text-gray-900 hover:bg-gray-50 hover:border-l-2 hover:border-blue-800 hover:pl-3.5 px-4 py-2 text-sm') if !@page.protected? %>
+          <%= link_to_if_authorized(l(:button_unlock), {:action => 'protect', :id => @page.title, :protected => 0}, :method => :post, :class => 'icon icon-unlock flex items-center text-gray-900 hover:bg-gray-50 hover:border-l-2 hover:border-blue-800 hover:pl-3.5 px-4 py-2 text-sm') if @page.protected? %>
+          <%= link_to_if_authorized(l(:button_rename), {:action => 'rename', :id => @page.title}, :class => 'icon icon-move flex items-center text-gray-900 hover:bg-gray-50 hover:border-l-2 hover:border-blue-800 hover:pl-3.5 px-4 py-2 text-sm') %>
+          <%= link_to_if_authorized(l(:button_delete), {:action => 'destroy', :id => @page.title}, :method => :delete, :data => {:confirm => l(:text_are_you_sure)}, :class => 'icon icon-del flex items-center text-gray-900 hover:bg-gray-50 hover:border-l-2 hover:border-blue-800 hover:pl-3.5 px-4 py-2 text-sm') %>
+        <% else %>
+          <%= link_to_if_authorized(l(:button_rollback), {:action => 'edit', :id => @page.title, :version => @content.version }, :class => 'icon icon-cancel flex items-center text-gray-900 hover:bg-gray-50 hover:border-l-2 hover:border-blue-800 hover:pl-3.5 px-4 py-2 text-sm') %>
+        <% end %>
+
         <%= watcher_link(@page, User.current) %>
       <% end %>
-    <% end %>
-    <%= actions_dropdown do %>
-    <%= link_to_if_authorized(l(:label_history), {:action => 'history', :id => @page.title}, :class => 'icon icon-history') %>
 
-    <% if @editable %>
-      <% if @content.current_version? %>
-        <%= link_to_if_authorized(l(:button_lock), {:action => 'protect', :id => @page.title, :protected => 1}, :method => :post, :class => 'icon icon-lock') if !@page.protected? %>
-        <%= link_to_if_authorized(l(:button_unlock), {:action => 'protect', :id => @page.title, :protected => 0}, :method => :post, :class => 'icon icon-unlock') if @page.protected? %>
-        <%= link_to_if_authorized(l(:button_rename), {:action => 'rename', :id => @page.title}, :class => 'icon icon-move') %>
-        <%= link_to_if_authorized(l(:button_delete), {:action => 'destroy', :id => @page.title}, :method => :delete, :data => {:confirm => l(:text_are_you_sure)}, :class => 'icon icon-del') %>
-      <% else %>
-        <%= link_to_if_authorized(l(:button_rollback), {:action => 'edit', :id => @page.title, :version => @content.version }, :class => 'icon icon-cancel') %>
-      <% end %>
-      <% end %>
-
-      <% if User.current.allowed_to?(:edit_wiki_pages, @project) %>
-        <%= link_to l(:label_wiki_page_new), new_project_wiki_page_path(@project, :parent => @page.title), :remote => true, :class => 'icon icon-add' %>
-      <% end %>
-    <% end %>
-  </div>
-</div>
-
-
-<% unless @content.current_version? %>
-  <%= title [@page.pretty_title, project_wiki_page_path(@page.project, @page.title, :version => nil)],
-        [l(:label_history), history_project_wiki_page_path(@page.project, @page.title)],
-        "#{l(:label_revision)} #{@content.version}" %>
-
-    <p>
-    <% if @content.previous %>
-      <%= link_to ("\xc2\xab " + l(:label_previous)),
-                :action => 'show', :id => @page.title, :project_id => @page.project,
-                :version => @content.previous.version %> |
-    <% end %>
-    <%= "#{l(:label_revision)} #{@content.version}/#{@page.content.version}" %>
-    <% if @content.previous %>
-      (<%= link_to l(:label_diff), :controller => 'wiki', :action => 'diff',
-                      :id => @page.title, :project_id => @page.project,
-                      :version => @content.version %>)
-    <% end %>
-    <% if @content.next %>
-      | <%= link_to (l(:label_next) + " \xc2\xbb"), :action => 'show',
-                :id => @page.title, :project_id => @page.project,
-                :version => @content.next.version %>
-    <% end %>
-    <br />
-    <em><%= @content.author ? link_to_user(@content.author) : l(:label_user_anonymous)
-         %>, <%= format_time(@content.updated_on) %> </em><br />
-    <%= @content.comments %>
-    </p>
-    <hr />
-<% end %>
-
-<%= render(:partial => "wiki/content", :locals => {:content => @content}) %>
-
-<fieldset class="collapsible collapsed hide-when-print mx-8 my-4 bg-white p-8">
-  <legend onclick="toggleFieldset(this);" class="icon icon-collapsed cursor-pointer"><%= l(:label_attachment_plural) %> (<%= @page.attachments.length %>)</legend>
-  <div style="display: none;">
-
-  <%= link_to_attachments @page, :thumbnails => true %>
-
-  <% if @editable && authorize_for('wiki', 'add_attachment') %>
-  <div id="wiki_add_attachment">
-    <%= form_tag({:controller => 'wiki', :action => 'add_attachment',
-                  :project_id => @project, :id => @page.title},
-                 :multipart => true, :id => "add_attachment_form") do %>
-      <div class="box">
-      <p><%= render :partial => 'attachments/form' %></p>
-      </div>
-      <%= submit_tag l(:button_add) %>
-    <% end %>
-  </div>
-  <% end %>
-</div>
-</fieldset>
-
-<p class="wiki-update-info text-gray-400 text-xs mx-8">
-  <% if User.current.allowed_to?(:view_wiki_edits, @project) %>
-    <%= wiki_content_update_info(@content) %>
-    · <%= link_to l(:label_x_revisions, :count => @content.version), {:action => 'history', :id => @page.title} %>
-  <% end %>
-  <% if @page.protected? %>
-    <span class="badge badge-status-locked"><%= l('status_locked') %></span>
-  <% end %>
-</p>
-
-<div class="mx-8 text-gray-400 text-xs">
-<% other_formats_links do |f| %>
-  <%= f.link_to 'PDF', :url => {:id => @page.title, :version => params[:version]} %>
-  <%= f.link_to 'HTML', :url => {:id => @page.title, :version => params[:version]} %>
-  <%= f.link_to 'TXT', :url => {:id => @page.title, :version => params[:version]} %>
-<% end if User.current.allowed_to?(:export_wiki_pages, @project) %>
-</div>
-<% content_for :sidebar do %>
-  <%= render :partial => 'sidebar' %>
-  <% if User.current.allowed_to?(:add_wiki_page_watchers, @project) ||
-    (@page.watchers.present? && User.current.allowed_to?(:view_wiki_page_watchers, @project)) %>
-    <div id="watchers">
-      <%= render :partial => 'watchers/watchers', :locals => {:watched => @page} %>
     </div>
+  </div>
+
+
+  <% unless @content.current_version? %>
+    <%= title [@page.pretty_title, project_wiki_page_path(@page.project, @page.title, :version => nil)],
+          [l(:label_history), history_project_wiki_page_path(@page.project, @page.title)],
+          "#{l(:label_revision)} #{@content.version}" %>
+
+      <p>
+      <% if @content.previous %>
+        <%= link_to ("\xc2\xab " + l(:label_previous)),
+                  :action => 'show', :id => @page.title, :project_id => @page.project,
+                  :version => @content.previous.version %> |
+      <% end %>
+      <%= "#{l(:label_revision)} #{@content.version}/#{@page.content.version}" %>
+      <% if @content.previous %>
+        (<%= link_to l(:label_diff), :controller => 'wiki', :action => 'diff',
+                        :id => @page.title, :project_id => @page.project,
+                        :version => @content.version %>)
+      <% end %>
+      <% if @content.next %>
+        | <%= link_to (l(:label_next) + " \xc2\xbb"), :action => 'show',
+                  :id => @page.title, :project_id => @page.project,
+                  :version => @content.next.version %>
+      <% end %>
+      <br />
+      <em><%= @content.author ? link_to_user(@content.author) : l(:label_user_anonymous)
+          %>, <%= format_time(@content.updated_on) %> </em><br />
+      <%= @content.comments %>
+      </p>
+      <hr />
   <% end %>
-<% end %>
 
-<% content_for :header_tags do %>
-  <%= robot_exclusion_tag unless @content.current_version? %>
-<% end %>
+  <%= render(:partial => "wiki/content", :locals => {:content => @content}) %>
 
-<% html_title @page.pretty_title %>
+  <fieldset class="collapsible collapsed hide-when-print mx-8 my-4 bg-white p-8">
+    <legend onclick="toggleFieldset(this);" class="icon icon-collapsed cursor-pointer"><%= l(:label_attachment_plural) %> (<%= @page.attachments.length %>)</legend>
+    <div style="display: none;">
+
+    <%= link_to_attachments @page, :thumbnails => true %>
+
+    <% if @editable && authorize_for('wiki', 'add_attachment') %>
+    <div id="wiki_add_attachment">
+      <%= form_tag({:controller => 'wiki', :action => 'add_attachment',
+                    :project_id => @project, :id => @page.title},
+                  :multipart => true, :id => "add_attachment_form") do %>
+        <div class="box">
+        <p><%= render :partial => 'attachments/form' %></p>
+        </div>
+        <%= submit_tag l(:button_add) %>
+      <% end %>
+    </div>
+    <% end %>
+  </div>
+  </fieldset>
+
+  <p class="wiki-update-info text-gray-400 text-xs mx-8">
+    <% if User.current.allowed_to?(:view_wiki_edits, @project) %>
+      <%= wiki_content_update_info(@content) %>
+      · <%= link_to l(:label_x_revisions, :count => @content.version), {:action => 'history', :id => @page.title} %>
+    <% end %>
+    <% if @page.protected? %>
+      <span class="badge badge-status-locked"><%= l('status_locked') %></span>
+    <% end %>
+  </p>
+
+  <div class="mx-8 text-gray-400 text-xs">
+  <% other_formats_links do |f| %>
+    <%= f.link_to 'PDF', :url => {:id => @page.title, :version => params[:version]} %>
+    <%= f.link_to 'HTML', :url => {:id => @page.title, :version => params[:version]} %>
+    <%= f.link_to 'TXT', :url => {:id => @page.title, :version => params[:version]} %>
+  <% end if User.current.allowed_to?(:export_wiki_pages, @project) %>
+  </div>
+  <% content_for :sidebar do %>
+    <%= render :partial => 'sidebar' %>
+    <% if User.current.allowed_to?(:add_wiki_page_watchers, @project) ||
+      (@page.watchers.present? && User.current.allowed_to?(:view_wiki_page_watchers, @project)) %>
+      <div id="watchers">
+        <%= render :partial => 'watchers/watchers', :locals => {:watched => @page} %>
+      </div>
+    <% end %>
+  <% end %>
+
+  <% content_for :header_tags do %>
+    <%= robot_exclusion_tag unless @content.current_version? %>
+  <% end %>
+
+  <% html_title @page.pretty_title %>
+</div>

@@ -49,7 +49,7 @@
 p.breadcrumb{
   @apply flex items-center;
   a{
-    @apply px-4 font-normal text-xs text-gray-900;
+    @apply px-4 font-normal text-sm text-gray-900;
   }
 }
 
@@ -74,36 +74,27 @@ div.wiki {
   }
 
   h1, .h1 {
-    @apply pb-6 border-b border-gray-100 text-lg mb-8;
+    @apply pb-6 border-b border-gray-200 text-lg mb-8 font-medium;
   }
 
   h2, .h2 {
-    @apply text-base my-6 pb-2 border-b border-gray-100;
+    @apply text-base my-8 pb-2 border-b border-gray-100 font-medium;
   }
 
   h3, .h3 {
-    font-size: 18px;
-    line-height: 1.43;
-    padding-top: 5px;
-    padding-bottom: .3em;
+    @apply text-sm mt-6 mb-2 pb-2  font-medium;
   }
 
   h4, .h4 {
-    font-size: 16px;
-    padding-top: 5px;
-    padding-bottom: .3em;
+    @apply text-sm mt-6 mb-2 pb-2  font-normal;
   }
 
   h5, .h5 {
-    font-size: 14px;
-    padding-top: 5px;
-    padding-bottom: .3em;
+    @apply text-sm my-2 pb-2  font-normal;
   }
 
   h6, .h6 {
-    font-size: 12px;
-    padding-top: 5px;
-    padding-bottom: .3em;
+    @apply text-sm my-2 pb-2  font-normal;
   }
 
 

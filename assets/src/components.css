@@ -419,6 +419,19 @@ tr.status-5{
 
 
 
-.modal{
-  @apply bg-white z-50;
+
+.ui-dialog{
+  @apply bg-white z-50 shadow-xl;
+  .ui-dialog-titlebar{
+    @apply flex w-full bg-blue-700 text-blue-50 p-4;
+    .ui-dialog-title{
+      @apply uppercase text-xs;
+    }
+    button{
+      @apply ml-auto hover:rounded-full hover:bg-blue-800;
+    }
+  }
+  .ui-dialog-content{
+    @apply p-8;
+  }
 }

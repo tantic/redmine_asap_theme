@@ -155,6 +155,10 @@ Display a notification type alert for flash messages
 
 ## Wiki page
 
-First start on the wiki page
+First start on the wiki page with left navigation
 
 ![Wiki](img/wiki.png)
+
+Second one with action bar and typography on the content
+
+![Wiki](img/wiki2.png)

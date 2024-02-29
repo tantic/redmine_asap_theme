@@ -3837,10 +3837,52 @@ tr.status-5{
   }
 }
 
-.modal{
+.ui-dialog{
   z-index: 50;
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+  --tw-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+  --tw-shadow-colored: 0 20px 25px -5px var(--tw-shadow-color), 0 8px 10px -6px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+  .ui-dialog-titlebar{
+    display: flex;
+  }
+  .ui-dialog-titlebar{
+    width: 100%;
+  }
+  .ui-dialog-titlebar{
+    --tw-bg-opacity: 1;
+    background-color: rgb(29 78 216 / var(--tw-bg-opacity));
+  }
+  .ui-dialog-titlebar{
+    padding: 1rem;
+  }
+  .ui-dialog-titlebar{
+    --tw-text-opacity: 1;
+    color: rgb(239 246 255 / var(--tw-text-opacity));
+  }
+  .ui-dialog-titlebar{
+    .ui-dialog-title{
+      font-size: 0.75rem;
+      line-height: 1rem;
+    }
+    .ui-dialog-title{
+      text-transform: uppercase;
+    }
+    button{
+      margin-left: auto;
+    }
+    button:hover{
+      border-radius: 9999px;
+    }
+    button:hover{
+      --tw-bg-opacity: 1;
+      background-color: rgb(30 64 175 / var(--tw-bg-opacity));
+    }
+  }
+  .ui-dialog-content{
+    padding: 2rem;
+  }
 }
 
 #wiki-navigation{
@@ -4103,8 +4145,8 @@ p.breadcrumb{
     padding-right: 1rem;
   }
   a{
-    font-size: 0.75rem;
-    line-height: 1rem;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
   }
   a{
     font-weight: 400;
@@ -4150,7 +4192,7 @@ div.wiki{
   }
   h1, .h1{
     --tw-border-opacity: 1;
-    border-color: rgb(243 244 246 / var(--tw-border-opacity));
+    border-color: rgb(229 231 235 / var(--tw-border-opacity));
   }
   h1, .h1{
     padding-bottom: 1.5rem;
@@ -4159,9 +4201,12 @@ div.wiki{
     font-size: 1.125rem;
     line-height: 1.75rem;
   }
+  h1, .h1{
+    font-weight: 500;
+  }
   h2, .h2{
-    margin-top: 1.5rem;
-    margin-bottom: 1.5rem;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
   }
   h2, .h2{
     border-bottom-width: 1px;
@@ -4177,26 +4222,68 @@ div.wiki{
     font-size: 1rem;
     line-height: 1.5rem;
   }
-  h3, .h3 {
-    font-size: 18px;
-    line-height: 1.43;
-    padding-top: 5px;
-    padding-bottom: .3em;
+  h2, .h2{
+    font-weight: 500;
   }
-  h4, .h4 {
-    font-size: 16px;
-    padding-top: 5px;
-    padding-bottom: .3em;
+  h3, .h3{
+    margin-top: 1.5rem;
   }
-  h5, .h5 {
-    font-size: 14px;
-    padding-top: 5px;
-    padding-bottom: .3em;
+  h3, .h3{
+    margin-bottom: 0.5rem;
   }
-  h6, .h6 {
-    font-size: 12px;
-    padding-top: 5px;
-    padding-bottom: .3em;
+  h3, .h3{
+    padding-bottom: 0.5rem;
+  }
+  h3, .h3{
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+  }
+  h3, .h3{
+    font-weight: 500;
+  }
+  h4, .h4{
+    margin-top: 1.5rem;
+  }
+  h4, .h4{
+    margin-bottom: 0.5rem;
+  }
+  h4, .h4{
+    padding-bottom: 0.5rem;
+  }
+  h4, .h4{
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+  }
+  h4, .h4{
+    font-weight: 400;
+  }
+  h5, .h5{
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+  h5, .h5{
+    padding-bottom: 0.5rem;
+  }
+  h5, .h5{
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+  }
+  h5, .h5{
+    font-weight: 400;
+  }
+  h6, .h6{
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+  h6, .h6{
+    padding-bottom: 0.5rem;
+  }
+  h6, .h6{
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+  }
+  h6, .h6{
+    font-weight: 400;
   }
   a{
     --tw-text-opacity: 1;
@@ -5378,6 +5465,18 @@ select{
   top: 5rem;
 }
 
+.top-32{
+  top: 8rem;
+}
+
+.top-24{
+  top: 6rem;
+}
+
+.top-28{
+  top: 7rem;
+}
+
 .z-10{
   z-index: 10;
 }
@@ -5645,6 +5744,10 @@ select{
   height: 80%;
 }
 
+.h-40{
+  height: 10rem;
+}
+
 .h-48{
   height: 12rem;
 }
@@ -5834,6 +5937,10 @@ select{
 
 .flex-col{
   flex-direction: column;
+}
+
+.flex-wrap{
+  flex-wrap: wrap;
 }
 
 .flex-nowrap{
@@ -6218,6 +6325,10 @@ select{
   padding-bottom: 2rem;
 }
 
+.pb-16{
+  padding-bottom: 4rem;
+}
+
 .pb-32{
   padding-bottom: 8rem;
 }
@@ -6250,12 +6361,24 @@ select{
   padding-top: 1rem;
 }
 
+.pr-8{
+  padding-right: 2rem;
+}
+
+.pr-6{
+  padding-right: 1.5rem;
+}
+
 .text-left{
   text-align: left;
 }
 
 .text-center{
   text-align: center;
+}
+
+.text-right{
+  text-align: right;
 }
 
 .align-top{
@@ -6503,6 +6626,10 @@ select{
 
 .duration-300{
   transition-duration: 300ms;
+}
+
+.duration-500{
+  transition-duration: 500ms;
 }
 
 .duration-75{
@@ -7017,6 +7144,10 @@ select{
     display: flex;
   }
 
+  .sm\:w-20{
+    width: 5rem;
+  }
+
   .sm\:translate-x-0{
     --tw-translate-x: 0px;
     transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
@@ -7164,12 +7295,21 @@ select{
     width: 60%;
   }
 
+  .xl\:w-40{
+    width: 10rem;
+  }
+
   .xl\:grid-cols-3{
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
   .xl\:grid-cols-6{
     grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+
+  .xl\:text-sm{
+    font-size: 0.875rem;
+    line-height: 1.25rem;
   }
 }
 
