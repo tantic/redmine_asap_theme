@@ -1,12 +1,14 @@
-<ol id="activity" class="relative border-s border-gray-200 dark:border-gray-700">
+<ol id="activity" class="relative w-full h-full border-s border-gray-200 dark:border-gray-700">
   <% events_by_day.keys.sort.reverse_each do |day| %>
     <h3 class="my-4 text-xs font-medium ml-6"><%= format_activity_day(day) %></h3>
-    <li class="mb-10 ms-6">
+
     <% sort_activity_events(events_by_day[day]).each do |e, in_group| -%>
-      <span class="absolute flex items-center justify-center w-6 h-6 bg-blue-100 rounded-full -start-3 ring-8 ring-white dark:ring-gray-900 dark:bg-blue-900">
+    <li class="mb-6 ms-6">
+      <span class="absolute flex items-center justify-center w-6 h-6 bg-blue-100 rounded-full -start-3 mt-4 ring-8 ring-white dark:ring-gray-900 dark:bg-blue-900">
         <% if e.respond_to?(:event_author) %>
         <div class="rounded-full shadow-lg">
-          <%= avatar(e.event_author) %></div>
+          <%= avatar(e.event_author) %>
+        </div>
         <% end %>
       </span>
       <div class="w-full items-start mb-4 p-4 bg-white border border-gray-200 rounded-lg shadow-sm sm:flex dark:bg-gray-700 dark:border-gray-600">
@@ -18,7 +20,7 @@
         <div class="flex flex-col w-full">
           <div class="flex">
             <div class="flex">
-              <span class="author mr-3"><%= link_to_user(e.event_author) if e.respond_to?(:event_author) %></span>
+              <span class="author mr-3 font-medium"><%= link_to_user(e.event_author) if e.respond_to?(:event_author) %></span>
             </div>
             <time class="ml-auto  text-xs font-normal text-gray-400 sm:order-last sm:mb-0"><%= format_time(e.event_datetime, false) %></time>
           </div>
@@ -37,8 +39,9 @@
           </div>
         </div>
       </div>
-    <% end -%>
     </li>
+    <% end -%>
+
   <% end -%>
 </ol>
 

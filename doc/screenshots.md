@@ -30,6 +30,10 @@
 
 ![Wiki](img/wiki3.png)
 
+## Activities
+
+![Activities](img/activities.png)
+
 
 ## User settings (ex my account)
 

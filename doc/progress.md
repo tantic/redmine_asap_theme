@@ -166,3 +166,7 @@ Second one with action bar and typography on the content
 With menu centered
 
 ![Wiki](img/wiki3.png)
+
+## Activities page
+
+![Activities](img/activities.png)

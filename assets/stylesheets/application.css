@@ -5465,6 +5465,14 @@ select{
   top: 5rem;
 }
 
+.start-3{
+  inset-inline-start: 0.75rem;
+}
+
+.top-4{
+  top: 1rem;
+}
+
 .z-10{
   z-index: 10;
 }
@@ -5775,6 +5783,18 @@ select{
 
 .h-screen{
   height: 100vh;
+}
+
+.h-\[calc\(100vh-5rem\)\]{
+  height: calc(100vh - 5rem);
+}
+
+.h-\[calc\(100vh-300px\)\]{
+  height: calc(100vh - 300px);
+}
+
+.h-\[calc\(100vh-200px\)\]{
+  height: calc(100vh - 200px);
 }
 
 .max-h-full{
