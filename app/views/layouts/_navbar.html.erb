@@ -131,12 +131,12 @@
             <div data-action="click->application#showSettings click->usermenu#hide" class="cursor-pointer flex items-center text-gray-900 hover:bg-gray-50 hover:border-l-2 hover:border-blue-800 hover:pl-3.5 px-4 py-2 text-sm">
                 <%= l(:label_settings_menu) %>
             </div>
-            <hr class="border-t border-l-0 border-r-0 border-b-0 border-solid border-gray-100 my-0.5" />
+            <hr class="border-t border-l-0 border-r-0 border-b-0 border-solid border-gray-100" />
             <div data-action="click->application#showModal click->usermenu#hide" class="cursor-pointer flex items-center text-gray-900 hover:bg-gray-50 hover:border-l-2 hover:border-blue-800 hover:pl-3.5 px-4 py-2 text-sm">
                 <%= l(:label_about) %>
             </div>
-            <hr class="border-t border-l-0 border-r-0 border-b-0 border-solid border-gray-100 my-0.5" />
-            <%= button_to signout_path, method: :post, data: {turbo: false}, :class => "flex items-center text-gray-900 hover:bg-gray-50 hover:border-l-2 hover:border-blue-800 hover:pl-3.5 px-4 py-2 text-sm" do %>
+            <hr class="border-t border-l-0 border-r-0 border-b-0 border-solid border-gray-100" />
+            <%= button_to signout_path, method: :post, data: {turbo: false}, :class => "flex w-full items-center text-gray-900 hover:bg-gray-50 hover:border-l-2 hover:border-blue-800 hover:pl-3.5 px-4 py-2 text-sm" do %>
                 <%= l(:label_logout) %>
             <% end %>
           </div>

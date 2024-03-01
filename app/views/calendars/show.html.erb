@@ -4,8 +4,8 @@
 <%= hidden_field_tag 'set_filter', '1' %>
 <%= hidden_field_tag 'calendar', '1' %>
 
-<div data-controller="query" id="query_form_with_buttons" class="hide-when-print">
-  <div class="buttons flex items-center bg-white dark:bg-gray-800 w-full shadow p-4 text-sm mb-4">
+<div data-controller="query" id="query_form_with_buttons" class="hide-when-print bg-white dark:bg-gray-800 w-full shadow">
+  <div class="buttons flex items-center  px-4 py-2 text-sm mb-4 container mx-auto">
     <div class="flex items-center">
       <%= link_to_previous_month(@year, @month, :accesskey => accesskey(:previous), class:"mr-2 text-gray-600  bg-gray-100 hover:bg-gray-200 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-xs px-5 py-2 dark:bg-gray-600 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800") %>
       <%= link_to_next_month(@year, @month, :accesskey => accesskey(:next), class:"mr-2 text-gray-600 bg-gray-100 hover:bg-gray-200 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-xs px-5 py-2 dark:bg-gray-600 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800") %>

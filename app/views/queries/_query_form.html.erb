@@ -5,7 +5,7 @@
 <div id="query_form_with_buttons" class="hide-when-print">
   <div id="query_form_content">
 
-    <fieldset id="filters" data-queries-target="filters" class="hidden collapsible <%= @query.new_record? ? "" : "collapsed" %>">
+    <fieldset id="filters" data-queries-target="filters" class="hidden collapsible bg-white <%= @query.new_record? ? "" : "collapsed" %>">
       <legend onclick="toggleFieldset(this);" class="icon cursor-pointer hover:bg-gray-300 icon-<%= @query.new_record? ? "expanded" : "collapsed" %>"><%= l(:label_filter_plural) %></legend>
       <div style="<%= @query.new_record? ? "" : "display: none;" %>">
         <%= render :partial => 'queries/filters', :locals => {:query => @query} %>
@@ -16,7 +16,7 @@
     </fieldset>
 
     <% if @query.available_columns.any? %>
-      <fieldset id="options"  data-queries-target="options" class="collapsible hidden collapsed">
+      <fieldset id="options"  data-queries-target="options" class="collapsible hidden collapsed bg-white">
         <legend onclick="toggleFieldset(this);" class="icon icon-collapsed  cursor-pointer hover:bg-gray-300"><%= l(:label_options) %></legend>
           <div class="flex">
             <% if @query.available_display_types.size > 1 %>
