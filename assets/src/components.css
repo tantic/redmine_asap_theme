@@ -435,3 +435,7 @@ tr.status-5{
     @apply p-8;
   }
 }
+
+#context-menu{
+  z-index:50 !important;
+}

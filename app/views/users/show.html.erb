@@ -23,8 +23,8 @@
     </div>
   </div>
 
-  <div class="splitcontent flex w-full my-8">
-    <div class="splitcontentleft w-1/2 mr-4">
+  <div class="splitcontent flex flex-col sm:flex-row w-full my-8">
+    <div class="splitcontentleft w-full sm:w-1/2 mr-0 sm:mr-4">
 
       <h3 class="uppercase text-gray-500 my-4"><%=l(:label_issue_plural)%></h3>
       <table class="list issue-report w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
@@ -114,27 +114,27 @@
       <% end %>
 
       <%= call_hook :view_account_left_bottom, :user => @user %>
-</div>
+    </div>
 
-<div class="splitcontentright w-1/2 ml-4">
+  <div class="splitcontentright w-full sm:w-1/2 ml-0 sm:ml-4">
 
-  <% unless @events_by_day.empty? %>
-  <h3 class="uppercase text-gray-500 my-4"><%= link_to l(:label_activity), :controller => 'activities',
-                :action => 'index', :id => nil, :user_id => @user,
-                :from => @events_by_day.keys.first %></h3>
+    <% unless @events_by_day.empty? %>
+      <h3 class="uppercase text-gray-500 my-4"><%= link_to l(:label_activity), :controller => 'activities',
+                  :action => 'index', :id => nil, :user_id => @user,
+                  :from => @events_by_day.keys.first %></h3>
 
-  <%= render :partial => 'activities/activities', :locals => {:events_by_day => @events_by_day} %>
+      <%= render :partial => 'activities/activities', :locals => {:events_by_day => @events_by_day} %>
 
-  <% other_formats_links do |f| %>
-    <%= f.link_to 'Atom', :url => {:controller => 'activities', :action => 'index', :id => nil, :user_id => @user, :key => User.current.atom_key} %>
-  <% end %>
+      <% other_formats_links do |f| %>
+        <%= f.link_to 'Atom', :url => {:controller => 'activities', :action => 'index', :id => nil, :user_id => @user, :key => User.current.atom_key} %>
+      <% end %>
 
-  <% content_for :header_tags do %>
-    <%= auto_discovery_link_tag(:atom, :controller => 'activities', :action => 'index', :user_id => @user, :format => :atom, :key => User.current.atom_key) %>
-  <% end %>
-<% end %>
-<%= call_hook :view_account_right_bottom, :user => @user %>
-</div>
+      <% content_for :header_tags do %>
+        <%= auto_discovery_link_tag(:atom, :controller => 'activities', :action => 'index', :user_id => @user, :format => :atom, :key => User.current.atom_key) %>
+      <% end %>
+    <% end %>
+    <%= call_hook :view_account_right_bottom, :user => @user %>
+  </div>
 </div>
 <% html_title @user.name %>
 </div>

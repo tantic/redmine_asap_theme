@@ -9,7 +9,7 @@
     <%= render_project_jump_box %>
     <% if @project && @project.id %>
       <% if @project.children.any? %>
-      <div data-controller="projectmenu" class="h-full relative flex items-center justify-center">
+      <div data-controller="projectmenu" class="h-full relative hidden sm:flex items-center justify-center">
         <div data-action="click->projectmenu#toggleSubprojects" class="cursor-pointer ml-1 p-2 rounded-full hover:bg-gray-100 text-gray-700 dark:text-gray-400 dark:hover:text-gray-300 dark:hover:bg-gray-700 hover:text-gray-800">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-gray-800 transition duration-75 dark:text-gray-400 hover:text-gray-900 dark:group-hover:text-white">
             <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
@@ -25,10 +25,10 @@
         </div>
       </div>
       <% end %>
-      <div class="contextual w-10 h-full relative flex items-center justify-center">
+      <div class="contextual w-10 h-full relative hidden sm:flex items-center justify-center">
         <%= bookmark_link @project %>
       </div>
-      <div class="contextual w-10 h-full relative flex items-center justify-center">
+      <div class="contextual w-10 h-full relative hidden sm:flex items-center justify-center">
         <% if controller_name == 'projects' && action_name == 'show' %>
         <% selected = 'bg-gray-100'  %>
         <% else %>
@@ -56,7 +56,7 @@
             <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM12.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM18.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
           </svg>
         </div>
-        <div id="project-menu-submenus" class="absolute left-20 shadow rounded-md border border-gray-50 mt bg-white z-50 w-60 top-14 hidden" data-projectmenu-target="projectsubmenu">
+        <div id="project-menu-submenus" class="absolute right-0 sm:left-20 shadow rounded-md border border-gray-50 mt bg-white z-50 w-60 top-14 hidden" data-projectmenu-target="projectsubmenu">
           <%= render_main_menu(@project) %>
           <% if @project && @project.id %>
             <div class="flex flex-col border-t border-gray-1">
@@ -82,7 +82,7 @@
 
       </div>
     <% end %>
-    <div class="ml-auto flex">
+    <div class="ml-auto flex fixed bg-white shadow-xl sm:shadow-none w-full sm:w-auto justify-center sm:relative bottom-0">
       <div data-controller="usermenu" class="flex text-sm relative items-center justify-center">
         <div id="quick-search" class="hidden" data-usermenu-target="search">
           <%= form_tag({:controller => 'search', :action => 'index', :id => @project}, :method => :get ) do %>
@@ -107,7 +107,7 @@
               <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12a7.5 7.5 0 0 0 15 0m-15 0a7.5 7.5 0 1 1 15 0m-15 0H3m16.5 0H21m-1.5 0H12m-8.457 3.077 1.41-.513m14.095-5.13 1.41-.513M5.106 17.785l1.15-.964m11.49-9.642 1.149-.964M7.501 19.795l.75-1.3m7.5-12.99.75-1.3m-6.063 16.658.26-1.477m2.605-14.772.26-1.477m0 17.726-.26-1.477M10.698 4.614l-.26-1.477M16.5 19.794l-.75-1.299M7.5 4.205 12 12m6.894 5.785-1.149-.964M6.256 7.178l-1.15-.964m15.352 8.864-1.41-.513M4.954 9.435l-1.41-.514M12.002 12l-3.75 6.495" />
             </svg>
           </div>
-          <div id="admin-menu" class="absolute right-10 shadow rounded-md border border-gray-50 mt bg-white z-50 w-60 top-14 hidden" data-usermenu-target="adminsubmenu">
+          <div id="admin-menu" class="absolute sm:right-10  overflow-y-auto shadow rounded-md border border-gray-50 mt bg-white z-50 w-60 bottom-14 sm:bottom-auto sm:top-14 hidden" data-usermenu-target="adminsubmenu">
             <%= render_menu :admin_menu %>
           </div>
         <% end %>
@@ -120,7 +120,7 @@
             </span>
           </div>
         </div>
-        <div class="absolute right-0 shadow rounded-md border border-gray-50 mt bg-white z-50 w-60 top-14 hidden" data-usermenu-target="usersubmenu">
+        <div class="absolute right-0 shadow rounded-md border border-gray-50 mt bg-white z-50 w-60 bottom-14 sm:bottom-auto sm:top-14 hidden" data-usermenu-target="usersubmenu">
           <div class="p-4 font-normal">
             <%= User.current %>
           </div>

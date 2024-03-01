@@ -5,7 +5,7 @@
 
 
     <div data-controller="sidebar" class="ml-auto">
-      <div data-action="click->sidebar#toggle" class="text-gray-900 mr-3 cursor-pointer flex items-center justify-center bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-full text-sm p-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">
+      <div data-action="click->sidebar#toggle" class="text-gray-900 mr-3 cursor-pointer flex items-center justify-center bg-white focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-full text-sm p-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
           <path stroke-linecap="round" stroke-linejoin="round" d="M6.429 9.75 2.25 12l4.179 2.25m0-4.5 5.571 3 5.571-3m-11.142 0L2.25 7.5 12 2.25l9.75 5.25-4.179 2.25m0 0L21.75 12l-4.179 2.25m0 0 4.179 2.25L12 21.75 2.25 16.5l4.179-2.25m11.142 0-5.571 3-5.571-3" />
         </svg>
@@ -17,7 +17,7 @@
   </div>
 </div>
 
-<div class="flex container mx-auto h-[calc(100vh-200px)] overflow-y-auto bg-white dark:bg-gray-800 w-full shadow p-4 text-sm mb-4">
+<div class="flex container mx-auto h-[calc(100vh-200px)] overflow-y-auto bg-white dark:bg-gray-800 w-full shadow p-8 text-sm mb-4">
 <%= render :partial => 'activities/activities', :locals => {:events_by_day => @events_by_day} %>
 <%= content_tag('p', l(:label_no_data), :class => 'nodata') if @events_by_day.empty? %>
 </div>

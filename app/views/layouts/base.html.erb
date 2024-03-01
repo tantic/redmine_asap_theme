@@ -50,8 +50,7 @@
           </section>
         </div>
       <% elsif controller_name == "wiki" %>
-        <%= render :partial => "wiki/navigation", :locals => {:wiki => @wiki} %>
-        <section id="content" class="ml-72 w-full flex flex-col h-full bg-gray-50 dark:bg-slate-900">
+        <section id="content" class="w-full flex flex-col h-full bg-gray-50 dark:bg-slate-900">
           <%= render "layouts/flash_messages" %>
           <%= yield %>
           <%= call_hook :view_layouts_base_content %>

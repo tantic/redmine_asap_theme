@@ -1,22 +1,17 @@
 (() => {
   const application = Stimulus.Application.start()
 
-  application.register("wiki", class extends Stimulus.Controller {
+  application.register("contextual", class extends Stimulus.Controller {
 
     static get targets() {
-      return [ "actions", "navigation" ]
+      return [ "actions" ]
     }
 
     connect() {}
 
-    toggle(event){
+    toggleActions(event){
       this.actionsTarget.classList.toggle('hidden');
       this.dismissOnClick(this.actionsTarget);
-    }
-
-    toggleNavigation(event){
-      this.navigationTarget.classList.toggle('hidden');
-      this.dismissOnClick(this.navigationTarget);
     }
 
     dismissOnClick(element) {
