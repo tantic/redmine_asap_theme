@@ -13,7 +13,7 @@
         <%= textilizable Setting.welcome_text %>
       </div>
     </div>
-    <%= form_tag(signin_path, onsubmit: 'return keepAnchorOnSignIn(this);', class:"w-full md:w-3/5 flex flex-col px-12 py-8 md:py-24") do %>
+    <%= form_tag(signin_path, onsubmit: 'return keepAnchorOnSignIn(this);', data: {turbo: false}, class:"w-full md:w-3/5 flex flex-col px-12 py-8 md:py-24") do %>
       <%= back_url_hidden_field_tag %>
 
       <div class="mb-6">

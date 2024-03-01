@@ -3886,6 +3886,10 @@ tr.status-5{
 }
 
 #wiki-navigation{
+  overflow-y: auto;
+  >ul.pages-hierarchy{
+    margin-bottom: 9rem;
+  }
   >ul.pages-hierarchy > :not([hidden]) ~ :not([hidden]){
     --tw-space-y-reverse: 0;
     margin-top: calc(0.25rem * calc(1 - var(--tw-space-y-reverse)));
@@ -3903,23 +3907,26 @@ tr.status-5{
     } */
     >li{
       >a{
-        margin-bottom: 1rem;
-      }
-      >a{
         display: flex;
       }
       >a{
-        justify-content: center;
+        justify-content: flex-start;
       }
       >a{
         border-radius: 0.5rem;
       }
       >a{
-        padding: 2rem;
+        padding: 1rem;
       }
       >a{
-        font-size: 1.125rem;
-        line-height: 1.75rem;
+        font-size: 0.875rem;
+        line-height: 1.25rem;
+      }
+      >a{
+        font-weight: 200;
+      }
+      >a{
+        text-transform: uppercase;
       }
       >a:hover{
         --tw-bg-opacity: 1;
@@ -3953,10 +3960,6 @@ tr.status-5{
         justify-content: flex-start;
       }
       >ul.pages-hierarchy{
-        padding-left: 1rem;
-        padding-right: 1rem;
-      }
-      >ul.pages-hierarchy{
         font-size: 0.875rem;
         line-height: 1.25rem;
       }
@@ -3974,6 +3977,20 @@ tr.status-5{
         >li{
           padding-top: 0.5rem;
           padding-bottom: 0.5rem;
+        }
+        >li{
+          padding-left: 1rem;
+          padding-right: 1rem;
+        }
+        >li:hover{
+          --tw-bg-opacity: 1;
+          background-color: rgb(249 250 251 / var(--tw-bg-opacity));
+        }
+        @media (prefers-color-scheme: dark){
+          >li:hover{
+            --tw-bg-opacity: 1;
+            background-color: rgb(55 65 81 / var(--tw-bg-opacity));
+          }
         }
         >li{
           >a{
@@ -4046,7 +4063,7 @@ tr.status-5{
               }
               >a:hover{
                 --tw-bg-opacity: 1;
-                background-color: rgb(249 250 251 / var(--tw-bg-opacity));
+                background-color: rgb(243 244 246 / var(--tw-bg-opacity));
               }
               @media (prefers-color-scheme: dark){
                 >a{
@@ -4113,7 +4130,7 @@ tr.status-5{
                   }
                   >a:hover{
                     --tw-bg-opacity: 1;
-                    background-color: rgb(249 250 251 / var(--tw-bg-opacity));
+                    background-color: rgb(243 244 246 / var(--tw-bg-opacity));
                   }
                   @media (prefers-color-scheme: dark){
                     >a{
@@ -5465,14 +5482,6 @@ select{
   top: 5rem;
 }
 
-.start-3{
-  inset-inline-start: 0.75rem;
-}
-
-.top-4{
-  top: 1rem;
-}
-
 .z-10{
   z-index: 10;
 }
@@ -5760,6 +5769,10 @@ select{
   height: 2rem;
 }
 
+.h-\[calc\(100vh-200px\)\]{
+  height: calc(100vh - 200px);
+}
+
 .h-\[calc\(100vh-3\.5rem\)\]{
   height: calc(100vh - 3.5rem);
 }
@@ -5783,18 +5796,6 @@ select{
 
 .h-screen{
   height: 100vh;
-}
-
-.h-\[calc\(100vh-5rem\)\]{
-  height: calc(100vh - 5rem);
-}
-
-.h-\[calc\(100vh-300px\)\]{
-  height: calc(100vh - 300px);
-}
-
-.h-\[calc\(100vh-200px\)\]{
-  height: calc(100vh - 200px);
 }
 
 .max-h-full{
