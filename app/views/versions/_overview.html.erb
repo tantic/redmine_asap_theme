@@ -22,7 +22,7 @@
                       version_filtered_issues_path(version, :status_id => 'o')) %>)
       </p>
   <% else %>
-      <p class="progress-info bg-gray-50 rounded p-4 flex items-center justify-center text-gray-500 text-xs"><%= l(:label_roadmap_no_issues) %></p>
+      <p class="progress-info bg-gray-50 dark:bg-gray-700 dark:text-gray-300 rounded p-4 flex items-center justify-center text-gray-500 text-xs"><%= l(:label_roadmap_no_issues) %></p>
   <% end %>
 
   <% if version.completed? %>

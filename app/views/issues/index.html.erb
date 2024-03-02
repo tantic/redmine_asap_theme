@@ -1,5 +1,5 @@
 <div data-controller="queries">
-  <div class="w-full flex bg-white shadow rounded">
+  <div class="w-full flex bg-white dark:bg-slate-700 shadow rounded">
     <div class="relative container mx-auto  w-full flex  px-4 py-2">
       <div class="flex flex-1 justify-center">
         <% if User.current.allowed_to?(:add_issues, @project, :global => true) && (@project.nil? || Issue.allowed_target_trackers(@project).any?) %>
@@ -75,7 +75,7 @@
   <div class="my-8 container mx-auto bg-white shadow rounded p-4">
     <%= render :partial => 'issues/list', :locals => {:issues => @issues, :query => @query} %>
   </div>
-  <span class="pagination flex items-center justify-center w-full my-4 text-gray-500 font-medium"><%= pagination_links_full @issue_pages, @issue_count %></span>
+  <span class="pagination"><%= pagination_links_full @issue_pages, @issue_count %></span>
   <% end %>
 
   <% other_formats_links do |f| %>

@@ -1,6 +1,6 @@
-<div class="bg-white shadow rounded">
+<div class="bg-white dark:bg-slate-700 shadow rounded">
   <div data-controller="contextual" class="contextual px-4 sm:px-0 container mx-auto  py-2 grid grid-cols-3 justify-items-stretch gap-0 w-full">
-    <h2 class="uppercase text-gray-600 flex items-center"><%=l(:label_news_plural)%></h2>
+    <h2 class="uppercase text-gray-600 flex items-center dark:text-gray-100"><%=l(:label_news_plural)%></h2>
 
     <div class="flex items-center justify-self-center">
       <% if User.current.allowed_to?(:manage_news, @project, global: true) %>
@@ -20,7 +20,7 @@
 <div class="container mx-auto mt-8">
   <div id="add-news" style="display:none;">
   <h2><%=l(:label_news_new)%></h2>
-  <%= labelled_form_for @news, :url => (@project ? project_news_index_path(@project) : news_index_path),
+  <%= labelled_form_for @news, :url => (@project ? project_news_index_path(@project) : news_index_path), data: {turbo: false},
                                             :html => { :id => 'news-form', :multipart => true } do |f| %>
   <%= render :partial => 'news/form', :locals => { :f => f } %>
   <%= submit_tag l(:button_create) %>
@@ -32,19 +32,28 @@
   <% if @newss.empty? %>
   <p class="nodata"><%= l(:label_no_data) %></p>
   <% else %>
-    <div class="grid grid-cols-4 gap-4">
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 mx-4 sm:mx-0">
       <% @newss.each do |news| %>
-          <article class="news-article bg-white shadow flex flex-col p-8">
-            <header>
-              <h3 class="text-base font-medium mb-6 text-center"><%= avatar(news.author) %><%= link_to_project(news.project) + ': ' unless news.project == @project %>
-              <%= link_to h(news.title), news_path(news) %>
-              <%= "(#{l(:label_x_comments, :count => news.comments_count)})" if news.comments_count > 0 %></h3>
-              <p class="author text-xs text-center text-gray-400"><%= authoring news.created_on, news.author %></p>
-            </header>
-            <div class="wiki my-6">
-            <%= textilizable(news, :summary) %>
+        <article class="news-article bg-white shadow flex flex-col p-8 hover:bg-gray-50 dark:bg-slate-800 dark:hover:bg-slate-700">
+          <header>
+            <h3 class="text-base font-medium mb-6 text-center"><%= avatar(news.author) %><%= link_to_project(news.project) + ': ' unless news.project == @project %>
+            <%= link_to h(news.title), news_path(news) %>
+            <p class="author text-xs text-center text-gray-400"><%= authoring news.created_on, news.author %></p>
+          </header>
+          <div class="wiki my-6">
+          <%= textilizable(news, :summary) %>
+          </div>
+          <% if news.comments_count > 0 %>
+          <div class="flex">
+            <div class="ml-auto text-gray-400 flex items-center">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 mr-1">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12.76c0 1.6 1.123 2.994 2.707 3.227 1.087.16 2.185.283 3.293.369V21l4.076-4.076a1.526 1.526 0 0 1 1.037-.443 48.282 48.282 0 0 0 5.68-.494c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0 0 12 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018Z" />
+              </svg>
+              <span><%= news.comments_count %></span>
             </div>
-          </article>
+          </div>
+          <% end %>
+        </article>
       <% end %>
     </div>
   <% end %>

@@ -172,7 +172,7 @@
 }
 
 .pagination{
-  @apply flex flex-col;
+  @apply  flex flex-col items-center justify-center w-full my-4 text-gray-500 font-medium;
   ul.pages{
     @apply inline-flex -space-x-px text-sm mb-6;
     li.previous{

@@ -2,7 +2,7 @@
 <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 2xl:grid-cols-8 gap-4">
   <% if @bookmarked %>
     <% @bookmarked.each do |project|%>
-      <%= link_to(project,:class => 'bg-white uppercase flex items-center text-gray-800 font-light text-sm rounded shadow p-4 hover:bg-gray-50 transition ease-in-out delay-75 hover:-translate-y-1 hover:scale-105 duration-100') do %>
+      <%= link_to(project,:class => 'bg-white dark:bg-gray-800 dark:text-gray-100 uppercase flex items-center text-gray-800 font-light text-sm rounded shadow p-4 hover:bg-gray-50 transition ease-in-out delay-75 hover:-translate-y-1 hover:scale-105 duration-100') do %>
           <%= letter_avatar_tag(project.name, 300, class: 'w-8 h-8 mr-4') %> <span class="text-xs"><%= project.name%></span>
 
       <% end %>
@@ -10,7 +10,7 @@
   <% end %>
   <% if @my_projects %>
     <% @my_projects.each do |project|%>
-      <%= link_to(project,:class => 'bg-white rounded shadow p-4 hover:bg-gray-50 transition ease-in-out delay-75 hover:-translate-y-1 hover:scale-105 duration-100') do %>
+      <%= link_to(project,:class => 'bg-white dark:bg-gray-800 dark:text-gray-100 rounded shadow p-4 hover:bg-gray-50 transition ease-in-out delay-75 hover:-translate-y-1 hover:scale-105 duration-100') do %>
         <h3 class="uppercase flex items-center text-gray-800 font-light text-sm">
           <%= letter_avatar_tag(project.name, 300, class: 'w-8 h-8 mr-4') %> <span><%= project.name%></span>
         </h3>
@@ -18,7 +18,7 @@
     <% end %>
   <% end %>
   <% if User.current.allowed_to?(:add_project, nil, :global => true) %>
-    <%= link_to new_project_path, :class => 'bg-white rounded flex items-center justify-center text-gray-300 shadow p-4 hover:bg-gray-50 transition ease-in-out delay-75 hover:-translate-y-1 hover:scale-105 duration-100' do %>
+    <%= link_to new_project_path, :class => 'bg-white dark:bg-gray-800 dark:text-gray-100 rounded flex items-center justify-center text-gray-300 shadow p-4 hover:bg-gray-50 transition ease-in-out delay-75 hover:-translate-y-1 hover:scale-105 duration-100' do %>
       <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
         <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
       </svg>

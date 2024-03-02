@@ -1,6 +1,6 @@
-<div class="buttons flex bg-white dark:bg-gray-800 w-full shadow px-4 py-2 text-sm mb-4">
+<div class="buttons flex bg-white dark:bg-slate-700 w-full shadow px-4 py-2 text-sm mb-4">
   <div class="container mx-auto flex  items-center">
-    <h2 class="uppercase text-gray-600 mr-3"><%= @author.nil? ? l(:label_activity) : l(:label_user_activity, link_to_user(@author)).html_safe %></h2>
+    <h2 class="uppercase text-gray-600 dark:text-gray-100 mr-3"><%= @author.nil? ? l(:label_activity) : l(:label_user_activity, link_to_user(@author)).html_safe %></h2>
     <p class="subtitle text-gray-400 text-xs"><%= l(:label_date_from_to, :start => format_date(@date_to - @days), :end => format_date(@date_to-1)) %></p>
 
 
