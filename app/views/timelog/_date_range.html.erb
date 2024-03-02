@@ -1,0 +1,11 @@
+<%= render :partial => 'queries/query_form' %>
+
+<div class="tabs mb-4 hide-when-print text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:text-gray-400 dark:border-gray-700">
+<% query_params = request.query_parameters %>
+<ul class="flex flex-wrap -mb-px">
+    <li class="me-2"><%= link_to(l(:label_details), _time_entries_path(@project, nil, :params => query_params),
+                                       :class => (action_name == 'index' ? 'selected inline-block p-4 text-blue-600 border-b-2 border-blue-600 rounded-t-lg active dark:text-blue-500 dark:border-blue-500' : 'inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300')) %></li>
+    <li class="me-2"><%= link_to(l(:label_report), _report_time_entries_path(@project, nil, :params => query_params),
+                                       :class => (action_name == 'report' ? 'selected inline-block p-4 text-blue-600 border-b-2 border-blue-600 rounded-t-lg active dark:text-blue-500 dark:border-blue-500' : 'inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300')) %></li>
+</ul>
+</div>
