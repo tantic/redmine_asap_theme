@@ -6,7 +6,7 @@
           <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
         </svg>
       </div>
-      <div class="flex items-center "><%= wiki_page_breadcrumb(@page) %></div>
+      <div class="items-center hidden lg:flex"><%= wiki_page_breadcrumb(@page) %></div>
 
     </div>
     <div class="relative flex items-center justify-self-center pr-6">
@@ -108,7 +108,7 @@
 
   <%= render(:partial => "wiki/content", :locals => {:content => @content}) %>
 
-  <fieldset class="collapsible container mx-auto  collapsed hide-when-print mx-8 my-4 bg-white dark:bg-gray-800 p-8">
+  <fieldset class="collapsible bg-white p-6 sm:p-16 sm:container sm:mx-auto mx-6 dark:bg-gray-800 dark:text-gray-100  shadow mt-4">
     <legend onclick="toggleFieldset(this);" class="icon icon-collapsed cursor-pointer"><%= l(:label_attachment_plural) %> (<%= @page.attachments.length %>)</legend>
     <div style="display: none;">
 
@@ -129,7 +129,7 @@
   </div>
   </fieldset>
 
-  <p class="wiki-update-info container mx-auto  text-gray-400 text-xs mx-8">
+  <p class="wiki-update-info sm:container sm:mx-auto mx-6  dark:text-gray-100  text-xs text-gray-600">
     <% if User.current.allowed_to?(:view_wiki_edits, @project) %>
       <%= wiki_content_update_info(@content) %>
       · <%= link_to l(:label_x_revisions, :count => @content.version), {:action => 'history', :id => @page.title} %>
@@ -139,7 +139,7 @@
     <% end %>
   </p>
 
-  <div class="mx-8 text-gray-400 text-xs container mx-auto ">
+  <div class="sm:container sm:mx-auto mx-6  dark:text-gray-100 text-xs text-gray-600">
   <% other_formats_links do |f| %>
     <%= f.link_to 'PDF', :url => {:id => @page.title, :version => params[:version]} %>
     <%= f.link_to 'HTML', :url => {:id => @page.title, :version => params[:version]} %>

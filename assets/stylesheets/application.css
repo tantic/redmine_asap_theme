@@ -4654,7 +4654,7 @@ div.wiki{
     margin-right: 2rem;
   }
   .toc{
-    width: 33.333333%;
+    width: 100%;
   }
   .toc{
     border-radius: 0.25rem;
@@ -4673,15 +4673,32 @@ div.wiki{
   .toc{
     padding: 2rem;
   }
+  @media (min-width: 640px){
+    .toc{
+      width: 33.333333%;
+    }
+  }
   .toc {
     >li:first-child{
       list-style-type: none;
     }
     &.right{
-      float: right;
+      width: 100%;
     }
-    &.right{
-      width: 33.333333%;
+    @media (min-width: 640px){
+      &.right{
+        float: right;
+      }
+    }
+    @media (min-width: 640px){
+      &.right{
+        margin-left: 2rem;
+      }
+    }
+    @media (min-width: 640px){
+      &.right{
+        width: 33.333333%;
+      }
     }
   }
 }
@@ -5684,6 +5701,11 @@ select{
   margin-right: 1rem;
 }
 
+.mx-6{
+  margin-left: 1.5rem;
+  margin-right: 1.5rem;
+}
+
 .mx-8{
   margin-left: 2rem;
   margin-right: 2rem;
@@ -6328,6 +6350,10 @@ select{
   border-style: solid;
 }
 
+.border-dotted{
+  border-style: dotted;
+}
+
 .border-blue-50{
   --tw-border-opacity: 1;
   border-color: rgb(239 246 255 / var(--tw-border-opacity));
@@ -6468,6 +6494,10 @@ select{
 
 .p-4{
   padding: 1rem;
+}
+
+.p-6{
+  padding: 1.5rem;
 }
 
 .p-8{
@@ -6956,6 +6986,42 @@ select{
   left: 140px !important;
 }
 
+@media (min-width: 640px){
+  .sm\:container{
+    width: 100%;
+  }
+
+  @media (min-width: 640px){
+    .sm\:container{
+      max-width: 640px;
+    }
+  }
+
+  @media (min-width: 768px){
+    .sm\:container{
+      max-width: 768px;
+    }
+  }
+
+  @media (min-width: 1024px){
+    .sm\:container{
+      max-width: 1024px;
+    }
+  }
+
+  @media (min-width: 1280px){
+    .sm\:container{
+      max-width: 1280px;
+    }
+  }
+
+  @media (min-width: 1536px){
+    .sm\:container{
+      max-width: 1536px;
+    }
+  }
+}
+
 .odd\:bg-white:nth-child(odd){
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
@@ -7417,6 +7483,11 @@ select{
     margin-right: 0px;
   }
 
+  .sm\:mx-auto{
+    margin-left: auto;
+    margin-right: auto;
+  }
+
   .sm\:mb-0{
     margin-bottom: 0px;
   }
@@ -7474,6 +7545,10 @@ select{
 
   .sm\:rounded-lg{
     border-radius: 0.5rem;
+  }
+
+  .sm\:p-16{
+    padding: 4rem;
   }
 
   .sm\:px-0{
@@ -7585,6 +7660,10 @@ select{
 @media (min-width: 1024px){
   .lg\:mt-8{
     margin-top: 2rem;
+  }
+
+  .lg\:flex{
+    display: flex;
   }
 
   .lg\:w-3\/5{
