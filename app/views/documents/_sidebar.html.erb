@@ -1,0 +1,13 @@
+<aside id="sidebar" data-sidebar-target="sidebar" class="w-96 z-50 shadow-lg p-8 bg-white border-l border-gray-50 dark:bg-gray-800 fixed top-14 right-0 h-full hidden">
+  <h3><%= l(:label_sort_by, '') %></h3>
+  <ul>
+    <li><%= link_to(l(:field_category), {:sort_by => 'category'},
+                    :class => (@sort_by == 'category' ? 'selected' :nil)) %></li>
+    <li><%= link_to(l(:label_date), {:sort_by => 'date'},
+                    :class => (@sort_by == 'date' ? 'selected' :nil)) %></li>
+    <li><%= link_to(l(:field_title), {:sort_by => 'title'},
+                    :class => (@sort_by == 'title' ? 'selected' :nil)) %></li>
+    <li><%= link_to(l(:field_author), {:sort_by => 'author'},
+                    :class => (@sort_by == 'author' ? 'selected' :nil)) %></li>
+  </ul>
+</aside>
