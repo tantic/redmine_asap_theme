@@ -17,12 +17,12 @@
   </div>
 </div>
 
-<div class="flex container mx-auto h-[calc(100vh-200px)] overflow-y-auto bg-white dark:bg-gray-800 w-full shadow p-8 text-sm mb-4">
+<div class="flex sm:container mx-4 sm:mx-auto h-[calc(100vh-200px)] overflow-y-auto bg-white dark:bg-gray-800 sm:w-full shadow p-8 text-sm mb-4">
 <%= render :partial => 'activities/activities', :locals => {:events_by_day => @events_by_day} %>
 <%= content_tag('p', l(:label_no_data), :class => 'nodata') if @events_by_day.empty? %>
 </div>
 
-<footer class="container mx-auto">
+<footer class="container mx-auto pb-20">
 <span class="pagination">
   <ul class="pages">
     <li class="previous page">

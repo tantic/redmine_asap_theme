@@ -1,4 +1,4 @@
-<div class="wiki wiki-page bg-white p-6 sm:p-16 sm:container sm:mx-auto mx-6 dark:bg-gray-800 dark:text-gray-100  shadow ">
+<div class="wiki wiki-page bg-white p-6 sm:p-16 sm:container sm:mx-auto mx-4 dark:bg-gray-800 dark:text-gray-100  shadow ">
   <%= textilizable content, :text, :attachments => content.page.attachments,
         :edit_section_links => (@sections_editable && {:controller => 'wiki', :action => 'edit', :project_id => @page.project, :id => @page.title}) %>
 </div>
