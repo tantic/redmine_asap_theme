@@ -4555,6 +4555,12 @@ div.wiki{
   ul,
   ol {
     li{
+      padding-left: 0px;
+    }
+    ul{
+      li{
+        padding-left: 1.25rem;
+      }
     }
   }
   table {
@@ -4644,28 +4650,38 @@ div.wiki{
     max-width: 100%;
     vertical-align: middle;
   }
+  .toc{
+    margin-right: 2rem;
+  }
+  .toc{
+    width: 33.333333%;
+  }
+  .toc{
+    border-radius: 0.25rem;
+  }
+  .toc{
+    border-width: 1px;
+  }
+  .toc{
+    --tw-border-opacity: 1;
+    border-color: rgb(243 244 246 / var(--tw-border-opacity));
+  }
+  .toc{
+    --tw-bg-opacity: 1;
+    background-color: rgb(249 250 251 / var(--tw-bg-opacity));
+  }
+  .toc{
+    padding: 2rem;
+  }
   .toc {
-    margin-left: 0;
-    padding: 0;
-    list-style-type: none;
-    &.right,
-    &.left {
-      max-width: 45%;
-      padding: 8px;
-      a {
-        text-decoration: none;
-        &:hover {
-          text-decoration: underline;
-        }
-      }
+    >li:first-child{
+      list-style-type: none;
     }
-    &.right {
-      margin-right: 0;
+    &.right{
       float: right;
     }
-    &.left {
-      margin-left: 0;
-      float: left;
+    &.right{
+      width: 33.333333%;
     }
   }
 }
@@ -6586,10 +6602,6 @@ select{
 
 .pt-4{
   padding-top: 1rem;
-}
-
-.pl-6{
-  padding-left: 1.5rem;
 }
 
 .text-left{
