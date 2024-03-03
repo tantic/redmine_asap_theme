@@ -165,8 +165,50 @@ Second one with action bar and typography on the content
 
 With menu centered
 
-![Wiki](img/wiki3.png)
+![Wiki](img/wiki4.png)
 
 ## Activities page
 
-![Activities](img/activities.png)
+![Activities](img/activities2.png)
+
+## Roadmap
+
+![Roadmap](img/roadmap.png)
+
+## Time entries
+
+![Time entries](img/spent-time.png)
+
+## News
+
+![News](img/news.png)
+
+## Documents
+
+![Documents](img/documents.png)
+
+## Files
+
+![Files](img/files.png)
+
+
+## Navigation in project
+
+New idea for the navigation with a navbar under the main navbar for all actions and access to sidebar...
+
+![Navigation](img/navigation-3.png)
+
+## Mobile
+
+Work on responsive display. The project navigation go to the bottom page
+
+![Mobile](img/mobile.png)
+
+
+## dark theme
+
+First work on dark theme, need to be improved
+
+![Dark](img/dark.png)
+![Dark](img/dark2.png)
+![Dark](img/dark3.png)

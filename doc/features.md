@@ -4,15 +4,15 @@
 
 - [x] Layout
 - [x] Navbar : logo, Project jumpbox, search, admin, user menu (my account, my profile, logout)
-- [ ] Navigation in a project
-- [ ] Contextual menu
+- [x] Navigation in a project
+- [x] Contextual menu
 - [ ] Responsive navigation (mobile, tablet, laptop, desktop)
-  - [ ] sm @media (min-width: 640px) { ... }
-  - [ ] md @media (min-width: 768px) { ... }
-  - [ ] lg @media (min-width: 1024px) { ... }
-  - [ ] xl @media (min-width: 1280px) { ... }
-  - [ ] 2xl @media (min-width: 1536px) { ... }
-- [ ] Dark theme
+  - [x] sm @media (min-width: 640px) { ... }
+  - [x] md @media (min-width: 768px) { ... }
+  - [x] lg @media (min-width: 1024px) { ... }
+  - [x] xl @media (min-width: 1280px) { ... }
+  - [x] 2xl @media (min-width: 1536px) { ... }
+- [x] Dark theme
 - [x] Add letter avatar to project
 - [ ] Notification panel available from the navbar
 - [ ] Access to last seen issues + personal activity in a panel
@@ -38,30 +38,39 @@ Account
 
 ## Multi-projects
 
-- [ ] Activities
+- [x] Activities
 - [x] Issues
-- [ ] Spent time
+- [x] Spent time
 - [x] Gantt
 - [x] Calendar
-- [ ] News
+- [x] News
 
 ## Project
 
 - [ ] Overview
-- [ ] Activity
-- [ ] Roadmap
+- [x] Activity
+- [x] Roadmap
 - [x] Issues
-- [ ] Spent time
-- [x] Gantt
+- [x] Spent time
+- [ ] Gantt
   - [ ] task display
 - [x] Calendar (WIP)
-  - [x] General UX and UI
+  - [ ] General UX and UI
   - [ ] Multiple days events
 - [ ] News
+  - [x] List
+  - [ ] Show
 - [ ] Forum
 - [ ] Documents
+  - [x] List
+  - [ ] Show document
+  - [ ] Edit document
 - [ ] Wiki
+  - [x] Show page
+  - [ ] Edit page
 - [ ] Files
+  - [x] List
+  - [ ] Add file
 - [ ] Respository
 - [ ] Settings
 

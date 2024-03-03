@@ -8,7 +8,7 @@
 
 ![Three](img/navbar.png)
 
-## Issues and views
+## Project views
 
 ### List
 
@@ -28,11 +28,32 @@
 
 ## Wiki
 
-![Wiki](img/wiki3.png)
+![Wiki](img/wiki4.png)
 
 ## Activities
 
-![Activities](img/activities.png)
+![Activities](img/activities2.png)
+
+
+## Roadmap
+
+![Roadmap](img/roadmap.png)
+
+## Time entries
+
+![Time entries](img/spent-time.png)
+
+## News
+
+![News](img/news.png)
+
+## Documents
+
+![Documents](img/documents.png)
+
+## Files
+
+![Files](img/files.png)
 
 
 ## User settings (ex my account)
@@ -42,6 +63,7 @@
 ## User profile
 
 ![User profile](img/user-profile.png)
+
 
 ## Administration
 
@@ -90,3 +112,8 @@ Ability to change the background
 ## Flash message
 
 ![Flash](img/flash-message.png)
+
+
+## Mobile
+
+![Mobile](img/mobile.png)

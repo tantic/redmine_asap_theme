@@ -7,7 +7,7 @@
     </div>
     <%= project_parent_breadcrumb %>
     <%= render_project_jump_box %>
-    <div class="fixed flex items-center justify-center px-4 sm:px-0 w-full sm:w-auto shadow-2xl sm:shadow-none border-t border-gray-100 sm:border-none sm:relative sm:flex bottom-0 bg-slate-800 sm:bg-white sm:dark:bg-gray-700 text-blue-50 sm:text-gray-900 sm:dark:text-gray-50 sm:bottom-auto  ">
+    <div class="fixed flex items-center justify-center px-4 sm:px-0 w-full sm:w-auto shadow-2xl sm:shadow-none border-t border-gray-100 sm:border-none sm:relative sm:flex bottom-0 bg-slate-800 sm:bg-white sm:dark:bg-slate-800 text-blue-50 sm:text-gray-900 sm:dark:text-gray-50 sm:bottom-auto  ">
       <% if @project && @project.id %>
         <% if @project.children.any? %>
         <div data-controller="projectmenu" class="h-full hidden sm:flex items-center justify-center">
