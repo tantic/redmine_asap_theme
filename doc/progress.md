@@ -216,3 +216,12 @@ First work on dark theme, need to be improved
 ## Forum
 
 ![Forum](img/forum.png)
+
+## Repository
+
+![Repository](img/repository.png)
+
+## Projects
+
+![Projects](img/projects.png)
+

@@ -123,3 +123,8 @@ Ability to change the background
 ## Mobile
 
 ![Mobile](img/mobile.png)
+
+
+## Projects
+
+![Projects](img/projects.png)
