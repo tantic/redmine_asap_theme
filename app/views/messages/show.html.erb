@@ -133,7 +133,7 @@
     <% end %>
   </div>
   <div id="reply" style="display:none;" class="absolute right-0 w-3/5">
-    <%= form_for @reply, :as => :reply, :url => {:action => 'reply', :id => @topic}, :html => {:multipart => true, :id => 'message-form'} do |f| %>
+    <%= form_for @reply, :as => :reply, :url => {:action => 'reply', :id => @topic}, data: {turbo: false}, :html => {:multipart => true, :id => 'message-form'} do |f| %>
       <%= render :partial => 'form', :locals => {:f => f, :replying => true} %>
       <%= submit_tag l(:button_submit) %>
     <% end %>
