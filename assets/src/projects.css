@@ -10,7 +10,7 @@
         }
       }
       li{
-        @apply ml-2 p-4 border-l border-gray-100
+        @apply ml-2 px-4 border-l border-gray-100
       }
     }
   }

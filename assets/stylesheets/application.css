@@ -4936,7 +4936,8 @@ blockquote{
         border-color: rgb(243 244 246 / var(--tw-border-opacity));
       }
       li{
-        padding: 1rem;
+        padding-left: 1rem;
+        padding-right: 1rem;
       }
     }
   }
