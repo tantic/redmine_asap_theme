@@ -4872,7 +4872,13 @@ blockquote{
   }
   >.projects{
     >li{
+      max-height: 11rem;
+    }
+    >li{
       width: 100%;
+    }
+    >li{
+      overflow-y: auto;
     }
     >li{
       --tw-bg-opacity: 1;

@@ -2,7 +2,7 @@
   >.projects{
     @apply grid grid-cols-4 gap-4 container mx-auto;
     >li{
-      @apply shadow bg-white dark:bg-gray-800 p-4 w-full;
+      @apply shadow bg-white dark:bg-gray-800 p-4 w-full max-h-44 overflow-y-auto;
       .description{
         @apply text-xs p-2 text-gray-500;
         p{
