@@ -1,0 +1,11 @@
+<% if topics.any? %>
+  <div class="w-2/6 mr-2 flex flex-col p-4  dark:bg-slate-800 dark:hover:bg-slate-700">
+    <h3 class="uppercase text-gray-700 font-extralight text-xs mt-6 mb-2 px-4 py-2">Discussions</h3>
+    <% topics.each do |topic| %>
+      <div class="flex items-center  font-base text-gray-600 hover:bg-gray-100 rounded px-4 py-2">
+        <div><%= link_to topic.subject, board_message_path(@board, topic) %></div>
+        <span><%= topic.replies_count %></span>
+      </div>
+    <% end %>
+  </div>
+<% end %>

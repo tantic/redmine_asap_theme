@@ -55,6 +55,12 @@
 
 ![Files](img/files.png)
 
+## Forum
+
+![Forum](img/forum.png)
+
+
+
 
 ## User settings (ex my account)
 

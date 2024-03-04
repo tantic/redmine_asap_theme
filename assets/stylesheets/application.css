@@ -1469,7 +1469,7 @@ fieldset{
   padding-left: 0.875rem;
 }
 
-.button-blue{
+.button-blue, #button-reply a{
   display: flex;
   border-radius: 0.25rem;
   --tw-bg-opacity: 1;
@@ -1485,12 +1485,12 @@ fieldset{
   color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
-.button-blue:hover{
+.button-blue:hover, #button-reply a:hover{
   --tw-bg-opacity: 1;
   background-color: rgb(30 64 175 / var(--tw-bg-opacity));
 }
 
-.button-blue:focus{
+.button-blue:focus, #button-reply a:focus{
   outline: 2px solid transparent;
   outline-offset: 2px;
   --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
@@ -1501,17 +1501,17 @@ fieldset{
 }
 
 @media (prefers-color-scheme: dark){
-  .button-blue{
+  .button-blue, #button-reply a{
     --tw-bg-opacity: 1;
     background-color: rgb(37 99 235 / var(--tw-bg-opacity));
   }
 
-  .button-blue:hover{
+  .button-blue:hover, #button-reply a:hover{
     --tw-bg-opacity: 1;
     background-color: rgb(29 78 216 / var(--tw-bg-opacity));
   }
 
-  .button-blue:focus{
+  .button-blue:focus, #button-reply a:focus{
     --tw-ring-opacity: 1;
     --tw-ring-color: rgb(30 64 175 / var(--tw-ring-opacity));
   }
@@ -4774,6 +4774,28 @@ p.footnote {
   }
 }
 
+blockquote{
+  margin-bottom: 0.5rem !important;
+  display: flex !important;
+  width: 100% !important;
+  border-left-width: 4px !important;
+  --tw-border-opacity: 1 !important;
+  border-color: rgb(243 244 246 / var(--tw-border-opacity)) !important;
+  padding: 1rem !important;
+}
+
+.controller-boards, .controller-messages{
+  .idnt-1{
+    margin-left: 0.5rem;
+  }
+  .idnt-2{
+    margin-left: 1rem;
+  }
+  .idnt-3{
+    margin-left: 1.5rem;
+  }
+}
+
 /* ! tailwindcss v3.3.6 | MIT License | https://tailwindcss.com */
 
 /*
@@ -5631,6 +5653,10 @@ select{
   position: relative;
 }
 
+.sticky{
+  position: sticky;
+}
+
 .-right-4{
   right: -1rem;
 }
@@ -6060,6 +6086,10 @@ select{
   width: 66.666667%;
 }
 
+.w-2\/6{
+  width: 33.333333%;
+}
+
 .w-3\/4{
   width: 75%;
 }
@@ -6114,6 +6144,10 @@ select{
 
 .w-full{
   width: 100%;
+}
+
+.w-3\/5{
+  width: 60%;
 }
 
 .max-w-2xl{
@@ -6661,6 +6695,10 @@ select{
   padding-top: 0.125rem;
 }
 
+.pt-1{
+  padding-top: 0.25rem;
+}
+
 .pt-4{
   padding-top: 1rem;
 }
@@ -6716,6 +6754,10 @@ select{
 .text-xs{
   font-size: 0.75rem;
   line-height: 1rem;
+}
+
+.font-extralight{
+  font-weight: 200;
 }
 
 .font-light{
@@ -6841,6 +6883,11 @@ select{
   color: rgb(248 113 113 / var(--tw-text-opacity));
 }
 
+.text-red-600{
+  --tw-text-opacity: 1;
+  color: rgb(220 38 38 / var(--tw-text-opacity));
+}
+
 .text-red-700{
   --tw-text-opacity: 1;
   color: rgb(185 28 28 / var(--tw-text-opacity));
@@ -6955,6 +7002,10 @@ select{
   transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
 }
 
+.\[eoform\:message\]{
+  eoform: message;
+}
+
 .\[eoform\:project\]{
   eoform: project;
 }
@@ -6965,6 +7016,10 @@ select{
 
 .\[eoform\:user\]{
   eoform: user;
+}
+
+.\[form\:message\]{
+  form: message;
 }
 
 .\[form\:project\]{
@@ -7661,11 +7716,6 @@ select{
   }
 
   @media (prefers-color-scheme: dark){
-    .sm\:dark\:bg-gray-700{
-      --tw-bg-opacity: 1;
-      background-color: rgb(55 65 81 / var(--tw-bg-opacity));
-    }
-
     .sm\:dark\:bg-slate-800{
       --tw-bg-opacity: 1;
       background-color: rgb(30 41 59 / var(--tw-bg-opacity));

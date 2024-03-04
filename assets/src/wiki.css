@@ -338,4 +338,9 @@ p.footnote {
       padding-top: 0;
     }
   }
+
+
+}
+blockquote{
+  @apply border-l-4 border-gray-100 p-4 flex w-full mb-2 !important
 }

@@ -1,0 +1,25 @@
+<div class="w-64 mr-2 flex flex-col p-4  dark:bg-slate-800 dark:hover:bg-slate-700">
+  <h3 class="uppercase text-gray-700 font-extralight text-xs mt-6 mb-2 px-4 py-2">Categories</h3>
+  <% Board.board_tree(boards) do |board, level| %>
+    <% selected = (current_page?(project_board_path(board.project, board)) ) ? 'bg-gray-100 font-medium':'' %>
+    <% if level > 0 %>
+      <div class="idnt-<%= level %>">
+        <%= link_to project_board_path(board.project, board), :class => "board flex items-center  font-base text-gray-800 hover:bg-gray-100 rounded px-4 py-2 #{selected}" do %>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 mr-1">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9.568 3H5.25A2.25 2.25 0 0 0 3 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 0 0 5.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 0 0 9.568 3Z" />
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 6h.008v.008H6V6Z" />
+          </svg>
+          <span><%= board.name %></span>
+        <% end %>
+      </div>
+    <% else %>
+      <%= link_to project_board_path(board.project, board), :class => "board flex items-center font-base text-gray-800 hover:bg-gray-100 rounded px-4 py-2 #{selected}" do %>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 mr-1">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9.568 3H5.25A2.25 2.25 0 0 0 3 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 0 0 5.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 0 0 9.568 3Z" />
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 6h.008v.008H6V6Z" />
+        </svg>
+        <span><%= board.name %></span>
+      <% end %>
+    <% end %>
+  <% end %>
+</div>

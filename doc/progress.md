@@ -212,3 +212,7 @@ First work on dark theme, need to be improved
 ![Dark](img/dark.png)
 ![Dark](img/dark2.png)
 ![Dark](img/dark3.png)
+
+## Forum
+
+![Forum](img/forum.png)

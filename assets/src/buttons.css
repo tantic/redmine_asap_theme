@@ -18,7 +18,7 @@
   @apply flex items-center font-light bg-white text-gray-900 hover:bg-gray-50 hover:border-l-2 hover:border-blue-800 hover:pl-3.5 px-4 py-2 text-sm ml-0 rounded-none
 }
 
-.button-blue{
+.button-blue, #button-reply a{
   @apply flex text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded text-sm px-3 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800
 }
 
