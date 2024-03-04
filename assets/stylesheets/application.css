@@ -4830,45 +4830,83 @@ blockquote{
 
 #projects-index{
   >.projects{
-    width: 100%;
-  }
-  @media (min-width: 640px){
-    >.projects{
-      max-width: 640px;
-    }
-  }
-  @media (min-width: 768px){
-    >.projects{
-      max-width: 768px;
-    }
-  }
-  @media (min-width: 1024px){
-    >.projects{
-      max-width: 1024px;
-    }
-  }
-  @media (min-width: 1280px){
-    >.projects{
-      max-width: 1280px;
-    }
-  }
-  @media (min-width: 1536px){
-    >.projects{
-      max-width: 1536px;
-    }
-  }
-  >.projects{
-    margin-left: auto;
-    margin-right: auto;
+    margin-left: 1rem;
+    margin-right: 1rem;
   }
   >.projects{
     display: grid;
   }
   >.projects{
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-columns: repeat(1, minmax(0, 1fr));
   }
   >.projects{
     gap: 1rem;
+  }
+  @media (min-width: 640px){
+    >.projects{
+      width: 100%;
+    }
+  }
+  @media (min-width: 640px){
+    @media (min-width: 640px){
+      >.projects{
+        max-width: 640px;
+      }
+    }
+  }
+  @media (min-width: 640px){
+    @media (min-width: 768px){
+      >.projects{
+        max-width: 768px;
+      }
+    }
+  }
+  @media (min-width: 640px){
+    @media (min-width: 1024px){
+      >.projects{
+        max-width: 1024px;
+      }
+    }
+  }
+  @media (min-width: 640px){
+    @media (min-width: 1280px){
+      >.projects{
+        max-width: 1280px;
+      }
+    }
+  }
+  @media (min-width: 640px){
+    @media (min-width: 1536px){
+      >.projects{
+        max-width: 1536px;
+      }
+    }
+  }
+  @media (min-width: 640px){
+    >.projects{
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+  @media (min-width: 640px){
+    >.projects{
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+  @media (min-width: 1024px){
+    >.projects{
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+  @media (min-width: 1280px){
+    >.projects{
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+  }
+  @media (min-width: 1536px){
+    >.projects{
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+    }
   }
   >.projects{
     >li{
@@ -7649,6 +7687,11 @@ select{
   .dark\:hover\:bg-slate-700:hover{
     --tw-bg-opacity: 1;
     background-color: rgb(51 65 85 / var(--tw-bg-opacity));
+  }
+
+  .dark\:hover\:bg-gray-800:hover{
+    --tw-bg-opacity: 1;
+    background-color: rgb(31 41 55 / var(--tw-bg-opacity));
   }
 
   .dark\:hover\:text-blue-200:hover{

@@ -1,6 +1,6 @@
 #projects-index{
   >.projects{
-    @apply grid grid-cols-4 gap-4 container mx-auto;
+    @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6 gap-4 sm:container mx-4 sm:mx-auto;
     >li{
       @apply shadow bg-white dark:bg-gray-800 p-4 w-full max-h-44 overflow-y-auto;
       .description{

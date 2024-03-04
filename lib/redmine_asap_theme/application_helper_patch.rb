@@ -132,12 +132,12 @@ module RedmineAsapTheme
 
     def link_to_project(project, options={}, html_options = nil)
       if project.archived?
-        content_tag :div, class: "flex items-center hover:bg-gray-50 px-2 py-1" do
+        content_tag :div, class: "flex items-center hover:bg-gray-50 dark:hover:bg-gray-700 px-2 py-1" do
           letter_avatar_tag(project.name, 300, class: 'w-8 h-8 mr-4') +
           content_tag(:span, project.name, class: "icon-plus icon-white uppercase font-normal text-xs")
         end
       else
-        link_to project_url(project, {:only_path => true}.merge(options)), class: 'flex items-center hover:bg-gray-50 px-2 py-1' do
+        link_to project_url(project, {:only_path => true}.merge(options)), class: 'flex items-center hover:bg-gray-50 dark:hover:bg-gray-700 px-2 py-1' do
             letter_avatar_tag(project.name, 300, class: 'w-8 h-8 mr-4') +
             content_tag(:span, project.name, class: "icon-plus icon-white uppercase font-normal text-xs")
         end
