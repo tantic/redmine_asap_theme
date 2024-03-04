@@ -1,53 +1,70 @@
-<div class="contextual">
-  &#171;
-  <% unless @changeset.previous.nil? -%>
-    <%= link_to_revision(@changeset.previous, @repository,
-      :text => l(:label_previous), :accesskey => accesskey(:previous)) %>
-  <% else -%>
-    <%= l(:label_previous) %>
-  <% end -%>
-|
-  <% unless @changeset.next.nil? -%>
-    <%= link_to_revision(@changeset.next, @repository,
-      :text => l(:label_next), :accesskey => accesskey(:next)) %>
-  <% else -%>
-    <%= l(:label_next) %>
-  <% end -%>
-  &#187;&nbsp;
+<%= render "repositories/contextual" %>
+<div class="sm:container sm:mx-auto mx-4 mt-8">
+  <div  class="bg-white shadow flex py-2 px-8  mx-4 dark:bg-slate-800 dark:hover:bg-slate-700">
+    <div class="flex items-center">
+      <h2 class="text-base font-medium"><%= l(:label_revision) %> <%= format_revision(@changeset) %></h2>
+    </div>
+    <div class="ml-auto flex items-center">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 mr-1">
+        <path stroke-linecap="round" stroke-linejoin="round" d="m18.75 4.5-7.5 7.5 7.5 7.5m-6-15L5.25 12l7.5 7.5" />
+      </svg>
 
-  <%= form_tag({:controller => 'repositories',
-               :action     => 'revision',
-               :id         => @project,
-               :repository_id => @repository.identifier_param,
-               :rev        => nil},
-               :method     => :get) do %>
-    <%= text_field_tag 'rev', @rev, :size => 8 %>
-    <%= submit_tag l(:button_view), :name => nil %>
-  <% end %>
+      <% unless @changeset.previous.nil? -%>
+        <%= link_to_revision(@changeset.previous, @repository,
+          :text => l(:label_previous), :accesskey => accesskey(:previous)) %>
+      <% else -%>
+        <%= l(:label_previous) %>
+      <% end -%>
+      <span class="mx-4">|</span>
+      <% unless @changeset.next.nil? -%>
+        <%= link_to_revision(@changeset.next, @repository,
+          :text => l(:label_next), :accesskey => accesskey(:next)) %>
+      <% else -%>
+        <%= l(:label_next) %>
+      <% end -%>
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 ml-1 mr-6">
+        <path stroke-linecap="round" stroke-linejoin="round" d="m5.25 4.5 7.5 7.5-7.5 7.5m6-15 7.5 7.5-7.5 7.5" />
+      </svg>
+
+
+      <%= form_tag({:controller => 'repositories',
+                  :action     => 'revision',
+                  :id         => @project,
+                  :repository_id => @repository.identifier_param,
+                  :rev        => nil},
+                  :method     => :get,
+                  :class => 'flex') do %>
+        <%= text_field_tag 'rev', @rev, :size => 8 %>
+        <%= submit_tag l(:button_view), :name => nil, class: 'ml-2' %>
+      <% end %>
+    </div>
+  </div>
+  <div  class="bg-white shadow flex flex-col p-8  mx-4 dark:bg-slate-800 dark:hover:bg-slate-700">
+
+    <%= render :partial => 'changeset' %>
+
+    <% if User.current.allowed_to?(:browse_repository, @project) %>
+    <ul id="changes-legend" >
+    <li class="change change-A"><%= l(:label_added)    %></li>
+    <li class="change change-M"><%= l(:label_modified) %></li>
+    <li class="change change-C"><%= l(:label_copied)   %></li>
+    <li class="change change-R"><%= l(:label_renamed)  %></li>
+    <li class="change change-D"><%= l(:label_deleted)  %></li>
+    </ul>
+
+    <div class="changeset-changes">
+    <%= render_changeset_changes %>
+    </div>
+    <% end %>
+
+    <% content_for :header_tags do %>
+    <%= stylesheet_link_tag "scm" %>
+    <% end %>
+
+    <%
+      title = "#{l(:label_revision)} #{format_revision(@changeset)}"
+      title << " - #{@changeset.comments.truncate(80)}"
+      html_title(title)
+    -%>
+  </div>
 </div>
-
-<%= render :partial => 'changeset' %>
-
-<% if User.current.allowed_to?(:browse_repository, @project) %>
-<ul id="changes-legend">
-<li class="change change-A"><%= l(:label_added)    %></li>
-<li class="change change-M"><%= l(:label_modified) %></li>
-<li class="change change-C"><%= l(:label_copied)   %></li>
-<li class="change change-R"><%= l(:label_renamed)  %></li>
-<li class="change change-D"><%= l(:label_deleted)  %></li>
-</ul>
-
-<div class="changeset-changes">
-<%= render_changeset_changes %>
-</div>
-<% end %>
-
-<% content_for :header_tags do %>
-<%= stylesheet_link_tag "scm" %>
-<% end %>
-
-<%
-  title = "#{l(:label_revision)} #{format_revision(@changeset)}"
-  title << " - #{@changeset.comments.truncate(80)}"
-  html_title(title)
- -%>

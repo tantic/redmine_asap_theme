@@ -1,12 +1,11 @@
-<h2><%= l(:label_revision) %> <%= format_revision(@changeset) %></h2>
 
 <div class="details">
-  <h4>
+  <h4 class="mb-4">
     <%= avatar(@changeset.user) %>
     <%= authoring(@changeset.committed_on, @changeset.author) %>
   </h4>
   <% if @changeset.scmid.present? || @changeset.parents.present? || @changeset.children.present? %>
-  <ul class="revision-info">
+  <ul class="revision-info bg-gray-50 rounded flex flex-col p-4 mb-4">
     <% if @changeset.scmid.present? %>
       <li>
         <strong>ID </strong><%= @changeset.scmid %>

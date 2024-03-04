@@ -1,20 +1,23 @@
 <%= call_hook(:view_repositories_show_contextual, { :repository => @repository, :project => @project }) %>
+<%= render "repositories/contextual" %>
 
 <div class="contextual">
   <%= render :partial => 'navigation' %>
 </div>
+<div class="sm:container sm:mx-auto mx-4">
+  <div  class="bg-white shadow flex flex-col p-8  mx-4 dark:bg-slate-800 dark:hover:bg-slate-700">
 
-<h2 class="breadcrumbs"><%= render :partial => 'breadcrumbs', :locals => { :path => @path, :kind => (@entry ? @entry.kind : nil), :revision => @rev } %></h2>
+    <%= render :partial => 'link_to_functions' %>
 
-<%= render :partial => 'link_to_functions' %>
+    <%= render_properties(@properties) %>
 
-<%= render_properties(@properties) %>
+    <%= render(:partial => 'revisions',
+              :locals => {:project => @project, :path => @path, :revisions => @changesets, :entry => @entry }) unless @changesets.empty? %>
 
-<%= render(:partial => 'revisions',
-           :locals => {:project => @project, :path => @path, :revisions => @changesets, :entry => @entry }) unless @changesets.empty? %>
+    <% content_for :header_tags do %>
+    <%=   stylesheet_link_tag "scm" %>
+    <% end %>
 
-<% content_for :header_tags do %>
-<%=   stylesheet_link_tag "scm" %>
-<% end %>
-
-<% html_title(l(:label_change_plural)) -%>
+    <% html_title(l(:label_change_plural)) -%>
+  </div>
+</div>

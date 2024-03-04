@@ -1,13 +1,16 @@
 <% manage_allowed = User.current.allowed_to?(:manage_related_issues, @repository.project) %>
 
 <div id="related-issues">
-<% if manage_allowed %>
-  <div class="contextual">
-    <%= toggle_link l(:button_add), 'new-relation-form', {:focus => 'issue_id'} %>
+  <div class="flex my-2">
+    <h3 class="font-medium"><%= l(:label_related_issues) %></h3>
+    <% if manage_allowed %>
+      <div class="contextual ml-auto">
+        <%= toggle_link l(:button_add), 'new-relation-form', {:focus => 'issue_id'} %>
+      </div>
+    <% end %>
   </div>
-<% end %>
 
-<h3><%= l(:label_related_issues) %></h3>
+
 <ul>
 <% @changeset.issues.visible.each do |issue| %>
   <li id="<%= "related-issue-#{issue.id}" %>"><%= link_to_issue issue %>
