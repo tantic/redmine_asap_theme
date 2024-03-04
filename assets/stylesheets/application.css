@@ -4828,6 +4828,120 @@ blockquote{
   }
 }
 
+#projects-index{
+  >.projects{
+    width: 100%;
+  }
+  @media (min-width: 640px){
+    >.projects{
+      max-width: 640px;
+    }
+  }
+  @media (min-width: 768px){
+    >.projects{
+      max-width: 768px;
+    }
+  }
+  @media (min-width: 1024px){
+    >.projects{
+      max-width: 1024px;
+    }
+  }
+  @media (min-width: 1280px){
+    >.projects{
+      max-width: 1280px;
+    }
+  }
+  @media (min-width: 1536px){
+    >.projects{
+      max-width: 1536px;
+    }
+  }
+  >.projects{
+    margin-left: auto;
+    margin-right: auto;
+  }
+  >.projects{
+    display: grid;
+  }
+  >.projects{
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+  >.projects{
+    gap: 1rem;
+  }
+  >.projects{
+    >li{
+      width: 100%;
+    }
+    >li{
+      --tw-bg-opacity: 1;
+      background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+    }
+    >li{
+      padding: 1rem;
+    }
+    >li{
+      --tw-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+      --tw-shadow-colored: 0 1px 3px 0 var(--tw-shadow-color), 0 1px 2px -1px var(--tw-shadow-color);
+      box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+    }
+    @media (prefers-color-scheme: dark){
+      >li{
+        --tw-bg-opacity: 1;
+        background-color: rgb(31 41 55 / var(--tw-bg-opacity));
+      }
+    }
+    >li{
+      .description{
+        padding: 0.5rem;
+      }
+      .description{
+        font-size: 0.75rem;
+        line-height: 1rem;
+      }
+      .description{
+        --tw-text-opacity: 1;
+        color: rgb(107 114 128 / var(--tw-text-opacity));
+      }
+      .description{
+        p{
+          overflow: hidden;
+          display: -webkit-box;
+          -webkit-box-orient: vertical;
+          -webkit-line-clamp: 3;
+        }
+        p{
+          font-size: 0.75rem;
+          line-height: 1rem;
+        }
+        p{
+          font-weight: 300;
+        }
+        p{
+          overflow: hidden;
+          display: -webkit-box;
+          -webkit-box-orient: vertical;
+          -webkit-line-clamp: 3;
+        }
+      }
+      li{
+        margin-left: 0.5rem;
+      }
+      li{
+        border-left-width: 1px;
+      }
+      li{
+        --tw-border-opacity: 1;
+        border-color: rgb(243 244 246 / var(--tw-border-opacity));
+      }
+      li{
+        padding: 1rem;
+      }
+    }
+  }
+}
+
 /* ! tailwindcss v3.3.6 | MIT License | https://tailwindcss.com */
 
 /*
@@ -5815,11 +5929,6 @@ select{
 .my-auto{
   margin-top: auto;
   margin-bottom: auto;
-}
-
-.mx-1{
-  margin-left: 0.25rem;
-  margin-right: 0.25rem;
 }
 
 .-mb-px{

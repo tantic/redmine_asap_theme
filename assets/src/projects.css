@@ -1,0 +1,17 @@
+#projects-index{
+  >.projects{
+    @apply grid grid-cols-4 gap-4 container mx-auto;
+    >li{
+      @apply shadow bg-white dark:bg-gray-800 p-4 w-full;
+      .description{
+        @apply text-xs p-2 text-gray-500;
+        p{
+          @apply text-xs font-light line-clamp-3;
+        }
+      }
+      li{
+        @apply ml-2 p-4 border-l border-gray-100
+      }
+    }
+  }
+}

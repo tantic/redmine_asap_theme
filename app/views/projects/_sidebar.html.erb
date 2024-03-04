@@ -1,4 +1,5 @@
-<div class="hidden">
+<aside id="sidebar" data-sidebar-target="sidebar" class="w-96 z-50 shadow-lg p-8 bg-white border-l border-gray-50 dark:bg-gray-800 fixed top-14 right-0 h-full hidden">
+
 <%= render_sidebar_queries(ProjectQuery, @project) %>
 <%= call_hook(:view_projects_sidebar_queries_bottom) %>
-</div>
+</aside>
