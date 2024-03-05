@@ -70,6 +70,8 @@ body{
 
 @media (prefers-color-scheme: dark){
   .table{
+    --tw-border-opacity: 1;
+    border-color: rgb(55 65 81 / var(--tw-border-opacity));
     --tw-text-opacity: 1;
     color: rgb(156 163 175 / var(--tw-text-opacity));
   }
@@ -160,12 +162,24 @@ body{
         --tw-text-opacity: 1;
         color: rgb(17 24 39 / var(--tw-text-opacity));
       }
+      @media (prefers-color-scheme: dark){
+        td{
+          --tw-text-opacity: 1;
+          color: rgb(243 244 246 / var(--tw-text-opacity));
+        }
+      }
       td.name{
         font-weight: 500;
       }
       td.name{
         --tw-text-opacity: 1;
         color: rgb(17 24 39 / var(--tw-text-opacity));
+      }
+      @media (prefers-color-scheme: dark){
+        td.name{
+          --tw-text-opacity: 1;
+          color: rgb(243 244 246 / var(--tw-text-opacity));
+        }
       }
     }
   }
@@ -179,6 +193,8 @@ body{
 
 @media (prefers-color-scheme: dark){
   .table-bordered{
+    --tw-border-opacity: 1;
+    border-color: rgb(55 65 81 / var(--tw-border-opacity));
     --tw-text-opacity: 1;
     color: rgb(156 163 175 / var(--tw-text-opacity));
   }
@@ -192,6 +208,12 @@ body{
     --tw-border-opacity: 1;
     border-color: rgb(229 231 235 / var(--tw-border-opacity));
   }
+  @media (prefers-color-scheme: dark){
+    thead{
+      --tw-border-opacity: 1;
+      border-color: rgb(55 65 81 / var(--tw-border-opacity));
+    }
+  }
   tbody{
     tr{
       border-bottom-width: 1px;
@@ -199,6 +221,12 @@ body{
     tr{
       --tw-border-opacity: 1;
       border-color: rgb(229 231 235 / var(--tw-border-opacity));
+    }
+    @media (prefers-color-scheme: dark){
+      tr{
+        --tw-border-opacity: 1;
+        border-color: rgb(55 65 81 / var(--tw-border-opacity));
+      }
     }
   }
 }
@@ -5992,16 +6020,6 @@ select{
   margin-bottom: auto;
 }
 
-.mx-12{
-  margin-left: 3rem;
-  margin-right: 3rem;
-}
-
-.mx-10{
-  margin-left: 2.5rem;
-  margin-right: 2.5rem;
-}
-
 .-mb-px{
   margin-bottom: -1px;
 }
@@ -6052,6 +6070,10 @@ select{
 
 .ml-1{
   margin-left: 0.25rem;
+}
+
+.ml-12{
+  margin-left: 3rem;
 }
 
 .ml-2{
@@ -6148,10 +6170,6 @@ select{
 
 .mt-8{
   margin-top: 2rem;
-}
-
-.ml-12{
-  margin-left: 3rem;
 }
 
 .block{
@@ -6369,10 +6387,6 @@ select{
 
 .w-full{
   width: 100%;
-}
-
-.w-20{
-  width: 5rem;
 }
 
 .max-w-2xl{

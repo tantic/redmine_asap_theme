@@ -1,5 +1,5 @@
 
-  <div class="flex bg-white shadow items-center justify-center flex-col p-8 mb-4">
+  <div class="flex bg-white dark:bg-gray-800 shadow items-center justify-center flex-col p-8 mb-4">
     <div class="flex flex-col items-center mb-4 hover:bg-gray-50 dark:hover:bg-gray-700 px-2 py-1">
       <%= letter_avatar_tag(@project.name, 300, class: 'w-8 h-8 mb-4') %>
       <span class="icon-plus icon-white uppercase font-normal text-base"><%= @project.name %></span>
@@ -17,9 +17,6 @@
   <% end %>
 
   <div class="splitcontent grid grid-cols-1 sm:grid-cols-2 gap-4">
-
-
-
     <% if User.current.allowed_to?(:view_issues, @project) %>
     <div class="issues box">
       <div class="flex items-center mb-2">
