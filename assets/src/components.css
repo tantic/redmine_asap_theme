@@ -7,12 +7,12 @@
 #issue-table{
   thead{
     th{
-      @apply px-2 text-xs font-medium text-gray-700;
+      @apply px-2 text-xs font-medium text-gray-700 dark:text-gray-300;
     }
   }
   tbody{
     tr{
-      @apply hover:bg-gray-100;
+      @apply hover:bg-gray-100 dark:hover:bg-gray-700;
     }
     tr.issue.idnt-1 td.subject {
       padding-left: 15px;

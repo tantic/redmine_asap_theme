@@ -31,12 +31,12 @@
         </div>
         <div class="contextual w-10 h-full relative flex items-center justify-center">
           <% if controller_name == 'projects' && action_name == 'show' %>
-          <% selected = 'sm:bg-gray-100 bg-slate-700'  %>
+          <% selected = 'sm:bg-gray-100 bg-slate-700 dark:sm:bg-slate-700 dark:sm:text-gray-100'  %>
           <% else %>
-          <% selected = 'sm:bg-white bg-slate-800'  %>
+          <% selected = 'sm:bg-white bg-slate-800 dark:sm:bg-slate-700 dark:sm:text-gray-50 dark:sm:hover:bg-slate-600'  %>
           <% end %>
           <%= link_to @project, class: "p-2 rounded-full hover:bg-gray-700 sm:hover:bg-gray-100 text-gray-100 sm:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300 dark:bg-gray-800 dark:hover:bg-gray-700 hover:text-gray-800 #{selected}" do %>
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-gray-400 sm:text-gray-800 transition duration-75 dark:text-gray-400 hover:text-gray-900 dark:group-hover:text-white">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-gray-400 sm:text-gray-800 dark:sm:text-gray-100 transition duration-75 dark:text-gray-400 hover:text-gray-900 dark:group-hover:text-white ">
               <path stroke-linecap="round" stroke-linejoin="round" d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
             </svg>
           <% end %>
@@ -46,14 +46,14 @@
         <div data-controller="projectmenu" class="h-full relative flex items-center justify-center">
           <% if @project && @project.id %>
             <% if controller_name == 'issues' %>
-            <% selected = 'border-b-2 border-blue-700 text-blue-100 sm:text-blue-700 dark:text-blue-300 dark:text-gray-100 dark:bg-gray-700 dark:hover:bg-gray-700 font-medium'  %>
+            <% selected = 'border-b-2 border-blue-700 text-blue-100 sm:text-blue-700 dark:text-blue-300 dark:text-gray-100 dark:bg-gray-700 dark:hover:bg-gray-800 dark:sm:hover:bg-gray-700 font-medium'  %>
             <% else %>
             <% selected = ''  %>
             <% end %>
-          <%= link_to t("label_issue_plural"),project_issues_path(@project), class: "h-full flex items-center p-4 hover:bg-gray-700 sm:hover:bg-gray-50 dark:text-gray-100 dark:bg-gray-800 dark:hover:bg-gray-700 #{selected}" %>
+          <%= link_to t("label_issue_plural"),project_issues_path(@project), class: "h-full flex items-center p-4 hover:bg-gray-700 sm:hover:bg-gray-50 dark:text-gray-100 dark:bg-gray-800 dark:hover:bg-gray-700 dark:sm:hover:bg-gray-700 #{selected}" %>
           <% end %>
-          <div data-action="click->projectmenu#toggle" class="cursor-pointer ml-1 p-2 rounded-full hover:bg-gray-700 sm:hover:bg-gray-100 text-gray-300 sm:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300 dark:hover:bg-gray-700 hover:text-gray-800">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-gray-300 sm:text-gray-800 transition duration-75 dark:text-gray-400 hover:text-gray-900 dark:group-hover:text-white">
+          <div data-action="click->projectmenu#toggle" class="cursor-pointer ml-1 p-2 rounded-full hover:bg-gray-700 dark:sm:hover:bg-gray-700 sm:hover:bg-gray-100 text-gray-300 sm:text-gray-700 dark:text-gray-400 dark:sm:text-gray-400 dark:hover:text-gray-300 dark:hover:bg-gray-700 hover:text-gray-800">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-gray-300 sm:text-gray-800 transition duration-75 dark:text-gray-400 dark:sm:text-gray-400 hover:text-gray-900 dark:group-hover:text-white">
               <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM12.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM18.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
             </svg>
           </div>

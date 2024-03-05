@@ -72,7 +72,7 @@
   <p class="nodata"><%= l(:label_no_data) %></p>
   <% else %>
   <%= render_query_totals(@query) %>
-  <div class="my-8 container mx-auto bg-white shadow rounded p-4">
+  <div class="my-8 container mx-auto bg-white dark:bg-slate-700 shadow rounded p-4">
     <%= render :partial => 'issues/list', :locals => {:issues => @issues, :query => @query} %>
   </div>
   <span class="pagination"><%= pagination_links_full @issue_pages, @issue_count %></span>
