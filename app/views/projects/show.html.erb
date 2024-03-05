@@ -1,37 +1,41 @@
-<div class=" container mx-auto">
+
+  <div class="flex bg-white shadow items-center justify-center flex-col p-8 mb-4">
+    <div class="flex flex-col items-center mb-4 hover:bg-gray-50 dark:hover:bg-gray-700 px-2 py-1">
+      <%= letter_avatar_tag(@project.name, 300, class: 'w-8 h-8 mb-4') %>
+      <span class="icon-plus icon-white uppercase font-normal text-base"><%= @project.name %></span>
+    </div>
+    <% if @project.description.present? %>
+    <div class="wiki text-center text-gray-400">
+      <%= textilizable @project.description %>
+    </div>
+    <% end %>
+  </div>
+
+  <div class=" container mx-auto">
   <% unless @project.active? %>
     <p class="warning"><span class="icon icon-lock"><%= l(:text_project_closed) %></span></p>
   <% end %>
 
-  <div class="splitcontent">
-  <div class="splitcontentleft">
-    <% if @project.description.present? %>
-    <div class="wiki">
-      <%= textilizable @project.description %>
-    </div>
-    <% end %>
-    <% if @project.homepage.present? || @project.visible_custom_field_values.any? { |o| o.value.present? } %>
-    <ul>
-    <% unless @project.homepage.blank? %>
-      <li><span class="label"><%=l(:field_homepage)%>:</span> <%= link_to_if uri_with_safe_scheme?(@project.homepage), @project.homepage, @project.homepage %></li>
-    <% end %>
-    <% render_custom_field_values(@project) do |custom_field, formatted| %>
-      <li class="<%= custom_field.css_classes %>"><span class="label"><%= custom_field.name %>:</span> <%= formatted %></li>
-    <% end %>
-    </ul>
-    <% end %>
+  <div class="splitcontent grid grid-cols-1 sm:grid-cols-2 gap-4">
+
+
 
     <% if User.current.allowed_to?(:view_issues, @project) %>
     <div class="issues box">
-      <h3 class="icon icon-issue">
-        <%=l(:label_issue_tracking)%>&nbsp;
-        <%= link_to l(:label_details),
-              project_issues_report_details_path(@project, :detail => 'tracker'),
-              :class => 'icon-only icon-zoom-in',
-              :title => l(:label_details) %>
-      </h3>
+      <div class="flex items-center mb-2">
+        <h3 class="icon icon-issue uppercase font-medium text-xs">
+          <%=l(:label_issue_tracking)%>&nbsp;
+        </h3>
+        <%= link_to project_issues_report_details_path(@project, :detail => 'tracker'),
+                :class => 'icon-only icon-zoom-in text-gray-900 cursor-pointer flex items-center justify-center bg-white  focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-full text-sm p-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700 ml-auto',
+                :title => l(:label_details) do %>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="m15.75 15.75-2.489-2.489m0 0a3.375 3.375 0 1 0-4.773-4.773 3.375 3.375 0 0 0 4.774 4.774ZM21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+          </svg>
+        <% end %>
+      </div>
       <% if @trackers.present? %>
-      <table class="list issue-report">
+      <table class="list issue-report table table-bordered">
         <thead>
           <tr>
             <th></th>
@@ -60,16 +64,16 @@
         </tbody>
       </table>
       <% end %>
-      <p>
+      <div class="my-2 flex items-center justify-center space-x-2 text-blue-700 hover:text-blue-800 dark:text-blue-100 dark:hover:text-blue-200">
         <%= link_to l(:label_issue_view_all), project_issues_path(@project, :set_filter => 1) %>
-        | <%= link_to l(:field_summary), project_issues_report_path(@project) %>
+        <%= link_to l(:field_summary), project_issues_report_path(@project) %>
         <% if User.current.allowed_to?(:view_calendar, @project, :global => true) %>
-          | <%= link_to l(:label_calendar), project_calendar_path(@project) %>
+          <%= link_to l(:label_calendar), project_calendar_path(@project) %>
         <% end %>
         <% if User.current.allowed_to?(:view_gantt, @project, :global => true) %>
-          | <%= link_to l(:label_gantt), project_gantt_path(@project) %>
+          <%= link_to l(:label_gantt), project_gantt_path(@project) %>
         <% end %>
-      </p>
+      </div>
     </div>
     <% end %>
 
@@ -94,14 +98,15 @@
     </div>
   <% end %>
     <%= call_hook(:view_projects_show_left, :project => @project) %>
-  </div>
 
-  <div class="splitcontentright">
+
     <% if @news.any? && authorize_for('news', 'index') %>
     <div class="news box">
       <h3 class="icon icon-news"><%=l(:label_news_latest)%></h3>
       <%= render :partial => 'news/news', :collection => @news %>
-      <p><%= link_to l(:label_news_view_all), project_news_index_path(@project) %></p>
+      <footer class="w-full flex my-2">
+        <%= link_to l(:label_news_view_all), project_news_index_path(@project), class: "ml-auto text-blue-700 hover:text-blue-800 dark:text-blue-100 dark:hover:text-blue-200" %>
+      </footer>
     </div>
     <% end %>
 
@@ -110,18 +115,32 @@
     <% if @subprojects.any? %>
     <div class="projects box">
       <h3 class="icon icon-projects"><%=l(:label_subproject_plural)%></h3>
-    <ul class="subprojects">
+      <div class="subprojects flex flex-col">
       <% @subprojects.each do |project| %>
-      <li><%= link_to(project.name, project_path(project), :class => project.css_classes).html_safe %></li>
-
+        <%= link_to project_path(project), class: 'flex items-center hover:bg-gray-50 dark:hover:bg-gray-700 py-1' do %>
+          <%= letter_avatar_tag(project.name, 300, class: 'w-8 h-8 mr-2') %>
+          <span class="icon-plus icon-white uppercase font-normal text-xs"><%= project.name %></span>
+        <% end %>
       <% end %>
+      </div>
+    </div>
+    <% end %>
 
+    <% if @project.homepage.present? || @project.visible_custom_field_values.any? { |o| o.value.present? } %>
+    <div class="box">
+      <ul>
+      <% unless @project.homepage.blank? %>
+        <li><span class="label"><%=l(:field_homepage)%>:</span> <%= link_to_if uri_with_safe_scheme?(@project.homepage), @project.homepage, @project.homepage %></li>
+      <% end %>
+      <% render_custom_field_values(@project) do |custom_field, formatted| %>
+        <li class="<%= custom_field.css_classes %>"><span class="label"><%= custom_field.name %>:</span> <%= formatted %></li>
+      <% end %>
       </ul>
     </div>
     <% end %>
 
     <%= call_hook(:view_projects_show_right, :project => @project) %>
-  </div>
+
   </div>
 
   <% content_for :sidebar do %>
