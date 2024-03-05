@@ -40,16 +40,7 @@
     <main class="w-full flex h-[calc(100vh-3.5rem)] dark:bg-slate-900 dark:text-gray-400 mt-14">
       <%= call_hook :view_layouts_base_body_top %>
 
-      <% if controller_name == "issues" && action_name == "show" %>
-        <div data-controller="issue" class="w-full flex bg-gray-50 dark:bg-slate-900 h-full">
-          <%= render "issues/sidebar" %>
-          <section  data-issue-target="section" id="content" class="w-full bg-gray-50 dark:bg-slate-900 h-full flex ml-8 mr-80">
-            <%= yield %>
-            <%= call_hook :view_layouts_base_content %>
-            <div style="clear:both;"></div>
-          </section>
-        </div>
-      <% elsif controller_name == "wiki" %>
+      <% if controller_name == "wiki" %>
         <section id="content" class="w-full flex flex-col h-full bg-gray-50 dark:bg-slate-900 ">
           <%= render "layouts/flash_messages" %>
           <%= yield %>

@@ -1,203 +1,208 @@
-<div class="dark:bg-gray-800 h-fit mr-8 w-full bg-white shadow p-8 md:p-16  mb-8 mt-0 md:mt-8 flex flex-col">
-  <%= render_flash_messages %>
-
-  <header class="flex flex-col items-center justify-center">
-    <div class="flex w-full border-b border-gray-100 pb-4 items-center">
-      <h2 class="flex-none flex w-auto items-center font-medium mr-2">
-        <div data-action="click->issue#toggleNavigation" class="cursor-pointer p-2 mr-2 rounded-full hover:bg-gray-100 text-gray-700 dark:text-gray-400 dark:hover:text-gray-300 dark:hover:bg-gray-700 hover:text-gray-800">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+<div data-controller="issue" class="bg-white dark:bg-slate-700 shadow">
+  <div data-issue-target="section" data-controller="contextual" class="contextual px-4 sm:px-0 container mx-auto  py-2 grid grid-cols-3 justify-items-stretch gap-0 w-full">
+    <h2 class="flex-none flex w-auto items-center font-medium mr-2">
+      <div data-action="click->issue#toggleNavigation" class="cursor-pointer p-2 mr-2 rounded-full hover:bg-gray-100 text-gray-700 dark:text-gray-400 dark:hover:text-gray-300 dark:hover:bg-gray-700 hover:text-gray-800">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+        </svg>
+        <%= render :partial => 'issues/sidebar-navigation' %>
+      </div>
+      <%= issue_heading(@issue) %>
+      <div class="flex items-center mx-2">
+        <%= issue_status_type_badge(@issue.status) %>
+      </div>
+      <% if @issue.is_private? %>
+        <span class="badge badge-private private mr-2 flex items-center justify-center">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z" />
+          </svg>
+        </span>
+      <% end %>
+    </h2>
+    <div class="relative flex items-center justify-self-center pr-6">
+      <%= render :partial => 'action_menu' %>
+    </div>
+    <div class="ml-auto w-auto flex relative">
+      <div data-controller="sidebar" class="ml-auto">
+        <div data-action="click->sidebar#toggle" class="text-gray-900 mr-3 cursor-pointer flex items-center justify-center bg-white focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-full text-sm p-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6.429 9.75 2.25 12l4.179 2.25m0-4.5 5.571 3 5.571-3m-11.142 0L2.25 7.5 12 2.25l9.75 5.25-4.179 2.25m0 0L21.75 12l-4.179 2.25m0 0 4.179 2.25L12 21.75 2.25 16.5l4.179-2.25m11.142 0-5.571 3-5.571-3" />
           </svg>
         </div>
-        <%= issue_heading(@issue) %>
-        <div class="flex items-center mx-2">
-          <%= issue_status_type_badge(@issue.status) %>
-        </div>
-        <% if @issue.is_private? %>
-          <span class="badge badge-private private mr-2 flex items-center justify-center">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z" />
-            </svg>
-          </span>
-        <% end %>
-      </h2>
-
-      <div class="ml-auto w-auto">
-        <div class="flex justify-end">
-          <%= render :partial => 'action_menu' %>
+        <div>
+          <%= render :partial => 'issues/sidebar' %>
         </div>
       </div>
-    </div>
-    <div class="my-16 flex flex-col items-center">
-      <div class="subject w-full text-center font-medium text-xl">
-        <%# render_issue_subject_with_tree(@issue) %>
-        <%= @issue.subject %>
+      <div data-action="click->issue#toggle" class="text-gray-900 cursor-pointer flex items-center justify-center bg-white  focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-full text-sm p-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5ZM12 12.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5ZM12 18.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5Z" />
+        </svg>
       </div>
-      <div class="text-xs text-gray-500 author">
-        <%= authoring @issue.created_on, @issue.author %>.
-        <% if @issue.created_on != @issue.updated_on %>
-        <%= l(:label_updated_time, time_tag(@issue.updated_on)).html_safe %>.
-        <% end %>
+
+      <div class="absolute flex flex-col right-0 shadow rounded-md border border-gray-50 top-10 bg-white z-50 w-60 hidden" data-issue-target="actions">
+        <%= copy_object_url_link(issue_url(@issue, only_path: false)) %>
+        <%= link_to l(:button_delete_object, object_name: l(:label_issue).downcase), issue_path(@issue),
+                  :data => {:confirm => issues_destroy_confirmation_message(@issue)},
+                  :method => :delete, :class => 'flex items-center text-gray-900 dark:text-gray-100 hover:bg-gray-50 hover:border-l-2 hover:border-blue-800 hover:pl-3.5 px-4 py-2 text-sm' if @issue.deletable? %>
       </div>
+
     </div>
-  </header>
+  </div>
+</div>
 
+<div class="container mx-auto mt-8 grid grid-cols-1 sm:grid-cols-3 gap-4">
+  <div class="dark:bg-gray-800 sm:col-span-2 h-fit w-full bg-white shadow p-8 md:p-16 flex flex-col">
+    <%= render_flash_messages %>
 
+    <header class="flex flex-col items-center justify-center">
+      <div class="my-12 flex flex-col items-center">
+        <div class="subject w-full text-center font-medium text-xl">
+          <%# render_issue_subject_with_tree(@issue) %>
+          <%= @issue.subject %>
+        </div>
+        <div class="text-xs text-gray-500 author">
+          <%= authoring @issue.created_on, @issue.author %>.
+          <% if @issue.created_on != @issue.updated_on %>
+          <%= l(:label_updated_time, time_tag(@issue.updated_on)).html_safe %>.
+          <% end %>
+        </div>
+      </div>
+    </header>
 
+    <div class="<%= @issue.css_classes %> details">
+      <div class="gravatar-with-child">
+        <%= author_avatar(@issue.author, :size => "50") %>
+        <%= assignee_avatar(@issue.assigned_to, :size => "22", :class => "gravatar-child") if @issue.assigned_to %>
+      </div>
 
-  <div class="<%= @issue.css_classes %> details">
-
-
-    <div class="gravatar-with-child">
-      <%= author_avatar(@issue.author, :size => "50") %>
-      <%= assignee_avatar(@issue.assigned_to, :size => "22", :class => "gravatar-child") if @issue.assigned_to %>
-    </div>
-
-  <% if @issue.description? %>
-
-  <div class="description">
-
-      <% if @issue.notes_addable? %>
-      <div class="w-full flex">
-        <%= link_to quoted_issue_path(@issue), :remote => true, :method => 'post', :class => 'icon icon-comment ml-auto' do %>
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-gray-600 hover:text-gray-900">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H8.25m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H12m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 0 1-2.555-.337A5.972 5.972 0 0 1 5.41 20.97a5.969 5.969 0 0 1-.474-.065 4.48 4.48 0 0 0 .978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25Z" />
-          </svg>
-        <% end %>
+      <% if @issue.description? %>
+        <div class="description">
+          <% if @issue.notes_addable? %>
+          <div class="w-full flex">
+            <%= link_to quoted_issue_path(@issue), :remote => true, :method => 'post', :class => 'icon icon-comment ml-auto' do %>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-gray-600 hover:text-gray-900">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H8.25m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H12m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 0 1-2.555-.337A5.972 5.972 0 0 1 5.41 20.97a5.969 5.969 0 0 1-.474-.065 4.48 4.48 0 0 0 .978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25Z" />
+              </svg>
+            <% end %>
+            </div>
+          <% end %>
+          <div class="wiki mb-8">
+            <%= textilizable @issue, :description, :attachments => @issue.attachments %>
+          </div>
+        </div>
+      <% end %>
+      <% if @issue.attachments.any? %>
+        <div class="my-8">
+          <%= link_to_attachments @issue, :thumbnails => true %>
         </div>
       <% end %>
 
-
-    <div class="wiki mb-8">
-    <%= textilizable @issue, :description, :attachments => @issue.attachments %>
+      <%= render_full_width_custom_fields_rows(@issue) %>
+      <%= call_hook(:view_issues_show_description_bottom, :issue => @issue) %>
     </div>
-  </div>
-  <% end %>
-  <% if @issue.attachments.any? %>
-    <div class="my-8">
-      <%= link_to_attachments @issue, :thumbnails => true %>
+
+    <%= render partial: 'action_menu_edit' if User.current.wants_comments_in_reverse_order? %>
+
+    <div id="history">
+      <%= render_tabs issue_history_tabs, issue_history_default_tab %>
     </div>
-  <% end %>
 
-  <%= render_full_width_custom_fields_rows(@issue) %>
+    <%= render partial: 'action_menu_edit' unless User.current.wants_comments_in_reverse_order? %>
 
-  <%= call_hook(:view_issues_show_description_bottom, :issue => @issue) %>
+    <% other_formats_links do |f| %>
+      <%= f.link_to 'Atom', :url => {:key => User.current.atom_key} %>
+      <%= f.link_to 'PDF' %>
+    <% end %>
 
+    <% html_title "#{@issue.tracker.name} ##{@issue.id}: #{@issue.subject}" %>
 
+    <% content_for :header_tags do %>
+        <%= auto_discovery_link_tag(:atom, {:format => 'atom', :key => User.current.atom_key}, :title => "#{@issue.project} - #{@issue.tracker} ##{@issue.id}: #{@issue.subject}") %>
+    <% end %>
+
+    <%= context_menu %>
   </div>
 
-  <%= render partial: 'action_menu_edit' if User.current.wants_comments_in_reverse_order? %>
-
-  <div id="history">
-  <%= render_tabs issue_history_tabs, issue_history_default_tab %>
-  </div>
-
-  <%#= render partial: 'action_menu_edit' unless User.current.wants_comments_in_reverse_order? %>
-
-  <% other_formats_links do |f| %>
-    <%= f.link_to 'Atom', :url => {:key => User.current.atom_key} %>
-    <%= f.link_to 'PDF' %>
-  <% end %>
-
-  <% html_title "#{@issue.tracker.name} ##{@issue.id}: #{@issue.subject}" %>
-
-  <% content_for :sidebar do %>
-    <%= render :partial => 'issues/sidebar' %>
-
-    <% if User.current.allowed_to?(:add_issue_watchers, @project) ||
-      (@issue.watchers.present? && User.current.allowed_to?(:view_issue_watchers, @project)) %>
-      <div id="watchers">
-        <%= render :partial => 'watchers/watchers', :locals => {:watched => @issue} %>
+  <aside class="shadow w-full  p-8 bg-white dark:bg-gray-800 ml-auto overflow-y-auto h-full">
+    <div class="space-y-1">
+      <div class="flex w-full">
+        <div class="mr-2 text-gray-400 w-1/3"><%= l(:field_status) %></div>
+        <div class="w-2/3"><%= @issue.status.name %></div>
       </div>
-    <% end %>
-  <% end %>
-
-  <% content_for :header_tags do %>
-      <%= auto_discovery_link_tag(:atom, {:format => 'atom', :key => User.current.atom_key}, :title => "#{@issue.project} - #{@issue.tracker} ##{@issue.id}: #{@issue.subject}") %>
-  <% end %>
-
-  <%= context_menu %>
-</div>
-
-<aside class="w-80 shadow  p-8 bg-white dark:bg-gray-800 ml-auto overflow-y-auto fixed top-14 right-0 h-full">
-  <div class="space-y-1">
-    <div class="flex w-full">
-      <div class="mr-2 text-gray-400 w-1/3"><%= l(:field_status) %></div>
-      <div class="w-2/3"><%= @issue.status.name %></div>
-    </div>
-    <div class="flex w-full">
-      <div class="mr-2 text-gray-400 w-1/3"><%= l(:field_priority) %></div>
-      <div class="w-2/3"><%= @issue.priority.name %></div>
-    </div>
-    <% unless @issue.disabled_core_fields.include?('assigned_to_id') %>
-    <div class="flex w-full">
-      <div class="mr-2 text-gray-400 w-1/3"><%= l(:field_assigned_to) %></div>
-      <div class="w-2/3"><%= @issue.assigned_to ? link_to_principal(@issue.assigned_to) : "-" %></div>
-    </div>
-    <% end %>
-    <% unless @issue.disabled_core_fields.include?('category_id') || (@issue.category.nil? && @issue.project.issue_categories.none?) %>
-    <div class="flex w-full">
-      <div class="mr-2 text-gray-400 w-1/3"><%= l(:field_category) %></div>
-      <div class="w-2/3"><%= @issue.category ? @issue.category.name : "-" %></div>
-    </div>
-    <% end %>
-    <% unless @issue.disabled_core_fields.include?('fixed_version_id') || (@issue.fixed_version.nil? && @issue.assignable_versions.none?) %>
-    <div class="flex w-full">
-      <div class="mr-2 text-gray-400 w-1/3"><%= l(:field_fixed_version) %></div>
-      <div class="w-2/3"><%= @issue.fixed_version ? link_to_version(@issue.fixed_version) : "-" %></div>
-    </div>
-    <% end %>
-    <% unless @issue.disabled_core_fields.include?('start_date') %>
-    <div class="flex w-full">
-      <div class="mr-2 text-gray-400 w-1/3"><%= l(:field_start_date) %></div>
-      <div class="w-2/3"><%= format_date(@issue.start_date) %></div>
-    </div>
-    <% end %>
-    <% unless @issue.disabled_core_fields.include?('due_date') %>
-    <div class="flex w-full">
-      <div class="mr-2 text-gray-400 w-1/3"><%= l(:field_due_date) %></div>
-      <div class="w-2/3"><%= issue_due_date_details(@issue) %></div>
-    </div>
-    <% end %>
-    <% unless @issue.disabled_core_fields.include?('done_ratio') %>
-    <div class="flex w-full">
-      <div class="mr-2 text-gray-400 w-1/3"><%= l(:field_done_ratio) %></div>
-      <div class="w-2/3 flex items-center">
-        <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
-          <div class="bg-green-500 h-2.5 rounded-full text-green-50 text-[8px] flex items-center px-2" style="width: <%= @issue.done_ratio%>%"><%= @issue.done_ratio %>%</div>
+      <div class="flex w-full">
+        <div class="mr-2 text-gray-400 w-1/3"><%= l(:field_priority) %></div>
+        <div class="w-2/3"><%= @issue.priority.name %></div>
+      </div>
+      <% unless @issue.disabled_core_fields.include?('assigned_to_id') %>
+      <div class="flex w-full">
+        <div class="mr-2 text-gray-400 w-1/3"><%= l(:field_assigned_to) %></div>
+        <div class="w-2/3"><%= @issue.assigned_to ? link_to_principal(@issue.assigned_to) : "-" %></div>
+      </div>
+      <% end %>
+      <% unless @issue.disabled_core_fields.include?('category_id') || (@issue.category.nil? && @issue.project.issue_categories.none?) %>
+      <div class="flex w-full">
+        <div class="mr-2 text-gray-400 w-1/3"><%= l(:field_category) %></div>
+        <div class="w-2/3"><%= @issue.category ? @issue.category.name : "-" %></div>
+      </div>
+      <% end %>
+      <% unless @issue.disabled_core_fields.include?('fixed_version_id') || (@issue.fixed_version.nil? && @issue.assignable_versions.none?) %>
+      <div class="flex w-full">
+        <div class="mr-2 text-gray-400 w-1/3"><%= l(:field_fixed_version) %></div>
+        <div class="w-2/3"><%= @issue.fixed_version ? link_to_version(@issue.fixed_version) : "-" %></div>
+      </div>
+      <% end %>
+      <% unless @issue.disabled_core_fields.include?('start_date') %>
+      <div class="flex w-full">
+        <div class="mr-2 text-gray-400 w-1/3"><%= l(:field_start_date) %></div>
+        <div class="w-2/3"><%= format_date(@issue.start_date) %></div>
+      </div>
+      <% end %>
+      <% unless @issue.disabled_core_fields.include?('due_date') %>
+      <div class="flex w-full">
+        <div class="mr-2 text-gray-400 w-1/3"><%= l(:field_due_date) %></div>
+        <div class="w-2/3"><%= issue_due_date_details(@issue) %></div>
+      </div>
+      <% end %>
+      <% unless @issue.disabled_core_fields.include?('done_ratio') %>
+      <div class="flex w-full">
+        <div class="mr-2 text-gray-400 w-1/3"><%= l(:field_done_ratio) %></div>
+        <div class="w-2/3 flex items-center">
+          <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
+            <div class="bg-green-500 h-2.5 rounded-full text-green-50 text-[8px] flex items-center px-2" style="width: <%= @issue.done_ratio%>%"><%= @issue.done_ratio %>%</div>
+          </div>
         </div>
       </div>
+      <% end %>
+      <% unless @issue.disabled_core_fields.include?('estimated_hours') %>
+      <div class="flex w-full">
+        <div class="mr-2 text-gray-400 w-1/3"><%= l(:field_estimated_hours) %></div>
+        <div class="w-2/3"><%= issue_estimated_hours_details(@issue) %></div>
+      </div>
+      <% end %>
+      <% if User.current.allowed_to?(:view_time_entries, @project) && @issue.total_spent_hours > 0 %>
+      <div class="flex w-full">
+        <div class="mr-2 text-gray-400 w-1/3"><%= l(:label_spent_time) %></div>
+        <div class="w-2/3"><%= issue_spent_hours_details(@issue) %></div>
+      </div>
+      <% end %>
+
+      <%= render_half_width_custom_fields_rows(@issue) %>
+      <%= call_hook(:view_issues_show_details_bottom, :issue => @issue) %>
+    </div>
+
+    <% if !@issue.leaf? || User.current.allowed_to?(:manage_subtasks, @project) %>
+
+    <div id="issue_tree" class="my-8 border-t border-gray-50">
+    <%= render :partial => 'subtasks' %>
     </div>
     <% end %>
-    <% unless @issue.disabled_core_fields.include?('estimated_hours') %>
-    <div class="flex w-full">
-      <div class="mr-2 text-gray-400 w-1/3"><%= l(:field_estimated_hours) %></div>
-      <div class="w-2/3"><%= issue_estimated_hours_details(@issue) %></div>
-    </div>
-    <% end %>
-    <% if User.current.allowed_to?(:view_time_entries, @project) && @issue.total_spent_hours > 0 %>
-    <div class="flex w-full">
-      <div class="mr-2 text-gray-400 w-1/3"><%= l(:label_spent_time) %></div>
-      <div class="w-2/3"><%= issue_spent_hours_details(@issue) %></div>
+
+    <% if @relations.present? || User.current.allowed_to?(:manage_issue_relations, @project) %>
+
+    <div id="relations" class="my-8 border-t border-gray-50">
+    <%= render :partial => 'relations' %>
     </div>
     <% end %>
 
-    <%= render_half_width_custom_fields_rows(@issue) %>
-    <%= call_hook(:view_issues_show_details_bottom, :issue => @issue) %>
-  </div>
-
-  <% if !@issue.leaf? || User.current.allowed_to?(:manage_subtasks, @project) %>
-
-  <div id="issue_tree" class="my-8 border-t border-gray-50">
-  <%= render :partial => 'subtasks' %>
-  </div>
-  <% end %>
-
-  <% if @relations.present? || User.current.allowed_to?(:manage_issue_relations, @project) %>
-
-  <div id="relations" class="my-8 border-t border-gray-50">
-  <%= render :partial => 'relations' %>
-  </div>
-  <% end %>
-
-</aside>
+  </aside>
+</div>

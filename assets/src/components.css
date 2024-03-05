@@ -362,7 +362,7 @@ a.tracker-9{
 
 tr.status-1{
   td.status{
-    @apply bg-green-100 text-green-800 text-xs text-center font-medium me-2 px-2.5 py-0.5 rounded-full dark:bg-green-900 dark:text-green-300;
+    @apply text-green-800 text-xs text-center font-medium me-2 px-2.5 py-0.5 rounded-full dark:bg-green-900 dark:text-green-300;
     -webkit-background-clip: content-box;
     background-clip: content-box;
   }
@@ -370,7 +370,7 @@ tr.status-1{
 
 tr.status-2{
   td.status{
-    @apply bg-orange-100 text-orange-800 text-xs text-center font-medium me-2 px-2.5 py-0.5 rounded-full dark:bg-orange-900 dark:text-orange-300;
+    @apply text-orange-800 text-xs text-center font-medium me-2 px-2.5 py-0.5 rounded-full dark:bg-orange-900 dark:text-orange-300;
     -webkit-background-clip: content-box;
     background-clip: content-box;
   }
@@ -378,7 +378,7 @@ tr.status-2{
 
 tr.status-3{
   td.status{
-    @apply bg-amber-100 text-amber-800 text-xs text-center font-medium me-2 px-2.5 py-0.5 rounded-full dark:bg-amber-900 dark:text-amber-300;
+    @apply text-amber-800 text-xs text-center font-medium me-2 px-2.5 py-0.5 rounded-full dark:bg-amber-900 dark:text-amber-300;
     -webkit-background-clip: content-box;
     background-clip: content-box;
   }
@@ -386,7 +386,7 @@ tr.status-3{
 
 tr.status-4{
   td.status{
-    @apply bg-lime-100 text-lime-800 text-xs text-center font-medium me-2 px-2.5 py-0.5 rounded-full dark:bg-lime-900 dark:text-lime-300;
+    @apply text-lime-800 text-xs text-center font-medium me-2 px-2.5 py-0.5 rounded-full dark:bg-lime-900 dark:text-lime-300;
     -webkit-background-clip: content-box;
     background-clip: content-box;
   }
@@ -394,7 +394,7 @@ tr.status-4{
 
 tr.status-5{
   td.status{
-    @apply bg-violet-100 text-violet-800 text-xs text-center font-medium me-2 px-2.5 py-0.5 rounded-full dark:bg-violet-900 dark:text-violet-300;
+    @apply text-violet-800 text-xs text-center font-medium me-2 px-2.5 py-0.5 rounded-full dark:bg-violet-900 dark:text-violet-300;
     -webkit-background-clip: content-box;
     background-clip: content-box;
   }
@@ -402,7 +402,7 @@ tr.status-5{
 
 tr.status-5{
   td.status{
-    @apply bg-fuchsia-100 text-fuchsia-800 text-xs text-center font-medium me-2 px-2.5 py-0.5 rounded-full dark:bg-fuchsia-900 dark:text-fuchsia-300;
+    @apply text-fuchsia-800 text-xs text-center font-medium me-2 px-2.5 py-0.5 rounded-full dark:bg-fuchsia-900 dark:text-fuchsia-300;
     -webkit-background-clip: content-box;
     background-clip: content-box;
   }
@@ -410,7 +410,7 @@ tr.status-5{
 
 tr.status-5{
   td.status{
-    @apply bg-rose-100 text-rose-800 text-xs text-center font-medium me-2 px-2.5 py-0.5 rounded-full dark:bg-rose-900 dark:text-rose-300;
+    @apply text-rose-800 text-xs text-center font-medium me-2 px-2.5 py-0.5 rounded-full dark:bg-rose-900 dark:text-rose-300;
     -webkit-background-clip: content-box;
     background-clip: content-box;
   }

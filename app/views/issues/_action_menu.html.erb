@@ -2,7 +2,7 @@
 <% if @issue.editable? %>
   <%= link_to edit_issue_path(@issue),
               :onclick => 'showAndScrollTo("update", "issue_notes"); return false;',
-              :class => 'action-button-with-icon', :accesskey => accesskey(:edit)  do %>
+              :class => 'action-button-with-icon text-white flex bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm p-2 mr-3 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800', :accesskey => accesskey(:edit)  do %>
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
       <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L6.832 19.82a4.5 4.5 0 0 1-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 0 1 1.13-1.897L16.863 4.487Zm0 0L19.5 7.125" />
     </svg>
@@ -27,16 +27,5 @@
   <% end %>
 <% end %>
 
-<div data-action="click->issue#toggle" class="action-button-with-icon relative">
-  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
-    <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM12.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM18.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
-  </svg>
-  <div data-issue-target="actions" class="absolute flex flex-col top-10 right-0 shadow rounded-md border border-gray-50 mt bg-white dark:bg-gray-800 z-50 w-60 hidden">
-    <%= copy_object_url_link(issue_url(@issue, only_path: false)) %>
-    <%= link_to l(:button_delete_object, object_name: l(:label_issue).downcase), issue_path(@issue),
-              :data => {:confirm => issues_destroy_confirmation_message(@issue)},
-              :method => :delete, :class => 'flex items-center text-gray-900 dark:text-gray-100 hover:bg-gray-50 hover:border-l-2 hover:border-blue-800 hover:pl-3.5 px-4 py-2 text-sm' if @issue.deletable? %>
-  </div>
-</div>
 
 </div>

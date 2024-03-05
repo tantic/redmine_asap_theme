@@ -3746,10 +3746,6 @@ tr.status-1{
     border-radius: 9999px;
   }
   td.status{
-    --tw-bg-opacity: 1;
-    background-color: rgb(220 252 231 / var(--tw-bg-opacity));
-  }
-  td.status{
     padding-left: 0.625rem;
     padding-right: 0.625rem;
   }
@@ -3795,10 +3791,6 @@ tr.status-2{
   }
   td.status{
     border-radius: 9999px;
-  }
-  td.status{
-    --tw-bg-opacity: 1;
-    background-color: rgb(255 237 213 / var(--tw-bg-opacity));
   }
   td.status{
     padding-left: 0.625rem;
@@ -3848,10 +3840,6 @@ tr.status-3{
     border-radius: 9999px;
   }
   td.status{
-    --tw-bg-opacity: 1;
-    background-color: rgb(254 243 199 / var(--tw-bg-opacity));
-  }
-  td.status{
     padding-left: 0.625rem;
     padding-right: 0.625rem;
   }
@@ -3897,10 +3885,6 @@ tr.status-4{
   }
   td.status{
     border-radius: 9999px;
-  }
-  td.status{
-    --tw-bg-opacity: 1;
-    background-color: rgb(236 252 203 / var(--tw-bg-opacity));
   }
   td.status{
     padding-left: 0.625rem;
@@ -3950,10 +3934,6 @@ tr.status-5{
     border-radius: 9999px;
   }
   td.status{
-    --tw-bg-opacity: 1;
-    background-color: rgb(237 233 254 / var(--tw-bg-opacity));
-  }
-  td.status{
     padding-left: 0.625rem;
     padding-right: 0.625rem;
   }
@@ -3998,10 +3978,6 @@ tr.status-5{
     border-radius: 9999px;
   }
   td.status{
-    --tw-bg-opacity: 1;
-    background-color: rgb(250 232 255 / var(--tw-bg-opacity));
-  }
-  td.status{
     padding-left: 0.625rem;
     padding-right: 0.625rem;
   }
@@ -4044,10 +4020,6 @@ tr.status-5{
   }
   td.status{
     border-radius: 9999px;
-  }
-  td.status{
-    --tw-bg-opacity: 1;
-    background-color: rgb(255 228 230 / var(--tw-bg-opacity));
   }
   td.status{
     padding-left: 0.625rem;
@@ -5964,12 +5936,20 @@ select{
   top: 5rem;
 }
 
+.top-28{
+  top: 7rem;
+}
+
 .z-10{
   z-index: 10;
 }
 
 .z-50{
   z-index: 50;
+}
+
+.col-span-2{
+  grid-column: span 2 / span 2;
 }
 
 .mx-2{
@@ -6030,6 +6010,11 @@ select{
 .my-auto{
   margin-top: auto;
   margin-bottom: auto;
+}
+
+.my-12{
+  margin-top: 3rem;
+  margin-bottom: 3rem;
 }
 
 .-mb-px{
@@ -6427,10 +6412,6 @@ select{
 
 .table-auto{
   table-layout: auto;
-}
-
-.table-fixed{
-  table-layout: fixed;
 }
 
 .translate-y-0{
@@ -7841,6 +7822,10 @@ select{
     order: 9999;
   }
 
+  .sm\:col-span-2{
+    grid-column: span 2 / span 2;
+  }
+
   .sm\:mx-0{
     margin-left: 0px;
     margin-right: 0px;
@@ -7908,6 +7893,10 @@ select{
 
   .sm\:grid-cols-2{
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .sm\:grid-cols-3{
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
   .sm\:flex-row{

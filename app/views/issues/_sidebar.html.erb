@@ -1,50 +1,8 @@
-<aside data-issue-target="navigation" class="w-72 z-50 shadow bg-white dark:bg-gray-800 fixed top-14 left-0 h-full hidden">
-    <div class="flex flex-col h-full overflow-y-auto">
-      <div class="w-full text-gray-600 dark:text-gray-200 border-b border-gray-50 dark:border-gray-600 py-4">
-        <% if @prev_issue_id || @next_issue_id %>
-          <div class="next-prev-links contextual flex justify-center">
-            <% if @prev_issue_id %>
-              <%= link_to_if @prev_issue_id,
-                            "\xc2\xab #{l(:label_previous)}",
-                            (@prev_issue_id ? issue_path(@prev_issue_id) : nil),
-                            :title => "##{@prev_issue_id}",
-                            :accesskey => accesskey(:previous),
-                            class: 'mr-2 hover:text-gray-800 dark:hover:text-gray-50' %> |
-            <% end %>
-            <% if @issue_position && @issue_count %>
-              <span class="position mx-2 hover:text-gray-800 dark:hover:text-gray-50">
-                <%= link_to_if @query_path,
-                              l(:label_item_position, :position => @issue_position, :count => @issue_count),
-                              @query_path %>
-              </span>
-            <% end %>
-            <% if @next_issue_id %>
-            |
-              <%= link_to_if @next_issue_id,
-                            "#{l(:label_next)} \xc2\xbb",
-                            (@next_issue_id ? issue_path(@next_issue_id) : nil),
-                            :title => "##{@next_issue_id}",
-                            :accesskey => accesskey(:next),
-                            class: 'ml-2 hover:text-gray-800 dark:hover:text-gray-50' %>
-            <% end %>
-          </div>
-        <% end %>
-      </div>
-      <% if @issues %>
-        <% @issues.each do |issue| %>
-          <%= link_to issue_path(issue), class:"flex flex-col text-gray-900 dark:text-gray-100 hover:bg-gray-50 dark:hover:bg-gray-900 cursor-pointer hover:border-l-2 hover:border-l-blue-800 border-b border-b-gray-50 dark:border-b-gray-600 hover:pl-3.5 p-4 text-sm" do %>
-            <div class="flex items-center">
-              <div class="mr-2">#<%= issue.id %></div>
-              <%= issue.subject %>
-            </div>
-            <% if issue.description? %>
-            <div class="text-xs text-gray-500 dark:text-gray-100 font-light ml-6">
-              <% the_text = textilizable issue, :description %>
-              <%= the_text.truncate(100) %>
-            </div>
-            <% end %>
-          <% end %>
-        <% end %>
-        <% end %>
-    </div>
+<aside id="sidebar" data-sidebar-target="sidebar" class="w-96 z-50 shadow-lg p-8 bg-white border-l border-gray-50 dark:bg-gray-800 fixed top-14 right-0 h-full hidden">
+  <%= call_hook(:view_issues_sidebar_issues_bottom) %>
+  <%= call_hook(:view_issues_sidebar_planning_bottom) %>
+
+  <%= render_sidebar_queries(IssueQuery, @project) %>
+  <%= call_hook(:view_issues_sidebar_queries_bottom) %>
+
   </aside>
