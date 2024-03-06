@@ -4,16 +4,17 @@
     <ul class="cal  w-full flex">
       <li scope="col" title="<%= l(:label_week) %>" class="calhead week-number p-2 border-r h-10 w-16 xl:text-sm text-xs"></li>
       <% 7.times do |i| %>
-        <li scope="col" class="calhead font-medium text-center p-2 border-r h-10 xl:w-40 lg:w-30 md:w-30 sm:w-20 w-10 xl:text-sm text-xs"><%= day_name((calendar.first_wday + i) % 7) %></li>
+        <li scope="col" class="calhead font-medium text-center p-2 border-r h-10 xl:w-40 lg:w-30 md:w-30 sm:w-20 w-12 xl:text-sm text-xs"><%= day_name((calendar.first_wday + i) % 7) %></li>
       <% end %>
     </ul>
-    <ul class="cal  w-full flex flex-wrap">
+
       <% calendar.format_month.each_slice(7) do |week| %>
+      <ul class="cal  w-full flex flex-wrap">
         <li class='week-number bg-gray-50 text-xs text-gray-500 text-center border p-1 h-40 w-16 overflow-auto transition cursor-pointer duration-500 ease hover:bg-gray-300'>
           <span class="label-week"><%= l(:label_week) %></span> <%= calendar.week_number week.first %>
         </li>
         <% week.each do |day| %>
-        <li class="<%= calendar.day_css_classes day %> calbody border p-1 h-40 xl:w-40 lg:w-30 md:w-30 sm:w-20 w-10 overflow-auto transition cursor-pointer duration-500 ease hover:bg-gray-300">
+        <li class="<%= calendar.day_css_classes day %> calbody border p-1 h-40 xl:w-40 lg:w-30 md:w-30 sm:w-20 w-12 overflow-auto transition cursor-pointer duration-500 ease hover:bg-gray-300">
           <p class="day-num text-right text-xs text-gray-500"><%= day.day %>
             <span class="abbr-day">(<%= abbr_day_name(day.cwday) %>)</span>
           </p>
@@ -34,8 +35,9 @@
           <% end %>
         </li>
         <% end %>
+      </ul>
       <% end %>
-    </ul>
+
   <% end %>
 </div>
 <%= context_menu %>

@@ -15,23 +15,8 @@
     }
 
     toggleNavigation(event){
-      event.preventDefault();
-      if(this.hasNavigationTarget) {
-        if (this.navigationTarget.classList.contains("hidden")) {
-          console.log("Affiche panneau");
-          this.navigationTarget.classList.remove("hidden");
-          this.sectionTarget.classList.remove("ml-16");
-          this.sectionTarget.classList.add("ml-80");
-          // this.navigationTarget.classList.toggle('hidden');
-      this.dismissNavigationOnClick(this.navigationTarget);
-        } else {
-          console.log("Ferme panneau");
-          this.navigationTarget.classList.add("hidden");
-          this.sectionTarget.classList.remove("ml-80");
-          this.sectionTarget.classList.add("ml-16");
-        }
-      }
-
+      this.navigationTarget.classList.toggle('hidden');
+      this.dismissOnClick(this.navigationTarget);
     }
 
     dismissOnClick(element) {

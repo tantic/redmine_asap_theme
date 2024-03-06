@@ -107,7 +107,6 @@
       <%= render_tabs issue_history_tabs, issue_history_default_tab %>
     </div>
 
-    <%= render partial: 'action_menu_edit' unless User.current.wants_comments_in_reverse_order? %>
 
     <% other_formats_links do |f| %>
       <%= f.link_to 'Atom', :url => {:key => User.current.atom_key} %>
