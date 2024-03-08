@@ -4,7 +4,7 @@
   }
 
   form label{
-    @apply font-normal;
+    @apply font-medium;
   }
 
   input[type='text'], input[type='password']{
@@ -63,17 +63,18 @@ table#filters-table{
     li{
       height: auto;
       margin: 0;
-      align-self: flex-end;
+      align-items: center;
       flex: 0 1 auto;
+      display: flex;
       a{
-        display: inline-block;
+        display: flex !important;
+        align-items: center;
         padding: 5px 8px;
-        vertical-align: bottom;
         line-height: 19px;
         border-bottom: 1px solid transparent;
         box-sizing: border-box;
         min-width: 3em;
-        height: 30px;
+        /* height: 30px; */
         margin-right: 2px;
         border: 1px solid transparent;
         border-radius: 3px 3px 0 0;
@@ -87,14 +88,22 @@ table#filters-table{
       }
     }
     li.tab-elements{
-      flex: 1;
+      /* flex: 1; */
       margin-left: 5px;
       position:relative;
+      align-items: center;
+      display: flex;
+      overflow-x: auto;
+    }
+    li.tab-elements::before{
+      display: none !important;
     }
     .jstElements {
       padding: 0;
       height: auto;
       line-height: normal;
+      display: flex;
+
     }
   }
 }

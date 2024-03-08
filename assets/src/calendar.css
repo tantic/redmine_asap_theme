@@ -1,10 +1,30 @@
-.today{
-  @apply bg-green-100;
-  .top>span{
-    @apply text-green-700 font-medium;
+.controller-calendars{
+  .today{
+    @apply bg-green-100 dark:bg-green-800 dark:text-green-100;
+    .top>span{
+      @apply text-green-700 font-medium dark:text-green-100;
+    }
   }
-}
 
-.odd{
-  @apply bg-gray-50;
+  .odd{
+    @apply bg-gray-50 dark:bg-gray-700;
+  }
+
+  .calendar-cell{
+    @apply border border-gray-100 dark:border-gray-500 p-1 h-40 2xl:w-48 xl:w-40 lg:w-32 md:w-24 sm:w-20 w-12 overflow-auto transition cursor-pointer duration-500 hover:bg-gray-300 dark:hover:bg-gray-700;
+    .issue{
+      @apply text-xs p-2 rounded bg-fuchsia-500 dark:hover:bg-fuchsia-200 dark:bg-fuchsia-100 text-fuchsia-50 dark:text-fuchsia-700 my-1;
+      a{
+        @apply p-0 dark:text-fuchsia-700 dark:hover:bg-fuchsia-200 dark:bg-fuchsia-100;
+      }
+    }
+  }
+
+  .calendar-head{
+    @apply font-medium text-center p-2 border  h-10 2xl:w-48 xl:w-40 lg:w-32 md:w-24 sm:w-20 w-12 xl:text-sm text-xs
+  }
+
+  .tip{
+    @apply hidden;
+  }
 }
