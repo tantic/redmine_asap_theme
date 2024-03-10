@@ -1,51 +1,57 @@
 <div class="ml-60">
-  <div class="dark:bg-gray-800 h-fit mr-8 w-full bg-white  mb-8 mt-0 flex items-center">
-    <div class="flex ml-auto">
-      <%= link_to l(:label_issue_status_new), new_issue_status_path, :class => 'icon icon-summary flex text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded text-sm px-3 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800' %>
-      <%= link_to(l(:label_update_issue_done_ratios), update_issue_done_ratio_issue_statuses_path, :class => 'icon icon-multiple ml-3 flex text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded text-sm px-3 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800', :method => 'post', :data => {:confirm => l(:text_are_you_sure)}) if Issue.use_status_for_done_ratio? %>
+  <div class="bg-white dark:bg-slate-700 shadow">
+    <div data-controller="contextual" class="contextual px-4 container mx-auto  py-2 grid grid-cols-3 justify-items-stretch gap-0 w-full">
+      <div></div>
+      <div></div>
+      <div class="flex w-full justify-end">
+        <%= link_to l(:label_issue_status_new), new_issue_status_path, :class => 'icon icon-summary flex text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded text-sm px-3 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800' %>
+        <%= link_to(l(:label_update_issue_done_ratios), update_issue_done_ratio_issue_statuses_path, :class => 'icon icon-multiple ml-3 flex text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded text-sm px-3 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800', :method => 'post', :data => {:confirm => l(:text_are_you_sure)}) if Issue.use_status_for_done_ratio? %>
+      </div>
     </div>
   </div>
 
-  <div class="dark:bg-gray-800 relative overflow-x-auto h-fit mr-8 w-full bg-white shadow p-8   mb-8 mt-0 md:mt-8 flex flex-col">
-    <table class="list issue_statuses w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-      <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-        <tr>
-          <th class="px-6 py-3"><%=l(:field_status)%></th>
-          <% if Issue.use_status_for_done_ratio? %>
-          <th class="px-6 py-3"><%=l(:field_done_ratio)%></th>
-          <% end %>
-          <th class="px-6 py-3"><%=l(:field_is_closed)%></th>
-          <th class="px-6 py-3"></th>
-          <th class="px-6 py-3"></th>
-        </tr>
-      </thead>
-      <tbody>
-        <% for status in @issue_statuses %>
-          <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
-            <td class="name px-6 py-2 text-gray-800"><%= link_to status.name, edit_issue_status_path(status) %></td>
+  <div class="mx-4">
+    <div class="dark:bg-gray-800 relative overflow-x-auto h-fit mr-8 w-full bg-white shadow p-8   mb-8 mt-0 md:mt-8 flex flex-col">
+      <table class="list issue_statuses w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+          <tr>
+            <th class="px-6 py-3"><%=l(:field_status)%></th>
             <% if Issue.use_status_for_done_ratio? %>
-            <td class="px-6 py-2"><%= status.default_done_ratio %></td>
+            <th class="px-6 py-3"><%=l(:field_done_ratio)%></th>
             <% end %>
-            <td class="px-6 py-2"><%= checked_image status.is_closed? %></td>
-            <td class="px-6 py-2">
-              <% unless WorkflowTransition.where('old_status_id = ? OR new_status_id = ?', status.id, status.id).exists? %>
-                <span class="icon icon-warning">
-                  <%= l(:text_status_no_workflow) %> (<%= link_to l(:button_edit), edit_workflows_path(:used_statuses_only => 0) %>)
-                </span>
-              <% end %>
-            </td>
-            <td class="buttons  px-6 py-2 flex items-center">
-              <%= reorder_handle(status) %>
-              <%= delete_link issue_status_path(status) %>
-            </td>
+            <th class="px-6 py-3"><%=l(:field_is_closed)%></th>
+            <th class="px-6 py-3"></th>
+            <th class="px-6 py-3"></th>
           </tr>
-        <% end %>
-      </tbody>
-    </table>
-  </div>
-  <% html_title(l(:label_issue_status_plural)) -%>
+        </thead>
+        <tbody>
+          <% for status in @issue_statuses %>
+            <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
+              <td class="name px-6 py-2 text-gray-800"><%= link_to status.name, edit_issue_status_path(status) %></td>
+              <% if Issue.use_status_for_done_ratio? %>
+              <td class="px-6 py-2"><%= status.default_done_ratio %></td>
+              <% end %>
+              <td class="px-6 py-2"><%= checked_image status.is_closed? %></td>
+              <td class="px-6 py-2">
+                <% unless WorkflowTransition.where('old_status_id = ? OR new_status_id = ?', status.id, status.id).exists? %>
+                  <span class="icon icon-warning">
+                    <%= l(:text_status_no_workflow) %> (<%= link_to l(:button_edit), edit_workflows_path(:used_statuses_only => 0) %>)
+                  </span>
+                <% end %>
+              </td>
+              <td class="buttons  px-6 py-2 flex items-center">
+                <%= reorder_handle(status) %>
+                <%= delete_link issue_status_path(status) %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    <% html_title(l(:label_issue_status_plural)) -%>
 
-  <%= javascript_tag do %>
-    $(function() { $("table.issue_statuses tbody").positionedItems(); });
-  <% end %>
+    <%= javascript_tag do %>
+      $(function() { $("table.issue_statuses tbody").positionedItems(); });
+    <% end %>
+  </div>
 </div>

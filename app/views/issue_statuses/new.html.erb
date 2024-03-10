@@ -1,8 +1,19 @@
 <div class="ml-60">
-<%= title [l(:label_issue_status_plural), issue_statuses_path], l(:label_issue_status_new) %>
+  <div class="bg-white dark:bg-slate-700 shadow">
+    <div data-controller="contextual" class="contextual px-4 container mx-auto  py-2 grid grid-cols-3 justify-items-stretch gap-0 w-full">
+      <div class="py-2">
+        <%= title [l(:label_issue_status_plural), issue_statuses_path], l(:label_issue_status_new) %>
+      </div>
+      <div></div>
+      <div class="flex w-full justify-end">
+      </div>
+    </div>
+  </div>
 
-<%= labelled_form_for @issue_status do |f| %>
-  <%= render :partial => 'form', :locals => {:f => f} %>
-  <%= submit_tag l(:button_create) %>
-<% end %>
+  <div class="mx-4">
+
+  <%= labelled_form_for @issue_status do |f| %>
+    <%= render :partial => 'form', :locals => {:f => f} %>
+    <%= submit_tag l(:button_create) %>
+  <% end %>
 </div>

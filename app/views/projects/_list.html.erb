@@ -4,7 +4,7 @@
   <%= form_tag({}, data: {cm_url: projects_context_menu_path}, class:'flex w-full mb-8') do -%>
     <%= hidden_field_tag 'back_url', url_for(params: request.query_parameters), id: nil %>
     <div class="autoscroll w-full relative overflow-x-auto">
-      <table class="list projects table odd-even <%= @query.css_classes %>">
+      <table class="list projects table table-bordered odd-even <%= @query.css_classes %>">
         <thead>
           <tr>
             <% if @admin_list %>

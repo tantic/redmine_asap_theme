@@ -1,7 +1,7 @@
 <%= form_tag({}, data: {cm_url: users_context_menu_path}) do -%>
 <%= hidden_field_tag 'back_url', url_for(params: request.query_parameters), id: nil %>
 <div class="autoscroll">
-<table class="list odd-even users table">
+<table class="list odd-even users table table-bordered">
 <thead>
   <tr>
     <th class="checkbox hide-when-print">

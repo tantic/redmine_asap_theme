@@ -1,8 +1,9 @@
 <div class="ml-60">
+  <div class="mx-4">
+  <%= render_settings_error @setting_errors %>
 
-<%= render_settings_error @setting_errors %>
+  <%= render_tabs administration_settings_tabs %>
 
-<%= render_tabs administration_settings_tabs %>
-
-<% html_title(l(:label_settings), l(:label_administration)) -%>
+  <% html_title(l(:label_settings), l(:label_administration)) -%>
+  </div>
 </div>

@@ -1,13 +1,21 @@
 <div class="ml-60">
-  <div class="dark:bg-gray-800 h-fit mr-6 w-full bg-white mb-8 mt-0 flex items-center">
-    <%= link_to_function l(:label_custom_field_new), "location.href = '#{new_custom_field_path}?tab=' + encodeURIComponent(($('.tabs a.selected').attr('id')||'').split('tab-').pop())", :class => 'icon icon-add ml-auto flex text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded text-sm px-3 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-80' %>
+  <div class="bg-white dark:bg-slate-700 shadow">
+    <div data-controller="contextual" class="contextual px-4 container mx-auto  py-2 grid grid-cols-3 justify-items-stretch gap-0 w-full">
+      <div></div>
+      <div></div>
+      <div class="flex w-full">
+        <%= link_to_function l(:label_custom_field_new), "location.href = '#{new_custom_field_path}?tab=' + encodeURIComponent(($('.tabs a.selected').attr('id')||'').split('tab-').pop())", :class => 'icon icon-add ml-auto flex text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded text-sm px-3 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-80' %>
+      </div>
+    </div>
   </div>
 
-  <% if @custom_fields_by_type.present? %>
-    <%= render_custom_fields_tabs(@custom_fields_by_type.keys) %>
-  <% else %>
-    <div class="nodata w-full flex items-center justify-center bg-gray-50 dark:bg-gray-800 p-16 rounded"><%= l(:label_no_data) %></p>
-  <% end %>
+  <div class="mx-4">
+    <% if @custom_fields_by_type.present? %>
+      <%= render_custom_fields_tabs(@custom_fields_by_type.keys) %>
+    <% else %>
+      <div class="nodata w-full flex items-center justify-center bg-gray-50 dark:bg-gray-800 p-16 rounded"><%= l(:label_no_data) %></p>
+    <% end %>
+  </div>
 
   <%= javascript_tag do %>
     $(function() { $("table.custom_fields tbody").positionedItems(); });

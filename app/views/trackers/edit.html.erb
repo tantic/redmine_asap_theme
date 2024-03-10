@@ -1,7 +1,19 @@
 <div class="ml-60">
-  <%= title [l(:label_tracker_plural), trackers_path], @tracker.name %>
+  <div class="bg-white dark:bg-slate-700 shadow">
+    <div data-controller="contextual" class="contextual px-4 container mx-auto  py-2 grid grid-cols-3 justify-items-stretch gap-0 w-full">
+      <div class="py-2">
+        <%= title [l(:label_tracker_plural), trackers_path], @tracker.name %>
+      </div>
+      <div></div>
+      <div class="flex w-full justify-end">
+      </div>
+    </div>
+  </div>
 
-  <%= labelled_form_for @tracker do |f| %>
-  <%= render :partial => 'form', :locals => { :f => f } %>
-  <% end %>
+  <div class="mx-4">
+
+    <%= labelled_form_for @tracker do |f| %>
+    <%= render :partial => 'form', :locals => { :f => f } %>
+    <% end %>
+  </div>
 </div>

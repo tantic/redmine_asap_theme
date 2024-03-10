@@ -1,10 +1,21 @@
 <div class="ml-60">
-  <%= title [l(:label_role_plural), roles_path], l(:label_role_new) %>
-
-  <%= labelled_form_for @role do |f| %>
-    <%= render :partial => 'form', :locals => { :f => f } %>
-    <div class="flex w-full my-4">
-      <%= submit_tag l(:button_create), class: "ml-auto button-submit" %>
+  <div class="bg-white dark:bg-slate-700 shadow">
+    <div data-controller="contextual" class="contextual px-4 container mx-auto  py-2 grid grid-cols-3 justify-items-stretch gap-0 w-full">
+      <div class="py-2">
+        <%= title [l(:label_role_plural), roles_path], l(:label_role_new) %>
+      </div>
+      <div></div>
+      <div class="flex w-full justify-end">
+      </div>
     </div>
-  <% end %>
+  </div>
+
+  <div class="mx-4">
+    <%= labelled_form_for @role do |f| %>
+      <%= render :partial => 'form', :locals => { :f => f } %>
+      <div class="flex w-full my-4">
+        <%= submit_tag l(:button_create), class: "ml-auto button-submit" %>
+      </div>
+    <% end %>
+  </div>
 </div>
