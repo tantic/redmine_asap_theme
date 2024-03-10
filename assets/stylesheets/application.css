@@ -6232,11 +6232,6 @@ select{
   margin-bottom: 0px;
 }
 
-.my-12{
-  margin-top: 3rem;
-  margin-bottom: 3rem;
-}
-
 .my-2{
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
@@ -6745,12 +6740,6 @@ select{
   --tw-space-x-reverse: 0;
   margin-right: calc(0.5rem * var(--tw-space-x-reverse));
   margin-left: calc(0.5rem * calc(1 - var(--tw-space-x-reverse)));
-}
-
-.space-y-1 > :not([hidden]) ~ :not([hidden]){
-  --tw-space-y-reverse: 0;
-  margin-top: calc(0.25rem * calc(1 - var(--tw-space-y-reverse)));
-  margin-bottom: calc(0.25rem * var(--tw-space-y-reverse));
 }
 
 .space-y-2 > :not([hidden]) ~ :not([hidden]){
@@ -8367,16 +8356,16 @@ select{
     justify-content: center;
   }
 
+  .md\:p-12{
+    padding: 3rem;
+  }
+
   .md\:p-16{
     padding: 4rem;
   }
 
   .md\:p-5{
     padding: 1.25rem;
-  }
-
-  .md\:p-12{
-    padding: 3rem;
   }
 
   .md\:px-2{
