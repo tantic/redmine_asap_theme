@@ -13,4 +13,22 @@
       @apply border-b-2 border-blue-700 text-blue-700 bg-gray-50;
     }
   }
+
+
+  .expander.icon-expanded{
+    .open{
+      @apply block;
+    }
+    .close{
+      @apply hidden
+    }
+  }
+  .expander.icon-collapsed{
+    .open{
+      @apply hidden;
+    }
+    .close{
+      @apply block
+    }
+  }
 }
