@@ -3,8 +3,7 @@
   <% if @bookmarked %>
     <% @bookmarked.each do |project|%>
       <%= link_to(project,:class => 'bg-white dark:bg-gray-800 dark:text-gray-100 uppercase flex items-center text-gray-800 font-light text-sm rounded shadow p-4 hover:bg-gray-50 transition ease-in-out delay-75 hover:-translate-y-1 hover:scale-105 duration-100') do %>
-          <%= letter_avatar_tag(project.name, 300, class: 'w-8 h-8 mr-4') %> <span class="text-xs"><%= project.name%></span>
-
+          <%= letter_avatar_tag(project.name, 300, class: 'w-8 h-8 mr-4') %> <span class="text-xs line-clamp-2"><%= project.name%></span>
       <% end %>
     <% end %>
   <% end %>
@@ -12,7 +11,7 @@
     <% @my_projects.each do |project|%>
       <%= link_to(project,:class => 'bg-white dark:bg-gray-800 dark:text-gray-100 rounded shadow p-4 hover:bg-gray-50 transition ease-in-out delay-75 hover:-translate-y-1 hover:scale-105 duration-100') do %>
         <h3 class="uppercase flex items-center text-gray-800 font-light text-sm">
-          <%= letter_avatar_tag(project.name, 300, class: 'w-8 h-8 mr-4') %> <span><%= project.name%></span>
+          <%= letter_avatar_tag(project.name, 300, class: 'w-8 h-8 mr-4') %> <span class="line-clamp-2"><%= project.name%></span>
         </h3>
       <% end %>
     <% end %>
