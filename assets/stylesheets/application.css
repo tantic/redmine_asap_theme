@@ -6644,6 +6644,10 @@ select{
   width: 1rem;
 }
 
+.w-44{
+  width: 11rem;
+}
+
 .w-48{
   width: 12rem;
 }
@@ -6686,22 +6690,6 @@ select{
 
 .w-full{
   width: 100%;
-}
-
-.w-2\/4{
-  width: 50%;
-}
-
-.w-36{
-  width: 9rem;
-}
-
-.w-32{
-  width: 8rem;
-}
-
-.w-44{
-  width: 11rem;
 }
 
 .max-w-2xl{
@@ -8402,8 +8390,16 @@ select{
     margin-bottom: 1rem;
   }
 
+  .md\:ml-3{
+    margin-left: 0.75rem;
+  }
+
   .md\:ml-60{
     margin-left: 15rem;
+  }
+
+  .md\:ml-auto{
+    margin-left: auto;
   }
 
   .md\:mr-3{
@@ -8412,14 +8408,6 @@ select{
 
   .md\:mt-8{
     margin-top: 2rem;
-  }
-
-  .md\:ml-auto{
-    margin-left: auto;
-  }
-
-  .md\:ml-3{
-    margin-left: 0.75rem;
   }
 
   .md\:block{
@@ -8436,6 +8424,14 @@ select{
 
   .md\:h-full{
     height: 100%;
+  }
+
+  .md\:w-1\/2{
+    width: 50%;
+  }
+
+  .md\:w-2\/4{
+    width: 50%;
   }
 
   .md\:w-2\/5{
@@ -8460,14 +8456,6 @@ select{
 
   .md\:w-full{
     width: 100%;
-  }
-
-  .md\:w-1\/2{
-    width: 50%;
-  }
-
-  .md\:w-2\/4{
-    width: 50%;
   }
 
   .md\:grid-cols-3{
