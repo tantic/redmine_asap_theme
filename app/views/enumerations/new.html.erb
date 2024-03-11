@@ -1,9 +1,21 @@
 <div class="ml-60">
-<%= title [l(@enumeration.option_name), enumerations_path], l(:label_enumeration_new) %>
+  <div class="bg-white dark:bg-slate-700 shadow">
+    <div data-controller="contextual" class="contextual px-4 py-2 grid grid-cols-3 justify-items-stretch gap-0 w-full">
+      <div class="py-2">
+        <%= title [l(@enumeration.option_name), enumerations_path], l(:label_enumeration_new) %>
+      </div>
+      <div></div>
+      <div class="flex w-full">
 
-<%= labelled_form_for :enumeration, @enumeration, :url => enumerations_path, :html => {:multipart => true} do |f| %>
-  <%= f.hidden_field :type  %>
-  <%= render :partial => 'form', :locals => {:f => f} %>
-  <%= submit_tag l(:button_create) %>
-<% end %>
+      </div>
+    </div>
+  </div>
+
+  <div class="mx-4 pb-16">
+    <%= labelled_form_for :enumeration, @enumeration, :url => enumerations_path, :html => {:multipart => true} do |f| %>
+      <%= f.hidden_field :type  %>
+      <%= render :partial => 'form', :locals => {:f => f} %>
+      <%= submit_tag l(:button_create) %>
+    <% end %>
+  </div>
 </div>

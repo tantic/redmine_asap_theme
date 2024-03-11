@@ -1,7 +1,17 @@
 <div class="ml-60">
   <div class="bg-white dark:bg-slate-700 shadow">
-    <div data-controller="contextual" class="contextual px-4 container mx-auto  py-2 grid grid-cols-3 justify-items-stretch gap-0 w-full">
-      <div class="py-2">
+    <div data-controller="contextual" class="contextual px-4 py-2 grid grid-cols-3 justify-items-stretch gap-0 w-full">
+      <div class="">
+        <%= form_tag(groups_path, :method => :get, class:'flex') do %>
+          <div class="flex items-center mr-8">
+            <label for='name' class="mr-3"><%= l(:label_group) %>:</label>
+            <%= text_field_tag 'name', params[:name], :size => 30 %>
+          </div>
+          <div class="flex">
+            <%= submit_tag l(:button_apply), :class => "small cursor-pointer flex text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded text-sm px-3 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800", :name => nil %>
+            <%= link_to l(:button_clear), groups_path, :class => 'icon icon-reload ml-3 py-2 px-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700' %>
+          </div>
+        <% end %>
       </div>
       <div></div>
       <div class="flex w-full justify-end">
@@ -13,30 +23,20 @@
   <div class="mx-4">
     <% if @groups.any? %>
       <div class="dark:bg-gray-800 relative overflow-x-auto h-fit mr-8 w-full bg-white shadow p-8   mb-8 mt-0 md:mt-8 flex flex-col">
-        <%= form_tag(groups_path, :method => :get, class:'flex mb-8') do %>
-          <div class="flex items-center mr-8">
-            <label for='name' class="mr-3"><%= l(:label_group) %>:</label>
-            <%= text_field_tag 'name', params[:name], :size => 30 %>
-          </div>
-          <div class="flex">
-            <%= submit_tag l(:button_apply), :class => "small cursor-pointer flex text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded text-sm px-3 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800", :name => nil %>
-            <%= link_to l(:button_clear), groups_path, :class => 'icon icon-reload ml-3 py-2 px-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700' %>
-          </div>
-        <% end %>
-        <table class="list groups w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-          <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+        <table class="list groups table table-bordered">
+          <thead>
             <tr>
-              <th class="px-6 py-3"><%=l(:label_group)%></th>
-              <th class="px-6 py-3"><%=l(:label_user_plural)%></th>
-              <th class="px-6 py-3"></th>
+              <th><%=l(:label_group)%></th>
+              <th><%=l(:label_user_plural)%></th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
             <% @groups.each do |group| %>
               <tr id="group-<%= group.id %>" class="<%= "builtin" if group.builtin? %> odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
-                <td class="name px-6 py-2 text-gray-800"><%= link_to group, edit_group_path(group) %></td>
-                <td class="user_count px-6 py-2"><%= (@user_count_by_group_id[group.id] || 0) unless group.builtin? %></td>
-                <td class="buttons px-6 py-2"><%= delete_link group unless group.builtin? %></td>
+                <td class="name"><%= link_to group, edit_group_path(group) %></td>
+                <td class="user_count"><%= (@user_count_by_group_id[group.id] || 0) unless group.builtin? %></td>
+                <td class="buttons"><%= delete_link group unless group.builtin? %></td>
               </tr>
             <% end %>
           </tbody>

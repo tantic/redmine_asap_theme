@@ -1602,7 +1602,6 @@ fieldset{
 }
 
 .button-second, .button-three a{
-  margin-right: 0.5rem;
   display: flex;
   cursor: pointer;
   align-items: center;
@@ -1612,8 +1611,8 @@ fieldset{
   border-color: rgb(209 213 219 / var(--tw-border-opacity));
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
   font-size: 0.75rem;
@@ -6542,6 +6541,10 @@ select{
   width: 25%;
 }
 
+.w-1\/6{
+  width: 16.666667%;
+}
+
 .w-10{
   width: 2.5rem;
 }
@@ -7128,6 +7131,10 @@ select{
   padding-bottom: 2rem;
 }
 
+.pb-16{
+  padding-bottom: 4rem;
+}
+
 .pb-2{
   padding-bottom: 0.5rem;
 }
@@ -7146,10 +7153,6 @@ select{
 
 .pb-4{
   padding-bottom: 1rem;
-}
-
-.pb-8{
-  padding-bottom: 2rem;
 }
 
 .pl-4{
@@ -7647,11 +7650,6 @@ select{
 .hover\:bg-blue-800:hover{
   --tw-bg-opacity: 1;
   background-color: rgb(30 64 175 / var(--tw-bg-opacity));
-}
-
-.hover\:bg-blue-900:hover{
-  --tw-bg-opacity: 1;
-  background-color: rgb(30 58 138 / var(--tw-bg-opacity));
 }
 
 .hover\:bg-gray-100:hover{

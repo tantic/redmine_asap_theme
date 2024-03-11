@@ -1,14 +1,28 @@
 <div class="ml-60">
+  <div class="bg-white dark:bg-slate-700 shadow">
+    <div data-controller="contextual" class="contextual px-4 py-2 grid grid-cols-3 justify-items-stretch gap-0 w-full">
+      <div class="py-2">
 
-<%= form_tag new_custom_field_path, :method => 'get' do %>
-  <div class="box rounded shadow my-8 p-8">
-    <div class="mb-6"><%= l(:label_custom_field_select_type) %>:</div>
-    <div id="custom-fields-radios">
-      <%= select_type_radio_buttons(params[:tab]) %>
+      </div>
+      <div></div>
+      <div class="flex w-full">
+
+      </div>
     </div>
   </div>
-  <div class="flex w-full">
-    <%= submit_tag l(:label_next).html_safe + " &#187;".html_safe, :name => nil, :class => "small ml-auto cursor-pointer flex text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded text-sm px-3 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" %>
+
+  <div class="mx-4 pb-16">
+
+    <%= form_tag new_custom_field_path, :method => 'get' do %>
+      <div class="box rounded shadow my-8 p-8">
+        <div class="mb-6"><%= l(:label_custom_field_select_type) %>:</div>
+        <div id="custom-fields-radios">
+          <%= select_type_radio_buttons(params[:tab]) %>
+        </div>
+      </div>
+      <div class="flex w-full">
+        <%= submit_tag l(:label_next).html_safe + " &#187;".html_safe, :name => nil, :class => "small ml-auto cursor-pointer flex text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded text-sm px-3 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" %>
+      </div>
+    <% end %>
   </div>
-<% end %>
 </div>

@@ -1,6 +1,6 @@
 <div class="ml-60">
   <div class="bg-white dark:bg-slate-700 shadow">
-    <div data-controller="contextual" class="contextual px-4 container mx-auto  py-2 grid grid-cols-3 justify-items-stretch gap-0 w-full">
+    <div data-controller="contextual" class="contextual px-4  py-2 grid grid-cols-3 justify-items-stretch gap-0 w-full">
       <div class="py-2">
       </div>
       <div></div>
@@ -13,26 +13,26 @@
 
   <div class="mx-4">
     <div class="dark:bg-gray-800 relative overflow-x-auto h-fit mr-8 w-full bg-white shadow p-8   mb-8 mt-0 md:mt-8 flex flex-col">
-      <table class="list roles w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+      <table class="list roles table table-bordered">
+        <thead>
           <tr>
-            <th class="px-6 py-3"><%=l(:label_role)%></th>
-            <th class="px-6 py-3"></th>
-            <th class="px-6 py-3"></th>
+            <th><%=l(:label_role)%></th>
+            <th></th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
           <% for role in @roles %>
             <tr class="<%= role.builtin? ? "builtin" : "givable" %> odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
-              <td class="name px-6 py-2 text-gray-800"><%= content_tag(role.builtin? ? 'em' : 'span', link_to(role.name, edit_role_path(role))) %></td>
-              <td class="px-6 py-2">
+              <td class="name"><%= content_tag(role.builtin? ? 'em' : 'span', link_to(role.name, edit_role_path(role))) %></td>
+              <td>
                 <% unless role.builtin? || role.workflow_rules.exists? %>
                   <span class="icon icon-warning">
                     <%= l(:text_role_no_workflow) %> (<%= link_to l(:button_edit), edit_workflows_path(:role_id => role) %>)
                   </span>
                 <% end %>
               </td>
-              <td class="buttons px-6 py-2">
+              <td class="buttons">
                 <%= reorder_handle(role) unless role.builtin? %>
                 <%= link_to l(:button_copy), new_role_path(:copy => role), :class => 'icon icon-copy' %>
                 <%= delete_link role_path(role) unless role.builtin? %>

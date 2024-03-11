@@ -1,6 +1,6 @@
 <div class="ml-60 w-auto">
   <div class="bg-white dark:bg-slate-700 shadow">
-    <div data-controller="contextual" class="contextual px-4 container mx-auto  py-2 grid grid-cols-3 justify-items-stretch gap-0 w-full">
+    <div data-controller="contextual" class="contextual px-4 py-2 grid grid-cols-3 justify-items-stretch gap-0 w-full">
       <div></div>
       <div></div>
       <div class="flex w-full">
@@ -11,24 +11,24 @@
 
   <div class="w-full">
     <div class="dark:bg-gray-800 relative h-fit mx-4 bg-white shadow p-8   mb-8 mt-0 md:mt-8 flex flex-col">
-      <table class="list w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+      <table class="list table table-bordered">
+        <thead>
           <tr>
-            <th class="px-6 py-3"><%=l(:field_name)%></th>
-            <th class="px-6 py-3"><%=l(:field_type)%></th>
-            <th class="px-6 py-3"><%=l(:field_host)%></th>
-            <th class="px-6 py-3"><%=l(:label_user_plural)%></th>
-            <th class="px-6 py-3"></th>
+            <th><%=l(:field_name)%></th>
+            <th><%=l(:field_type)%></th>
+            <th><%=l(:field_host)%></th>
+            <th><%=l(:label_user_plural)%></th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
         <% for source in @auth_sources %>
-          <tr id="auth-source-<%= source.id %>" class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
-            <td class="name px-6 py-2 text-gray-800"><%= link_to(source.name, :action => 'edit', :id => source)%></td>
-            <td class="px-6 py-2"><%= source.auth_method_name %></td>
-            <td class="px-6 py-2"><%= source.host %></td>
-            <td class="px-6 py-2"><%= source.users.count %></td>
-            <td class="buttons px-6 py-2 flex items-center">
+          <tr id="auth-source-<%= source.id %>">
+            <td class="name"><%= link_to(source.name, :action => 'edit', :id => source)%></td>
+            <td><%= source.auth_method_name %></td>
+            <td><%= source.host %></td>
+            <td><%= source.users.count %></td>
+            <td class="buttons">
               <%= link_to l(:button_test), try_connection_auth_source_path(source), :class => 'icon icon-test mr-3' %>
               <%= delete_link auth_source_path(source) %>
             </td>

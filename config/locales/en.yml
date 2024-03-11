@@ -28,9 +28,12 @@ en:
   label_redmine_groups: Groups
   label_redmine_issues: Issues
   label_redmine_asap_theme_login: Login page
+  label_redmine_asap_theme_colors: Colors
   label_display: Display
   label_issue_general: General
   label_issue_relations: Relations
   label_issue_progress: Progress
   label_issue_watchers: Watchers
   label_issue_others: Others
+  redmine_asap_colors_logo_title: Logo
+  redmine_asap_colors_logo_bg: Background color

@@ -1,19 +1,33 @@
 <div class="ml-60">
+  <div class="bg-white dark:bg-slate-700 shadow">
+    <div data-controller="contextual" class="contextual px-4 py-2 grid grid-cols-3 justify-items-stretch gap-0 w-full">
+      <div class="py-2">
 
-  <%= labelled_form_for :custom_field, @custom_field, :url => custom_fields_path, :html => {:id => 'custom_field_form'} do |f| %>
-  <%= render :partial => 'form', :locals => { :f => f } %>
-  <%= hidden_field_tag 'type', @custom_field.type %>
-  <%= hidden_field_tag 'copy', @copy_from.id if @copy_from %>
-  <% end %>
+      </div>
+      <div></div>
+      <div class="flex w-full">
 
-  <%= javascript_tag do %>
-  $('#custom_field_field_format').change(function(){
-    $.ajax({
-      url: '<%= new_custom_field_path(:format => 'js') %>',
-      type: 'get',
-      data: $('#custom_field_form').serialize(),
-      complete: toggleDisabledInit
+      </div>
+    </div>
+  </div>
+
+  <div class="mx-4 pb-16">
+
+    <%= labelled_form_for :custom_field, @custom_field, :url => custom_fields_path, :html => {:id => 'custom_field_form'} do |f| %>
+    <%= render :partial => 'form', :locals => { :f => f } %>
+    <%= hidden_field_tag 'type', @custom_field.type %>
+    <%= hidden_field_tag 'copy', @copy_from.id if @copy_from %>
+    <% end %>
+
+    <%= javascript_tag do %>
+    $('#custom_field_field_format').change(function(){
+      $.ajax({
+        url: '<%= new_custom_field_path(:format => 'js') %>',
+        type: 'get',
+        data: $('#custom_field_form').serialize(),
+        complete: toggleDisabledInit
+      });
     });
-  });
-  <% end %>
+    <% end %>
+  </div>
 </div>

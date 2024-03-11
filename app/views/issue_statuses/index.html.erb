@@ -1,6 +1,6 @@
 <div class="ml-60">
   <div class="bg-white dark:bg-slate-700 shadow">
-    <div data-controller="contextual" class="contextual px-4 container mx-auto  py-2 grid grid-cols-3 justify-items-stretch gap-0 w-full">
+    <div data-controller="contextual" class="contextual px-4 py-2 grid grid-cols-3 justify-items-stretch gap-0 w-full">
       <div></div>
       <div></div>
       <div class="flex w-full justify-end">
@@ -12,34 +12,34 @@
 
   <div class="mx-4">
     <div class="dark:bg-gray-800 relative overflow-x-auto h-fit mr-8 w-full bg-white shadow p-8   mb-8 mt-0 md:mt-8 flex flex-col">
-      <table class="list issue_statuses w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+      <table class="list issue_statuses table table-bordered">
+        <thead>
           <tr>
-            <th class="px-6 py-3"><%=l(:field_status)%></th>
+            <th><%=l(:field_status)%></th>
             <% if Issue.use_status_for_done_ratio? %>
-            <th class="px-6 py-3"><%=l(:field_done_ratio)%></th>
+            <th><%=l(:field_done_ratio)%></th>
             <% end %>
-            <th class="px-6 py-3"><%=l(:field_is_closed)%></th>
-            <th class="px-6 py-3"></th>
-            <th class="px-6 py-3"></th>
+            <th><%=l(:field_is_closed)%></th>
+            <th></th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
           <% for status in @issue_statuses %>
-            <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
-              <td class="name px-6 py-2 text-gray-800"><%= link_to status.name, edit_issue_status_path(status) %></td>
+            <tr>
+              <td class="name"><%= link_to status.name, edit_issue_status_path(status) %></td>
               <% if Issue.use_status_for_done_ratio? %>
-              <td class="px-6 py-2"><%= status.default_done_ratio %></td>
+              <td><%= status.default_done_ratio %></td>
               <% end %>
-              <td class="px-6 py-2"><%= checked_image status.is_closed? %></td>
-              <td class="px-6 py-2">
+              <td><%= checked_image status.is_closed? %></td>
+              <td>
                 <% unless WorkflowTransition.where('old_status_id = ? OR new_status_id = ?', status.id, status.id).exists? %>
                   <span class="icon icon-warning">
                     <%= l(:text_status_no_workflow) %> (<%= link_to l(:button_edit), edit_workflows_path(:used_statuses_only => 0) %>)
                   </span>
                 <% end %>
               </td>
-              <td class="buttons  px-6 py-2 flex items-center">
+              <td class="buttons">
                 <%= reorder_handle(status) %>
                 <%= delete_link issue_status_path(status) %>
               </td>

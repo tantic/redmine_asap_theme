@@ -1,7 +1,11 @@
 <nav class="bg-white dark:bg-slate-800 h-14 fixed w-full z-50 top-0 left-0 shadow dark:border-gray-600">
   <div class="flex h-full mx-auto">
-    <div class="h-full  flex items-center justify-center">
-      <%= link_to home_path(), :title => Setting.app_title, :class=>"bg-blue-700 flex flex-none text-blue-50 hover:bg-blue-900 dark:bg-blue-900 cursor-pointer w-14 p-2 flex items-center justify-center" do %>
+    <div class="h-full  flex items-center justify-center ">
+      <%
+        bg_color = Setting.plugin_redmine_asap_theme['redmine_asap_colors_logo_bg']
+        hover_bg_color = Setting.plugin_redmine_asap_theme['redmine_asap_colors_logo_bg_hover']
+      %>
+      <%= link_to home_path(), :title => Setting.app_title, :class=>"flex flex-none text-blue-50 dark:bg-blue-900 cursor-pointer w-14 p-2 flex items-center justify-center", style: "background-color:#{bg_color}" do %>
         <%= image_tag 'redmine_white.svg', :plugin => 'redmine_asap_theme', class: 'w-10 h-10' %>
       <% end %>
     </div>
