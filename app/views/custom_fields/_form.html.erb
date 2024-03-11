@@ -1,7 +1,7 @@
 <%= error_messages_for 'custom_field' %>
 
-<div class="splitcontent flex w-full">
-  <div class="splitcontentleft w-1/2 pr-4">
+<div class="splitcontent flex flex-col md:flex-row w-full">
+  <div class="splitcontentleft w-full md:w-1/2 pr-4">
     <div class="box tabular">
       <div class="mb-6">
         <%= f.select :field_format, custom_field_formats_for_select(@custom_field), {}, :disabled => !@custom_field.new_record? %>
@@ -29,7 +29,7 @@
 
   </div>
 
-<div class="splitcontentright w-1/2 pl-4">
+<div class="splitcontentright w-full md:w-1/2 pl-4">
   <div class="box tabular">
     <p><%= f.check_box :is_required %></p>
 

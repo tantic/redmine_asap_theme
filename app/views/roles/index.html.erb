@@ -1,17 +1,17 @@
-<div class="ml-60">
+<div class="ml-14 md:ml-60">
   <div class="bg-white dark:bg-slate-700 shadow">
-    <div data-controller="contextual" class="contextual px-4  py-2 grid grid-cols-3 justify-items-stretch gap-0 w-full">
-      <div class="py-2">
+    <div data-controller="contextual" class="contextual px-4  py-2 grid grid-cols-1 md:grid-cols-3 justify-items-stretch gap-0 w-full">
+      <div class="py-2 hidden md:flex">
       </div>
-      <div></div>
-      <div class="flex w-full justify-end">
+      <div class=" hidden md:flex"></div>
+      <div class="flex w-full justify-center md:justify-end">
         <%= link_to l(:label_permissions_report), permissions_roles_path, :class => 'icon icon-summary mr-3 flex text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded text-sm px-3 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800' %>
         <%= link_to l(:label_role_new), new_role_path, :class => 'icon icon-add flex text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded text-sm px-3 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800' %>
       </div>
     </div>
   </div>
 
-  <div class="mx-4">
+  <div class="mx-4 my-6 md:my-0">
     <div class="dark:bg-gray-800 relative overflow-x-auto h-fit mr-8 w-full bg-white shadow p-8   mb-8 mt-0 md:mt-8 flex flex-col">
       <table class="list roles table table-bordered">
         <thead>

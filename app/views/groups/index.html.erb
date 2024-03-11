@@ -1,11 +1,11 @@
-<div class="ml-60">
+<div class="ml-14 md:ml-60">
   <div class="bg-white dark:bg-slate-700 shadow">
-    <div data-controller="contextual" class="contextual px-4 py-2 grid grid-cols-3 justify-items-stretch gap-0 w-full">
+    <div data-controller="contextual" class="contextual px-4 py-2 grid grid-cols-1 md:grid-cols-3 justify-items-stretch gap-0 w-full">
       <div class="">
         <%= form_tag(groups_path, :method => :get, class:'flex') do %>
           <div class="flex items-center mr-8">
             <label for='name' class="mr-3"><%= l(:label_group) %>:</label>
-            <%= text_field_tag 'name', params[:name], :size => 30 %>
+            <%= text_field_tag 'name', params[:name], :size => 30, class: 'w-44 flex' %>
           </div>
           <div class="flex">
             <%= submit_tag l(:button_apply), :class => "small cursor-pointer flex text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded text-sm px-3 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800", :name => nil %>
@@ -13,14 +13,14 @@
           </div>
         <% end %>
       </div>
-      <div></div>
+      <div class="hidden md:flex"></div>
       <div class="flex w-full justify-end">
         <%= link_to l(:label_group_new), new_group_path, :class => 'icon icon-add flex text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded text-sm px-3 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800' %>
       </div>
     </div>
   </div>
 
-  <div class="mx-4">
+  <div class="mx-4 my-6 md:my-0">
     <% if @groups.any? %>
       <div class="dark:bg-gray-800 relative overflow-x-auto h-fit mr-8 w-full bg-white shadow p-8   mb-8 mt-0 md:mt-8 flex flex-col">
         <table class="list groups table table-bordered">

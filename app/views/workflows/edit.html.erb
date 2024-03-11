@@ -1,6 +1,6 @@
-<div class="ml-60 mb-16">
+<div class="ml-14 md:ml-60 mb-16">
   <div class="bg-white dark:bg-slate-700 shadow">
-    <div data-controller="contextual" class="contextual px-4 py-2 grid grid-cols-3 justify-items-stretch gap-0 w-full">
+    <div data-controller="contextual" class="contextual px-4 py-2 grid grid-cols-1 md:grid-cols-3 justify-items-stretch gap-0 w-full">
       <div></div>
       <div></div>
       <div class="flex w-full">
@@ -45,7 +45,7 @@
         <%= @trackers.map {|tracker| hidden_field_tag 'tracker_id[]', tracker.id, :id => nil}.join.html_safe %>
         <%= @roles.map {|role| hidden_field_tag 'role_id[]', role.id, :id => nil}.join.html_safe %>
         <%= hidden_field_tag 'used_statuses_only', params[:used_statuses_only], :id => nil %>
-        <div class="autoscroll dark:bg-gray-800 h-fit mr-6 w-full bg-white shadow p-8 mb-8 mt-0">
+        <div class="autoscroll overflow-auto dark:bg-gray-800 h-fit mr-6 w-auto bg-white shadow p-8 mb-8 mt-0">
           <%= render :partial => 'form', :locals => {:name => 'always', :workflows => @workflows['always']} %>
 
           <fieldset class="collapsible" style="padding: 0; margin-top: 0.5em;">
@@ -55,7 +55,7 @@
               </svg>
               <legend onclick="toggleFieldset(this);" class="icon icon-collapsed cursor-pointer text-blue-700 hover:text-blue-800 dark:text-blue-100 dark-hover:text-blue-200"><%= l(:label_additional_workflow_transitions_for_author) %></legend>
             </span>
-            <div id="author_workflows" style="margin: 0.5em 0 0.5em 0;">
+            <div id="author_workflows" class="overflow-auto" style="margin: 0.5em 0 0.5em 0;">
               <%= render :partial => 'form', :locals => {:name => 'author', :workflows => @workflows['author']} %>
             </div>
           </fieldset>
@@ -68,7 +68,7 @@
               </svg>
               <legend onclick="toggleFieldset(this);" class="icon icon-collapsed cursor-pointer text-blue-700 hover:text-blue-800 dark:text-blue-100 dark-hover:text-blue-200"><%= l(:label_additional_workflow_transitions_for_assignee) %></legend>
             </span>
-            <div id="assignee_workflows" style="margin: 0.5em 0 0.5em 0;">
+            <div id="assignee_workflows" class="overflow-auto" style="margin: 0.5em 0 0.5em 0;">
               <%= render :partial => 'form', :locals => {:name => 'assignee', :workflows => @workflows['assignee']} %>
             </div>
           </fieldset>

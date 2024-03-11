@@ -24,7 +24,7 @@
             <% @project.children.each do |project| %>
             <%= link_to project_path(project), :title => project.name, :class => 'flex items-center hover:bg-gray-50 px-2 py-2' do %>
                 <%= letter_avatar_tag(project.name, 300, class: 'w-8 h-8 mr-2') %>
-                <span class="uppercase font-normal text-xs"><%= project.name %></span>
+                <span class="uppercase font-normal text-xs line-clamp-2"><%= project.name %></span>
               <% end %>
             <% end %>
           </div>

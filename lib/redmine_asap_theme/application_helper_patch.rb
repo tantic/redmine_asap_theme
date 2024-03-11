@@ -54,7 +54,7 @@ module RedmineAsapTheme
       projects = projects_for_jump_box(User.current)
       if @project && @project.persisted?
         # text = @project.name_was
-        text = letter_avatar_tag(@project.name_was, 300, class: 'w-8 h-8 mr-2') + content_tag('span', @project.name_was, :class => ' uppercase font-normal text-xs')
+        text = letter_avatar_tag(@project.name_was, 300, class: 'w-8 h-8 mr-2') + content_tag('span', @project.name_was, :class => 'uppercase font-normal text-xs line-clamp-2')
       end
       text ||= l(:label_jump_to_a_project)
       url = autocomplete_projects_path(:format => 'js', :jump => current_menu_item)
@@ -134,12 +134,12 @@ module RedmineAsapTheme
       if project.archived?
         content_tag :div, class: "flex items-center hover:bg-gray-50 dark:hover:bg-gray-700 px-2 py-1" do
           letter_avatar_tag(project.name, 300, class: 'w-8 h-8 mr-4') +
-          content_tag(:span, project.name, class: "icon-plus icon-white uppercase font-normal text-xs")
+          content_tag(:span, project.name, class: "icon-plus icon-white uppercase font-normal text-xs line-clamp-2")
         end
       else
         link_to project_url(project, {:only_path => true}.merge(options)), class: 'flex items-center hover:bg-gray-50 dark:hover:bg-gray-700 px-2 py-1' do
             letter_avatar_tag(project.name, 300, class: 'w-8 h-8 mr-4') +
-            content_tag(:span, project.name, class: "icon-plus icon-white uppercase font-normal text-xs")
+            content_tag(:span, project.name, class: "icon-plus icon-white uppercase font-normal text-xs line-clamp-2")
         end
       end
     end
@@ -158,7 +158,7 @@ module RedmineAsapTheme
       build_project_link = lambda do |project, level = 0|
         padding = level * 16
 
-        text = letter_avatar_tag(project.name, 300, class: 'w-8 h-8 mr-2') + content_tag('span', project.name, :class => ' uppercase font-normal text-xs')
+        text = letter_avatar_tag(project.name, 300, class: 'w-8 h-8 mr-2') + content_tag('span', project.name, :class => 'uppercase font-normal text-xs line-clamp-2')
         s << link_to(text, project_path(project, :jump => jump),
                      :title => project.name,
                      :style => "padding-left:#{padding}px;",

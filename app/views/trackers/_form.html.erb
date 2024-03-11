@@ -1,7 +1,7 @@
 <%= error_messages_for 'tracker' %>
 
-<div class="splitcontent flex w-full mt-6">
-  <div class="splitcontentleft flex w-1/2 mr-4">
+<div class="splitcontent flex flex-col md:flex-row w-full mt-6">
+  <div class="splitcontentleft flex md:w-1/2 w-full mr-4">
     <div class="box w-full tabular">
       <!--[form:tracker]-->
       <div class="mb-6"><%= f.text_field :name, :required => true %></div>
@@ -47,7 +47,7 @@
     </div>
   </div>
 
-  <div class="splitcontentright flex w-1/2 ml-4">
+  <div class="splitcontentright flex md:w-1/2 w-full ml-4">
     <% if @projects.any? %>
       <fieldset class="box w-full overflow-y-auto" id="tracker_project_ids">
         <legend><%= toggle_checkboxes_link("#tracker_project_ids input[type=checkbox]") %><%= l(:label_project_plural) %></legend>
@@ -61,6 +61,6 @@
   </div>
 </div>
 
-<div class="flex w-full">
+<div class="flex w-full mb-16">
   <%= submit_tag l(@tracker.new_record? ? :button_create : :button_save), class: 'ml-auto' %>
 </div>

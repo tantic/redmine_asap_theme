@@ -1,18 +1,18 @@
-<table class="list workflows w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 transitions transitions-<%= name %>">
-  <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+<table class="list workflows table table-bordered transitions transitions-<%= name %>">
+  <thead>
     <tr>
-      <th class="py-3 align-middle text-center bg-gray-100">
+      <th>
         <%= link_to_function('', "toggleCheckboxesBySelector('table.transitions-#{name} input[type=checkbox]:not(:disabled)')",
                             :title => "#{l(:button_check_all)}/#{l(:button_uncheck_all)}",
                             :class => 'no-tooltip icon-only icon-checked') %>
         <%=l(:label_current_status)%>
       </th>
-      <th class="py-3 align-middle text-center" colspan="<%= @statuses.length %>"><%=l(:label_new_statuses_allowed)%></th>
+      <th colspan="<%= @statuses.length %>"><%=l(:label_new_statuses_allowed)%></th>
     </tr>
     <tr>
-      <td class="py-3 bg-gray-100"></td>
+      <td></td>
       <% for new_status in @statuses %>
-      <td class="py-3 align-middle text-center" style="width:<%= 75 / @statuses.size %>%;">
+      <td style="width:<%= 75 / @statuses.size %>%;">
         <%= link_to_function('', "toggleCheckboxesBySelector('table.transitions-#{name} input[type=checkbox]:not(:disabled).new-status-#{new_status.id}')",
                             :title => "#{l(:button_check_all)}/#{l(:button_uncheck_all)}",
                             :class => 'no-tooltip icon-only icon-checked') %>
@@ -26,7 +26,7 @@
     <% for old_status in [nil] + @statuses %>
     <% next if old_status.nil? && name != 'always' %>
     <tr>
-      <td class="name px-6 py-2 bg-gray-100 border-t border-white">
+      <td class="name">
         <%= link_to_function('', "toggleCheckboxesBySelector('table.transitions-#{name} input[type=checkbox]:not(:disabled).old-status-#{old_status.try(:id) || 0}')",
                             :title => "#{l(:button_check_all)}/#{l(:button_uncheck_all)}",
                             :class => 'no-tooltip icon-only icon-checked') %>

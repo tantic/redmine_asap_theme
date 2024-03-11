@@ -1,4 +1,4 @@
-<div class="ml-60">
+<div class="ml-14 md:ml-60">
   <div class="mx-4 pb-24">
     <% Enumeration.get_subclasses.each do |klass| %>
       <div class="flex w-full mt-8 mb-4">
@@ -11,27 +11,29 @@
 
 
       <% if enumerations.any? %>
-        <table class="list enumerations shadow table table-bordered">
-          <thead>
+        <div class="overflow-auto">
+          <table class="list enumerations shadow table table-bordered">
+            <thead>
+              <tr>
+                <th><%= l(:field_name) %></th>
+                <th><%= l(:field_is_default) %></th>
+                <th><%= l(:field_active) %></th>
+                <th></th>
+              </tr>
+            </thead>
+            <% enumerations.each do |enumeration| %>
             <tr>
-              <th><%= l(:field_name) %></th>
-              <th><%= l(:field_is_default) %></th>
-              <th><%= l(:field_active) %></th>
-              <th></th>
+                <td class="name"><%= link_to enumeration, edit_enumeration_path(enumeration) %></td>
+                <td class="tick"><%= checked_image enumeration.is_default? %></td>
+                <td class="tick"><%= checked_image enumeration.active? %></td>
+                <td class="buttons">
+                  <%= reorder_handle(enumeration, :url => enumeration_path(enumeration), :param => 'enumeration', class: "mr-3") %>
+                  <%= delete_link enumeration_path(enumeration), class: "ml-3" %>
+                </td>
             </tr>
-          </thead>
-          <% enumerations.each do |enumeration| %>
-          <tr>
-              <td class="name"><%= link_to enumeration, edit_enumeration_path(enumeration) %></td>
-              <td class="tick"><%= checked_image enumeration.is_default? %></td>
-              <td class="tick"><%= checked_image enumeration.active? %></td>
-              <td class="buttons">
-                <%= reorder_handle(enumeration, :url => enumeration_path(enumeration), :param => 'enumeration', class: "mr-3") %>
-                <%= delete_link enumeration_path(enumeration), class: "ml-3" %>
-              </td>
-          </tr>
-          <% end %>
-        </table>
+            <% end %>
+          </table>
+        </div>
       <% else %>
         <p class="nodata"><%= l(:label_no_data) %></p>
       <% end %>
