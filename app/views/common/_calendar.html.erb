@@ -1,4 +1,4 @@
-<div class="bg-white dark:bg-gray-800 shadow container mx-auto flex justify-center p-4 overflow-x-auto">
+<div data-controller="calendar" class="bg-white dark:bg-gray-800 shadow container mx-auto flex justify-center p-4 overflow-x-auto">
   <%= form_tag({}, :data => {:cm_url => issues_context_menu_path}) do -%>
     <%= hidden_field_tag 'back_url', url_for(:params => request.query_parameters), :id => nil %>
     <ul class="cal  w-full hidden sm:flex">
@@ -14,7 +14,7 @@
           <span class="label-week"><%= l(:label_week) %></span> <%= calendar.week_number week.first %>
         </li>
         <% week.each do |day| %>
-        <li class="<%= calendar.day_css_classes day %> calendar-cell">
+        <li data-action="click->calendar#new" class="<%= calendar.day_css_classes day %> calendar-cell">
           <p class="day-num text-right text-xs text-gray-500 dark:text-gray-400"><%= day.day %>
             <span class="abbr-day">(<%= abbr_day_name(day.cwday) %>)</span>
           </p>

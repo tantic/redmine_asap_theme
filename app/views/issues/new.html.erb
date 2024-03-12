@@ -12,7 +12,7 @@
 <div class="w-auto sm:container mx-4 sm:mx-auto mt-8">
 
     <%= labelled_form_for @issue, :url => _project_issues_path(@project),
-                                :html => {:id => 'issue-form', :multipart => true} do |f| %>
+                                :html => {:id => 'issue-form', :multipart => true}, data:{turbo:false} do |f| %>
       <%= error_messages_for 'issue' %>
       <%= hidden_field_tag 'copy_from', params[:copy_from] if params[:copy_from] %>
       <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">

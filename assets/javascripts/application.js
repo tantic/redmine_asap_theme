@@ -9,6 +9,7 @@ import "./controllers/notification_controller.js"
 import "./controllers/sidebar_controller.js"
 import "./controllers/wiki_controller.js"
 import "./controllers/contextual_controller.js"
+import "./controllers/calendar_controller.js"
 
 // Turbo.session.drive = false
 
