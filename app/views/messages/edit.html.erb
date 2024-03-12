@@ -5,6 +5,7 @@
 <%= form_for @message, {
                :as => :message,
                :url => {:action => 'edit'},
+               data:{turbo:false},
                :html => {:multipart => true,
                          :id => 'message-form',
                          :method => :post}
