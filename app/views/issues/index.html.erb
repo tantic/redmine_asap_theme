@@ -69,7 +69,7 @@
 
   <% if @query.valid? %>
   <% if @issues.empty? %>
-  <p class="nodata"><%= l(:label_no_data) %></p>
+  <div class="my-8 container mx-auto bg-white dark:bg-slate-700 shadow rounded p-4"><%= l(:label_no_data) %></div>
   <% else %>
   <%= render_query_totals(@query) %>
   <div class="my-8 container mx-auto bg-white dark:bg-slate-700 shadow rounded p-4">

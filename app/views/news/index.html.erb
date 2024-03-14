@@ -30,7 +30,7 @@
 
 
   <% if @newss.empty? %>
-  <p class="nodata"><%= l(:label_no_data) %></p>
+  <div class="my-8 container mx-auto bg-white dark:bg-slate-700 shadow rounded p-4"><%= l(:label_no_data) %></div>
   <% else %>
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 mx-4 sm:mx-0">
       <% @newss.each do |news| %>
