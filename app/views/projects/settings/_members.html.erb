@@ -3,10 +3,12 @@
 <% if User.current.admin? %>
   <div class="contextual"><%= link_to l(:label_administration), users_path, :class => "icon icon-settings" %></div>
 <% end %>
-<p><%= link_to l(:label_member_new), new_project_membership_path(@project), :remote => true, :class => "icon icon-add" %></p>
+<div class="flex justify-end my-2">
+  <%= link_to l(:label_member_new), new_project_membership_path(@project), :remote => true, :class => "icon icon-add button-blue" %>
+</div>
 
 <% if members.any? %>
-<table class="list members">
+<table class="list members table table-bordered">
   <thead>
     <tr>
       <th><%= l(:label_user) %> / <%= l(:label_group) %></th>

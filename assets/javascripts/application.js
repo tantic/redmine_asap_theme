@@ -131,7 +131,9 @@ document.addEventListener("turbo:load",setupTabs);
 document.addEventListener("turbo:load",setupFilePreviewNavigation);
 document.addEventListener("turbo:load",setupWikiTableSortableHeader);
 
-
+document.addEventListener("turbo:load",function(){
+  autoFillProjectIdentifier();
+});
 
 function toggle(breadcrumb){
   if (breadcrumb.style.display === "none") {

@@ -4914,10 +4914,9 @@ div.wiki{
       }
     }
   }
-  .wiki-edit{
-    --tw-bg-opacity: 1 !important;
-    background-color: rgb(255 255 255 / var(--tw-bg-opacity)) !important;
-  }
+  /* .wiki-edit{
+    @apply bg-white;
+  } */
   td,
   th {
     padding: 10px;
@@ -5023,10 +5022,9 @@ div.wiki{
   }
 }
 
-.wiki-edit{
-  --tw-bg-opacity: 1 !important;
-  background-color: rgb(255 255 255 / var(--tw-bg-opacity)) !important;
-}
+/* .wiki-edit{
+  @apply bg-white;
+} */
 
 h1,
 h2,
@@ -5272,6 +5270,33 @@ blockquote{
         padding-right: 1rem;
       }
     }
+  }
+}
+
+.tab-content{
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  border-radius: 0.25rem;
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+  padding: 1rem;
+  --tw-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  --tw-shadow-colored: 0 1px 3px 0 var(--tw-shadow-color), 0 1px 2px -1px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
+@media (prefers-color-scheme: dark){
+  .tab-content{
+    --tw-bg-opacity: 1;
+    background-color: rgb(31 41 55 / var(--tw-bg-opacity));
+    --tw-text-opacity: 1;
+    color: rgb(243 244 246 / var(--tw-text-opacity));
+  }
+}
+
+@media (min-width: 768px){
+  .tab-content{
+    padding: 2rem;
   }
 }
 
@@ -6247,6 +6272,10 @@ select{
 
 .z-50{
   z-index: 50;
+}
+
+.col-span-3{
+  grid-column: span 3 / span 3;
 }
 
 .float-right{
@@ -7796,6 +7825,11 @@ select{
 .hover\:text-gray-600:hover{
   --tw-text-opacity: 1;
   color: rgb(75 85 99 / var(--tw-text-opacity));
+}
+
+.hover\:text-gray-700:hover{
+  --tw-text-opacity: 1;
+  color: rgb(55 65 81 / var(--tw-text-opacity));
 }
 
 .hover\:text-gray-800:hover{

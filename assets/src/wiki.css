@@ -208,9 +208,9 @@ div.wiki {
     }
   }
 
-  .wiki-edit{
-    @apply bg-white !important;
-  }
+  /* .wiki-edit{
+    @apply bg-white;
+  } */
 
 
   td,
@@ -260,9 +260,9 @@ div.wiki {
   }
 }
 
-.wiki-edit{
-  @apply bg-white !important;
-}
+/* .wiki-edit{
+  @apply bg-white;
+} */
 
 h1,
 h2,

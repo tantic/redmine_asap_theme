@@ -1,27 +1,31 @@
 <% default_action = false %>
-
-<div class="tabs text-sm font-medium text-center text-gray-500  dark:text-gray-400 dark:border-gray-700 mb-6">
-  <ul class="flex flex-nowrap overflow-x-auto -mb-px">
-  <% tabs.each do |tab| -%>
-    <% action = get_tab_action(tab) %>
-    <li class=""><%= link_to l(tab[:label]), (tab[:url] || { :tab => tab[:name] }),
-                                    :id => "tab-#{tab[:name]}",
-                                    :class => (tab[:name] != selected_tab ? "inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" : 'inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 selected'),
-                                    :onclick => (action.nil? ? nil : "#{ action }; return false;") %></li>
-    <% default_action = action if tab[:name] == selected_tab %>
-  <% end -%>
-  </ul>
-  <div class="tabs-buttons" style="display:none;">
-    <button class="tab-left" type="button" onclick="moveTabLeft(this);"></button>
-    <button class="tab-right" type="button" onclick="moveTabRight(this);"></button>
+<div class="bg-white dark:bg-slate-700 shadow">
+  <div class="px-4 sm:px-0 container mx-auto  grid grid-cols-3 justify-items-stretch gap-0 w-full">
+    <div></div>
+    <ul class="tabs flex col-span-3 justify-self-center  flex-nowrap overflow-x-auto -mb-px">
+    <% tabs.each do |tab| -%>
+      <% action = get_tab_action(tab) %>
+      <li class=""><%= link_to l(tab[:label]), (tab[:url] || { :tab => tab[:name] }),
+                                      :id => "tab-#{tab[:name]}",
+                                      :class => (tab[:name] != selected_tab ? "inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-700 hover:border-gray-300 dark:hover:text-gray-300" : 'inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-700 hover:border-gray-300 dark:hover:text-gray-300 selected'),
+                                      :onclick => (action.nil? ? nil : "#{ action }; return false;") %></li>
+      <% default_action = action if tab[:name] == selected_tab %>
+    <% end -%>
+    </ul>
+    <div></div>
   </div>
 </div>
 
+<div class="sm:container sm:mx-auto mx-4">
 <% tabs.each do |tab| -%>
   <%= content_tag('div', (render(:partial => tab[:partial], :locals => {:tab => tab}) if tab[:partial]) ,
                        :id => "tab-content-#{tab[:name]}",
                        :style => (tab[:name] != selected_tab ? 'display:none' : nil),
                        :class => 'tab-content') if tab[:partial] || tab[:remote] %>
 <% end -%>
+<div></div>
 
+<div></div>
+
+</div>
 <%= javascript_tag default_action if default_action %>

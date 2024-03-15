@@ -1,10 +1,12 @@
 <% if User.current.allowed_to?(:manage_repository, @project) %>
-  <p><%= link_to l(:label_repository_new), new_project_repository_path(@project), :class => 'icon icon-add' %></p>
+  <div class="flex justify-end">
+    <%= link_to l(:label_repository_new), new_project_repository_path(@project), :class => 'icon icon-add button-blue my-2' %>
+  </div>
 <% end %>
 
 <% if @project.repositories.any? %>
 <div class="autoscroll">
-  <table class="list">
+  <table class="list table table-bordered">
     <thead>
       <tr>
         <th><%= l(:field_identifier) %></th>

@@ -1,7 +1,9 @@
-<p><%= link_to l(:label_issue_category_new), new_project_issue_category_path(@project), :class => 'icon icon-add' if User.current.allowed_to?(:manage_categories, @project) %></p>
+<div class="flex justify-end">
+  <%= link_to l(:label_issue_category_new), new_project_issue_category_path(@project), :class => 'icon icon-add button-blue my-2 ' if User.current.allowed_to?(:manage_categories, @project) %>
+</div>
 
 <% if @project.issue_categories.any? %>
-<table class="list">
+<table class="list table table-bordered">
   <thead><tr>
     <th><%= l(:label_issue_category) %></th>
     <th><%= l(:field_assigned_to) %></th>
