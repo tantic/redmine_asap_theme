@@ -31,6 +31,107 @@ document.addEventListener("turbo:load", function(e) {
   }
 });
 
+document.addEventListener("turbo:load", function(e) {
+  $('#content').on('change', 'input[data-disables], input[data-enables], input[data-shows]', toggleDisabledOnChange);
+  toggleDisabledInit();
+
+  $('#content').on('click', '.toggle-multiselect', function() {
+    toggleMultiSelect($(this).siblings('select'));
+    $(this).toggleClass('icon-toggle-plus icon-toggle-minus');
+  });
+  toggleMultiSelectIconInit();
+
+  $('#history .tabs').on('click', 'a', function(e){
+    var tab = $(e.target).attr('id').replace('tab-','');
+    document.cookie = 'history_last_tab=' + tab + '; SameSite=Lax'
+  });
+});
+
+document.addEventListener("turbo:load", function(e) {
+  $('#content').on('click', 'div.jstTabs a.tab-preview', function(event){
+    var tab = $(event.target);
+
+    var url = tab.data('url');
+    var form = tab.parents('form');
+    var jstBlock = tab.parents('.jstBlock');
+
+    var element = encodeURIComponent(jstBlock.find('.wiki-edit').val());
+    var attachments = form.find('.attachments_fields input').serialize();
+
+    $.ajax({
+      url: url,
+      type: 'post',
+      data: "text=" + element + '&' + attachments,
+      success: function(data){
+        jstBlock.find('.wiki-preview').html(data);
+        setupWikiTableSortableHeader();
+      }
+    });
+  });
+});
+
+document.addEventListener("turbo:load",function(){
+
+  observeSearchfield('projects-quick-search', null, $('#projects-quick-search').data('automcomplete-url'));
+
+  $(".drdn-content").keydown(function(event){
+    var items = $(this).find(".drdn-items");
+
+    // If a project is selected set focused to selected only once
+    if (selected && selected.length > 0) {
+      var focused = selected;
+      selected = undefined;
+    }
+    else {
+      var focused = items.find("a:focus");
+    }
+    switch (event.which) {
+    case 40: //down
+      if (focused.length > 0) {
+        focused.nextAll("a").first().focus();;
+      } else {
+        items.find("a").first().focus();;
+      }
+      event.preventDefault();
+      break;
+    case 38: //up
+      if (focused.length > 0) {
+        var prev = focused.prevAll("a");
+        if (prev.length > 0) {
+          prev.first().focus();
+        } else {
+          $(this).find(".autocomplete").focus();
+        }
+        event.preventDefault();
+      }
+      break;
+    case 35: //end
+      if (focused.length > 0) {
+        focused.nextAll("a").last().focus();
+        event.preventDefault();
+      }
+      break;
+    case 36: //home
+      if (focused.length > 0) {
+        focused.prevAll("a").last().focus();
+        event.preventDefault();
+      }
+      break;
+    }
+  });
+});
+
+
+document.addEventListener("turbo:load",setupAjaxIndicator);
+document.addEventListener("turbo:load",hideOnLoad);
+document.addEventListener("turbo:load",addFormObserversForDoubleSubmit);
+document.addEventListener("turbo:load",defaultFocus);
+document.addEventListener("turbo:load",setupAttachmentDetail);
+document.addEventListener("turbo:load",setupTabs);
+document.addEventListener("turbo:load",setupFilePreviewNavigation);
+document.addEventListener("turbo:load",setupWikiTableSortableHeader);
+
+
 
 function toggle(breadcrumb){
   if (breadcrumb.style.display === "none") {
@@ -40,12 +141,6 @@ function toggle(breadcrumb){
   }
 }
 
-
-// context menu
-document.addEventListener("turbo:load", function() {
-  contextMenuInit();
-  $('input[type=checkbox].toggle-selection').on('change', toggleIssuesSelection);
-});
 
 
 function buildFilterRow(field, operator, values) {
@@ -149,3 +244,4 @@ function buildFilterRow(field, operator, values) {
     break;
   }
 }
+
