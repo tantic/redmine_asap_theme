@@ -1,9 +1,10 @@
 <% members = @project.memberships.preload(:project).sorted.to_a %>
 
-<% if User.current.admin? %>
-  <div class="contextual"><%= link_to l(:label_administration), users_path, :class => "icon icon-settings" %></div>
-<% end %>
+
 <div class="flex justify-end my-2">
+  <% if User.current.admin? %>
+    <%= link_to l(:label_administration), users_path, :class => "icon icon-settings button-second mr-2" %>
+  <% end %>
   <%= link_to l(:label_member_new), new_project_membership_path(@project), :remote => true, :class => "icon icon-add button-blue" %>
 </div>
 

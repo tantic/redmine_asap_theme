@@ -1,23 +1,29 @@
-<% if @versions.any? %>
-  <div class="contextual">
-    <%= link_to l(:label_close_versions), close_completed_project_versions_path(@project), :class => 'icon icon-locked', :method => :put %>
-  </div>
-<% end %>
 <div class="flex justify-end">
+  <% if @versions.any? %>
+    <%= link_to l(:label_close_versions), close_completed_project_versions_path(@project), :class => 'icon icon-locked button-second mr-2', :method => :put %>
+  <% end %>
   <%= link_to l(:label_version_new), new_project_version_path(@project, :back_url => ''), :class => 'icon icon-add button-blue' if User.current.allowed_to?(:manage_versions, @project) %>
 </div>
 
 <%= form_tag(settings_project_path(@project, :tab => 'versions'), :method => :get) do %>
 <fieldset><legend><%= l(:label_filter_plural) %></legend>
-<label for='status'><%= l(:field_status) %>:</label>
-<%= select_tag 'version_status', options_for_select([[l(:label_all), '']] + Version::VERSION_STATUSES.collect {|s| [l("version_status_#{s}"), s]}, @version_status), :onchange => "this.form.submit(); return false;"  %>
-<label for='name'><%= l(:label_version) %>:</label>
-<%= text_field_tag 'version_name', @version_name, :size => 30 %>
-<%= submit_tag l(:button_apply), :name => nil %>
-<%= link_to l(:button_clear), settings_project_path(@project, :tab => 'versions'), :class => 'icon icon-reload' %>
+  <div class="grid grid-cols-2 gap-4">
+    <div>
+      <label for='status'><%= l(:field_status) %></label>
+      <%= select_tag 'version_status', options_for_select([[l(:label_all), '']] + Version::VERSION_STATUSES.collect {|s| [l("version_status_#{s}"), s]}, @version_status), :onchange => "this.form.submit(); return false;"  %>
+    </div>
+    <div>
+      <label for='name'><%= l(:label_version) %></label>
+      <%= text_field_tag 'version_name', @version_name, :size => 30 %>
+    </div>
+  </div>
+  <div class="flex justify-end my-2 items-center">
+    <%= submit_tag l(:button_apply), :name => nil %>
+    <%= link_to l(:button_clear), settings_project_path(@project, :tab => 'versions'), :class => 'icon icon-reload button-second ml-2' %>
+  </div>
 </fieldset>
 <% end %>
-&nbsp;
+
 
 <% if @versions.present? %>
 <table class="list versions table table-bordered">

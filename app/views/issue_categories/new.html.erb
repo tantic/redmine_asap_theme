@@ -1,0 +1,16 @@
+<div class="bg-white dark:bg-slate-700 shadow">
+  <div data-controller="contextual" class="contextual px-4 sm:px-0 container mx-auto  py-2 grid grid-cols-3 justify-items-stretch gap-0 w-full">
+    <h2 class="uppercase text-gray-600 dark:text-gray-100 flex items-center"><%=l(:label_issue_category_new)%></h2>
+    <div></div>
+    <div></div>
+  </div>
+</div>
+
+<div class="sm:container sm:mx-auto mx-4 mt-8">
+
+  <%= labelled_form_for @category, :as => :issue_category,
+                        :url => project_issue_categories_path(@project) do |f| %>
+  <%= render :partial => 'issue_categories/form', :locals => { :f => f } %>
+  <%= submit_tag l(:button_create) %>
+  <% end %>
+</div>

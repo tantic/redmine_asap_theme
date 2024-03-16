@@ -1,10 +1,10 @@
-<div class="contextual">
+<div class="contextual flex justify-end mb-2">
 <%= link_to(l(:button_reset), project_enumerations_path(@project),
             :method => :delete,
             :data => {:confirm => l(:text_are_you_sure)},
-            :class => 'icon icon-del') %>
+            :class => 'icon icon-del button-second') %>
 <% if User.current.admin? %>
-<%= link_to l(:label_administration), enumerations_path, :class => "icon icon-settings" %>
+<%= link_to l(:label_administration), enumerations_path, :class => "icon icon-settings button-second ml-2" %>
 <% end %>
 </div>
 
