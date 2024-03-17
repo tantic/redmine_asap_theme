@@ -6,7 +6,7 @@
 - [x] Navbar : logo, Project jumpbox, search, admin, user menu (my account, my profile, logout)
 - [x] Navigation in a project
 - [x] Contextual menu
-- [ ] Responsive navigation (mobile, tablet, laptop, desktop)
+- [x] Responsive navigation (mobile, tablet, laptop, desktop)
   - [x] sm @media (min-width: 640px) { ... }
   - [x] md @media (min-width: 768px) { ... }
   - [x] lg @media (min-width: 1024px) { ... }
@@ -23,7 +23,7 @@
   - [x] Display projects
   - [ ] News from listed projects
   - [ ] Ability for user to display details on projects
-- [ ] Projects
+- [x] Projects
 - [ ] Search
 
 Account
@@ -55,34 +55,36 @@ Account
 - [ ] Gantt
   - [ ] task display
 - [x] Calendar (WIP)
-  - [ ] General UX and UI
+  - [x] General UX and UI
   - [ ] Multiple days events
-- [ ] News
+- [x] News
   - [x] List
-  - [ ] Show
-- [ ] Forum
+  - [x] Show
+  - [x] Edit
+- [x] Forum
 - [ ] Documents
   - [x] List
   - [ ] Show document
   - [ ] Edit document
-- [ ] Wiki
+- [x] Wiki
   - [x] Show page
-  - [ ] Edit page
+  - [x] Edit page
+  - [x] Add navigation
 - [ ] Files
   - [x] List
   - [ ] Add file
-- [ ] Respository
-- [ ] Settings
+- [x] Respository
+- [x] Settings
 
 - [ ] Query
-- [ ] Ability to access subprojects more quickly
+- [x] Ability to access subprojects more quickly
 
 ## Issue
 
 - [x] UX/UI of an issue (WIP)
   - [x] General layout
   - [ ] Tabs for history and notes
-  - [ ] Sidebar
+  - [x] Sidebar
   - [ ] subtasks and relations
 - [ ] Ability to add reaction to issues
 - [ ] Reactions on comments
@@ -123,13 +125,13 @@ Account
   - [x] Authentication
   - [x] API
   - [x] Projects
-  - [ ] Users
-  - [ ] Issue tracking
-  - [ ] Time tracking
-  - [ ] Files
-  - [ ] Email notifications
-  - [ ] Incoming emails
-  - [ ] Repositories
+  - [x] Users
+  - [x] Issue tracking
+  - [x] Time tracking
+  - [x] Files
+  - [x] Email notifications
+  - [x] Incoming emails
+  - [x] Repositories
 - [x] LDAP Authentication
 - [x] Plugins
 - [x] Information
