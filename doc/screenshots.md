@@ -2,62 +2,98 @@
 
 ## Login
 
+The login page with a background image that can be choose in the plugin settings.
+
 ![Login page](img/login.png)
 
 ## Navigation
 
 ![Three](img/navbar.png)
 
-## Project views
+## Welcome
 
-### List
+For now, the welcome page display only user projects
 
-![first-issues](img/issues_20240229.png)
+![Welcome](img/welcome.png)
 
-### Calendar
+## Projects list
 
-![Calendar](img/redmine_calendar_filters.png)
+![Projects list](img/projects_list.png)
 
-### Gantt
 
-![Gantt](img/redmine_gantt_v0.png)
+## Project
 
-## Issue
+### Overview
 
-![Issue](img/issue_20240118.png)
+![Project overview](img/project_overview.png)
 
-## Wiki
+### Issues
 
-![Wiki](img/wiki4.png)
+![Issues](img/project_issues.png)
 
 ## Activities
 
-![Activities](img/activities2.png)
-
+![Activities](img/project_activities.png)
 
 ## Roadmap
 
-![Roadmap](img/roadmap.png)
+![Roadmap](img/project_roadmap.png)
+
 
 ## Time entries
 
-![Time entries](img/spent-time.png)
+![Time entries](img/project_timelog.png)
 
-## News
 
-![News](img/news.png)
+### Gantt (WIP)
 
-## Documents
+Work in progress
 
-![Documents](img/documents.png)
+![Gantt](img/project_gantt.png)
 
-## Files
 
-![Files](img/files.png)
+### Calendar
 
-## Forum
+![Calendar](img/project_calendar.png)
 
-![Forum](img/forum.png)
+
+### News
+
+![News](img/project_news.png)
+
+### Documents
+
+![Documents](img/project_documents.png)
+
+### Wiki
+
+![Wiki](img/project_wiki.png)
+
+### Forum
+
+![Forum](img/project_forum.png)
+
+### Files
+
+![Files](img/project_files.png)
+
+### Repositories
+
+![Files](img/project_repositories.png)
+
+
+### Project settings
+
+![Files](img/project_settings.png)
+
+
+## Issue
+
+![Issue](img/issue_overview.png)
+
+
+
+
 
 
 
@@ -75,7 +111,7 @@
 
 ![Admin menu](img/admin-menu.png)
 
-![Admin project](img/admin-projects-2.png)
+![Admin project](img/admin-projects.png)
 
 ![Admin menu](img/admin-users.png)
 
@@ -111,6 +147,11 @@ Ability to change the background
 
 ![Login page](img/admin-plugin-redmine-asap-theme.png)
 
+Settings for colors (more to be defined)
+
+![Color](img/admin-plugin-redmine-asap-theme-2.png)
+
+
 ## About
 
 ![Modal](img/redmine_about.png)
@@ -125,6 +166,3 @@ Ability to change the background
 ![Mobile](img/mobile.png)
 
 
-## Projects
-
-![Projects](img/projects.png)
