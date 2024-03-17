@@ -24,3 +24,13 @@ A brand new theme whith a new layout and some principles
 * Stimulus for interactivity, turbo for performances
 * integration of small improvments seen in open sources plugins
 * try to keep the compatibility with plugins when possible
+
+## Rails and Hotwire
+
+I think Hotwire is really great and really cool for progressive enhancement (see the article here : https://boringrails.com/articles/thinking-in-hotwire-progressive-enhancement/).
+
+So here, the proposition is to improve Redmine
+* Step 1 : improve UI with some css
+* Step 2 : improve some UX with stimulus and Turbo for the navigation and performances
+* Step 3 : go deeper in the UX improvment with some Hotwire stuff
+* Step 4 : add some new features

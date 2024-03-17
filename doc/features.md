@@ -136,6 +136,13 @@ Account
 - [x] Plugins
 - [x] Information
 
+## Hotwire
+
+- [x] Stimulus controller => need to rework on this
+- [x] Turbo => probably some work left on compatibility with jquery
+- [ ] Turbo frames
+- [ ] Turbo stream => see if needed
+
 ## Compatibility
 
 - [ ] Redmine maintenance

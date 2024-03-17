@@ -11,7 +11,7 @@ Here are some screenshots
 
 ![Login page](doc/img/login.png)
 
-![Issues](doc/img/issues_20240229.png)
+![Issues](doc/img/project_issues.png)
 
 
 ## Documentation
