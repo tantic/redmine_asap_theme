@@ -1,41 +1,54 @@
-<div class="contextual">
-<% if User.current.allowed_to?(:edit_documents, @project) %>
-<%= link_to l(:button_edit), edit_document_path(@document), :class => 'icon icon-edit', :accesskey => accesskey(:edit) %>
-<% end %>
-<% if User.current.allowed_to?(:delete_documents, @project) %>
-<%= delete_link document_path(@document) %>
-<% end %>
-</div>
+<div class="bg-white dark:bg-slate-700 shadow">
+  <div data-controller="contextual" class="contextual px-4 sm:px-0 container mx-auto  py-2 grid grid-cols-3 justify-items-stretch gap-0 w-full">
+    <h2 class="uppercase text-gray-600 flex items-center dark:text-gray-100"><%= @document.category.name %> > <%= @document.title %></h2>
+    <div class="relative flex items-center justify-self-center pr-6">
+      <% if User.current.allowed_to?(:edit_documents, @project) %>
+        <%= link_to edit_document_path(@document), :class => 'icon icon-edit text-white flex bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm p-2 mr-3 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800', :accesskey => accesskey(:edit) do %>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L6.832 19.82a4.5 4.5 0 0 1-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 0 1 1.13-1.897L16.863 4.487Zm0 0L19.5 7.125" />
+          </svg>
+        <% end %>
+      <% end %>
+    </div>
+    <div class="ml-auto w-auto flex relative">
 
-<h2><%= @document.title %></h2>
-
-<p><em><%= @document.category.name %><br />
-<%= format_date @document.created_on %></em></p>
-
-<% if @document.custom_field_values.any? %>
-<ul>
-  <% render_custom_field_values(@document) do |custom_field, formatted| %>
-    <li><span class="label"><%= custom_field.name %>:</span> <%= formatted %></li>
-  <% end %>
-</ul>
-<% end %>
-
-<div class="wiki">
-<%= textilizable @document, :description, :attachments => @document.attachments %>
-</div>
-
-<h3><%= l(:label_attachment_plural) %></h3>
-<%= link_to_attachments @document, :thumbnails => true %>
-
-<% if authorize_for('documents', 'add_attachment') %>
-<p><%= link_to l(:label_attachment_new), {}, :onclick => "$('#add_attachment_form').show(); return false;",
-                                             :id => 'attach_files_link' %></p>
-  <%= form_tag({ :controller => 'documents', :action => 'add_attachment', :id => @document }, :multipart => true, :id => "add_attachment_form", :style => "display:none;") do %>
-  <div class="box">
-  <p><%= render :partial => 'attachments/form' %></p>
+      <% if User.current.allowed_to?(:delete_documents, @project) %>
+      <%= delete_link document_path(@document) %>
+      <% end %>
+    </div>
   </div>
-  <%= submit_tag l(:button_add) %>
-  <% end %>
-<% end %>
+</div>
 
-<% html_title @document.title -%>
+<div class="sm:container sm:mx-auto mx-4 mt-8 bg-white shadow dark:bg-gray-800 p-8">
+
+    <%= format_date @document.created_on %>
+
+    <% if @document.custom_field_values.any? %>
+    <ul>
+      <% render_custom_field_values(@document) do |custom_field, formatted| %>
+        <li><span class="label"><%= custom_field.name %>:</span> <%= formatted %></li>
+      <% end %>
+    </ul>
+    <% end %>
+
+    <div class="wiki">
+    <%= textilizable @document, :description, :attachments => @document.attachments %>
+    </div>
+
+    <h3><%= l(:label_attachment_plural) %></h3>
+    <%= link_to_attachments @document, :thumbnails => true %>
+
+    <% if authorize_for('documents', 'add_attachment') %>
+    <div class="flex justify-end"><%= link_to l(:label_attachment_new), {}, :onclick => "$('#add_attachment_form').show(); return false;",
+                                                :id => 'attach_files_link', class: 'button-blue' %></div>
+      <%= form_tag({ :controller => 'documents', :action => 'add_attachment', :id => @document }, :multipart => true, :id => "add_attachment_form", :style => "display:none;") do %>
+      <div class="box">
+      <p><%= render :partial => 'attachments/form' %></p>
+      </div>
+      <%= submit_tag l(:button_add) %>
+      <% end %>
+    <% end %>
+
+    <% html_title @document.title -%>
+
+</div>

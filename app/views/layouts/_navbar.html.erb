@@ -64,7 +64,7 @@
           <div id="project-menu-submenus" class="absolute h-80 sm:h-auto overflow-y-auto z-50 sm:left-20 shadow rounded-md border border-gray-50 mt bg-white dark:bg-slate-800 dark:border-none dark:text-gray-100 w-60  bottom-14 sm:bottom-auto sm:top-14 hidden" data-projectmenu-target="projectsubmenu">
             <%= render_main_menu(@project) %>
             <% if @project && @project.id %>
-              <div class="flex flex-col border-t border-gray-50 dark:border-gray-700">
+              <div class="flex flex-col border-t border-gray-200 font-base dark:border-gray-700">
                 <%= link_to_if_authorized l(:label_settings),
                             {:controller => 'projects', :action => 'settings', :id => @project},
                             :class => 'icon icon-settings flex items-center text-gray-900 hover:bg-gray-50 dark:text-gray-100 dark:hover:bg-gray-700 hover:border-l-2 hover:border-l-blue-800 hover:pl-3.5 px-4 py-2 text-sm' if User.current.allowed_to?(:edit_project, @project) %>

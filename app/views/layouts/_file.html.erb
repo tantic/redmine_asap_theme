@@ -1,0 +1,34 @@
+<div class="bg-white dark:bg-slate-700 shadow">
+  <div data-controller="contextual" class="contextual px-4 sm:px-0 container mx-auto py-2 grid grid-cols-3 justify-items-stretch gap-0 w-full">
+    <h2 class="uppercase text-gray-600 flex items-center dark:text-gray-100">
+      <%= safe_join([link_to_attachment_container(@attachment.container), @attachment.filename].compact, ' » ') %>
+    </h2>
+    <div></div>
+    <div class="ml-auto w-auto flex relative">
+      <%= link_to_attachment @attachment, :text => "#{l(:button_download)} (#{number_to_human_size(@attachment.filesize)})", :download => true, :class => 'icon icon-download' -%>
+    </div>
+  </div>
+</div>
+
+<div class="sm:container sm:mx-auto bg-white dark:bg-gray-800 p-8 shadow mx-4 mt-8 flex">
+  <div class="flex flex-col w-full">
+    <div class="attachments">
+    <p class="text-gray-500"><%= "#{@attachment.description} - " unless @attachment.description.blank? %>
+      <span class="author"><%= link_to_user(@attachment.author) %>, <%= format_time(@attachment.created_on) %></span></p>
+    </div>
+    <div class="filecontent-container flex items-center py-8">
+      <%= yield %>
+    </div>
+
+    <div class="pagination filepreview flex items-center justify-center">
+      <%= render_pagination %>
+    </div>
+
+    <% html_title @attachment.filename %>
+
+    <% content_for :header_tags do -%>
+        <%= stylesheet_link_tag "scm" -%>
+    <% end -%>
+  </div>
+
+</div>
