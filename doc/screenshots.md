@@ -93,11 +93,6 @@ Work in progress
 
 
 
-
-
-
-
-
 ## User settings (ex my account)
 
 ![User settings](img/user-settings.gif)
@@ -150,6 +145,8 @@ Ability to change the background
 Settings for colors (more to be defined)
 
 ![Color](img/admin-plugin-redmine-asap-theme-2.png)
+
+![Color](img/admin_issue_statuses.png)
 
 
 ## About

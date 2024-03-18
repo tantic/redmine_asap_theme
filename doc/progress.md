@@ -225,3 +225,8 @@ First work on dark theme, need to be improved
 
 ![Projects](img/projects.png)
 
+## Issue statuses
+
+Ability to customize statuses colors
+
+![Color](img/admin_issue_statuses.png)
