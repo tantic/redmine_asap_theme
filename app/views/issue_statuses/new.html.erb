@@ -12,7 +12,7 @@
 
   <div class="mx-4">
 
-  <%= labelled_form_for @issue_status do |f| %>
+  <%= labelled_form_for @issue_status, data: { turbo: false } do |f| %>
     <%= render :partial => 'form', :locals => {:f => f} %>
     <%= submit_tag l(:button_create) %>
   <% end %>
