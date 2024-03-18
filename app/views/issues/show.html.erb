@@ -173,7 +173,7 @@
         <div data-tabs-target="tab" id="general" class="space-y-2">
           <div class="flex w-full">
             <div class="mr-2 text-gray-400 w-1/3"><%= l(:field_status) %></div>
-            <div class="w-2/3"><%= @issue.status.name %></div>
+            <div class="w-2/3"><span class="rounded px-2.5 py-1 text-xs" style="background-color: <%= @issue.status.bg_color %>;color: <%= @issue.status.text_color %>"><%= @issue.status.name %></span></div>
           </div>
           <div class="flex w-full">
             <div class="mr-2 text-gray-400 w-1/3"><%= l(:field_priority) %></div>

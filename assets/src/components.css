@@ -360,9 +360,9 @@ a.tracker-9{
 }
 
 
-tr.status-1{
+/* tr.status-1{
   td.status{
-    @apply text-green-800 text-xs text-center font-medium me-2 px-2.5 py-0.5 rounded-full dark:bg-green-900 dark:text-green-300;
+    @apply text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full dark:bg-green-900 dark:text-green-300;
     -webkit-background-clip: content-box;
     background-clip: content-box;
   }
@@ -370,7 +370,7 @@ tr.status-1{
 
 tr.status-2{
   td.status{
-    @apply text-orange-800 text-xs text-center font-medium me-2 px-2.5 py-0.5 rounded-full dark:bg-orange-900 dark:text-orange-300;
+    @apply text-orange-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full dark:bg-orange-900 dark:text-orange-300;
     -webkit-background-clip: content-box;
     background-clip: content-box;
   }
@@ -414,7 +414,7 @@ tr.status-5{
     -webkit-background-clip: content-box;
     background-clip: content-box;
   }
-}
+} */
 
 
 
