@@ -9,9 +9,6 @@
       <div class="text-center text-blue-100 w-full my-0 md:my-4 font-medium text-lg">
         <%= Setting.app_title %>
       </div>
-      <div class="hidden md:flex text-gray-400 font-light text-center text-xs">
-        <%= textilizable Setting.welcome_text %>
-      </div>
     </div>
     <%= form_tag(signin_path, onsubmit: 'return keepAnchorOnSignIn(this);', data: {turbo: false}, class:"w-full md:w-3/5 flex flex-col px-12 py-8 md:py-24") do %>
       <%= back_url_hidden_field_tag %>
