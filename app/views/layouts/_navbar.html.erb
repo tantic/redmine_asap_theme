@@ -9,11 +9,12 @@
         <%= image_tag 'redmine_white.svg', :plugin => 'redmine_asap_theme', class: 'w-10 h-10' %>
       <% end %>
     </div>
-    <%= project_parent_breadcrumb %>
+    <%#= project_parent_breadcrumb %>
     <%= render_project_jump_box %>
     <div class="fixed flex items-center justify-center px-4 sm:px-0 w-full sm:w-auto shadow-2xl sm:shadow-none border-t border-gray-100 sm:border-none sm:relative sm:flex bottom-0 bg-slate-800 sm:bg-white sm:dark:bg-slate-800 text-blue-50 sm:text-gray-900 sm:dark:text-gray-50 sm:bottom-auto  ">
       <% if @project && @project.id %>
         <% if @project.children.any? %>
+        <!--
         <div data-controller="projectmenu" class="h-full hidden sm:flex items-center justify-center">
           <div data-action="click->projectmenu#toggleSubprojects" class="cursor-pointer ml-1 p-2 rounded-full hover:bg-gray-100 text-gray-700 dark:text-gray-400 dark:hover:text-gray-300 dark:hover:bg-gray-700 hover:text-gray-800">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-gray-800 transition duration-75 dark:text-gray-400 hover:text-gray-900 dark:group-hover:text-white">
@@ -29,6 +30,7 @@
             <% end %>
           </div>
         </div>
+      -->
         <% end %>
         <div class="contextual w-10 h-full relative flex items-center justify-center">
           <%= bookmark_link @project %>
@@ -90,6 +92,12 @@
     </div>
     <div class="ml-auto flex  bg-white dark:bg-slate-800  sm:w-auto justify-end sm:justify-center sm:relative bottom-0">
       <div data-controller="usermenu" class="flex text-sm relative items-center justify-center">
+        <%= link_to my_path, class: "cursor-pointer p-2 rounded-full hover:bg-gray-100 text-gray-700 dark:text-gray-400 dark:hover:text-gray-300 dark:hover:bg-gray-700 hover:text-gray-800" do %>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="h-5 w-5" viewBox="0 0 16 16">
+            <path d="M4 16s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1zm4-5.95a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5"/>
+            <path d="M2 1a2 2 0 0 0-2 2v9.5A1.5 1.5 0 0 0 1.5 14h.653a5.4 5.4 0 0 1 1.066-2H1V3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v9h-2.219c.554.654.89 1.373 1.066 2h.653a1.5 1.5 0 0 0 1.5-1.5V3a2 2 0 0 0-2-2z"/>
+          </svg>
+        <% end %>
         <div id="quick-search" class="hidden" data-usermenu-target="search">
           <%= form_tag({:controller => 'search', :action => 'index', :id => @project}, :method => :get ) do %>
             <%= hidden_field_tag 'scope', default_search_project_scope, :id => nil %>
