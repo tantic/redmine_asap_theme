@@ -8,9 +8,9 @@
     <% end %>
   </div>
 </div>
-<div id="my-page" class="sm:container sm:mx-auto grid grid-cols-2 gap-4 mx-4 mt-8 mb-8">
+<div id="my-page" class="splitcontent sm:container sm:mx-auto grid grid-cols-2 gap-4 mx-4 mt-8 mb-8">
   <% @groups.each do |group| %>
-    <div id="list-<%= group %>" class="block-receiver splitcontent<%= group %>">
+    <div id="list-<%= group %>" class="box block-receiver splitcontent<%= group %>">
       <%= render_blocks(@blocks[group], @user) %>
     </div>
   <% end %>

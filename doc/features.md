@@ -26,11 +26,12 @@
 - [x] Projects
 - [ ] Search
 
-Account
+## Account
+
 - [x] Login
   - [x] Login page
   - [x] Settings of the plugin : choose the background image
-- [ ] Logout
+- [x] Logout
 - [ ] Lost password
 - [ ] Password recovery
 - [ ] Register
@@ -47,7 +48,7 @@ Account
 
 ## Project
 
-- [ ] Overview
+- [x] Overview
 - [x] Activity
 - [x] Roadmap
 - [x] Issues
@@ -64,7 +65,7 @@ Account
 - [x] Forum
 - [ ] Documents
   - [x] List
-  - [ ] Show document
+  - [x] Show document
   - [ ] Edit document
 - [x] Wiki
   - [x] Show page
@@ -91,10 +92,12 @@ Account
 
 ## Personal
 
-- [ ] My page
+- [x] My page
 - [x] My account => modal
 - [x] My profile
 - [ ] Avatar from file
+- [x] Settings => display in a modal
+- [ ] Dark theme choose
 
 ## Administration
 
@@ -111,6 +114,7 @@ Account
   - [x] List
   - [x] New
   - [x] Edit
+  - [ ] Summary
 - [x] Issues statuses
 - [x] Workflow
   - [x] Edit

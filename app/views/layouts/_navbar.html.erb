@@ -1,92 +1,93 @@
 <nav class="bg-white dark:bg-slate-800 h-14 fixed w-full z-50 top-0 left-0 shadow dark:border-gray-600">
-  <div class="flex h-full mx-auto">
-    <div class="h-full  flex items-center justify-center ">
-      <%
-        bg_color = Setting.plugin_redmine_asap_theme['redmine_asap_colors_logo_bg']
-        hover_bg_color = Setting.plugin_redmine_asap_theme['redmine_asap_colors_logo_bg_hover']
-      %>
-      <%= link_to home_path(), :title => Setting.app_title, :class=>"flex flex-none text-blue-50 dark:bg-blue-900 cursor-pointer w-14 p-2 flex items-center justify-center", style: "background-color:#{bg_color}" do %>
-        <%= image_tag 'redmine_white.svg', :plugin => 'redmine_asap_theme', class: 'w-10 h-10' %>
-      <% end %>
-    </div>
-    <%#= project_parent_breadcrumb %>
-    <%= render_project_jump_box %>
-    <div class="fixed flex items-center justify-center px-4 sm:px-0 w-full sm:w-auto shadow-2xl sm:shadow-none border-t border-gray-100 sm:border-none sm:relative sm:flex bottom-0 bg-slate-800 sm:bg-white sm:dark:bg-slate-800 text-blue-50 sm:text-gray-900 sm:dark:text-gray-50 sm:bottom-auto  ">
-      <% if @project && @project.id %>
-        <% if @project.children.any? %>
-        <!--
-        <div data-controller="projectmenu" class="h-full hidden sm:flex items-center justify-center">
-          <div data-action="click->projectmenu#toggleSubprojects" class="cursor-pointer ml-1 p-2 rounded-full hover:bg-gray-100 text-gray-700 dark:text-gray-400 dark:hover:text-gray-300 dark:hover:bg-gray-700 hover:text-gray-800">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-gray-800 transition duration-75 dark:text-gray-400 hover:text-gray-900 dark:group-hover:text-white">
-              <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
-            </svg>
-          </div>
-          <div id="project-menu-subprojects" class="absolute left-0 shadow border border-gray-50 mt bg-white z-50 w-60 top-14 hidden" data-projectmenu-target="projectsubprojects">
-            <% @project.children.each do |project| %>
-            <%= link_to project_path(project), :title => project.name, :class => 'flex items-center hover:bg-gray-50 px-2 py-2' do %>
-                <%= letter_avatar_tag(project.name, 300, class: 'w-8 h-8 mr-2') %>
-                <span class="uppercase font-normal text-xs line-clamp-2"><%= project.name %></span>
-              <% end %>
-            <% end %>
-          </div>
-        </div>
-      -->
+  <div class="grid grid-cols-3 gap-4">
+    <div class="h-full  flex items-center justify-start ">
+      <div class="h-full  flex items-center justify-center ">
+        <%
+          bg_color = Setting.plugin_redmine_asap_theme['redmine_asap_colors_logo_bg']
+          hover_bg_color = Setting.plugin_redmine_asap_theme['redmine_asap_colors_logo_bg_hover']
+        %>
+        <%= link_to home_path(), :title => Setting.app_title, :class=>"flex flex-none text-blue-50 dark:bg-blue-900 cursor-pointer w-14 p-2 flex items-center justify-center", style: "background-color:#{bg_color}" do %>
+          <%= image_tag 'redmine_white.svg', :plugin => 'redmine_asap_theme', class: 'w-10 h-10' %>
         <% end %>
-        <div class="contextual w-10 h-full relative flex items-center justify-center">
-          <%= bookmark_link @project %>
-        </div>
-        <div class="contextual w-10 h-full relative flex items-center justify-center">
-          <% if controller_name == 'projects' && action_name == 'show' %>
-          <% selected = 'sm:bg-gray-100 bg-slate-700 dark:sm:bg-slate-700 dark:sm:text-gray-100'  %>
-          <% else %>
-          <% selected = 'sm:bg-white bg-slate-800 dark:sm:bg-slate-700 dark:sm:text-gray-50 dark:sm:hover:bg-slate-600'  %>
-          <% end %>
-          <%= link_to @project, class: "p-2 rounded-full hover:bg-gray-700 sm:hover:bg-gray-100 text-gray-100 sm:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300 dark:bg-gray-800 dark:hover:bg-gray-700 hover:text-gray-800 #{selected}" do %>
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-gray-400 sm:text-gray-800 dark:sm:text-gray-100 transition duration-75 dark:text-gray-400 hover:text-gray-900 dark:group-hover:text-white ">
-              <path stroke-linecap="round" stroke-linejoin="round" d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
-            </svg>
-          <% end %>
-        </div>
-      <% end %>
-      <% if display_main_menu?(@project) %>
-        <div data-controller="projectmenu" class="h-full relative flex items-center justify-center">
-          <% if @project && @project.id %>
-            <% if controller_name == 'issues' %>
-            <% selected = 'border-b-2 border-blue-700 text-blue-100 sm:text-blue-700 dark:text-blue-300 dark:text-gray-100 dark:bg-gray-700 dark:hover:bg-gray-800 dark:sm:hover:bg-gray-700 font-medium'  %>
-            <% else %>
-            <% selected = ''  %>
-            <% end %>
-          <%= link_to t("label_issue_plural"),project_issues_path(@project), class: "h-full flex items-center p-4 hover:bg-gray-700 sm:hover:bg-gray-50 dark:text-gray-100 dark:bg-gray-800 dark:hover:bg-gray-700 dark:sm:hover:bg-gray-700 #{selected}" %>
-          <% end %>
-          <div data-action="click->projectmenu#toggle" class="cursor-pointer ml-1 p-2 rounded-full hover:bg-gray-700 dark:sm:hover:bg-gray-700 sm:hover:bg-gray-100 text-gray-300 sm:text-gray-700 dark:text-gray-400 dark:sm:text-gray-400 dark:hover:text-gray-300 dark:hover:bg-gray-700 hover:text-gray-800">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-gray-300 sm:text-gray-800 transition duration-75 dark:text-gray-400 dark:sm:text-gray-400 hover:text-gray-900 dark:group-hover:text-white">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM12.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM18.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
-            </svg>
+      </div>
+      <%= project_parent_breadcrumb %>
+      <%= render_project_jump_box %>
+      <div class="fixed flex items-center justify-center px-4 sm:px-0 w-full sm:w-auto shadow-2xl sm:shadow-none border-t border-gray-100 sm:border-none sm:relative sm:flex bottom-0 bg-slate-800 sm:bg-white sm:dark:bg-slate-800 text-blue-50 sm:text-gray-900 sm:dark:text-gray-50 sm:bottom-auto  ">
+        <% if @project && @project.id %>
+          <% if @project.children.any? %>
+          <div data-controller="projectmenu" class="h-full hidden sm:flex items-center justify-center">
+            <div data-action="click->projectmenu#toggleSubprojects" class="cursor-pointer ml-1 p-2 rounded-full hover:bg-gray-100 text-gray-700 dark:text-gray-400 dark:hover:text-gray-300 dark:hover:bg-gray-700 hover:text-gray-800">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-gray-800 transition duration-75 dark:text-gray-400 hover:text-gray-900 dark:group-hover:text-white">
+                <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+              </svg>
+            </div>
+            <div id="project-menu-subprojects" class="absolute left-0 shadow border border-gray-50 mt bg-white z-50 w-60 top-14 hidden" data-projectmenu-target="projectsubprojects">
+              <% @project.children.each do |project| %>
+              <%= link_to project_path(project), :title => project.name, :class => 'flex items-center hover:bg-gray-50 px-2 py-2' do %>
+                  <%= letter_avatar_tag(project.name, 300, class: 'w-8 h-8 mr-2') %>
+                  <span class="uppercase font-normal text-xs line-clamp-2"><%= project.name %></span>
+                <% end %>
+              <% end %>
+            </div>
           </div>
-          <div id="project-menu-submenus" class="absolute h-80 sm:h-auto overflow-y-auto z-50 sm:left-20 shadow rounded-md border border-gray-50 mt bg-white dark:bg-slate-800 dark:border-none dark:text-gray-100 w-60  bottom-14 sm:bottom-auto sm:top-14 hidden" data-projectmenu-target="projectsubmenu">
-            <%= render_main_menu(@project) %>
-            <% if @project && @project.id %>
-              <div class="flex flex-col border-t border-gray-200 font-base dark:border-gray-700">
-                <%= link_to_if_authorized l(:label_settings),
-                            {:controller => 'projects', :action => 'settings', :id => @project},
-                            :class => 'icon icon-settings flex items-center text-gray-900 hover:bg-gray-50 dark:text-gray-100 dark:hover:bg-gray-700 hover:border-l-2 hover:border-l-blue-800 hover:pl-3.5 px-4 py-2 text-sm' if User.current.allowed_to?(:edit_project, @project) %>
-                <% if User.current.allowed_to?(:add_subprojects, @project) %>
-                  <%= link_to l(:label_subproject_new), new_project_path(:parent_id => @project), :class => 'icon icon-add flex items-center text-gray-900 hover:bg-gray-50 dark:text-gray-100 dark:hover:bg-gray-700  hover:border-l-2 hover:border-l-blue-800 hover:pl-3.5 px-4 py-2 text-sm' %>
-                <% end %>
-                <% if User.current.allowed_to?(:close_project, @project) %>
-                  <% if @project.active? %>
-                    <%= link_to l(:button_close), close_project_path(@project), :data => {:confirm => l(:text_project_close_confirmation, @project.to_s)}, :method => :post, :class => 'icon icon-lock flex items-center text-gray-900 hover:bg-gray-50 dark:text-gray-100 dark:hover:bg-gray-700  hover:border-l-2 hover:border-l-blue-800 hover:pl-3.5 px-4 py-2 text-sm' %>
-                  <% else %>
-                    <%= link_to l(:button_reopen), reopen_project_path(@project), :data => {:confirm => l(:text_project_reopen_confirmation, @project.to_s)}, :method => :post, :class => 'icon icon-unlock flex items-center text-gray-900 hover:bg-gray-50 dark:text-gray-100 dark:hover:bg-gray-700  hover:border-l-2 hover:border-l-blue-800 hover:pl-3.5 px-4 py-2 text-sm' %>
-                  <% end %>
-                <% end %>
-                <% if @project.deletable? %>
-                  <%= link_to l(:button_delete), project_path(@project), :method => :delete, data: {turbo: false}, :class => 'icon icon-del flex items-center text-gray-900 hover:bg-gray-50 dark:text-gray-100 dark:hover:bg-gray-700  hover:border-l-2 hover:border-l-blue-800 hover:pl-3.5 px-4 py-2 text-sm' %>
-                <% end %>
-              </div>
-            <% end %>
+          <% end %>
+          <div class="contextual w-10 h-full relative flex items-center justify-center">
+            <%= bookmark_link @project %>
           </div>
 
+        <% end %>
+
+      </div>
+    </div>
+    <div data-controller="projectmenu" class="h-full relative flex items-center justify-center">
+      <% if display_main_menu?(@project) %>
+        <% if @project && @project.id %>
+          <div class="contextual w-10 h-full relative flex items-center justify-center">
+            <% if controller_name == 'projects' && action_name == 'show' %>
+            <% selected = 'sm:bg-gray-100 bg-slate-700 dark:sm:bg-slate-700 dark:sm:text-gray-100'  %>
+            <% else %>
+            <% selected = 'sm:bg-white bg-slate-800 dark:sm:bg-slate-700 dark:sm:text-gray-50 dark:sm:hover:bg-slate-600'  %>
+            <% end %>
+            <%= link_to @project, class: "p-2 rounded-full hover:bg-gray-700 sm:hover:bg-gray-100 text-gray-100 sm:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300 dark:bg-gray-800 dark:hover:bg-gray-700 hover:text-gray-800 #{selected}" do %>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-gray-400 sm:text-gray-800 dark:sm:text-gray-100 transition duration-75 dark:text-gray-400 hover:text-gray-900 dark:group-hover:text-white ">
+                <path stroke-linecap="round" stroke-linejoin="round" d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+              </svg>
+            <% end %>
+          </div>
+          <% if controller_name == 'issues' %>
+          <% selected = 'border-b-2 border-blue-700 text-blue-100 sm:text-blue-700 dark:text-blue-300 dark:text-gray-100 dark:bg-gray-700 dark:hover:bg-gray-800 dark:sm:hover:bg-gray-700 font-medium'  %>
+          <% else %>
+          <% selected = ''  %>
+          <% end %>
+        <%= link_to t("label_issue_plural"),project_issues_path(@project), class: "h-full flex items-center p-4 hover:bg-gray-700 sm:hover:bg-gray-50 dark:text-gray-100 dark:bg-gray-800 dark:hover:bg-gray-700 dark:sm:hover:bg-gray-700 #{selected}" %>
+        <% end %>
+        <div data-action="click->projectmenu#toggle" class="cursor-pointer ml-1 p-2 rounded-full hover:bg-gray-700 dark:sm:hover:bg-gray-700 sm:hover:bg-gray-100 text-gray-300 sm:text-gray-700 dark:text-gray-400 dark:sm:text-gray-400 dark:hover:text-gray-300 dark:hover:bg-gray-700 hover:text-gray-800">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-gray-300 sm:text-gray-800 transition duration-75 dark:text-gray-400 dark:sm:text-gray-400 hover:text-gray-900 dark:group-hover:text-white">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM12.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM18.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
+          </svg>
+        </div>
+        <div id="project-menu-submenus" class="absolute h-80 sm:h-auto overflow-y-auto z-50 sm:left-20 shadow rounded-md border border-gray-50 mt bg-white dark:bg-slate-800 dark:border-none dark:text-gray-100 w-60  bottom-14 sm:bottom-auto sm:top-14 hidden" data-projectmenu-target="projectsubmenu">
+          <%= render_main_menu(@project) %>
+          <% if @project && @project.id %>
+            <div class="flex flex-col border-t border-gray-200 font-base dark:border-gray-700">
+              <%= link_to_if_authorized l(:label_settings),
+                          {:controller => 'projects', :action => 'settings', :id => @project},
+                          :class => 'icon icon-settings flex items-center text-gray-900 hover:bg-gray-50 dark:text-gray-100 dark:hover:bg-gray-700 hover:border-l-2 hover:border-l-blue-800 hover:pl-3.5 px-4 py-2 text-sm' if User.current.allowed_to?(:edit_project, @project) %>
+              <% if User.current.allowed_to?(:add_subprojects, @project) %>
+                <%= link_to l(:label_subproject_new), new_project_path(:parent_id => @project), :class => 'icon icon-add flex items-center text-gray-900 hover:bg-gray-50 dark:text-gray-100 dark:hover:bg-gray-700  hover:border-l-2 hover:border-l-blue-800 hover:pl-3.5 px-4 py-2 text-sm' %>
+              <% end %>
+              <% if User.current.allowed_to?(:close_project, @project) %>
+                <% if @project.active? %>
+                  <%= link_to l(:button_close), close_project_path(@project), :data => {:confirm => l(:text_project_close_confirmation, @project.to_s)}, :method => :post, :class => 'icon icon-lock flex items-center text-gray-900 hover:bg-gray-50 dark:text-gray-100 dark:hover:bg-gray-700  hover:border-l-2 hover:border-l-blue-800 hover:pl-3.5 px-4 py-2 text-sm' %>
+                <% else %>
+                  <%= link_to l(:button_reopen), reopen_project_path(@project), :data => {:confirm => l(:text_project_reopen_confirmation, @project.to_s)}, :method => :post, :class => 'icon icon-unlock flex items-center text-gray-900 hover:bg-gray-50 dark:text-gray-100 dark:hover:bg-gray-700  hover:border-l-2 hover:border-l-blue-800 hover:pl-3.5 px-4 py-2 text-sm' %>
+                <% end %>
+              <% end %>
+              <% if @project.deletable? %>
+                <%= link_to l(:button_delete), project_path(@project), :method => :delete, data: {turbo: false}, :class => 'icon icon-del flex items-center text-gray-900 hover:bg-gray-50 dark:text-gray-100 dark:hover:bg-gray-700  hover:border-l-2 hover:border-l-blue-800 hover:pl-3.5 px-4 py-2 text-sm' %>
+              <% end %>
+            </div>
+          <% end %>
         </div>
       <% end %>
     </div>
