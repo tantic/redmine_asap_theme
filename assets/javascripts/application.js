@@ -266,3 +266,44 @@ document.addEventListener("turbo:load",function(){
   contextMenuInit();
   $('input[type=checkbox].toggle-selection').on('change', toggleIssuesSelection);
 });
+
+
+document.addEventListener("turbo:load",function(){
+  // $('#content').on('change', 'input[data-disables], input[data-enables], input[data-shows]', toggleDisabledOnChange);
+  // toggleDisabledInit();
+
+  // $('#content').on('click', '.toggle-multiselect', function() {
+  //   toggleMultiSelect($(this).siblings('select'));
+  //   $(this).toggleClass('icon-toggle-plus icon-toggle-minus');
+  // });
+  // toggleMultiSelectIconInit();
+
+  $('#history .tabs li').on('click', 'a', function(e){
+    console.log("clic sur la tab")
+    var tab = $(e.target).attr('id').replace('tab-','');
+    document.cookie = 'history_last_tab=' + tab + '; SameSite=Lax'
+  });
+});
+
+document.addEventListener("turbo:load",function(){
+  $('#content').on('click', 'div.jstTabs a.tab-preview', function(event){
+    var tab = $(event.target);
+
+    var url = tab.data('url');
+    var form = tab.parents('form');
+    var jstBlock = tab.parents('.jstBlock');
+
+    var element = encodeURIComponent(jstBlock.find('.wiki-edit').val());
+    var attachments = form.find('.attachments_fields input').serialize();
+
+    $.ajax({
+      url: url,
+      type: 'post',
+      data: "text=" + element + '&' + attachments,
+      success: function(data){
+        jstBlock.find('.wiki-preview').html(data);
+        setupWikiTableSortableHeader();
+      }
+    });
+  });
+});

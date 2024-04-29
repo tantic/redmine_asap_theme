@@ -28,3 +28,4 @@ en:
   label_redmine_groups: Groupes
   label_redmine_issues: Demandes
   label_display: Affichage
+  label_description_empty: Aucune description

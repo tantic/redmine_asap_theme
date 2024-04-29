@@ -1,5 +1,6 @@
 <div class="attachments flex flex-col w-full">
-  <div class=" border-b border-gray-50 flex w-full mb-4">
+  <div class=" border-b border-gray-100 flex w-full mb-4">
+    <h3 class="font-light uppercase text-gray-600 text-sm"><%=l(:label_attachment_plural)%></h3>
     <div class="contextual ml-auto flex">
       <% if options[:editable] %>
         <%= link_to(container_attachments_edit_path(container),
