@@ -126,9 +126,22 @@
   </div>
 </div>
 
-<div class="flex  h-screen">
-  <aside class="hidden md:flex md:flex-col md:w-2/12 border-r border-gray-200 p-8 bg-gray-50 dark:bg-gray-800 overflow-y-auto h-full">
+<div class="flex h-screen">
+  <aside class="hidden md:flex md:flex-col md:w-2/12 border-r border-gray-200 bg-gray-50 dark:bg-gray-800 overflow-y-auto h-screen mb-16">
+    <div data-tabs-target="tab" id="relations" class="space-y-2">
+      <% if !@issue.leaf? || User.current.allowed_to?(:manage_subtasks, @project) %>
+        <div id="issue_tree" class="border-t border-gray-50">
+        <%= render :partial => 'subtasks' %>
+        </div>
+      <% end %>
 
+      <% if @relations.present? || User.current.allowed_to?(:manage_issue_relations, @project) %>
+
+      <div id="relations" class="border-t border-gray-50">
+      <%= render :partial => 'relations' %>
+      </div>
+      <% end %>
+    </div>
   </aside>
   <div class="w-full flex-1 overflow-auto">
     <div class="dark:bg-gray-800  h-fit w-full bg-white px-12 flex flex-col">
@@ -304,11 +317,8 @@
     </div>
   </div>
   <aside class="shadow hidden md:flex md:flex-col md:w-2/12    p-8 bg-gray-50 dark:bg-gray-800 overflow-y-auto h-full">
-    <div id="tabs" data-controller="tabs"  data-tabs-default-tab-value="relations" class="flex flex-col h-full">
+    <div id="tabs" data-controller="tabs"  data-tabs-default-tab-value="progress" class="flex flex-col h-full">
       <section class="flex border-b border-gray-200 overflow-x-auto">
-        <div data-tabs-target="btn" id="relations" data-action="click->tabs#select"  class="tab flex p-4 hover:bg-gray-100 cursor-pointer">
-          <div><%= l(:label_issue_relations) %></div>
-        </div>
         <div data-tabs-target="btn" id="progress" data-action="click->tabs#select"  class="tab flex p-4 hover:bg-gray-100 cursor-pointer">
           <div><%= l(:label_issue_progress) %></div>
         </div>
@@ -320,21 +330,7 @@
         </div>
       </section>
       <section class="my-6">
-        <div data-tabs-target="tab" id="relations" class="space-y-2">
-          <% if !@issue.leaf? || User.current.allowed_to?(:manage_subtasks, @project) %>
 
-          <div id="issue_tree" class="border-t border-gray-50">
-          <%= render :partial => 'subtasks' %>
-          </div>
-          <% end %>
-
-          <% if @relations.present? || User.current.allowed_to?(:manage_issue_relations, @project) %>
-
-          <div id="relations" class="border-t border-gray-50">
-          <%= render :partial => 'relations' %>
-          </div>
-          <% end %>
-        </div>
         <div data-tabs-target="tab" id="progress" class="space-y-6">
 
 
