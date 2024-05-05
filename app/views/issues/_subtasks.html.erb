@@ -1,39 +1,32 @@
-<div class="contextual text-sm font-extralight flex flex-col px-4 my-4">
+<div class="contextual text-xs font-extralight flex flex-col px-4 my-4">
   <h3 class="font-light text-gray-400 uppercase text-xs py-4"><%=l(:label_subtask_plural)%></h3>
   <% left = 0 %>
   <% ancestors = @issue.root? ? [] : @issue.ancestors.visible.to_a %>
   <% ancestors.each do |ancestor| %>
     <%= link_to issue_path(ancestor) do %>
-      <div class="flex items-center" style="padding-left:<%= left + ancestor.lft%>px">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 mr-0.5">
-          <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
-        </svg>
+      <div class="flex items-center py-1" style="padding-left:<%= left%>px">
 
-        <%= ancestor.subject %>
+        <span class="truncate  border-l-2 border-gray-200 pl-2"><%= ancestor.subject %></span>
       </div>
-      <% left += left + 3 %>
+      <% left = left + 3 %>
     <% end %>
   <% end %>
 
-  <div class="flex items-center font-medium rounded w-full"  style="padding-left:<%=left%>px">
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 mr-0.5">
-      <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
-    </svg>
-    <%= @issue.subject %>
+  <div class="flex items-center font-medium rounded w-full  py-1" style="padding-left:<%=left%>px">
+    <span class="truncate border-l-2 border-gray-400 pl-2"><%= @issue.subject %></span>
     <% if User.current.allowed_to?(:manage_subtasks, @project) %>
-    <div class="ml-auto">
-      <%= link_to url_for_new_subtask(@issue), class:'flex cursor-pointer  rounded-full hover:bg-gray-200 text-gray-700 dark:text-gray-400 dark:hover:text-gray-300 dark:hover:bg-gray-700 hover:text-gray-800' do %>
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-        </svg>
-      <% end %>
-    </div>
-  <% end %>
+      <div class="ml-auto">
+        <%= link_to url_for_new_subtask(@issue), class:'flex cursor-pointer  rounded-full hover:bg-gray-200 text-gray-700 dark:text-gray-400 dark:hover:text-gray-300 dark:hover:bg-gray-700 hover:text-gray-800' do %>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+          </svg>
+        <% end %>
+      </div>
+    <% end %>
   </div>
-  <% left += left + 3 %>
 
 
-
+  <% left = left + 3 %>
   <%= form_tag({}, :data => {:cm_url => issues_context_menu_path}) do %>
     <%#= render_descendants_tree(@issue) unless @issue.leaf? %>
     <%
@@ -41,14 +34,13 @@
       issue_list(
         @issue.descendants.visible.sort_by(&:lft)) do |child, level|
     %>
-    <div style="padding-left:<%=left%>px">
-      <%= link_to issue_path(child),  :style => "padding-left: #{5*level}px", :class => 'flex items-center' do %>
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 mr-0.5">
-        <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
-      </svg>
-        <%= child.subject %>
-      <% end %>
-    </div>
+      <div class="w-full  py-1" style="padding-left:<%=left+level*5%>px">
+        <%= link_to issue_path(child), :class => 'flex items-center ' do %>
+
+          <span class="truncate  border-l-2 border-gray-200 pl-2"><%= child.subject %></span>
+        <% end %>
+      </div>
+
     <% end %>
   <% end %>
 </div>
