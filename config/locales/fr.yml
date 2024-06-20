@@ -42,3 +42,31 @@ fr:
     notice: Information
     error: Erreur
     alert: Attention
+  welcome:
+    tabs:
+      quicklinks: Accès rapides
+      my_projects: Mes projets
+      my_issues: Mes demandes
+    recent_projects:
+      title: Projets récents
+      none: Aucun projet visité récemment.
+      none_description: Cette liste se mettra à jour selon votre navigation dans les projets. Le nombre de projets affichés est configurable dans la rubrique "Mon compte"
+    favorite_projects:
+      title: Projets favoris
+      none: Aucun projet favori.
+      none_description: Pour en ajouter, aller sur un projet puis sur le bouton "Ajouter aux favoris" en haut à droite de l'onglet "Aperçu".
+    news:
+      title: Annonces
+      all: Voir toutes
+      none: Aucune annonce
+    shortcuts:
+      title: Raccourcis
+      new_issue: Nouvelle demande
+      documentation: Documentation
+      help: Assistance & support
+    my_watched_issues:
+      title: "Demandes que j'observe"
+    my_assigned_issues:
+      title: "Mes demandes assignées"
+    my_projects:
+      title: "Mes projets"

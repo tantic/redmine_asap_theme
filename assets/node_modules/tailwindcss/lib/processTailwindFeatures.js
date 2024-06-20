@@ -17,7 +17,6 @@ const _resolveDefaultsAtRules = /*#__PURE__*/ _interop_require_default(require("
 const _collapseAdjacentRules = /*#__PURE__*/ _interop_require_default(require("./lib/collapseAdjacentRules"));
 const _collapseDuplicateDeclarations = /*#__PURE__*/ _interop_require_default(require("./lib/collapseDuplicateDeclarations"));
 const _partitionApplyAtRules = /*#__PURE__*/ _interop_require_default(require("./lib/partitionApplyAtRules"));
-const _detectNesting = /*#__PURE__*/ _interop_require_default(require("./lib/detectNesting"));
 const _setupContextUtils = require("./lib/setupContextUtils");
 const _featureFlags = require("./featureFlags");
 function _interop_require_default(obj) {
@@ -28,7 +27,6 @@ function _interop_require_default(obj) {
 function processTailwindFeatures(setupContext) {
     return async function(root, result) {
         let { tailwindDirectives , applyDirectives  } = (0, _normalizeTailwindDirectives.default)(root);
-        (0, _detectNesting.default)()(root, result);
         // Partition apply rules that are found in the css
         // itself.
         (0, _partitionApplyAtRules.default)()(root, result);

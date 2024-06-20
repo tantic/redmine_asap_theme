@@ -1,0 +1,18 @@
+<div class="container mx-auto flex flex-col bg-gray-50 dark:bg-gray-800 h-full">
+
+  <div class="flex flex-col md:flex-row mt-8 md:mt-24">
+    <%= render "welcome/tabs" %>
+    <div class="md:ml-44 lg:ml-64 px-6 lg:px-12 bg-gray-50 text-medium text-gray-800 dark:text-gray-400 dark:bg-gray-800 rounded-lg w-full">
+      <% if @my_projects.length > 0 %>
+      <section>
+        <h2 class="mb-8 text-xs text-gray-500 font-light uppercase flex items-center"><%= l("welcome.my_projects.title") %></h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 xl:grid-cols-6 gap-4">
+          <% @my_projects.each do |project| %>
+            <%= render :partial => "welcome/details",:locals => {:project => project}  %>
+          <% end %>
+        </div>
+      </section>
+      <% end %>
+    </div>
+  </div>
+</div>

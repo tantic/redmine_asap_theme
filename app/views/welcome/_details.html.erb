@@ -1,0 +1,65 @@
+<div data-controller="projects" data-projects-url-value="/home/project/<%= project.id %>" class="flex flex-col group  mb-2.5">
+  <%= link_to_project(project, {}, class:"font-medium flex items-center truncate text-xs bg-white dark:bg-gray-700 shadow rounded-t px-4 py-3 hover:bg-gray-50 hover:text-gray-900 hover:font-semibold") %>
+
+  <div class="relative">
+    <footer class="text-xs bg-white  dark:bg-gray-700 absolute -bottom-6 shadow rounded-b hidden group-hover:grid grid-cols-4 gap-1 w-full">
+      <div class="flex items-center justify-center">
+        <div data-action="click->projects#showDetails" title="Aperçu du projet" class="tooltip cursor-pointer p-2 hover:bg-gray-100  dark:hover:bg-gray-600 dark:hover:text-gray-100 hover:text-gray-700 rounded-full">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+          </svg>
+        </div>
+
+      </div>
+      <% if User.current.allowed_to?(:add_issues, project, :global => true) && (project.nil? || Issue.allowed_target_trackers(project).any?) %>
+        <div class="flex items-center justify-center ">
+          <%= link_to new_project_issue_path(project), title: "Nouvelle demande", class: "p-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-gray-100 hover:text-gray-700 rounded-full" do%>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+          </svg>
+          <% end %>
+        </div>
+      <% end %>
+      <div class="flex items-center justify-center ">
+        <%
+        jump_box ||= Redmine::ProjectJumpBox.new User.current
+        bookmarked = jump_box.bookmark?(project)
+        %>
+        <% if bookmarked %>
+          <%= link_to welcome_bookmark_project_delete_path(project.id), remote: false, method: :delete, title: 'Retirer des favoris', class: "p-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-gray-100 hover:text-gray-700 rounded-full" do%>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4">
+            <path stroke-linecap="round" stroke-linejoin="round" d="m3 3 1.664 1.664M21 21l-1.5-1.5m-5.485-1.242L12 17.25 4.5 21V8.742m.164-4.078a2.15 2.15 0 0 1 1.743-1.342 48.507 48.507 0 0 1 11.186 0c1.1.128 1.907 1.077 1.907 2.185V19.5M4.664 4.664 19.5 19.5" />
+          </svg>
+
+          <% end %>
+        <% else %>
+          <%= link_to welcome_bookmark_project_path(project.id), remote: false, method: :post, title: 'Ajouter aux favoris', class: "p-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-gray-100 hover:text-gray-700 rounded-full" do%>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0 1 11.186 0Z" />
+          </svg>
+          <% end %>
+        <% end %>
+      </div>
+      <div class="flex items-center justify-center">
+        <% if project.children.visible(User.current).length > 0 %>
+          <div data-action="click->projects#toggle" title="Voir les sous-projets" class="cursor-pointer p-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-gray-100 hover:text-gray-700 rounded-full">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12.75V12A2.25 2.25 0 0 1 4.5 9.75h15A2.25 2.25 0 0 1 21.75 12v.75m-8.69-6.44-2.12-2.12a1.5 1.5 0 0 0-1.061-.44H4.5A2.25 2.25 0 0 0 2.25 6v12a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9a2.25 2.25 0 0 0-2.25-2.25h-5.379a1.5 1.5 0 0 1-1.06-.44Z" />
+            </svg>
+          </div>
+          <div data-projects-target="submenu" class="absolute hidden overflow-y-auto top-6 z-50 shadow rounded-md border border-gray-50 mt bg-white  dark:bg-slate-800 dark:border-none dark:text-gray-100 w-60 ">
+            <div class="flex flex-col">
+              <% project.children.visible(User.current).each do |project| %>
+                <%= link_to project.name, project_path(project), class: "w-full hover:bg-gray-100 hover:text-gray-900 hover:font-medium px-4 py-2" %>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </footer>
+  </div>
+  <div data-projects-target="panel" class="hidden absolute top-0 bg-white dark:bg-gray-700 shadow right-0 w-1/2 h-full pb-44 overflow-y-auto">
+
+  </div>
+</div>

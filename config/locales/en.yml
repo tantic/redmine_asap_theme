@@ -42,3 +42,32 @@ en:
     notice: Notice
     error: Error
     alert: Alert
+  welcome:
+    tabs:
+      quicklinks: Quick links
+      my_projects: My projects
+      my_issues: My issues
+    recent_projects:
+      title: Recent projects
+      none: No project visited recently
+      none_description: This list will be updated according to your navigation into the projects. The number of projects displayed in the list can be set in the My account menu.
+    favorite_projects:
+      title: Favorite projects
+      none: No favorite project.
+      none_description: To add favorite, just go in a project and click on Add favorite on the overview tab
+    news:
+      title: News
+      all: See all
+      none: No news
+    shortcuts:
+      title: Shortcuts
+      new_issue: New issue
+      documentation: Documentation
+      help: Help & support
+    my_watched_issues:
+      title: "My watched issues"
+    my_assigned_issues:
+      title: "My assigned issues"
+    my_projects:
+      title: "My projects"
+

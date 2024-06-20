@@ -380,6 +380,19 @@ function processApply(root, context, localCache) {
                 throw apply.error(`The \`${applyCandidate}\` class does not exist. If \`${applyCandidate}\` is a custom class, make sure it is defined within a \`@layer\` directive.`);
             }
             let rules = applyClassCache.get(applyCandidate);
+            // Verify that we can apply the class
+            for (let [, rule] of rules){
+                if (rule.type === "atrule") {
+                    continue;
+                }
+                rule.walkRules(()=>{
+                    throw apply.error([
+                        `The \`${applyCandidate}\` class cannot be used with \`@apply\` because \`@apply\` does not currently support nested CSS.`,
+                        "Rewrite the selector without nesting or configure the `tailwindcss/nesting` plugin:",
+                        "https://tailwindcss.com/docs/using-with-preprocessors#nesting"
+                    ].join("\n"));
+                });
+            }
             candidates.push([
                 applyCandidate,
                 important,

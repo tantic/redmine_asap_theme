@@ -1,7 +1,142 @@
-<div class="container mx-auto sm:mt-8 px-4 lg:mt-8 h-full">
-  <% if (@bookmarked && @bookmarked.length > 0) || (@my_projects && @my_projects.length > 0) %>
-    <%= render :partial => 'projects' %>
-  <% else %>
-    <%= render :partial => 'no_project' %>
-  <% end %>
+<div class="container mx-auto flex flex-col bg-gray-50 dark:bg-gray-800 h-full">
+
+  <div class="flex flex-col md:flex-row mt-8 md:mt-24">
+    <%= render "welcome/tabs" %>
+    <div class="md:ml-44 lg:ml-64 px-6 lg:px-12 bg-gray-50 text-medium text-gray-800 dark:text-gray-400 dark:bg-gray-800 rounded-lg w-full">
+      <section>
+        <h2 class="mb-8 text-xs text-gray-500 font-light uppercase flex items-center">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99" />
+          </svg>
+          <span class="ml-2"><%= l("welcome.recent_projects.title") %></span>
+        </h2>
+          <% if @recent_projects.length > 0 %>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 xl:grid-cols-6 gap-4">
+              <% @recent_projects.each do |project| %>
+                <%= render :partial => "welcome/details",:locals => {:project => project}  %>
+              <% end %>
+            </div>
+          <% else %>
+            <div class="rounded bg-gray-100 dark:bg-gray-700 p-8 flex flex-col items-center justify-center">
+              <p class="font-medium"><%= l("welcome.recent_projects.none") %></p>
+              <p class="text-gray-500">
+                <%= l("welcome.recent_projects.none_description") %>
+              </p>
+            </div>
+          <% end %>
+
+      </section>
+
+      <section class="mt-12">
+        <h2 class="my-8 text-xs text-gray-500 font-light uppercase flex items-center">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0 1 11.186 0Z" />
+          </svg>
+
+          <span class="ml-2"><%= l("welcome.favorite_projects.title") %></span>
+        </h2>
+          <% if @bookmarked_projects.length > 0 %>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 xl:grid-cols-6 gap-4">
+              <% @bookmarked_projects.each do |project| %>
+                <%= render :partial => "welcome/details",:locals => {:project => project}  %>
+              <% end %>
+            </div>
+          <% else %>
+            <div class="rounded bg-gray-100 dark:bg-gray-700 p-8 flex flex-col items-center justify-center">
+              <p class="font-medium"><%= l("welcome.favorite_projects.none") %></p>
+              <p class="text-gray-500"><%= l("welcome.favorite_projects.none_description") %></p>
+            </div>
+          <% end %>
+
+      </section>
+      <section class="mt-12">
+        <h2 class="my-8 text-xs text-gray-500 font-light  flex items-center">
+          <div class="flex items-center uppercase">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M10.34 15.84c-.688-.06-1.386-.09-2.09-.09H7.5a4.5 4.5 0 1 1 0-9h.75c.704 0 1.402-.03 2.09-.09m0 9.18c.253.962.584 1.892.985 2.783.247.55.06 1.21-.463 1.511l-.657.38c-.551.318-1.26.117-1.527-.461a20.845 20.845 0 0 1-1.44-4.282m3.102.069a18.03 18.03 0 0 1-.59-4.59c0-1.586.205-3.124.59-4.59m0 9.18a23.848 23.848 0 0 1 8.835 2.535M10.34 6.66a23.847 23.847 0 0 0 8.835-2.535m0 0A23.74 23.74 0 0 0 18.795 3m.38 1.125a23.91 23.91 0 0 1 1.014 5.395m-1.014 8.855c-.118.38-.245.754-.38 1.125m.38-1.125a23.91 23.91 0 0 0 1.014-5.395m0-3.46c.495.413.811 1.035.811 1.73 0 .695-.316 1.317-.811 1.73m0-3.46a24.347 24.347 0 0 1 0 3.46" />
+            </svg>
+            <span class="ml-2"><%= l("welcome.news.title") %></span>
+          </div>
+          <div class="ml-auto text-xs">
+            <%= link_to l("welcome.news.all"), :controller => 'news' %>
+          </div>
+        </h2>
+        <% if @news_from_my_projects.length > 0 %>
+          <div class="grid  grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+            <% @news_from_my_projects.each do |news| %>
+              <%= link_to news_path(news),class: "shadow hover:bg-gray-100 bg-white dark:bg-gray-700 dark:hover:bg-gray-600 flex flex-col items-start justify-center p-8" do %>
+                <div class="mb-2">
+                  <h2 class="font-medium mt-4 text-center w-full"><%= news.title %></h2>
+                  <div class="mb-4 w-full text-xs text-gray-400 flex items-center justify-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4 mr-1">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5" />
+                    </svg>
+
+                    <%= format_date(news.created_on) %>
+                  </div>
+                  <% unless news.summary.blank? %>
+                  <div class="text-gray-500 text-xs font-light my-2">
+                    <%= news.summary %>
+                  </div>
+                  <% end %>
+                </div>
+                <footer class="flex w-full mt-auto">
+                  <div class="flex items-center truncate">
+                    <%= letter_avatar_tag(news.project.name, 100, class: 'w-4 h-4 mr-2') %>
+                    <span><%= news.project  %></span>
+                  </div>
+                  <% if news.comments_count > 0 %>
+                    <div class="flex items-center ml-auto text-gray-500 text-xs">
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4 mr-1">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 20.25c4.97 0 9-3.694 9-8.25s-4.03-8.25-9-8.25S3 7.444 3 12c0 2.104.859 4.023 2.273 5.48.432.447.74 1.04.586 1.641a4.483 4.483 0 0 1-.923 1.785A5.969 5.969 0 0 0 6 21c1.282 0 2.47-.402 3.445-1.087.81.22 1.668.337 2.555.337Z" />
+                      </svg>
+
+                      <%= news.comments_count %>
+                    </div>
+                  <% end %>
+                </footer>
+              <% end %>
+            <% end %>
+          </div>
+        <% else %>
+          <div class="p-8 bg-gray-100 rounded text-gray-600 font-medium flex items-center justify-center">
+            <%= l("welcome.news.none") %>
+          </div>
+        <% end %>
+      </section>
+      <section class="my-12">
+        <h2 class="my-8 text-xs text-gray-500 font-light uppercase flex items-center">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M13.19 8.688a4.5 4.5 0 0 1 1.242 7.244l-4.5 4.5a4.5 4.5 0 0 1-6.364-6.364l1.757-1.757m13.35-.622 1.757-1.757a4.5 4.5 0 0 0-6.364-6.364l-4.5 4.5a4.5 4.5 0 0 0 1.242 7.244" />
+          </svg>
+
+          <span class="ml-2"><%= l("welcome.shortcuts.title") %></span>
+        </h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 xl:grid-cols-6 gap-4">
+          <%= link_to new_issue_path(), class:"font-medium text-xs bg-white dark:bg-gray-700 flex flex-col items-center justify-center shadow rounded px-4 py-3 hover:bg-gray-50 hover:text-gray-900 hover:font-semibold" do %>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 mb-2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+            </svg>
+            <span><%= l("welcome.shortcuts.new_issue") %></span>
+          <% end %>
+
+          <a href="<%= Setting.plugin_redmine_asap_theme['settings_welcome_documentation_url'] unless Setting.plugin_redmine_asap_theme['settings_welcome_documentation_url'].nil? %>" class="font-medium text-xs bg-white dark:bg-gray-700 flex flex-col items-center justify-center shadow rounded px-4 py-3 hover:bg-gray-50 hover:text-gray-900 hover:font-semibold">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 mb-2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25" />
+            </svg>
+
+            <span><%= l("welcome.shortcuts.documentation") %></span>
+          </a>
+          <a href="<%= Setting.plugin_redmine_asap_theme['settings_welcome_help_url'] unless Setting.plugin_redmine_asap_theme['settings_welcome_help_url'].nil? %>" class="font-medium text-xs bg-white dark:bg-gray-700 flex flex-col items-center justify-center shadow rounded px-4 py-3 hover:bg-gray-50 hover:text-gray-900 hover:font-semibold">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 mb-2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M16.712 4.33a9.027 9.027 0 0 1 1.652 1.306c.51.51.944 1.064 1.306 1.652M16.712 4.33l-3.448 4.138m3.448-4.138a9.014 9.014 0 0 0-9.424 0M19.67 7.288l-4.138 3.448m4.138-3.448a9.014 9.014 0 0 1 0 9.424m-4.138-5.976a3.736 3.736 0 0 0-.88-1.388 3.737 3.737 0 0 0-1.388-.88m2.268 2.268a3.765 3.765 0 0 1 0 2.528m-2.268-4.796a3.765 3.765 0 0 0-2.528 0m4.796 4.796c-.181.506-.475.982-.88 1.388a3.736 3.736 0 0 1-1.388.88m2.268-2.268 4.138 3.448m0 0a9.027 9.027 0 0 1-1.306 1.652c-.51.51-1.064.944-1.652 1.306m0 0-3.448-4.138m3.448 4.138a9.014 9.014 0 0 1-9.424 0m5.976-4.138a3.765 3.765 0 0 1-2.528 0m0 0a3.736 3.736 0 0 1-1.388-.88 3.737 3.737 0 0 1-.88-1.388m2.268 2.268L7.288 19.67m0 0a9.024 9.024 0 0 1-1.652-1.306 9.027 9.027 0 0 1-1.306-1.652m0 0 4.138-3.448M4.33 16.712a9.014 9.014 0 0 1 0-9.424m4.138 5.976a3.765 3.765 0 0 1 0-2.528m0 0c.181-.506.475-.982.88-1.388a3.736 3.736 0 0 1 1.388-.88m-2.268 2.268L4.33 7.288m6.406 1.18L7.288 4.33m0 0a9.024 9.024 0 0 0-1.652 1.306A9.025 9.025 0 0 0 4.33 7.288" />
+            </svg>
+
+            <span><%= l("welcome.shortcuts.help") %></span>
+          </a>
+        </div>
+      </section>
+    </div>
+  </div>
 </div>
+

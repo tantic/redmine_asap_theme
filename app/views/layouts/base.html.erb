@@ -37,7 +37,7 @@
       <%= render "layouts/navbar" %>
     <% end %>
 
-    <main class="w-full flex h-[calc(100vh-3.5rem)] dark:bg-slate-900 dark:text-gray-400 mt-14">
+    <main class="w-full flex  dark:bg-slate-900 dark:text-gray-400 mt-14">
       <%= call_hook :view_layouts_base_body_top %>
 
       <% if controller_name == "wiki" %>
@@ -47,7 +47,7 @@
           <%= call_hook :view_layouts_base_content %>
           <div style="clear:both;"></div>
         </section>
-      <% elsif controller_name == "calendars" %>
+      <% elsif controller_name == "calendars" || controller_name == "welcome" %>
         <section id="content" class="mb-auto w-full  h-full bg-gray-50 dark:bg-slate-900">
           <%= render "layouts/flash_messages" %>
           <%= yield %>

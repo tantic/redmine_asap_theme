@@ -18,7 +18,9 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
-
+html{
+  height:100%;
+}
 
 
 .badge-status-open{

@@ -1,5 +1,5 @@
 <nav class="bg-white dark:bg-slate-800 h-14 fixed w-full z-50 top-0 left-0 shadow dark:border-gray-600">
-  <div class="grid grid-cols-3 gap-4">
+  <div class="flex relative h-full">
     <div class="h-full  flex items-center justify-start ">
       <div class="h-full  flex items-center justify-center ">
         <%
@@ -15,7 +15,7 @@
       <div class="fixed flex items-center justify-center px-4 sm:px-0 w-full sm:w-auto shadow-2xl sm:shadow-none border-t border-gray-100 sm:border-none sm:relative sm:flex bottom-0 bg-slate-800 sm:bg-white sm:dark:bg-slate-800 text-blue-50 sm:text-gray-900 sm:dark:text-gray-50 sm:bottom-auto  ">
         <% if @project && @project.id %>
           <% if @project.children.any? %>
-          <div data-controller="projectmenu" class="h-full hidden sm:flex items-center justify-center">
+          <div data-controller="projectmenu" class="h-full flex items-center justify-center">
             <div data-action="click->projectmenu#toggleSubprojects" class="cursor-pointer ml-1 p-2 rounded-full hover:bg-gray-100 text-gray-700 dark:text-gray-400 dark:hover:text-gray-300 dark:hover:bg-gray-700 hover:text-gray-800">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-gray-800 transition duration-75 dark:text-gray-400 hover:text-gray-900 dark:group-hover:text-white">
                 <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
@@ -42,7 +42,7 @@
     <div data-controller="projectmenu" class="h-full relative flex items-center justify-center">
       <% if display_main_menu?(@project) %>
         <% if @project && @project.id %>
-          <div class="contextual w-10 h-full relative flex items-center justify-center">
+          <div class="contextual w-10 h-full relative hidden md:flex items-center justify-center">
             <% if controller_name == 'projects' && action_name == 'show' %>
             <% selected = 'sm:bg-gray-100 bg-slate-700 dark:sm:bg-slate-700 dark:sm:text-gray-100'  %>
             <% else %>
@@ -61,12 +61,12 @@
           <% end %>
         <%= link_to t("label_issue_plural"),project_issues_path(@project), class: "h-full flex items-center p-4 hover:bg-gray-700 sm:hover:bg-gray-50 dark:text-gray-100 dark:bg-gray-800 dark:hover:bg-gray-700 dark:sm:hover:bg-gray-700 #{selected}" %>
         <% end %>
-        <div data-action="click->projectmenu#toggle" class="cursor-pointer ml-1 p-2 rounded-full hover:bg-gray-700 dark:sm:hover:bg-gray-700 sm:hover:bg-gray-100 text-gray-300 sm:text-gray-700 dark:text-gray-400 dark:sm:text-gray-400 dark:hover:text-gray-300 dark:hover:bg-gray-700 hover:text-gray-800">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-gray-300 sm:text-gray-800 transition duration-75 dark:text-gray-400 dark:sm:text-gray-400 hover:text-gray-900 dark:group-hover:text-white">
+        <div data-action="click->projectmenu#toggle" class="cursor-pointer ml-1 p-2 rounded-full  dark:sm:hover:bg-gray-700 hover:bg-gray-100 text-gray-700 dark:text-gray-400 dark:sm:text-gray-400 dark:hover:text-gray-300 dark:hover:bg-gray-700 hover:text-gray-800">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-gray-800 transition duration-75 dark:text-gray-400 dark:sm:text-gray-400 hover:text-gray-900 dark:group-hover:text-white">
             <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM12.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM18.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
           </svg>
         </div>
-        <div id="project-menu-submenus" class="absolute h-80 sm:h-auto overflow-y-auto z-50 shadow rounded-md border border-gray-50 mt bg-white dark:bg-slate-800 dark:border-none dark:text-gray-100 w-60  bottom-14 sm:bottom-auto sm:top-14 hidden" data-projectmenu-target="projectsubmenu">
+        <div id="project-menu-submenus" class="absolute h-80 md:h-auto overflow-y-auto z-50 shadow rounded-md border border-gray-50 mt bg-white dark:bg-slate-800 dark:border-none dark:text-gray-100 w-60  top-14 hidden" data-projectmenu-target="projectsubmenu">
           <%= render_main_menu(@project) %>
           <% if @project && @project.id %>
             <div class="flex flex-col border-t border-gray-200 font-base dark:border-gray-700">
@@ -91,9 +91,9 @@
         </div>
       <% end %>
     </div>
-    <div class="ml-auto flex  bg-white dark:bg-slate-800  sm:w-auto justify-end sm:justify-center sm:relative bottom-0">
+    <div class="fixed md:relative bottom-0 bg-gray-100 md:bg-white md:ml-auto flex shadow-xl md:shadow-none  dark:bg-slate-800  w-full md:w-auto justify-center md:justify-end">
       <div data-controller="usermenu" class="flex text-sm relative items-center justify-center">
-        <%= link_to my_path, class: "cursor-pointer p-2 rounded-full hover:bg-gray-100 text-gray-700 dark:text-gray-400 dark:hover:text-gray-300 dark:hover:bg-gray-700 hover:text-gray-800" do %>
+        <%= link_to my_path, class: "flex cursor-pointer p-2 rounded-full hover:bg-gray-200 text-gray-700 dark:text-gray-400 dark:hover:text-gray-300 dark:hover:bg-gray-700 hover:text-gray-800" do %>
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="h-5 w-5" viewBox="0 0 16 16">
             <path d="M4 16s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1zm4-5.95a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5"/>
             <path d="M2 1a2 2 0 0 0-2 2v9.5A1.5 1.5 0 0 0 1.5 14h.653a5.4 5.4 0 0 1 1.066-2H1V3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v9h-2.219c.554.654.89 1.373 1.066 2h.653a1.5 1.5 0 0 0 1.5-1.5V3a2 2 0 0 0-2-2z"/>
@@ -111,13 +111,13 @@
                       :data => {:auto_complete => true, :autofocus => true, :usermenu_target => "searchinput"} %>
           <% end %>
         </div>
-        <div data-action="click->usermenu#search" class="cursor-pointer ml-1 p-2 rounded-full hover:bg-gray-100 text-gray-700 dark:text-gray-400 dark:hover:text-gray-300 dark:hover:bg-gray-700 hover:text-gray-800">
+        <div data-action="click->usermenu#search" class="cursor-pointer ml-1 p-2 rounded-full hover:bg-gray-200 text-gray-700 dark:text-gray-400 dark:hover:text-gray-300 dark:hover:bg-gray-700 hover:text-gray-800">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-gray-800 transition duration-75 dark:text-gray-400 hover:text-gray-900 dark:group-hover:text-white">
             <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
           </svg>
         </div>
         <% if User.current.admin?  %>
-          <div data-action="click->usermenu#toggleAdmin" class="cursor-pointer p-2 rounded-full hover:bg-gray-100 text-gray-700 dark:text-gray-400 dark:hover:text-gray-300 dark:hover:bg-gray-700 hover:text-gray-800">
+          <div data-action="click->usermenu#toggleAdmin" class="cursor-pointer p-2 rounded-full hover:bg-gray-200 text-gray-700 dark:text-gray-400 dark:hover:text-gray-300 dark:hover:bg-gray-700 hover:text-gray-800">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-gray-800 transition duration-75 dark:text-gray-400 hover:text-gray-900 dark:group-hover:text-white">
               <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12a7.5 7.5 0 0 0 15 0m-15 0a7.5 7.5 0 1 1 15 0m-15 0H3m16.5 0H21m-1.5 0H12m-8.457 3.077 1.41-.513m14.095-5.13 1.41-.513M5.106 17.785l1.15-.964m11.49-9.642 1.149-.964M7.501 19.795l.75-1.3m7.5-12.99.75-1.3m-6.063 16.658.26-1.477m2.605-14.772.26-1.477m0 17.726-.26-1.477M10.698 4.614l-.26-1.477M16.5 19.794l-.75-1.299M7.5 4.205 12 12m6.894 5.785-1.149-.964M6.256 7.178l-1.15-.964m15.352 8.864-1.41-.513M4.954 9.435l-1.41-.514M12.002 12l-3.75 6.495" />
             </svg>

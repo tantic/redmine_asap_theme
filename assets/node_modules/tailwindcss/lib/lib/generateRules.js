@@ -162,6 +162,9 @@ function applyImportant(matches, classCandidate) {
         return matches;
     }
     let result = [];
+    function isInKeyframes(rule) {
+        return rule.parent && rule.parent.type === "atrule" && rule.parent.name === "keyframes";
+    }
     for (let [meta, rule] of matches){
         let container = _postcss.default.root({
             nodes: [
@@ -169,6 +172,11 @@ function applyImportant(matches, classCandidate) {
             ]
         });
         container.walkRules((r)=>{
+            // Declarations inside keyframes cannot be marked as important
+            // They will be ignored by the browser
+            if (isInKeyframes(r)) {
+                return;
+            }
             let ast = (0, _postcssselectorparser.default)().astSync(r.selector);
             // Remove extraneous selectors that do not include the base candidate
             ast.each((sel)=>(0, _formatVariantSelector.eliminateIrrelevantSelectors)(sel, classCandidate));
@@ -506,12 +514,15 @@ function extractArbitraryProperty(classCandidate, context) {
     if (!isParsableCssValue(property, normalized)) {
         return null;
     }
-    let sort = context.offsets.arbitraryProperty();
+    let sort = context.offsets.arbitraryProperty(classCandidate);
     return [
         [
             {
                 sort,
-                layer: "utilities"
+                layer: "utilities",
+                options: {
+                    respectImportant: true
+                }
             },
             ()=>({
                     [(0, _nameClass.asClass)(classCandidate)]: {
