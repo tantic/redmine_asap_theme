@@ -14,7 +14,7 @@ The login page with a background image that can be choose in the plugin settings
 
 For now, the welcome page display only user projects
 
-![Welcome](img/welcome.png)
+![Welcome](img/welcome-1.png)
 
 ## Projects list
 
