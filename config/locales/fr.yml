@@ -1,5 +1,5 @@
 # English strings go here for Rails i18n
-en:
+fr:
   # my_label: "My label"
   no_project: Vous n'avez pas encore de projets...
   my_projects: Mes projets
@@ -27,5 +27,18 @@ en:
   label_redmine_users: Utilisateurs
   label_redmine_groups: Groupes
   label_redmine_issues: Demandes
+  label_redmine_asap_theme_login: Page d'authentification
+  label_redmine_asap_theme_colors: Couleurs
   label_display: Affichage
+  label_issue_general: Général
+  label_issue_relations: Relations
+  label_issue_progress: Avancement
+  label_issue_watchers: Observateurs
+  label_issue_others: Autres
+  redmine_asap_colors_logo_title: Logo
+  redmine_asap_colors_logo_bg: Couleur de fond
   label_description_empty: Aucune description
+  flash_message:
+    notice: Information
+    error: Erreur
+    alert: Attention
