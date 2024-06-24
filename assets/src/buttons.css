@@ -14,7 +14,7 @@
   @apply cursor-pointer text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded text-sm px-5 py-2 ml-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800;
 }
 
-#admin-menu a.icon{
+#admin-menu a.icon, #admin-menu .redmine-asap-theme{
   @apply flex items-center font-light bg-white text-gray-900 hover:bg-gray-50 hover:border-l-2 hover:border-blue-800 hover:pl-3.5 px-4 py-2 text-sm ml-0 rounded-none
 }
 

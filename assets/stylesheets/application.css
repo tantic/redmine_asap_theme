@@ -1507,7 +1507,7 @@ fieldset{
   }
 }
 
-#admin-menu a.icon{
+#admin-menu a.icon, #admin-menu .redmine-asap-theme{
   margin-left: 0px;
   display: flex;
   align-items: center;
@@ -1525,7 +1525,7 @@ fieldset{
   color: rgb(17 24 39 / var(--tw-text-opacity));
 }
 
-#admin-menu a.icon:hover{
+#admin-menu a.icon:hover, #admin-menu .redmine-asap-theme:hover{
   border-left-width: 2px;
   --tw-border-opacity: 1;
   border-color: rgb(30 64 175 / var(--tw-border-opacity));

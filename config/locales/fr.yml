@@ -1,6 +1,7 @@
 # English strings go here for Rails i18n
 fr:
   # my_label: "My label"
+  label_redmine_asap_theme: Thème
   no_project: Vous n'avez pas encore de projets...
   my_projects: Mes projets
   label_filters: Filtres

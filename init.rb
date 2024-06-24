@@ -13,6 +13,7 @@ Redmine::Plugin.register :redmine_asap_theme do
   delete_menu_item :project_menu, :overview
   delete_menu_item :project_menu, :settings
 
+  menu :admin_menu, :redmine_asap_theme, { controller: 'settings', action: 'plugin', id: 'redmine_asap_theme' }, caption: :label_redmine_asap_theme
 end
 
 lib_dir = File.join(File.dirname(__FILE__), 'lib', 'redmine_asap_theme')
