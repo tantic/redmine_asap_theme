@@ -21,8 +21,8 @@
 
 - [x] Welcome page (WIP) : last seen projects, bookmarked and projects (limit 12) + search + last seen issues
   - [x] Display projects
-  - [ ] News from listed projects
-  - [ ] Ability for user to display details on projects
+  - [x] News from listed projects
+  - [x] Ability for user to display details on projects
 - [x] Projects
 - [ ] Search
 
@@ -86,7 +86,7 @@
   - [x] General layout
   - [ ] Tabs for history and notes
   - [x] Sidebar
-  - [ ] subtasks and relations
+  - [x] subtasks and relations
 - [ ] Ability to add reaction to issues
 - [ ] Reactions on comments
 
