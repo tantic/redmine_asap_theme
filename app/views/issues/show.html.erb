@@ -9,7 +9,7 @@
           <%= render :partial => 'issues/sidebar-navigation' %>
         </div>
       </div>
-      <div class="w-full text-gray-600 dark:text-gray-200  dark:border-gray-600">
+      <div class="w-auto text-gray-600 dark:text-gray-200  dark:border-gray-600">
         <% if @prev_issue_id || @next_issue_id %>
           <div class="next-prev-links contextual flex justify-center">
             <% if @prev_issue_id %>
@@ -126,8 +126,8 @@
   </div>
 </div>
 
-<div class="flex h-screen">
-  <aside class="hidden md:flex md:flex-col md:w-2/12 border-r border-gray-200 bg-gray-50 dark:bg-gray-800 overflow-y-auto h-screen mb-16">
+<div class="flex flex-col lg:flex-row h-full lg:h-[calc(100vh-106px)]">
+  <aside class="hidden lg:flex lg:flex-col lg:w-2/12 border-r border-gray-200 bg-gray-50 dark:bg-gray-800 overflow-y-auto h-full pb-16">
     <div data-tabs-target="tab" id="relations" class="space-y-2">
       <% if !@issue.leaf? || User.current.allowed_to?(:manage_subtasks, @project) %>
         <div id="issue_tree" class="border-t border-gray-50">
@@ -143,7 +143,7 @@
       <% end %>
     </div>
   </aside>
-  <div class="w-full flex-1 overflow-auto">
+  <div class="w-full h-full flex-1 overflow-auto">
     <div class="dark:bg-gray-800  h-fit w-full bg-white px-12 flex flex-col">
       <%#= render_flash_messages %>
       <h2 class="font-medium text-lg py-8 w-full text-center"><%= @issue.subject %></h2>
@@ -317,55 +317,42 @@
     </div>
   </div>
   <aside class="shadow hidden md:flex md:flex-col md:w-2/12    p-8 bg-gray-50 dark:bg-gray-800 overflow-y-auto h-full">
-    <div id="tabs" data-controller="tabs"  data-tabs-default-tab-value="progress" class="flex flex-col h-full">
-      <section class="flex border-b border-gray-200 overflow-x-auto">
-        <div data-tabs-target="btn" id="progress" data-action="click->tabs#select"  class="tab flex p-4 hover:bg-gray-100 cursor-pointer">
-          <div><%= l(:label_issue_progress) %></div>
-        </div>
-        <div data-tabs-target="btn" id="the_watchers" data-action="click->tabs#select"  class="tab flex p-4 hover:bg-gray-100 cursor-pointer">
-          <div class="flex"><span><%= l(:label_issue_watchers) %></span><span class="ml-1">(<%= @issue.watcher_users.size %>)</span></div>
-        </div>
-        <div data-tabs-target="btn" id="others" data-action="click->tabs#select"  class="tab flex p-4 hover:bg-gray-100 cursor-pointer">
-          <div><%= l(:label_issue_others) %></div>
-        </div>
-      </section>
-      <section class="my-6">
-
-        <div data-tabs-target="tab" id="progress" class="space-y-6">
-
-
-          <% unless @issue.disabled_core_fields.include?('estimated_hours') %>
-          <div class="flex w-full">
-            <div class="mr-2 text-gray-400 w-1/3"><%= l(:field_estimated_hours) %></div>
-            <div class="w-2/3"><%= issue_estimated_hours_details(@issue) %></div>
+    <div class="space-y-2">
+      <div class="space-y-6 mb-6">
+        <% if !@issue.attributes_editable? && User.current.allowed_to?(:add_issue_watchers, @issue.project) %>
+          <%= update_data_sources_for_auto_complete({users: watchers_autocomplete_for_mention_path(project_id: @issue.project, q: '', object_type: 'issue',
+                                                                                                  object_id: @issue.id)}) %>
+        <% end %>
+        <% if User.current.allowed_to?(:add_issue_watchers, @project) ||
+        (@issue.watchers.present? && User.current.allowed_to?(:view_issue_watchers, @project)) %>
+          <div id="watchers" class="text-xs">
+            <%= render :partial => 'watchers/watchers', :locals => {:watched => @issue} %>
           </div>
-          <% end %>
-          <% if User.current.allowed_to?(:view_time_entries, @project) && @issue.total_spent_hours > 0 %>
-          <div class="flex w-full">
-            <div class="mr-2 text-gray-400 w-1/3"><%= l(:label_spent_time) %></div>
-            <div class="w-2/3"><%= issue_spent_hours_details(@issue) %></div>
-          </div>
-          <% end %>
-        </div>
-        <div data-tabs-target="tab" id="the_watchers" class="space-y-6">
-          <% if !@issue.attributes_editable? && User.current.allowed_to?(:add_issue_watchers, @issue.project) %>
-            <%= update_data_sources_for_auto_complete({users: watchers_autocomplete_for_mention_path(project_id: @issue.project, q: '', object_type: 'issue',
-                                                                                                    object_id: @issue.id)}) %>
-          <% end %>
-          <% if User.current.allowed_to?(:add_issue_watchers, @project) ||
-          (@issue.watchers.present? && User.current.allowed_to?(:view_issue_watchers, @project)) %>
-            <div id="watchers">
-              <%= render :partial => 'watchers/watchers', :locals => {:watched => @issue} %>
-            </div>
-          <% end %>
-          <%= render :partial => 'issues/watchers_form' %>
+        <% end %>
+        <%= render :partial => 'issues/watchers_form' %>
+      </div>
 
+      <div class="space-y-6 mt-6">
+        <% unless @issue.disabled_core_fields.include?('estimated_hours') %>
+        <div class="flex flex-col w-full">
+          <div class="mr-2 text-gray-400 w-full uppercase text-xs"><%= l(:field_estimated_hours) %></div>
+          <div class="w-full text-xs"><%= issue_estimated_hours_details(@issue) %></div>
         </div>
-        <div data-tabs-target="tab" id="others" class="space-y-6">
-          <%= render_half_width_custom_fields_rows(@issue) %>
+        <% end %>
+        <% if User.current.allowed_to?(:view_time_entries, @project) && @issue.total_spent_hours > 0 %>
+        <div class="flex flex-col w-full">
+          <div class="mr-2 text-gray-400 w-full uppercase text-xs"><%= l(:label_spent_time) %></div>
+          <div class="w-full text-xs"><%= issue_spent_hours_details(@issue) %></div>
         </div>
-      </section>
+        <% end %>
+      </div>
+
+      <div class="space-y-6">
+        <%= render_half_width_custom_fields_rows(@issue) %>
+      </div>
     </div>
+
+
   </aside>
 
 </div>

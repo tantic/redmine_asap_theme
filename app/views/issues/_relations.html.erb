@@ -11,12 +11,12 @@
 
 
 
-<p>
+<p class=" px-4 text-xs">
   <%= render_relations_stats(@issue, @relations) if @relations.present? %>
 </p>
 
 <% if @relations.present? %>
-<%= form_tag({}, :data => {:cm_url => issues_context_menu_path}) do %>
+<%= form_tag({}, :data => {:cm_url => issues_context_menu_path}, :class => ' px-4') do %>
   <%= render_issue_relations(@issue, @relations) %>
 <% end %>
 <% end %>
@@ -25,7 +25,7 @@
                  :as => :relation, :remote => true,
                  :url => issue_relations_path(@issue),
                  :method => :post,
-                 :html => {:id => 'new-relation-form', :style => 'display: none;'}
+                 :html => {:id => 'new-relation-form', :style => 'display: none;', :class => 'px-4'}
                } do |f| %>
 <%= render :partial => 'issue_relations/form', :locals => {:f => f}%>
 <% end %>

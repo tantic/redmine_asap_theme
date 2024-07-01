@@ -6301,6 +6301,14 @@ select{
   margin-top: auto;
 }
 
+.ml-10{
+  margin-left: 2.5rem;
+}
+
+.mt-2{
+  margin-top: 0.5rem;
+}
+
 .line-clamp-2{
   overflow: hidden;
   display: -webkit-box;
@@ -6429,6 +6437,70 @@ select{
 
 .h-screen{
   height: 100vh;
+}
+
+.h-\[calc\(100\%-6rem\)\]{
+  height: calc(100% - 6rem);
+}
+
+.h-\[calc\(100\%-2rem\)\]{
+  height: calc(100% - 2rem);
+}
+
+.h-\[calc\(100vh-2rem\)\]{
+  height: calc(100vh - 2rem);
+}
+
+.h-\[calc\(100vh-0\.5rem\)\]{
+  height: calc(100vh - 0.5rem);
+}
+
+.h-\[calc\(100vh-100px\)\]{
+  height: calc(100vh - 100px);
+}
+
+.h-\[calc\(100vh-104px\)\]{
+  height: calc(100vh - 104px);
+}
+
+.h-\[calc\(100vh-56px\)\]{
+  height: calc(100vh - 56px);
+}
+
+.h-\[calc\(100vh-58px\)\]{
+  height: calc(100vh - 58px);
+}
+
+.h-\[calc\(100vh-80px\)\]{
+  height: calc(100vh - 80px);
+}
+
+.h-\[calc\(100vh-60px\)\]{
+  height: calc(100vh - 60px);
+}
+
+.h-\[calc\(100vh-10px\)\]{
+  height: calc(100vh - 10px);
+}
+
+.h-\[calc\(100vh-120px\)\]{
+  height: calc(100vh - 120px);
+}
+
+.h-\[calc\(100vh-114px\)\]{
+  height: calc(100vh - 114px);
+}
+
+.h-\[calc\(100vh-110px\)\]{
+  height: calc(100vh - 110px);
+}
+
+.h-\[calc\(100vh-108px\)\]{
+  height: calc(100vh - 108px);
+}
+
+.h-\[calc\(100vh-106px\)\]{
+  height: calc(100vh - 106px);
 }
 
 .max-h-full{
@@ -7101,6 +7173,11 @@ select{
 .py-8{
   padding-top: 2rem;
   padding-bottom: 2rem;
+}
+
+.py-16{
+  padding-top: 4rem;
+  padding-bottom: 4rem;
 }
 
 .pb-16{
@@ -8208,6 +8285,10 @@ html{
     display: flex;
   }
 
+  .lg\:h-\[calc\(100vh-106px\)\]{
+    height: calc(100vh - 106px);
+  }
+
   .lg\:w-3\/5{
     width: 60%;
   }
@@ -8220,6 +8301,10 @@ html{
     width: 24rem;
   }
 
+  .lg\:w-2\/12{
+    width: 16.666667%;
+  }
+
   .lg\:grid-cols-2{
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -8230,6 +8315,14 @@ html{
 
   .lg\:grid-cols-5{
     grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+
+  .lg\:flex-row{
+    flex-direction: row;
+  }
+
+  .lg\:flex-col{
+    flex-direction: column;
   }
 
   .lg\:px-12{
