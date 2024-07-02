@@ -42,6 +42,14 @@ Let see it in action
 
 ![Issue](img/issue_20240118.gif)
 
+
+This is a try with a 3 columns layout :
+* on the left, navigation + subtasks and relations
+* on the right, watchers and other fields
+* in the middle, issue details
+
+![Issue](img/issue_20240701.png)
+
 ## Calendar
 
 ![Calendar](img/redmine_calendar.png)

@@ -89,7 +89,7 @@ Work in progress
 
 ## Issue
 
-![Issue](img/issue_overview.png)
+![Issue](img/issue_20240701.png)
 
 
 
