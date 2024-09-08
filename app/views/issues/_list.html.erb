@@ -4,7 +4,7 @@
 <%= form_tag({}, :data => {:cm_url => issues_context_menu_path}) do -%>
 <%= hidden_field_tag 'back_url', url_for(:params => request.query_parameters), :id => nil %>
 <%= query_columns_hidden_tags(query) %>
-<div class="relative overflow-x-auto shadow-sm sm:rounded-lg">
+<div class="relative overflow-x-auto sm:rounded-lg">
 <table id="issue-table" class="table-auto w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 list issues odd-even <%= query.css_classes %>">
   <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
     <tr>
