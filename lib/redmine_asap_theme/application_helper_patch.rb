@@ -225,6 +225,17 @@ module RedmineAsapTheme
       doc.to_html.html_safe
     end
 
+    def reorder_handle(object, options={})
+    data = {
+      :reorder_url => options[:url] || url_for(object),
+      :reorder_param => options[:param] || object.class.name.underscore
+    }
+    content_tag('span', '',
+                :class => "icon-only icon-sort-handle sort-handle button-icon",
+                :data => data,
+                :title => l(:button_sort))
+  end
+
   end
 end
 

@@ -2,7 +2,17 @@
   display: inline-flex;
   content: '';
   background-image: url('../images/arrow-pointing.svg');
-  background-size: 24px 24px;
-  height: 24px;
-  width: 24px;
+  background-size: 16px 16px;
+  height: 16px;
+  width: 16px;
+}
+
+.icon-checked:after{
+  display: inline-flex;
+  content: '';
+  background-image: url('../images/checked.svg');
+  background-size: 16px 16px;
+  color: #22c55e;
+  height: 16px;
+  width: 16px;
 }

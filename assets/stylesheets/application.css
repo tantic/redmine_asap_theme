@@ -1696,6 +1696,33 @@ fieldset{
   }
 }
 
+.button-delete{
+  display: flex;
+  border-radius: 9999px;
+  padding: 0.5rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+.button-delete:hover{
+  --tw-bg-opacity: 1;
+  background-color: rgb(254 202 202 / var(--tw-bg-opacity));
+  --tw-text-opacity: 1;
+  color: rgb(185 28 28 / var(--tw-text-opacity));
+}
+
+@media (prefers-color-scheme: dark){
+  .button-delete{
+    --tw-text-opacity: 1;
+    color: rgb(156 163 175 / var(--tw-text-opacity));
+  }
+
+  .button-delete:hover{
+    --tw-bg-opacity: 1;
+    background-color: rgb(75 85 99 / var(--tw-bg-opacity));
+  }
+}
+
 .controller-calendars{
   .today{
     --tw-bg-opacity: 1;
@@ -2211,9 +2238,19 @@ fieldset{
   display: inline-flex;
   content: '';
   background-image: url('../images/arrow-pointing.svg');
-  background-size: 24px 24px;
-  height: 24px;
-  width: 24px;
+  background-size: 16px 16px;
+  height: 16px;
+  width: 16px;
+}
+
+.icon-checked:after{
+  display: inline-flex;
+  content: '';
+  background-image: url('../images/checked.svg');
+  background-size: 16px 16px;
+  color: #22c55e;
+  height: 16px;
+  width: 16px;
 }
 
 #errorExplanation{
