@@ -24,7 +24,7 @@
 <!-- page specific tags -->
 <%= yield :header_tags -%>
 </head>
-<body  data-controller="application" data-application-myaccount-value="<%= show_settings_path(User.current) %>" class="<%= body_css_classes %> dark:bg-slate-900 h-full">
+<body  data-controller="application" data-application-myaccount-value="<%= show_settings_path(User.current) %>" class="<%= body_css_classes %> dark:bg-slate-900 h-full flex">
   <% if controller_name == "account" %>
       <section id="content" class="w-full h-full">
         <%= render "layouts/flash_messages" %>
@@ -37,7 +37,10 @@
       <%= render "layouts/navbar" %>
     <% end %>
 
-    <main class="w-full flex  dark:bg-slate-900 dark:text-gray-400 mt-14">
+    <main class="w-full flex flex-col h-full  dark:bg-slate-900 dark:text-gray-400 ml-14">
+      <% if display_main_menu?(@project) %>
+      <%= render "layouts/projectbar" %>
+      <% end %>
       <%= call_hook :view_layouts_base_body_top %>
 
       <% if controller_name == "wiki" %>
@@ -54,7 +57,7 @@
           <%= call_hook :view_layouts_base_content %>
           <div style="clear:both;"></div>
         </section>
-      <% else %>
+      <% elsif controller_name == "admin" || controller_name == "users" || controller_name == "groups" || controller_name == "roles"|| controller_name == "trackers"|| controller_name == "issue_statuses"|| controller_name == "workflows"|| controller_name == "custom_fields"|| controller_name == "enumerations"|| controller_name == "settings"|| controller_name == "auth_sources"|| controller_name == "queries" %>
         <div id="sidebar">
           <%= yield :sidebar %>
           <%= view_layouts_base_sidebar_hook_response %>
@@ -66,6 +69,20 @@
           <%= call_hook :view_layouts_base_content %>
           <div style="clear:both;"></div>
         </section>
+      <% else %>
+        <div class="mt-14 h-full px-16 bg-gray-50">
+          <div id="sidebar">
+            <%= yield :sidebar %>
+            <%= view_layouts_base_sidebar_hook_response %>
+          </div>
+          <section id="content" class="bg-gray-50 flex-1 mb-auto w-full  h-full dark:bg-slate-900">
+            <%= render "layouts/flash_messages" %>
+
+            <%= yield %>
+            <%= call_hook :view_layouts_base_content %>
+            <div style="clear:both;"></div>
+          </section>
+        </div>
       <% end %>
     </main>
   <% end %>

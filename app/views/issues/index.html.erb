@@ -1,5 +1,5 @@
 <div data-controller="queries">
-  <div class="w-full flex bg-white dark:bg-slate-700 shadow rounded">
+  <div class="w-full flex ">
     <div class="relative container mx-auto  w-full flex  px-4 py-2">
       <div class="flex flex-1 justify-center">
         <% if User.current.allowed_to?(:add_issues, @project, :global => true) && (@project.nil? || Issue.allowed_target_trackers(@project).any?) %>

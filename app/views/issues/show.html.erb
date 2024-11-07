@@ -1,5 +1,6 @@
-<div data-controller="issue" class="bg-white dark:bg-slate-700 border-b border-gray-100">
-  <div data-issue-target="section" data-controller="contextual" class="contextual flex w-full">
+
+<div data-controller="issue" class="container mx-auto pt-16 flex flex-col h-full lg:h-[calc(100vh-106px)] px-12">
+  <div data-issue-target="section" data-controller="contextual" class="contextual flex">
     <h2 class="flex items-center font-medium w-2/12">
       <div class="flex items-center justify-center w-16">
         <div data-action="click->issue#toggleNavigation" class="cursor-pointer flex items-center justify-center p-2 rounded-full hover:bg-gray-100 text-gray-700 dark:text-gray-400 dark:hover:text-gray-300 dark:hover:bg-gray-700 hover:text-gray-800">
@@ -47,6 +48,7 @@
       <div class="hidden sm:flex items-center mx-2">
         <%= issue_status_type_badge(@issue.status) %>
       </div>
+      <h2 class="font-medium text-lg"><%= @issue.subject %></h2>
       <% if @issue.is_private? %>
         <span class="badge badge-private private mr-2 flex items-center justify-center">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
@@ -124,29 +126,9 @@
       </div>
     </div>
   </div>
-</div>
-
-<div class="flex flex-col lg:flex-row h-full lg:h-[calc(100vh-106px)]">
-  <aside class="hidden lg:flex lg:flex-col lg:w-2/12 border-r border-gray-200 bg-gray-50 dark:bg-gray-800 overflow-y-auto h-full pb-16">
-    <div data-tabs-target="tab" id="relations" class="space-y-2">
-      <% if !@issue.leaf? || User.current.allowed_to?(:manage_subtasks, @project) %>
-        <div id="issue_tree" class="border-t border-gray-50">
-        <%= render :partial => 'subtasks' %>
-        </div>
-      <% end %>
-
-      <% if @relations.present? || User.current.allowed_to?(:manage_issue_relations, @project) %>
-
-      <div id="relations" class="border-t border-gray-50">
-      <%= render :partial => 'relations' %>
-      </div>
-      <% end %>
-    </div>
-  </aside>
   <div class="w-full h-full flex-1 overflow-auto">
     <div class="dark:bg-gray-800  h-fit w-full bg-white px-12 flex flex-col">
-      <%#= render_flash_messages %>
-      <h2 class="font-medium text-lg py-8 w-full text-center"><%= @issue.subject %></h2>
+
       <div class="border-b  border-gray-100 grid grid-cols-1 md:grid-cols-2 md:gap-8 mb-8 pt-4 pb-8">
         <div class="flex flex-col space-y-2">
           <div class="flex w-full">
@@ -316,43 +298,6 @@
       <%= call_hook(:view_issues_show_details_bottom, :issue => @issue) %>
     </div>
   </div>
-  <aside class="shadow hidden md:flex md:flex-col md:w-2/12    p-8 bg-gray-50 dark:bg-gray-800 overflow-y-auto h-full">
-    <div class="space-y-2">
-      <div class="space-y-6 mb-6">
-        <% if !@issue.attributes_editable? && User.current.allowed_to?(:add_issue_watchers, @issue.project) %>
-          <%= update_data_sources_for_auto_complete({users: watchers_autocomplete_for_mention_path(project_id: @issue.project, q: '', object_type: 'issue',
-                                                                                                  object_id: @issue.id)}) %>
-        <% end %>
-        <% if User.current.allowed_to?(:add_issue_watchers, @project) ||
-        (@issue.watchers.present? && User.current.allowed_to?(:view_issue_watchers, @project)) %>
-          <div id="watchers" class="text-xs">
-            <%= render :partial => 'watchers/watchers', :locals => {:watched => @issue} %>
-          </div>
-        <% end %>
-        <%= render :partial => 'issues/watchers_form' %>
-      </div>
 
-      <div class="space-y-6 mt-6">
-        <% unless @issue.disabled_core_fields.include?('estimated_hours') %>
-        <div class="flex flex-col w-full">
-          <div class="mr-2 text-gray-400 w-full uppercase text-xs"><%= l(:field_estimated_hours) %></div>
-          <div class="w-full text-xs"><%= issue_estimated_hours_details(@issue) %></div>
-        </div>
-        <% end %>
-        <% if User.current.allowed_to?(:view_time_entries, @project) && @issue.total_spent_hours > 0 %>
-        <div class="flex flex-col w-full">
-          <div class="mr-2 text-gray-400 w-full uppercase text-xs"><%= l(:label_spent_time) %></div>
-          <div class="w-full text-xs"><%= issue_spent_hours_details(@issue) %></div>
-        </div>
-        <% end %>
-      </div>
-
-      <div class="space-y-6">
-        <%= render_half_width_custom_fields_rows(@issue) %>
-      </div>
-    </div>
-
-
-  </aside>
 
 </div>

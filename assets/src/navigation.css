@@ -146,6 +146,26 @@
   @apply shadow-xl p-2 w-48 text-sm bg-white hover:bg-gray-50;
 }
 
+
+#project-menu-navbar{
+  @apply h-full flex justify-center;
+}
+#project-menu-navbar > ul{
+  @apply flex items-center justify-center h-full;
+  > li{
+    @apply h-full;
+    .menu-children{
+      display:none;
+    }
+    a{
+      @apply  h-full flex items-center text-sm font-light px-3 hover:bg-gray-50;
+      &.selected{
+        @apply text-blue-700 border-b-2 font-medium border-blue-700
+      }
+    }
+  }
+}
+
 #project-menu{
   ul{
     @apply space-y-0.5 font-light;

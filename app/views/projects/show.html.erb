@@ -1,17 +1,5 @@
 
-  <div class="flex bg-white dark:bg-gray-800 shadow items-center justify-center flex-col p-8 mb-4">
-    <div class="flex flex-col items-center mb-4 hover:bg-gray-50 dark:hover:bg-gray-700 px-2 py-1">
-      <%= letter_avatar_tag(@project.name, 300, class: 'w-8 h-8 mb-4') %>
-      <span class="icon-plus icon-white uppercase font-normal text-base"><%= @project.name %></span>
-    </div>
-    <% if @project.description.present? %>
-    <div class="wiki text-center text-gray-400">
-      <%= textilizable @project.description %>
-    </div>
-    <% end %>
-  </div>
-
-  <div class=" container mx-auto">
+  <div class=" container mx-auto p-8">
   <% unless @project.active? %>
     <p class="warning"><span class="icon icon-lock"><%= l(:text_project_closed) %></span></p>
   <% end %>

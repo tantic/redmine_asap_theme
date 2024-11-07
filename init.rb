@@ -9,7 +9,7 @@ Redmine::Plugin.register :redmine_asap_theme do
   author_url 'https://github.com/tantic'
 
   settings :default => {'empty' => true}, :partial => 'settings/redmine_asap_theme/settings'
-  delete_menu_item :project_menu, :issues
+  # delete_menu_item :project_menu, :issues
   delete_menu_item :project_menu, :overview
   delete_menu_item :project_menu, :settings
 
@@ -27,8 +27,6 @@ end
 rat_helpers = File.join(lib_dir, 'helpers.rb')
 require rat_helpers
 require lib_dir
-
-
 
 include LetterAvatar::AvatarHelper
 LetterAvatar.setup do |config|

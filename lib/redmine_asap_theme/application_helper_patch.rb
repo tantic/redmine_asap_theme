@@ -138,13 +138,13 @@ module RedmineAsapTheme
     def link_to_project(project, options={}, html_options = nil)
       if project.archived?
         content_tag :div, html_options, class: 'flex items-center' do
-          letter_avatar_tag(project.name, 300, class: 'w-8 h-8 mr-2') +
+          letter_avatar_tag(project.name, 300, class: 'w-8 h-8 mr-2 rounded-sm') +
           content_tag(:span, project.name, class: "icon-plus icon-white uppercase font-normal text-xs line-clamp-2")
         end
       else
         link_to project_url(project, {:only_path => true}.merge(options)), html_options do
           content_tag :div, :class => 'flex items-center truncate' do
-            letter_avatar_tag(project.name, 300, class: 'w-8 h-8 mr-2') +
+            letter_avatar_tag(project.name, 300, class: 'w-8 h-8 mr-2 rounded-sm') +
             content_tag(:span, project.name, class: "icon-plus icon-white uppercase font-normal text-xs line-clamp-2")
           end
         end
@@ -190,7 +190,7 @@ module RedmineAsapTheme
       build_project_link = lambda do |project, level = 0|
         padding = level * 16
 
-        text = letter_avatar_tag(project.name, 300, class: 'w-8 h-8 mr-2') + content_tag('span', project.name, :class => 'uppercase font-normal text-xs line-clamp-2')
+        text = letter_avatar_tag(project.name, 300, class: 'w-8 h-8 mr-2 rounded-sm') + content_tag('span', project.name, :class => 'uppercase font-normal text-xs line-clamp-2')
         s << link_to(text, project_path(project, :jump => jump),
                      :title => project.name,
                      :style => "padding-left:#{padding}px;",

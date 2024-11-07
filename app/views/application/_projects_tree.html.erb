@@ -1,0 +1,25 @@
+<% projects.each do |project| %>
+  <div class="my-1.5 flex bg-white dark:bg-gray-800 dark:text-gray-100 items-center">
+    <%= link_to(project, class: 'uppercase flex items-center w-full flex py-1 text-gray-800 font-light text-sm hover:bg-gray-50') do %>
+      <%= letter_avatar_tag(project.name, 100, class: 'w-6 h-6 mr-2 rounded-sm') %>
+      <span class="text-xs line-clamp-2"><%= project.name %></span>
+    <% end %>
+
+    <% if project.children.any? %>
+      <div data-action="click->sidebar#toggleSubprojects"
+           data-sidebar-target="toggleButton"
+           data-project-id="<%= project.id %>"
+           class="flex cursor-pointer ml-auto p-2 rounded-full hover:bg-gray-100 text-gray-700 dark:text-gray-400 dark:hover:text-gray-300 dark:hover:bg-gray-700 hover:text-gray-800">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 text-gray-800 transition duration-75 dark:text-gray-400 hover:text-gray-900 dark:group-hover:text-white">
+          <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+        </svg>
+      </div>
+    <% end %>
+  </div>
+
+  <% if project.children.any? %>
+    <div id="subprojects-<%= project.id %>" class="ml-4 border-l border-gray-50 mt bg-white z-50 hidden" data-sidebar-target="subprojects-<%= project.id %>">
+      <%= render partial: 'projects_tree', locals: { projects: project.children } %>
+    </div>
+  <% end %>
+<% end %>
