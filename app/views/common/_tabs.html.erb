@@ -1,5 +1,5 @@
 <% default_action = false %>
-<div class="px-12">
+<div class="">
   <div class="px-4 sm:px-0 flex w-full">
     <ul class="tabs flex col-span-3 justify-self-center  flex-nowrap overflow-x-auto -mb-px">
     <% tabs.each do |tab| -%>
@@ -19,7 +19,7 @@
   <%= content_tag('div', (render(:partial => tab[:partial], :locals => {:tab => tab}) if tab[:partial]) ,
                        :id => "tab-content-#{tab[:name]}",
                        :style => (tab[:name] != selected_tab ? 'display:none' : nil),
-                       :class => 'tab-content px-16 bg-gray-50') if tab[:partial] || tab[:remote] %>
+                       :class => 'tab-content bg-gray-50') if tab[:partial] || tab[:remote] %>
 <% end -%>
 <div></div>
 

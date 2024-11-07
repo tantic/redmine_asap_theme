@@ -1,302 +1,284 @@
 
-<div data-controller="issue" class="container mx-auto pt-16 flex flex-col h-full lg:h-[calc(100vh-106px)] px-12">
-  <div data-issue-target="section" data-controller="contextual" class="contextual flex">
-    <h2 class="flex items-center font-medium w-2/12">
-      <div class="flex items-center justify-center w-16">
-        <div data-action="click->issue#toggleNavigation" class="cursor-pointer flex items-center justify-center p-2 rounded-full hover:bg-gray-100 text-gray-700 dark:text-gray-400 dark:hover:text-gray-300 dark:hover:bg-gray-700 hover:text-gray-800">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-          </svg>
-          <%= render :partial => 'issues/sidebar-navigation' %>
-        </div>
-      </div>
-      <div class="w-auto text-gray-600 dark:text-gray-200  dark:border-gray-600">
-        <% if @prev_issue_id || @next_issue_id %>
-          <div class="next-prev-links contextual flex justify-center">
-            <% if @prev_issue_id %>
-              <%= link_to_if @prev_issue_id,
-                            "\xc2\xab",
-                            (@prev_issue_id ? issue_path(@prev_issue_id) : nil),
-                            :title => "##{@prev_issue_id}",
-                            :accesskey => accesskey(:previous),
-                            class: 'mr-2 hover:text-gray-800 dark:hover:text-gray-50' %> |
-            <% end %>
-            <% if @issue_position && @issue_count %>
-              <span class="position mx-2 hover:text-gray-800 dark:hover:text-gray-50">
-                <%= link_to_if @query_path,
-                              l(:label_item_position, :position => @issue_position, :count => @issue_count),
-                              @query_path %>
-              </span>
-            <% end %>
-            <% if @next_issue_id %>
-            |
-              <%= link_to_if @next_issue_id,
-                            "\xc2\xbb",
-                            (@next_issue_id ? issue_path(@next_issue_id) : nil),
-                            :title => "##{@next_issue_id}",
-                            :accesskey => accesskey(:next),
-                            class: 'ml-2 hover:text-gray-800 dark:hover:text-gray-50' %>
-            <% end %>
-          </div>
-        <% end %>
-      </div>
-    </h2>
-    <div class="relative flex flex-1 items-center px-12 w-full py-2">
-      <h3 class="font-light text-base text-gray-800 flex items-center">
-        <span class="hidden sm:flex text-sm mr-2"><%= issue_heading(@issue) %></span>
-      </h3>
-      <div class="hidden sm:flex items-center mx-2">
-        <%= issue_status_type_badge(@issue.status) %>
-      </div>
-      <h2 class="font-medium text-lg"><%= @issue.subject %></h2>
-      <% if @issue.is_private? %>
-        <span class="badge badge-private private mr-2 flex items-center justify-center">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z" />
-          </svg>
-        </span>
-      <% end %>
-      <% if @issue.editable? %>
-        <div class="flex items-center justify-center ml-auto">
-          <%= link_to edit_issue_path(@issue),
-                      :onclick => 'showAndScrollTo("update", "issue_notes"); return false;',
-                      :class => 'action-button-with-icon text-white flex bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm p-2 mr-3 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800', :accesskey => accesskey(:edit)  do %>
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
-              <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L6.832 19.82a4.5 4.5 0 0 1-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 0 1 1.13-1.897L16.863 4.487Zm0 0L19.5 7.125" />
-            </svg>
-          <% end %>
-        </div>
-      <% end %>
-    </div>
-    <div class="flex relative w-2/12">
-      <div class="ml-auto flex items-center pr-4">
+<div data-controller="issue" class="">
 
-        <div data-controller="sidebar" class="flex">
-
-          <div data-action="click->sidebar#toggle" class="button-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M6.429 9.75 2.25 12l4.179 2.25m0-4.5 5.571 3 5.571-3m-11.142 0L2.25 7.5 12 2.25l9.75 5.25-4.179 2.25m0 0L21.75 12l-4.179 2.25m0 0 4.179 2.25L12 21.75 2.25 16.5l4.179-2.25m11.142 0-5.571 3-5.571-3" />
-            </svg>
-            <div>
-              <%= render :partial => 'issues/sidebar' %>
-            </div>
-          </div>
-        </div>
-        <div data-action="click->issue#toggle" class="text-gray-900 cursor-pointer flex items-center justify-center bg-white  focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-full text-sm p-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5ZM12 12.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5ZM12 18.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5Z" />
-          </svg>
-        </div>
-
-        <div class="absolute flex flex-col right-0 shadow rounded-md border border-gray-50 top-14 bg-white z-50 w-60 hidden" data-issue-target="actions">
-          <% if User.current.allowed_to?(:log_time, @project) %>
-            <%= link_to new_issue_time_entry_path(@issue),
-                        :class => 'flex items-center text-gray-900 dark:text-gray-100 hover:bg-gray-50 hover:border-l-2 hover:border-blue-800 hover:pl-3.5 px-4 py-2 text-sm' do %>
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mr-2">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-                </svg>
-                <%= l(:button_log_time) %>
-              <% end %>
-          <% end %>
-          <%= copy_object_url_link(issue_url(@issue, only_path: false)) %>
-
-          <%= watcher_link(@issue, User.current) %>
-
-          <% if User.current.allowed_to?(:copy_issues, @project) && Issue.allowed_target_projects.any?  %>
-            <%= link_to project_copy_issue_path(@project, @issue),
-                        :class => 'flex items-center text-gray-900 dark:text-gray-100 hover:bg-gray-50 hover:border-l-2 hover:border-blue-800 hover:pl-3.5 px-4 py-2 text-sm' do %>
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mr-2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 0 1-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 0 1 1.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 0 0-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 0 1-1.125-1.125v-9.25m12 6.625v-1.875a3.375 3.375 0 0 0-3.375-3.375h-1.5a1.125 1.125 0 0 1-1.125-1.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H9.75" />
-              </svg>
-              <%= l(:button_copy) %>
-            <% end %>
-          <% end %>
-          <% if @issue.deletable? %>
-            <%= link_to issue_path(@issue),
-                      :data => {:confirm => issues_destroy_confirmation_message(@issue)},
-                      :method => :delete, :class => 'flex items-center text-red-700 dark:text-gray-100 hover:bg-gray-50 hover:border-l-2 hover:border-blue-800 hover:pl-3.5 px-4 py-2 text-sm' do %>
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mr-2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
-              </svg>
-              <%= l(:button_delete_object, object_name: l(:label_issue).downcase) %>
-            <% end %>
-          <% end %>
-
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="w-full h-full flex-1 overflow-auto">
+  <div class="my-8 container mx-auto bg-white dark:bg-slate-700 shadow rounded">
     <div class="dark:bg-gray-800  h-fit w-full bg-white px-12 flex flex-col">
-
-      <div class="border-b  border-gray-100 grid grid-cols-1 md:grid-cols-2 md:gap-8 mb-8 pt-4 pb-8">
-        <div class="flex flex-col space-y-2">
-          <div class="flex w-full">
-            <div class="mr-2 text-gray-700 font-normal w-2/5 2xl:w-1/4 flex">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mr-2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-                <path stroke-linecap="round" stroke-linejoin="round" d="M15.91 11.672a.375.375 0 0 1 0 .656l-5.603 3.113a.375.375 0 0 1-.557-.328V8.887c0-.286.307-.466.557-.327l5.603 3.112Z" />
-              </svg>
-              <%= l(:field_status) %>
-            </div>
-            <div><span class="rounded px-2.5 py-1 text-xs" style="background-color: <%= @issue.status.bg_color %>;color: <%= @issue.status.text_color %>"><%= @issue.status.name %></span></div>
+      <div class="relative flex flex-1 items-center w-full py-2 my-6">
+        <div class="flex items-center ">
+          <div data-action="click->issue#toggleNavigation" class="cursor-pointer flex items-center justify-center p-2 rounded-full hover:bg-gray-100 text-gray-700 dark:text-gray-400 dark:hover:text-gray-300 dark:hover:bg-gray-700 hover:text-gray-800">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+            </svg>
+            <%= render :partial => 'issues/sidebar-navigation' %>
           </div>
-          <% unless @issue.disabled_core_fields.include?('assigned_to_id') %>
-          <div class="flex w-full">
-            <div class="mr-2 text-gray-700 font-normal w-2/5 2xl:w-1/4 flex">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mr-2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
-              </svg>
-              <%= l(:field_assigned_to) %>
-            </div>
-            <div class="hover:bg-gray-50 px-2 rounded cursor-pointer"><%= @issue.assigned_to ? link_to_principal(@issue.assigned_to) : "-" %></div>
-          </div>
-          <% end %>
-          <% unless @issue.disabled_core_fields.include?('start_date') %>
-          <div class="flex w-full">
-            <div class="mr-2 text-gray-700 font-normal w-2/5 2xl:w-1/4 flex">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mr-2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5" />
-              </svg>
-              <%= l(:field_start_date) %>
-            </div>
-            <div class="hover:bg-gray-50 px-2 rounded cursor-pointer"><%= format_date(@issue.start_date) %></div>
-          </div>
-          <% end %>
-          <% unless @issue.disabled_core_fields.include?('done_ratio') %>
-          <div class="flex w-full">
-            <div class="mr-2 text-gray-700 font-normal w-2/5 2xl:w-1/4 flex">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mr-2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M21 10.5h.375c.621 0 1.125.504 1.125 1.125v2.25c0 .621-.504 1.125-1.125 1.125H21M4.5 10.5h6.75V15H4.5v-4.5ZM3.75 18h15A2.25 2.25 0 0 0 21 15.75v-6a2.25 2.25 0 0 0-2.25-2.25h-15A2.25 2.25 0 0 0 1.5 9.75v6A2.25 2.25 0 0 0 3.75 18Z" />
-              </svg>
-
-              <%= l(:field_done_ratio) %>
-            </div>
-            <div class="flex items-center  w-3/5 xl:w-1/2 px-2">
-              <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
-                <div class="bg-green-500 h-2.5 rounded-full text-green-50 text-[8px] flex items-center px-2" style="width: <%= @issue.done_ratio%>%"><%= @issue.done_ratio %>%</div>
-              </div>
-            </div>
-          </div>
-          <% end %>
         </div>
-        <div class="flex flex-col space-y-2">
-          <div class="flex w-full">
-            <div class="mr-2 text-gray-700 font-normal w-2/5 2xl:w-1/4 flex">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mr-2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M3 3v1.5M3 21v-6m0 0 2.77-.693a9 9 0 0 1 6.208.682l.108.054a9 9 0 0 0 6.086.71l3.114-.732a48.524 48.524 0 0 1-.005-10.499l-3.11.732a9 9 0 0 1-6.085-.711l-.108-.054a9 9 0 0 0-6.208-.682L3 4.5M3 15V4.5" />
-              </svg>
 
-              <%= l(:field_priority) %>
+        <h2 class="font-medium flex items-center text-lg">
+          <span class="ml-2 mr-4"><%= @issue.subject %></span>
+          <div class="hidden sm:flex tracker-<%= @issue.tracker.id %>">
+            <div class="tracker">
+              <%= issue_heading(@issue) %>
             </div>
-            <div class=""><%= @issue.priority.name %></div>
           </div>
-          <% unless @issue.disabled_core_fields.include?('fixed_version_id') || (@issue.fixed_version.nil? && @issue.assignable_versions.none?) %>
-          <div class="flex w-full">
-            <div class="mr-2 text-gray-700 font-normal w-2/5 2xl:w-1/4 flex">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mr-2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
-              </svg>
+        </h2>
 
-              <%= l(:field_fixed_version) %>
+
+        <div class="ml-auto flex">
+          <div class="flex border-r border-gray-100 px-4 mr-4">
+            <div class="hidden sm:flex items-center mx-2">
+              <%= issue_status_type_badge(@issue.status) %>
             </div>
-            <div class="">
-              <span class="bg-red-100 hover:bg-red-200 text-red-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full dark:bg-red-900 dark:text-red-300">
-                <%= @issue.fixed_version ? link_to_version(@issue.fixed_version) : "-" %>
+            <% if @issue.is_private? %>
+              <span class="badge badge-private private mr-2 flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z" />
+                </svg>
               </span>
-            </div>
+            <% end %>
           </div>
-          <% end %>
-          <% unless @issue.disabled_core_fields.include?('due_date') %>
-          <div class="flex w-full">
-            <div class="mr-2 text-gray-700 font-normal  w-2/5 2xl:w-1/4 flex">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mr-2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5" />
-              </svg>
-              <%= l(:field_due_date) %>
-            </div>
-            <div class=" <%= @issue.due_date < User.current.today ? 'text-red-700' : 'text-green-700' unless @issue.due_date.nil?%>"><%= issue_due_date_details(@issue) %></div>
-          </div>
-          <% end %>
-          <% unless @issue.disabled_core_fields.include?('category_id') || (@issue.category.nil? && @issue.project.issue_categories.none?) %>
-          <div class="flex w-full">
-            <div class="mr-2 text-gray-700 font-normal  w-2/5 2xl:w-1/4 flex">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mr-2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12.75V12A2.25 2.25 0 0 1 4.5 9.75h15A2.25 2.25 0 0 1 21.75 12v.75m-8.69-6.44-2.12-2.12a1.5 1.5 0 0 0-1.061-.44H4.5A2.25 2.25 0 0 0 2.25 6v12a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9a2.25 2.25 0 0 0-2.25-2.25h-5.379a1.5 1.5 0 0 1-1.06-.44Z" />
-              </svg>
+          <% if @issue.editable? %>
+            <div class="flex items-center justify-center">
+              <%= link_to edit_issue_path(@issue),
+                          :onclick => 'showAndScrollTo("update", "issue_notes"); return false;',
+                          :class => 'action-button-with-icon text-white flex bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm p-2 mr-3 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800', :accesskey => accesskey(:edit)  do %>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L6.832 19.82a4.5 4.5 0 0 1-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 0 1 1.13-1.897L16.863 4.487Zm0 0L19.5 7.125" />
+                </svg>
+              <% end %>
 
-              <%= l(:field_category) %>
+              <div data-controller="sidebar" class="flex">
+
+                <div data-action="click->sidebar#toggle" class="button-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6.429 9.75 2.25 12l4.179 2.25m0-4.5 5.571 3 5.571-3m-11.142 0L2.25 7.5 12 2.25l9.75 5.25-4.179 2.25m0 0L21.75 12l-4.179 2.25m0 0 4.179 2.25L12 21.75 2.25 16.5l4.179-2.25m11.142 0-5.571 3-5.571-3" />
+                  </svg>
+                  <div>
+                    <%= render :partial => 'issues/sidebar' %>
+                  </div>
+                </div>
+              </div>
+
+              <div data-action="click->issue#toggle" class="text-gray-900 cursor-pointer flex items-center justify-center bg-white  focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-full text-sm p-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5ZM12 12.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5ZM12 18.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5Z" />
+                </svg>
+              </div>
+
+
+
+              <div class="absolute flex flex-col right-0 shadow rounded-md border border-gray-50 top-14 bg-white z-50 w-60 hidden" data-issue-target="actions">
+                <% if User.current.allowed_to?(:log_time, @project) %>
+                  <%= link_to new_issue_time_entry_path(@issue),
+                              :class => 'flex items-center text-gray-900 dark:text-gray-100 hover:bg-gray-50 hover:border-l-2 hover:border-blue-800 hover:pl-3.5 px-4 py-2 text-sm' do %>
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mr-2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                      </svg>
+                      <%= l(:button_log_time) %>
+                    <% end %>
+                <% end %>
+                <%= copy_object_url_link(issue_url(@issue, only_path: false)) %>
+
+                <%= watcher_link(@issue, User.current) %>
+
+                <% if User.current.allowed_to?(:copy_issues, @project) && Issue.allowed_target_projects.any?  %>
+                  <%= link_to project_copy_issue_path(@project, @issue),
+                              :class => 'flex items-center text-gray-900 dark:text-gray-100 hover:bg-gray-50 hover:border-l-2 hover:border-blue-800 hover:pl-3.5 px-4 py-2 text-sm' do %>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mr-2">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 0 1-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 0 1 1.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 0 0-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 0 1-1.125-1.125v-9.25m12 6.625v-1.875a3.375 3.375 0 0 0-3.375-3.375h-1.5a1.125 1.125 0 0 1-1.125-1.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H9.75" />
+                    </svg>
+                    <%= l(:button_copy) %>
+                  <% end %>
+                <% end %>
+                <% if @issue.deletable? %>
+                  <%= link_to issue_path(@issue),
+                            :data => {:confirm => issues_destroy_confirmation_message(@issue)},
+                            :method => :delete, :class => 'flex items-center text-red-700 dark:text-gray-100 hover:bg-gray-50 hover:border-l-2 hover:border-blue-800 hover:pl-3.5 px-4 py-2 text-sm' do %>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mr-2">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
+                    </svg>
+                    <%= l(:button_delete_object, object_name: l(:label_issue).downcase) %>
+                  <% end %>
+                <% end %>
+
+              </div>
+
             </div>
-            <div class="">
-              <%= @issue.category ? @issue.category.name : "-" %>
-            </div>
-          </div>
           <% end %>
         </div>
       </div>
 
-      <div class="<%= @issue.css_classes %> details">
-        <div class="gravatar-with-child">
-          <%= author_avatar(@issue.author, :size => "50") %>
-          <%= assignee_avatar(@issue.assigned_to, :size => "22", :class => "gravatar-child") if @issue.assigned_to %>
-        </div>
+      <div class="grid grid-cols-3 gap-8">
+        <section class="col-span-2">
+          <div class="<%= @issue.css_classes %> details">
+            <div class="gravatar-with-child">
+              <%= author_avatar(@issue.author, :size => "50") %>
+              <%= assignee_avatar(@issue.assigned_to, :size => "22", :class => "gravatar-child") if @issue.assigned_to %>
+            </div>
 
-        <% if @issue.description? %>
-          <div class="description py-2">
-            <% if @issue.notes_addable? %>
-              <div class="w-full flex mb-6">
-                <%= link_to quoted_issue_path(@issue), :remote => true, :method => 'post', :class => 'icon icon-comment ml-auto' do %>
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-gray-600 hover:text-gray-900">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H8.25m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H12m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 0 1-2.555-.337A5.972 5.972 0 0 1 5.41 20.97a5.969 5.969 0 0 1-.474-.065 4.48 4.48 0 0 0 .978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25Z" />
-                  </svg>
+            <% if @issue.description? %>
+              <div class="description py-2">
+                <% if @issue.notes_addable? %>
+                  <div class="w-full flex">
+                    <%= link_to quoted_issue_path(@issue), :remote => true, :method => 'post', :class => 'icon icon-comment ml-auto' do %>
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-gray-600 hover:text-gray-900">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H8.25m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H12m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 0 1-2.555-.337A5.972 5.972 0 0 1 5.41 20.97a5.969 5.969 0 0 1-.474-.065 4.48 4.48 0 0 0 .978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25Z" />
+                      </svg>
+                    <% end %>
+                  </div>
                 <% end %>
+                <div class="wiki mb-8">
+                  <%= textilizable @issue, :description, :attachments => @issue.attachments %>
+                </div>
+              </div>
+            <% else %>
+              <div class="bg-gray-50 rounded-md p-8 mb-8">
+                <%= l(:label_description_empty) %>
               </div>
             <% end %>
-            <div class="wiki mb-8">
-              <%= textilizable @issue, :description, :attachments => @issue.attachments %>
+
+            <% if @issue.attachments.any? %>
+              <div class="my-8">
+                <%= link_to_attachments @issue, :thumbnails => true %>
+              </div>
+            <% end %>
+
+            <%= render_full_width_custom_fields_rows(@issue) %>
+            <%= call_hook(:view_issues_show_description_bottom, :issue => @issue) %>
+          </div>
+
+          <%= render partial: 'action_menu_edit' if User.current.wants_comments_in_reverse_order? %>
+          <div id="history" class="mt-8">
+            <%= render_tabs issue_history_tabs, issue_history_default_tab %>
+          </div>
+          <div class="sm:container sm:mx-auto mx-4 my-6 px-12">
+            <% other_formats_links do |f| %>
+              <%= f.link_to 'Atom', :url => {:key => User.current.atom_key} %>
+              <%= f.link_to 'PDF' %>
+            <% end %>
+
+            <% html_title "#{@issue.tracker.name} ##{@issue.id}: #{@issue.subject}" %>
+
+            <% content_for :header_tags do %>
+                <%= auto_discovery_link_tag(:atom, {:format => 'atom', :key => User.current.atom_key}, :title => "#{@issue.project} - #{@issue.tracker} ##{@issue.id}: #{@issue.subject}") %>
+            <% end %>
+
+            <%= context_menu %>
+
+            <%= call_hook(:view_issues_show_details_bottom, :issue => @issue) %>
+          </div>
+        </section>
+        <section class="bg-gray-50 p-8 mb-4">
+          <div class="border-b  border-gray-100 flex flex-col md:gap-2">
+            <div class="flex flex-col space-y-3">
+              <div class="flex w-full">
+                <div class="mr-2 text-gray-700 font-normal w-2/5 2xl:w-1/4 flex">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mr-2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.91 11.672a.375.375 0 0 1 0 .656l-5.603 3.113a.375.375 0 0 1-.557-.328V8.887c0-.286.307-.466.557-.327l5.603 3.112Z" />
+                  </svg>
+                  <%= l(:field_status) %>
+                </div>
+                <div><span class="rounded px-2.5 py-1 text-xs" style="background-color: <%= @issue.status.bg_color %>;color: <%= @issue.status.text_color %>"><%= @issue.status.name %></span></div>
+              </div>
+              <% unless @issue.disabled_core_fields.include?('assigned_to_id') %>
+              <div class="flex w-full">
+                <div class="mr-2 text-gray-700 font-normal w-2/5 2xl:w-1/4 flex">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mr-2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
+                  </svg>
+                  <%= l(:field_assigned_to) %>
+                </div>
+                <div class="hover:bg-gray-50 px-2 rounded cursor-pointer"><%= @issue.assigned_to ? link_to_principal(@issue.assigned_to) : "-" %></div>
+              </div>
+              <% end %>
+              <% unless @issue.disabled_core_fields.include?('start_date') %>
+              <div class="flex w-full">
+                <div class="mr-2 text-gray-700 font-normal w-2/5 2xl:w-1/4 flex">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mr-2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5" />
+                  </svg>
+                  <%= l(:field_start_date) %>
+                </div>
+                <div class="hover:bg-gray-50 px-2 rounded cursor-pointer"><%= format_date(@issue.start_date) %></div>
+              </div>
+              <% end %>
+              <% unless @issue.disabled_core_fields.include?('done_ratio') %>
+              <div class="flex w-full">
+                <div class="mr-2 text-gray-700 font-normal w-2/5 2xl:w-1/4 flex">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mr-2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 10.5h.375c.621 0 1.125.504 1.125 1.125v2.25c0 .621-.504 1.125-1.125 1.125H21M4.5 10.5h6.75V15H4.5v-4.5ZM3.75 18h15A2.25 2.25 0 0 0 21 15.75v-6a2.25 2.25 0 0 0-2.25-2.25h-15A2.25 2.25 0 0 0 1.5 9.75v6A2.25 2.25 0 0 0 3.75 18Z" />
+                  </svg>
+
+                  <%= l(:field_done_ratio) %>
+                </div>
+                <div class="flex items-center  w-3/5 xl:w-1/2 px-2">
+                  <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
+                    <div class="bg-green-500 h-2.5 rounded-full text-green-50 text-[8px] flex items-center px-2" style="width: <%= @issue.done_ratio%>%"><%= @issue.done_ratio %>%</div>
+                  </div>
+                </div>
+              </div>
+              <% end %>
+            </div>
+            <div class="flex flex-col space-y-3">
+              <div class="flex w-full">
+                <div class="mr-2 text-gray-700 font-normal w-2/5 2xl:w-1/4 flex">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mr-2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 3v1.5M3 21v-6m0 0 2.77-.693a9 9 0 0 1 6.208.682l.108.054a9 9 0 0 0 6.086.71l3.114-.732a48.524 48.524 0 0 1-.005-10.499l-3.11.732a9 9 0 0 1-6.085-.711l-.108-.054a9 9 0 0 0-6.208-.682L3 4.5M3 15V4.5" />
+                  </svg>
+
+                  <%= l(:field_priority) %>
+                </div>
+                <div class=""><%= @issue.priority.name %></div>
+              </div>
+              <% unless @issue.disabled_core_fields.include?('fixed_version_id') || (@issue.fixed_version.nil? && @issue.assignable_versions.none?) %>
+              <div class="flex w-full">
+                <div class="mr-2 text-gray-700 font-normal w-2/5 2xl:w-1/4 flex">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mr-2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
+                  </svg>
+
+                  <%= l(:field_fixed_version) %>
+                </div>
+                <div class="">
+                  <span class="bg-red-100 hover:bg-red-200 text-red-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full dark:bg-red-900 dark:text-red-300">
+                    <%= @issue.fixed_version ? link_to_version(@issue.fixed_version) : "-" %>
+                  </span>
+                </div>
+              </div>
+              <% end %>
+              <% unless @issue.disabled_core_fields.include?('due_date') %>
+              <div class="flex w-full">
+                <div class="mr-2 text-gray-700 font-normal  w-2/5 2xl:w-1/4 flex">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mr-2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5" />
+                  </svg>
+                  <%= l(:field_due_date) %>
+                </div>
+                <div class=" <%= @issue.due_date < User.current.today ? 'text-red-700' : 'text-green-700' unless @issue.due_date.nil?%>"><%= issue_due_date_details(@issue) %></div>
+              </div>
+              <% end %>
+              <% unless @issue.disabled_core_fields.include?('category_id') || (@issue.category.nil? && @issue.project.issue_categories.none?) %>
+              <div class="flex w-full">
+                <div class="mr-2 text-gray-700 font-normal  w-2/5 2xl:w-1/4 flex">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mr-2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12.75V12A2.25 2.25 0 0 1 4.5 9.75h15A2.25 2.25 0 0 1 21.75 12v.75m-8.69-6.44-2.12-2.12a1.5 1.5 0 0 0-1.061-.44H4.5A2.25 2.25 0 0 0 2.25 6v12a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9a2.25 2.25 0 0 0-2.25-2.25h-5.379a1.5 1.5 0 0 1-1.06-.44Z" />
+                  </svg>
+
+                  <%= l(:field_category) %>
+                </div>
+                <div class="">
+                  <%= @issue.category ? @issue.category.name : "-" %>
+                </div>
+              </div>
+              <% end %>
             </div>
           </div>
-        <% else %>
-          <div class="bg-gray-50 rounded-md p-8 mb-8">
-            <%= l(:label_description_empty) %>
-          </div>
-        <% end %>
-
-        <% if @issue.attachments.any? %>
-          <div class="my-8">
-            <%= link_to_attachments @issue, :thumbnails => true %>
-          </div>
-        <% end %>
-
-        <%= render_full_width_custom_fields_rows(@issue) %>
-        <%= call_hook(:view_issues_show_description_bottom, :issue => @issue) %>
+        </section>
       </div>
-
-      <%= render partial: 'action_menu_edit' if User.current.wants_comments_in_reverse_order? %>
-
-
     </div>
 
-    <div id="history" class="mt-8">
-      <%= render_tabs issue_history_tabs, issue_history_default_tab %>
-    </div>
-    <div class="sm:container sm:mx-auto mx-4 my-6 px-12">
-      <% other_formats_links do |f| %>
-        <%= f.link_to 'Atom', :url => {:key => User.current.atom_key} %>
-        <%= f.link_to 'PDF' %>
-      <% end %>
 
-      <% html_title "#{@issue.tracker.name} ##{@issue.id}: #{@issue.subject}" %>
-
-      <% content_for :header_tags do %>
-          <%= auto_discovery_link_tag(:atom, {:format => 'atom', :key => User.current.atom_key}, :title => "#{@issue.project} - #{@issue.tracker} ##{@issue.id}: #{@issue.subject}") %>
-      <% end %>
-
-      <%= context_menu %>
-
-      <%= call_hook(:view_issues_show_details_bottom, :issue => @issue) %>
-    </div>
   </div>
 
 

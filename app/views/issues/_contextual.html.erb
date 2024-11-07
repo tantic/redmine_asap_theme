@@ -1,8 +1,8 @@
 <div class="pt-8 dark:bg-slate-700">
-  <div data-controller="contextual" class="contextual px-4 sm:px-0 container mx-auto  py-2 flex  justify-items-stretch w-full">
-    <h2 class="uppercase text-gray-600 dark:text-gray-100 flex items-center"><%= @query.new_record? ? l(:label_issue_plural) : @query.name %></h2>
+  <div data-controller="contextual" class="contextual px-4 sm:px-0 container mx-auto  py-2 flex justify-between w-full">
+    <h2 class="uppercase  text-gray-600 dark:text-gray-100 flex items-center"><%= @query.new_record? ? l(:label_issue_plural) : @query.name %></h2>
 
-    <div class="flex items-center ml-auto relative">
+    <div class="flex items-center justify-self-end relative">
       <div class="inline-flex bg-white rounded-md shadow-sm">
         <% if User.current.allowed_to?(:add_issues, @project, :global => true) && (@project.nil? || Issue.allowed_target_trackers(@project).any?) %>
           <%= link_to  _new_project_issue_path(@project), :title => l(:label_issue_new), :class => 'icon icon-add px-4 py-2 text-sm font-medium text-blue-100 bg-blue-700 border border-blue-800 rounded-s-lg hover:bg-blue-800 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-100 dark:bg-blue-600 dark:border-blue-700 dark:text-blue-100 dark:hover:text-white dark:hover:bg-blue-700 dark:focus:ring-blue-500 dark:focus:text-white' do %>

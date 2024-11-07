@@ -11,8 +11,8 @@
         <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
       </svg>
     </span>
-    <div class="items-center justify-between p-4 bg-white border border-gray-200 rounded-lg shadow-sm sm:flex dark:bg-gray-700 dark:border-gray-600">
-        <time class="mb-1 text-xs font-normal text-gray-400 sm:order-last sm:mb-0"><%= authoring journal.created_on, journal.user, :label => :label_updated_time_by %></time>
+    <div class="flex-col p-4 bg-white border border-gray-200 rounded-lg shadow-sm flex dark:bg-gray-700 dark:border-gray-600">
+        <time class="mb-1 text-xs font-normal text-gray-400 "><%= authoring journal.created_on, journal.user, :label => :label_updated_time_by %></time>
         <div class="text-sm font-normal text-gray-500 dark:text-gray-300">
           <%= render_private_notes_indicator(journal) %>
           <% if journal.details.any? %>

@@ -247,7 +247,7 @@ a.tracker-1{
   td.id a{
     @apply bg-blue-100 text-blue-800 text-xs text-center font-medium me-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300;
   }
-  td.tracker{
+  .tracker{
     @apply bg-blue-100 text-blue-800 text-xs text-center font-medium me-2 px-2.5 py-0.5  dark:bg-blue-900 dark:text-blue-300;
     -webkit-background-clip: content-box;
     background-clip: content-box;
@@ -262,7 +262,7 @@ a.tracker-2{
   td.id a{
     @apply bg-gray-100 text-gray-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-300
   }
-  td.tracker{
+  .tracker{
     @apply bg-gray-100 text-gray-800 text-xs text-center font-medium me-2 px-2.5 py-0.5 rounded-xl dark:bg-gray-900 dark:text-gray-300;
     -webkit-background-clip: content-box;
     background-clip: content-box;
@@ -277,7 +277,7 @@ a.tracker-3{
   td.id a{
     @apply bg-red-100 text-red-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300
   }
-  td.tracker{
+  .tracker{
     @apply bg-red-100 text-red-800 text-xs text-center font-medium me-2 px-2.5 py-0.5 rounded-xl dark:bg-red-900 dark:text-red-300;
     -webkit-background-clip: content-box;
     background-clip: content-box;
@@ -292,7 +292,7 @@ a.tracker-4{
   td.id a{
     @apply bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300
   }
-  td.tracker{
+  .tracker{
     @apply bg-green-100 text-green-800 text-xs text-center font-medium me-2 px-2.5 py-0.5 rounded-xl dark:bg-green-900 dark:text-green-300;
     -webkit-background-clip: content-box;
     background-clip: content-box;
@@ -307,7 +307,7 @@ a.tracker-6{
   td.id a{
     @apply bg-yellow-100 text-yellow-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-yellow-900 dark:text-yellow-300
   }
-  td.tracker{
+  .tracker{
     @apply bg-yellow-100 text-yellow-800 text-xs text-center font-medium me-2 px-2.5 py-0.5 rounded-xl dark:bg-yellow-900 dark:text-yellow-300;
     -webkit-background-clip: content-box;
     background-clip: content-box;
@@ -322,7 +322,7 @@ a.tracker-7{
   td.id a{
     @apply bg-indigo-100 text-indigo-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-indigo-900 dark:text-indigo-300
   }
-  td.tracker{
+  .tracker{
     @apply bg-indigo-100 text-indigo-800 text-xs text-center font-medium me-2 px-2.5 py-0.5 rounded-xl dark:bg-indigo-900 dark:text-indigo-300;
     -webkit-background-clip: content-box;
     background-clip: content-box;
@@ -337,7 +337,7 @@ a.tracker-8{
   td.id a{
     @apply bg-purple-100 text-purple-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-purple-900 dark:text-purple-300
   }
-  td.tracker{
+  .tracker{
     @apply bg-purple-100 text-purple-800 text-xs text-center font-medium me-2 px-2.5 py-0.5 rounded-xl dark:bg-purple-900 dark:text-purple-300;
     -webkit-background-clip: content-box;
     background-clip: content-box;
@@ -352,7 +352,7 @@ a.tracker-9{
   td.id a{
     @apply bg-pink-100 text-pink-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-pink-900 dark:text-pink-300
   }
-  td.tracker{
+  .tracker{
     @apply bg-pink-100 text-pink-800 text-xs text-center font-medium me-2 px-2.5 py-0.5 rounded-xl dark:bg-pink-900 dark:text-pink-300;
     -webkit-background-clip: content-box;
     background-clip: content-box;
