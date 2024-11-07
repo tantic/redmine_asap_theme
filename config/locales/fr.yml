@@ -39,6 +39,10 @@ fr:
   redmine_asap_colors_logo_title: Logo
   redmine_asap_colors_logo_bg: Couleur de fond
   label_description_empty: Aucune description
+  see_more_projects: Voir plus de projets
+  display_settings: Paramètres d'affichage
+  show_reports: Afficher les rapports
+  label_close_panel: Fermer
   flash_message:
     notice: Information
     error: Erreur

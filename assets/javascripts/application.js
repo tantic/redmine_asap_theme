@@ -270,6 +270,20 @@ document.addEventListener("turbo:load",function(){
 
 
 document.addEventListener("turbo:load",function(){
+  $(function () {
+    $("[title]:not(.no-tooltip)").tooltip({
+      show: {
+        delay: 400
+      },
+      position: {
+        my: "center bottom-5",
+        at: "center top"
+      }
+    });
+  });
+});
+
+document.addEventListener("turbo:load",function(){
   // $('#content').on('change', 'input[data-disables], input[data-enables], input[data-shows]', toggleDisabledOnChange);
   // toggleDisabledInit();
 
@@ -309,3 +323,20 @@ document.addEventListener("turbo:load",function(){
   });
 });
 
+
+document.addEventListener("turbo:load",function(){
+  function initFilters() {
+    $('#add_filter_select').change(function() {
+      addFilter($(this).val(), '', []);
+    });
+    $('#filters-table td.field input[type=checkbox]').each(function() {
+      toggleFilter($(this).val());
+    });
+    $('#filters-table').on('click', 'td.field input[type=checkbox]', function() {
+      toggleFilter($(this).val());
+    });
+    $('#filters-table').on('keypress', 'input[type=text]', function(e) {
+      if (e.keyCode == 13) $(this).closest('form').submit();
+    });
+  }}
+);

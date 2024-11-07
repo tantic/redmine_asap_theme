@@ -8,11 +8,11 @@
       @apply mt-8
     }
   }
-  #tabs{
+  /* #tabs{
     .tab.active {
-      @apply border-b-2 border-blue-700 text-blue-700 bg-gray-50;
+      @apply font-medium text-blue-700 bg-gray-50;
     }
-  }
+  } */
 
 
   .expander.icon-expanded{
@@ -35,5 +35,12 @@
     .nodata{
       @apply mx-12 bg-gray-50 rounded
     }
+  }
+}
+
+
+#issue-menu{
+  .other-formats{
+    @apply text-gray-500 font-light border-t border-gray-100 py-2
   }
 }

@@ -2,8 +2,8 @@
 <% available_tag_id = "available_#{tag_id}" %>
 <% selected_tag_id = "selected_#{tag_id}" %>
 
-<div class="query-columns flex h-full">
-  <div class="flex flex-col">
+<div class="query-columns flex h-full w-full">
+  <div class="flex flex-col w-2/6">
       <%= label_tag available_tag_id, l(:description_available_columns) %>
       <%= select_tag 'available_columns',
               options_for_select(query_available_inline_columns_options(query)),
@@ -11,13 +11,17 @@
               :multiple => true, :size => 10,
               :ondblclick => "moveOptions(this.form.#{available_tag_id}, this.form.#{selected_tag_id});" %>
   </div>
-  <div class="buttons align-middle flex flex-col justify-center items-center">
-      <input type="button" value="&#8594;" class="move-right"
+  <div class="buttons w-1/6 align-middle flex flex-col justify-center items-center">
+    <div class="flex justify-center mb-2">
+      <input type="button" value="&#8594;" class="move-right text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-full text-sm p-2 cursor-pointer dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
        onclick="moveOptions(this.form.<%= available_tag_id %>, this.form.<%= selected_tag_id %>);" />
-      <input type="button" value="&#8592;" class="move-left"
+    </div>
+    <div class="flex justify-center">
+       <input type="button" value="&#8592;" class="move-left text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-full text-sm p-2 cursor-pointer dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
        onclick="moveOptions(this.form.<%= selected_tag_id %>, this.form.<%= available_tag_id %>);" />
+    </div>
   </div>
-  <div>
+  <div class=" w-2/6">
       <%= label_tag selected_tag_id, l(:description_selected_columns) %>
       <%= select_tag tag_name,
               options_for_select(query_selected_inline_columns_options(query)),
@@ -25,11 +29,19 @@
               :multiple => true, :size => 10,
               :ondblclick => "moveOptions(this.form.#{selected_tag_id}, this.form.#{available_tag_id});" %>
   </div>
-  <div class="buttons align-middle flex flex-col justify-center items-center">
-      <input type="button" value="&#8648;" onclick="moveOptionTop(this.form.<%= selected_tag_id %>);" />
-      <input type="button" value="&#8593;" onclick="moveOptionUp(this.form.<%= selected_tag_id %>);" />
-      <input type="button" value="&#8595;" onclick="moveOptionDown(this.form.<%= selected_tag_id %>);" />
-      <input type="button" value="&#8650;" onclick="moveOptionBottom(this.form.<%= selected_tag_id %>);" />
+  <div class="buttons w-1/6 align-middle flex flex-col justify-center items-center">
+    <div class="flex justify-center mb-2">
+      <input type="button" value="&#8648;" class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-full text-sm p-2 cursor-pointer dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700" onclick="moveOptionTop(this.form.<%= selected_tag_id %>);" />
+    </div>
+    <div class="flex justify-center mb-2">
+      <input type="button" value="&#8593;" class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-full text-sm p-2 cursor-pointer dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700" onclick="moveOptionUp(this.form.<%= selected_tag_id %>);" />
+    </div>
+    <div class="flex justify-center mb-2">
+      <input type="button" value="&#8595;" class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-full text-sm p-2 cursor-pointer dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700" onclick="moveOptionDown(this.form.<%= selected_tag_id %>);" />
+    </div>
+    <div class="flex justify-center mb-2">
+      <input type="button" value="&#8650;" class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-full text-sm p-2 cursor-pointer dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700" onclick="moveOptionBottom(this.form.<%= selected_tag_id %>);" />
+    </div>
   </div>
 </div>
 

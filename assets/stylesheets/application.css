@@ -2391,8 +2391,8 @@ fieldset{
       padding-right: 0.5rem;
     }
     td{
-      padding-top: 0.5rem;
-      padding-bottom: 0.5rem;
+      padding-top: 0.75rem;
+      padding-bottom: 0.75rem;
     }
     td.buttons{
       padding: 0;
@@ -3073,10 +3073,6 @@ fieldset{
     margin-bottom: 1.5rem;
   }
   h3{
-    padding-left: 2rem;
-    padding-right: 2rem;
-  }
-  h3{
     font-size: 0.75rem;
     line-height: 1rem;
   }
@@ -3104,13 +3100,6 @@ fieldset{
       width: 100%;
     }
     li{
-      a{
-        margin-left: 1rem;
-        margin-right: 1rem;
-      }
-      a{
-        margin-bottom: 0.125rem;
-      }
       a{
         display: flex;
       }
@@ -3164,6 +3153,9 @@ fieldset{
       }
       a.selected{
         margin-right: 0px;
+      }
+      a.selected{
+        border-radius: 0px;
       }
       a.selected{
         border-left-width: 2px;
@@ -4232,6 +4224,60 @@ tr.status-5{
 
 #context-menu{
   z-index:50 !important;
+  ul{
+    li{
+      a{
+        display: flex;
+      }
+      a{
+        font-size: 0.875rem;
+        line-height: 1.25rem;
+      }
+      a{
+        svg{
+          height: 1rem;
+        }
+        svg{
+          width: 1rem;
+        }
+      }
+    }
+  }
+}
+
+#ajax-indicator{
+  position: absolute;
+}
+
+.ui-tooltip{
+  position: absolute;
+  z-index: 50;
+  border-radius: 0.25rem;
+  --tw-bg-opacity: 1;
+  background-color: rgb(3 7 18 / var(--tw-bg-opacity));
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  --tw-text-opacity: 1;
+  color: rgb(243 244 246 / var(--tw-text-opacity));
+}
+
+#tabs-panel{
+  .tab.active{
+    border-bottom-width: 2px;
+  }
+  .tab.active{
+    --tw-border-opacity: 1;
+    border-color: rgb(37 99 235 / var(--tw-border-opacity));
+  }
+  .tab.active{
+    font-weight: 500;
+  }
+  .tab.active{
+    --tw-text-opacity: 1;
+    color: rgb(29 78 216 / var(--tw-text-opacity));
+  }
 }
 
 #wiki-navigation{
@@ -5171,23 +5217,11 @@ blockquote{
       margin-top: 2rem;
     }
   }
-  #tabs{
-    .tab.active{
-      border-bottom-width: 2px;
+  /* #tabs{
+    .tab.active {
+      @apply font-medium text-blue-700 bg-gray-50;
     }
-    .tab.active{
-      --tw-border-opacity: 1;
-      border-color: rgb(29 78 216 / var(--tw-border-opacity));
-    }
-    .tab.active{
-      --tw-bg-opacity: 1;
-      background-color: rgb(249 250 251 / var(--tw-bg-opacity));
-    }
-    .tab.active{
-      --tw-text-opacity: 1;
-      color: rgb(29 78 216 / var(--tw-text-opacity));
-    }
-  }
+  } */
   .expander.icon-expanded{
     .open{
       display: block;
@@ -5216,6 +5250,27 @@ blockquote{
       --tw-bg-opacity: 1;
       background-color: rgb(249 250 251 / var(--tw-bg-opacity));
     }
+  }
+}
+
+#issue-menu{
+  .other-formats{
+    border-top-width: 1px;
+  }
+  .other-formats{
+    --tw-border-opacity: 1;
+    border-color: rgb(243 244 246 / var(--tw-border-opacity));
+  }
+  .other-formats{
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+  }
+  .other-formats{
+    font-weight: 300;
+  }
+  .other-formats{
+    --tw-text-opacity: 1;
+    color: rgb(107 114 128 / var(--tw-text-opacity));
   }
 }
 
@@ -6398,6 +6453,10 @@ select{
   margin-top: 0px;
 }
 
+.mt-0\.5{
+  margin-top: 0.125rem;
+}
+
 .mt-1{
   margin-top: 0.25rem;
 }
@@ -6656,6 +6715,10 @@ select{
   width: 2rem;
 }
 
+.w-80{
+  width: 20rem;
+}
+
 .w-9{
   width: 2.25rem;
 }
@@ -6670,10 +6733,6 @@ select{
 
 .w-full{
   width: 100%;
-}
-
-.w-80{
-  width: 20rem;
 }
 
 .max-w-2xl{
@@ -7098,21 +7157,6 @@ select{
 .bg-white{
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
-}
-
-.bg-blue-600{
-  --tw-bg-opacity: 1;
-  background-color: rgb(37 99 235 / var(--tw-bg-opacity));
-}
-
-.bg-blue-400{
-  --tw-bg-opacity: 1;
-  background-color: rgb(96 165 250 / var(--tw-bg-opacity));
-}
-
-.bg-blue-800{
-  --tw-bg-opacity: 1;
-  background-color: rgb(30 64 175 / var(--tw-bg-opacity));
 }
 
 .bg-opacity-30{
@@ -8009,6 +8053,11 @@ html{
 .focus\:ring-blue-700:focus{
   --tw-ring-opacity: 1;
   --tw-ring-color: rgb(29 78 216 / var(--tw-ring-opacity));
+}
+
+.focus\:ring-gray-100:focus{
+  --tw-ring-opacity: 1;
+  --tw-ring-color: rgb(243 244 246 / var(--tw-ring-opacity));
 }
 
 .focus\:ring-gray-200:focus{

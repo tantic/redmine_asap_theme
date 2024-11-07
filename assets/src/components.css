@@ -35,7 +35,7 @@
       background-position: 45px 50%;
     }
     td{
-      @apply px-2 py-2;
+      @apply px-2 py-3;
     }
     td.buttons{
       padding: 0;
@@ -215,20 +215,20 @@
 
 #sidebar-list{
   h3{
-    @apply text-gray-500 uppercase text-xs my-6 px-8
+    @apply text-gray-500 uppercase text-xs my-6
   }
   .queries{
     @apply w-full m-0 p-0;
     li{
       @apply w-full flex;
       a{
-        @apply flex w-full hover:bg-gray-100 py-2 px-4 mb-0.5 mx-4 rounded;
+        @apply flex w-full hover:bg-gray-100 py-2 px-4  rounded;
       }
       a.icon-clear-query{
         @apply w-16 flex justify-center items-center rounded-md bg-blue-700 text-blue-50 ml-0 hover:bg-blue-800;
       }
       a.selected{
-        @apply bg-gray-100 border-l-2 border-blue-700 px-3 mr-0;
+        @apply bg-gray-100 rounded-none border-l-2 border-blue-700 px-3 mr-0;
       }
     }
   }
@@ -438,4 +438,28 @@ tr.status-5{
 
 #context-menu{
   z-index:50 !important;
+  ul{
+    li{
+      a{
+        @apply flex text-sm;
+        svg{
+          @apply w-4 h-4;
+        }
+      }
+    }
+  }
+}
+
+#ajax-indicator{
+  @apply absolute;
+}
+
+.ui-tooltip{
+  @apply absolute bg-gray-950 px-4 py-2 rounded text-gray-100 z-50;
+}
+
+#tabs-panel{
+  .tab.active {
+    @apply font-medium text-blue-700  border-b-2 border-blue-600;
+  }
 }

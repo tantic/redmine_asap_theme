@@ -1,8 +1,32 @@
-<aside id="sidebar" data-sidebar-target="sidebar" class="w-96 z-50 shadow-lg p-8 bg-white border-l border-gray-50 dark:bg-gray-800 fixed top-14 right-0 h-full hidden">
+<aside id="sidebar-list" data-queries-target="reports" class="mt-0.5 fixed top-14 right-0 bg-white shadow z-50 w-1/3 h-full overflow-y-auto px-8 pt-4 pb-16 hidden">
+  <div class="w-full flex">
+    <div class="flex mb-6 pb-4">
+      <% if @query.new_record? %>
+        <% if User.current.allowed_to?(:save_queries, @project, :global => true) %>
+          <%= link_to_function l(:button_save_object, object_name: l(:label_query).downcase),
+                              "$('#query_type').prop('disabled',false);$('#query_form').attr('action', '#{ @project ? new_project_query_path(@project) : new_query_path }').submit()",
+                              :class => 'icon icon-save button-blue mr-3' %>
+        <% end %>
+      <% else %>
+        <% if @query.editable_by?(User.current) %>
+          <% redirect_params = (controller_name == 'admin' && action_name == 'projects') ? {:admin_projects => 1} : {} %>
+          <%= link_to l(:button_edit_object, object_name: l(:label_query).downcase), edit_query_path(@query, redirect_params), :class => 'icon icon-edit button-blue' %>
+          <%= delete_link query_path(@query, redirect_params), {class: 'button-second mx-2'}, l(:button_delete_object, object_name: l(:label_query).downcase) %>
+        <% end %>
+      <% end %>
+      <%= link_to l(:button_clear), { :set_filter => 1, :sort => '', :project_id => @project }, :class => 'icon icon-reload mr-3 button-second' %>
+    </div>
+    <div data-action="click->queries#toggleReports" title="<%= l(:label_close_panel) %>" class="hover:bg-gray-50 p-2 rounded cursor-pointer ml-auto">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+      </svg>
+    </div>
+  </div>
+
   <%= call_hook(:view_issues_sidebar_issues_bottom) %>
   <%= call_hook(:view_issues_sidebar_planning_bottom) %>
 
   <%= render_sidebar_queries(IssueQuery, @project) %>
   <%= call_hook(:view_issues_sidebar_queries_bottom) %>
 
-  </aside>
+</aside>

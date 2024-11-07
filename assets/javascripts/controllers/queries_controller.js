@@ -4,31 +4,21 @@
   application.register("queries", class extends Stimulus.Controller {
 
     static get targets() {
-      return [ "filters", "issuesfilters", "options", "buttonDisplay", "buttonFilter", "actions" ]
+      return [ "issuesfilters", "reports", 'btn', 'tab', 'actions' ]
     }
 
-    connect() {}
-
-    toggle(event){
-      this.filtersTarget.classList.toggle('hidden');
-      this.dismissOnClick(this.filtersTarget);
-      // if(this.buttonFilterTarget.classList.contains('bg-gray-100')){
-      //   this.buttonFilterTarget.classList.remove('bg-gray-100')
-      // }else{
-      //   this.buttonFilterTarget.classList.add('bg-gray-100')
-      // }
+    static get values() {
+      return {defaultTab: String}
     }
 
     toggleIssuesFilters(event){
       this.issuesfiltersTarget.classList.toggle('hidden');
-      this.filtersTarget.classList.toggle('hidden');
-      this.optionsTarget.classList.toggle('hidden');
       this.dismissOnClick(this.issuesfiltersTarget);
-      // if(this.buttonFilterTarget.classList.contains('bg-gray-100')){
-      //   this.buttonFilterTarget.classList.remove('bg-gray-100')
-      // }else{
-      //   this.buttonFilterTarget.classList.add('bg-gray-100')
-      // }
+    }
+
+    toggleReports(event){
+      this.reportsTarget.classList.toggle('hidden');
+      this.dismissOnClick(this.reportsTarget);
     }
 
     toggleActions(event){
@@ -36,15 +26,15 @@
       this.dismissOnClick(this.actionsTarget);
     }
 
-    display(event){
-      this.optionsTarget.classList.toggle('hidden');
-      if(this.buttonDisplayTarget.classList.contains('bg-gray-100')){
-        this.buttonDisplayTarget.classList.remove('bg-gray-100')
-      }else{
-        this.buttonDisplayTarget.classList.add('bg-gray-100')
-      }
-      // this.dismissOnClick(this.optionsTarget);
-    }
+    // display(event){
+    //   this.optionsTarget.classList.toggle('hidden');
+    //   if(this.buttonDisplayTarget.classList.contains('bg-gray-100')){
+    //     this.buttonDisplayTarget.classList.remove('bg-gray-100')
+    //   }else{
+    //     this.buttonDisplayTarget.classList.add('bg-gray-100')
+    //   }
+    //   // this.dismissOnClick(this.optionsTarget);
+    // }
 
 
     dismissOnClick(element) {
