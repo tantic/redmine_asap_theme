@@ -136,6 +136,13 @@ document.addEventListener("turbo:load",function(){
   autoFillProjectIdentifier();
 });
 
+function defaultFocus(){
+  // if (($('#content :focus').length == 0) && (window.location.hash == '')) {
+  //   $('#content input[type=text]:visible, #content textarea:visible').first().focus();
+  // }
+}
+
+
 function autoFillProjectIdentifier() {
   var locked = ($('#project_identifier').val() != '');
   var maxlength = parseInt($('#project_identifier').attr('maxlength'));
@@ -340,3 +347,118 @@ document.addEventListener("turbo:load",function(){
     });
   }}
 );
+
+document.addEventListener("turbo:load",function(){
+  function showTab(name, url) {
+    $('#tab-content-' + name).parent().find('.tab-content').hide();
+    $('#tab-content-' + name).show();
+    $('#tab-' + name).closest('.tabs').find('a').removeClass('selected');
+    $('#tab-' + name).addClass('selected');
+
+    replaceInHistory(url)
+
+    return false;
+  }}
+);
+
+document.addEventListener("turbo:load",function(){
+  function showIssueHistory(journal, url) {
+    tab_content = $('#tab-content-history');
+    tab_content.parent().find('.tab-content').hide();
+    tab_content.show();
+    tab_content.parent().children('div.tabs').find('a').removeClass('selected');
+
+    $('#tab-' + journal).addClass('selected');
+
+    replaceInHistory(url)
+
+    switch(journal) {
+      case 'notes':
+        tab_content.find('.journal').show();
+        tab_content.find('.journal:not(.has-notes)').hide();
+        tab_content.find('.journal .wiki').show();
+        tab_content.find('.journal .contextual .journal-actions').show();
+
+        // always show thumbnails in notes tab
+        var thumbnails = tab_content.find('.journal .thumbnails');
+        thumbnails.show();
+        // show journals without notes, but with thumbnails
+        thumbnails.parents('.journal').show();
+        break;
+      case 'properties':
+        tab_content.find('.journal').show();
+        tab_content.find('.journal:not(.has-details)').hide();
+        tab_content.find('.journal .wiki').hide();
+        tab_content.find('.journal .thumbnails').hide();
+        tab_content.find('.journal .contextual .journal-actions').hide();
+        break;
+      default:
+        tab_content.find('.journal').show();
+        tab_content.find('.journal .wiki').show();
+        tab_content.find('.journal .thumbnails').show();
+        tab_content.find('.journal .contextual .journal-actions').show();
+    }
+
+    return false;
+  }
+});
+
+document.addEventListener("turbo:load",function(){
+  function getRemoteTab(name, remote_url, url, load_always) {
+    load_always = load_always || false;
+    var tab_content = $('#tab-content-' + name);
+
+    tab_content.parent().find('.tab-content').hide();
+    tab_content.parent().children('div.tabs').find('a').removeClass('selected');
+    $('#tab-' + name).addClass('selected');
+
+    replaceInHistory(url);
+
+    if (tab_content.children().length == 0 && load_always == false) {
+      $.ajax({
+        url: remote_url,
+        type: 'get',
+        success: function(data){
+          tab_content.html(data)
+        }
+      });
+    }
+
+    tab_content.show();
+    return false;
+  }
+});
+
+
+//replaces current URL with the "href" attribute of the current link
+//(only triggered if supported by browser)
+document.addEventListener("turbo:load",function(){
+  function replaceInHistory(url) {
+    if ("replaceState" in window.history && url !== undefined) {
+      window.history.replaceState(null, document.title, url);
+    }
+  }
+});
+
+
+document.addEventListener("turbo:load",function(){
+  function moveTabRight(el) {
+    var lis = $(el).parents('div.tabs').first().find('ul').children();
+    var bw = $(el).parents('div.tabs-buttons').outerWidth(true);
+    var tabsWidth = 0;
+    var i = 0;
+    lis.each(function() {
+      if ($(this).is(':visible')) {
+        tabsWidth += $(this).outerWidth(true);
+      }
+    });
+    if (tabsWidth < $(el).parents('div.tabs').first().width() - bw) { return; }
+    $(el).siblings('.tab-left').removeClass('disabled');
+    while (i<lis.length && !lis.eq(i).is(':visible')) { i++; }
+    var w = lis.eq(i).width();
+    lis.eq(i).hide();
+    if (tabsWidth - w < $(el).parents('div.tabs').first().width() - bw) {
+      $(el).addClass('disabled');
+    }
+  }
+});

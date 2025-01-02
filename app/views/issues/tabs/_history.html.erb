@@ -5,15 +5,24 @@
 <ol class="relative border-s border-gray-200 dark:border-gray-700">
 <% reply_links = issue.notes_addable? -%>
 <% for journal in journals %>
-  <li class="mb-4 ms-6">
+  <li id="change-<%= journal.id %>" class="mb-4 ms-6 <%= journal.css_classes %>">
     <span class="absolute flex items-center justify-center w-6 h-6 bg-blue-100 rounded-full -start-3 ring-8 ring-white dark:ring-gray-900 dark:bg-blue-900">
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
         <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
       </svg>
     </span>
-    <div class="flex-col p-4 bg-white border border-gray-200 rounded-lg shadow-sm flex dark:bg-gray-700 dark:border-gray-600">
-        <time class="mb-1 text-xs font-normal text-gray-400 "><%= authoring journal.created_on, journal.user, :label => :label_updated_time_by %></time>
-        <div class="text-sm font-normal text-gray-500 dark:text-gray-300">
+    <div  id="note-<%= journal.indice %>" class="flex-col p-4 bg-white border border-gray-200 rounded-lg shadow-sm flex dark:bg-gray-700 dark:border-gray-600">
+        <div class="flex items-center">
+          <time class="mb-1 text-xs font-normal text-gray-400 px-4">
+            <%= authoring journal.created_on, journal.user, :label => :label_updated_time_by %>
+          </time>
+          <div class="contextual ml-auto flex text-xs">
+            <div class="journal-actions flex text-xs"><%= render_journal_actions(issue, journal, :reply_links => reply_links) %></div>
+            <a href="#note-<%= journal.indice %>" class="journal-link">#<%= journal.indice %></a>
+          </div>
+        </div>
+
+        <div class="text-sm font-normal text-gray-900 dark:text-gray-300 py-6 px-4">
           <%= render_private_notes_indicator(journal) %>
           <% if journal.details.any? %>
             <ul class="details">
@@ -32,11 +41,32 @@
             <%= render_notes(issue, journal, :reply_links => reply_links) unless journal.notes.blank? %>
         </div>
     </div>
-  <!-- <div id="change-<%= journal.id %>" class="<%= journal.css_classes %>"> -->
 
   </li>
   <%= call_hook(:view_issues_history_journal_bottom, { :journal => journal }) %>
 <% end %>
 
-<% heads_for_wiki_formatter if User.current.allowed_to?(:edit_issue_notes, issue.project) || User.current.allowed_to?(:edit_own_issue_notes, issue.project) %>
+<%= labelled_form_for @issue, :html => {:id => 'issue-form', :multipart => true}, data:{turbo:false} do |f| %>
+  <div class="flex flex-col pl-8 py-4">
+    <% if @issue.notes_addable? %>
+      <legend class="text-gray-600 border-b border-gray-100 pb-4 mb-4"><%= l(:label_comment_add) %></legend>
+      <%= f.text_area :notes, :cols => 60, :rows => 10, :class => 'wiki-edit border border-gray-800',
+            :data => {
+                :auto_complete => true
+            },
+            :no_label => true %>
+      <%= wikitoolbar_for 'issue_notes', preview_issue_path(:project_id => @project, :issue_id => @issue) %>
+
+      <% if @issue.safe_attribute? 'private_notes' %>
+        <div class="flex items-center my-2">
+          <%= f.check_box :private_notes, :no_label => true %> <label for="issue_private_notes" class="ml-2"><%= l(:field_private_notes) %></label>
+        </div>
+      <% end %>
+    <% end %>
+    <div class="flex justify-end items-center">
+      <%= submit_tag l(:button_submit), class: 'ml-3' %>
+    </div>
+  </div>
+  <% heads_for_wiki_formatter if User.current.allowed_to?(:edit_issue_notes, issue.project) || User.current.allowed_to?(:edit_own_issue_notes, issue.project) %>
+<% end %>
 </ol>

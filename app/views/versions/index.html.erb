@@ -49,7 +49,7 @@
       <div id="roadmap" class="bg-gray-100 dark:bg-gray-800 p-8 flex flex-col flex-shrink-0 w-full md:w-52 lg:w-80 rounded-md overflow-y-auto border border-gray-100 dark:border-gray-700">
         <article class="version-article <%= version.css_classes %>">
           <header class="flex items-center group border-b border-gray-100 mb-6 pb-2">
-            <div class="">
+            <div class="p-2">
               <h3 class="icon icon-package version inline-flex font-medium text-base mr-3"><%= link_to_version version, :name => version_anchor(version) %></h3>
               <span class="badge badge-status-<%= version.status %>"><%= l("version_status_#{version.status}") %></span>
             </div>

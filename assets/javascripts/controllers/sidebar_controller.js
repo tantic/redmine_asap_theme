@@ -11,9 +11,11 @@
       return {url: String}
     }
 
-    connect() {}
+    connect() {
+    }
 
     toggleProjectMenu(event){
+      console.log("dans le toggle")
       this.projectMenuTarget.classList.toggle('hidden');
       this.dismissOnClick(this.projectMenuTarget);
     }

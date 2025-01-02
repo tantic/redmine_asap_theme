@@ -1,10 +1,10 @@
 <% default_action = false %>
-<div class="">
+<div class="tabs">
   <div class="px-4 sm:px-0 flex w-full">
-    <ul class="tabs flex col-span-3 justify-self-center  flex-nowrap overflow-x-auto -mb-px">
+    <ul class="flex w-full font-extralight justify-center items-center flex-nowrap overflow-x-auto -mb-px">
     <% tabs.each do |tab| -%>
       <% action = get_tab_action(tab) %>
-      <li class=""><%= link_to l(tab[:label]), (tab[:url] || { :tab => tab[:name] }),
+      <li><%= link_to l(tab[:label]), (tab[:url] || { :tab => tab[:name] }),
                                       :id => "tab-#{tab[:name]}",
                                       :class => (tab[:name] != selected_tab ? "inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-700 hover:border-gray-300 dark:hover:text-gray-300" : 'inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-700 hover:border-gray-300 dark:hover:text-gray-300 selected'),
                                       :onclick => (action.nil? ? nil : "#{ action }; return false;") %></li>
@@ -14,16 +14,15 @@
   </div>
 </div>
 
-<div class="">
+
 <% tabs.each do |tab| -%>
   <%= content_tag('div', (render(:partial => tab[:partial], :locals => {:tab => tab}) if tab[:partial]) ,
                        :id => "tab-content-#{tab[:name]}",
                        :style => (tab[:name] != selected_tab ? 'display:none' : nil),
-                       :class => 'tab-content bg-gray-50') if tab[:partial] || tab[:remote] %>
+                       :class => 'tab-content z-30') if tab[:partial] || tab[:remote] %>
 <% end -%>
-<div></div>
 
-<div></div>
 
-</div>
+
+
 <%= javascript_tag default_action if default_action %>
