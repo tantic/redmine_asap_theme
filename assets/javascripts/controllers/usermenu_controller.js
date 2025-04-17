@@ -7,7 +7,9 @@
       return [ "usersubmenu", "search", "searchinput", "adminsubmenu" ]
     }
 
-    connect() {}
+    connect() {
+      console.log("Chargement du menu utilisateur")
+    }
 
     toggle(event){
       this.usersubmenuTarget.classList.toggle('hidden');

@@ -1,6 +1,0 @@
-<% @projects.each do |project| %>
-  <%= link_to(project, class: 'uppercase flex items-center w-full flex py-1 text-gray-800 font-light text-sm hover:bg-gray-50') do %>
-    <%= letter_avatar_tag(project.name, 100, class: 'w-6 h-6 mr-2 rounded-sm') %>
-    <span class="text-xs line-clamp-2"><%= project.name %></span>
-  <% end %>
-<% end %>

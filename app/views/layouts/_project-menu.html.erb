@@ -1,0 +1,47 @@
+<div class="flex items-center">
+  <%= render_project_jump_box %>
+
+
+
+</div>
+<% if display_main_menu?(@project) && @project && @project.id %>
+  <div id="project-menu" class="flex items-center ">
+    <div data-controller="projectmenu" class="h-full relative flex items-center justify-center">
+      <div data-action="click->projectmenu#toggle" class="cursor-pointer ml-1 p-2 rounded-full hover:bg-gray-100 text-gray-700 dark:text-gray-400 dark:hover:text-gray-300 dark:hover:bg-gray-700 hover:text-gray-800">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-gray-800 transition duration-75 dark:text-gray-400 hover:text-gray-900 dark:group-hover:text-white">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM12.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM18.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
+        </svg>
+      </div>
+      <div id="project-menu-submenus" class="drdn-items absolute left-0 shadow rounded-md border border-gray-50 mt bg-white z-50 w-60 top-14 hidden" data-projectmenu-target="projectsubmenu">
+        <%= bookmark_link @project %>
+
+        <% if User.current.allowed_to?(:add_subprojects, @project) %>
+          <%= link_to sprite_icon('add', l(:label_subproject_new)), new_project_path(:parent_id => @project), :class => 'icon icon-add' %>
+        <% end %>
+        <% if User.current.allowed_to?(:close_project, @project) %>
+          <% if @project.active? %>
+            <%= link_to sprite_icon('lock', l(:button_close)), close_project_path(@project), :data => { :confirm => l(:text_project_close_confirmation, @project.to_s)}, :method => :post, :class => 'icon icon-lock' %>
+          <% else %>
+            <%= link_to sprite_icon('unlock', l(:button_reopen)), reopen_project_path(@project), :data => { :confirm => l(:text_project_reopen_confirmation, @project.to_s)}, :method => :post, :class => 'icon icon-unlock' %>
+          <% end %>
+        <% end %>
+        <% if @project.deletable? %>
+          <%= link_to sprite_icon('del', l(:button_delete)), project_path(@project), :method => :delete, :class => 'icon icon-del' %>
+        <% end %>
+        <%= link_to_if_authorized sprite_icon('settings', l(:label_settings)),
+                                  {:controller => 'projects', :action => 'settings', :id => @project},
+                                  :class => 'icon icon-settings' if User.current.allowed_to?(:edit_project, @project) %>
+
+
+        <% if @project.children.visible(User.current).length > 0 %>
+          <hr class="h-px my-4 bg-gray-200 border-0 dark:bg-gray-700 p-0 !important">
+          <h3 class="uppercase my-4 text-gray-500 text-xs px-4"><%= l(:label_subprojects) %></h3>
+          <% @project.children.visible(User.current).each do |project| %>
+            <%= link_to_project(project, { avatar_size: 6 }, class:"font-medium text-gray-900 flex items-center truncate text-xs bg-white dark:bg-gray-700 rounded-t px-4 py-1 hover:bg-gray-50 hover:text-gray-900 hover:font-semibold ") %>
+            <%#= link_to project.name, project_path(project), class: "w-full hover:bg-gray-100 hover:text-gray-900 hover:font-medium px-4 py-2" %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+<% end %>

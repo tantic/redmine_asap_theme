@@ -1,0 +1,106 @@
+.controller-issues{
+  div.issue {
+    @apply bg-white shadow p-8 border border-gray-100;
+    div.gravatar-with-child{
+      @apply float-left mr-4;
+      .gravatar{
+        @apply w-14 h-14;
+      }
+      .gravatar-child{
+        @apply w-8 h-8 rounded-full;
+      }
+    }
+    div.gravatar-with-child > img.gravatar:nth-child(2){
+      @apply w-8 h-8 rounded-full;
+    }
+    .author{
+      @apply text-gray-500 font-light mt-0;
+      a.user.active{
+        span{
+          @apply p-0 shadow-none align-bottom border-0;
+          img{
+            @apply w-4 h-4;
+          }
+        }
+      }
+    }
+  }
+
+  div.journal{
+    @apply my-4;
+    .note{
+      @apply bg-white shadow rounded ml-10;
+      >.contextual{
+        @apply pr-4;
+      }
+      .note-header{
+        @apply relative py-2 px-4 border-b border-gray-100 text-gray-500 text-xs;
+        >.gravatar{
+          @apply relative top-0 float-left -ml-14 w-8 h-8;
+        }
+        a.user.active{
+          span{
+            @apply p-0 shadow-none align-bottom border-0;
+            img{
+              @apply hidden;
+            }
+          }
+        }
+      }
+      .details{
+        @apply p-4 text-xs;
+      }
+      .wiki{
+        @apply p-4;
+      }
+    }
+  }
+
+  div.issue div.attributes{
+    @apply bg-gray-50 rounded p-6 border border-gray-100 mb-6
+  }
+
+  div.issue div.wiki{
+    @apply my-6
+  }
+
+  div.issue .subject h3{
+    @apply font-bold text-lg mb-0
+  }
+
+  div.issue .next-prev-links .position a{
+    @apply px-2
+  }
+
+  .description{
+    > .contextual{
+      @apply float-right
+    }
+    > p {
+      display: none;
+    }
+    div.wiki p{
+      /* @apply text-xs; */
+    }
+  }
+
+  #issue_description_and_toolbar{
+    @apply w-full;
+  }
+
+  #content{
+    > form{
+      @apply my-4;
+      p{
+        @apply flex items-center;
+        > label{
+          @apply mr-3;
+        }
+      }
+    }
+  }
+
+  #relations{
+    @apply my-6;
+  }
+}

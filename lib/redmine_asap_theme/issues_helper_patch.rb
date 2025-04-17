@@ -1,72 +1,70 @@
-require_dependency "issues_helper"
+# plugins/redmine_asap_theme/lib/redmine_asap_theme/issues_helper_patch.rb
+
+require_dependency 'issues_helper'
 
 module RedmineAsapTheme
   module IssuesHelperPatch
+    class IssueFieldsRows
+      include ActionView::Helpers::TagHelper
+      include ApplicationHelper
+include IssuesHelper
 
-    # Renders the list of related issues on the issue details view
-  def render_issue_relations(issue, relations)
-    manage_relations = User.current.allowed_to?(:manage_issue_relations, issue.project)
-    s = ''.html_safe
-    relations.each do |relation|
-      other_issue = relation.other_issue(issue)
-      css = "issue hascontextmenu text-xs flex flex-col shadow bg-white my-2 rounded p-2 hover:bg-gray-50  #{other_issue.css_classes} #{relation.css_classes_for(other_issue)}"
-      buttons =
-        if manage_relations
-          link_to(
-            l(:label_relation_delete),
-            relation_path(relation, issue_id: issue.id),
-            :remote => true,
-            :method => :delete,
-            :data => {:confirm => l(:text_are_you_sure)},
-            :title => l(:label_relation_delete),
-            :class => 'icon-only icon-link-break'
+      def initialize(issue)
+        @issue = issue
+        @left = []
+        @right = []
+      end
+
+      def left(*args)
+        args.any? ? @left << cells(*args) : @left
+      end
+
+      def right(*args)
+        args.any? ? @right << cells(*args) : @right
+      end
+
+      def size
+        [@left.size, @right.size].max
+      end
+
+      def to_html
+        # rubocop:disable Performance/Sum
+        content =
+          content_tag('div', @left.reduce(&:+), :class => 'splitcontentleft') +
+          content_tag('div', @right.reduce(&:+), :class => 'splitcontentleft')
+        # rubocop:enable Performance/Sum
+
+        content_tag('div', content, :class => 'splitcontent')
+      end
+
+      def cells(label, text, options={})
+        options[:class] = [options[:class] || "", 'attribute'].join(' ')
+        if label == l(:field_status)
+          text = content_tag(
+            'span',
+            @issue.status.name,
+            class: "rounded px-2.5 py-1 text-xs font-medium",
+            style: "background-color: #{@issue.status.bg_color}; color: #{@issue.status.text_color};"
           )
-        else
-          "".html_safe
         end
-      buttons << link_to_context_menu
-      s <<
+
         content_tag(
           'div',
-          content_tag('div',
-            content_tag('div',
-                      check_box_tag(
-                        "ids[]", other_issue.id,
-                        false, :id => nil),
-                      :class => 'checkbox') +
-                      content_tag(
-                        'span',
-                        relation.to_s(@issue),
-                        :class => 'ml-2 font-extralight'),
-                      :class => 'flex items-center') +
-             content_tag('div',
-                            link_to(
-                              other_issue.subject,
-                              issue_path(other_issue),
-                              class: 'font-normal'
-                           ),
-                         :class => 'subject flex my-2'),
-            #  content_tag('div', other_issue.status, :class => 'status') +
-            #  content_tag('div', link_to_user(other_issue.assigned_to), :class => 'assigned_to') +
-            #  content_tag('td', format_date(other_issue.start_date), :class => 'start_date') +
-            #  content_tag('td', format_date(other_issue.due_date), :class => 'due_date') +
-            #  content_tag('td',
-            #              (if other_issue.disabled_core_fields.include?('done_ratio')
-            #                 ''
-            #               else
-            #                 progress_bar(other_issue.done_ratio)
-            #               end),
-            #              :class=> 'done_ratio') +
-            #  content_tag('td', buttons, :class => 'buttons'),
-          :id => "relation-#{relation.id}",
-          :class => css)
+          content_tag('div', label + ":", class: 'label') +
+            content_tag('div', text, class: 'value'),
+          options
+        )
+      end
     end
-    content_tag('div', s, :class => 'list issues odd-even')
-  end
 
+    def issue_fields_rows
+      issue = @issue
+      r = IssueFieldsRows.new(issue)
+      yield r
+      r.to_html
+    end
   end
 end
 
-
+# Patch propre
 IssuesHelper.prepend RedmineAsapTheme::IssuesHelperPatch
-ActionView::Base.prepend IssuesHelper

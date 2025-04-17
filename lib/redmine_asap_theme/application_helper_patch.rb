@@ -54,7 +54,7 @@ module RedmineAsapTheme
       projects = projects_for_jump_box(User.current)
       if @project && @project.persisted?
         # text = @project.name_was
-        text = letter_avatar_tag(@project.name_was, 300, class: 'w-8 h-8 mr-2') + content_tag('span', @project.name_was, :class => 'uppercase font-normal text-xs line-clamp-2')
+        text = letter_avatar_tag(@project.name_was, 300, class: 'w-6 h-6 mr-2') + content_tag('span', @project.name_was, :class => 'uppercase font-normal text-xs line-clamp-2')
       end
       text ||= l(:label_jump_to_a_project)
       url = autocomplete_projects_path(:format => 'js', :jump => current_menu_item)
@@ -77,7 +77,7 @@ module RedmineAsapTheme
 
     def project_parent_breadcrumb
       if @project.nil? || @project.new_record?
-        # content_tag(:div, '&#47;'.html_safe, :id => 'menu-breadcrumb-empty')
+        content_tag(:div, '&#47;'.html_safe, :id => 'menu-breadcrumb-empty')
       else
           b = []
           c = []
@@ -93,7 +93,7 @@ module RedmineAsapTheme
               path = safe_join(c[0..-1], separator)
               b = [content_tag(:div, path.html_safe, id: 'breadcrumbs', style: "display:none"), b]
           else
-              # b << content_tag(:div, '&#47;'.html_safe, :id => 'menu-breadcrumb-empty')
+              b << content_tag(:div, '&#47;'.html_safe, :id => 'menu-breadcrumb-empty')
           end
           safe_join b.reverse
       end
@@ -135,20 +135,54 @@ module RedmineAsapTheme
       end
     end
 
-    def link_to_project(project, options={}, html_options = nil)
+    def link_to_project(project, options = {}, html_options = nil)
+      avatar_size = options.delete(:avatar_size) || 8
+      avatar_classes = "w-#{avatar_size} h-#{avatar_size} mr-2 rounded-sm"
+
+      content = lambda {
+        letter_avatar_tag(project.name, 300, class: avatar_classes) +
+        content_tag(:span, project.name, class: "icon-plus icon-white uppercase font-normal text-xs text-gray-900 dark:text-gray-100 line-clamp-2")
+      }
+
       if project.archived?
         content_tag :div, html_options, class: 'flex items-center' do
-          letter_avatar_tag(project.name, 300, class: 'w-8 h-8 mr-2 rounded-sm') +
-          content_tag(:span, project.name, class: "icon-plus icon-white uppercase font-normal text-xs line-clamp-2")
+          content.call
         end
       else
-        link_to project_url(project, {:only_path => true}.merge(options)), html_options do
-          content_tag :div, :class => 'flex items-center truncate' do
-            letter_avatar_tag(project.name, 300, class: 'w-8 h-8 mr-2 rounded-sm') +
-            content_tag(:span, project.name, class: "icon-plus icon-white uppercase font-normal text-xs line-clamp-2")
+        link_to project_url(project, { only_path: true }.merge(options)), html_options do
+          content_tag :div, class: 'flex items-center truncate' do
+            content.call
           end
         end
       end
+    end
+
+
+
+    # Displays a link to user's account page or group page
+    def link_to_principal(principal, options={})
+      only_path = options[:only_path].nil? ? true : options[:only_path]
+      case principal
+      when User
+        username = principal.name(options[:format])
+        username = "@#{username}" if options[:mention]
+        name = "<span style='display:inline-flex; align-items:center; gap:4px;' class='bg-white text-xs dark:bg-gray-700 shadow border border-gray-100 hover:bg-gray-50 rounded px-2.5 py-1 text-gray-900 hover:text-blue-800'>#{avatar_with_local(principal, size: '18')} #{username}</span>".html_safe
+
+        css_classes = ''
+        if principal.active? || (User.current.admin? && principal.logged?)
+          url = user_url(principal, :only_path => only_path)
+          css_classes += principal.css_classes
+        end
+      when Group
+        name = principal.to_s
+        url = group_url(principal, :only_path => only_path)
+        css_classes = principal.css_classes
+      else
+        name = principal.to_s
+      end
+
+      css_classes += " #{options[:class]}" if css_classes && options[:class].present?
+      url ? link_to(principal_icon(principal).to_s.html_safe + name, url, :class => css_classes) : h(name)
     end
 
     # Renders the project quick-jump box
@@ -190,11 +224,11 @@ module RedmineAsapTheme
       build_project_link = lambda do |project, level = 0|
         padding = level * 16
 
-        text = letter_avatar_tag(project.name, 300, class: 'w-8 h-8 mr-2 rounded-sm') + content_tag('span', project.name, :class => 'uppercase font-normal text-xs line-clamp-2')
+        text = letter_avatar_tag(project.name, 300, class: 'w-6 h-6 mx-2 rounded-sm') + content_tag('span', project.name, :class => 'uppercase font-normal text-xs line-clamp-2')
         s << link_to(text, project_path(project, :jump => jump),
                      :title => project.name,
                      :style => "padding-left:#{padding}px;",
-                     :class => (project == selected ? 'selected flex items-center hover:bg-gray-50 px-2 ' : 'flex items-center hover:bg-gray-50 px-2'))
+                     :class => (project == selected ? 'selected flex items-center hover:px-1 hover:bg-gray-50 px-2 ' : 'flex items-center hover:px-1 hover:bg-gray-50 px-2'))
       end
       [
         [bookmarked, :label_optgroup_bookmarks, true],

@@ -11,23 +11,21 @@ module RedmineAsapTheme
       css = +"icon bookmark "
 
       if bookmarked
-        css << "icon-bookmark cursor-pointer ml-1 p-2 rounded-full hover:bg-yellow-100 text-gray-700 dark:text-gray-400 dark:hover:text-gray-300 dark:hover:bg-gray-700 hover:text-gray-800"
+        css << "icon-bookmark"
+        icon = "bookmark-delete"
         method = "delete"
-        # text = l(:button_project_bookmark_delete)
-        icon = svg_tag("star-yellow.svg", class: 'w-5 h-5 text-yellow-400 hover:text-yellow-500')
+        text = sprite_icon(icon, l(:button_project_bookmark_delete))
       else
-        css << "icon-bookmark-off cursor-pointer ml-1 p-2 rounded-full hover:bg-gray-100 text-gray-700 dark:text-gray-400 dark:hover:text-gray-300 dark:hover:bg-gray-700 hover:text-gray-800"
+        css << "icon-bookmark-off"
+        icon = "bookmark-add"
         method = "post"
-        # text = l(:button_project_bookmark)
-        icon = svg_tag("star.svg", class: 'w-5 h-5 hover:text-gray-500')
+        text = sprite_icon(icon, l(:button_project_bookmark))
       end
 
       url = bookmark_project_path(project)
-
-      link_to url, remote: true, method: method, data: {turbo: false}, class: css do
-        icon
-      end
+      link_to text, url, remote: true, method: method, class: css
     end
+
   end
 end
 

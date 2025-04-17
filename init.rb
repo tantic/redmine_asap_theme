@@ -9,12 +9,9 @@ Redmine::Plugin.register :redmine_asap_theme do
   author_url 'https://github.com/tantic'
 
   settings :default => {'empty' => true}, :partial => 'settings/redmine_asap_theme/settings'
-  # delete_menu_item :project_menu, :issues
-  delete_menu_item :project_menu, :overview
   delete_menu_item :project_menu, :settings
-
-  menu :admin_menu, :redmine_asap_theme, { controller: 'settings', action: 'plugin', id: 'redmine_asap_theme' }, caption: :label_redmine_asap_theme
 end
+
 
 lib_dir = File.join(File.dirname(__FILE__), 'lib', 'redmine_asap_theme')
 

@@ -1,35 +1,181 @@
-/* a.icon{
-  @apply text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded text-sm px-5 py-2 ml-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800;
-} */
-
-.submit, .button-submit{
-  @apply text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded text-sm px-5 py-2 ml-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800;
+.contextual{
+  @apply flex items-center;
 }
 
-/* .action-button-with-icon{
-  @apply cursor-pointer p-2 rounded-full hover:bg-gray-100 text-gray-700 dark:text-gray-400 dark:hover:text-gray-300 dark:hover:bg-gray-700 hover:text-gray-800;
-} */
-
-.button-submit > input[type='submit']{
-  @apply cursor-pointer text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded text-sm px-5 py-2 ml-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800;
+.contextual #revision_selector{
+  @apply flex items-center
 }
 
-#admin-menu a.icon, #admin-menu .redmine-asap-theme{
-  @apply flex items-center font-light bg-white text-gray-900 hover:bg-gray-50 hover:border-l-2 hover:border-blue-800 hover:pl-3.5 px-4 py-2 text-sm ml-0 rounded-none
+.contextual #revision_selector select{
+  @apply mx-2
 }
 
-.button-blue, #button-reply a{
-  @apply flex text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded text-xs px-3 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800
+.contextual #revision_selector #rev{
+  @apply ml-2
 }
 
-.button-second, .button-three a{
-  @apply text-gray-900 cursor-pointer flex items-center bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-light rounded text-xs px-3 py-2  dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700
+a.icon{
+  @apply text-gray-800 no-underline   font-medium rounded text-xs px-2.5 py-1.5
 }
 
-.button-icon{
-  @apply text-gray-900 mr-1 cursor-pointer flex items-center justify-center bg-white focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-full text-xs p-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700
+a.icon:hover svg, a.icon-only:hover svg {
+  stroke: oklch(0.278 0.033 256.848);
 }
 
-.button-delete{
-  @apply flex p-2 hover:bg-red-200 hover:text-red-700 rounded-full  text-sm dark:text-gray-400 dark:hover:bg-gray-600;
+a.icon-checked, a.bookmark{
+  @apply bg-gray-200 hover:bg-gray-300 focus:ring-gray-300 focus:ring-4 dark:bg-gray-600 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800
+}
+
+a.icon-edit:not(#context-menu a.icon-edit) {
+  @apply rounded-full p-2 hover:bg-blue-700 hover:text-blue-100 !important;
+  .icon-label{
+    display: none;
+  }
+  &:hover svg{
+    stroke: oklch(0.932 0.032 255.585);
+  }
+}
+
+a.icon-reload:not(#context-menu a.icon-reload){
+  @apply rounded-full p-2 hover:bg-gray-100 hover:text-gray-700 !important;
+  .icon-label{
+    display: none;
+  }
+}
+
+a.icon-fav-off:not(#context-menu a.icon-fav-off){
+  @apply rounded-full p-2 hover:bg-yellow-400 hover:text-yellow-100 !important;
+  .icon-label{
+    display: none;
+  }
+  &:hover svg{
+    stroke: oklch(0.973 0.071 103.193);
+  }
+}
+
+a.icon-copy:not(#context-menu a.icon-copy){
+  @apply rounded-full p-2 hover:bg-gray-200 hover:text-gray-800 !important;
+  .icon-label{
+    display: none;
+  }
+  &:hover svg{
+    stroke: oklch(0.973 0.071 103.193);
+  }
+}
+
+a.icon-fav:not(#context-menu a.icon-fav){
+  @apply rounded-full p-2 hover:bg-yellow-400 hover:text-yellow-700 !important;
+  .icon-label{
+    display: none;
+  }
+  /* &:hover{
+    .icon-label{
+      @apply block text-yellow-100;
+    }
+  } */
+  svg{
+    stroke: oklch(0.795 0.184 86.047) !important;
+  }
+  &:hover svg{
+    stroke: oklch(0.973 0.071 103.193) !important;
+  }
+}
+
+a.icon-del:not(#context-menu a.icon-del):not(.drdn-items a.icon-del) {
+  @apply rounded-full p-2 hover:bg-red-100 hover:text-red-700;
+  .icon-label{
+    display: none;
+  }
+  &:hover svg{
+    stroke: oklch(0.505 0.213 27.518);
+  }
+}
+
+a.icon .icon-svg{
+  @apply stroke-current
+}
+
+.contextual a.icon-add{
+  @apply text-white no-underline bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded text-xs px-2.5 py-1.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800
+}
+
+.contextual a.icon-add .icon-svg{
+  @apply stroke-current
+}
+
+a.icon-only{
+  @apply bg-transparent
+}
+
+.button-small{
+  @apply px-3 py-1.5 text-xs h-auto font-medium text-center text-white bg-blue-700 rounded hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 !important;
+}
+
+
+input[type=submit] {
+  @apply text-white no-underline bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded text-xs px-2.5 py-1.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 !important;
+}
+
+
+/* Buttons
+-------------------------------------------------------- */
+.jstb_strong {
+  background-image: url(/jstoolbar/bold.svg) !important;
+}
+.jstb_em {
+  background-image: url(/jstoolbar/italic.svg) !important;
+}
+.jstb_ins {
+  background-image: url(/jstoolbar/underline.svg) !important;
+}
+.jstb_del {
+  background-image: url(/jstoolbar/strikethrough.svg) !important;
+}
+.jstb_code {
+  background-image: url(/jstoolbar/letter-c.svg) !important;
+}
+.jstb_h1 {
+  background-image: url(/jstoolbar/h1.svg) !important;
+}
+.jstb_h2 {
+  background-image: url(/jstoolbar/h2.svg) !important;
+}
+.jstb_h3 {
+  background-image: url(/jstoolbar/h3.svg) !important;
+}
+.jstb_ul {
+  background-image: url(/jstoolbar/list.svg) !important;
+}
+.jstb_ol {
+  background-image: url(/jstoolbar/list-numbers.svg) !important;
+}
+.jstb_tl {
+  background-image: url(/jstoolbar/list-check.svg) !important;
+}
+.jstb_bq {
+  background-image: url(/jstoolbar/indent-increase.svg) !important;
+}
+.jstb_unbq {
+  background-image: url(/jstoolbar/indent-decrease.svg) !important;
+}
+.jstb_pre::before {
+  content: "pre";
+  font-size: 10px;
+  color: #333;
+  font-weight: 700
+}
+.jstb_precode {
+  background-image: url(/jstoolbar/code.svg) !important;
+}
+.jstb_link {
+  background-image: url(/jstoolbar/wiki_link.svg) !important;
+}
+.jstb_img {
+  background-image: url(/jstoolbar/image.svg) !important;
+}
+.jstb_table {
+  background-image: url(/jstoolbar/table.svg) !important;
+}
+.jstb_help {
+  background-image: url(/jstoolbar/help.svg) !important;
 }

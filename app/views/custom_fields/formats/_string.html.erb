@@ -1,4 +1,0 @@
-<%= render :partial => 'custom_fields/formats/regexp', :locals => {:f => f, :custom_field => custom_field} %>
-<div class="mb-6"><%= f.check_box :text_formatting, {:label => :setting_text_formatting, :data => {:disables => '#custom_field_url_pattern'}}, 'full', '' %></div>
-<div class="mb-6"><%= f.text_field(:default_value) %></div>
-<div class="mb-6"><%= f.text_field :url_pattern, :size => 50, :label => :label_link_values_to %></div>

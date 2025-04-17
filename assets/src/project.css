@@ -1,0 +1,81 @@
+.controller-projects{
+  #content{
+    >h2{
+      display: none;
+    }
+  }
+
+  .news{
+    p{
+      @apply mb-2 font-medium border-b border-gray-100 py-0.5;
+      .author{
+        @apply text-xs text-gray-500 font-light flex items-center;
+        a{
+          @apply px-1;
+        }
+        a.user.active{
+          span{
+            @apply py-0 px-1 shadow-none align-bottom border-0;
+            img{
+              @apply hidden;
+            }
+          }
+        }
+      }
+    }
+
+  }
+
+  .members{
+    >p{
+      @apply border-b border-gray-100 pb-6 mb-6;
+      >span.label{
+        @apply font-bold flex w-full pb-2;
+      }
+      >a{
+
+      }
+    }
+  }
+
+  .issues{
+    .issue-report{
+      @apply mb-6;
+    }
+  }
+
+  #tab-content-issues{
+    fieldset {
+      @apply grid grid-cols-6 gap-4 relative;
+      .contextual{
+        @apply flex w-full justify-end -top-2 absolute right-8
+      }
+      .floating{
+        @apply flex;
+        input{
+          @apply mr-2;
+        }
+      }
+    }
+  }
+
+  &.action-show{
+    .contextual{
+      display: none;
+    }
+  }
+}
+
+
+.controller-activities {
+
+  #activity{
+    dl{
+      dt{
+        >img{
+          display: none;
+        }
+      }
+    }
+  }
+}

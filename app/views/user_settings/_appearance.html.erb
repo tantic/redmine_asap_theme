@@ -1,4 +1,20 @@
-
 <%= labelled_fields_for :pref, @user.pref do |pref_fields| %>
 <div class="mb-6"><%= pref_fields.select :textarea_font, textarea_font_options %></div>
 <% end %>
+
+<div class="mb-6">
+  <h2><%= l(:label_avatar)%></h2>
+  <div style="width: 128px; height: 128px; border: 1px silver solid;" class="mb-8">
+  <%= avatar(@user, :size => "100") %>
+  </div>
+
+
+  <%= form_tag( { :controller => 'users',  :action => 'save_avatar', :id => @user.id }, :multipart => true) do %>
+      <div class="mb-8">
+      <%= file_field_tag "avatar" %>
+    </div>
+      <%= submit_tag l(:button_save) %>
+      <%= submit_tag l(:button_delete), :confirm => l(:are_you_sure_delete_avatar) %>
+  <% end %>
+
+</div>

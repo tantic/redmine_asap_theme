@@ -1,0 +1,7 @@
+.controller-documents{
+  #document-list{
+    .document-group{
+      @apply bg-white shadow dark:bg-gray-800 rounded p-8 mb-4;
+    }
+  }
+}

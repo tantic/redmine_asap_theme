@@ -1,346 +1,86 @@
-#wiki-navigation{
-  @apply overflow-y-auto ;
-  >ul.pages-hierarchy{
-    @apply space-y-1 font-light mb-36;
-    /* a{
-      @apply flex items-center text-sm p-2 rounded-lg dark:text-white hover:bg-gray-50 dark:hover:bg-gray-700
+.controller-wiki{
+  #content {
+    > .contextual{
+      @apply -mt-6;
     }
-    a.selected{
-      @apply bg-gray-50 dark:bg-gray-900 text-sm dark:hover:bg-gray-800;
-    } */
-
-    >li{
-      >a{
-        @apply text-sm uppercase font-extralight flex justify-start p-4 rounded-lg dark:text-white hover:bg-gray-50 dark:hover:bg-gray-700;
+    > .breadcrumb{
+      @apply -mt-4 mb-4;
+    }
+    >div.wiki{
+      @apply bg-white shadow dark:bg-gray-800 rounded p-8 mb-4;
+      h1{
+        @apply text-xl font-medium border-b border-gray-100 pb-4 mb-4;
       }
-      >ul.pages-hierarchy{
-        @apply ml-0 text-sm flex flex-col justify-start  w-full;
+      h2{
+        @apply text-lg font-medium border-b border-gray-100 pb-4 my-6;
+      }
+      h3{
+        @apply text-base font-medium mt-6 mb-2;
+      }
+
+      p{
+        @apply my-2;
+      }
+      a.project{
+        >div{
+          @apply inline-flex;
+          img{
+            display: none;
+          }
+        }
+        @apply inline-flex;
+          img{
+            display: none;
+          }
+      }
+      ul{
+        @apply space-y-1 list-disc ml-3 my-4;
+        li{
+          @apply pl-4;
+        }
         >li{
-          @apply w-full py-2 px-4 border-t border-gray-100 hover:bg-gray-50 dark:hover:bg-gray-700;
-          >a{
-            @apply text-sm py-2 font-semibold flex w-full ;
-          }
-          >ul.pages-hierarchy{
-            @apply ml-0 my-2 text-sm;
-            >li{
-              @apply w-full;
-              >a{
-                @apply w-full flex text-sm px-4 py-2 font-light border-l rounded-none border-gray-300  mx-0 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700;
-              }
-              >ul.pages-hierarchy{
-                @apply ml-4 my-2 text-sm;;
-                >li{
-                  @apply w-full;
-                  >a{
-                    @apply w-full flex text-sm px-4 py-1 font-light border-l rounded-none border-gray-300  mx-0 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700;
-                  }
-                }
-              }
-            }
+          @apply pl-0;
+        }
+      }
+      blockquote{
+        @apply p-4 my-4 border-s-4 border-gray-300 rounded bg-gray-50 dark:border-gray-500 dark:bg-gray-800;
+      }
+      code{
+        @apply text-rose-700 text-xs bg-rose-50 border-rose-100 rounded p-0.5;
+      }
+      pre{
+        @apply my-4 mx-0 bg-gray-800 text-slate-100 shadow-xl border-gray-800 rounded p-4;
+        counter-reset: line;
+        >code{
+          @apply  text-xs bg-transparent border-none p-0;
+        }
+      }
+      .toc{
+        @apply space-y-2 list-disc ml-3 my-4 p-8 rounded border-yellow-200 bg-yellow-100 text-yellow-800;
+
+        li{
+          @apply list-disc;
+          a{
+            @apply text-yellow-700;
           }
         }
-
-      }
-    }
-
-
-  }
-}
-
-p.breadcrumb{
-  @apply flex items-center;
-  a{
-    @apply px-4 font-normal text-sm text-gray-900;
-  }
-}
-
-.controller-wiki {
-  .wiki > .preview,
-  .wiki.wiki-preview {
-    font-size: 12px;
-  }
-}
-
-
-div.wiki {
-  @apply text-base;
-
-  h1, .h1,
-  h2, .h2,
-  h3, .h3,
-  h4, .h4,
-  h5, .h5,
-  h6, .h6 {
-    @apply my-3 font-light;
-  }
-
-  h1, .h1 {
-    @apply pb-6 border-b border-gray-200 text-lg mb-8 font-medium;
-  }
-
-  h2, .h2 {
-    @apply text-base my-8 pb-2 border-b border-gray-100 font-medium;
-  }
-
-  h3, .h3 {
-    @apply text-sm mt-6 mb-2 pb-2  font-medium;
-  }
-
-  h4, .h4 {
-    @apply text-sm mt-6 mb-2 pb-2  font-normal;
-  }
-
-  h5, .h5 {
-    @apply text-sm my-2 pb-2  font-normal;
-  }
-
-  h6, .h6 {
-    @apply text-sm my-2 pb-2  font-normal;
-  }
-
-
-  a{
-    @apply text-blue-800;
-  }
-
-  > a:first-child {
-    + h1,
-    + h2,
-    + h3,
-    + h4,
-    + h5,
-    + h6 {
-      margin-top: 0;
-    }
-  }
-
-  > a:target {
-    + h2,
-    + h3,
-    + h4,
-    + h5,
-    + h6 {
-      &::before {
-        content: "#";
-        display: inline-block;
-        width: .7em;
-        margin-left: -.7em;
-      }
-    }
-  }
-
-  > :last-child {
-    margin-bottom: 0;
-  }
-
-  blockquote {
-    > :first-child {
-      margin-top: 0;
-    }
-
-    > :last-child {
-      margin-bottom: 0;
-    }
-  }
-
-
-  a {
-    word-break: break-all;
-    word-break: break-word;
-  }
-
-  p,
-  ul,
-  ol {
-    margin-bottom: 1em;
-  }
-
-  p{
-    @apply text-sm
-  }
-
-  ul,
-  ol {
-    @apply text-sm  max-w-md space-y-1 list-disc list-inside dark:text-gray-400;
-
-    li{
-      @apply pl-0;
-    }
-    ul{
-      li{
-        @apply pl-5
-      }
-    }
-  }
-
-
-
-
-  table {
-    display: block;
-    margin-bottom: 12px;
-    overflow: auto;
-    word-break: normal;
-    word-break: keep-all;
-    &.issues{
-      tr{
-        &.closed{
-          .id{
-            a{
-              position: relative;
-              text-decoration: none;
-              &::after {
-                content: "";
-                display: block;
-                position: absolute;
-                right: 5px;
-                bottom: 0;
-                left: 5px;
-                height: calc(50% - 2px / 2);
-                transform: rotate(-4deg);
-              }
-              &:hover::after {
-              }
-            }
+        >li{
+          @apply list-none;
+          ul{
+            @apply m-0 p-0;
           }
         }
       }
     }
   }
-
-  /* .wiki-edit{
-    @apply bg-white;
-  } */
-
-
-  td,
-  th {
-    padding: 10px;
-    border: 1px solid #ccc;
-  }
-
-  .noborder,
-  .wiki-class-noborder {
-    border: 0 none;
-
-    td,
-    th {
-      border: 0 none;
+  #sidebar-wrapper{
+    .wiki{
+      >ul{
+        padding-left: 0px;
+        ul{
+          padding-left: 15px;
+        }
+      }
     }
   }
-
-  a.new {
-    @apply text-red-600;
-  }
-
-  .contextual{
-    @apply float-right;
-    a{
-      @apply text-sm
-    }
-  }
-
-  pre {
-    @apply p-6 my-4 rounded bg-slate-800 text-slate-100 text-xs
-  }
-
-  img {
-    max-width: 100%;
-    vertical-align: middle;
-  }
-
-  .toc {
-    @apply bg-gray-50 p-8 mr-8 w-full sm:w-1/3 rounded border border-gray-100 ;
-    >li:first-child{
-      @apply list-none
-    }
-    &.right{
-      @apply sm:float-right w-full sm:w-1/3 sm:ml-8;
-    }
-  }
-}
-
-/* .wiki-edit{
-  @apply bg-white;
-} */
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  .wiki-anchor {
-    display: none;
-    position: relative;
-    top: -(1em - 12px);
-    margin-left: 5px;
-    text-decoration: none !important;
-  }
-
-  &:hover {
-    .wiki-anchor {
-      display: inline;
-    }
-  }
-
-  img {
-    display: inline-block;
-    max-width: 100%;
-    vertical-align: middle;
-  }
-}
-
-p.footnote {
-  margin-bottom: 5px;
-
-  &::before {
-    content: "";
-    display: block;
-    width: 300px;
-    margin-top: 12px;
-    padding-top: math.div(12px, 2);
-  }
-
-  + p.footnote::before {
-    display: none;
-  }
-}
-
-.ltr,
-.wiki-class-ltr {
-  direction: ltr;
-}
-
-.rtl,
-.wiki-class-rtl {
-  direction: rtl;
-}
-
-
-
-#wiki_add_attachment {
-
-  > p {
-    margin-bottom: 0;
-    float: left;
-  }
-
-  > form {
-    clear: left;
-  }
-
-  .collapsible & {
-    padding-top: 0;
-    border-top: 0;
-
-    > form {
-      padding-top: 0;
-    }
-  }
-
-
-}
-blockquote{
-  @apply border-l-4 border-gray-100 p-4 flex w-full mb-2 !important
 }

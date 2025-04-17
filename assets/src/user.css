@@ -1,0 +1,35 @@
+.controller-users{
+  #content{
+    >h2{
+      @apply flex flex-col items-center w-full text-xl my-6 font-medium;
+      .gravatar{
+        @apply w-24 h-24 mb-6;
+      }
+    }
+  }
+  .splitcontentleft, .splitcontentright{
+    @apply px-6;
+    >h3, h3>a, #groups >h3{
+      @apply uppercase text-gray-500 font-light;
+    }
+    >table,>ul{
+      @apply shadow my-4 bg-white border border-gray-200 rounded-lg  p-8 dark:bg-gray-800 dark:border-gray-700;
+    }
+  }
+  #activity{
+    @apply shadow my-4 bg-white border border-gray-200 rounded-lg  p-8 dark:bg-gray-800 dark:border-gray-700;
+    dl{
+      dt{
+        img.gravatar{
+          display: none;
+        }
+      }
+    }
+  }
+  #groups{
+    >table,>ul{
+      @apply shadow my-4 bg-white border border-gray-200 rounded-lg  p-8 dark:bg-gray-800 dark:border-gray-700;
+    }
+  }
+}
+

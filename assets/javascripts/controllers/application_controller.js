@@ -12,7 +12,9 @@
     }
 
     connect() {
+      console.log("dans application")
     }
+
 
     dismissOnClick(parent, element) {
       document.addEventListener('click', (evt) => {

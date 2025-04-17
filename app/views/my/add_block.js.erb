@@ -1,3 +1,0 @@
-$("#block-<%= escape_javascript @block %>").remove();
-$("#list-top").prepend("<%= escape_javascript render_blocks([@block], @user) %>");
-$("#block-select").replaceWith("<%= escape_javascript block_select_tag(@user) %>");

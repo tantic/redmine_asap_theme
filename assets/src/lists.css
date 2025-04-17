@@ -1,0 +1,103 @@
+.autoscroll{
+  @apply w-full;
+}
+
+table.list{
+  @apply w-full;
+  tr.group{
+    >td{
+      @apply  p-2;
+      span{
+        @apply inline-block align-middle;
+      }
+    }
+  }
+}
+
+table.list th, .table-list-header {
+  @apply bg-gray-100 p-2 align-middle
+  /* background-color:#EEEEEE; padding: 4px; white-space:nowrap; font-weight:bold; border-bottom: 2px solid #d0d7de;  */
+}
+
+table.list thead{
+  @apply text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400
+}
+
+table.list thead th a{
+  @apply flex items-center text-gray-700 text-xs
+}
+
+table.list thead th a.sort{
+  @apply bg-gray-200 rounded text-gray-800 font-bold
+}
+
+table.list tr.assigned-to-me{
+  >td.subject a, >td.id a, >td.tracker span{
+    @apply font-bold;
+  }
+}
+
+table.list td {
+  @apply  align-middle text-xs px-4 py-2 border border-gray-100 text-gray-900;
+}
+
+table.list .checkbox input{
+  height:1rem;
+}
+
+table.list td.subject a{
+  @apply text-gray-900 font-normal
+}
+
+table.list td.author, table.list td.assigned_to{
+  a.user.active{
+    span{
+      @apply py-0 px-1 bg-transparent shadow-none align-bottom border-0;
+    }
+  }
+}
+
+
+table.issues tr.issue td.id a{
+  @apply bg-gray-100 px-2 py-1 border-gray-600 text-gray-800
+}
+
+
+tr.idnt td.subject, tr.idnt td.name {
+  background: url(/arrow_right.png) no-repeat 2px 50%;
+}
+tr.idnt-1 td.subject, tr.idnt-1 td.name {padding-left: 32px; background-position: 16px 50%;}
+tr.idnt-2 td.subject, tr.idnt-2 td.name {padding-left: 40px; background-position: 24px 50%;}
+tr.idnt-3 td.subject, tr.idnt-3 td.name {padding-left: 56px; background-position: 40px 50%;}
+tr.idnt-4 td.subject, tr.idnt-4 td.name {padding-left: 72px; background-position: 56px 50%;}
+tr.idnt-5 td.subject, tr.idnt-5 td.name {padding-left: 88px; background-position: 72px 50%;}
+tr.idnt-6 td.subject, tr.idnt-6 td.name {padding-left: 104px; background-position: 88px 50%;}
+tr.idnt-7 td.subject, tr.idnt-7 td.name {padding-left: 120px; background-position: 104px 50%;}
+tr.idnt-8 td.subject, tr.idnt-8 td.name {padding-left: 136px; background-position: 120px 50%;}
+tr.idnt-9 td.subject, tr.idnt-9 td.name {padding-left: 152px; background-position: 136px 50%;}
+
+#projects-index{
+  .projects >  li.root {
+    @apply bg-white shadow border border-gray-50;
+  }
+}
+
+#sidebar{
+    ul.watchers{
+      li{
+        @apply flex items-center !important;
+        >img{
+          display: none;
+        }
+        .delete{
+          @apply ml-auto;
+        }
+      }
+    }
+}
+
+#users_for_watcher{
+  label{
+    @apply flex items-center;
+  }
+}

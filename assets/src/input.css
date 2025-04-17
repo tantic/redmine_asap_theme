@@ -1,41 +1,17 @@
+@import './legacy.css';
+@import './legacy-responsive.css';
+@import './layout.css';
+@import './components.css';
+@import './buttons.css';
+@import './forms.css';
+@import './lists.css';
+@import './issue.css';
+@import './news.css';
+@import './documents.css';
+@import './wiki.css';
+@import './project.css';
+@import './user.css';
 
-@import "./base.css";
-@import "./navigation.css";
-@import "./form.css";
-@import "./buttons.css";
-@import "./calendar.css";
-@import "./gantt.css";
-@import "./admin.css";
-@import "./icons.css";
-@import "./components.css";
-@import "./wiki.css";
-@import "./boards.css";
-@import "./projects.css";
-@import "./issues.css";
-
-
-@import 'tailwindcss/base';
-@import 'tailwindcss/components';
-@import 'tailwindcss/utilities';
-
-html{
-  height:100%;
-}
-
-
-.badge-status-open{
-  @apply rounded py-0.5 px-2 text-xs inline-block font-semibold leading-normal  bg-green-200 text-green-700;
-}
-
-.badge-status-closed{
-  @apply rounded py-0.5 px-2 text-xs inline-block font-semibold leading-normal  bg-gray-200 text-gray-700;
-}
-
-#attachment-thumbnail > a > img{
-  @apply w-12
-}
-
-#context-menu li.folder > ul
-{
-  left: 140px !important;
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

@@ -1,98 +1,138 @@
 <!DOCTYPE html>
-<html lang="<%= current_language %>">
+<html lang="<%= current_language %>" class="h-full">
 <head>
 <meta charset="utf-8" />
-<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 <title><%= html_title %></title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="<%= Redmine::Info.app_name %>" />
 <meta name="keywords" content="issue,bug,tracker" />
 <%= csrf_meta_tag %>
 <%= favicon %>
-<%#= stylesheet_link_tag 'jquery/jquery-ui-1.13.2', 'tribute-5.1.3',  'responsive', :media => 'all' %>
+<%= stylesheet_link_tag 'jquery/jquery-ui-1.13.2', 'tribute-5.1.3', :media => 'all' %>
 <%= stylesheet_link_tag 'rtl', :media => 'all' if l(:direction) == 'rtl' %>
-<%= stylesheet_link_tag "application.css", :plugin => 'redmine_asap_theme' %>
-<%= javascript_include_tag 'stimulus.umd.js', :plugin => 'redmine_asap_theme' %>
-<%= javascript_include_tag 'stimulus-notification.umd.js', :plugin => 'redmine_asap_theme' %>
-
-<%= javascript_include_tag 'application.js', :type => "module", :plugin => 'redmine_asap_theme' %>
-<%= javascript_heads %>
 <%= heads_for_theme %>
-<%= javascript_include_tag 'turbo.es2017-umd.js.js', :plugin => 'redmine_asap_theme' %>
 <%= heads_for_auto_complete(@project) %>
+
+<%= javascript_include_tag 'stimulus.umd.js', :plugin => 'redmine_asap_theme' %>
+<%= javascript_heads %>
+<%= javascript_include_tag 'application.js', :type => "module", :plugin => 'redmine_asap_theme' %>
+<%= javascript_include_tag 'controllers/application_controller.js', :type => "module", :plugin => 'redmine_asap_theme' %>
+<%= javascript_include_tag 'controllers/usermenu_controller.js', :type => "module", :plugin => 'redmine_asap_theme' %>
+<%= javascript_include_tag 'controllers/projectmenu_controller.js', :type => "module", :plugin => 'redmine_asap_theme' %>
+<%= javascript_include_tag 'controllers/navbar_controller.js', :type => "module", :plugin => 'redmine_asap_theme' %>
+<%= javascript_include_tag 'controllers/tabs_controller.js', :type => "module", :plugin => 'redmine_asap_theme' %>
+<%= javascript_include_tag 'controllers/projects_controller.js', :type => "module", :plugin => 'redmine_asap_theme' %>
+
+<% if Setting.plugin_redmine_asap_theme['redmine_asap_theme_turbo'] && Setting.plugin_redmine_asap_theme['redmine_asap_theme_turbo'] == 'true' %>
+  <%= javascript_include_tag 'turbo.es2017-esm.min.js', :type => "module", :plugin => 'redmine_asap_theme' %>
+  <%= javascript_include_tag 'application-turbo.js', :type => "module", :plugin => 'redmine_asap_theme' %>
+<% end %>
+
+
 <%= call_hook :view_layouts_base_html_head %>
 <!-- page specific tags -->
 <%= yield :header_tags -%>
+<%= stylesheet_link_tag "application.css", :plugin => 'redmine_asap_theme' %>
 </head>
-<body  data-controller="application" data-application-myaccount-value="<%= show_settings_path(User.current) %>" class="<%= body_css_classes %> dark:bg-slate-900 h-full flex">
+<body  data-controller="application" data-application-myaccount-value="<%= show_settings_path(User.current) %>" class="<%= body_css_classes %> dark:bg-slate-900 <%= controller_name == 'account' ? 'h-full':'' %>" data-text-formatting="<%= Setting.text_formatting %>">
+
   <% if controller_name == "account" %>
-      <section id="content" class="w-full h-full">
-        <%= render "layouts/flash_messages" %>
-        <%= yield %>
-        <%= call_hook :view_layouts_base_content %>
-        <div style="clear:both;"></div>
-      </section>
+    <section class="w-full h-full flex relative bg-gray-50">
+      <%= render "layouts/flash_messages" %>
+      <%= yield %>
+      <%= call_hook :view_layouts_base_content %>
+      <div style="clear:both;"></div>
+    </section>
   <% else %>
+
+    <%= call_hook :view_layouts_base_body_top %>
+    <div id="wrapper">
+
+    <div class="flyout-menu js-flyout-menu">
+
+        <% if User.current.logged? || !Setting.login_required? %>
+            <div class="flyout-menu__search">
+                <%= form_tag(search_path(id: @project), :method => :get ) do %>
+                <%= hidden_field_tag(controller.default_search_scope, 1, :id => nil) if controller.default_search_scope %>
+                <%= label_tag 'flyout-search', sprite_icon('search', l(:label_search), icon_only: true), :class => 'search-magnifier search-magnifier--flyout' %>
+                <%= text_field_tag 'q', @question, :id => 'flyout-search', :class => 'small js-search-input', :placeholder => l(:label_search) %>
+                <% end %>
+            </div>
+        <% end %>
+
+        <% if User.current.logged? %>
+            <div class="flyout-menu__avatar <% if !Setting.gravatar_enabled? %>flyout-menu__avatar--no-avatar<% end %>">
+                <% if Setting.gravatar_enabled? %>
+                    <%= link_to(avatar(User.current, :size => "80"), user_path(User.current)) %>
+                <% end %>
+                <%= link_to_user(User.current, :format => :username) %>
+            </div>
+        <% end %>
+
+        <% if display_main_menu?(@project) %>
+            <h3><%= l(:label_project) %></h3>
+            <span class="js-project-menu"></span>
+        <% end %>
+
+        <h3><%= l(:label_general) %></h3>
+        <span class="js-general-menu"></span>
+
+        <span class="js-sidebar flyout-menu__sidebar"></span>
+
+        <h3><%= l(:label_profile) %></h3>
+        <span class="js-profile-menu"></span>
+
+    </div>
+
     <% if User.current.logged? || !Setting.login_required? %>
       <%= render "layouts/navbar" %>
     <% end %>
 
-    <main class="w-full flex flex-col h-full  dark:bg-slate-900 dark:text-gray-400 ml-14">
-      <% if display_main_menu?(@project) %>
-      <%= render "layouts/projectbar" %>
-      <% end %>
-      <%= call_hook :view_layouts_base_body_top %>
-
-      <% if controller_name == "wiki" %>
-        <section id="content" class="w-full flex flex-col h-full bg-gray-50 dark:bg-slate-900 ">
-          <%= render "layouts/flash_messages" %>
-          <%= yield %>
-          <%= call_hook :view_layouts_base_content %>
-          <div style="clear:both;"></div>
-        </section>
-      <% elsif controller_name == "calendars" || controller_name == "welcome" %>
-        <section id="content" class="mb-auto w-full  h-full bg-gray-50 dark:bg-slate-900">
-          <%= render "layouts/flash_messages" %>
-          <%= yield %>
-          <%= call_hook :view_layouts_base_content %>
-          <div style="clear:both;"></div>
-        </section>
-      <% elsif controller_name == "admin" || controller_name == "users" || controller_name == "groups" || controller_name == "roles"|| controller_name == "trackers"|| controller_name == "issue_statuses"|| controller_name == "workflows"|| controller_name == "custom_fields"|| controller_name == "enumerations"|| controller_name == "settings"|| controller_name == "auth_sources"|| controller_name == "queries" %>
-        <div id="sidebar">
-          <%= yield :sidebar %>
-          <%= view_layouts_base_sidebar_hook_response %>
-        </div>
-        <section id="content" class="bg-gray-50 mb-auto w-full  h-full dark:bg-slate-900">
-          <%= render "layouts/flash_messages" %>
-
-          <%= yield %>
-          <%= call_hook :view_layouts_base_content %>
-          <div style="clear:both;"></div>
-        </section>
-      <% else %>
-        <div class="mt-14 h-full px-2 lg:px-16 bg-gray-50">
-          <div id="sidebar">
-            <%= yield :sidebar %>
-            <%= view_layouts_base_sidebar_hook_response %>
+    <% if display_main_menu?(@project) %>
+    <nav  class="flex flex-col bg-white h-14  w-full <%= (User.current.logged? || !Setting.login_required?) ? 'mt-14' : 'mt-0' %>">
+      <div id="main-menu" class="tabs">
+          <%= render_main_menu(@project) %>
+          <div class="tabs-buttons" style="display:none;">
+            <button class="tab-left" onclick="moveTabLeft(this); return false;"></button>
+            <button class="tab-right" onclick="moveTabRight(this); return false;"></button>
           </div>
-          <section id="content" class="bg-gray-50 flex-1 mb-auto w-full  h-full dark:bg-slate-900">
-            <%= render "layouts/flash_messages" %>
+        </div>
+    </nav>
+    <% end %>
+    <div id="main" class="<%= sidebar_content? ? 'collapsiblesidebar' : 'nosidebar' %> <%= display_main_menu?(@project) ? '' : 'mt-14' %>">
+      <%= javascript_tag "$('#main.collapsiblesidebar').collapsibleSidebar();" if sidebar_content? %>
+        <div id="sidebar">
+            <% if sidebar_content? %>
+              <div id="sidebar-switch-panel" style="visibility: hidden;">
+                <a id="sidebar-switch-button" class="" href="#">
+                  <%= sprite_icon("chevrons-right", size: 20) %></a>
+              </div>
+              <%= javascript_tag "$('#sidebar-switch-panel').css('visibility', 'visible');" %>
+            <% end %>
+            <div id="sidebar-wrapper">
+              <%= yield :sidebar %>
+              <%= view_layouts_base_sidebar_hook_response %>
+            </div>
+        </div>
 
+        <div id="content">
+            <%= render_flash_messages %>
             <%= yield %>
             <%= call_hook :view_layouts_base_content %>
             <div style="clear:both;"></div>
-          </section>
         </div>
-      <% end %>
-    </main>
+    </div>
+    <div id="footer">
+        Powered by <%= link_to Redmine::Info.app_name, Redmine::Info.url, :target => '_blank', :rel => 'noopener' %> &copy; 2006-2025 Jean-Philippe Lang
+    </div>
+
+    <div id="ajax-indicator" style="display:none;"><span><%= l(:label_loading) %></span></div>
+    <div id="ajax-modal" style="display:none;"></div>
+    <div data-application-target="app"></div>
+
+    </div>
+
+    <%= call_hook :view_layouts_base_body_bottom %>
   <% end %>
-
-  <div id="ajax-indicator" style="display:none;"><span><%= l(:label_loading) %></span></div>
-  <div id="ajax-modal" style="display:none;"></div>
-
-  <%= render "common/about" %>
-
-  <div data-application-target="app"></div>
-  <%= call_hook :view_layouts_base_body_bottom %>
 </body>
 </html>

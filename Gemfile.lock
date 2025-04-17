@@ -3,10 +3,11 @@ GEM
     letter_avatar (0.3.9)
 
 PLATFORMS
+  ruby
   x86_64-linux
 
 DEPENDENCIES
   letter_avatar
 
 BUNDLED WITH
-   2.4.7
+   2.6.7

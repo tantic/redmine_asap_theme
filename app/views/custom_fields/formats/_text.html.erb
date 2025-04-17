@@ -1,6 +1,0 @@
-<%= render :partial => 'custom_fields/formats/regexp', :locals => {:f => f, :custom_field => custom_field} %>
-<div class="mb-6"><%= f.check_box :text_formatting, {:label => :setting_text_formatting}, 'full', '' %></div>
-<% if @custom_field.class.name == "IssueCustomField" %>
-<div class="mb-6"><%= f.check_box :full_width_layout %></div>
-<% end %>
-<div class="mb-6"><%= f.text_area(:default_value, :rows => 5) %></div>

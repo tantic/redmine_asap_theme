@@ -6,8 +6,8 @@
     <% end %>
 
     <% if project.children.any? %>
-      <div data-action="click->sidebar#toggleSubprojects"
-           data-sidebar-target="toggleButton"
+      <div data-action="click->navbar#toggleSubprojects"
+           data-navbar-target="toggleButton"
            data-project-id="<%= project.id %>"
            class="flex cursor-pointer ml-auto p-2 rounded-full hover:bg-gray-100 text-gray-700 dark:text-gray-400 dark:hover:text-gray-300 dark:hover:bg-gray-700 hover:text-gray-800">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 text-gray-800 transition duration-75 dark:text-gray-400 hover:text-gray-900 dark:group-hover:text-white">
@@ -18,7 +18,7 @@
   </div>
 
   <% if project.children.any? %>
-    <div id="subprojects-<%= project.id %>" class="ml-4 border-l border-gray-50 mt bg-white z-50 hidden" data-sidebar-target="subprojects-<%= project.id %>">
+    <div id="subprojects-<%= project.id %>" class="flex flex-col ml-4 border-l-2 pl-2 border-gray-100 bg-white z-50 hidden" data-navbar-target="subprojects-<%= project.id %>">
       <%= render partial: 'projects_tree', locals: { projects: project.children } %>
     </div>
   <% end %>

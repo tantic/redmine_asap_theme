@@ -1,12 +1,13 @@
-<div class="flex flex-col">
-  <div class="flex flex-col">
-    <fieldset class="box tabular">
-      <legend><%= l(:redmine_asap_colors_logo_title) %></legend>
-      <div class="flex">
-        <div class="w-1/6 flex items-center"><%= label_tag :redmine_asap_colors_logo_bg, l(:redmine_asap_colors_logo_bg) %></div>
-        <%= text_field_tag "settings[redmine_asap_colors_logo_bg]", @settings[:redmine_asap_colors_logo_bg] %>
-      </div>
-
-    </fieldset>
+<fieldset class="box">
+  <legend><%= l(:redmine_asap_colors_logo_title) %></legend>
+  <div class="tabular settings">
+    <p>
+      <%= label_tag :redmine_asap_colors_logo_bg, l(:redmine_asap_colors_logo_bg) %>
+      <%= text_field_tag "settings[redmine_asap_colors_logo_bg]", @settings[:redmine_asap_colors_logo_bg] %>
+    </p>
+    <p>
+      <%= label_tag :redmine_asap_colors_logo_bg_hover, l(:redmine_asap_colors_logo_bg_hover) %>
+      <%= text_field_tag "settings[redmine_asap_colors_logo_bg_hover]", @settings[:redmine_asap_colors_logo_bg_hover] %>
+    </p>
   </div>
-</div>
+</fieldset>

@@ -1,10 +1,17 @@
-# English strings go here for Rails i18n
+# French strings go here for Rails i18n
 fr:
   # my_label: "My label"
   label_redmine_asap_theme: Thème
   no_project: Vous n'avez pas encore de projets...
   my_projects: Mes projets
   label_filters: Filtres
+  label_avatar: "Avatar"
+  message_avatar_uploaded: "Avatar enregistré"
+  button_change_avatar: "Modifier l'avatar"
+  are_you_sure_delete_avatar: "Êtes-vous certain de vouloir supprimer votre avatar?"
+  avatar_deleted: "Avatar supprimé"
+  unable_to_delete_avatar: "Une erreur est survenue lors de la suppression de l'avatar."
+  label_subprojects: Sous-projets
   label_about: A propos
   label_settings_menu: Paramètres
   label_settings_general: Général
@@ -38,6 +45,9 @@ fr:
   label_issue_others: Autres
   redmine_asap_colors_logo_title: Logo
   redmine_asap_colors_logo_bg: Couleur de fond
+  redmine_asap_colors_logo_bg_hover: Couleurs de fond au passage de la souris
+  label_redmine_asap_theme_general: Général
+  redmine_asap_theme_turbo: Activer turbo pour une expérience plus rapide (beta)
   label_description_empty: Aucune description
   see_more_projects: Voir plus de projets
   display_settings: Paramètres d'affichage
@@ -52,6 +62,8 @@ fr:
       quicklinks: Accès rapides
       my_projects: Mes projets
       my_issues: Mes demandes
+    projects:
+      title: Projets
     recent_projects:
       title: Projets récents
       none: Aucun projet visité récemment.

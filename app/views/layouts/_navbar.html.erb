@@ -1,150 +1,79 @@
-<nav data-controller="sidebar" data-sidebar-url-value="/autocomplete/search/" class="flex flex-col bg-slate-800 dark:bg-slate-800 h-screen fixed top-0 w-14 z-50 left-0 shadow dark:border-gray-600">
-  <div class="flex flex-col w-full items-center h-14">
+<nav id="main-navbar" data-controller="navbar" class="bg-white h-14 dark:bg-gray-800 fixed w-full z-50 top-0 left-0 shadow dark:border-gray-600">
+  <div class="flex mx-auto h-full">
+
     <%
       bg_color = Setting.plugin_redmine_asap_theme['redmine_asap_colors_logo_bg']
       hover_bg_color = Setting.plugin_redmine_asap_theme['redmine_asap_colors_logo_bg_hover']
     %>
-    <%= link_to home_path(), :title => Setting.app_title, :class=>"flex w-full h-14 text-blue-50 dark:bg-blue-900 cursor-pointer p-2 flex items-center justify-center", style: "background-color:#{bg_color}" do %>
-      <%= image_tag 'redmine_white.svg', :plugin => 'redmine_asap_theme', class: 'w-8 h-8' %>
+    <%= link_to home_path(), :title => Setting.app_title, :class=>"flex h-14 text-blue-50 dark:bg-blue-900 cursor-pointer p-2 flex items-center justify-center", style: "background-color:#{bg_color}", :onmouseover=>"this.style.backgroundColor='#{hover_bg_color}'", :onmouseout=>"this.style.backgroundColor='#{bg_color}'" do %>
+      <%= image_tag 'redmine_white.svg', :plugin => 'redmine_asap_theme', class: 'w-10 h-10 max-w-none' %>
     <% end %>
-  </div>
-  <div class="flex flex-col overflow-y-auto">
-    <div class="flex flex-col items-center overflow-auto">
-
-      <div class="flex flex-col h-auto w-full items-center justify-center">
-        <% jump_box = Redmine::ProjectJumpBox.new(User.current) %>
-        <% bookmarked_projects = jump_box.bookmarked_projects %>
-        <% if bookmarked_projects.present? %>
-          <% bookmarked_projects.each do |project|%>
-            <div class="my-1.5">
-              <%= link_to(project, :title => project.name,:class => 'bg-white dark:bg-gray-800 dark:text-gray-100 uppercase flex items-center text-gray-800 font-light text-sm rounded shadow hover:bg-gray-50 transition ease-in-out delay-75 hover:-translate-y-1 hover:scale-105 duration-100') do %>
-                  <%= letter_avatar_tag(project.name, 300, class: 'w-9 h-9 rounded-sm') %>
-              <% end %>
-            </div>
-          <% end %>
-        <% end %>
-      </div>
+    <div id="project-breadcrumb" class="sm:flex hidden items-center">
+      <%= project_parent_breadcrumb %>
     </div>
-    <div class="cursor-pointer p-1  flex items-center justify-center">
-      <div data-action="click->sidebar#toggleProjectMenu" title="<%= l(:see_more_projects) %>" class="cursor-pointer p-2 rounded-full hover:bg-slate-900 bg-slate-900 text-gray-200 dark:text-gray-400 dark:hover:text-gray-300 dark:hover:bg-gray-700 hover:text-gray-800">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-gray-400 transition duration-75 dark:text-gray-400 hover:text-gray-500 dark:group-hover:text-white">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM12.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM18.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
-        </svg>
-      </div>
-    </div>
-    <div id="project-menu-subprojects" class="absolute top-0 left-14 p-8 shadow border border-gray-50 mt bg-white z-50 w-96 h-full overflow-auto hidden" data-sidebar-target="projectMenu">
-      <input type="text" class="form-input block w-full rounded-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-         placeholder="Rechercher un projet..."
-         data-action="input->sidebar#search"
-         data-sidebar-target="searchInput" />
 
-      <div class="mt-4" data-sidebar-target="searchResults">
-      </div>
-      <div data-sidebar-target="projectsList">
-        <!-- Les résultats de la recherche s'afficheront ici -->
-        <%
-          my_projects = projects_for_jump_box(User.current)
-          recents = jump_box.recently_used_projects
-        %>
-        <h2 class="text-sm font-light text-gray-500 flex items-center mt-8 mb-6 border-b border-gray-200 pb-4">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 mr-2">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-          </svg>
-          <%= l(:label_optgroup_recents) %>
-        </h2>
-        <%= render partial: 'application/projects_tree', locals: { projects: recents, my_projects: recents } %>
+    <%= render "layouts/project-menu" %>
 
-        <h2 class="text-sm font-light text-gray-500 flex items-center mt-8 mb-6 border-b border-gray-200 pb-4">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 mr-2">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12.75V12A2.25 2.25 0 0 1 4.5 9.75h15A2.25 2.25 0 0 1 21.75 12v.75m-8.69-6.44-2.12-2.12a1.5 1.5 0 0 0-1.061-.44H4.5A2.25 2.25 0 0 0 2.25 6v12a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9a2.25 2.25 0 0 0-2.25-2.25h-5.379a1.5 1.5 0 0 1-1.06-.44Z" />
-          </svg>
-
-          <%= l(:label_my_projects) %>
-        </h2>
-
-        <%= render partial: 'application/projects_tree', locals: { projects: my_projects, my_projects: my_projects } %>
-
-        <div class="my-8 flex justify-end">
-          <%= link_to l(:label_project_all), projects_path() %>
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-  <div class="mt-auto md:relative bottom-0 bg-slate-800  flex flex-col shadow-xl md:shadow-none  dark:bg-slate-800  w-full md:w-auto justify-center md:justify-end">
-    <div data-controller="usermenu" class="flex flex-col text-sm relative items-center justify-center">
-      <div class="cursor-pointer p-1 h-full flex items-center justify-center">
-        <%= link_to my_path, class: "cursor-pointer p-2 rounded-full hover:bg-slate-900 bg-slate-900 text-gray-200 dark:text-gray-400 dark:hover:text-gray-300 dark:hover:bg-gray-700 hover:text-gray-800" do %>
-          <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor"  class="w-5 h-5 text-gray-400 transition duration-75 dark:text-gray-400 hover:text-gray-500 dark:group-hover:text-white" viewBox="0 0 16 16">
-            <path d="M4 16s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1zm4-5.95a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5"/>
-            <path d="M2 1a2 2 0 0 0-2 2v9.5A1.5 1.5 0 0 0 1.5 14h.653a5.4 5.4 0 0 1 1.066-2H1V3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v9h-2.219c.554.654.89 1.373 1.066 2h.653a1.5 1.5 0 0 0 1.5-1.5V3a2 2 0 0 0-2-2z"/>
-          </svg>
-        <% end %>
-      </div>
-      <div id="quick-search" class="hidden" data-usermenu-target="search">
-        <%= form_tag({:controller => 'search', :action => 'index', :id => @project}, :method => :get ) do %>
+    <div class="ml-auto flex">
+      <div data-controller="usermenu" class="flex text-sm relative items-center justify-center">
+        <div id="quick-search" class="hidden" data-usermenu-target="search" class="flex items-center p-2">
+          <%= form_tag({:controller => 'search', :action => 'index', :id => @project}, :method => :get ) do %>
           <%= hidden_field_tag 'scope', default_search_project_scope, :id => nil %>
           <%= hidden_field_tag(controller.default_search_scope, 1, :id => nil) if controller.default_search_scope %>
-          <%= text_field_tag 'q', @question,
-                    :size => 20,
-                    :class => 'text-sm bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-3 py-1.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500',
-                    :accesskey => accesskey(:quick_search),
-                    :placeholder => l(:label_search),
-                    :data => {:auto_complete => true, :autofocus => true, :usermenu_target => "searchinput"} %>
-        <% end %>
-      </div>
-      <div class="cursor-pointer p-1 h-full flex items-center justify-center">
-        <div data-action="click->usermenu#search" class="cursor-pointer p-2 rounded-full hover:bg-slate-900 bg-slate-900 text-gray-200 dark:text-gray-400 dark:hover:text-gray-300 dark:hover:bg-gray-700 hover:text-gray-800">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-gray-400 transition duration-75 dark:text-gray-400 hover:text-gray-500 dark:group-hover:text-white">
+          <%= text_field_tag 'q', @question, :size => 20, :class => 'small', :accesskey => accesskey(:quick_search),:placeholder => l(:label_search),
+                              :data => {
+                                  :auto_complete => true, :autofocus => true, :usermenu_target => "searchinput"
+                              } %>
+          <% end %>
+        </div>
+        <div data-action="click->usermenu#search" class="cursor-pointer ml-1 p-2 rounded-full hover:bg-gray-100 text-gray-700 dark:text-gray-400 dark:hover:text-gray-300 dark:hover:bg-gray-700 hover:text-gray-800">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-gray-800 transition duration-75 dark:text-gray-400 hover:text-gray-900 dark:group-hover:text-white">
             <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
           </svg>
         </div>
-      </div>
-      <% if User.current.admin?  %>
-        <div class="cursor-pointer p-1 h-full flex items-center justify-center">
-          <div data-action="click->usermenu#toggleAdmin" class="cursor-pointer p-2 rounded-full hover:bg-slate-900 bg-slate-900 text-gray-200 dark:text-gray-400 dark:hover:text-gray-300 dark:hover:bg-gray-700 hover:text-gray-900">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-gray-400 transition duration-75 dark:text-gray-400 hover:text-gray-500 dark:group-hover:text-white">
+        <% if User.current.admin?  %>
+          <div data-action="click->usermenu#toggleAdmin" class="cursor-pointer p-2 rounded-full hover:bg-gray-100 text-gray-700 dark:text-gray-400 dark:hover:text-gray-300 dark:hover:bg-gray-700 hover:text-gray-800">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-gray-800 transition duration-75 dark:text-gray-400 hover:text-gray-900 dark:group-hover:text-white">
               <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12a7.5 7.5 0 0 0 15 0m-15 0a7.5 7.5 0 1 1 15 0m-15 0H3m16.5 0H21m-1.5 0H12m-8.457 3.077 1.41-.513m14.095-5.13 1.41-.513M5.106 17.785l1.15-.964m11.49-9.642 1.149-.964M7.501 19.795l.75-1.3m7.5-12.99.75-1.3m-6.063 16.658.26-1.477m2.605-14.772.26-1.477m0 17.726-.26-1.477M10.698 4.614l-.26-1.477M16.5 19.794l-.75-1.299M7.5 4.205 12 12m6.894 5.785-1.149-.964M6.256 7.178l-1.15-.964m15.352 8.864-1.41-.513M4.954 9.435l-1.41-.514M12.002 12l-3.75 6.495" />
             </svg>
           </div>
-          <div id="admin-menu" class="absolute left-14  overflow-y-auto shadow-xl rounded-md border border-gray-50 mt bg-white z-50 w-60 bottom-10 hidden " data-usermenu-target="adminsubmenu">
+          <div id="admin-menu" class="absolute right-10 shadow rounded-md border border-gray-50 mt bg-white z-50 w-60 top-14 hidden" data-usermenu-target="adminsubmenu">
             <%= render_menu :admin_menu %>
           </div>
+        <% end %>
+        <div id="navbar-gravatar" data-action="click->usermenu#toggle" class="cursor-pointer p-2 h-full flex items-center justify-center">
+          <%= avatar(User.current, :size => "32") %>
+          <!-- <div class="relative inline-flex items-center justify-center w-10 h-10 overflow-hidden bg-gray-100  hover:bg-gray-200 rounded-full dark:bg-gray-600">
+              <span class="font-medium text-gray-600 dark:text-gray-300">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
+                </svg>
+              </span>
+          </div> -->
         </div>
-      <% end %>
-      <div data-action="click->usermenu#toggle" class="cursor-pointer p-1 h-full flex items-center justify-center">
-        <div class="cursor-pointer p-2 rounded-full hover:bg-slate-900 bg-slate-900 text-gray-200 dark:text-gray-400 dark:hover:text-gray-300 dark:hover:bg-gray-700 hover:text-gray-900">
-          <span class="">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
-            </svg>
-          </span>
-        </div>
-      </div>
-      <div class="absolute left-14 bottom-1 shadow-xl rounded-md border border-gray-50 mt bg-white z-50 w-60 hidden" data-usermenu-target="usersubmenu">
-        <div class="px-4 py-8 font-normal">
-          <%= User.current %>
-        </div>
-        <div class="border-t border-gray-50">
-          <%= link_to user_path(User.current), :class => "flex items-center text-gray-900 hover:bg-gray-50 hover:border-r-2 hover:border-blue-800 hover:pr-3.5 px-4 py-2 text-sm" do %>
-              <%= l(:label_profile) %>
-          <% end %>
-          <div data-action="click->application#showSettings click->usermenu#hide" class="cursor-pointer flex items-center text-gray-900 hover:bg-gray-50 hover:border-r-2 hover:border-blue-800 hover:pr-3.5 px-4 py-2 text-sm">
+        <div class="absolute right-0 shadow rounded-md border border-gray-50 mt bg-white z-50 w-60 top-14 hidden" data-usermenu-target="usersubmenu">
+          <div class="p-4 font-normal">
+            <%= User.current %>
+          </div>
+          <div class="border-t border-gray-50">
+            <%= link_to user_path(User.current), :class => "flex text-xs items-center font-light text-gray-900 bg-white rounded-none hover:bg-gray-50 hover:border-l-2 hover:border-blue-800 hover:pl-3.5 px-4 py-2" do %>
+                <%= l(:label_profile) %>
+            <% end %>
+            <div data-action="click->application#showSettings click->usermenu#hide" class="cursor-pointer text-xs flex items-center font-light text-gray-900 bg-white rounded-none hover:bg-gray-50 hover:border-l-2 hover:border-blue-800 hover:pl-3.5 px-4 py-2 ">
               <%= l(:label_settings_menu) %>
-          </div>
-          <hr class="border-t border-l-0 border-r-0 border-b-0 border-solid border-gray-100" />
-          <div data-action="click->application#showModal click->usermenu#hide" class="cursor-pointer flex items-center text-gray-900 hover:bg-gray-50 hover:border-r-2 hover:border-blue-800 hover:pr-3.5 px-4 py-2 text-sm">
+            </div>
+            <hr class="border-t border-l-0 border-r-0 border-b-0 border-solid border-gray-100 my-0.5" />
+            <div data-action="click->application#showModal click->usermenu#hide" class="cursor-pointer text-xs flex items-center font-light text-gray-900 bg-white rounded-none hover:bg-gray-50 hover:border-l-2 hover:border-blue-800 hover:pl-3.5 px-4 py-2">
               <%= l(:label_about) %>
+            </div>
+            <hr class="border-t border-l-0 border-r-0 border-b-0 border-solid border-gray-100 my-0.5" />
+            <%= link_to "/logout", method: :post, :class => "flex text-xs items-center font-light text-gray-900 bg-white rounded-none hover:bg-gray-50 hover:border-l-2 hover:border-blue-800 hover:pl-3.5 px-4 py-2" do %>
+                <%= l(:label_logout) %>
+            <% end %>
           </div>
-          <hr class="border-t border-l-0 border-r-0 border-b-0 border-solid border-gray-100" />
-          <%= button_to signout_path, method: :post, data: {turbo: false}, :class => "flex w-full items-center text-gray-900 hover:bg-gray-50 hover:border-r-2 hover:border-blue-800 hover:pr-3.5 px-4 py-2 text-sm" do %>
-              <%= l(:label_logout) %>
-          <% end %>
         </div>
       </div>
     </div>
+
   </div>
 </nav>
-
-
