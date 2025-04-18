@@ -2412,9 +2412,7 @@ input#time_entry_comments {
   width: 90%;
 }
 
-input#months {
-  width: 46px;
-}
+/* input#months { width: 46px; } */
 
 .jstBlock .jstTabs, .jstBlock .wiki-preview {
   width: 99%;
@@ -7040,6 +7038,23 @@ table.progress-10 td, table.progress-20 td, table.progress-30 td, table.progress
   }
 }
 
+#query_form_content{
+  #filters-table{
+    .filter {
+      display: flex;
+    }
+    .filter {
+      align-items: center;
+    }
+    .values span {
+      display: flex;
+    }
+    .values span {
+      align-items: center;
+    }
+  }
+}
+
 .contextual {
   display: flex;
   align-items: center;
@@ -7492,7 +7507,6 @@ select {
   border-color: transparent !important;
   --tw-bg-opacity: 1 !important;
   background-color: rgb(243 244 246 / var(--tw-bg-opacity)) !important;
-  padding: 0.5rem !important;
   font-size: 0.75rem !important;
   line-height: 1rem !important;
 }
@@ -7643,6 +7657,11 @@ textarea:focus {
   --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color) !important;
   --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(0px + var(--tw-ring-offset-width)) var(--tw-ring-color) !important;
   box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000) !important;
+}
+
+input#months {
+  font-size: 0.75rem;
+  line-height: 1rem;
 }
 
 .autoscroll {

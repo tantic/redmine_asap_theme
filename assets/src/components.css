@@ -497,3 +497,14 @@ table.progress-10 td, table.progress-20 td, table.progress-30 td, table.progress
     }
   }
 }
+
+#query_form_content{
+  #filters-table{
+    .filter{
+      @apply flex items-center;
+    }
+    .values span{
+      @apply flex items-center;
+    }
+  }
+}
