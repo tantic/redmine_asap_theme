@@ -10,3 +10,20 @@ This version start from the original theme of Redmine so all pages works (normal
 If you want to test it quickly with docker, you can use the repo https://github.com/tantic/redmine_asap_docker.git
 
 
+## Features
+
+* New general design
+* New navbar for navigation and new menu for project
+* New home page
+* Local avatar or letter for users (all credits to A.Chaika and contributors of the next versions)
+* Letter avatar for projects
+* Account is now preferences and is displayed in a modal
+* Logo's color is customizable
+* Login page is customizable with picture
+* Issue statuses can be customized (background color and color)
+
+## Screenshots
+
+![Login page](doc/screenshots/login.png)
+
+![Preferences](doc/screenshots/preferences.png)
