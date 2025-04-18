@@ -8635,7 +8635,7 @@ tr.idnt-9 td.subject, tr.idnt-9 td.name {
 .controller-projects{
   #content{
     >h2{
-      display: none;
+      /* display: none; */
     }
   }
   .news{

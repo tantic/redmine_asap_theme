@@ -1,7 +1,7 @@
 .controller-projects{
   #content{
     >h2{
-      display: none;
+      /* display: none; */
     }
   }
 
