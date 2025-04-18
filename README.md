@@ -9,6 +9,9 @@ This version start from the original theme of Redmine so all pages works (normal
 
 If you want to test it quickly with docker, you can use the repo https://github.com/tantic/redmine_asap_docker.git
 
+## Documentation
+
+https://tantic.github.io/redmine_asap_docs/docs/theme/intro
 
 ## Features
 
@@ -27,6 +30,7 @@ If you want to test it quickly with docker, you can use the repo https://github.
 ![Login page](doc/screenshots/login.png)
 
 ![Preferences](doc/screenshots/preferences.png)
+
 
 ## Installation
 
