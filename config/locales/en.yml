@@ -1,49 +1,89 @@
 # English strings go here for Rails i18n
 en:
   # my_label: "My label"
-  label_redmine_asap_theme: Thème
-  no_project: Vous n'avez pas encore de projets...
-  my_projects: Mes projets
-  label_filters: Filtres
-  label_about: A propos
-  label_settings_menu: Paramètres
-  label_settings_general: Général
-  label_settings_preferences: Préférences
+  label_redmine_asap_theme: Theme
+  no_project: No projects yet...
+  my_projects: My projects
+  label_filters: Filters
+  label_avatar: Avatar
+  message_avatar_uploaded: Saved Avatar
+  button_change_avatar: Edit avatar
+  are_you_sure_delete_avatar: Are you sure you want to remove your avatar?
+  avatar_deleted: Avatar deleted
+  unable_to_delete_avatar: An error occured during the deletion of the avatar.
+  label_subprojects: Subs-projects
+  label_about: About
+  label_settings_menu: Settings
+  label_settings_general: General
+  label_settings_preferences: Preferences
   label_settings_notifications: Notifications
-  label_settings_appearance: Apparence
+  label_settings_appearance: Appearance
   label_redmine_configuration: Configuration
-  label_redmine_environment: Environnement
-  label_redmine_versioned_name: Version Redmine
+  label_redmine_environment: Environment
+  label_redmine_versioned_name: Redmine version
   label_redmine_ruby: Ruby
-  label_redmine_ruby_platform: Plateforme Ruby
+  label_redmine_ruby_platform: Ruby platform
   label_redmine_rails: Rails
-  label_redmine_environment: Environnement
-  label_redmine_database_adapter: Connecteur BDD
+  label_redmine_environment: Environment
+  label_redmine_database_adapter: Database connector
   label_redmine_mailer_queue: Mailer queue
   label_redmine_mailer_delivery: Mailer delivery
   label_redmine_plugins: Plugins
-  label_redmine_plugins_none: Aucun plugin installé
-  label_redmine_statistics: Statistiques
-  label_redmine_projects_number: Projets
-  label_redmine_users: Utilisateurs
-  label_redmine_groups: Groupes
-  label_redmine_issues: Demandes
-  label_redmine_asap_theme_login: Page d'authentification
-  label_redmine_asap_theme_colors: Couleurs
-  label_display: Affichage
-  label_issue_general: Général
+  label_redmine_plugins_none: No plugin installed
+  label_redmine_statistics: Statistics
+  label_redmine_projects_number: Projects
+  label_redmine_users: Users
+  label_redmine_groups: Groups
+  label_redmine_issues: Issues
+  label_redmine_asap_theme_login: Authentication page
+  label_redmine_asap_theme_colors: Colors
+  label_display: Display
+  label_issue_general: General
   label_issue_relations: Relations
-  label_issue_progress: Avancement
-  label_issue_watchers: Observateurs
-  label_issue_others: Autres
+  label_issue_progress: Progress
+  label_issue_watchers: Watchers
+  label_issue_others: Others
   redmine_asap_colors_logo_title: Logo
-  redmine_asap_colors_logo_bg: Couleur de fond
-  label_description_empty: Aucune description
-  see_more_projects: Voir plus de projets
-  display_settings: Paramètres d'affichage
-  show_reports: Afficher les rapports
-  label_close_panel: Fermer
+  redmine_asap_colors_logo_bg: Background color
+  redmine_asap_colors_logo_bg_hover: Background color on mouse over
+  label_redmine_asap_theme_general: General
+  redmine_asap_theme_turbo: Enable turbo for a faster experience (beta)
+  label_description_empty: No description
+  see_more_projects: See more projects
+  display_settings: Displays settings
+  show_reports: Show reports
+  label_close_panel: Close
   flash_message:
     notice: Information
-    error: Erreur
-    alert: Attention
+    error: Error
+    alert: Alert
+  welcome:
+    tabs:
+      quicklinks: Quick links
+      my_projects: My projects
+      my_issues: My issues
+    projects:
+      title: Projects
+    recent_projects:
+      title: Recents projects
+      none: No recent project.
+      none_description: This list will be updated with your navigation in the projects. The number of projects displayed is configured in the "My account"
+    favorite_projects:
+      title: Favorite projects
+      none: No favorite projects.
+      none_description: To add some, go on a project and then "Add to my favorites"
+    news:
+      title: News
+      all: See all
+      none: No news
+    shortcuts:
+      title: Shortcuts
+      new_issue: New issue
+      documentation: Documentation
+      help: Help
+    my_watched_issues:
+      title: My watched issues
+    my_assigned_issues:
+      title: My assigned issues
+    my_projects:
+      title: My projects
