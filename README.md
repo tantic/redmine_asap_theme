@@ -29,6 +29,8 @@ https://tantic.github.io/redmine_asap_docs/docs/theme/intro
 
 ![Login page](doc/screenshots/login.png)
 
+![Issues page](doc/screenshots/issues.png)
+
 ![Preferences](doc/screenshots/preferences.png)
 
 
