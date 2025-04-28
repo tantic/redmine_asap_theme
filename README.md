@@ -33,7 +33,6 @@ https://tantic.github.io/redmine_asap_docs/docs/theme/intro
 
 ![Preferences](doc/screenshots/preferences.png)
 
-
 ## Installation
 
 This plugin has been tested with Redmine 6.0.x
