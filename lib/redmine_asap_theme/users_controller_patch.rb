@@ -6,6 +6,7 @@ module RedmineAsapTheme
 
 		def self.included(base) # :nodoc:
 			base.class_eval do
+        skip_before_action :require_admin, only: [:get_avatar, :save_avatar], raise: false
 				helper :attachments
 				include AttachmentsHelper
 			end

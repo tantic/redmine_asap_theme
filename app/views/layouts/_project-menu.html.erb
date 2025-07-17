@@ -35,7 +35,6 @@
           <h3 class="uppercase my-4 text-gray-500 text-xs px-4 mx-4!"><%= l(:label_subprojects) %></h3>
           <% @project.children.visible(User.current).each do |project| %>
             <%= link_to_project(project, { avatar_size: 6 }, class:"font-medium text-gray-900 flex items-center truncate text-xs bg-white dark:bg-gray-700 rounded-t px-4 py-1 hover:bg-gray-50 hover:text-gray-900 hover:font-semibold ") %>
-            <%#= link_to project.name, project_path(project), class: "w-full hover:bg-gray-100 hover:text-gray-900 hover:font-medium px-4 py-2" %>
           <% end %>
         <% end %>
       </div>

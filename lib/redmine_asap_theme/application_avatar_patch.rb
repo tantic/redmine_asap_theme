@@ -14,7 +14,8 @@ module RedmineAsapTheme
                 av = user.attachments.find_by_description 'avatar'
                 options[:size] = "32" unless options[:size]
                 if av then
-                    image_url = url_for :only_path => true, :controller => 'account', :action => 'get_avatar', :id => user
+                    # image_url = url_for :only_path => true, :controller => 'account', :action => 'get_avatar', :id => user
+                    image_url = url_for(only_path: true, controller: 'account', action: 'get_avatar', id: user, format: 'png')
                     options[:size] = "32" unless options[:size]
                     return "<img class=\"gravatar #{options[:class]}\" width=\"#{options[:size]}\" height=\"#{options[:size]}\" src=\"#{image_url}\" title=\"#{options[:title]}\"/>".html_safe
                 else

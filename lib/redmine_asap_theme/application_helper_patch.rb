@@ -228,7 +228,7 @@ module RedmineAsapTheme
         s << link_to(text, project_path(project, :jump => jump),
                      :title => project.name,
                      :style => "padding-left:#{padding}px;",
-                     :class => (project == selected ? 'selected flex items-center hover:px-1 hover:bg-gray-50 px-2 ' : 'flex items-center hover:px-1 hover:bg-gray-50 px-2'))
+                     :class => (project == selected ? 'selected flex items-center hover:bg-gray-50 px-2 ' : 'flex items-center hover:bg-gray-50 px-2'))
       end
       [
         [bookmarked, :label_optgroup_bookmarks, true],

@@ -4363,7 +4363,7 @@ span.drdn .drdn-content {
   }
   &:hover {
     @media (hover: hover) {
-      padding-left: calc(var(--spacing) * 0.5);
+      padding-left: calc(var(--spacing) * 1);
     }
   }
 }
@@ -6248,6 +6248,52 @@ tr.idnt-9 td.subject, tr.idnt-9 td.name {
     }
   }
 }
+#my-page.dashboard {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: calc(var(--spacing) * 4);
+  #list-top, #list-bottom {
+    grid-column: span 2 / span 2;
+    width: 100%;
+  }
+  .block-receiver {
+    padding-top: calc(var(--spacing) * 0) !important;
+    .mypage-box {
+      margin-top: calc(var(--spacing) * 0);
+      margin-bottom: calc(var(--spacing) * 4);
+      border-radius: var(--radius-lg);
+      border-style: var(--tw-border-style);
+      border-width: 1px;
+      border-color: var(--color-gray-200);
+      background-color: var(--color-white);
+      padding: calc(var(--spacing) * 8);
+      --tw-shadow: 0 1px 3px 0 var(--tw-shadow-color, rgb(0 0 0 / 0.1)), 0 1px 2px -1px var(--tw-shadow-color, rgb(0 0 0 / 0.1));
+      box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+      @media (prefers-color-scheme: dark) {
+        border-color: var(--color-gray-700);
+      }
+      @media (prefers-color-scheme: dark) {
+        background-color: var(--color-gray-800);
+      }
+    }
+    .mypage-box h3 {
+      margin-bottom: calc(var(--spacing) * 6);
+      width: 100%;
+    }
+    .mypage-box h3 .icon-svg {
+      stroke: currentcolor;
+      color: var(--color-gray-800);
+    }
+    .mypage-box h3 .icon-label {
+      font-size: var(--text-xs);
+      line-height: var(--tw-leading, var(--text-xs--line-height));
+      --tw-font-weight: var(--font-weight-medium);
+      font-weight: var(--font-weight-medium);
+      color: var(--color-gray-800);
+      text-transform: uppercase;
+    }
+  }
+}
 @layer theme, base, components, utilities;
 @layer theme {
   :root, :host {
@@ -7250,13 +7296,6 @@ tr.idnt-9 td.subject, tr.idnt-9 td.name {
     &:hover {
       @media (hover: hover) {
         background-color: var(--color-gray-200);
-      }
-    }
-  }
-  .hover\:px-1 {
-    &:hover {
-      @media (hover: hover) {
-        padding-inline: calc(var(--spacing) * 1);
       }
     }
   }

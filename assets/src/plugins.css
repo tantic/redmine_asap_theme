@@ -1,0 +1,25 @@
+/* Additionals */
+
+#my-page.dashboard{
+  @apply grid grid-cols-2 gap-4;
+  #list-top, #list-bottom{
+    @apply col-span-2 w-full;
+  }
+  .block-receiver{
+    @apply pt-0!;
+    .mypage-box{
+      @apply shadow mt-0 mb-4 bg-white border border-gray-200 rounded-lg  p-8 dark:bg-gray-800 dark:border-gray-700;
+    }
+    .mypage-box h3{
+      @apply mb-6 w-full;
+    }
+
+    .mypage-box h3 .icon-svg{
+      @apply text-gray-800 stroke-current;
+    }
+
+    .mypage-box h3 .icon-label{
+      @apply text-xs uppercase text-gray-800 font-medium;
+    }
+  }
+}

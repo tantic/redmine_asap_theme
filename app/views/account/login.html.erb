@@ -31,9 +31,10 @@
       <% end %>
 
       <input type="submit" name="login" value="<%=l(:button_login)%>" tabindex="5" id="login-submit" class="w-full cursor-pointer flex text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded text-sm px-3 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" />
+      <%= call_hook :view_account_login_bottom %>
     <% end %>
 
-    <%= call_hook :view_account_login_bottom %>
+
   </div>
 
 <% if params[:username].present? %>

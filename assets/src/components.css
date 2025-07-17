@@ -124,7 +124,7 @@ span.drdn .drdn-content{
 } */
 
 #project-jump .drdn-items>a {
-  @apply flex items-center text-gray-900 hover:bg-gray-50 border-0 hover:border-l-2 hover:border-blue-800 hover:pl-0.5 px-1 py-2  ;
+  @apply flex items-center text-gray-900 hover:bg-gray-50 border-0 hover:border-l-2 hover:border-blue-800 px-1  hover:pl-1 py-2  ;
 }
 
 #project-jump .drdn-items strong{
