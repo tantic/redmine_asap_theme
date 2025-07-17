@@ -26,14 +26,35 @@ a.icon-checked, a.bookmark{
   @apply bg-gray-200 hover:bg-gray-300 focus:ring-gray-300 focus:ring-4 dark:bg-gray-600 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800
 }
 
-a.icon-edit:not(#context-menu a.icon-edit) {
-  @apply rounded-full p-2 hover:bg-blue-700 hover:text-blue-100;
-  .icon-label{
-    display: none;
-  }
-  &:hover svg{
-    stroke: oklch(0.932 0.032 255.585);
-  }
+a.icon-edit {
+  @apply rounded-full p-2;
+}
+a.icon-edit:hover {
+  background: none !important;
+  color: inherit !important;
+}
+a.icon-edit:hover svg {
+  stroke: inherit !important;
+}
+a.icon-edit .icon-label {
+  display: none;
+}
+
+/* Exceptions : Pas d'effet dans .drdn-items ou dans #context-menu */
+.drdn-items a.icon-edit:hover,
+#context-menu a.icon-edit:hover {
+  /* Remets le style que tu veux pour ces contextes, si besoin */
+  color:#2A5685 !important;
+  background-color:#eef5fd !important;
+  border-radius:3px !important;
+}
+.drdn-items a.icon-edit .icon-label,
+#context-menu a.icon-edit .icon-label{
+  display: initial;
+}
+
+.drdn-items a.icon-edit .icon-svg{
+  stroke: #2A5685 !important;
 }
 
 a.icon-reload:not(#context-menu a.icon-reload){
@@ -95,7 +116,7 @@ a.icon .icon-svg{
   @apply stroke-current
 }
 
-.contextual a.icon-add{
+.contextual > a.icon-add{
   @apply text-white no-underline bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded text-xs px-2.5 py-1.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800
 }
 

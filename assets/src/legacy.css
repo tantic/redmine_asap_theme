@@ -273,7 +273,7 @@ a#toggle-completed-versions {color:#999;}
 .contextual .drdn-items {padding:2px; min-width: 160px;}
 .contextual .drdn-items>a {display: flex; padding: 5px 8px;}
 .contextual .drdn-items>a.icon:not(:has(svg)) {padding-left: 24px; background-position-x: 4px;}
-.contextual .drdn-items>a:hover {color:#2A5685; border:1px solid #628db6; background-color:#eef5fd; border-radius:3px;}
+.contextual .drdn-items>a:hover {color:#2A5685; /*border:1px solid #628db6;*/ background-color:#eef5fd; border-radius:3px;}
 
 #project-jump.drdn {width:200px;display:inline-block;}
 /* #project-jump .drdn-trigger {

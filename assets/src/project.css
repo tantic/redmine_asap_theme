@@ -61,7 +61,7 @@
 
   &.action-show{
     .contextual{
-      display: none;
+      /* display: none; */
     }
   }
 }

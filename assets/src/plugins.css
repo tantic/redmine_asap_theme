@@ -23,3 +23,31 @@
     }
   }
 }
+
+#sidebar{
+  h3.dashboards{
+    @apply px-4 py-2;
+  }
+  ul.dashboards{
+    li{
+      @apply mb-1 w-full flex;
+      a{
+        @apply text-xs hover:bg-gray-100 rounded w-full px-4 py-2;
+        &.selected{
+          @apply bg-gray-100 text-blue-800  px-4 py-2;
+        }
+      }
+      .icon .icon-svg{
+        @apply fill-blue-800
+      }
+    }
+  }
+  .active-dashboards{
+    @apply my-4 bg-gray-100 rounded px-4 py-2;
+    ul{
+      li{
+        @apply text-xs
+      }
+    }
+  }
+}

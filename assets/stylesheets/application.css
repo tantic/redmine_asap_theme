@@ -435,7 +435,6 @@ a#toggle-completed-versions {
 }
 .contextual .drdn-items>a:hover {
   color: #2A5685;
-  border: 1px solid #628db6;
   background-color: #eef5fd;
   border-radius: 3px;
 }
@@ -5080,25 +5079,30 @@ a.icon-checked, a.bookmark {
     }
   }
 }
-a.icon-edit:not(#context-menu a.icon-edit) {
+a.icon-edit {
   border-radius: calc(infinity * 1px);
   padding: calc(var(--spacing) * 2);
-  &:hover {
-    @media (hover: hover) {
-      background-color: var(--color-blue-700);
-    }
-  }
-  &:hover {
-    @media (hover: hover) {
-      color: var(--color-blue-100);
-    }
-  }
-  .icon-label {
-    display: none;
-  }
-  &:hover svg {
-    stroke: oklch(0.932 0.032 255.585);
-  }
+}
+a.icon-edit:hover {
+  background: none !important;
+  color: inherit !important;
+}
+a.icon-edit:hover svg {
+  stroke: inherit !important;
+}
+a.icon-edit .icon-label {
+  display: none;
+}
+.drdn-items a.icon-edit:hover, #context-menu a.icon-edit:hover {
+  color: #2A5685 !important;
+  background-color: #eef5fd !important;
+  border-radius: 3px !important;
+}
+.drdn-items a.icon-edit .icon-label, #context-menu a.icon-edit .icon-label {
+  display: initial;
+}
+.drdn-items a.icon-edit .icon-svg {
+  stroke: #2A5685 !important;
 }
 a.icon-reload:not(#context-menu a.icon-reload) {
   border-radius: calc(infinity * 1px);
@@ -5203,7 +5207,7 @@ a.icon-del:not(#context-menu a.icon-del):not(.drdn-items a.icon-del) {
 a.icon .icon-svg {
   stroke: currentcolor;
 }
-.contextual a.icon-add {
+.contextual > a.icon-add {
   border-radius: 0.25rem;
   background-color: var(--color-blue-700);
   padding-inline: calc(var(--spacing) * 2.5);
@@ -6142,11 +6146,6 @@ tr.idnt-9 td.subject, tr.idnt-9 td.name {
       }
     }
   }
-  &.action-show {
-    .contextual {
-      display: none;
-    }
-  }
 }
 .controller-activities {
   #activity {
@@ -6291,6 +6290,54 @@ tr.idnt-9 td.subject, tr.idnt-9 td.name {
       font-weight: var(--font-weight-medium);
       color: var(--color-gray-800);
       text-transform: uppercase;
+    }
+  }
+}
+#sidebar {
+  h3.dashboards {
+    padding-inline: calc(var(--spacing) * 4);
+    padding-block: calc(var(--spacing) * 2);
+  }
+  ul.dashboards {
+    li {
+      margin-bottom: calc(var(--spacing) * 1);
+      display: flex;
+      width: 100%;
+      a {
+        width: 100%;
+        border-radius: 0.25rem;
+        padding-inline: calc(var(--spacing) * 4);
+        padding-block: calc(var(--spacing) * 2);
+        font-size: var(--text-xs);
+        line-height: var(--tw-leading, var(--text-xs--line-height));
+        &:hover {
+          @media (hover: hover) {
+            background-color: var(--color-gray-100);
+          }
+        }
+        &.selected {
+          background-color: var(--color-gray-100);
+          padding-inline: calc(var(--spacing) * 4);
+          padding-block: calc(var(--spacing) * 2);
+          color: var(--color-blue-800);
+        }
+      }
+      .icon .icon-svg {
+        fill: var(--color-blue-800);
+      }
+    }
+  }
+  .active-dashboards {
+    margin-block: calc(var(--spacing) * 4);
+    border-radius: 0.25rem;
+    background-color: var(--color-gray-100);
+    padding-inline: calc(var(--spacing) * 4);
+    padding-block: calc(var(--spacing) * 2);
+    ul {
+      li {
+        font-size: var(--text-xs);
+        line-height: var(--tw-leading, var(--text-xs--line-height));
+      }
     }
   }
 }
