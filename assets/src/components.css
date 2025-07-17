@@ -374,6 +374,10 @@ a.user.user-mention {
 
 /* CONTEXTUAL MENU */
 
+#context-menu{
+  @apply z-100!;
+}
+
 #context-menu li.folder > ul{
   left:144px  ;
 }

@@ -1,0 +1,28 @@
+<h3><%=l(:label_member_plural)%></h3>
+<div data-controller="members">
+  <div
+   data-members-expanded-value="false"
+    class="flex flex-col overflow-y-auto transition-all duration-300"
+    data-members-target="list"
+    style="height: 16rem;"
+  >
+    <% @project.assignable_users.each do |user| %>
+      <span class="assignable-user" data-id="<%= user.id %>">
+        <%= avatar(user.is_a?(User) ? user : '<gravatar>', size: "14", style: agile_user_color(user, color_base: @query.respond_to?(:color_base) && @query.color_base)).to_s.html_safe + " " + link_to_user(user) %>
+        <br>
+      </span>
+    <% end %>
+  </div>
+
+  <!-- Lien pour agrandir/réduire la liste -->
+  <a
+    href="#"
+    data-action="click->members#toggle"
+    data-members-target="toggleLink"
+    data-members-all-label="<%= l(:label_members_all) %>"
+    data-members-reduce-label="<%= l(:label_members_reduce) %>"
+    class="text-xs text-blue-600 text-right hover:underline mt-2 cursor-pointer block"
+  >
+    <%=l(:label_members_all)%>
+  </a>
+</div>

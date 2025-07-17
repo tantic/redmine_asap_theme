@@ -51,3 +51,79 @@
     }
   }
 }
+
+/* Redmineup agile plugin */
+
+.controller-agile_boards{
+  span.assignable-user, span.user{
+    >.gravatar, >.user-avatar{
+      display:none;
+    }
+  }
+
+  #sidebar-wrapper{
+    span.assignable-user{
+      /* float:left; */
+    }
+    h3{
+      clear:both;
+      @apply mt-4;
+    }
+  }
+
+  #query_form{
+    @apply w-full flex flex-col;
+    h2{
+      @apply flex items-center bg-gray-50 rounded p-2 font-medium;
+      span{
+        @apply ml-3 h-full;
+        a.icon-add{
+          @apply hover:bg-gray-100 rounded-full p-2;
+        }
+      }
+    }
+  }
+  .query-totals {
+    margin-top: -3.3em;
+    padding-right: 2em;
+  }
+
+  .container-fixed{
+    @apply z-50 relative mt-4;
+    .issue-card{
+      @apply shadow bg-white p-4 border-0;
+      .fields{
+        @apply flex flex-col;
+        > * {
+          @apply my-1
+        }
+      }
+    }
+  }
+
+
+}
+html.agile-board-fullscreen div.agile-board{
+  @apply z-50
+}
+
+.controller-agile_versions{
+  span.assignable-user, span.user{
+    >.gravatar, >.user-avatar{
+      display:none;
+    }
+  }
+
+  .planning-board{
+    @apply relative mt-4;
+    .issue-card{
+      @apply shadow bg-white p-4 border-0;
+      .fields{
+        @apply flex flex-col;
+        > * {
+          @apply my-1
+        }
+      }
+    }
+  }
+}
