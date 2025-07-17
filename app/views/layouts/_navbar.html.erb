@@ -8,7 +8,7 @@
     <%= link_to home_path(), :title => Setting.app_title, :class=>"flex h-14 text-blue-50 dark:bg-blue-900 cursor-pointer p-2 flex items-center justify-center", style: "background-color:#{bg_color}", :onmouseover=>"this.style.backgroundColor='#{hover_bg_color}'", :onmouseout=>"this.style.backgroundColor='#{bg_color}'" do %>
       <%= image_tag 'redmine_white.svg', :plugin => 'redmine_asap_theme', class: 'w-10 h-10 max-w-none' %>
     <% end %>
-    <div id="project-breadcrumb" class="sm:flex hidden items-center">
+    <div id="project-breadcrumb" class="hidden sm:flex items-center">
       <%= project_parent_breadcrumb %>
     </div>
 

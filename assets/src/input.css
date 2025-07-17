@@ -12,6 +12,16 @@
 @import './project.css';
 @import './user.css';
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+@plugin "@tailwindcss/forms";
+@plugin "@tailwindcss/aspect-ratio";
+@plugin "@tailwindcss/typography";
+
+@source  "../../app/views/**/*.html.erb";
+@source  "../../lib/redmine_asap_theme/*.rb";
+
+@theme {
+  --font-sans: "Inter", sans-serif;
+  --font-inter: Inter, sans-serif;
+}

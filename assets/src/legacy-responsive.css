@@ -103,7 +103,7 @@
 
   /* Hide project name on mobile (project name is still visible in select menu) */
   #header h1 {
-    display: none !important;
+    display: none  ;
   }
 
   /* reset #header a color for mobile toggle button */
@@ -191,7 +191,7 @@
   #project-jump .drdn-content .autocomplete {
     height:40px;
     font-size:1.25rem;
-    padding-left: 28px !important;
+    padding-left: 28px  ;
   }
   #project-jump .drdn-content a {
     padding:8px;
@@ -567,7 +567,7 @@
   }
 
   #admin-menu a.icon:not(:has(svg)) {
-    padding-left: 20px !important;
+    padding-left: 20px  ;
   }
 
   /*----------------------------------------*\
@@ -677,17 +677,17 @@
    * [4] maintain width due to [3]
    */
   .gantt_subjects_column {
-    width: 60% !important; /* [1] */
+    width: 60%  ; /* [1] */
   }
 
   .gantt_subjects_container {
-    width: 100% !important;
+    width: 100%  ;
     overflow: hidden;
   }
 
   .gantt_subjects_column .gantt_hdr {
-    width: 100% !important;
-    right: 0 !important; /* [2] */
+    width: 100%  ;
+    right: 0  ; /* [2] */
     border-right: solid 1px #c0c0c0;
   }
 
@@ -728,7 +728,7 @@
 
   /* new issue form */
   #all_attributes p:first-child {
-    float: none !important;
+    float: none  ;
   }
 
   #all_attributes #issue_tracker_id {

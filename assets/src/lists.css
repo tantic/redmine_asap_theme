@@ -50,11 +50,12 @@ table.list td.subject a{
 }
 
 table.list td.author, table.list td.assigned_to{
-  a.user.active{
+  @apply text-left;
+  /* a.user.active{
     span{
       @apply py-0 px-1 bg-transparent shadow-none align-bottom border-0;
     }
-  }
+  } */
 }
 
 
@@ -85,7 +86,7 @@ tr.idnt-9 td.subject, tr.idnt-9 td.name {padding-left: 152px; background-positio
 #sidebar{
     ul.watchers{
       li{
-        @apply flex items-center !important;
+        @apply flex items-center  ;
         >img{
           display: none;
         }

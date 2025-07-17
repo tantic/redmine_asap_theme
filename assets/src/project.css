@@ -28,7 +28,7 @@
 
   .members{
     >p{
-      @apply border-b border-gray-100 pb-6 mb-6;
+      @apply border-b border-gray-100 pb-4 mb-4;
       >span.label{
         @apply font-bold flex w-full pb-2;
       }

@@ -19,3 +19,10 @@
 #sidebar a{
   /* @apply text-gray-900 */
 }
+
+.splitcontent {
+  @apply grid grid-cols-1 sm:grid-cols-2 gap-4
+}
+/* .splitcontentleft {flex: 1; margin-right: 5px;}
+.splitcontentright {flex: 1; margin-left: 5px;}
+.splitcontenttop {flex: 2; flex-basis: 100%;} */

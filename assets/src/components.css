@@ -50,7 +50,7 @@ body{
 }
 
 #main-menu .menu-children li a{
-  @apply flex w-full items-center font-light rounded-none text-gray-900 hover:bg-gray-50 border-0 hover:border-l-2 hover:border-blue-800 hover:pl-1.5 px-2 py-2  !important;
+  @apply flex w-full items-center font-light rounded-none text-gray-900 hover:bg-gray-50 border-0 hover:border-b-0 hover:border-l-2 hover:border-blue-800 hover:pl-1.5 px-2 py-2   ;
 }
 
 #main-menu li:hover ul.menu-children, #main-menu li ul.menu-children.visible{
@@ -93,7 +93,7 @@ span.drdn .drdn-content{
 .drdn-content .quick-search {
   @apply px-6;
   input {
-    @apply mt-1 px-2 py-4 block rounded-md bg-gray-100 border-transparent focus:border-gray-200 focus:bg-white focus:ring-0 !important;
+    @apply mt-1 px-2 py-4 block rounded-md bg-gray-100 border-transparent focus:border-gray-200 focus:bg-white focus:ring-0  ;
   }
 }
 
@@ -124,7 +124,7 @@ span.drdn .drdn-content{
 } */
 
 #project-jump .drdn-items>a {
-  @apply flex items-center text-gray-900 hover:bg-gray-50 border-0 hover:border-l-2 hover:border-blue-800 hover:pl-0.5 px-1 py-2 !important;
+  @apply flex items-center text-gray-900 hover:bg-gray-50 border-0 hover:border-l-2 hover:border-blue-800 hover:pl-0.5 px-1 py-2  ;
 }
 
 #project-jump .drdn-items strong{
@@ -169,7 +169,7 @@ span.drdn .drdn-content{
       @apply hover:bg-blue-900;
       div{
         span{
-          @apply text-blue-100 !important;
+          @apply text-blue-100  ;
         }
       }
     }
@@ -194,13 +194,19 @@ span.drdn .drdn-content{
 }
 
 .tabular p{
-  @apply flex items-center my-2;
+  /* @apply flex items-center my-2; */
+  padding: 3px 0 3px 0;
   padding-left: 180px;
   /* margin: 0;
   padding: 3px 0 3px 0;
   padding-left: 180px;
   min-height: 2em;
   clear:left; */
+  .block{
+    >*{
+      @apply mr-2
+    }
+  }
 }
 
 .tabular label{
@@ -237,7 +243,7 @@ span.drdn .drdn-content{
 #query_form_with_buttons > .buttons{
   @apply flex items-center w-full;
   select{
-    @apply w-auto mx-2 !important;
+    @apply w-auto mx-2  ;
   }
 }
 
@@ -362,20 +368,20 @@ a.user.user-mention {
 } */
 
 .jstElements{
-  vertical-align: middle !important;
+  vertical-align: middle  ;
 }
 
 
 /* CONTEXTUAL MENU */
 
 #context-menu li.folder > ul{
-  left:144px !important;
+  left:144px  ;
 }
 
 
 .context-menu-selection{
   a{
-    @apply text-gray-100 !important;
+    @apply text-gray-100  ;
   }
 }
 
@@ -438,37 +444,37 @@ a.user.user-mention {
 }
 
 
-.context-menu-selection { background-color:#bae6fd !important; color:#0c4a6e !important; }
-.context-menu-selection a, .context-menu-selection .tracker span, .context-menu-selection a:hover { color:#0c4a6e !important; }
-.context-menu-selection:hover { background-color:#bae6fd !important; color:#0c4a6e  !important; }
+.context-menu-selection { background-color:#bae6fd  ; color:#0c4a6e  ; }
+.context-menu-selection a, .context-menu-selection .tracker span, .context-menu-selection a:hover { color:#0c4a6e  ; }
+.context-menu-selection:hover { background-color:#bae6fd  ; color:#0c4a6e   ; }
 
 table.progress td{
   background: #eee none repeat scroll 0%;
   &.closed {
     background: #22c55e none repeat scroll 0%;
-    @apply rounded-l-full border-0 !important;
+    @apply rounded-l-full border-0  ;
   }
   &.todo {
-    @apply rounded-r-full border-0 !important;
+    @apply rounded-r-full border-0  ;
   }
   &.done{
-    @apply bg-green-200 border-0 !important;
+    @apply bg-green-200 border-0  ;
   }
 }
 
 table.progress-100 td, table.progress-0 td{
-  @apply rounded-full border-0 !important;
+  @apply rounded-full border-0  ;
   &.closed {
     background: #22c55e none repeat scroll 0%;
   }
   &.done{
-    @apply bg-green-200 rounded-r-none border-0 !important;
+    @apply bg-green-200 rounded-r-none border-0  ;
   }
 }
 
 table.progress-0 tr:has(td:nth-child(2)){
   td.todo{
-    @apply rounded-l-none !important;
+    @apply rounded-l-none  ;
   }
 }
 
@@ -476,10 +482,10 @@ table.progress-10 td, table.progress-20 td, table.progress-30 td, table.progress
   background: #eee none repeat scroll 0%;
   &.closed {
     background: #22c55e none repeat scroll 0%;
-    @apply rounded-l-full border-0 !important;
+    @apply rounded-l-full border-0  ;
   }
   &.todo {
-    @apply rounded-r-full border-0 !important;
+    @apply rounded-r-full border-0  ;
   }
 }
 
@@ -492,7 +498,7 @@ table.progress-10 td, table.progress-20 td, table.progress-30 td, table.progress
     label{
       @apply flex items-center space-x-2;
       .gravatar{
-        @apply mr-2 !important;
+        @apply mr-2  ;
       }
     }
   }
@@ -507,4 +513,12 @@ table.progress-10 td, table.progress-20 td, table.progress-30 td, table.progress
       @apply flex items-center;
     }
   }
+}
+
+hr{
+  @apply h-px my-2 bg-gray-200 border-0 dark:bg-gray-700;
+}
+
+#search-results{
+  @apply shadow my-4 bg-white border border-gray-200 rounded-lg  p-8 dark:bg-gray-800 dark:border-gray-700;
 }

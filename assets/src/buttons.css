@@ -27,7 +27,7 @@ a.icon-checked, a.bookmark{
 }
 
 a.icon-edit:not(#context-menu a.icon-edit) {
-  @apply rounded-full p-2 hover:bg-blue-700 hover:text-blue-100 !important;
+  @apply rounded-full p-2 hover:bg-blue-700 hover:text-blue-100;
   .icon-label{
     display: none;
   }
@@ -37,14 +37,14 @@ a.icon-edit:not(#context-menu a.icon-edit) {
 }
 
 a.icon-reload:not(#context-menu a.icon-reload){
-  @apply rounded-full p-2 hover:bg-gray-100 hover:text-gray-700 !important;
+  @apply rounded-full p-2 hover:bg-gray-100 hover:text-gray-700;
   .icon-label{
     display: none;
   }
 }
 
 a.icon-fav-off:not(#context-menu a.icon-fav-off){
-  @apply rounded-full p-2 hover:bg-yellow-400 hover:text-yellow-100 !important;
+  @apply rounded-full p-2 hover:bg-yellow-400 hover:text-yellow-100;
   .icon-label{
     display: none;
   }
@@ -54,7 +54,7 @@ a.icon-fav-off:not(#context-menu a.icon-fav-off){
 }
 
 a.icon-copy:not(#context-menu a.icon-copy){
-  @apply rounded-full p-2 hover:bg-gray-200 hover:text-gray-800 !important;
+  @apply rounded-full p-2 hover:bg-gray-200 hover:text-gray-800  ;
   .icon-label{
     display: none;
   }
@@ -64,7 +64,7 @@ a.icon-copy:not(#context-menu a.icon-copy){
 }
 
 a.icon-fav:not(#context-menu a.icon-fav){
-  @apply rounded-full p-2 hover:bg-yellow-400 hover:text-yellow-700 !important;
+  @apply rounded-full p-2 hover:bg-yellow-400 hover:text-yellow-700  ;
   .icon-label{
     display: none;
   }
@@ -74,10 +74,10 @@ a.icon-fav:not(#context-menu a.icon-fav){
     }
   } */
   svg{
-    stroke: oklch(0.795 0.184 86.047) !important;
+    stroke: oklch(0.795 0.184 86.047)  ;
   }
   &:hover svg{
-    stroke: oklch(0.973 0.071 103.193) !important;
+    stroke: oklch(0.973 0.071 103.193)  ;
   }
 }
 
@@ -108,55 +108,55 @@ a.icon-only{
 }
 
 .button-small{
-  @apply px-3 py-1.5 text-xs h-auto font-medium text-center text-white bg-blue-700 rounded hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 !important;
+  @apply px-3 py-1.5 text-xs h-auto font-medium text-center text-white bg-blue-700 rounded hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800  ;
 }
 
 
 input[type=submit] {
-  @apply text-white no-underline bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded text-xs px-2.5 py-1.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 !important;
+  @apply text-white no-underline bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded text-xs px-2.5 py-1.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800  ;
 }
 
 
 /* Buttons
 -------------------------------------------------------- */
 .jstb_strong {
-  background-image: url(/jstoolbar/bold.svg) !important;
+  background-image: url(/jstoolbar/bold.svg)  ;
 }
 .jstb_em {
-  background-image: url(/jstoolbar/italic.svg) !important;
+  background-image: url(/jstoolbar/italic.svg)  ;
 }
 .jstb_ins {
-  background-image: url(/jstoolbar/underline.svg) !important;
+  background-image: url(/jstoolbar/underline.svg)  ;
 }
 .jstb_del {
-  background-image: url(/jstoolbar/strikethrough.svg) !important;
+  background-image: url(/jstoolbar/strikethrough.svg)  ;
 }
 .jstb_code {
-  background-image: url(/jstoolbar/letter-c.svg) !important;
+  background-image: url(/jstoolbar/letter-c.svg)  ;
 }
 .jstb_h1 {
-  background-image: url(/jstoolbar/h1.svg) !important;
+  background-image: url(/jstoolbar/h1.svg)  ;
 }
 .jstb_h2 {
-  background-image: url(/jstoolbar/h2.svg) !important;
+  background-image: url(/jstoolbar/h2.svg)  ;
 }
 .jstb_h3 {
-  background-image: url(/jstoolbar/h3.svg) !important;
+  background-image: url(/jstoolbar/h3.svg)  ;
 }
 .jstb_ul {
-  background-image: url(/jstoolbar/list.svg) !important;
+  background-image: url(/jstoolbar/list.svg)  ;
 }
 .jstb_ol {
-  background-image: url(/jstoolbar/list-numbers.svg) !important;
+  background-image: url(/jstoolbar/list-numbers.svg)  ;
 }
 .jstb_tl {
-  background-image: url(/jstoolbar/list-check.svg) !important;
+  background-image: url(/jstoolbar/list-check.svg)  ;
 }
 .jstb_bq {
-  background-image: url(/jstoolbar/indent-increase.svg) !important;
+  background-image: url(/jstoolbar/indent-increase.svg)  ;
 }
 .jstb_unbq {
-  background-image: url(/jstoolbar/indent-decrease.svg) !important;
+  background-image: url(/jstoolbar/indent-decrease.svg)  ;
 }
 .jstb_pre::before {
   content: "pre";
@@ -165,17 +165,17 @@ input[type=submit] {
   font-weight: 700
 }
 .jstb_precode {
-  background-image: url(/jstoolbar/code.svg) !important;
+  background-image: url(/jstoolbar/code.svg)  ;
 }
 .jstb_link {
-  background-image: url(/jstoolbar/wiki_link.svg) !important;
+  background-image: url(/jstoolbar/wiki_link.svg)  ;
 }
 .jstb_img {
-  background-image: url(/jstoolbar/image.svg) !important;
+  background-image: url(/jstoolbar/image.svg)  ;
 }
 .jstb_table {
-  background-image: url(/jstoolbar/table.svg) !important;
+  background-image: url(/jstoolbar/table.svg)  ;
 }
 .jstb_help {
-  background-image: url(/jstoolbar/help.svg) !important;
+  background-image: url(/jstoolbar/help.svg)  ;
 }

@@ -166,7 +166,7 @@ module RedmineAsapTheme
       when User
         username = principal.name(options[:format])
         username = "@#{username}" if options[:mention]
-        name = "<span style='display:inline-flex; align-items:center; gap:4px;' class='bg-white text-xs dark:bg-gray-700 shadow border border-gray-100 hover:bg-gray-50 rounded px-2.5 py-1 text-gray-900 hover:text-blue-800'>#{avatar_with_local(principal, size: '18')} #{username}</span>".html_safe
+        name = "<span style='display:inline-flex; align-items:center; gap:4px;' class='bg-white text-xs dark:bg-gray-700 border border-gray-100 hover:bg-gray-50 rounded px-2.5 py-1 text-gray-900 hover:text-blue-800'>#{avatar_with_local(principal, size: '18')} #{username}</span>".html_safe
 
         css_classes = ''
         if principal.active? || (User.current.admin? && principal.logged?)
@@ -176,7 +176,7 @@ module RedmineAsapTheme
       when Group
         name = principal.to_s
         url = group_url(principal, :only_path => only_path)
-        css_classes = principal.css_classes
+        css_classes = 'bg-white flex items-center justify-left text-xs dark:bg-gray-700 border border-gray-100 hover:bg-gray-50 rounded px-2.5 py-1 text-gray-900 hover:text-blue-800'
       else
         name = principal.to_s
       end
@@ -224,7 +224,7 @@ module RedmineAsapTheme
       build_project_link = lambda do |project, level = 0|
         padding = level * 16
 
-        text = letter_avatar_tag(project.name, 300, class: 'w-6 h-6 mx-2 rounded-sm') + content_tag('span', project.name, :class => 'uppercase font-normal text-xs line-clamp-2')
+        text = letter_avatar_tag(project.name, 300, class: 'w-6 h-6 mr-2 rounded-sm') + content_tag('span', project.name, :class => 'uppercase font-normal text-xs line-clamp-2')
         s << link_to(text, project_path(project, :jump => jump),
                      :title => project.name,
                      :style => "padding-left:#{padding}px;",
