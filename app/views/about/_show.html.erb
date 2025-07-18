@@ -1,0 +1,30 @@
+<div data-application-target="modal" id="default-modal" tabindex="-1" aria-hidden="true" class="flex bg-gray-700 bg-opacity-50 overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center w-full md:inset-0 h-screen max-h-full">
+  <div data-application-target="modalBody" class="relative w-full max-w-xl top-32 h-2/5 overflow-auto">
+
+    <div class="relative bg-white h-full rounded-lg shadow dark:bg-gray-700 w-full flex flex-col">
+
+      <div data-action="click->application#hide" class="ml-auto text-right cursor-pointer p-2 rounded-full hover:bg-gray-50">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+        </svg>
+      </div>
+
+
+      <div class="flex flex-col">
+        <div class="mb-8">
+          <%= image_tag "Redmine_logo_v1.png", :plugin => 'redmine_asap_theme' %>
+        </div>
+        <div class="flex px-8 py-2">
+          <label class="font-medium mr-4"><%= l(:label_version) %></label>
+          <%= Redmine::Info.versioned_name %>
+        </div>
+
+        <div class="flex px-8 py-2">
+          Powered by &nbsp;<%= link_to Redmine::Info.app_name, Redmine::Info.url, :target => '_blank', :rel => 'noopener' %>&nbsp; &copy; 2006-2025 Jean-Philippe Lang
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</div>

@@ -4,7 +4,7 @@
   application.register("usermenu", class extends Stimulus.Controller {
 
     static get targets() {
-      return [ "usersubmenu", "search", "searchinput", "adminsubmenu" ]
+      return [ "usersubmenu", "search", "searchinput", "adminsubmenu", "tools" ]
     }
 
     connect() {
@@ -19,6 +19,11 @@
     toggleAdmin(event){
       this.adminsubmenuTarget.classList.toggle('hidden');
       this.dismissOnClick(this.adminsubmenuTarget);
+    }
+
+    toggleTools(event){
+      this.toolsTarget.classList.toggle('hidden');
+      this.dismissOnClick(this.toolsTarget);
     }
 
     dismissOnClick(element) {

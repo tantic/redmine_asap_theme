@@ -112,8 +112,8 @@ a.icon-del:not(#context-menu a.icon-del):not(.drdn-items a.icon-del) {
   }
 }
 
-a.icon .icon-svg{
-  @apply stroke-current
+a.icon .icon-svg, div.icon .icon-svg{
+  @apply stroke-current!
 }
 
 .contextual > a.icon-add{

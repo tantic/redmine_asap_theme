@@ -47,6 +47,7 @@ fr:
   redmine_asap_colors_logo_bg: Couleur de fond
   redmine_asap_colors_logo_bg_hover: Couleurs de fond au passage de la souris
   label_redmine_asap_theme_general: Général
+  label_official_site: Site officiel
   redmine_asap_theme_turbo: Activer turbo pour une expérience plus rapide (beta)
   label_description_empty: Aucune description
   see_more_projects: Voir plus de projets

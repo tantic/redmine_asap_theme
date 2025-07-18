@@ -10,6 +10,14 @@ Redmine::Plugin.register :redmine_asap_theme do
 
   settings :default => {'empty' => true}, :partial => 'settings/redmine_asap_theme/settings'
   delete_menu_item :project_menu, :settings
+
+  menu :tools_menu,
+        :label_my_page,
+        { :controller => 'my', :action => 'page' },
+        :caption => :label_my_page,
+        plugin: 'redmine_asap_theme',
+        html: { class: 'icon' },
+        icon: 'my-page'
 end
 
 

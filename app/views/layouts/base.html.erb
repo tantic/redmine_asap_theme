@@ -35,7 +35,7 @@
 <%= yield :header_tags -%>
 <%= stylesheet_link_tag "application.css", :plugin => 'redmine_asap_theme' %>
 </head>
-<body  data-controller="application" data-application-myaccount-value="<%= show_settings_path(User.current) %>" class="<%= body_css_classes %> dark:bg-slate-900 <%= controller_name == 'account' ? 'h-full':'' %>" data-text-formatting="<%= Setting.text_formatting %>">
+<body  data-controller="application" data-application-myaccount-value="<%= show_settings_path(User.current) %>" data-application-about-value="<%= show_about_path() %>" class="<%= body_css_classes %> dark:bg-slate-900 <%= controller_name == 'account' ? 'h-full':'' %>" data-text-formatting="<%= Setting.text_formatting %>">
 
   <% if controller_name == "account" %>
     <section class="w-full h-full flex relative bg-gray-50">

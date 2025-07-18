@@ -16,60 +16,79 @@
 
     <div class="ml-auto flex">
       <div data-controller="usermenu" class="flex text-sm relative items-center justify-center">
-        <div id="quick-search" class="hidden" data-usermenu-target="search" class="flex items-center p-2">
-          <%= form_tag({:controller => 'search', :action => 'index', :id => @project}, :method => :get ) do %>
-          <%= hidden_field_tag 'scope', default_search_project_scope, :id => nil %>
-          <%= hidden_field_tag(controller.default_search_scope, 1, :id => nil) if controller.default_search_scope %>
-          <%= text_field_tag 'q', @question, :size => 20, :class => 'small', :accesskey => accesskey(:quick_search),:placeholder => l(:label_search),
-                              :data => {
-                                  :auto_complete => true, :autofocus => true, :usermenu_target => "searchinput"
-                              } %>
-          <% end %>
-        </div>
-        <div data-action="click->usermenu#search" class="cursor-pointer ml-1 p-2 rounded-full hover:bg-gray-100 text-gray-700 dark:text-gray-400 dark:hover:text-gray-300 dark:hover:bg-gray-700 hover:text-gray-800">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-gray-800 transition duration-75 dark:text-gray-400 hover:text-gray-900 dark:group-hover:text-white">
-            <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
-          </svg>
-        </div>
-        <% if User.current.admin?  %>
-          <div data-action="click->usermenu#toggleAdmin" class="cursor-pointer p-2 rounded-full hover:bg-gray-100 text-gray-700 dark:text-gray-400 dark:hover:text-gray-300 dark:hover:bg-gray-700 hover:text-gray-800">
+
+
+        <div class="h-full relative flex items-center">
+          <div id="quick-search" class="hidden" data-usermenu-target="search" class="flex items-center p-2">
+            <%= form_tag({:controller => 'search', :action => 'index', :id => @project}, :method => :get ) do %>
+            <%= hidden_field_tag 'scope', default_search_project_scope, :id => nil %>
+            <%= hidden_field_tag(controller.default_search_scope, 1, :id => nil) if controller.default_search_scope %>
+            <%= text_field_tag 'q', @question, :size => 20, :class => 'small', :accesskey => accesskey(:quick_search),:placeholder => l(:label_search),
+                                :data => {
+                                    :auto_complete => true, :autofocus => true, :usermenu_target => "searchinput"
+                                } %>
+            <% end %>
+          </div>
+          <div data-action="click->usermenu#search" class="cursor-pointer ml-1 p-2 rounded-full hover:bg-gray-100 text-gray-700 dark:text-gray-400 dark:hover:text-gray-300 dark:hover:bg-gray-700 hover:text-gray-800">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-gray-800 transition duration-75 dark:text-gray-400 hover:text-gray-900 dark:group-hover:text-white">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12a7.5 7.5 0 0 0 15 0m-15 0a7.5 7.5 0 1 1 15 0m-15 0H3m16.5 0H21m-1.5 0H12m-8.457 3.077 1.41-.513m14.095-5.13 1.41-.513M5.106 17.785l1.15-.964m11.49-9.642 1.149-.964M7.501 19.795l.75-1.3m7.5-12.99.75-1.3m-6.063 16.658.26-1.477m2.605-14.772.26-1.477m0 17.726-.26-1.477M10.698 4.614l-.26-1.477M16.5 19.794l-.75-1.299M7.5 4.205 12 12m6.894 5.785-1.149-.964M6.256 7.178l-1.15-.964m15.352 8.864-1.41-.513M4.954 9.435l-1.41-.514M12.002 12l-3.75 6.495" />
+              <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
             </svg>
           </div>
-          <div id="admin-menu" class="absolute right-10 shadow rounded-md border border-gray-50 mt bg-white z-49 w-60 top-14 hidden" data-usermenu-target="adminsubmenu">
-            <%= render_menu :admin_menu %>
+        </div>
+
+        <div id="tools-menu" class="h-full relative flex items-center">
+          <div  class="cursor-pointer ml-1 p-2 rounded-full hover:bg-gray-100 text-gray-700 dark:text-gray-400 dark:hover:text-gray-300 dark:hover:bg-gray-700 hover:text-gray-800"
+                data-action="click->usermenu#toggleTools" >
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-gray-800 transition duration-75 dark:text-gray-400 hover:text-gray-900 dark:group-hover:text-white">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a2.25 2.25 0 0 0-2.25-2.25H15a3 3 0 1 1-6 0H5.25A2.25 2.25 0 0 0 3 12m18 0v6a2.25 2.25 0 0 1-2.25 2.25H5.25A2.25 2.25 0 0 1 3 18v-6m18 0V9M3 12V9m18 0a2.25 2.25 0 0 0-2.25-2.25H5.25A2.25 2.25 0 0 0 3 9m18 0V6a2.25 2.25 0 0 0-2.25-2.25H5.25A2.25 2.25 0 0 0 3 6v3" />
+            </svg>
+          </div>
+
+          <div class="absolute right-0 shadow rounded border border-gray-50 mt bg-white z-49 w-60 top-14 hidden" data-usermenu-target="tools">
+            <%= render_menu :tools_menu %>
+          </div>
+        </div>
+
+
+        <% if User.current.admin?  %>
+          <div class="h-full relative flex items-center">
+            <div data-action="click->usermenu#toggleAdmin" class="cursor-pointer p-2 rounded-full hover:bg-gray-100 text-gray-700 dark:text-gray-400 dark:hover:text-gray-300 dark:hover:bg-gray-700 hover:text-gray-800">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-gray-800 transition duration-75 dark:text-gray-400 hover:text-gray-900 dark:group-hover:text-white">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12a7.5 7.5 0 0 0 15 0m-15 0a7.5 7.5 0 1 1 15 0m-15 0H3m16.5 0H21m-1.5 0H12m-8.457 3.077 1.41-.513m14.095-5.13 1.41-.513M5.106 17.785l1.15-.964m11.49-9.642 1.149-.964M7.501 19.795l.75-1.3m7.5-12.99.75-1.3m-6.063 16.658.26-1.477m2.605-14.772.26-1.477m0 17.726-.26-1.477M10.698 4.614l-.26-1.477M16.5 19.794l-.75-1.299M7.5 4.205 12 12m6.894 5.785-1.149-.964M6.256 7.178l-1.15-.964m15.352 8.864-1.41-.513M4.954 9.435l-1.41-.514M12.002 12l-3.75 6.495" />
+              </svg>
+            </div>
+            <div id="admin-menu" class="absolute right-0 shadow rounded border border-gray-50 mt bg-white z-49 w-60 top-14 hidden" data-usermenu-target="adminsubmenu">
+              <%= render_menu :admin_menu %>
+            </div>
           </div>
         <% end %>
-        <div id="navbar-gravatar" data-action="click->usermenu#toggle" class="cursor-pointer p-2 h-full flex items-center justify-center">
-          <%= avatar(User.current, :size => "32") %>
-          <!-- <div class="relative inline-flex items-center justify-center w-10 h-10 overflow-hidden bg-gray-100  hover:bg-gray-200 rounded-full dark:bg-gray-600">
-              <span class="font-medium text-gray-600 dark:text-gray-300">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
-                </svg>
-              </span>
-          </div> -->
-        </div>
-        <div class="absolute right-0 shadow rounded-md border border-gray-50 mt bg-white z-49 w-60 top-14 hidden" data-usermenu-target="usersubmenu">
-          <div class="p-4 font-normal">
-            <%= User.current %>
+        <div id="user-menu" class="h-full relative flex items-center">
+          <div id="navbar-gravatar" data-action="click->usermenu#toggle" class="cursor-pointer p-2 h-full flex items-center justify-center">
+            <%= avatar(User.current, :size => "32") %>
           </div>
-          <div class="border-t border-gray-50">
-            <%= link_to user_path(User.current), :class => "flex text-xs items-center font-light text-gray-900 bg-white rounded-none hover:bg-gray-50 hover:border-l-2 hover:border-blue-800 hover:pl-3.5 px-4 py-2" do %>
-                <%= l(:label_profile) %>
-            <% end %>
-            <div data-action="click->application#showSettings click->usermenu#hide" class="cursor-pointer text-xs flex items-center font-light text-gray-900 bg-white rounded-none hover:bg-gray-50 hover:border-l-2 hover:border-blue-800 hover:pl-3.5 px-4 py-2 ">
-              <%= l(:label_settings_menu) %>
+          <div class="absolute right-0 shadow rounded border border-gray-50 mt bg-white z-49 w-60 top-14 hidden" data-usermenu-target="usersubmenu">
+            <div class="p-4 font-normal">
+              <%= User.current %>
             </div>
-            <hr class="border-t border-l-0 border-r-0 border-b-0 border-solid border-gray-100 my-0.5" />
-            <div data-action="click->application#showModal click->usermenu#hide" class="cursor-pointer text-xs flex items-center font-light text-gray-900 bg-white rounded-none hover:bg-gray-50 hover:border-l-2 hover:border-blue-800 hover:pl-3.5 px-4 py-2">
-              <%= l(:label_about) %>
+            <div class="border-t border-gray-50">
+              <%= link_to user_path(User.current), :class => "icon flex text-xs items-center font-light text-gray-900! bg-white rounded-none hover:bg-gray-50 hover:border-l-2 hover:border-blue-800 hover:pl-3.5 px-4 py-2" do %>
+                <%= sprite_icon('user-scan', label= l(:label_profile), plugin: 'redmine_asap_theme') %>
+              <% end %>
+              <div data-action="click->application#showSettings click->usermenu#hide" class="icon w-full cursor-pointer text-xs flex items-center font-light text-gray-900! bg-white rounded-none hover:bg-gray-50 hover:border-l-2 hover:border-blue-800 hover:pl-3.5 px-4 py-2 ">
+                <%= sprite_icon('adjustments', label= l(:label_settings_menu), plugin: 'redmine_asap_theme') %>
+              </div>
+              <hr class="border-t border-l-0 border-r-0 border-b-0 border-solid border-gray-100 my-0.5" />
+              <div data-action="click->application#showAbout click->usermenu#hide" class="icon w-full cursor-pointer text-xs flex items-center font-light text-gray-900! bg-white rounded-none hover:bg-gray-50 hover:border-l-2 hover:border-blue-800 hover:pl-3.5 px-4 py-2">
+                <%= sprite_icon('info-circle', label= l(:label_about), plugin: 'redmine_asap_theme') %>
+              </div>
+              <%= link_to Redmine::Info.help_url, :target =>'_blank', :class => "icon w-full flex text-xs items-center font-light text-gray-900! bg-white rounded-none hover:bg-gray-50 hover:border-l-2 hover:border-blue-800 hover:pl-3.5 px-4 py-2" do %>
+                <%= sprite_icon('help-circle', label= l(:label_help), plugin: 'redmine_asap_theme') %>
+              <% end %>
+              <hr class="border-t border-l-0 border-r-0 border-b-0 border-solid border-gray-100 my-0.5" />
+              <%= link_to "/logout", method: :post, :class => "icon flex text-xs items-center font-light text-gray-900! bg-white rounded-none hover:bg-gray-50 hover:border-l-2 hover:border-blue-800 hover:pl-3.5 px-4 py-2" do %>
+                <%= sprite_icon('logout', label= l(:label_logout), plugin: 'redmine_asap_theme') %>
+              <% end %>
             </div>
-            <hr class="border-t border-l-0 border-r-0 border-b-0 border-solid border-gray-100 my-0.5" />
-            <%= link_to "/logout", method: :post, :class => "flex text-xs items-center font-light text-gray-900 bg-white rounded-none hover:bg-gray-50 hover:border-l-2 hover:border-blue-800 hover:pl-3.5 px-4 py-2" do %>
-                <%= l(:label_logout) %>
-            <% end %>
           </div>
         </div>
       </div>

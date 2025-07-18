@@ -1,0 +1,8 @@
+.controller-my{
+  #my-page{
+    @apply grid grid-cols-2 gap-4;
+    #list-top, #list-bottom{
+      @apply col-span-2 w-full;
+    }
+  }
+}

@@ -141,7 +141,7 @@ span.drdn .drdn-content{
 }
 
 
-#main-navbar #admin-menu a.icon{
+#main-navbar #admin-menu a.icon, #main-navbar #tools-menu a.icon, #main-navbar #user-menu a.icon, #main-navbar #user-menu div.icon{
   @apply flex items-center font-light text-gray-900 bg-white rounded-none hover:bg-gray-50 hover:border-l-2 hover:border-blue-800 hover:pl-3.5 px-4 py-2
 }
 
