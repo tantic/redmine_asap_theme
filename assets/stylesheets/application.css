@@ -5020,6 +5020,10 @@ hr {
     background-color: var(--color-gray-800);
   }
 }
+svg.s24 {
+  width: 1.5rem;
+  height: 1.5rem;
+}
 .contextual {
   display: flex;
   align-items: center;
@@ -6622,7 +6626,6 @@ html.agile-board-fullscreen div.agile-board {
     --color-stone-500: oklch(55.3% 0.013 58.071);
     --color-white: #fff;
     --spacing: 0.25rem;
-    --container-md: 28rem;
     --container-xl: 36rem;
     --container-6xl: 72rem;
     --text-xs: 0.75rem;
@@ -6829,9 +6832,6 @@ html.agile-board-fullscreen div.agile-board {
   .static {
     position: static;
   }
-  .sticky {
-    position: sticky;
-  }
   .top-0 {
     top: calc(var(--spacing) * 0);
   }
@@ -6891,9 +6891,6 @@ html.agile-board-fullscreen div.agile-board {
     @media (width >= 96rem) {
       max-width: 96rem;
     }
-  }
-  .mx-4 {
-    margin-inline: calc(var(--spacing) * 4);
   }
   .mx-4\! {
     margin-inline: calc(var(--spacing) * 4) !important;
@@ -7045,14 +7042,8 @@ html.agile-board-fullscreen div.agile-board {
   .inline {
     display: inline;
   }
-  .inline-block {
-    display: inline-block;
-  }
   .inline-flex {
     display: inline-flex;
-  }
-  .table {
-    display: table;
   }
   .size-4 {
     width: calc(var(--spacing) * 4);
@@ -7062,14 +7053,8 @@ html.agile-board-fullscreen div.agile-board {
     width: calc(var(--spacing) * 5);
     height: calc(var(--spacing) * 5);
   }
-  .h-2 {
-    height: calc(var(--spacing) * 2);
-  }
   .h-2\/5 {
     height: calc(2/5 * 100%);
-  }
-  .h-3 {
-    height: calc(var(--spacing) * 3);
   }
   .h-3\/5 {
     height: calc(3/5 * 100%);
@@ -7131,17 +7116,11 @@ html.agile-board-fullscreen div.agile-board {
   .w-0 {
     width: calc(var(--spacing) * 0);
   }
-  .w-1 {
-    width: calc(var(--spacing) * 1);
-  }
   .w-1\/2 {
     width: calc(1/2 * 100%);
   }
   .w-1\/4 {
     width: calc(1/4 * 100%);
-  }
-  .w-3 {
-    width: calc(var(--spacing) * 3);
   }
   .w-3\/4 {
     width: calc(3/4 * 100%);
@@ -7194,14 +7173,8 @@ html.agile-board-fullscreen div.agile-board {
   .max-w-6xl {
     max-width: var(--container-6xl);
   }
-  .max-w-md {
-    max-width: var(--container-md);
-  }
   .max-w-none {
     max-width: none;
-  }
-  .max-w-screen {
-    max-width: 100vw;
   }
   .max-w-xl {
     max-width: var(--container-xl);
@@ -7212,26 +7185,17 @@ html.agile-board-fullscreen div.agile-board {
   .flex-none {
     flex: none;
   }
-  .flex-shrink {
-    flex-shrink: 1;
-  }
   .flex-shrink-0 {
     flex-shrink: 0;
   }
   .shrink-0 {
     flex-shrink: 0;
   }
-  .flex-grow {
-    flex-grow: 1;
-  }
   .basis-\[350px\] {
     flex-basis: 350px;
   }
   .basis-auto {
     flex-basis: auto;
-  }
-  .border-collapse {
-    border-collapse: collapse;
   }
   .translate-y-0 {
     --tw-translate-y: calc(var(--spacing) * 0);
@@ -7247,9 +7211,6 @@ html.agile-board-fullscreen div.agile-board {
   .cursor-pointer {
     cursor: pointer;
   }
-  .resize {
-    resize: both;
-  }
   .grid-cols-1 {
     grid-template-columns: repeat(1, minmax(0, 1fr));
   }
@@ -7264,9 +7225,6 @@ html.agile-board-fullscreen div.agile-board {
   }
   .flex-row {
     flex-direction: row;
-  }
-  .flex-wrap {
-    flex-wrap: wrap;
   }
   .items-center {
     align-items: center;
@@ -7408,9 +7366,6 @@ html.agile-board-fullscreen div.agile-board {
   .bg-blue-100 {
     background-color: var(--color-blue-100);
   }
-  .bg-blue-500 {
-    background-color: var(--color-blue-500);
-  }
   .bg-blue-500\! {
     background-color: var(--color-blue-500) !important;
   }
@@ -7453,20 +7408,11 @@ html.agile-board-fullscreen div.agile-board {
   .bg-no-repeat {
     background-repeat: no-repeat;
   }
-  .stroke-blue-800 {
-    stroke: var(--color-blue-800);
-  }
   .stroke-blue-800\! {
     stroke: var(--color-blue-800) !important;
   }
-  .stroke-gray-800 {
-    stroke: var(--color-gray-800);
-  }
   .stroke-gray-800\! {
     stroke: var(--color-gray-800) !important;
-  }
-  .stroke-gray-900 {
-    stroke: var(--color-gray-900);
   }
   .stroke-gray-900\! {
     stroke: var(--color-gray-900) !important;
@@ -7507,9 +7453,6 @@ html.agile-board-fullscreen div.agile-board {
   .px-12 {
     padding-inline: calc(var(--spacing) * 12);
   }
-  .py-0 {
-    padding-block: calc(var(--spacing) * 0);
-  }
   .py-0\.5 {
     padding-block: calc(var(--spacing) * 0.5);
   }
@@ -7530,9 +7473,6 @@ html.agile-board-fullscreen div.agile-board {
   }
   .py-8 {
     padding-block: calc(var(--spacing) * 8);
-  }
-  .pt-0 {
-    padding-top: calc(var(--spacing) * 0);
   }
   .pt-0\.5 {
     padding-top: calc(var(--spacing) * 0.5);
@@ -7617,9 +7557,6 @@ html.agile-board-fullscreen div.agile-board {
   .text-wrap {
     text-wrap: wrap;
   }
-  .whitespace-normal {
-    white-space: normal;
-  }
   .text-blue-50 {
     color: var(--color-blue-50);
   }
@@ -7677,9 +7614,6 @@ html.agile-board-fullscreen div.agile-board {
   .uppercase {
     text-transform: uppercase;
   }
-  .underline {
-    text-decoration-line: underline;
-  }
   .opacity-0 {
     opacity: 0%;
   }
@@ -7694,19 +7628,11 @@ html.agile-board-fullscreen div.agile-board {
     --tw-shadow: 0 1px 2px 0 var(--tw-shadow-color, rgb(0 0 0 / 0.05));
     box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
   }
-  .outline {
-    outline-style: var(--tw-outline-style);
-    outline-width: 1px;
-  }
   .filter {
     filter: var(--tw-blur,) var(--tw-brightness,) var(--tw-contrast,) var(--tw-grayscale,) var(--tw-hue-rotate,) var(--tw-invert,) var(--tw-saturate,) var(--tw-sepia,) var(--tw-drop-shadow,);
   }
   .backdrop-blur-sm {
     --tw-backdrop-blur: blur(var(--blur-sm));
-    -webkit-backdrop-filter: var(--tw-backdrop-blur,) var(--tw-backdrop-brightness,) var(--tw-backdrop-contrast,) var(--tw-backdrop-grayscale,) var(--tw-backdrop-hue-rotate,) var(--tw-backdrop-invert,) var(--tw-backdrop-opacity,) var(--tw-backdrop-saturate,) var(--tw-backdrop-sepia,);
-    backdrop-filter: var(--tw-backdrop-blur,) var(--tw-backdrop-brightness,) var(--tw-backdrop-contrast,) var(--tw-backdrop-grayscale,) var(--tw-backdrop-hue-rotate,) var(--tw-backdrop-invert,) var(--tw-backdrop-opacity,) var(--tw-backdrop-saturate,) var(--tw-backdrop-sepia,);
-  }
-  .backdrop-filter {
     -webkit-backdrop-filter: var(--tw-backdrop-blur,) var(--tw-backdrop-brightness,) var(--tw-backdrop-contrast,) var(--tw-backdrop-grayscale,) var(--tw-backdrop-hue-rotate,) var(--tw-backdrop-invert,) var(--tw-backdrop-opacity,) var(--tw-backdrop-saturate,) var(--tw-backdrop-sepia,);
     backdrop-filter: var(--tw-backdrop-blur,) var(--tw-backdrop-brightness,) var(--tw-backdrop-contrast,) var(--tw-backdrop-grayscale,) var(--tw-backdrop-hue-rotate,) var(--tw-backdrop-invert,) var(--tw-backdrop-opacity,) var(--tw-backdrop-saturate,) var(--tw-backdrop-sepia,);
   }
@@ -8582,11 +8508,6 @@ html.agile-board-fullscreen div.agile-board {
   syntax: "*";
   inherits: false;
 }
-@property --tw-outline-style {
-  syntax: "*";
-  inherits: false;
-  initial-value: solid;
-}
 @property --tw-blur {
   syntax: "*";
   inherits: false;
@@ -8729,7 +8650,6 @@ html.agile-board-fullscreen div.agile-board {
       --tw-translate-y: 0;
       --tw-translate-z: 0;
       --tw-leading: initial;
-      --tw-outline-style: solid;
       --tw-blur: initial;
       --tw-brightness: initial;
       --tw-contrast: initial;

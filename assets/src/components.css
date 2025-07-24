@@ -526,3 +526,8 @@ hr{
 #search-results{
   @apply shadow my-4 bg-white border border-gray-200 rounded-lg  p-8 dark:bg-gray-800 dark:border-gray-700;
 }
+
+svg.s24 {
+  width: 1.5rem;
+  height: 1.5rem;
+}
