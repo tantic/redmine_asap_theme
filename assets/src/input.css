@@ -22,6 +22,8 @@
 
 @source  "../../app/views/**/*.html.erb";
 @source  "../../lib/redmine_asap_theme/*.rb";
+@source  "../../../redmine_asap_user_features/app/views/**/*.html.erb";
+@source  "../../../redmine_asap_portfolio/app/views/**/*.html.erb";
 
 @theme {
   --font-sans: "Inter", sans-serif;

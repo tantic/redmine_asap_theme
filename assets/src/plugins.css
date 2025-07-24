@@ -127,3 +127,84 @@ html.agile-board-fullscreen div.agile-board{
     }
   }
 }
+
+
+/* Redmine Asap User Features */
+.controller-inbox{
+  #content{
+    padding:0px !important;
+  }
+  #attribute{
+    .splitcontentleft{
+      @apply space-y-2;
+      >div{
+        @apply flex flex-col md:flex-row;
+        .label{
+          @apply mr-3 w-full md:w-40;
+        }
+      }
+    }
+  }
+  #issue-menu{
+    a.icon-fav:not(#context-menu a.icon-fav) {
+      & .icon-label{
+        @apply flex! hover:bg-blue-50! rounded!;
+      }
+    }
+  }
+  #issue_tree, #relations{
+    >p{
+      @apply mb-2;
+    }
+  }
+  .context-menu-selection:hover, .context-menu-selection{
+    @apply bg-blue-50! text-gray-900!
+  }
+  div.journal{
+    @apply my-4;
+    .note{
+      @apply bg-white shadow rounded ml-10;
+      >.contextual{
+        @apply pr-4;
+      }
+      .note-header{
+        @apply relative py-2 px-4 border-b border-gray-100 text-gray-500 text-xs;
+        >.gravatar{
+          @apply relative top-0 float-left -ml-14 w-8 h-8;
+        }
+        a.user.active{
+          span{
+            @apply p-0 shadow-none align-bottom border-0;
+            img{
+              @apply hidden;
+            }
+          }
+        }
+      }
+      .details{
+        @apply p-4 text-xs;
+      }
+      .wiki{
+        @apply p-4;
+      }
+    }
+  }
+}
+
+.controller-my{
+  #content{
+    @apply p-0;
+  }
+}
+
+.controller-todo{
+  #content{
+    @apply p-0;
+  }
+}
+
+.controller-portfolios{
+  #content{
+    @apply p-0;
+  }
+}

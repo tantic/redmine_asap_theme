@@ -33,3 +33,7 @@
   svg: user-scan
 - name: help-circle
   svg: help
+- name: user-screen
+  svg: user-screen
+- name: device-analytics
+  svg: device-analytics

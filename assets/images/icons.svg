@@ -12,6 +12,13 @@
       <path d="M18 4v1"/>
       <path d="M18 9v11"/>
     </symbol>
+    <symbol viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" id="icon--device-analytics">
+      <path d="M3 4m0 1a1 1 0 0 1 1 -1h16a1 1 0 0 1 1 1v10a1 1 0 0 1 -1 1h-16a1 1 0 0 1 -1 -1z"/>
+      <path d="M7 20l10 0"/>
+      <path d="M9 16l0 4"/>
+      <path d="M15 16l0 4"/>
+      <path d="M8 12l3 -3l2 2l3 -3"/>
+    </symbol>
     <symbol viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" id="icon--help-circle">
       <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"/>
       <path d="M12 17l0 .01"/>
@@ -40,6 +47,11 @@
       <path d="M16 4h2a2 2 0 0 1 2 2v2"/>
       <path d="M16 20h2a2 2 0 0 0 2 -2v-2"/>
       <path d="M8 16a2 2 0 0 1 2 -2h4a2 2 0 0 1 2 2"/>
+    </symbol>
+    <symbol viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" id="icon--user-screen">
+      <path d="M19.03 17.818a3 3 0 0 0 1.97 -2.818v-8a3 3 0 0 0 -3 -3h-12a3 3 0 0 0 -3 3v8c0 1.317 .85 2.436 2.03 2.84"/>
+      <path d="M10 14a2 2 0 1 0 4 0a2 2 0 0 0 -4 0"/>
+      <path d="M8 21a2 2 0 0 1 2 -2h4a2 2 0 0 1 2 2"/>
     </symbol>
   </defs>
 </svg>
