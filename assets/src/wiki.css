@@ -7,7 +7,7 @@
       @apply -mt-4 mb-4;
     }
     >div.wiki{
-      @apply bg-white shadow dark:bg-gray-800 rounded p-8 mb-4;
+      @apply bg-white shadow dark:bg-gray-800 rounded p-8 mb-4 mt-4;
       h1{
         @apply text-xl font-medium border-b border-gray-100 pb-4 mb-4;
       }

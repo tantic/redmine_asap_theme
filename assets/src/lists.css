@@ -1,5 +1,5 @@
 .autoscroll{
-  @apply w-full;
+  @apply w-full overflow-x-auto shadow bg-white p-4;
 }
 
 table.list{

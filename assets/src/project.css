@@ -64,6 +64,10 @@
       /* display: none; */
     }
   }
+
+  p#system-ticket-message{
+    padding-left:0px;
+  }
 }
 
 

@@ -27,17 +27,26 @@ a.icon-checked, a.bookmark{
 }
 
 a.icon-edit {
-  @apply rounded-full p-2;
+  @apply rounded-full p-2 bg-blue-700 text-blue-100;
 }
 a.icon-edit:hover {
-  background: none !important;
-  color: inherit !important;
+  @apply bg-blue-800 text-blue-100!;
 }
 a.icon-edit:hover svg {
-  stroke: inherit !important;
+
 }
 a.icon-edit .icon-label {
   display: none;
+}
+
+.controller-issues.action-show{
+  .contextual{
+    .icon-time-add {
+      .icon-label {
+        display: none;
+      }
+    }
+  }
 }
 
 /* Exceptions : Pas d'effet dans .drdn-items ou dans #context-menu */

@@ -1,7 +1,7 @@
 .controller-issues{
   div.issue {
     @apply bg-white shadow p-8 border border-gray-100;
-    div.gravatar-with-child{
+    div.gravatar-with-child, div.avatar-with-child{
       @apply float-left mr-4;
       .gravatar{
         @apply w-14 h-14;
@@ -10,8 +10,8 @@
         @apply w-8 h-8 rounded-full;
       }
     }
-    div.gravatar-with-child > img.gravatar:nth-child(2){
-      @apply w-8 h-8 rounded-full;
+    div.gravatar-with-child > img.gravatar:nth-child(2), div.avatar-with-child > img.gravatar:nth-child(2){
+      @apply w-8 h-8 rounded-full absolute top-6 -right-2;
     }
     .author{
       @apply text-gray-500 font-light mt-0;
@@ -53,6 +53,25 @@
       .wiki{
         @apply p-4;
       }
+    }
+
+    .journal-header{
+      @apply flex items-center text-xs border-b border-gray-200;
+      .journal-info{
+          @apply flex items-center relative;
+          >a{
+            @apply mx-1
+          }
+      }
+      .journal-meta{
+        @apply ml-auto flex items-center space-x-3;
+        .journal-actions{
+          @apply space-x-3;
+        }
+      }
+    }
+    .journal-content{
+      @apply text-xs p-4
     }
   }
 
@@ -102,5 +121,14 @@
 
   #relations{
     @apply my-6;
+  }
+}
+
+
+.controller-issues.action-show {
+  #content{
+    hr{
+      display:none;
+    }
   }
 }

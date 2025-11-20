@@ -19,3 +19,21 @@ textarea{
 }
 
 input#months { @apply text-xs; }
+
+input[type="file"] {
+  @apply border border-gray-200 px-4;
+}
+
+#list-definition{
+  .query-columns{
+    select[multiple="multiple"]{
+      @apply bg-gray-100;
+    }
+  }
+}
+
+.controller-workflows.action-copy{
+  select[multiple="multiple"]{
+      @apply bg-gray-100;
+    }
+}

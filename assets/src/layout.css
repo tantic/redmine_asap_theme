@@ -9,7 +9,14 @@
 
 /* SIDEBAR */
 #sidebar{
-  @apply bg-neutral-50 border-l border-zinc-200
+  @apply bg-white shadow border-l border-gray-100 flex-shrink pr-0;
+  padding-left:20px;
+
+  #sidebar-switch-panel {
+    margin-left: -20px;
+    /* padding-right: 28px; */
+    width: 100%;
+  }
 }
 
 #sidebar h3{
@@ -26,3 +33,8 @@
 /* .splitcontentleft {flex: 1; margin-right: 5px;}
 .splitcontentright {flex: 1; margin-left: 5px;}
 .splitcontenttop {flex: 2; flex-basis: 100%;} */
+
+
+#content {
+  @apply p-8 bg-gray-50 flex-grow m-0 overflow-x-auto;
+}

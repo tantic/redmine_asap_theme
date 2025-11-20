@@ -1,4 +1,4 @@
-.controller-users{
+.controller-users.action-show{
   #content{
     >h2{
       @apply flex flex-col items-center w-full text-xl my-6 font-medium;
