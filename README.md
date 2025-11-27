@@ -5,7 +5,7 @@ The first version started almost from a blank page by replacing all Redmine page
 This version start from the original theme of Redmine so all pages works (normally) and the theme can be used now.
 
 * Status : first version usable but need to be used and improved (feedback appreciated)
-* Compatibility : work for Redmine >=6 (other versions not tested)
+* Compatibility : work for Redmine >=6.1 (other versions not tested)
 
 If you want to test it quickly with docker, you can use the repo https://github.com/tantic/redmine_asap_docker.git
 
@@ -35,7 +35,7 @@ https://tantic.github.io/redmine_asap_docs/docs/theme/intro
 
 ## Installation
 
-This plugin has been tested with Redmine 6.0.x
+This plugin has been tested with Redmine 6.1.x
 
 ```
 cd $REDMINE_ROOT
@@ -43,6 +43,8 @@ git clone https://github.com/tantic/redmine_asap_theme.git plugins/redmine_asap_
 bundle install
 bundle exec rake redmine:plugins:migrate RAILS_ENV=production
 ```
+
+Go to the admin section > /settings/plugin/redmine_asap_theme to change the settings.
 
 ## Contributing
 

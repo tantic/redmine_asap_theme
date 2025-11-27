@@ -64,6 +64,7 @@ en:
       my_issues: My issues
     projects:
       title: Projects
+      all: See all
     recent_projects:
       title: Recents projects
       none: No recent project.
