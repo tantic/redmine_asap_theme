@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="<%= current_language %>" class="h-full">
+<html lang="<%= current_language %>">
 <head>
 <meta charset="utf-8" />
 <title><%= html_title %></title>
@@ -8,37 +8,30 @@
 <meta name="keywords" content="issue,bug,tracker" />
 <%= csrf_meta_tag %>
 <%= favicon %>
-<%= stylesheet_link_tag 'jquery/jquery-ui-1.13.2', 'tribute-5.1.3', :media => 'all' %>
+<%= stylesheet_link_tag 'jquery/jquery-ui-1.13.2', 'tribute-5.1.3', 'responsive', :media => 'all' %>
 <%= stylesheet_link_tag 'rtl', :media => 'all' if l(:direction) == 'rtl' %>
-<%= heads_for_theme %>
-<%= heads_for_auto_complete(@project) %>
 
-<%= javascript_include_tag 'stimulus.umd.js', :plugin => 'redmine_asap_theme' %>
+<%= javascript_importmap_tags %>
 <%= javascript_heads %>
-<%= javascript_include_tag 'application.js', :type => "module", :plugin => 'redmine_asap_theme' %>
-<%= javascript_include_tag 'controllers/application_controller.js', :type => "module", :plugin => 'redmine_asap_theme' %>
-<%= javascript_include_tag 'controllers/usermenu_controller.js', :type => "module", :plugin => 'redmine_asap_theme' %>
-<%= javascript_include_tag 'controllers/projectmenu_controller.js', :type => "module", :plugin => 'redmine_asap_theme' %>
-<%= javascript_include_tag 'controllers/navbar_controller.js', :type => "module", :plugin => 'redmine_asap_theme' %>
-<%= javascript_include_tag 'controllers/tabs_controller.js', :type => "module", :plugin => 'redmine_asap_theme' %>
-<%= javascript_include_tag 'controllers/projects_controller.js', :type => "module", :plugin => 'redmine_asap_theme' %>
-<%= javascript_include_tag 'controllers/members_controller.js', :type => "module", :plugin => 'redmine_asap_theme' %>
+
+<%= heads_for_theme %>
+<%= heads_for_i18n %>
+<%= heads_for_auto_complete(@project) %>
+<%= call_hook :view_layouts_base_html_head %>
+<!-- page specific tags -->
+<%= yield :header_tags -%>
 
 <% if Setting.plugin_redmine_asap_theme['redmine_asap_theme_turbo'] && Setting.plugin_redmine_asap_theme['redmine_asap_theme_turbo'] == 'true' %>
   <%= javascript_include_tag 'turbo.es2017-esm.min.js', :type => "module", :plugin => 'redmine_asap_theme' %>
   <%= javascript_include_tag 'application-turbo.js', :type => "module", :plugin => 'redmine_asap_theme' %>
 <% end %>
 
-
-<%= call_hook :view_layouts_base_html_head %>
-<!-- page specific tags -->
-<%= yield :header_tags -%>
 <%= stylesheet_link_tag "application.css", :plugin => 'redmine_asap_theme' %>
 </head>
 <body  data-controller="application" data-application-myaccount-value="<%= show_settings_path(User.current) %>" data-application-about-value="<%= show_about_path() %>" class="<%= body_css_classes %> dark:bg-slate-900 <%= controller_name == 'account' ? 'h-full':'' %>" data-text-formatting="<%= Setting.text_formatting %>">
 
   <% if controller_name == "account" %>
-    <section class="w-full h-full flex relative bg-gray-50">
+    <section class="w-full h-screen flex relative bg-gray-50">
       <%= render "layouts/flash_messages" %>
       <%= yield %>
       <%= call_hook :view_layouts_base_content %>
@@ -124,16 +117,21 @@
         </div>
     </div>
     <div id="footer">
-        Powered by <%= link_to Redmine::Info.app_name, Redmine::Info.url, :target => '_blank', :rel => 'noopener' %> &copy; 2006-2025 Jean-Philippe Lang
+      Powered by <%= link_to Redmine::Info.app_name, Redmine::Info.url, :target => '_blank', :rel => 'noopener' %> &copy; 2006-2025 Jean-Philippe Lang
     </div>
 
-    <div id="ajax-indicator" style="display:none;"><span><%= l(:label_loading) %></span></div>
+    <div id="ajax-indicator" style="display:none;">
+      <span class="icon">
+        <%= sprite_icon 'loader', l(:label_loading), css_class: 'svg-loader' %>
+      </span>
+    </div>
     <div id="ajax-modal" style="display:none;"></div>
-    <div data-application-target="app"></div>
+    <div id="icon-copy-source" style="display: none;"><%= sprite_icon('') %></div>
 
     </div>
-
     <%= call_hook :view_layouts_base_body_bottom %>
+
+
   <% end %>
 </body>
 </html>

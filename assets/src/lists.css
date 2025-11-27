@@ -60,7 +60,7 @@ table.list td.author, table.list td.assigned_to{
 
 
 table.issues tr.issue td.id a{
-  @apply bg-gray-100 px-2 py-1 border-gray-600 text-gray-800
+  @apply bg-pink-50 px-2 py-1 border-pink-600 text-pink-800
 }
 
 

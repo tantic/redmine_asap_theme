@@ -1,17 +1,22 @@
-(() => {
-  const application = Stimulus.Application.start()
+(async function () {
+  // Wait for Stimulus application to be available
+  while (typeof Stimulus === 'undefined') {
+      await new Promise(resolve => setTimeout(resolve, 100));
+  }
 
-  application.register("tabs", class extends Stimulus.Controller {
+  // Import Controller from Stimulus module
+  const { Controller } = await import('@hotwired/stimulus');
 
-    static get targets() {
-      return [ 'btn', 'tab' ]
-    }
+  Stimulus.register("tabs", class extends Controller {
 
-    static get values() {
-      return {defaultTab: String}
+    static targets = [ 'btn', 'tab' ]
+
+    static values = {
+      defaultTab: String
     }
 
     connect() {
+      console.log("Dans les tabs")
       this.tabTargets.map(x => x.hidden = true) // hide all tabs by default
       // OPEN DEFAULT TAB
       try {
@@ -40,6 +45,6 @@
       }
     }
 
-  })
+ });
 
-})()
+})();

@@ -31,6 +31,17 @@ end
 
 rat_helpers = File.join(lib_dir, 'helpers.rb')
 require rat_helpers
+
+
+
+libraries =
+  [
+    'hooks',
+  ]
+libraries.each do |library|
+  require_dependency File.expand_path(library, lib_dir)
+end
+
 require lib_dir
 
 include LetterAvatar::AvatarHelper
@@ -43,3 +54,4 @@ LetterAvatar.setup do |config|
   config.letters_count     = 2                        # default is 1
   config.pointsize         = 300                       # default is 140
 end
+

@@ -1,15 +1,16 @@
-(() => {
-  const application = Stimulus.Application.start()
+(async function () {
+  // Wait for Stimulus application to be available
+  while (typeof Stimulus === 'undefined') {
+      await new Promise(resolve => setTimeout(resolve, 100));
+  }
 
-  application.register("navbar", class extends Stimulus.Controller {
+  // Import Controller from Stimulus module
+  const { Controller } = await import('@hotwired/stimulus');
 
-    static get targets() {
-      return [ "projectMenu", "projectactionsubmenu", "projectsubprojects","searchInput", "searchResults", "projectsList"]
-    }
+  Stimulus.register("navbar", class extends Controller {
 
-    static get values() {
-      return {url: String}
-    }
+    static targets = [ "projectMenu", "projectactionsubmenu", "projectsubprojects","searchInput", "searchResults", "projectsList"]
+    static values = {url: String}
 
     connect() {
       console.log("chargement du navbar")
@@ -89,29 +90,7 @@
       this.projectsListTarget.classList.add('hidden');
     }
 
-    // search() {
-    //   console.log("Dans la recherche")
-    //   const query = this.searchInputTarget.value;
-
-    //   if (query.length > 2) { // Lancer la recherche après 3 caractères minimum
-    //     const response = await fetch(`/autocomplete/search?q=${query}`)
-    //     this.remoteContent = await response.text()
-
-    //     .then(data => {
-    //       this.searchResultsTarget.innerHTML = data.map(project => `
-    //         <li>
-    //           <a href="/projects/${project.id}" class="block p-2 hover:bg-gray-100">
-    //             ${project.name}
-    //           </a>
-    //         </li>
-    //       `).join('');
-    //     });
-    //   } else {
-    //     this.searchResultsTarget.innerHTML = "";
-    //   }
-    // }
-
-
-  })
+})
 
 })()
+

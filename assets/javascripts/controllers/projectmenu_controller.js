@@ -1,15 +1,22 @@
-(() => {
-  const application = Stimulus.Application.start()
+(async function () {
+  // Wait for Stimulus application to be available
+  while (typeof Stimulus === 'undefined') {
+      await new Promise(resolve => setTimeout(resolve, 100));
+  }
 
-  application.register("projectmenu", class extends Stimulus.Controller {
+  // Import Controller from Stimulus module
+  const { Controller } = await import('@hotwired/stimulus');
 
-    static get targets() {
-      return [ "projectsubmenu", "projectactionsubmenu", "projectsubprojects"]
+  Stimulus.register("projectmenu", class extends Controller {
+
+    static targets = [ "projectsubmenu", "projectactionsubmenu", "projectsubprojects"]
+
+    connect() {
+      console.log("Dans le project menu")
     }
 
-    connect() {}
-
     toggle(event){
+      console.log("on lance le toggle")
       this.projectsubmenuTarget.classList.toggle('hidden');
       this.dismissOnClick(this.projectsubmenuTarget);
     }
@@ -35,6 +42,6 @@
      );
     }
 
-  })
+ });
 
-})()
+})();

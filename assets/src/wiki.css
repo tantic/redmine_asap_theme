@@ -33,15 +33,7 @@
             display: none;
           }
       }
-      ul{
-        @apply space-y-1 list-disc ml-3 my-4;
-        li{
-          @apply pl-4;
-        }
-        >li{
-          @apply pl-0;
-        }
-      }
+
       blockquote{
         @apply p-4 my-4 border-s-4 border-gray-300 rounded bg-gray-50 dark:border-gray-500 dark:bg-gray-800;
       }

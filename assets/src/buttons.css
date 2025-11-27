@@ -137,6 +137,22 @@ a.icon-only{
   @apply bg-transparent
 }
 
+a.icon-checked{
+  @apply p-2;
+}
+
+fieldset{
+  legend{
+    @apply bg-gray-100 py-2 px-4 rounded flex items-center;
+    a.icon-checked{
+      @apply p-0 mr-2 bg-gray-100;
+      > span{
+        display: none;
+      }
+    }
+  }
+}
+
 .button-small{
   @apply px-3 py-1.5 text-xs h-auto font-medium text-center text-white bg-blue-700 rounded hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800  ;
 }
@@ -145,6 +161,7 @@ a.icon-only{
 input[type=submit] {
   @apply text-white no-underline bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded text-xs px-2.5 py-1.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800  ;
 }
+
 
 
 /* Buttons

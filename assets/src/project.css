@@ -5,6 +5,24 @@
     }
   }
 
+  ul.projects {
+    > li {
+      @apply mb-0 pb-0;
+      > div{
+        @apply flex items-center hover:bg-gray-50 rounded;
+        >a.project{
+          @apply mb-0!  flex items-center hover:bg-white!;
+        }
+        >span{
+          @apply flex items-center mx-1;
+          >svg{
+            @apply mb-0!
+          }
+        }
+      }
+    }
+  }
+
   .news{
     p{
       @apply mb-2 font-medium border-b border-gray-100 py-0.5;
@@ -26,9 +44,18 @@
 
   }
 
+  #block-projectissues, #block-projecttimeentries{
+    p:last-of-type{
+      @apply mt-4 text-xs text-right text-gray-400;
+      a{
+        @apply text-gray-400 hover:text-gray-900;
+      }
+    }
+  }
+
   .members{
     >p{
-      @apply border-b border-gray-100 pb-4 mb-4;
+      @apply border-0 p-4 mb-4 bg-gray-50 rounded;
       >span.label{
         @apply font-bold flex w-full pb-2;
       }

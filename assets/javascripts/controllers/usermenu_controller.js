@@ -1,11 +1,15 @@
-(() => {
-  const application = Stimulus.Application.start()
+(async function () {
+  // Wait for Stimulus application to be available
+  while (typeof Stimulus === 'undefined') {
+      await new Promise(resolve => setTimeout(resolve, 100));
+  }
 
-  application.register("usermenu", class extends Stimulus.Controller {
+  // Import Controller from Stimulus module
+  const { Controller } = await import('@hotwired/stimulus');
 
-    static get targets() {
-      return [ "usersubmenu", "search", "searchinput", "adminsubmenu", "tools" ]
-    }
+  Stimulus.register("usermenu", class extends Controller {
+
+    static targets = [ "usersubmenu", "search", "searchinput", "adminsubmenu", "tools" ]
 
     connect() {
       console.log("Chargement du menu utilisateur")
@@ -54,6 +58,6 @@
       });
     }
 
-  })
+ });
 
-})()
+})();

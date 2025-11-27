@@ -1,11 +1,18 @@
-(() => {
-  const application = Stimulus.Application.start()
+(async function () {
+  // Wait for Stimulus application to be available
+  while (typeof Stimulus === 'undefined') {
+      await new Promise(resolve => setTimeout(resolve, 100));
+  }
 
-  application.register("projects", class extends Stimulus.Controller {
-    static get targets() {
-      return [ "submenu", "panel" ]
+  // Import Controller from Stimulus module
+  const { Controller } = await import('@hotwired/stimulus');
+
+  Stimulus.register("projects", class extends Controller {
+    static targets = [ "submenu", "panel" ]
+
+    connect() {
+      console.log("Dans le projects")
     }
-
 
     static get values() {
       return {url: String}
@@ -54,7 +61,6 @@
       { once: true, capture: true }
      );
     }
+ });
 
-
-  })
-})()
+})();

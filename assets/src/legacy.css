@@ -1334,7 +1334,7 @@ p.progress-info {clear: left; font-size: 86%; margin-top:-4px; color:#777;}
 .version-overview table.progress td { height: 1.2em; }
 
 /***** Tabs *****/
-#content .tabs {height: 2.6em; margin-bottom:1.2em; position:relative; overflow:hidden;}
+/* #content .tabs {height: 2.6em; margin-bottom:1.2em; position:relative; overflow:hidden;}
 #content .tabs ul {margin:0; position:absolute; bottom:0; padding-left:0.5em; min-width: 2000px; width: 100%;  border-bottom: 1px solid #d0d7de;}
 #content .tabs ul li {
   float:left;
@@ -1408,7 +1408,7 @@ button.tab-right {
 button.tab-left.disabled, button.tab-right.disabled {
   background-color: #ccc;
   cursor: unset;
-}
+} */
 
 /***** Diff *****/
 .diff_out { background: #fcc; }
@@ -1796,7 +1796,7 @@ span.icon-label {
 .icon-only:not(:has(svg))::after {
   content: "\a0";
 }
-
+/*
 .icon-add:not(:has(svg)) { background-image: url(/add.png); }
 .icon-edit:not(:has(svg)) { background-image: url(/edit.png); }
 .icon-copy:not(:has(svg)) { background-image: url(/copy.png); }
@@ -1896,7 +1896,7 @@ span.icon-label {
 .icon-file.application-gzip:not(:has(svg)) { background-image: url(/files/zip.png); }
 .icon-copy-link:not(:has(svg)) { background-image: url(/copy_link.png); }
 
-.sort-handle.ajax-loading { background-image: url(/loading.gif); }
+.sort-handle.ajax-loading { background-image: url(/loading.gif); } */
 tr.ui-sortable-helper { border:1px solid #e4e4e4; }
 svg.svg-loader {
   animation: spin 1s linear infinite;
@@ -2144,7 +2144,7 @@ th[role=columnheader]:not(.no-sort):hover:after {
 	opacity: 1;
 }
 
-
+/*
 div#sticky-issue-header {
   display: none;
   position: fixed;
@@ -2174,7 +2174,7 @@ div#sticky-issue-header .subject {
   text-overflow: ellipsis;
   white-space: nowrap;
   flex-grow: 1;
-}
+} */
 /* Prevent content from being hidden behind a #sticky-issue-header when scrolling via anchor links. */
 .controller-issues.action-show div.wiki a[name],
 .controller-issues.action-show #history div[id^="note-"],

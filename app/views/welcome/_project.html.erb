@@ -1,6 +1,8 @@
 <div class="h-screen overflow-auto ">
-  <header class="pt-16">
-    <h1 class="font-medium text-base w-full text-center mb-8"><%= project.name %></h1>
+  <header class="mt-16 p-8">
+
+    <%= link_to_project(project, {}, class:"font-medium text-gray-900 flex items-center truncate text-xs bg-white dark:bg-gray-700 shadow rounded-t px-4 py-3 hover:bg-gray-50 hover:text-gray-900 hover:font-semibold ") %>
+
     <% if project.description.present? %>
       <div class="px-8 py-4 text-gray-500">
         <%= textilizable(project.short_description, :project => project) %>
@@ -9,10 +11,10 @@
   </header>
 
   <% if my_issues.length > 0 %>
-  <section class="px-8">
-    <h3 class="uppercase my-6 text-gray-500 pb-4 border-b border-gray-100">Mes demandes (<%= my_issues.count %>)</h3>
+  <section class="px-8 mt-6 mb-12">
+    <h3 class="uppercase my-6 text-gray-500 pb-4! border-b border-gray-100">Mes demandes (<%= my_issues.count %>)</h3>
     <% my_issues.each do |issue| %>
-      <div class="flex my-1">
+      <div class="flex my-2">
         <%= link_to_issue(issue) %>
         <% if issue.due_date %>
           <% if issue.overdue? %>
@@ -40,11 +42,11 @@
 
   <% if news.length > 0 %>
   <section class="px-8">
-    <h3 class="uppercase flex items-center my-6 text-gray-900 pb-4 border-b border-gray-100">
+    <h3 class="uppercase flex items-center my-6 text-gray-900 pb-4! border-b border-gray-100">
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4 mr-2">
         <path stroke-linecap="round" stroke-linejoin="round" d="M10.34 15.84c-.688-.06-1.386-.09-2.09-.09H7.5a4.5 4.5 0 1 1 0-9h.75c.704 0 1.402-.03 2.09-.09m0 9.18c.253.962.584 1.892.985 2.783.247.55.06 1.21-.463 1.511l-.657.38c-.551.318-1.26.117-1.527-.461a20.845 20.845 0 0 1-1.44-4.282m3.102.069a18.03 18.03 0 0 1-.59-4.59c0-1.586.205-3.124.59-4.59m0 9.18a23.848 23.848 0 0 1 8.835 2.535M10.34 6.66a23.847 23.847 0 0 0 8.835-2.535m0 0A23.74 23.74 0 0 0 18.795 3m.38 1.125a23.91 23.91 0 0 1 1.014 5.395m-1.014 8.855c-.118.38-.245.754-.38 1.125m.38-1.125a23.91 23.91 0 0 0 1.014-5.395m0-3.46c.495.413.811 1.035.811 1.73 0 .695-.316 1.317-.811 1.73m0-3.46a24.347 24.347 0 0 1 0 3.46" />
       </svg>
-      Annonces (<%= news.count %>)
+      <%= l("welcome.news.title") %> (<%= news.count %>)
     </h3>
     <% news.each do |news| %>
       <div class="flex my-2">

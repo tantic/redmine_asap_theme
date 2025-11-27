@@ -5,6 +5,9 @@
   #list-top, #list-bottom{
     @apply col-span-2 w-full;
   }
+  .splitcontentright, .splitcontentleft{
+    @apply w-full;
+  }
   .block-receiver{
     @apply pt-0!;
     .mypage-box{
@@ -52,12 +55,17 @@
   }
 }
 
+#fast-desc-link.icon-edit{
+  @apply bg-white text-gray-800 hover:bg-blue-700 hover:text-blue-100;
+}
+
 /* Redmineup agile plugin */
 
 .controller-agile_boards{
   span.assignable-user, span.user{
+    @apply flex items-center bg-white text-xs dark:bg-gray-700 border border-gray-100 hover:bg-gray-50 rounded px-2.5 py-1 text-gray-900 hover:text-blue-800;
     >.gravatar, >.user-avatar{
-      display:none;
+      @apply mr-1;
     }
   }
 
@@ -91,15 +99,31 @@
   .container-fixed{
     @apply z-50 relative mt-4;
     .issue-card{
-      @apply shadow bg-white p-4 border-0;
+      @apply shadow-md rounded bg-white p-4 border-0;
       .fields{
-        @apply flex flex-col;
+        @apply flex flex-col pb-6;
         > * {
           @apply my-1
+        }
+        .quick-edit-card{
+          @apply border-0 bottom-4;
+          > a {
+            @apply p-2 hover:bg-gray-100 rounded-full;
+          }
         }
       }
     }
   }
+
+  table.issues-board{
+    tr{
+      @apply bg-gray-50!;
+      td{
+        @apply border-r! border-gray-200!;
+      }
+    }
+  }
+
 
 
 }
@@ -157,9 +181,9 @@ html.agile-board-fullscreen div.agile-board{
       @apply mb-2;
     }
   }
-  .context-menu-selection:hover, .context-menu-selection{
+  /* .context-menu-selection:hover, .context-menu-selection{
     @apply bg-blue-50! text-gray-900!
-  }
+  } */
   div.journal{
     @apply my-4;
     .note{
@@ -206,5 +230,29 @@ html.agile-board-fullscreen div.agile-board{
 .controller-portfolios{
   #content{
     @apply p-0;
+  }
+}
+
+
+/* Redmine asap user features */
+.user-card{
+  @apply absolute bg-white shadow p-4 rounded w-72 z-50;
+  h2.title{
+    @apply flex items-center;
+    img{
+      @apply ms-0! me-0!;
+    }
+    .username{
+      @apply ml-2! text-base font-medium;
+    }
+  }
+}
+
+
+/* Aditionals Tags */
+
+#sidebar-wrapper{
+  .sidebar-tags{
+    @apply my-6;
   }
 }

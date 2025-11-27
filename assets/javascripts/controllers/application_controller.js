@@ -1,18 +1,23 @@
-(() => {
-  const application = Stimulus.Application.start()
+(async function () {
+  // Wait for Stimulus application to be available
+  while (typeof Stimulus === 'undefined') {
+      await new Promise(resolve => setTimeout(resolve, 100));
+  }
 
-  application.register("application", class extends Stimulus.Controller {
+  // Import Controller from Stimulus module
+  const { Controller } = await import('@hotwired/stimulus');
 
-    static get targets() {
-      return [ "modal", "modalBody", "settings", "settingsBody", "app" ]
-    }
+  Stimulus.register("application", class extends Controller {
 
-    static get values() {
-      return {myaccount: String, about: String}
+    static targets = [ "modal", "modalBody", "settings", "settingsBody", "app" ]
+
+    static values = {
+        myaccount: String,
+        about: String
     }
 
     connect() {
-      console.log("dans application")
+      console.log("dans application controller")
       this.aboutContent = null
       this.settingsContent = null
     }
@@ -106,6 +111,6 @@
       return this.settingsContent
     }
 
-  })
+ });
 
-})()
+})();
