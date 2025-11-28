@@ -1,43 +1,11 @@
 <div class="grid grid-cols-6 gap-4">
-  <% @urls = [
-    'fond1.jpg',
-    'fond2.jpg',
-    'fond3.jpg',
-    'fond4.jpg',
-    'fond5.jpg',
-    'fond6.jpg',
-    'fond7.jpg',
-    'fond8.jpg',
-    'fond9.jpg',
-    'fond10.jpg',
-    'fond11.jpg',
-    'fond12.jpg',
-    'fond13.jpg',
-    'fond14.jpg',
-    'fond15.jpg',
-    'fond16.jpg',
-    'fond17.jpg',
-    'fond18.jpg',
-    'fond19.jpg',
-    'fond20.jpg',
-    'fond21.jpg',
-    'fond22.jpg',
-    'fond23.jpg',
-    'fond24.jpg',
-    'fond25.jpg',
-    'fond26.jpg',
-    'fond27.jpg',
-    'fond28.jpg',
-    'fond29.jpg',
-    'fond30.jpg',
-    'fond31.jpg',
-    'fond32.jpg',
-    'fond33.jpg']
-  %>
-  <% @urls.each do |url| %>
-    <div class="flex flex-col items-center bg-white p-4 shadow rounded">
-      <%= image_tag url, :plugin => 'redmine_asap_theme', class: 'w-full mb-6 max-w-none' %>
-      <%= radio_button_tag 'settings[redmine_asap_login_wallpaper]', url, true %>
-    </div>
-  <% end %>
+  <% images_dir = Rails.root.join('plugins', 'redmine_asap_theme', 'assets', 'images', 'login') %>
+<% @urls = Dir.glob("#{images_dir}/*.{jpg,png,jpeg,gif}").map { |f| File.basename(f) } %>
+<% @urls.each do |filename| %>
+  <div class="flex flex-col items-center bg-white p-4 shadow rounded">
+    <!-- DONNE LE CHEMIN login/FICHIER -->
+    <%= image_tag "login/#{filename}", :plugin => 'redmine_asap_theme', class: 'w-full mb-6 max-w-none' %>
+    <%= radio_button_tag 'settings[redmine_asap_login_wallpaper]', filename, (Setting.plugin_redmine_asap_theme['redmine_asap_login_wallpaper'] == filename) %>
+  </div>
+<% end %>
 </div>
