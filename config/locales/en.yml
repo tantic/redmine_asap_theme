@@ -53,6 +53,9 @@ en:
   display_settings: Displays settings
   show_reports: Show reports
   label_close_panel: Close
+  label_members_all: See all members
+  label_members_reduce: Reduce members
+  label_tracker_display: Display
   flash_message:
     notice: Information
     error: Error

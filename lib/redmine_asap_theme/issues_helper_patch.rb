@@ -43,7 +43,7 @@ include IssuesHelper
           text = content_tag(
             'span',
             @issue.status.name,
-            class: "rounded px-2.5 py-1 text-xs font-medium",
+            class: "rounded px-2.5 py-0.5 text-xs font-medium",
             style: "background-color: #{@issue.status.bg_color}; color: #{@issue.status.text_color};"
           )
         end
@@ -55,6 +55,18 @@ include IssuesHelper
           options
         )
       end
+    end
+
+    def issue_heading(issue)
+      text = issue.tracker.name + ' #' + issue.id.to_s
+
+      content_tag(
+          'span',
+          text,
+          class: "rounded px-2.5 py-1 text-xs font-medium",
+            style: "background-color: #{@issue.tracker.bg_color}; color: #{@issue.tracker.text_color};"
+        )
+      # h("#{issue.tracker} ##{issue.id}")
     end
 
     def issue_fields_rows

@@ -249,6 +249,54 @@ module RedmineAsapTheme
       s
     end
 
+
+    # Displays a link to +issue+ with its subject.
+    # Examples:
+    #
+    #   link_to_issue(issue)                        # => Defect #6: This is the subject
+    #   link_to_issue(issue, :truncate => 6)        # => Defect #6: This i...
+    #   link_to_issue(issue, :subject => false)     # => Defect #6
+    #   link_to_issue(issue, :project => true)      # => Foo - Defect #6
+    #   link_to_issue(issue, :subject => false, :tracker => false)     # => #6
+    #
+    def link_to_issue(issue, options = {})
+      title = nil
+      subject = nil
+
+      # Place l'ID après le nom du tracker dans le même span
+      tracker_text = if options[:tracker] == false
+        "##{issue.id}"
+      else
+        content_tag(
+          'span',
+          "#{issue.tracker} ##{issue.id}",
+          class: "rounded px-2.5 py-1 text-xs font-medium",
+          style: "background-color: #{issue.tracker.bg_color}; color: #{issue.tracker.text_color};"
+        )
+      end
+
+      if options[:subject] == false
+        title = issue.subject.truncate(60)
+      else
+        subject = issue.subject
+        if truncate_length = options[:truncate]
+          subject = subject.truncate(truncate_length)
+        end
+      end
+
+      only_path = options[:only_path].nil? ? true : options[:only_path]
+
+      s = link_to(
+        tracker_text.html_safe,
+        issue_url(issue, only_path: only_path),
+        class: issue.css_classes,
+        title: title
+      )
+      s << h(" #{subject}") if subject
+      s = h("#{issue.project} - ") + s if options[:project]
+      s
+    end
+
     def svg_tag(icon_name, options={})
       file = File.read(Rails.root.join('public', 'plugin_assets', 'redmine_asap_theme', 'icons', "#{icon_name}"))
       doc = Nokogiri::HTML::DocumentFragment.parse file

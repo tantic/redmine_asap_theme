@@ -56,6 +56,7 @@ fr:
   label_close_panel: Fermer
   label_members_all: Voir tous les membres
   label_members_reduce: Réduire les membres
+  label_tracker_display: Affichage
   flash_message:
     notice: Information
     error: Erreur

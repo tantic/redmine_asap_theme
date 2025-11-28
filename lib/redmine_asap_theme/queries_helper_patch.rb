@@ -32,9 +32,10 @@ module RedmineAsapTheme
         when :attachments
           value.to_a.map {|a| format_object(a)}.join(" ").html_safe
         when :tracker
-          content_tag('span', value, class: css_classes_for_item(value))
+          # content_tag('span', value, class: css_classes_for_item(value))
+          content_tag('span', value, class: "rounded-r-md px-2.5 py-1 text-xs font-medium", style: "background-color: #{item.tracker.bg_color};color: #{item.tracker.text_color}")
         when :status
-          content_tag('span', value, class: "rounded px-2.5 py-1 text-xs font-medium", style: "background-color: #{item.status.bg_color};color: #{item.status.text_color}")
+          content_tag('span', value, class: "rounded px-2.5 py-0.5 text-xs font-medium", style: "background-color: #{item.status.bg_color};color: #{item.status.text_color}")
         else
           format_object(value)
         end
