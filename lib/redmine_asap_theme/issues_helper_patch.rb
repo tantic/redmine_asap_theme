@@ -64,7 +64,7 @@ include IssuesHelper
           'span',
           text,
           class: "rounded px-2.5 py-1 text-xs font-medium",
-            style: "background-color: #{@issue.tracker.bg_color}; color: #{@issue.tracker.text_color};"
+            style: "background-color: #{issue.tracker.bg_color}; color: #{issue.tracker.text_color};"
         )
       # h("#{issue.tracker} ##{issue.id}")
     end
