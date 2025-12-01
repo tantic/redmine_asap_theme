@@ -5,7 +5,7 @@
       @apply mb-4;
 
       h3 {
-        @apply flex items-start;
+        @apply flex items-center;
         .gravatar{
           @apply h-10 w-10 mr-3;
         }
@@ -14,7 +14,7 @@
         }
       }
       .author{
-        @apply text-gray-500 font-light -mt-4 pl-14 border-b border-gray-200 pb-4 mb-4;
+        @apply text-gray-500 font-light -mt-4 pl-14 border-b border-gray-200 dark:border-gray-600 pb-4 mb-4;
         a.user.active{
           span{
             @apply p-0 shadow-none align-bottom border-0;

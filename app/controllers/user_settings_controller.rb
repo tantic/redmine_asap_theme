@@ -28,6 +28,9 @@ class UserSettingsController < ApplicationController
     @pref = @user.pref
     @user.safe_attributes = params[:user]
     @user.pref.safe_attributes = params[:pref]
+    if params[:pref] && params[:pref][:theme]
+      @user.pref[:theme] = params[:pref][:theme]
+    end
     if @user.save
       @user.pref.save
       set_language_if_valid @user.language

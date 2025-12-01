@@ -15,6 +15,7 @@ https://tantic.github.io/redmine_asap_docs/docs/theme/intro
 
 ## Features
 
+Ready
 * New general design
 * New navbar for navigation and new menu for project
 * New home page
@@ -24,6 +25,11 @@ https://tantic.github.io/redmine_asap_docs/docs/theme/intro
 * Logo's color is customizable
 * Login page is customizable with picture
 * Issue statuses can be customized (background color and color)
+* Tracker can be customized (background color and color)
+* Dark theme : each user can choose light or dark theme from the settings modale
+
+To do
+* Responsive mode
 
 ## Screenshots
 

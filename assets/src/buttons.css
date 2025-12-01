@@ -15,7 +15,7 @@
 }
 
 a.icon{
-  @apply text-gray-800 no-underline   font-medium rounded text-xs px-2.5 py-1.5
+  @apply text-gray-800 dark:text-gray-100 no-underline   font-medium rounded text-xs px-2.5 py-1.5
 }
 
 a.icon:hover svg, a.icon-only:hover svg {
@@ -143,9 +143,9 @@ a.icon-checked{
 
 fieldset{
   legend{
-    @apply bg-gray-100 py-2 px-4 rounded flex items-center;
+    @apply bg-gray-100 dark:bg-gray-700 dark:text-gray-300 py-2 px-4 rounded flex items-center;
     a.icon-checked{
-      @apply p-0 mr-2 bg-gray-100;
+      @apply p-0 mr-2 bg-gray-100 dark:bg-gray-800;
       > span{
         display: none;
       }

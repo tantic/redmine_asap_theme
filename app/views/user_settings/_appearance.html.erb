@@ -1,8 +1,33 @@
+<%= labelled_form_for :user, @user,
+                              :url => { :action => "update" },
+                              :html => { :id => 'update_settings_form',
+                                          :method => :put, :multipart => true } do |f| %>
+
+<div class="mb-6">
+  <label><%= l(:label_user_theme_settings) %></label><br>
+  <label>
+    <input type="radio" name="pref[theme]" value="light" <%= @user.pref[:theme] == 'light' ? 'checked' : '' %>>
+    <%= l(:label_user_theme_settings_light) %>
+  </label>
+  <br>
+  <label>
+    <input type="radio" name="pref[theme]" value="dark" <%= @user.pref[:theme] == 'dark' ? 'checked' : '' %>>
+    <%= l(:label_user_theme_settings_dark) %>
+  </label>
+</div>
+
 <%= labelled_fields_for :pref, @user.pref do |pref_fields| %>
 <div class="mb-6"><%= pref_fields.select :textarea_font, textarea_font_options %></div>
 <% end %>
 
-<div class="mb-6">
+ <div class="flex w-full">
+      <div class="button-submit"><%= submit_tag l(:button_save) %></div>
+    </div>
+
+  <% end %>
+
+
+<div class="my-6 shadow rounded p-8">
   <h2><%= l(:label_avatar)%></h2>
   <div style="width: 128px; height: 128px; border: 1px silver solid;" class="mb-8">
   <%= avatar(@user, :size => "100") %>

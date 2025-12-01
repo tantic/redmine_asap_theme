@@ -1,6 +1,6 @@
 .controller-issues{
   div.issue {
-    @apply bg-white shadow p-8 border border-gray-100;
+    @apply bg-white dark:bg-gray-800 shadow p-8 border border-gray-100 dark:border-gray-800;
     div.gravatar-with-child, div.avatar-with-child{
       @apply float-left mr-4;
       .gravatar{
@@ -14,7 +14,7 @@
       @apply w-8 h-8 rounded-full absolute top-6 -right-2;
     }
     .author{
-      @apply text-gray-500 font-light mt-0;
+      @apply text-gray-500 dark:text-gray-300 font-light mt-0;
       a.user.active{
         span{
           @apply p-0 shadow-none align-bottom border-0;
@@ -26,10 +26,22 @@
     }
   }
 
+  .select2-container--default .select2-selection--multiple{
+    @apply dark:bg-gray-700! border-gray-800;
+  }
+
+  .select2-container--default .select2-results__option--highlighted[aria-selected]{
+    @apply dark:bg-gray-800! border-gray-800! text-gray-300!;
+  }
+
+  .select2-dropdown{
+     @apply dark:bg-gray-700! border-gray-800! text-gray-300!;
+  }
+
   div.journals{
-    @apply my-4 p-8 bg-white shadow rounded;
+    @apply my-4 p-8 bg-white dark:bg-gray-800 shadow rounded;
     #tab-content-history > div{
-      @apply relative border-s-2 border-gray-200 ms-4;
+      @apply relative border-s-2 border-gray-200 dark:border-gray-600 ms-4;
       > div{
         @apply pb-4 ms-6;
       }
@@ -37,9 +49,9 @@
         @apply  absolute flex items-center justify-center w-8 h-8 rounded-full start-6;
       }
       .journal-info{
-        @apply flex items-center font-light;
+        @apply flex items-center font-light dark:text-gray-100;
         >a{
-          @apply mx-1 text-gray-800;
+          @apply mx-1 text-gray-800 dark:text-gray-100;
         }
       }
       .journal-header{
@@ -52,7 +64,7 @@
         }
       }
       .journal-content{
-        @apply bg-gray-50 rounded p-4;
+        @apply bg-gray-50 dark:bg-gray-700 rounded p-4;
       }
     }
 
@@ -105,7 +117,7 @@
   }
 
   div.issue div.attributes{
-    @apply bg-gray-50 rounded p-6 border border-gray-100 mb-6
+    @apply bg-gray-50 dark:bg-gray-700 rounded p-6 border border-gray-100 dark:border-gray-700 mb-6
   }
 
   div.issue div.wiki{
@@ -113,7 +125,7 @@
   }
 
   div.issue .subject h3{
-    @apply font-bold text-lg mb-0
+    @apply font-bold text-lg mb-0 dark:text-gray-400;
   }
 
   div.issue .next-prev-links .position a{

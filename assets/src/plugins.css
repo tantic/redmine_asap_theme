@@ -9,20 +9,20 @@
     @apply w-full;
   }
   .block-receiver{
-    @apply pt-0!;
+    @apply pt-0! border-0;
     .mypage-box{
-      @apply shadow mt-0 mb-4 bg-white border border-gray-200 rounded-lg  p-8 dark:bg-gray-800 dark:border-gray-700;
+      @apply shadow mt-0 mb-4 bg-white border border-gray-200 rounded-lg  p-8 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-200;
     }
     .mypage-box h3{
       @apply mb-6 w-full;
     }
 
     .mypage-box h3 .icon-svg{
-      @apply text-gray-800 stroke-current;
+      @apply text-gray-800 dark:text-gray-200 stroke-current;
     }
 
     .mypage-box h3 .icon-label{
-      @apply text-xs uppercase text-gray-800 font-medium;
+      @apply text-xs uppercase text-gray-800 dark:text-gray-200 font-medium;
     }
   }
 }
@@ -56,7 +56,7 @@
 }
 
 #fast-desc-link.icon-edit{
-  @apply bg-white text-gray-800 hover:bg-blue-700 hover:text-blue-100;
+  @apply bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-300 hover:bg-blue-700 hover:text-blue-100;
 }
 
 /* Redmineup agile plugin */
@@ -236,7 +236,7 @@ html.agile-board-fullscreen div.agile-board{
 
 /* Redmine asap user features */
 .user-card{
-  @apply absolute bg-white shadow p-4 rounded w-72 z-50;
+  @apply absolute bg-white dark:bg-gray-600 dark:text-gray-300 shadow p-4 rounded w-72 z-50;
   h2.title{
     @apply flex items-center;
     img{

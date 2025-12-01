@@ -1,5 +1,5 @@
 .autoscroll{
-  @apply w-full overflow-x-auto shadow bg-white p-4;
+  @apply w-full overflow-x-auto shadow bg-white dark:bg-gray-800 p-4;
 }
 
 table.list{
@@ -15,7 +15,7 @@ table.list{
 }
 
 table.list th, .table-list-header {
-  @apply bg-gray-100 p-2 align-middle
+  @apply bg-gray-100 dark:bg-gray-700 p-2 align-middle dark:border-gray-600 dark:border;
   /* background-color:#EEEEEE; padding: 4px; white-space:nowrap; font-weight:bold; border-bottom: 2px solid #d0d7de;  */
 }
 
@@ -24,11 +24,11 @@ table.list thead{
 }
 
 table.list thead th a{
-  @apply flex items-center text-gray-700 text-xs
+  @apply flex items-center text-gray-700 dark:text-gray-200 text-xs
 }
 
 table.list thead th a.sort{
-  @apply bg-gray-200 rounded text-gray-800 font-bold
+  @apply bg-gray-200 dark:bg-gray-600 rounded text-gray-800 dark:text-gray-100 font-bold
 }
 
 table.list tr.assigned-to-me{
@@ -38,7 +38,7 @@ table.list tr.assigned-to-me{
 }
 
 table.list td {
-  @apply  align-middle text-xs px-4 py-2 border border-gray-100 text-gray-900;
+  @apply  align-middle text-xs px-4 py-2 border border-gray-100 dark:border-gray-800 dark:text-gray-100 text-gray-900;
 }
 
 table.list .checkbox input{
@@ -46,7 +46,7 @@ table.list .checkbox input{
 }
 
 table.list td.subject a{
-  @apply text-gray-900 font-normal
+  @apply text-gray-900 dark:text-gray-100 font-normal
 }
 
 table.list td.author, table.list td.assigned_to{
@@ -62,6 +62,18 @@ table.list td.author, table.list td.assigned_to{
 table.issues tr.issue td.id a{
   @apply bg-pink-50 px-2 py-1 border-pink-600 text-pink-800
 }
+
+table.list:not(.odd-even) tbody tr:nth-child(odd), .odd, #issue-changesets div.changeset:nth-child(odd) {
+  @apply bg-white dark:bg-gray-700;
+}
+table.list:not(.odd-even) tbody tr:nth-child(even), .even, #issue-changesets div.changeset:nth-child(even) {
+  @apply bg-gray-50 dark:bg-gray-800;
+}
+table.list:not(.odd-even) tbody tr:nth-child(odd):hover, .odd:hover, #issue-changesets div.changeset:nth-child(odd):hover,
+table.list:not(.odd-even) tbody tr:nth-child(even):hover, .even:hover, #issue-changesets div.changeset:nth-child(even):hover {
+  @apply bg-gray-100 dark:bg-gray-600;
+}
+
 
 
 tr.idnt td.subject, tr.idnt td.name {
@@ -79,7 +91,7 @@ tr.idnt-9 td.subject, tr.idnt-9 td.name {padding-left: 152px; background-positio
 
 #projects-index{
   .projects >  li.root {
-    @apply bg-white shadow border border-gray-50;
+    @apply bg-white dark:bg-gray-800 shadow border border-gray-50 dark:border-gray-800;
   }
 }
 

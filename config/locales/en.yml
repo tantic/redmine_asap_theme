@@ -56,6 +56,9 @@ en:
   label_members_all: See all members
   label_members_reduce: Reduce members
   label_tracker_display: Display
+  label_user_theme_settings: Theme
+  label_user_theme_settings_light: Light
+  label_user_theme_settings_dark: Dark
   flash_message:
     notice: Information
     error: Error

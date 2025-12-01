@@ -57,6 +57,9 @@ fr:
   label_members_all: Voir tous les membres
   label_members_reduce: Réduire les membres
   label_tracker_display: Affichage
+  label_user_theme_settings: Thème
+  label_user_theme_settings_light: Clair
+  label_user_theme_settings_dark: Sombre
   flash_message:
     notice: Information
     error: Erreur

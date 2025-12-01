@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="<%= current_language %>">
+<html lang="<%= current_language %>" class="<%= User.current.pref[:theme] %>">
 <head>
 <meta charset="utf-8" />
 <title><%= html_title %></title>
@@ -83,7 +83,7 @@
     <% end %>
 
     <% if display_main_menu?(@project) %>
-    <nav  class="flex flex-col bg-white h-14  w-full <%= (User.current.logged? || !Setting.login_required?) ? 'mt-14' : 'mt-0' %>">
+    <nav  class="flex flex-col bg-white dark:bg-gray-800 h-14  w-full <%= (User.current.logged? || !Setting.login_required?) ? 'mt-14' : 'mt-0' %>">
       <div id="main-menu" class="tabs">
           <%= render_main_menu(@project) %>
           <div class="tabs-buttons" style="display:none;">

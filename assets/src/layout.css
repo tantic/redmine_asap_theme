@@ -1,5 +1,7 @@
-#content{
-  @apply bg-zinc-50 dark:bg-gray-900 p-8
+
+
+#content {
+  @apply px-12 py-10 bg-gray-50 dark:bg-gray-900 flex-grow m-0 overflow-x-auto;
 }
 
 #content .splitcontent{
@@ -25,14 +27,12 @@
 .splitcontenttop {flex: 2; flex-basis: 100%;} */
 
 
-#content {
-  @apply px-12 py-10 bg-gray-50 flex-grow m-0 overflow-x-auto;
-}
+
 
 
 
 div#sticky-issue-header {
-  @apply hidden fixed top-14 left-0 right-0 bg-white border-b border-gray-100 shadow-sm text-sm z-50 px-14 py-4
+  @apply hidden fixed top-14 left-0 right-0 bg-white dark:bg-gray-900 border-b border-gray-100 dark:border-gray-800 shadow-sm text-sm z-50 px-14 py-4
 }
 div#sticky-issue-header.is-visible {
   display: flex;
@@ -48,4 +48,9 @@ div#sticky-issue-header .subject {
   text-overflow: ellipsis;
   white-space: nowrap;
   flex-grow: 1;
+}
+
+#footer {
+  clear: both; border-top: 1px solid #d0d7de; font-size: 0.9em; color: #aaa; padding: 5px; text-align:center; background:#fff;
+  @apply dark:bg-gray-800 border-t-gray-800;
 }

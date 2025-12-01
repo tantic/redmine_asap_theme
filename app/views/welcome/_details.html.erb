@@ -1,5 +1,5 @@
 <div data-controller="projects" data-projects-url-value="/home/project/<%= project.id %>" class="flex flex-col group  mb-2.5">
-  <%= link_to_project(project, {}, class:"font-medium text-gray-900 flex items-center truncate text-xs bg-white dark:bg-gray-700 shadow rounded-t px-4 py-3 hover:bg-gray-50 hover:text-gray-900 hover:font-semibold ") %>
+  <%= link_to_project(project, {}, class:"font-medium text-gray-900 flex items-center truncate text-xs bg-white dark:hover:bg-gray-700 dark:bg-gray-800 shadow rounded-t px-4 py-3 hover:bg-gray-50 hover:text-gray-900 hover:font-semibold ") %>
 
   <div class="relative">
     <footer class="text-xs bg-white  dark:bg-gray-700 absolute -bottom-6 shadow rounded-b hidden group-hover:grid grid-cols-4 gap-1 w-full">
@@ -51,7 +51,7 @@
           <div data-projects-target="submenu" class="absolute hidden overflow-y-auto top-6 z-50 shadow rounded-md border border-gray-50 mt bg-white  dark:bg-slate-800 dark:border-none dark:text-gray-100 w-60 ">
             <div class="flex flex-col">
               <% project.children.visible(User.current).each do |project| %>
-                <%= link_to project.name, project_path(project), class: "w-full hover:bg-gray-100 hover:text-gray-900 hover:font-medium px-4 py-2" %>
+                <%= link_to project.name, project_path(project), class: "w-full hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-gray-300 hover:text-gray-900 hover:font-medium px-4 py-2" %>
               <% end %>
             </div>
           </div>

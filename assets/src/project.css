@@ -55,9 +55,9 @@
 
   .members{
     >p{
-      @apply border-0 p-4 mb-4 bg-gray-50 rounded;
+      @apply border-0 p-4 mb-4 bg-gray-50 dark:bg-gray-700 rounded;
       >span.label{
-        @apply font-bold flex w-full pb-2;
+        @apply font-bold flex w-full pb-2 dark:text-gray-300;
       }
       >a{
 
