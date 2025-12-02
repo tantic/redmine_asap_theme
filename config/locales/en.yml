@@ -63,6 +63,7 @@ en:
     notice: Information
     error: Error
     alert: Alert
+  error_saving_avatar: An error occured during the avatar upload
   welcome:
     tabs:
       quicklinks: Quick links

@@ -64,6 +64,7 @@ fr:
     notice: Information
     error: Erreur
     alert: Attention
+  error_saving_avatar: Erreur lors de la sauvegarde de l'avatar
   welcome:
     tabs:
       quicklinks: Accès rapides

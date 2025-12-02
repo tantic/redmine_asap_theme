@@ -9,7 +9,7 @@
           <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM12.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM18.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
         </svg>
       </div>
-      <div id="project-menu-submenus" class="drdn-items absolute left-0 shadow rounded-md border border-gray-50 dark:border-gray-700 mt bg-white dark:bg-gray-700 z-50 w-60 top-14 hidden" data-projectmenu-target="projectsubmenu">
+      <div id="project-menu-submenus" class="drdn-items absolute right-0 md:left-0 shadow rounded-md border border-gray-50 dark:border-gray-700 mt bg-white dark:bg-gray-700 z-50 w-60 top-14 hidden" data-projectmenu-target="projectsubmenu">
         <%= bookmark_link @project %>
 
         <% if User.current.allowed_to?(:add_subprojects, @project) %>

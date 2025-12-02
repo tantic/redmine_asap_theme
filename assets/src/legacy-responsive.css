@@ -31,7 +31,7 @@
   add first breakpoint here and start adding responsiveness
 */
 
-@media screen and (max-width: 899px)
+@media screen and (max-width: 1024px)
 {
   /*----------------------------------------*\
     A) BASIC MOBILE RESETS
@@ -103,7 +103,7 @@
 
   /* Hide project name on mobile (project name is still visible in select menu) */
   #header h1 {
-    display: none  ;
+    display: none !important;
   }
 
   /* reset #header a color for mobile toggle button */
@@ -140,9 +140,9 @@
     padding: 5px;
     padding-right: 72px;
     padding-left: 20px;
-  } */
+  }
   #project-jump .drdn-trigger {
-    /* font-size:1.5em; */
+    font-size:1.5em;
     font-weight:bold;
     display:block;
     width:100%;
@@ -154,15 +154,13 @@
     border:0;
   }
   #project-jump .drdn-trigger:before {
-    /* set a font-size in order to achive same result in different themes */
     font-family: var(--fonts-main);
-    /* font-size: 1.5em; */
+    font-size: 1.5em;
 
     position: absolute;
     left: 0;
     padding: 0 8px;
-    /* achieve dropdwon arrow by scaling a caret character */
-    /* content: '^'; */
+    content: '^';
     -webkit-transform: scale(1,-.8);
             transform: scale(1,-.8);
     text-align: right;
@@ -191,7 +189,7 @@
   #project-jump .drdn-content .autocomplete {
     height:40px;
     font-size:1.25rem;
-    padding-left: 28px  ;
+    padding-left: 28px !important;
   }
   #project-jump .drdn-content a {
     padding:8px;
@@ -199,7 +197,7 @@
 
   #header #quick-search form {
     display: none;
-  }
+  } */
 
   /*----------------------------------------*\
     C) MAIN CONTENT & SIDEBAR
@@ -217,10 +215,10 @@
   }
 
   /* hide sidebar and sidebar switch panel, since it's placed in mobile flyout menu */
-  #sidebar,
+  /* #sidebar,
   #sidebar-switch-panel {
     display: none;
-  }
+  } */
 
   .splitcontentleft, .splitcontentright, .splitcontenttop {
     width: 100%;
@@ -385,7 +383,7 @@
     list-style: none;
   }
 
-  .flyout-menu #watchers {
+  .flyout-menu #watchers, .flyout-menu .queries {
     display: -webkit-flex;
     display: -webkit-box;
     display: flex;
@@ -402,11 +400,11 @@
     order: 3;
   }
 
-  .flyout-menu #watchers h3 {
+  /* #sidebar-wrapper {
     margin-left: -8px;
-  }
+  } */
 
-  .flyout-menu #watchers ul li {
+  .flyout-menu #watchers ul li, .flyout-menu ul.queries li {
     display: -webkit-flex;
     display: -webkit-box;
     display: flex;
@@ -418,6 +416,16 @@
     -webkit-align-items: center;
     -webkit-box-align: center;
     align-items: center;
+    border-top: 1px solid rgba(255,255,255,.1);
+  }
+
+  .flyout-menu #watchers ul li a, .flyout-menu ul.queries li a {
+    border-top: none;
+  }
+
+  .flyout-menu ul.queries li a.icon-clear-query {
+    flex-shrink: 0;
+    padding-right: 8px;
   }
 
   .flyout-menu ul li a {
@@ -440,7 +448,7 @@
     color: white;
   }
 
-  .flyout-menu .icon svg {
+  .flyout-menu .icon svg, .flyout-menu .icon-only svg {
     stroke: white;
   }
 
@@ -560,14 +568,14 @@
     padding-bottom: 0;
   }
 
-  #admin-menu a,
+  /* #admin-menu a,
   #admin-menu a.selected {
     line-height: 40px;
     padding: 0;
-  }
+  } */
 
   #admin-menu a.icon:not(:has(svg)) {
-    padding-left: 20px  ;
+    padding-left: 20px !important;
   }
 
   /*----------------------------------------*\
@@ -677,17 +685,17 @@
    * [4] maintain width due to [3]
    */
   .gantt_subjects_column {
-    width: 60%  ; /* [1] */
+    width: 60% !important; /* [1] */
   }
 
   .gantt_subjects_container {
-    width: 100%  ;
+    width: 100% !important;
     overflow: hidden;
   }
 
   .gantt_subjects_column .gantt_hdr {
-    width: 100%  ;
-    right: 0  ; /* [2] */
+    width: 100% !important;
+    right: 0 !important; /* [2] */
     border-right: solid 1px #c0c0c0;
   }
 
@@ -728,7 +736,7 @@
 
   /* new issue form */
   #all_attributes p:first-child {
-    float: none  ;
+    float: none !important;
   }
 
   #all_attributes #issue_tracker_id {
@@ -754,35 +762,44 @@
     text-align: left;
   }
 
-  /* subtasks and related issues list on issue show */
-  #issue_tree .issues, #relations .issues {
+  /* subtasks and related issues list on issue show (without headers) */
+  #issue_tree:not(.with-related-issues-table-headers) table.issues,
+  #relations:not(.with-related-issues-table-headers) table.issues {
     border-collapse: separate;
     border-spacing: 0 1em; /* vertical space between tasks */
   }
 
-  #issue_tree .issue > td:not(.checkbox), #relations .issue > td:not(.checkbox) {
+  #issue_tree:not(.with-related-issues-table-headers) .issue > td:not(.checkbox),
+  #relations:not(.with-related-issues-table-headers) .issue > td:not(.checkbox) {
     display: block;
     float: left;
     text-align: left;
     padding-right: 5px;
   }
 
-  #issue_tree .issue > td.subject, #relations .issue > td.subject {
+  #issue_tree:not(.with-related-issues-table-headers) .issue > td.subject,
+  #relations:not(.with-related-issues-table-headers) .issue > td.subject {
     width: 100%; /* let subject have one full width column */
   }
 
-  #issue_tree .issue > td:not(.subject), #relations .issue > td:not(.subject) {
+  #issue_tree:not(.with-related-issues-table-headers) .issue:has(.buttons a) > td.subject,
+  #relations:not(.with-related-issues-table-headers) .issue:has(.buttons a) > td.subject {
+    padding-right: 40px;
+  }
+
+  #issue_tree:not(.with-related-issues-table-headers) .issue > td:not(.subject),
+  #relations:not(.with-related-issues-table-headers) .issue > td:not(.subject) {
     width: 20%; /* three columns for all cells that are not subject */
   }
 
-  #issue_tree .issues, #issue_tree .issue,
-  #relations .issues, #relations .issue {
+  #issue_tree:not(.with-related-issues-table-headers) table.issues, #issue_tree:not(.with-related-issues-table-headers) .issue,
+  #relations:not(.with-related-issues-table-headers) table.issues, #relations:not(.with-related-issues-table-headers) .issue {
     position: relative; /* needed for .buttons positioning */
   }
 
   /* positioniong of unline button */
-  #issue_tree .issue > td.buttons,
-  #relations .issue > td.buttons {
+  #issue_tree:not(.with-related-issues-table-headers) .issue > td.buttons,
+  #relations:not(.with-related-issues-table-headers) .issue > td.buttons {
     text-align: right;
     position: absolute;
     right: 0;
@@ -790,9 +807,20 @@
     padding-right: 0;
   }
 
-  #issue_tree .issue .buttons a,
-  #relations .issue .buttons a {
+  #issue_tree:not(.with-related-issues-table-headers) .issue .buttons a,
+  #relations:not(.with-related-issues-table-headers) .issue .buttons a {
     vertical-align: middle;
+  }
+
+  /* subtasks and related issues list on issue show (with headers) */
+  #issue_tree.with-related-issues-table-headers .subtasks-wrapper,
+  #relations.with-related-issues-table-headers .relation-issues-wrapper {
+    overflow-x: scroll;
+  }
+
+  #issue_tree.with-related-issues-table-headers .issue > td.subject,
+  #relations.with-related-issues-table-headers .issue > td.subject {
+    min-width: 15rem;
   }
 
   /* attachment upload form */
@@ -844,16 +872,30 @@
     font-size: 1.1em;
     text-align: left;
   }
+
+  /* Sticky issue header */
+  /* When project-jump.drdn is visible in mobile layout, offset the sticky header by its height to prevent it from being hidden. */
+  div#sticky-issue-header {
+    top: 64px;
+  }
+
+  /* Prevent content from being hidden behind #sticky-issue-header and project-jump when scrolling via anchor links. */
+  .controller-issues.action-show div.wiki a[name],
+  .controller-issues.action-show #history div[id^="note-"],
+  .controller-issues.action-show #history div[id^="change-"],
+  .controller-issues.action-show #update {
+    scroll-margin-top: 114px;
+  }
 }
 
-@media all and (max-width: 599px) {
+@media all and (max-width: 640px) {
   span.pagination {text-align:center;}
   .pagination ul.pages li {display:none;}
   .pagination ul.pages li.current,
   .pagination ul.pages li.previous,
   .pagination ul.pages li.next {display:inline-block; width:32%; overflow:hidden;}
 
-  #login-form {width:100%; margin-top:2em;}
+  /* #login-form {width:100%; margin-top:2em;} */
 
   #filters-table .filter .field, #list-definition > div .field { width: 100%; }
   #filters-table .values { width: auto; max-width: 100%; }

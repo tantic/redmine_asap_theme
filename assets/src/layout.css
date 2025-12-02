@@ -1,7 +1,7 @@
 
 
 #content {
-  @apply px-12 py-10 bg-gray-50 dark:bg-gray-900 flex-grow m-0 overflow-x-auto;
+  @apply px-6 sm:px-12 py-8 sm:py-10 bg-gray-50 dark:bg-gray-900 flex-grow m-0 overflow-x-auto;
 }
 
 #content .splitcontent{
@@ -32,7 +32,7 @@
 
 
 div#sticky-issue-header {
-  @apply hidden fixed top-14 left-0 right-0 bg-white dark:bg-gray-900 border-b border-gray-100 dark:border-gray-800 shadow-sm text-sm z-50 px-14 py-4
+  @apply hidden fixed top-14 left-0 right-0 bg-white dark:bg-gray-900 border-b border-gray-100 dark:border-gray-800 shadow-sm text-sm z-40 px-14 py-4
 }
 div#sticky-issue-header.is-visible {
   display: flex;
@@ -52,5 +52,5 @@ div#sticky-issue-header .subject {
 
 #footer {
   clear: both; border-top: 1px solid #d0d7de; font-size: 0.9em; color: #aaa; padding: 5px; text-align:center; background:#fff;
-  @apply dark:bg-gray-800 border-t-gray-800;
+  @apply dark:bg-gray-800 dark:border-t-gray-800;
 }

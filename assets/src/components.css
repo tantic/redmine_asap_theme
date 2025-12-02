@@ -4,7 +4,7 @@ body {
 }
 /* MENUS */
 #main-menu {
-  @apply relative mx-0 left-0 w-full flex  h-full border-b border-gray-200 dark:border-gray-800;
+  @apply relative mx-0 left-0 w-full flex  h-full border-b border-gray-200 dark:border-gray-800 overflow-x-auto md:overflow-auto;
 }
 
 #main-menu ul{
@@ -103,7 +103,7 @@ body {
 }
 
 #project-jump .drdn-trigger{
-  @apply flex items-center truncate whitespace-nowrap border-0 bg-blue-700 h-full hover:bg-blue-800 rounded-none text-blue-50 px-4 font-semibold w-full overflow-hidden;
+  @apply flex w-full items-center truncate whitespace-nowrap border-0 bg-blue-700 h-full hover:bg-blue-800 rounded-none text-blue-50 px-4 font-semibold overflow-hidden;
 }
 
 #project-jump .drdn-trigger::after{
@@ -478,7 +478,10 @@ a.user.user-mention {
   @apply bg-white dark:bg-gray-600;
 }
 
-div.tabs-buttons { position:absolute; right: 0; width: 54px; height: 24px; background: white; bottom: 0; border-bottom: 1px solid #bbbbbb; }
+div.tabs-buttons {
+  display: none !important;
+  /* position:absolute; right: 0; width: 54px; height: 24px; background: white; bottom: 0; border-bottom: 1px solid #bbbbbb;  */
+}
 
 button.tab-left, button.tab-right {
   font-size: 0.9em;
@@ -663,7 +666,7 @@ div.news .reaction {
 
 
 #sidebar{
-  @apply text-sm shrink-0 flex flex-col  bg-white dark:bg-gray-800 shadow;
+  @apply text-sm shrink-0 flex flex-col  bg-white dark:bg-gray-800 shadow overflow-y-auto h-auto z-50  w-9/12 md:w-64;
 }
 
 
@@ -697,12 +700,13 @@ div.news .reaction {
 }
 
 
-@media screen and (min-width: 0px) and (max-width: 1089px) {#sidebar{width: 22%;}}
+/* @media screen and (min-width: 0px) and (max-width: 1089px) {#sidebar{width: 22%;}}
 @media screen and (min-width: 1090px) and (max-width: 1279px) {#sidebar{width: 240px;}}
 @media screen and (min-width: 1280px) and (max-width: 1599px) {#sidebar{width: 280px;}}
 @media screen and (min-width: 1600px) and (max-width: 1919px) {#sidebar{width: 320px;}}
 @media screen and (min-width: 1920px) and (max-width: 2559px) {#sidebar{width: 360px;}}
-@media screen and (min-width: 2560px) {#sidebar{width: 380px;}}
+@media screen and (min-width: 2560px) {#sidebar{width: 380px;}} */
+
 #sidebar #sidebar-wrapper h3{ @apply font-extralight text-base; }
 #sidebar h3:first-child{ margin-top: 0; }
 #sidebar hr{ width: 100%; margin: 0 auto; height: 1px; background: #ccc; border: 0; }
