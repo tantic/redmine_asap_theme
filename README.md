@@ -28,7 +28,7 @@ Ready
 * Tracker can be customized (background color and color)
 * Dark theme : each user can choose light or dark theme from the settings modale
 
-To do
+In progress
 * Responsive mode
 
 ## Screenshots
@@ -42,6 +42,10 @@ To do
 ![Preferences](doc/screenshots/preferences.png)
 
 ![Dark](doc/screenshots/dark.png)
+
+![Mobile](doc/screenshots/mobile.png)
+
+![Mobile](doc/screenshots/mobile2.png)
 
 ## Installation
 
