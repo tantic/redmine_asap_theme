@@ -39,6 +39,8 @@ To do
 
 ![Preferences](doc/screenshots/preferences.png)
 
+![Dark](doc/screenshots/dark.png)
+
 ## Installation
 
 This plugin has been tested with Redmine 6.1.x
