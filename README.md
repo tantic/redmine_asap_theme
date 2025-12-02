@@ -35,6 +35,8 @@ To do
 
 ![Login page](doc/screenshots/login.png)
 
+![welcome page](doc/screenshots/welcome.png)
+
 ![Issues page](doc/screenshots/issues.png)
 
 ![Preferences](doc/screenshots/preferences.png)
