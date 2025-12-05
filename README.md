@@ -33,19 +33,21 @@ In progress
 
 ## Screenshots
 
-![Login page](doc/screenshots/login.png)
+![Login page](doc/screenshots/login.png | width=)
 
 ![welcome page](doc/screenshots/welcome.png)
 
 ![Issues page](doc/screenshots/issues.png)
 
+![Issue page](doc/screenshots/issue.png)
+
 ![Preferences](doc/screenshots/preferences.png)
 
 ![Dark](doc/screenshots/dark.png)
 
-![Mobile](doc/screenshots/mobile.png)
+![Mobile](doc/screenshots/mobile.png | width=200)
 
-![Mobile](doc/screenshots/mobile2.png)
+![Mobile](doc/screenshots/mobile2.png | width=200)
 
 ## Installation
 
