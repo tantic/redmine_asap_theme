@@ -27,9 +27,11 @@ Ready
 * Issue statuses can be customized (background color and color)
 * Tracker can be customized (background color and color)
 * Dark theme : each user can choose light or dark theme from the settings modale
+* Responsive mode
+* Colors and icons on default priorities (not customisable for now)
 
 In progress
-* Responsive mode
+* find a way to reduce query form
 
 ## Screenshots
 
