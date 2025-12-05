@@ -12,6 +12,10 @@
       <path d="M18 4v1"/>
       <path d="M18 9v11"/>
     </symbol>
+    <symbol viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" id="icon--chevrons-up">
+      <path d="M7 11l5 -5l5 5"/>
+      <path d="M7 17l5 -5l5 5"/>
+    </symbol>
     <symbol viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" id="icon--device-analytics">
       <path d="M3 4m0 1a1 1 0 0 1 1 -1h16a1 1 0 0 1 1 1v10a1 1 0 0 1 -1 1h-16a1 1 0 0 1 -1 -1z"/>
       <path d="M7 20l10 0"/>

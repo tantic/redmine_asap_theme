@@ -37,3 +37,5 @@
   svg: user-screen
 - name: device-analytics
   svg: device-analytics
+- name: chevrons-up
+  svg: chevrons-up

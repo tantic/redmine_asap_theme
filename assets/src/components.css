@@ -8,7 +8,7 @@ body {
 }
 
 #main-menu ul{
-  @apply flex justify-start
+  @apply flex justify-start;
 }
 
 #main-menu ul li{
@@ -666,7 +666,7 @@ div.news .reaction {
 
 
 #sidebar{
-  @apply text-sm shrink-0 flex flex-col  bg-white dark:bg-gray-800 shadow overflow-y-auto h-auto z-50  w-9/12 md:w-64;
+  @apply text-sm shrink-0 flex flex-col  bg-white dark:bg-gray-800 shadow overflow-y-auto h-auto   w-9/12 md:w-64;
 }
 
 

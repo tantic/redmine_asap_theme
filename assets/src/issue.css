@@ -122,6 +122,9 @@
     div.attribute{
       @apply flex flex-col md:flex-row pl-0 py-0.5;
     }
+    .tags{
+      @apply w-1/2;
+    }
     .label{
       @apply w-full md:w-1/3 md:py-0 py-1 font-bold;
     }

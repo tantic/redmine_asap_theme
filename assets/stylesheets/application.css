@@ -4528,7 +4528,6 @@ div.news .reaction {
   }
 }
 #sidebar {
-  z-index: 50;
   display: flex;
   height: auto;
   width: calc(9/12 * 100%);
@@ -5560,6 +5559,176 @@ svg.icon-svg {
     stroke: var(--color-blue-300);
   }
 }
+.priority-highest {
+  td.priority {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    color: var(--color-red-800);
+    &::before {
+      content: "";
+      display: inline-block;
+      mask: url("arrow-badge-up.svg") no-repeat center;
+      mask-size: contain;
+      height: calc(var(--spacing) * 5);
+      width: calc(var(--spacing) * 5);
+      background-color: var(--color-red-800);
+    }
+  }
+  div.priority {
+    .value {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+      color: var(--color-red-800);
+      &::before {
+        content: "";
+        display: inline-block;
+        mask: url("arrow-badge-up.svg") no-repeat center;
+        mask-size: contain;
+        height: calc(var(--spacing) * 5);
+        width: calc(var(--spacing) * 5);
+        background-color: var(--color-red-800);
+      }
+    }
+  }
+}
+.priority-high2 {
+  td.priority {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    color: var(--color-orange-700);
+    &::before {
+      content: "";
+      display: inline-block;
+      mask: url("chevrons-up.svg") no-repeat center;
+      mask-size: contain;
+      height: calc(var(--spacing) * 5);
+      width: calc(var(--spacing) * 5);
+      background-color: var(--color-orange-700);
+    }
+  }
+  div.priority {
+    .value {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+      color: var(--color-orange-700);
+      &::before {
+        content: "";
+        display: inline-block;
+        mask: url("chevrons-up.svg") no-repeat center;
+        mask-size: contain;
+        height: calc(var(--spacing) * 5);
+        width: calc(var(--spacing) * 5);
+        background-color: var(--color-orange-700);
+      }
+    }
+  }
+}
+.priority-high3 {
+  td.priority {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    color: var(--color-yellow-700);
+    &::before {
+      content: "";
+      display: inline-block;
+      mask: url("chevron-up.svg") no-repeat center;
+      mask-size: contain;
+      height: calc(var(--spacing) * 5);
+      width: calc(var(--spacing) * 5);
+      background-color: var(--color-yellow-700);
+    }
+  }
+  div.priority {
+    .value {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+      color: var(--color-yellow-700);
+      &::before {
+        content: "";
+        display: inline-block;
+        mask: url("chevron-up.svg") no-repeat center;
+        mask-size: contain;
+        height: calc(var(--spacing) * 5);
+        width: calc(var(--spacing) * 5);
+        background-color: var(--color-yellow-700);
+      }
+    }
+  }
+}
+.priority-default {
+  td.priority {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    color: var(--color-blue-800);
+    &::before {
+      content: "";
+      display: inline-block;
+      mask: url("equal.svg") no-repeat center;
+      mask-size: contain;
+      height: calc(var(--spacing) * 5);
+      width: calc(var(--spacing) * 5);
+      background-color: var(--color-blue-800);
+    }
+  }
+  div.priority {
+    .value {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+      color: var(--color-blue-800);
+      &::before {
+        content: "";
+        display: inline-block;
+        mask: url("equal.svg") no-repeat center;
+        mask-size: contain;
+        height: calc(var(--spacing) * 5);
+        width: calc(var(--spacing) * 5);
+        background-color: var(--color-blue-800);
+      }
+    }
+  }
+}
+.priority-lowest {
+  td.priority {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    color: var(--color-gray-500);
+    &::before {
+      content: "";
+      display: inline-block;
+      mask: url("chevrons-down.svg") no-repeat center;
+      mask-size: contain;
+      height: calc(var(--spacing) * 5);
+      width: calc(var(--spacing) * 5);
+      background-color: var(--color-gray-500);
+    }
+  }
+  div.priority {
+    .value {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+      color: var(--color-gray-500);
+      &::before {
+        content: "";
+        display: inline-block;
+        mask: url("chevrons-down.svg") no-repeat center;
+        mask-size: contain;
+        height: calc(var(--spacing) * 5);
+        width: calc(var(--spacing) * 5);
+        background-color: var(--color-gray-500);
+      }
+    }
+  }
+}
 .contextual {
   display: flex;
   align-items: center;
@@ -6554,6 +6723,9 @@ tr.idnt-9 td.subject, tr.idnt-9 td.name {
       @media (width >= 48rem) {
         flex-direction: row;
       }
+    }
+    .tags {
+      width: calc(1/2 * 100%);
     }
     .label {
       width: 100%;
@@ -7552,6 +7724,7 @@ html.agile-board-fullscreen div.agile-board {
     --color-red-700: oklch(50.5% 0.213 27.518);
     --color-red-800: oklch(44.4% 0.177 26.899);
     --color-red-900: oklch(39.6% 0.141 25.723);
+    --color-orange-700: oklch(55.3% 0.195 38.402);
     --color-amber-100: oklch(96.2% 0.059 95.617);
     --color-amber-800: oklch(47.3% 0.137 46.201);
     --color-yellow-100: oklch(97.3% 0.071 103.193);
@@ -7836,6 +8009,9 @@ html.agile-board-fullscreen div.agile-board {
   }
   .top-32 {
     top: calc(var(--spacing) * 32);
+  }
+  .-right-14 {
+    right: calc(var(--spacing) * -14);
   }
   .right-0 {
     right: calc(var(--spacing) * 0);
@@ -8645,6 +8821,10 @@ html.agile-board-fullscreen div.agile-board {
   }
   .shadow {
     --tw-shadow: 0 1px 3px 0 var(--tw-shadow-color, rgb(0 0 0 / 0.1)), 0 1px 2px -1px var(--tw-shadow-color, rgb(0 0 0 / 0.1));
+    box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+  }
+  .shadow-2xl {
+    --tw-shadow: 0 25px 50px -12px var(--tw-shadow-color, rgb(0 0 0 / 0.25));
     box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
   }
   .shadow-xl {
