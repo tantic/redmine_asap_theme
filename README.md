@@ -45,9 +45,9 @@ In progress
 
 ![Dark](doc/screenshots/dark.png)
 
-![Mobile](doc/screenshots/mobile.png | width=200)
+![Mobile](doc/screenshots/mobile.png)
 
-![Mobile](doc/screenshots/mobile2.png | width=200)
+![Mobile](doc/screenshots/mobile2.png)
 
 ## Installation
 
