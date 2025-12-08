@@ -51,11 +51,11 @@
     <div id="navbar-gravatar" data-action="click->usermenu#toggle" class="cursor-pointer p-2 h-full flex items-center justify-center">
       <%= avatar(User.current, :size => "32") %>
     </div>
-    <div class="absolute left-0 md:left-auto md:right-0 shadow rounded border border-gray-50 dark:border-gray-700 mt bg-white dark:bg-gray-700 z-49 w-60  bottom-12 md:top-14 hidden" data-usermenu-target="usersubmenu">
+    <div class="absolute flex-col left-0 md:left-auto md:right-0 shadow rounded border border-gray-50 dark:border-gray-700 mt bg-white dark:bg-gray-700 z-49 w-60  bottom-12 md:top-14 hidden" data-usermenu-target="usersubmenu">
       <div class="p-4 font-normal">
         <%= User.current %>
       </div>
-      <div class="border-t border-gray-50">
+      <div class="border-t border-gray-50 bg-white dark:bg-gray-700">
         <%= link_to user_path(User.current), :class => "icon flex text-xs items-center font-light text-gray-900! bg-white rounded-none hover:bg-gray-50 dark:text-gray-100! dark:bg-gray-700 dark:hover:bg-gray-600 hover:border-l-2 hover:border-blue-800 hover:pl-3.5 px-4 py-2" do %>
           <%= sprite_icon('user-scan', label= l(:label_profile), plugin: 'redmine_asap_theme') %>
         <% end %>
