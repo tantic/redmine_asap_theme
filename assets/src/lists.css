@@ -67,11 +67,11 @@ table.list:not(.odd-even) tbody tr:nth-child(odd), .odd, #issue-changesets div.c
   @apply bg-white dark:bg-gray-700;
 }
 table.list:not(.odd-even) tbody tr:nth-child(even), .even, #issue-changesets div.changeset:nth-child(even) {
-  @apply bg-gray-50 dark:bg-gray-800;
+  @apply bg-gray-100 dark:bg-gray-800;
 }
 table.list:not(.odd-even) tbody tr:nth-child(odd):hover, .odd:hover, #issue-changesets div.changeset:nth-child(odd):hover,
 table.list:not(.odd-even) tbody tr:nth-child(even):hover, .even:hover, #issue-changesets div.changeset:nth-child(even):hover {
-  @apply bg-gray-100 dark:bg-gray-600;
+  @apply bg-blue-200 dark:bg-gray-600;
 }
 
 

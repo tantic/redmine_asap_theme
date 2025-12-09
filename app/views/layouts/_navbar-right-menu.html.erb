@@ -51,7 +51,7 @@
     <div id="navbar-gravatar" data-action="click->usermenu#toggle" class="cursor-pointer p-2 h-full flex items-center justify-center">
       <%= avatar(User.current, :size => "32") %>
     </div>
-    <div class="absolute flex-col left-0 md:left-auto md:right-0 shadow rounded border border-gray-50 dark:border-gray-700 mt bg-white dark:bg-gray-700 z-49 w-60  bottom-12 md:top-14 hidden" data-usermenu-target="usersubmenu">
+    <div class="absolute h-full flex-col left-0 md:left-auto md:right-0 shadow-md rounded border border-gray-50 dark:border-gray-700 mt bg-white dark:bg-gray-700 z-49 w-60  bottom-12 md:top-14 hidden" data-usermenu-target="usersubmenu">
       <div class="p-4 font-normal">
         <%= User.current %>
       </div>

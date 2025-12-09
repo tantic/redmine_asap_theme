@@ -18,6 +18,7 @@ fr:
   label_settings_preferences: Préférences
   label_settings_notifications: Notifications
   label_settings_appearance: Apparence
+  label_settings_keys: Clés d'accès
   label_redmine_configuration: Configuration
   label_redmine_environment: Environnement
   label_redmine_versioned_name: Version Redmine

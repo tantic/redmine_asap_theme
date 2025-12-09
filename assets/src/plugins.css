@@ -99,7 +99,7 @@
   .container-fixed{
     @apply z-50 relative mt-4;
     .issue-card{
-      @apply shadow-md rounded bg-white p-4 border-0;
+      @apply shadow-md  rounded bg-white dark:bg-gray-700 p-4 border-b border-gray-200;
       .fields{
         @apply flex flex-col pb-6;
         > * {
@@ -124,6 +124,30 @@
     }
   }
 
+  .issue-card{
+    .fields{
+      >*:not(.issue-id){
+        @apply px-2;
+      }
+    }
+    p.name{
+      @apply py-2.5;
+      a{
+        @apply text-gray-900;
+      }
+    }
+    .sub-issues{
+      >ul{
+        @apply pl-0;
+        >li{
+          @apply py-1 hover:bg-gray-50 dark:hover:bg-gray-700;
+          >a{
+            @apply w-full;
+          }
+        }
+      }
+    }
+  }
 
 
 }

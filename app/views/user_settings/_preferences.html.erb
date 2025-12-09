@@ -14,6 +14,11 @@
 
   <%= call_hook(:view_my_account, :user => @user, :form => f) %>
 
+  <fieldset class="box">
+    <legend><%=l(:label_auto_watch_on)%></legend>
+    <%= render :partial => 'users/auto_watch_on' %>
+  </fieldset>
+
   <div class="flex w-full">
     <div class="ml-auto button-submit"><%= submit_tag l(:button_save) %></div>
   </div>

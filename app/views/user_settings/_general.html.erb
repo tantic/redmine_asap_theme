@@ -1,3 +1,8 @@
+<header class="flex w-full mb-6 justify-end">
+<%= additional_emails_link(@user) %>
+<%= link_to(sprite_icon('key', l(:button_change_password)), { controller: 'my', :action => 'password'}, :class => 'icon icon-passwd') if @user.change_password_allowed? %>
+
+</header>
 <%= labelled_form_for :user, @user,
                               :url => { :action => "update" },
                               :html => { :id => 'update_settings_form',
