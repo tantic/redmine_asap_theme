@@ -6424,6 +6424,9 @@ table.list td {
 table.list .checkbox input {
   height: 1rem;
 }
+tr.issue td.subject {
+  white-space: nowrap;
+}
 table.list td.subject a {
   --tw-font-weight: var(--font-weight-normal);
   font-weight: var(--font-weight-normal);
@@ -8809,6 +8812,9 @@ html.agile-board-fullscreen div.agile-board {
   .font-semibold {
     --tw-font-weight: var(--font-weight-semibold);
     font-weight: var(--font-weight-semibold);
+  }
+  .text-nowrap {
+    text-wrap: nowrap;
   }
   .text-wrap {
     text-wrap: wrap;

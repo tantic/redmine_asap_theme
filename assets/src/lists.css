@@ -45,8 +45,12 @@ table.list .checkbox input{
   height:1rem;
 }
 
+tr.issue td.subject{
+  white-space: nowrap;
+}
+
 table.list td.subject a{
-  @apply text-gray-900 dark:text-gray-100 font-normal
+  @apply text-gray-900 dark:text-gray-100 font-normal;
 }
 
 table.list td.author, table.list td.assigned_to{

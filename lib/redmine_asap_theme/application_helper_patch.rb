@@ -166,7 +166,7 @@ module RedmineAsapTheme
       when User
         username = principal.name(options[:format])
         username = "@#{username}" if options[:mention]
-        name = "<span style='display:inline-flex; align-items:center; gap:4px;' class='bg-white flex items-center justify-left text-xs dark:bg-gray-600 border border-gray-100 dark:border-gray-600 dark:hover:border-gray-500 hover:bg-gray-50 rounded px-2.5 py-1 text-gray-900 dark:text-gray-200 hover:text-blue-800'>#{avatar_with_local(principal, size: '18')} #{username}</span>".html_safe
+        name = "<span style='display:inline-flex; align-items:center; gap:4px;' class='bg-white flex items-center text-nowrap justify-left text-xs dark:bg-gray-600 border border-gray-100 dark:border-gray-600 dark:hover:border-gray-500 hover:bg-gray-50 rounded px-2.5 py-1 text-gray-900 dark:text-gray-200 hover:text-blue-800'>#{avatar_with_local(principal, size: '18')} #{username}</span>".html_safe
 
         css_classes = ''
         if principal.active? || (User.current.admin? && principal.logged?)
