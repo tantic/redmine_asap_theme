@@ -7752,6 +7752,30 @@ html.agile-board-fullscreen div.agile-board {
     margin-block: calc(var(--spacing) * 6);
   }
 }
+#oauth-form {
+  width: 100% !important;
+  #login-oauth-submit {
+    margin-block: calc(var(--spacing) * 2);
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.25rem;
+    padding-inline: calc(var(--spacing) * 2.5);
+    padding-block: calc(var(--spacing) * 2);
+    font-size: var(--text-xs);
+    line-height: var(--tw-leading, var(--text-xs--line-height));
+    color: var(--color-white);
+    --tw-shadow: 0 1px 3px 0 var(--tw-shadow-color, rgb(0 0 0 / 0.1)), 0 1px 2px -1px var(--tw-shadow-color, rgb(0 0 0 / 0.1));
+    box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+    i {
+      margin-right: calc(var(--spacing) * 2);
+    }
+    b {
+      margin-left: calc(var(--spacing) * 1);
+    }
+  }
+}
 @layer theme, base, components, utilities;
 @layer theme {
   :root, :host {
@@ -7844,7 +7868,6 @@ html.agile-board-fullscreen div.agile-board {
     --ease-in: cubic-bezier(0.4, 0, 1, 1);
     --ease-out: cubic-bezier(0, 0, 0.2, 1);
     --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
-    --blur-sm: 8px;
     --default-transition-duration: 150ms;
     --default-transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     --default-font-family: var(--font-sans);
@@ -8277,9 +8300,6 @@ html.agile-board-fullscreen div.agile-board {
   .h-2\/5 {
     height: calc(2/5 * 100%);
   }
-  .h-3\/5 {
-    height: calc(3/5 * 100%);
-  }
   .h-4 {
     height: calc(var(--spacing) * 4);
   }
@@ -8459,14 +8479,14 @@ html.agile-board-fullscreen div.agile-board {
   .items-start {
     align-items: flex-start;
   }
+  .items-stretch {
+    align-items: stretch;
+  }
   .justify-center {
     justify-content: center;
   }
   .justify-end {
     justify-content: flex-end;
-  }
-  .justify-start {
-    justify-content: flex-start;
   }
   .gap-1 {
     gap: calc(var(--spacing) * 1);
@@ -8495,9 +8515,6 @@ html.agile-board-fullscreen div.agile-board {
   }
   .overflow-auto {
     overflow: auto;
-  }
-  .overflow-hidden {
-    overflow: hidden;
   }
   .overflow-x-auto {
     overflow-x: auto;
@@ -8612,12 +8629,6 @@ html.agile-board-fullscreen div.agile-board {
   .bg-blue-900 {
     background-color: var(--color-blue-900);
   }
-  .bg-blue-900\/80 {
-    background-color: color-mix(in srgb, oklch(37.9% 0.146 265.522) 80%, transparent);
-    @supports (color: color-mix(in lab, red, red)) {
-      background-color: color-mix(in oklab, var(--color-blue-900) 80%, transparent);
-    }
-  }
   .bg-gray-50 {
     background-color: var(--color-gray-50);
   }
@@ -8638,30 +8649,6 @@ html.agile-board-fullscreen div.agile-board {
   }
   .bg-white\! {
     background-color: var(--color-white) !important;
-  }
-  .bg-white\/10 {
-    background-color: color-mix(in srgb, #fff 10%, transparent);
-    @supports (color: color-mix(in lab, red, red)) {
-      background-color: color-mix(in oklab, var(--color-white) 10%, transparent);
-    }
-  }
-  .bg-white\/80 {
-    background-color: color-mix(in srgb, #fff 80%, transparent);
-    @supports (color: color-mix(in lab, red, red)) {
-      background-color: color-mix(in oklab, var(--color-white) 80%, transparent);
-    }
-  }
-  .bg-white\/90 {
-    background-color: color-mix(in srgb, #fff 90%, transparent);
-    @supports (color: color-mix(in lab, red, red)) {
-      background-color: color-mix(in oklab, var(--color-white) 90%, transparent);
-    }
-  }
-  .bg-white\/95 {
-    background-color: color-mix(in srgb, #fff 95%, transparent);
-    @supports (color: color-mix(in lab, red, red)) {
-      background-color: color-mix(in oklab, var(--color-white) 95%, transparent);
-    }
   }
   .bg-cover {
     background-size: cover;
@@ -8911,16 +8898,6 @@ html.agile-board-fullscreen div.agile-board {
   }
   .filter {
     filter: var(--tw-blur,) var(--tw-brightness,) var(--tw-contrast,) var(--tw-grayscale,) var(--tw-hue-rotate,) var(--tw-invert,) var(--tw-saturate,) var(--tw-sepia,) var(--tw-drop-shadow,);
-  }
-  .backdrop-opacity-10 {
-    --tw-backdrop-opacity: opacity(10%);
-    -webkit-backdrop-filter: var(--tw-backdrop-blur,) var(--tw-backdrop-brightness,) var(--tw-backdrop-contrast,) var(--tw-backdrop-grayscale,) var(--tw-backdrop-hue-rotate,) var(--tw-backdrop-invert,) var(--tw-backdrop-opacity,) var(--tw-backdrop-saturate,) var(--tw-backdrop-sepia,);
-    backdrop-filter: var(--tw-backdrop-blur,) var(--tw-backdrop-brightness,) var(--tw-backdrop-contrast,) var(--tw-backdrop-grayscale,) var(--tw-backdrop-hue-rotate,) var(--tw-backdrop-invert,) var(--tw-backdrop-opacity,) var(--tw-backdrop-saturate,) var(--tw-backdrop-sepia,);
-  }
-  .backdrop-opacity-100 {
-    --tw-backdrop-opacity: opacity(100%);
-    -webkit-backdrop-filter: var(--tw-backdrop-blur,) var(--tw-backdrop-brightness,) var(--tw-backdrop-contrast,) var(--tw-backdrop-grayscale,) var(--tw-backdrop-hue-rotate,) var(--tw-backdrop-invert,) var(--tw-backdrop-opacity,) var(--tw-backdrop-saturate,) var(--tw-backdrop-sepia,);
-    backdrop-filter: var(--tw-backdrop-blur,) var(--tw-backdrop-brightness,) var(--tw-backdrop-contrast,) var(--tw-backdrop-grayscale,) var(--tw-backdrop-hue-rotate,) var(--tw-backdrop-invert,) var(--tw-backdrop-opacity,) var(--tw-backdrop-saturate,) var(--tw-backdrop-sepia,);
   }
   .transition {
     transition-property: color, background-color, border-color, outline-color, text-decoration-color, fill, stroke, --tw-gradient-from, --tw-gradient-via, --tw-gradient-to, opacity, box-shadow, transform, translate, scale, rotate, filter, -webkit-backdrop-filter, backdrop-filter, display, content-visibility, overlay, pointer-events;
@@ -9260,16 +9237,6 @@ html.agile-board-fullscreen div.agile-board {
       display: none;
     }
   }
-  .md\:h-96 {
-    @media (width >= 48rem) {
-      height: calc(var(--spacing) * 96);
-    }
-  }
-  .md\:h-full {
-    @media (width >= 48rem) {
-      height: 100%;
-    }
-  }
   .md\:w-2\/5 {
     @media (width >= 48rem) {
       width: calc(2/5 * 100%);
@@ -9315,11 +9282,6 @@ html.agile-board-fullscreen div.agile-board {
       flex-direction: row;
     }
   }
-  .md\:justify-center {
-    @media (width >= 48rem) {
-      justify-content: center;
-    }
-  }
   .md\:justify-start {
     @media (width >= 48rem) {
       justify-content: flex-start;
@@ -9354,9 +9316,9 @@ html.agile-board-fullscreen div.agile-board {
       padding-inline: calc(var(--spacing) * 12);
     }
   }
-  .md\:py-24 {
+  .md\:py-14 {
     @media (width >= 48rem) {
-      padding-block: calc(var(--spacing) * 24);
+      padding-block: calc(var(--spacing) * 14);
     }
   }
   .lg\:mt-14 {
@@ -9940,42 +9902,6 @@ html.agile-board-fullscreen div.agile-board {
   syntax: "*";
   inherits: false;
 }
-@property --tw-backdrop-blur {
-  syntax: "*";
-  inherits: false;
-}
-@property --tw-backdrop-brightness {
-  syntax: "*";
-  inherits: false;
-}
-@property --tw-backdrop-contrast {
-  syntax: "*";
-  inherits: false;
-}
-@property --tw-backdrop-grayscale {
-  syntax: "*";
-  inherits: false;
-}
-@property --tw-backdrop-hue-rotate {
-  syntax: "*";
-  inherits: false;
-}
-@property --tw-backdrop-invert {
-  syntax: "*";
-  inherits: false;
-}
-@property --tw-backdrop-opacity {
-  syntax: "*";
-  inherits: false;
-}
-@property --tw-backdrop-saturate {
-  syntax: "*";
-  inherits: false;
-}
-@property --tw-backdrop-sepia {
-  syntax: "*";
-  inherits: false;
-}
 @property --tw-duration {
   syntax: "*";
   inherits: false;
@@ -10047,15 +9973,6 @@ html.agile-board-fullscreen div.agile-board {
       --tw-drop-shadow-color: initial;
       --tw-drop-shadow-alpha: 100%;
       --tw-drop-shadow-size: initial;
-      --tw-backdrop-blur: initial;
-      --tw-backdrop-brightness: initial;
-      --tw-backdrop-contrast: initial;
-      --tw-backdrop-grayscale: initial;
-      --tw-backdrop-hue-rotate: initial;
-      --tw-backdrop-invert: initial;
-      --tw-backdrop-opacity: initial;
-      --tw-backdrop-saturate: initial;
-      --tw-backdrop-sepia: initial;
       --tw-duration: initial;
       --tw-ease: initial;
       --tw-scale-x: 1;

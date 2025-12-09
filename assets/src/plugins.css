@@ -280,3 +280,18 @@ html.agile-board-fullscreen div.agile-board{
     @apply my-6;
   }
 }
+
+
+/* redmine_oauth */
+#oauth-form{
+  @apply w-full!;
+  #login-oauth-submit{
+    @apply my-2 w-full flex text-white items-center justify-center px-2.5 py-2 shadow rounded text-xs;
+    i{
+      @apply mr-2;
+    }
+    b{
+      @apply ml-1;
+    }
+  }
+}

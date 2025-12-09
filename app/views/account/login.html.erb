@@ -1,8 +1,12 @@
 <%= call_hook :view_account_login_top %>
 
 <div id="login-form" class="w-full h-full bg-fixed flex bg-no-repeat bg-left-top bg-cover"  style="background-image: url(<%= asset_path("plugin_assets/redmine_asap_theme/login/#{Setting.plugin_redmine_asap_theme['redmine_asap_login_wallpaper']}") %>)">
-  <div class="flex flex-col bg-white justify-start md:justify-center h-3/5 md:h-96 items-center overflow-hidden md:flex-row w-full md:w-4/5 lg:w-3/5 xl:w-3/5 2xl:w-2/5 my-auto mx-8 md:mx-auto shadow-md">
-    <div class="p-8 h-auto md:h-full flex items-center justify-center flex-col w-full md:w-2/5 bg-blue-900 ">
+  <div class="flex flex-col md:flex-row bg-white items-stretch justify-center
+            h-auto my-auto mx-8 md:mx-auto shadow-md
+            w-full md:w-4/5 lg:w-3/5 xl:w-3/5 2xl:w-2/5">
+    <div class="p-8 flex items-center justify-center flex-col
+            w-full md:w-2/5 bg-blue-900">
+
       <div class="hidden md:flex items-center justify-center">
         <%= image_tag 'redmine_white.svg', :plugin => 'redmine_asap_theme', class: 'w-22 h-22' %>
       </div>
@@ -10,7 +14,7 @@
         <%= Setting.app_title %>
       </div>
     </div>
-    <div class="w-full md:w-3/5 flex flex-col px-12 py-8 md:py-24 ">
+    <div class="w-full h-full md:w-3/5 flex flex-col px-12 py-8 md:py-14 ">
       <%= form_tag(signin_path, onsubmit: 'return keepAnchorOnSignIn(this);', data: {turbo: false}, class:"mb-6") do %>
         <%= back_url_hidden_field_tag %>
 
