@@ -2,8 +2,9 @@
   @apply w-full overflow-x-auto shadow bg-white dark:bg-gray-800 p-4;
 }
 
+
 table.list{
-  @apply w-full block overflow-x-auto;
+  @apply w-full overflow-x-auto;
   tr.group{
     >td{
       @apply  p-2;
