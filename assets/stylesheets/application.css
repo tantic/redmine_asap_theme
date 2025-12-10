@@ -4006,7 +4006,6 @@ span.drdn .drdn-content {
 }
 .version-article {
   margin-block: calc(var(--spacing) * 4);
-  overflow-x: auto;
   border-radius: var(--radius-lg);
   border-style: var(--tw-border-style);
   border-width: 1px;
@@ -6337,7 +6336,9 @@ input[type="file"] {
   }
 }
 table.list {
+  display: block;
   width: 100%;
+  overflow-x: auto;
   tr.group {
     >td {
       padding: calc(var(--spacing) * 2);
@@ -6618,6 +6619,10 @@ tr.idnt-9 td.subject, tr.idnt-9 td.name {
     &:where(.dark, .dark *) {
       background-color: var(--color-gray-700) !important;
     }
+  }
+  .subtasks-wrapper {
+    width: 100%;
+    overflow-x: auto;
   }
   div.journals {
     margin-block: calc(var(--spacing) * 4);

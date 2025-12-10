@@ -3,7 +3,7 @@
 }
 
 table.list{
-  @apply w-full;
+  @apply w-full block overflow-x-auto;
   tr.group{
     >td{
       @apply  p-2;

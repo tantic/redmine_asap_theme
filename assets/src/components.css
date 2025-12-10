@@ -353,7 +353,7 @@ span.drdn .drdn-content{
 /* ROADMAP */
 
 .version-article{
-  @apply shadow my-4 bg-white overflow-x-auto border border-gray-200 rounded-lg  p-4 dark:bg-gray-800 dark:border-gray-700;
+  @apply shadow my-4 bg-white border border-gray-200 rounded-lg  p-4 dark:bg-gray-800 dark:border-gray-700;
 }
 
 .version-article header{

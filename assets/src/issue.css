@@ -38,6 +38,10 @@
      @apply dark:bg-gray-700! border-gray-800! text-gray-300!;
   }
 
+  .subtasks-wrapper{
+    @apply w-full overflow-x-auto;
+  }
+
   div.journals{
     @apply my-4 p-8 bg-white dark:bg-gray-800 shadow rounded;
     #tab-content-history > div{
