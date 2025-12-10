@@ -6,7 +6,7 @@
   <p class="mb-6"><%= f.select :default_done_ratio, ((0..10).to_a.collect {|r| ["#{r*10} %", r*10] }), :include_blank => true, :label => :field_done_ratio %></p>
 <% end %>
 <p class="mb-6"><%= f.check_box :is_closed %></p>
-<p class="mb-6"><%= f.color_field :bg_color, :size => 60 %></p>
-<p class="mb-6"><%= f.color_field :text_color, :size => 60 %></p>
+<p class="mb-6"><%= f.text_field :bg_color, :size => 60 %></p>
+<p class="mb-6"><%= f.text_field :text_color, :size => 60 %></p>
 <%= call_hook(:view_issue_statuses_form, :issue_status => @issue_status) %>
 </div>

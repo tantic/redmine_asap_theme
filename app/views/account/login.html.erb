@@ -20,14 +20,14 @@
 
         <div class="mb-6">
           <label for="username"><%=l(:field_login)%></label>
-          <%= text_field_tag 'username', params[:username], :tabindex => '1' %>
+          <%= text_field_tag 'username', params[:username], :tabindex => '1', :autocomplete => 'username', :autofocus => params[:username].blank? %>
         </div>
 
         <div class="mb-6">
           <label for="password">
             <%=l(:field_password)%>
           </label>
-          <%= password_field_tag 'password', nil, :tabindex => '2' %>
+          <%= password_field_tag 'password', nil, :tabindex => '2', :autocomplete => 'current-password', :autofocus => params[:username].present? %>
           <%= link_to l(:label_password_lost), lost_password_path, :class => "lost_password ml-auto text-blue-700 hover:text-blue-800 dark:text-blue-100 dark:hover:text-blue-200 text-xs" if Setting.lost_password? %>
         </div>
 
@@ -43,9 +43,3 @@
     </div>
 
   </div>
-
-<% if params[:username].present? %>
-<%= javascript_tag "$('#password').focus();" %>
-<% else %>
-<%= javascript_tag "$('#username').focus();" %>
-<% end %>
