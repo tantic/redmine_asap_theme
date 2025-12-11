@@ -587,10 +587,10 @@
 
   /* Contextual Buttons */
 
-  #content>.contextual {
+  /* #content>.contextual {
     width: 100%;
     margin-bottom: .5em;
-    padding-left: 0; /* reset left padding in order to use whole space */
+    padding-left: 0;
     white-space: normal;
   }
 
@@ -608,7 +608,7 @@
     border: 1px solid #ddd;
     -webkit-border-radius: 3px;
     border-radius: 3px;
-  }
+  } */
   #content>.contextual .drdn-content {
 	right:initial;
     left:0px;

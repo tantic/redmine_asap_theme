@@ -69,6 +69,10 @@
     }
   }
 
+  .agile-board{
+    @apply mt-12;
+  }
+
   #sidebar-wrapper{
     span.assignable-user{
       /* float:left; */
@@ -80,7 +84,7 @@
   }
 
   #query_form{
-    @apply w-full flex flex-col;
+    @apply w-full flex flex-col mt-12;
     h2{
       @apply flex items-center bg-gray-50 rounded p-2 font-medium;
       span{
@@ -293,5 +297,64 @@ html.agile-board-fullscreen div.agile-board{
     b{
       @apply ml-1;
     }
+  }
+}
+
+/* Easy Gantt */
+
+.controller-easy_gantt {
+  .content-title{
+    @apply flex items-center;
+    #toggle-query-form{
+      @apply ml-auto;
+    }
+  }
+  #query_form_content{
+    table{
+      td{
+        @apply flex items-center;
+        .buttons{
+          @apply flex;
+          input{
+            @apply p-2 hover:bg-gray-100 rounded-full dark:hover:bg-gray-600 cursor-pointer;
+          }
+        }
+      }
+    }
+  }
+  .redmine .gantt-menu-button{
+    display: inline-flex;
+  }
+  .redmine .push-right{
+    @apply ml-auto;
+  }
+  #checkbox_silencer{
+    @apply ml-2 mr-1;
+  }
+  .redmine a.disabled{
+    @apply text-gray-600 opacity-100;
+  }
+  #button_save{
+    @apply text-white;
+    &.disabled{
+      @apply bg-green-100 text-green-800 border-green-100;
+    }
+  }
+  #button_task_control{
+    .icon-label{
+      display: block;
+    }
+  }
+  .gantt-grid-header-collapse-buttons{
+    @apply flex items-center h-full;
+    .gantt-button-symbol{
+      @apply flex items-center justify-center p-2;
+      .icon-label{
+        display: none;
+      }
+    }
+    #button_close_all_milestones svg, #button_close_all_parent_issues svg{
+        display: none;
+      }
   }
 }

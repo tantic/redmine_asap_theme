@@ -32,6 +32,11 @@ input[type="file"] {
   }
 }
 
+  select[multiple="multiple"]{
+    @apply bg-gray-100 dark:bg-gray-700;
+  }
+
+
 .controller-workflows.action-copy{
   select[multiple="multiple"]{
       @apply bg-gray-100 dark:bg-gray-700;

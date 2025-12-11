@@ -1,13 +1,13 @@
 .controller-wiki{
   #content {
     > .contextual{
-      @apply -mt-6;
+      @apply -mt-2;
     }
     > .breadcrumb{
       @apply -mt-4 mb-4;
     }
     >div.wiki{
-      @apply bg-white shadow dark:bg-gray-800 rounded p-8 mb-4 mt-4;
+      @apply bg-white shadow dark:bg-gray-800 rounded p-8 mb-4 mt-8;
       h1{
         @apply text-xl font-medium border-b border-gray-100 pb-4 mb-4;
       }
@@ -72,6 +72,14 @@
         ul{
           padding-left: 15px;
         }
+      }
+    }
+  }
+  .tags{
+    @apply relative;
+    #tags-data{
+      .contextual{
+        @apply relative inline-block right-auto bottom-auto top-auto;
       }
     }
   }

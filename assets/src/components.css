@@ -221,6 +221,30 @@ span.drdn .drdn-content{
   }
 }
 
+
+.contextual{
+  @apply absolute top-6 right-12 flex items-center justify-end;
+}
+
+.contextual #revision_selector{
+  @apply flex items-center
+}
+
+.contextual #revision_selector select{
+  @apply mx-2
+}
+
+.contextual #revision_selector #rev{
+  @apply ml-2
+}
+
+.contextual {
+  white-space: nowrap;
+  line-height:1.4em;
+  margin:5px 0px;
+  padding-left: 10px;
+  font-size:0.9em;
+}
 .contextual .drdn-items {padding:2px; min-width: 160px;}
 .contextual .drdn-items>a {display: flex; padding: 5px 8px;}
 .contextual .drdn-items>a.icon:not(:has(svg)) {padding-left: 24px; background-position-x: 4px;}
@@ -293,11 +317,23 @@ span.drdn .drdn-content{
 }
 
 #query_form{
-  @apply flex shadow my-4 bg-white border border-gray-200 rounded-lg  p-4 dark:bg-gray-800 dark:border-gray-700;
+  @apply relative flex shadow my-4 bg-white border border-gray-200 rounded-lg  p-4 dark:bg-gray-800 dark:border-gray-700;
 }
 
 #query_form_with_buttons{
   @apply w-full;
+  span.contextual.pagination{
+    @apply relative;
+    .pages{
+      @apply absolute right-0 -bottom-4;
+    }
+  }
+  p.contextual{
+    @apply absolute right-6 bottom-6 top-auto;
+  }
+  a.icon-checked{
+    @apply bg-blue-700 text-blue-100 px-2.5 hover:bg-blue-800;
+  }
 }
 
 #query_form_with_buttons fieldset{
@@ -353,7 +389,7 @@ span.drdn .drdn-content{
 /* ROADMAP */
 
 .version-article{
-  @apply shadow my-4 bg-white border border-gray-200 rounded-lg  p-4 dark:bg-gray-800 dark:border-gray-700;
+  @apply relative shadow my-4 bg-white border border-gray-200 rounded-lg  p-4 dark:bg-gray-800 dark:border-gray-700;
   table.list{
     @apply block;
   }
@@ -412,7 +448,6 @@ span.drdn .drdn-content{
 }
 
 /* CONTENT */
-
 #content > h2 {
   @apply mb-0 uppercase font-medium text-sm inline-flex items-center mb-4 pt-2;
 }
@@ -975,7 +1010,7 @@ div.flash.warning svg.icon-svg, .conflict svg.icon-svg {
 .markdown-alert-note .markdown-alert-title svg { stroke: #1e40af; }
 
 
-.controller-admin{
+.controller-admin, .controller-projects{
   table.projects{
     tr.project{
       td.name{
