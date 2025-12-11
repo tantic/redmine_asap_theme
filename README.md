@@ -29,9 +29,10 @@ Ready
 * Dark theme : each user can choose light or dark theme from the settings modale
 * Responsive mode
 * Colors and icons on default priorities (not customisable for now)
+* Button to toggle display of the query form
 
 In progress
-* find a way to reduce query form
+* Display issue in a panel when click on an issue of the main list
 
 ## Screenshots
 

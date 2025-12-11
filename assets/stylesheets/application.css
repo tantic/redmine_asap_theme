@@ -5399,108 +5399,133 @@ span.pagination>span {
   display: block;
   margin-top: 1.2em;
 }
-ul.cal {
-  list-style: none;
-  width: 100%;
-  padding: 0;
-  display: grid;
-  grid-template-columns: 2rem repeat(7, 1fr);
-  border: 1px solid #d0d7de;
-  border-spacing: 0;
-  border-radius: 3px;
-  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
-  margin: calc(var(--spacing) * 0);
-  margin-bottom: calc(var(--spacing) * 4);
-  &:where(.dark, .dark *) {
-    border-color: var(--color-gray-500);
+.controller-calendars {
+  #content > h2:first-child {
+    width: 100%;
+    #toggle-query-form {
+      margin-left: auto;
+    }
   }
-}
-.cal .calhead {
-  background-color: #eee;
-  text-align: center;
-  font-weight: bold;
-  padding: 4px;
-  &:where(.dark, .dark *) {
-    background-color: var(--color-gray-800);
+  ul.cal {
+    list-style: none;
+    width: 100%;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 2rem repeat(7, 1fr);
+    border: 1px solid #d0d7de;
+    border-spacing: 0;
+    border-radius: 3px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    margin: calc(var(--spacing) * 0);
+    margin-bottom: calc(var(--spacing) * 4);
+    &:where(.dark, .dark *) {
+      border-color: var(--color-gray-500);
+    }
   }
-}
-.cal .week-number {
-  background-color: #eee;
-  border: none;
-  font-size: 1em;
-  padding: 4px;
-  text-align: center;
-  &:where(.dark, .dark *) {
-    background-color: var(--color-gray-800);
+  .cal .calhead {
+    background-color: #eee;
+    text-align: center;
+    font-weight: bold;
+    padding: 4px;
+    &:where(.dark, .dark *) {
+      background-color: var(--color-gray-800);
+    }
   }
-}
-.cal .week-number .label-week {
-  display: none;
-}
-.cal .calbody {
-  border: 1px solid #d0d7de;
-  vertical-align: top;
-  font-size: 0.9em;
-  border-bottom: 0;
-  border-right: 0;
-  line-height: 1.2;
-  min-height: calc(1.2em * 6);
-  padding: 2px;
-  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
-  &:where(.dark, .dark *) {
-    border-color: var(--color-gray-300);
+  .cal .week-number {
+    background-color: #eee;
+    border: none;
+    font-size: 1em;
+    padding: 4px;
+    text-align: center;
+    &:where(.dark, .dark *) {
+      background-color: var(--color-gray-800);
+    }
   }
-  &:where(.dark, .dark *) {
-    border-color: var(--color-gray-500);
+  .cal .week-number .label-week {
+    display: none;
   }
-}
-.cal .calbody p.day-num {
-  font-size: 1.1em;
-  text-align: right;
-}
-.cal .calbody .abbr-day {
-  display: none;
-}
-.cal .calbody.this-month {
-  background-color: #fff;
-  &:where(.dark, .dark *) {
-    background-color: var(--color-gray-600);
+  .cal .calbody {
+    border: 1px solid #d0d7de;
+    vertical-align: top;
+    font-size: 0.9em;
+    border-bottom: 0;
+    border-right: 0;
+    line-height: 1.2;
+    min-height: calc(1.2em * 6);
+    padding: 2px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    &:where(.dark, .dark *) {
+      border-color: var(--color-gray-300);
+    }
+    &:where(.dark, .dark *) {
+      border-color: var(--color-gray-500);
+    }
   }
-}
-.cal .calbody.other-month {
-  background-color: #f6f7f8;
-  &:where(.dark, .dark *) {
-    background-color: var(--color-gray-800);
+  .cal .calbody p.day-num {
+    font-size: 1.1em;
+    text-align: right;
   }
-}
-.cal .calbody.other-month p.day-num {
-  color: #bbb;
-}
-.cal .calbody.today {
-  background: #ffd;
-  color: var(--color-amber-800);
-  &:where(.dark, .dark *) {
-    background-color: var(--color-amber-100);
+  .cal .calbody .abbr-day {
+    display: none;
   }
-}
-.cal .calbody.today p.day-num {
-  font-weight: bold;
-}
-.cal .calbody .icon {
-  padding-top: 2px;
-  padding-bottom: 3px;
-}
-.cal .calbody.nwday:not(.other-month) {
-  background-color: #f1f1f1;
-  &:where(.dark, .dark *) {
-    background-color: var(--color-gray-700);
+  .cal .calbody.this-month {
+    background-color: var(--color-gray-50);
+    &:where(.dark, .dark *) {
+      background-color: var(--color-gray-600);
+    }
   }
-}
-p.cal.legend span {
-  display: flex;
-}
-.controller-calendars p.buttons {
-  margin-top: unset;
+  .cal .calbody.other-month {
+    background-color: var(--color-gray-100);
+    &:where(.dark, .dark *) {
+      background-color: var(--color-gray-800);
+    }
+  }
+  .cal .calbody.other-month p.day-num {
+    color: #bbb;
+  }
+  .cal .calbody.today {
+    background: #ffd;
+    color: var(--color-amber-800);
+    &:where(.dark, .dark *) {
+      background-color: var(--color-amber-100);
+    }
+  }
+  .cal .calbody.today p.day-num {
+    font-weight: bold;
+  }
+  .cal .calbody .icon {
+    padding-top: 2px;
+    padding-bottom: 3px;
+  }
+  .cal .calbody.nwday:not(.other-month) {
+    background-color: var(--color-blue-50);
+    &:where(.dark, .dark *) {
+      background-color: var(--color-gray-700);
+    }
+  }
+  p.cal.legend span {
+    display: flex;
+  }
+  .controller-calendars p.buttons {
+    margin-top: unset;
+  }
+  div.issue {
+    margin-bottom: calc(var(--spacing) * 1);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    background-color: var(--color-white);
+    padding: calc(var(--spacing) * 2);
+    --tw-shadow: 0 1px 3px 0 var(--tw-shadow-color, rgb(0 0 0 / 0.1)), 0 1px 2px -1px var(--tw-shadow-color, rgb(0 0 0 / 0.1));
+    box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+    svg {
+      margin-bottom: calc(var(--spacing) * 2);
+    }
+    a {
+      margin-bottom: calc(var(--spacing) * 2);
+      text-wrap: nowrap;
+    }
+  }
 }
 .tooltip {
   position: relative;
@@ -5553,6 +5578,16 @@ img.ui-datepicker-trigger {
   vertical-align: middle;
   margin-left: 4px;
 }
+.controller-reports {
+  table.list {
+    background-color: var(--color-white);
+    --tw-shadow: 0 1px 3px 0 var(--tw-shadow-color, rgb(0 0 0 / 0.1)), 0 1px 2px -1px var(--tw-shadow-color, rgb(0 0 0 / 0.1));
+    box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+    &:where(.dark, .dark *) {
+      background-color: var(--color-gray-700);
+    }
+  }
+}
 svg.icon-svg {
   fill: none;
   stroke: var(--color-blue-700);
@@ -5564,13 +5599,13 @@ svg.icon-svg {
 }
 .priority-highest {
   td.priority {
-    display: flex;
-    align-items: center;
-    gap: 0.25rem;
+    vertical-align: middle;
+    gap: 0.3rem;
     color: var(--color-red-800);
     &::before {
       content: "";
       display: inline-block;
+      vertical-align: middle;
       mask: url("arrow-badge-up.svg") no-repeat center;
       mask-size: contain;
       height: calc(var(--spacing) * 5);
@@ -5580,13 +5615,13 @@ svg.icon-svg {
   }
   div.priority {
     .value {
-      display: flex;
-      align-items: center;
-      gap: 0.25rem;
+      vertical-align: middle;
+      gap: 0.3rem;
       color: var(--color-red-800);
       &::before {
         content: "";
         display: inline-block;
+        vertical-align: middle;
         mask: url("arrow-badge-up.svg") no-repeat center;
         mask-size: contain;
         height: calc(var(--spacing) * 5);
@@ -5598,13 +5633,13 @@ svg.icon-svg {
 }
 .priority-high2 {
   td.priority {
-    display: flex;
-    align-items: center;
-    gap: 0.25rem;
+    vertical-align: middle;
+    gap: 0.3rem;
     color: var(--color-orange-700);
     &::before {
       content: "";
       display: inline-block;
+      vertical-align: middle;
       mask: url("chevrons-up.svg") no-repeat center;
       mask-size: contain;
       height: calc(var(--spacing) * 5);
@@ -5614,13 +5649,13 @@ svg.icon-svg {
   }
   div.priority {
     .value {
-      display: flex;
-      align-items: center;
-      gap: 0.25rem;
+      vertical-align: middle;
+      gap: 0.3rem;
       color: var(--color-orange-700);
       &::before {
         content: "";
         display: inline-block;
+        vertical-align: middle;
         mask: url("chevrons-up.svg") no-repeat center;
         mask-size: contain;
         height: calc(var(--spacing) * 5);
@@ -5632,13 +5667,13 @@ svg.icon-svg {
 }
 .priority-high3 {
   td.priority {
-    display: flex;
-    align-items: center;
-    gap: 0.25rem;
+    vertical-align: middle;
+    gap: 0.3rem;
     color: var(--color-yellow-700);
     &::before {
       content: "";
       display: inline-block;
+      vertical-align: middle;
       mask: url("chevron-up.svg") no-repeat center;
       mask-size: contain;
       height: calc(var(--spacing) * 5);
@@ -5648,13 +5683,13 @@ svg.icon-svg {
   }
   div.priority {
     .value {
-      display: flex;
-      align-items: center;
-      gap: 0.25rem;
+      vertical-align: middle;
+      gap: 0.3rem;
       color: var(--color-yellow-700);
       &::before {
         content: "";
         display: inline-block;
+        vertical-align: middle;
         mask: url("chevron-up.svg") no-repeat center;
         mask-size: contain;
         height: calc(var(--spacing) * 5);
@@ -5666,13 +5701,13 @@ svg.icon-svg {
 }
 .priority-default {
   td.priority {
-    display: flex;
-    align-items: center;
-    gap: 0.25rem;
+    vertical-align: middle;
+    gap: 0.3rem;
     color: var(--color-blue-800);
     &::before {
       content: "";
       display: inline-block;
+      vertical-align: middle;
       mask: url("equal.svg") no-repeat center;
       mask-size: contain;
       height: calc(var(--spacing) * 5);
@@ -5682,12 +5717,12 @@ svg.icon-svg {
   }
   div.priority {
     .value {
-      display: flex;
-      align-items: center;
-      gap: 0.25rem;
+      vertical-align: middle;
+      gap: 0.3rem;
       color: var(--color-blue-800);
       &::before {
         content: "";
+        vertical-align: middle;
         display: inline-block;
         mask: url("equal.svg") no-repeat center;
         mask-size: contain;
@@ -5700,13 +5735,13 @@ svg.icon-svg {
 }
 .priority-lowest {
   td.priority {
-    display: flex;
-    align-items: center;
-    gap: 0.25rem;
+    vertical-align: middle;
+    gap: 0.3rem;
     color: var(--color-gray-500);
     &::before {
       content: "";
       display: inline-block;
+      vertical-align: middle;
       mask: url("chevrons-down.svg") no-repeat center;
       mask-size: contain;
       height: calc(var(--spacing) * 5);
@@ -5716,13 +5751,13 @@ svg.icon-svg {
   }
   div.priority {
     .value {
-      display: flex;
-      align-items: center;
-      gap: 0.25rem;
+      vertical-align: middle;
+      gap: 0.3rem;
       color: var(--color-gray-500);
       &::before {
         content: "";
         display: inline-block;
+        vertical-align: middle;
         mask: url("chevrons-down.svg") no-repeat center;
         mask-size: contain;
         height: calc(var(--spacing) * 5);
@@ -8060,9 +8095,6 @@ html.agile-board-fullscreen div.agile-board {
   .static {
     position: static;
   }
-  .sticky {
-    position: sticky;
-  }
   .inset-0 {
     inset: calc(var(--spacing) * 0);
   }
@@ -8137,9 +8169,6 @@ html.agile-board-fullscreen div.agile-board {
     @media (width >= 96rem) {
       max-width: 96rem;
     }
-  }
-  .mx-4 {
-    margin-inline: calc(var(--spacing) * 4);
   }
   .mx-4\! {
     margin-inline: calc(var(--spacing) * 4) !important;
@@ -8303,14 +8332,8 @@ html.agile-board-fullscreen div.agile-board {
   .inline {
     display: inline;
   }
-  .inline-block {
-    display: inline-block;
-  }
   .inline-flex {
     display: inline-flex;
-  }
-  .table {
-    display: table;
   }
   .size-4 {
     width: calc(var(--spacing) * 4);
@@ -8319,9 +8342,6 @@ html.agile-board-fullscreen div.agile-board {
   .size-5 {
     width: calc(var(--spacing) * 5);
     height: calc(var(--spacing) * 5);
-  }
-  .h-2 {
-    height: calc(var(--spacing) * 2);
   }
   .h-2\/5 {
     height: calc(2/5 * 100%);
@@ -8383,17 +8403,11 @@ html.agile-board-fullscreen div.agile-board {
   .w-0 {
     width: calc(var(--spacing) * 0);
   }
-  .w-1 {
-    width: calc(var(--spacing) * 1);
-  }
   .w-1\/2 {
     width: calc(1/2 * 100%);
   }
   .w-1\/4 {
     width: calc(1/4 * 100%);
-  }
-  .w-3 {
-    width: calc(var(--spacing) * 3);
   }
   .w-3\/4 {
     width: calc(3/4 * 100%);
@@ -8464,26 +8478,17 @@ html.agile-board-fullscreen div.agile-board {
   .flex-none {
     flex: none;
   }
-  .flex-shrink {
-    flex-shrink: 1;
-  }
   .flex-shrink-0 {
     flex-shrink: 0;
   }
   .shrink-0 {
     flex-shrink: 0;
   }
-  .flex-grow {
-    flex-grow: 1;
-  }
   .basis-\[350px\] {
     flex-basis: 350px;
   }
   .basis-auto {
     flex-basis: auto;
-  }
-  .border-collapse {
-    border-collapse: collapse;
   }
   .translate-y-0 {
     --tw-translate-y: calc(var(--spacing) * 0);
@@ -8499,9 +8504,6 @@ html.agile-board-fullscreen div.agile-board {
   .cursor-pointer {
     cursor: pointer;
   }
-  .resize {
-    resize: both;
-  }
   .grid-cols-1 {
     grid-template-columns: repeat(1, minmax(0, 1fr));
   }
@@ -8516,9 +8518,6 @@ html.agile-board-fullscreen div.agile-board {
   }
   .flex-row {
     flex-direction: row;
-  }
-  .flex-wrap {
-    flex-wrap: wrap;
   }
   .items-center {
     align-items: center;
@@ -8655,9 +8654,6 @@ html.agile-board-fullscreen div.agile-board {
   .border-white {
     border-color: var(--color-white);
   }
-  .bg-black {
-    background-color: var(--color-black);
-  }
   .bg-black\/50 {
     background-color: color-mix(in srgb, #000 50%, transparent);
     @supports (color: color-mix(in lab, red, red)) {
@@ -8669,9 +8665,6 @@ html.agile-board-fullscreen div.agile-board {
   }
   .bg-blue-100 {
     background-color: var(--color-blue-100);
-  }
-  .bg-blue-500 {
-    background-color: var(--color-blue-500);
   }
   .bg-blue-500\! {
     background-color: var(--color-blue-500) !important;
@@ -8715,26 +8708,14 @@ html.agile-board-fullscreen div.agile-board {
   .bg-no-repeat {
     background-repeat: no-repeat;
   }
-  .stroke-blue-100 {
-    stroke: var(--color-blue-100);
-  }
   .stroke-blue-100\! {
     stroke: var(--color-blue-100) !important;
-  }
-  .stroke-blue-800 {
-    stroke: var(--color-blue-800);
   }
   .stroke-blue-800\! {
     stroke: var(--color-blue-800) !important;
   }
-  .stroke-gray-800 {
-    stroke: var(--color-gray-800);
-  }
   .stroke-gray-800\! {
     stroke: var(--color-gray-800) !important;
-  }
-  .stroke-gray-900 {
-    stroke: var(--color-gray-900);
   }
   .stroke-gray-900\! {
     stroke: var(--color-gray-900) !important;
@@ -8778,9 +8759,6 @@ html.agile-board-fullscreen div.agile-board {
   .px-12 {
     padding-inline: calc(var(--spacing) * 12);
   }
-  .py-0 {
-    padding-block: calc(var(--spacing) * 0);
-  }
   .py-0\.5 {
     padding-block: calc(var(--spacing) * 0.5);
   }
@@ -8804,9 +8782,6 @@ html.agile-board-fullscreen div.agile-board {
   }
   .py-8 {
     padding-block: calc(var(--spacing) * 8);
-  }
-  .pt-0 {
-    padding-top: calc(var(--spacing) * 0);
   }
   .pt-0\.5 {
     padding-top: calc(var(--spacing) * 0.5);
@@ -8887,9 +8862,6 @@ html.agile-board-fullscreen div.agile-board {
   .text-wrap {
     text-wrap: wrap;
   }
-  .whitespace-normal {
-    white-space: normal;
-  }
   .text-blue-50 {
     color: var(--color-blue-50);
   }
@@ -8947,9 +8919,6 @@ html.agile-board-fullscreen div.agile-board {
   .uppercase {
     text-transform: uppercase;
   }
-  .underline {
-    text-decoration-line: underline;
-  }
   .opacity-0 {
     opacity: 0%;
   }
@@ -8975,14 +8944,6 @@ html.agile-board-fullscreen div.agile-board {
   .shadow-xs {
     --tw-shadow: 0 1px 2px 0 var(--tw-shadow-color, rgb(0 0 0 / 0.05));
     box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
-  }
-  .outline {
-    outline-style: var(--tw-outline-style);
-    outline-width: 1px;
-  }
-  .blur {
-    --tw-blur: blur(8px);
-    filter: var(--tw-blur,) var(--tw-brightness,) var(--tw-contrast,) var(--tw-grayscale,) var(--tw-hue-rotate,) var(--tw-invert,) var(--tw-saturate,) var(--tw-sepia,) var(--tw-drop-shadow,);
   }
   .filter {
     filter: var(--tw-blur,) var(--tw-brightness,) var(--tw-contrast,) var(--tw-grayscale,) var(--tw-hue-rotate,) var(--tw-invert,) var(--tw-saturate,) var(--tw-sepia,) var(--tw-drop-shadow,);
@@ -9937,11 +9898,6 @@ html.agile-board-fullscreen div.agile-board {
   syntax: "*";
   inherits: false;
 }
-@property --tw-outline-style {
-  syntax: "*";
-  inherits: false;
-  initial-value: solid;
-}
 @property --tw-blur {
   syntax: "*";
   inherits: false;
@@ -10053,7 +10009,6 @@ html.agile-board-fullscreen div.agile-board {
       --tw-translate-y: 0;
       --tw-translate-z: 0;
       --tw-leading: initial;
-      --tw-outline-style: solid;
       --tw-blur: initial;
       --tw-brightness: initial;
       --tw-contrast: initial;

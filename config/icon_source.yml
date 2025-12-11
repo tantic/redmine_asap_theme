@@ -39,3 +39,7 @@
   svg: device-analytics
 - name: chevrons-up
   svg: chevrons-up
+- name: adjustments-horizontal
+  svg: adjustments-horizontal
+- name: adjustments-off
+  svg: adjustments-off

@@ -1,0 +1,10 @@
+<%= link_to "#",
+      id: "toggle-query-form",
+      class: "rounded-full p-2 hover:bg-gray-200 relative" do %>
+  <span id="icon-on"  style="display:none">
+    <%= sprite_icon('adjustments', plugin: 'redmine_asap_theme', css_class: 's18 h-5 icon-svg icon-rtl') %>
+  </span>
+  <span id="icon-off" style="display:inline">
+    <%= sprite_icon('adjustments-off', plugin: 'redmine_asap_theme', css_class: 's18 h-5 icon-svg icon-rtl') %>
+  </span>
+<% end %>
