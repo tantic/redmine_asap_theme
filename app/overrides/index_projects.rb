@@ -1,4 +1,4 @@
-module IndexIssues
+module IndexProjects
   Deface::Override.new :virtual_path => "projects/index",
                       :name => "button_filter_contextual",
                       :insert_top => "div.contextual",
