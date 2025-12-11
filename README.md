@@ -13,6 +13,10 @@ If you want to test it quickly with docker, you can use the repo https://github.
 
 https://tantic.github.io/redmine_asap_docs/docs/theme/intro
 
+## Changelog
+
+[Changelog](doc/CHANGELOG.md)
+
 ## Features
 
 Ready
