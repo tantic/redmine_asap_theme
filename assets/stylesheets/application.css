@@ -1863,90 +1863,6 @@ div.wiki .task-list input.task-list-item-checkbox {
 #my-page .list th.checkbox, #my-page .list td.checkbox {
   display: none;
 }
-table.gantt-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-table.gantt-table td {
-  padding: 0px;
-}
-.gantt_hdr {
-  position: absolute;
-  top: 0;
-  height: 16px;
-  border-top: 1px solid #c0c0c0;
-  border-bottom: 1px solid #c0c0c0;
-  border-left: 1px solid #c0c0c0;
-  text-align: center;
-  overflow: hidden;
-}
-#gantt_area .gantt_hdr {
-  border-left: 0px;
-  border-right: 1px solid #c0c0c0;
-}
-.gantt_subjects_container:not(.draw_selected_columns) .gantt_hdr, .last_gantt_selected_column .gantt_hdr {
-  border-right: 1px solid #c0c0c0;
-}
-.last_gantt_selected_column .gantt_selected_column_container, .gantt_subjects_container .gantt_subjects * {
-  z-index: 10;
-}
-.gantt_subjects_column + td {
-  padding: 0;
-}
-.gantt_hdr.nwday {
-  background-color: #f1f1f1;
-  color: #999;
-}
-.gantt_subjects, .gantt_selected_column_content.gantt_hdr {
-  font-size: 0.8em;
-  position: relative;
-  z-index: 1;
-}
-.gantt_subjects div, .gantt_selected_column_content div {
-  line-height: 16px;
-  height: 16px;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: clip;
-  width: 100%;
-}
-.gantt_subjects div.issue-subject:hover {
-  background-color: #ffffdd;
-}
-.gantt_selected_column_content {
-  padding-left: 3px;
-  padding-right: 3px;
-}
-.gantt_subjects .issue-subject img.icon-gravatar {
-  margin: 2px 5px 0px 2px;
-}
-.gantt_hdr_selected_column_name {
-  position: absolute;
-  top: 50%;
-  width: 100%;
-  transform: translateY(-50%);
-  -webkit-transform: translateY(-50%);
-  font-size: 0.8em;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-td.gantt_selected_column {
-  width: 50px;
-}
-td.gantt_selected_column .gantt_hdr,.gantt_selected_column_container {
-  width: 49px;
-}
-.task {
-  position: absolute;
-  height: 8px;
-  font-size: 0.8em;
-  color: #888;
-  padding: 0;
-  margin: 0;
-  line-height: 16px;
-  white-space: nowrap;
-}
 .task.label {
   width: 100%;
 }
@@ -6497,7 +6413,7 @@ table.list:not(.odd-even) tbody tr:nth-child(even), .even, #issue-changesets div
   }
 }
 table.list:not(.odd-even) tbody tr:nth-child(odd):hover, .odd:hover, #issue-changesets div.changeset:nth-child(odd):hover, table.list:not(.odd-even) tbody tr:nth-child(even):hover, .even:hover, #issue-changesets div.changeset:nth-child(even):hover {
-  background-color: var(--color-blue-200);
+  background-color: var(--color-blue-100);
   &:where(.dark, .dark *) {
     background-color: var(--color-gray-600);
   }
@@ -7230,6 +7146,90 @@ tr.idnt-9 td.subject, tr.idnt-9 td.name {
       }
     }
   }
+}
+table.gantt-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+table.gantt-table td {
+  padding: 0px;
+}
+.gantt_hdr {
+  position: absolute;
+  top: 0;
+  height: 16px;
+  border-top: 1px solid #c0c0c0;
+  border-bottom: 1px solid #c0c0c0;
+  border-left: 1px solid #c0c0c0;
+  text-align: center;
+  overflow: hidden;
+}
+#gantt_area .gantt_hdr {
+  border-left: 0px;
+  border-right: 1px solid #c0c0c0;
+}
+.gantt_subjects_container:not(.draw_selected_columns) .gantt_hdr, .last_gantt_selected_column .gantt_hdr {
+  border-right: 1px solid #c0c0c0;
+}
+.last_gantt_selected_column .gantt_selected_column_container, .gantt_subjects_container .gantt_subjects * {
+  z-index: 10;
+}
+.gantt_subjects_column + td {
+  padding: 0;
+}
+.gantt_hdr.nwday {
+  background-color: #f1f1f1;
+  color: #999;
+}
+.gantt_subjects, .gantt_selected_column_content.gantt_hdr {
+  font-size: 0.8em;
+  position: relative;
+  z-index: 1;
+}
+.gantt_subjects div, .gantt_selected_column_content div {
+  line-height: 24px;
+  height: 24px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: clip;
+  width: 100%;
+}
+.gantt_subjects div.issue-subject:hover {
+  background-color: #ffffdd;
+}
+.gantt_selected_column_content {
+  padding-left: 3px;
+  padding-right: 3px;
+}
+.gantt_subjects .issue-subject img.icon-gravatar {
+  margin: 2px 5px 0px 2px;
+}
+.gantt_hdr_selected_column_name {
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+  font-size: 0.8em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+td.gantt_selected_column {
+  width: 50px;
+}
+td.gantt_selected_column .gantt_hdr,.gantt_selected_column_container {
+  width: 49px;
+}
+.task {
+  position: absolute;
+  height: 16px;
+  font-size: 0.8em;
+  color: #888;
+  padding: 0;
+  margin: 0;
+  line-height: 16px;
+  white-space: nowrap;
 }
 .controller-users.action-show {
   #content {

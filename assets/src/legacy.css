@@ -1542,7 +1542,7 @@ div.wiki .task-list input.task-list-item-checkbox {
 
 #my-page .list th.checkbox, #my-page .list td.checkbox {display:none;}
 /***** Gantt chart *****/
-table.gantt-table {
+/* table.gantt-table {
   width: 100%;
   border-collapse: collapse;
 }
@@ -1627,7 +1627,7 @@ td.gantt_selected_column .gantt_hdr,.gantt_selected_column_container {
   margin:0;
   line-height:16px;
   white-space:nowrap;
-}
+} */
 
 .task.label {width:100%;}
 .task.label.project, .task.label.version { font-weight: bold; }

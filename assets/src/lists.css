@@ -76,7 +76,7 @@ table.list:not(.odd-even) tbody tr:nth-child(even), .even, #issue-changesets div
 }
 table.list:not(.odd-even) tbody tr:nth-child(odd):hover, .odd:hover, #issue-changesets div.changeset:nth-child(odd):hover,
 table.list:not(.odd-even) tbody tr:nth-child(even):hover, .even:hover, #issue-changesets div.changeset:nth-child(even):hover {
-  @apply bg-blue-200 dark:bg-gray-600;
+  @apply bg-blue-100 dark:bg-gray-600;
 }
 
 
