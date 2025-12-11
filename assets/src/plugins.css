@@ -59,6 +59,17 @@
   @apply bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-300 hover:bg-blue-700 hover:text-blue-100;
 }
 
+/* Aditionnals_tags */
+.tags{
+    @apply relative;
+    #tags-data{
+      .contextual{
+        @apply relative inline-block right-auto bottom-auto top-auto;
+      }
+    }
+  }
+
+
 /* Redmineup agile plugin */
 
 .controller-agile_boards{
@@ -358,3 +369,5 @@ html.agile-board-fullscreen div.agile-board{
       }
   }
 }
+
+

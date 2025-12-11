@@ -1022,7 +1022,7 @@ div.flash.warning svg.icon-svg, .conflict svg.icon-svg {
 
 .controller-roles.action-edit, .controller-trackers.action-edit, .controller-custom_fields.action-edit{
   a.icon{
-    @apply p-1 mr-2;
+    @apply p-1 mr-1;
   }
 }
 
@@ -1360,5 +1360,13 @@ img.ui-datepicker-trigger {
 .controller-reports{
   table.list{
     @apply bg-white dark:bg-gray-700 shadow;
+  }
+}
+
+
+div.attachments{
+  @apply relative bg-white shadow p-4 rounded;
+  .contextual{
+    @apply top-0;
   }
 }

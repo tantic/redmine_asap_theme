@@ -1,6 +1,6 @@
 .controller-issues{
   div.issue {
-    @apply bg-white dark:bg-gray-800 shadow p-8 border border-gray-100 dark:border-gray-800;
+    @apply relative bg-white dark:bg-gray-800 shadow p-8 border border-gray-100 dark:border-gray-800;
     div.gravatar-with-child, div.avatar-with-child{
       @apply float-left mr-4;
       .gravatar{
@@ -20,6 +20,23 @@
           @apply p-0 shadow-none align-bottom border-0;
           img{
             @apply w-4 h-4;
+          }
+        }
+      }
+    }
+    #issue_tree, #relations{
+      @apply flex flex-col relative;
+      .contextual{
+        @apply -top-2 right-0;
+        a{
+          @apply hover:bg-gray-50 px-2.5 py-2 rounded dark:hover:bg-gray-700;
+        }
+      }
+      .subtasks-wrapper, .relation-issues-wrapper{
+        @apply mt-2 mb-4;
+        table{
+          td{
+            @apply border-gray-200;
           }
         }
       }
@@ -147,8 +164,9 @@
   }
 
   .description{
+    @apply relative;
     > .contextual{
-      @apply float-right
+      @apply top-0 right-0;
     }
     > p {
       display: none;

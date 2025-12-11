@@ -1,4 +1,4 @@
-/*! tailwindcss v4.1.16 | MIT License | https://tailwindcss.com */
+/*! tailwindcss v4.1.18 | MIT License | https://tailwindcss.com */
 @layer properties;
 html, body {
   min-height: 100vh;
@@ -4995,7 +4995,7 @@ div.flash.warning svg.icon-svg, .conflict svg.icon-svg {
 }
 .controller-roles.action-edit, .controller-trackers.action-edit, .controller-custom_fields.action-edit {
   a.icon {
-    margin-right: calc(var(--spacing) * 2);
+    margin-right: calc(var(--spacing) * 1);
     padding: calc(var(--spacing) * 1);
   }
 }
@@ -5531,6 +5531,17 @@ img.ui-datepicker-trigger {
     }
   }
 }
+div.attachments {
+  position: relative;
+  border-radius: 0.25rem;
+  background-color: var(--color-white);
+  padding: calc(var(--spacing) * 4);
+  --tw-shadow: 0 1px 3px 0 var(--tw-shadow-color, rgb(0 0 0 / 0.1)), 0 1px 2px -1px var(--tw-shadow-color, rgb(0 0 0 / 0.1));
+  box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+  .contextual {
+    top: calc(var(--spacing) * 0);
+  }
+}
 svg.icon-svg {
   fill: none;
   stroke: var(--color-blue-700);
@@ -5955,8 +5966,8 @@ fieldset {
     align-items: center;
     border-radius: 0.25rem;
     background-color: var(--color-gray-100);
-    padding-inline: calc(var(--spacing) * 4);
-    padding-block: calc(var(--spacing) * 2);
+    padding-inline: calc(var(--spacing) * 2.5);
+    padding-block: calc(var(--spacing) * 1);
     &:where(.dark, .dark *) {
       background-color: var(--color-gray-700);
     }
@@ -5964,7 +5975,7 @@ fieldset {
       color: var(--color-gray-300);
     }
     a.icon-checked {
-      margin-right: calc(var(--spacing) * 2);
+      margin-right: calc(var(--spacing) * 1);
       background-color: var(--color-gray-100);
       padding: calc(var(--spacing) * 0);
       &:where(.dark, .dark *) {
@@ -6514,6 +6525,7 @@ tr.idnt-9 td.subject, tr.idnt-9 td.name {
 }
 .controller-issues {
   div.issue {
+    position: relative;
     border-style: var(--tw-border-style);
     border-width: 1px;
     border-color: var(--color-gray-100);
@@ -6567,6 +6579,41 @@ tr.idnt-9 td.subject, tr.idnt-9 td.name {
           img {
             height: calc(var(--spacing) * 4);
             width: calc(var(--spacing) * 4);
+          }
+        }
+      }
+    }
+    #issue_tree, #relations {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      .contextual {
+        top: calc(var(--spacing) * -2);
+        right: calc(var(--spacing) * 0);
+        a {
+          border-radius: 0.25rem;
+          padding-inline: calc(var(--spacing) * 2.5);
+          padding-block: calc(var(--spacing) * 2);
+          &:hover {
+            @media (hover: hover) {
+              background-color: var(--color-gray-50);
+            }
+          }
+          &:where(.dark, .dark *) {
+            &:hover {
+              @media (hover: hover) {
+                background-color: var(--color-gray-700);
+              }
+            }
+          }
+        }
+      }
+      .subtasks-wrapper, .relation-issues-wrapper {
+        margin-top: calc(var(--spacing) * 2);
+        margin-bottom: calc(var(--spacing) * 4);
+        table {
+          td {
+            border-color: var(--color-gray-200);
           }
         }
       }
@@ -6738,8 +6785,10 @@ tr.idnt-9 td.subject, tr.idnt-9 td.name {
     padding-inline: calc(var(--spacing) * 2);
   }
   .description {
+    position: relative;
     > .contextual {
-      float: right;
+      top: calc(var(--spacing) * 0);
+      right: calc(var(--spacing) * 0);
     }
     > p {
       display: none;
@@ -7008,18 +7057,6 @@ tr.idnt-9 td.subject, tr.idnt-9 td.name {
         ul {
           padding-left: 15px;
         }
-      }
-    }
-  }
-  .tags {
-    position: relative;
-    #tags-data {
-      .contextual {
-        position: relative;
-        top: auto;
-        right: auto;
-        bottom: auto;
-        display: inline-block;
       }
     }
   }
@@ -7495,6 +7532,18 @@ td.gantt_selected_column .gantt_hdr,.gantt_selected_column_container {
     color: var(--color-gray-300);
   }
 }
+.tags {
+  position: relative;
+  #tags-data {
+    .contextual {
+      position: relative;
+      top: auto;
+      right: auto;
+      bottom: auto;
+      display: inline-block;
+    }
+  }
+}
 .controller-agile_boards {
   span.assignable-user, span.user {
     display: flex;
@@ -7942,8 +7991,8 @@ html.agile-board-fullscreen div.agile-board {
 @layer theme {
   :root, :host {
     --font-sans: "Inter", sans-serif;
-    --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New',
-    monospace;
+    --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+      "Courier New", monospace;
     --color-red-100: oklch(93.6% 0.032 17.717);
     --color-red-300: oklch(80.8% 0.114 19.571);
     --color-red-400: oklch(70.4% 0.191 22.216);
@@ -8047,7 +8096,7 @@ html.agile-board-fullscreen div.agile-board {
     line-height: 1.5;
     -webkit-text-size-adjust: 100%;
     tab-size: 4;
-    font-family: var(--default-font-family, ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji');
+    font-family: var(--default-font-family, ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji");
     font-feature-settings: var(--default-font-feature-settings, normal);
     font-variation-settings: var(--default-font-variation-settings, normal);
     -webkit-tap-highlight-color: transparent;
@@ -8074,7 +8123,7 @@ html.agile-board-fullscreen div.agile-board {
     font-weight: bolder;
   }
   code, kbd, samp, pre {
-    font-family: var(--default-mono-font-family, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace);
+    font-family: var(--default-mono-font-family, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace);
     font-feature-settings: var(--default-mono-font-feature-settings, normal);
     font-variation-settings: var(--default-mono-font-variation-settings, normal);
     font-size: 1em;
@@ -8174,13 +8223,13 @@ html.agile-board-fullscreen div.agile-board {
   :-moz-ui-invalid {
     box-shadow: none;
   }
-  button, input:where([type='button'], [type='reset'], [type='submit']), ::file-selector-button {
+  button, input:where([type="button"], [type="reset"], [type="submit"]), ::file-selector-button {
     appearance: button;
   }
   ::-webkit-inner-spin-button, ::-webkit-outer-spin-button {
     height: auto;
   }
-  [hidden]:where(:not([hidden='until-found'])) {
+  [hidden]:where(:not([hidden="until-found"])) {
     display: none !important;
   }
 }

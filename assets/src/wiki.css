@@ -75,12 +75,5 @@
       }
     }
   }
-  .tags{
-    @apply relative;
-    #tags-data{
-      .contextual{
-        @apply relative inline-block right-auto bottom-auto top-auto;
-      }
-    }
-  }
+
 }
