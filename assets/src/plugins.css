@@ -370,4 +370,12 @@ html.agile-board-fullscreen div.agile-board{
   }
 }
 
+.controller-easy_wbs {
+  .content-title{
+    @apply flex items-center;
+    #toggle-query-form{
+      @apply ml-auto;
+    }
+  }
+}
 

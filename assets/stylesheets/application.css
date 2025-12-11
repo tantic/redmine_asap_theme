@@ -3963,8 +3963,26 @@ span.drdn .drdn-content {
   &:where(.dark, .dark *) {
     background-color: var(--color-gray-800);
   }
-  table.list {
+  >form {
     display: block;
+    overflow-x: auto;
+  }
+  .contextual {
+    right: calc(var(--spacing) * 6);
+    .icon-edit {
+      &:hover {
+        @media (hover: hover) {
+          stroke: var(--color-blue-50);
+        }
+      }
+      svg {
+        &:hover {
+          @media (hover: hover) {
+            stroke: var(--color-blue-50);
+          }
+        }
+      }
+    }
   }
 }
 .version-article header {
@@ -3972,6 +3990,9 @@ span.drdn .drdn-content {
   display: flex;
   width: auto;
   align-items: center;
+  h3 {
+    margin-block: calc(var(--spacing) * 0);
+  }
 }
 .version-article header h3 a {
   margin-right: calc(var(--spacing) * 2);
@@ -4485,7 +4506,7 @@ div.news .reaction {
   line-height: var(--tw-leading, var(--text-sm--line-height));
   --tw-shadow: 0 1px 3px 0 var(--tw-shadow-color, rgb(0 0 0 / 0.1)), 0 1px 2px -1px var(--tw-shadow-color, rgb(0 0 0 / 0.1));
   box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
-  @media (width >= 48rem) {
+  @media (width >= 40rem) {
     width: calc(var(--spacing) * 64);
   }
   &:where(.dark, .dark *) {
@@ -7984,6 +8005,15 @@ html.agile-board-fullscreen div.agile-board {
     }
     #button_close_all_milestones svg, #button_close_all_parent_issues svg {
       display: none;
+    }
+  }
+}
+.controller-easy_wbs {
+  .content-title {
+    display: flex;
+    align-items: center;
+    #toggle-query-form {
+      margin-left: auto;
     }
   }
 }
