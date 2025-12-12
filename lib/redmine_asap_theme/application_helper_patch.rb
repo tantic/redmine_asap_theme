@@ -161,28 +161,34 @@ module RedmineAsapTheme
 
     # Displays a link to user's account page or group page
     def link_to_principal(principal, options={})
+      # 1. Cas : liste de watchers (CollectionProxy)
+      if principal.is_a?(Enumerable) && !principal.is_a?(User) && !principal.is_a?(Group)
+        return principal.map { |p| link_to_principal(p, options) }.join(', ').html_safe
+      end
+
+      # 2. Ton code existant
       only_path = options[:only_path].nil? ? true : options[:only_path]
+
       case principal
       when User
         username = principal.name(options[:format])
         username = "@#{username}" if options[:mention]
         name = "<span style='display:inline-flex; align-items:center; gap:4px;' class='bg-white flex items-center text-nowrap justify-left text-xs dark:bg-gray-600 border border-gray-100 dark:border-gray-600 dark:hover:border-gray-500 hover:bg-gray-50 rounded px-2.5 py-1 text-gray-900 dark:text-gray-200 hover:text-blue-800'>#{avatar_with_local(principal, size: '18')} #{username}</span>".html_safe
 
-        css_classes = ''
-        if principal.active? || (User.current.admin? && principal.logged?)
-          url = user_url(principal, :only_path => only_path)
-          css_classes += principal.css_classes
-        end
+        url = user_url(principal, only_path: only_path) if principal.active? || (User.current.admin? && principal.logged?)
+        css_classes = principal.css_classes
+
       when Group
         name = principal.to_s
-        url = group_url(principal, :only_path => only_path)
-        css_classes = 'bg-white flex items-center justify-left text-xs dark:bg-gray-600 border border-gray-100 dark:border-gray-600 dark:hover:border-gray-500 hover:bg-gray-50 rounded px-2.5 py-1 text-gray-900 dark:text-gray-200 hover:text-blue-800'
+        url  = group_url(principal, only_path: only_path)
+        css_classes = 'bg-white flex items-center justify-left text-xs dark:bg-gray-600 border ...'
+
       else
+        # objets inattendus (types customs) → fallback
         name = principal.to_s
       end
 
-      css_classes += " #{options[:class]}" if css_classes && options[:class].present?
-      url ? link_to(principal_icon(principal).to_s.html_safe + name, url, :class => css_classes) : h(name)
+      url ? link_to(principal_icon(principal).to_s.html_safe + name, url, class: css_classes) : h(name)
     end
 
     # Renders the project quick-jump box
@@ -324,5 +330,9 @@ end
 # Rails.application.config.after_initialize do
 #   ApplicationController.send(:helper, RedmineAsapTheme::ApplicationHelperPatch)
 # end
-ApplicationHelper.prepend RedmineAsapTheme::ApplicationHelperPatch
-ActionView::Base.prepend ApplicationHelper
+
+Rails.application.config.after_initialize do
+  ApplicationHelper.prepend RedmineAsapTheme::ApplicationHelperPatch
+end
+# ApplicationHelper.include RedmineAsapTheme::ApplicationHelperPatch
+# ActionView::Base.prepend ApplicationHelper

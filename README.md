@@ -58,6 +58,13 @@ In progress
 
 ## Installation
 
+### Requirements
+
+You'll need deface so if you have installed a plugin like aditionnals it will work out of the box. Otherwise I suggest that you use this plugin
+https://github.com/jbbarth/redmine_base_deface
+
+### Installation
+
 This plugin has been tested with Redmine 6.1.x
 
 ```
@@ -67,7 +74,10 @@ bundle install
 bundle exec rake redmine:plugins:migrate RAILS_ENV=production
 ```
 
+### Configuration
+
 Go to the admin section > /settings/plugin/redmine_asap_theme to change the settings.
+Note : you can add your own wallpapers for the login page in the folder /assets/images/login and restart Redmine.
 
 ## Contributing
 

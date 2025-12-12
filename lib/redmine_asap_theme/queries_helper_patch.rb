@@ -4,58 +4,34 @@ module RedmineAsapTheme
   module QueriesHelperPatch
 
     def column_value(column, item, value)
-      content =
-        case column.name
-        when :id
-          link_to value, issue_path(item)
-        when :subject
-          link_to value, issue_path(item)
-        when :parent, :'issue.parent'
-          value ? (value.visible? ? link_to_issue(value, :subject => false) : "##{value.id}") : ''
-        when :description
-          item.description? ? content_tag('div', textilizable(item, :description), :class => "wiki") : ''
-        when :last_notes
-          item.last_notes.present? ? content_tag('div', textilizable(item, :last_notes), :class => "wiki") : ''
-        when :done_ratio
-          progress_bar(value)
-        when :relations
-          content_tag(
-            'span',
-            value.to_s(item) {|other| link_to_issue(other, :subject => false, :tracker => false)}.html_safe,
-            :class => value.css_classes_for(item))
-        when :hours, :estimated_hours, :total_estimated_hours
-          format_hours(value)
-        when :spent_hours
-          link_to_if(value > 0, format_hours(value), project_time_entries_path(item.project, :issue_id => "#{item.id}"))
-        when :total_spent_hours
-          link_to_if(value > 0, format_hours(value), project_time_entries_path(item.project, :issue_id => "~#{item.id}"))
-        when :attachments
-          value.to_a.map {|a| format_object(a)}.join(" ").html_safe
-        when :tracker
-          # content_tag('span', value, class: css_classes_for_item(value))
-          content_tag('span', value, class: "rounded-r-md px-2.5 py-1 text-xs font-medium", style: "background-color: #{item.tracker.bg_color};color: #{item.tracker.text_color}")
-        when :status
-          content_tag('span', value, class: "rounded px-2.5 py-0.5 text-xs font-medium", style: "background-color: #{item.status.bg_color};color: #{item.status.text_color}")
-        else
-          format_object(value)
-        end
+      case column.name
+      when :tracker
+        content_tag(
+          'span',
+          value,
+          class: "rounded-r-md px-2.5 py-1 text-xs font-medium",
+          style: "background-color: #{item.tracker.bg_color};color: #{item.tracker.text_color}"
+        )
 
-      call_hook(:helper_queries_column_value,
-                {:content => content, :column => column, :item => item, :value => value})
+      when :status
+        content_tag(
+          'span',
+          value,
+          class: "rounded px-2.5 py-0.5 text-xs font-medium",
+          style: "background-color: #{item.status.bg_color};color: #{item.status.text_color}"
+        )
 
-      content
+      else
+        # 👉 Laisser Redmine gérer toutes les autres colonnes
+        super
+      end
     end
-
-    def css_classes_for_item(item)
-      "rel-#{item.id}"
-    end
-
-
-
 
   end
 end
 
-
-QueriesHelper.prepend RedmineAsapTheme::QueriesHelperPatch
-ActionView::Base.prepend QueriesHelper
+Rails.application.config.after_initialize do
+  QueriesHelper.prepend RedmineAsapTheme::QueriesHelperPatch
+end
+#
+# QueriesHelper.include RedmineAsapTheme::QueriesHelperPatch
