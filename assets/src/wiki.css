@@ -77,3 +77,41 @@
   }
 
 }
+
+
+.wiki{
+  @apply text-xs;
+  h1{
+    @apply text-base my-2;
+  }
+  h2{
+    @apply text-base font-bold border-b border-gray-100 pb-4 mt-4 mb-2;
+  }
+  h3{
+    @apply text-sm font-bold pb-1 mt-6 mb-0;
+  }
+  h4{
+    @apply text-sm font-medium py-1;
+  }
+  h5{
+    @apply text-xs font-medium py-1;
+  }
+  h5{
+    @apply text-xs text-gray-500 font-medium py-1;
+  }
+  p{
+    @apply py-2 ;
+  }
+  .pre-wrapper{
+    @apply relative;
+    .copy-pre-content-link{
+      @apply absolute right-2 top-2 cursor-pointer;
+    }
+  }
+  pre{
+    @apply bg-gray-100 dark:bg-gray-600 rounded p-4 border-gray-200 dark:border-gray-700 my-1;
+  }
+}
+div.wiki p{
+  /* @apply text-xs; */
+}

@@ -453,7 +453,7 @@ table.boards td.last-message {text-align:left;font-size:93%;}
 div.table-list.boards .table-list-cell.name {width: 30%;}
 #message_subject { max-width: 99%; }
 
-#query_form_content {font-size:90%;}
+/* #query_fom_content {font-size:90%;} */
 #query_form_with_buttons > p.contextual {font-size:0.75rem; margin:12px 0px;}
 
 .query_sort_criteria_count {
@@ -462,7 +462,7 @@ div.table-list.boards .table-list-cell.name {width: 30%;}
 }
 
 /* query form - options */
-#list-definition {
+/* #list-definition {
   margin: 0 15px;
   width: auto  ;
 }
@@ -485,7 +485,7 @@ div.table-list.boards .table-list-cell.name {width: 30%;}
 }
 .query-columns select {
   min-width:150px;
-}
+} */
 
 .query-totals {text-align:right; margin-top:-2.3em; font-size: 93%;}
 .query-totals>span:not(:first-child) {margin-left:0.6em;}

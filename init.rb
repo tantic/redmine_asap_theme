@@ -4,7 +4,7 @@ Redmine::Plugin.register :redmine_asap_theme do
   name 'Redmine Asap Theme plugin'
   author 'DGAC/DSNA - Tantic'
   description 'UX/UI based on Tailwindcss'
-  version '2.1.0'
+  version '2.1.1'
   url 'https://github.com/tantic/redmine_asap_theme'
   author_url 'https://github.com/tantic'
 
@@ -55,3 +55,8 @@ LetterAvatar.setup do |config|
   config.pointsize         = 300                       # default is 140
 end
 
+
+Rails.configuration.to_prepare do
+  require_dependency 'issues_helper'
+  IssuesHelper.prepend RedmineAsapTheme::IssuesHelperPatch
+end

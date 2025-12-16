@@ -7,7 +7,7 @@ table.list{
   @apply w-full overflow-x-auto;
   tr.group{
     >td{
-      @apply  p-2;
+      @apply  p-2 dark:bg-gray-600;
       span{
         @apply inline-block align-middle;
       }
@@ -55,7 +55,7 @@ table.list td.subject a{
 }
 
 table.list td.author, table.list td.assigned_to{
-  @apply text-left;
+  @apply text-left font-bold;
   /* a.user.active{
     span{
       @apply py-0 px-1 bg-transparent shadow-none align-bottom border-0;
@@ -72,7 +72,7 @@ table.list:not(.odd-even) tbody tr:nth-child(odd), .odd, #issue-changesets div.c
   @apply bg-white dark:bg-gray-700;
 }
 table.list:not(.odd-even) tbody tr:nth-child(even), .even, #issue-changesets div.changeset:nth-child(even) {
-  @apply bg-gray-50 dark:bg-gray-800;
+  @apply bg-gray-100 dark:bg-gray-800;
 }
 table.list:not(.odd-even) tbody tr:nth-child(odd):hover, .odd:hover, #issue-changesets div.changeset:nth-child(odd):hover,
 table.list:not(.odd-even) tbody tr:nth-child(even):hover, .even:hover, #issue-changesets div.changeset:nth-child(even):hover {

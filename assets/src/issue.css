@@ -14,7 +14,7 @@
       @apply w-8 h-8 rounded-full absolute top-6 -right-2;
     }
     .author{
-      @apply text-gray-500 dark:text-gray-300 font-light mt-0;
+      @apply text-gray-500 dark:text-gray-300 font-light mt-0 text-xs;
       a.user.active{
         span{
           @apply p-0 shadow-none align-bottom border-0;
@@ -26,6 +26,9 @@
     }
     #issue_tree, #relations{
       @apply flex flex-col relative;
+      > p{
+        @apply text-xs text-gray-500;
+      }
       .contextual{
         @apply -top-2 right-0;
         a{
@@ -139,7 +142,7 @@
   }
 
   div.issue div.attributes{
-    @apply bg-gray-50 dark:bg-gray-700 rounded p-6 border border-gray-100 dark:border-gray-700 mb-6;
+    @apply bg-gray-50 text-xs dark:bg-gray-700 rounded p-6 border border-gray-100 dark:border-gray-700 mb-6;
     div.attribute{
       @apply flex flex-col md:flex-row pl-0 py-0.5;
     }
@@ -164,16 +167,14 @@
   }
 
   .description{
-    @apply relative;
+    @apply relative px-2;
     > .contextual{
       @apply top-0 right-0;
     }
     > p {
       display: none;
     }
-    div.wiki p{
-      /* @apply text-xs; */
-    }
+
   }
 
   #issue_description_and_toolbar{

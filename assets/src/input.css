@@ -31,4 +31,5 @@
 @theme {
   --font-sans: "Inter", sans-serif;
   --font-inter: Inter, sans-serif;
+  --text-xs: 13px;
 }

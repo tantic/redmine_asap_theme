@@ -7,28 +7,28 @@ svg.icon-svg {
   td.priority{
     vertical-align: middle;
     gap: 0.3rem;
-    @apply text-red-800;
+    @apply text-red-800 dark:text-red-300;
     &::before{
       content: "";
       display: inline-block;
       vertical-align: middle;
       mask: url("arrow-badge-up.svg") no-repeat center;
       mask-size: contain;
-      @apply w-5 h-5 bg-red-800;
+      @apply w-5 h-5 bg-red-800 dark:bg-red-300;
     }
   }
   div.priority{
     .value{
       vertical-align: middle;
       gap: 0.3rem;
-      @apply text-red-800;
+      @apply text-red-800 dark:text-red-300;
       &::before{
         content: "";
         display: inline-block;
         vertical-align: middle;
         mask: url("arrow-badge-up.svg") no-repeat center;
         mask-size: contain;
-        @apply w-5 h-5 bg-red-800;
+        @apply w-5 h-5 bg-red-800 dark:bg-red-300;
       }
     }
   }
@@ -38,28 +38,28 @@ svg.icon-svg {
   td.priority{
     vertical-align: middle;
     gap: 0.3rem;
-    @apply text-orange-700;
+    @apply text-orange-700 dark:text-orange-300;
     &::before{
       content: "";
       display: inline-block;
       vertical-align: middle;
       mask: url("chevrons-up.svg") no-repeat center;
       mask-size: contain;
-      @apply w-5 h-5 bg-orange-700;
+      @apply w-5 h-5 bg-orange-700 dark:bg-orange-300;
     }
   }
   div.priority{
     .value{
       vertical-align: middle;
       gap: 0.3rem;
-      @apply text-orange-700;
+      @apply text-orange-700 dark:text-orange-300;
       &::before{
         content: "";
         display: inline-block;
         vertical-align: middle;
         mask: url("chevrons-up.svg") no-repeat center;
         mask-size: contain;
-        @apply w-5 h-5 bg-orange-700;
+        @apply w-5 h-5 bg-orange-700 dark:bg-orange-300;
       }
     }
   }
@@ -69,28 +69,28 @@ svg.icon-svg {
   td.priority{
     vertical-align: middle;
     gap: 0.3rem;
-    @apply text-yellow-700;
+    @apply text-yellow-700 dark:text-yellow-300;
     &::before{
       content: "";
       display: inline-block;
       vertical-align: middle;
       mask: url("chevron-up.svg") no-repeat center;
       mask-size: contain;
-      @apply w-5 h-5 bg-yellow-700;
+      @apply w-5 h-5 bg-yellow-700 dark:bg-yellow-300;
     }
   }
   div.priority{
     .value{
       vertical-align: middle;
       gap: 0.3rem;
-      @apply text-yellow-700;
+      @apply text-yellow-700 dark:text-yellow-300;
       &::before{
         content: "";
         display: inline-block;
         vertical-align: middle;
         mask: url("chevron-up.svg") no-repeat center;
         mask-size: contain;
-        @apply w-5 h-5 bg-yellow-700;
+        @apply w-5 h-5 bg-yellow-700 dark:bg-yellow-300;
       }
     }
   }
@@ -100,28 +100,28 @@ svg.icon-svg {
   td.priority{
     vertical-align: middle;
     gap: 0.3rem;
-    @apply text-blue-800;
+    @apply text-blue-800 dark:text-blue-300;
     &::before{
       content: "";
       display: inline-block;
       vertical-align: middle;
       mask: url("equal.svg") no-repeat center;
       mask-size: contain;
-      @apply w-5 h-5 bg-blue-800;
+      @apply w-5 h-5 bg-blue-800 dark:bg-blue-300;
     }
   }
   div.priority{
     .value{
       vertical-align: middle;
       gap: 0.3rem;
-      @apply text-blue-800;
+      @apply text-blue-800 dark:text-blue-300;
       &::before{
         content: "";
         vertical-align: middle;
         display: inline-block;
         mask: url("equal.svg") no-repeat center;
         mask-size: contain;
-        @apply w-5 h-5 bg-blue-800;
+        @apply w-5 h-5 bg-blue-800 dark:bg-blue-300;
       }
     }
   }
@@ -132,28 +132,28 @@ svg.icon-svg {
   td.priority{
     vertical-align: middle;
     gap: 0.3rem;
-    @apply text-gray-500;
+    @apply text-gray-500 dark:text-gray-300;
     &::before{
       content: "";
       display: inline-block;
       vertical-align: middle;
       mask: url("chevrons-down.svg") no-repeat center;
       mask-size: contain;
-      @apply w-5 h-5 bg-gray-500;
+      @apply w-5 h-5 bg-gray-500  dark:bg-gray-300;
     }
   }
   div.priority{
     .value{
       vertical-align: middle;
       gap: 0.3rem;
-      @apply text-gray-500;
+      @apply text-gray-500 dark:text-gray-300;
       &::before{
         content: "";
         display: inline-block;
         vertical-align: middle;
         mask: url("chevrons-down.svg") no-repeat center;
         mask-size: contain;
-        @apply w-5 h-5 bg-gray-500;
+        @apply w-5 h-5 bg-gray-500  dark:bg-gray-300;
       }
     }
   }

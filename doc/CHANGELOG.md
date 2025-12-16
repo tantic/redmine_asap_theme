@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.1.1
+
+* Query form : improve display of options
+* Increase font size
+* Wiki text (issue description, wiki pages...) improvments
+
 ## 2.1.0
 
 * New general design

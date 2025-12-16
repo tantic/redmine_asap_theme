@@ -72,10 +72,11 @@ body {
   display:inline-block;
 }
 #main-menu li a {
+  @apply text-xs;
   display: block;
   color: #fff;
   text-decoration: none;
-  font-size: 93%;
+  /* font-size: 93%; */
   margin: 0;
   padding: 4px 10px 4px 10px;
   /* border-top-left-radius: 3px;
@@ -349,19 +350,7 @@ span.drdn .drdn-content{
 
 
 
-#query_form{
-  #filters > div{
-    @apply px-4;
-  }
-  #list-definition{
-    >div > div{
-      @apply my-1;
-    }
-    label.inline{
-      @apply mr-3 ;
-    }
-  }
-}
+
 
 /* ACTIVITY */
 .controller-activities #activity{
@@ -880,6 +869,7 @@ table.progress-10 td, table.progress-20 td, table.progress-30 td, table.progress
 }
 
 #query_form_content{
+  @apply text-xs;
   #filters-table{
     .filter{
       @apply flex items-center;
@@ -888,6 +878,7 @@ table.progress-10 td, table.progress-20 td, table.progress-30 td, table.progress
       @apply flex items-center;
     }
   }
+
 }
 
 hr{
