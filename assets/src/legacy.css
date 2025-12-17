@@ -639,22 +639,22 @@ body.controller-issues h2.inline-flex {padding-right: 0}
 
 /* #issue_tree table.issues, #relations table.issues {border: 0;}
 #issue_tree table.issues td, #relations table.issues td {border: 0;} */
-#issue_tree td.checkbox, #relations td.checkbox {display:none;}
-#issue_tree td.buttons, #relations td.buttons {padding:0;}
-#issue_tree .issues-stat, #relations .issues-stat {font-size: 93%}
-#issue_tree .issues-stat .badge, #relations .issues-stat .badge {bottom: initial;}
+/* #issue_tree td.checkbox, #relations td.checkbox {display:none;} */
+/* #issue_tree td.buttons, #relations td.buttons {padding:0;} */
+/* #issue_tree .issues-stat, #relations .issues-stat {font-size: 93%} */
+/* #issue_tree .issues-stat .badge, #relations .issues-stat .badge {bottom: initial;}
 #issue_tree .issue > td, #relations .issue > td, #issue_tree .issue .user {
-  text-overflow: ellipsis; /* if text exceeds its space, add ... */
+  text-overflow: ellipsis;
   overflow: hidden;
 }
 #issue_tree .issue > td.subject, #relations .issue > td.subject {
   width: 50%;
-  word-break: break-word; /* break word if subject is too long */
-  padding-right: 25px; /* this is the spaces that .buttons uses next to subject */
+  word-break: break-word;
+  padding-right: 25px;
 }
 #issue_tree .issue > td.assigned_to, #relations .issue > td.assigned_to {
   white-space: nowrap;
-}
+} */
 #trackers_description, #issue_statuses_description {display:none;}
 #trackers_description dt, #issue_statuses_description dt {font-weight: bold; text-decoration: underline;}
 #trackers_description dd, #issue_statuses_description dd {margin: 0; padding: 0 0 1em 0;}
@@ -1063,8 +1063,8 @@ span.required {color: #bb0000;}
 .check_box_group.bool_cf {border:0; background:inherit;}
 .check_box_group.bool_cf label {display: inline;}
 
-.attachments_fields input.description, #existing-attachments input.description {margin-left:4px; width:340px;}
-.attachments_fields>span, #existing-attachments>span {display:block; white-space:nowrap;}
+/* .attachments_fields input.description, #existing-attachments input.description {margin-left:4px; width:340px;}
+.attachments_fields>span, #existing-attachments>span {display:block; white-space:nowrap;} */
 /* ToDo: delete this line when legacy icons are deleted */
 .attachments_fields , #existing-attachments .icon-attachment {background-image: none; padding-left: 0}
 /* .attachments_fields input.filename, #existing-attachments .filename {border:0; width:250px; color:#555; background-color:inherit; } */

@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.1.2
+
+* Change pagination in issue
+* Improve file attachments
+* Improve Subtasks and relations
+
 ## 2.1.1
 
 * Query form : improve display of options

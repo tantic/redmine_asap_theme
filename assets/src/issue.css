@@ -25,7 +25,7 @@
       }
     }
     #issue_tree, #relations{
-      @apply flex flex-col relative;
+      @apply relative overflow-x-auto;
       > p{
         @apply text-xs text-gray-500;
       }
@@ -36,10 +36,28 @@
         }
       }
       .subtasks-wrapper, .relation-issues-wrapper{
-        @apply mt-2 mb-4;
-        table{
+        @apply mt-4 mb-4 flex;
+        table, tbody{
+          @apply w-full;
           td{
-            @apply border-gray-200;
+            @apply border-gray-200 text-wrap p-1;
+            &.checkbox{
+              @apply px-2;
+            }
+            &.done_ratio{
+              @apply w-20;
+            }
+
+            &.buttons{
+              a{
+                @apply rounded-full p-2 hover:bg-gray-50 dark:hover:bg-gray-600;
+              }
+            }
+          }
+          tr.assigned-to-me{
+            td.subject{
+              @apply font-bold;
+            }
           }
         }
       }

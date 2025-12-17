@@ -265,6 +265,37 @@ span.drdn .drdn-content{
   }
 }
 
+.next-prev-links.contextual {
+  display: flex;
+  gap: 0;
+}
+
+.next-prev-links.contextual > * {
+  margin: 0;
+}
+
+.next-prev-links.contextual {
+  font-size: 0;
+}
+
+/* .next-prev-links.contextual > *:nth-child(2),
+.next-prev-links.contextual > *:nth-child(4) {
+  display: none;
+} */
+
+.contextual.next-prev-links{
+  @apply inline-flex rounded-md shadow-xs -space-x-px right-8 top-8;
+  >a:first-child{
+    @apply text-xs border border-gray-200 leading-5 rounded-s-md px-3 py-1.5 focus:outline-none bg-gray-50 dark:bg-gray-600 hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-700;
+  }
+  a:last-child{
+    @apply text-xs border border-gray-200  leading-5 rounded-e-md px-3 py-1.5 bg-gray-50 dark:bg-gray-600 hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-700 px-2 py-1.5;
+  }
+  > .position a{
+    @apply text-xs border border-gray-200 rounded-none bg-gray-100 dark:bg-gray-600 hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-500 px-2 py-2;
+  }
+}
+
 /* BOX */
 .box{
   @apply shadow my-4 bg-white border border-gray-200 rounded-lg  p-8 dark:bg-gray-800 dark:border-gray-700;
@@ -653,7 +684,7 @@ h4 img.gravatar {
 div.issue.details .reaction {
   float: right;
   font-size: 0.9em;
-  margin-top: 0.5em;
+  margin-top: 1em;
   margin-left: 10px;
   clear: right;
 
@@ -1368,8 +1399,24 @@ img.ui-datepicker-trigger {
 
 
 div.attachments{
-  @apply relative bg-white shadow p-4 rounded;
+  @apply relative bg-gray-50 dark:bg-gray-600 shadow p-4 rounded mt-2 mb-6;
   .contextual{
-    @apply top-0;
+    @apply top-0 right-4;
+  }
+  table{
+    @apply w-full mt-8;
+    tr{
+      @apply border-t border-gray-100;
+      td{
+        @apply py-1;
+      }
+    }
+  }
+}
+
+#new-attachments{
+  .attachments_fields input.description, #existing-attachments input.description {margin-left:4px; width:340px;}
+  .attachments_fields>span, #existing-attachments>span {
+    @apply flex items-center;
   }
 }
