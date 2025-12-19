@@ -1,5 +1,5 @@
 select{
-  @apply block text-xs w-full mt-1 rounded-md bg-gray-100 dark:bg-gray-700 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0
+  @apply block text-xs w-full mt-1 rounded-md bg-gray-100 dark:bg-gray-700 border-transparent focus:border-gray-500 focus:bg-white dark:focus:bg-gray-700 focus:ring-0
 }
 
 input[type=text],input[type=password]{

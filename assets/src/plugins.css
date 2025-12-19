@@ -211,7 +211,7 @@ html.agile-board-fullscreen div.agile-board{
   #issue-menu{
     a.icon-fav:not(#context-menu a.icon-fav) {
       & .icon-label{
-        @apply flex! hover:bg-blue-50! rounded!;
+        @apply flex! hover:bg-blue-50! dark:hover:bg-blue-700! rounded!;
       }
     }
   }
@@ -226,12 +226,21 @@ html.agile-board-fullscreen div.agile-board{
   div.journal{
     @apply my-4;
     .note{
-      @apply bg-white shadow rounded ml-10;
+      @apply bg-white dark:bg-gray-700 shadow rounded ml-10;
+      .journal-header{
+        @apply flex items-center;
+        .journal-info{
+          @apply flex;
+        }
+        .journal-meta{
+          @apply ml-auto;
+        }
+      }
       >.contextual{
         @apply pr-4;
       }
       .note-header{
-        @apply relative py-2 px-4 border-b border-gray-100 text-gray-500 text-xs;
+        @apply relative py-2 px-4 border-b border-gray-100 dark:border-gray-700 text-gray-500 dark:text-gray-200 text-xs;
         >.gravatar{
           @apply relative top-0 float-left -ml-14 w-8 h-8;
         }
@@ -284,6 +293,12 @@ html.agile-board-fullscreen div.agile-board{
     .username{
       @apply ml-2! text-base font-medium;
     }
+  }
+}
+
+.controller-inbox{
+  tr.issue td.subject {
+    white-space: normal;
   }
 }
 

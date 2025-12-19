@@ -108,18 +108,7 @@ document.addEventListener("turbo:load",function(){
 });
 
 
-document.addEventListener("turbo:load",setupAjaxIndicator);
-document.addEventListener("turbo:load",hideOnLoad);
-document.addEventListener("turbo:load",addFormObserversForDoubleSubmit);
-document.addEventListener("turbo:load",defaultFocus);
-document.addEventListener("turbo:load",setupAttachmentDetail);
-document.addEventListener("turbo:load",setupTabs);
-document.addEventListener("turbo:load",setupFilePreviewNavigation);
-document.addEventListener("turbo:load",setupWikiTableSortableHeader);
 
-document.addEventListener("turbo:load",function(){
-  autoFillProjectIdentifier();
-});
 
 function defaultFocus(){
   // if (($('#content :focus').length == 0) && (window.location.hash == '')) {
@@ -255,10 +244,7 @@ function buildFilterRow(field, operator, values) {
   }
 }
 
-document.addEventListener("turbo:load",function(){
-  contextMenuInit();
-  $('input[type=checkbox].toggle-selection').on('change', toggleIssuesSelection);
-});
+
 
 
 document.addEventListener("turbo:load",function(){
@@ -446,4 +432,205 @@ document.addEventListener("turbo:load",function(){
       $(el).addClass('disabled');
     }
   }
+});
+
+window.keepAnchorOnSignIn = function (form) {
+  var hash = decodeURIComponent(document.location.hash);
+
+  if (hash) {
+    if (!hash.startsWith("#")) {
+      hash = "#" + hash;
+    }
+    form.action = form.action + hash;
+  }
+  form.submit();
+  return false;
+};
+
+
+document.addEventListener("turbo:load",function(){
+  $(function ($) {
+    $('#auth_source_ldap_mode').change(function () {
+      $('.ldaps_warning').toggle($(this).val() != 'ldaps_verify_peer');
+    }).change();
+  });
+});
+
+
+document.addEventListener("turbo:load",function(){
+  function inlineAutoComplete(element) {
+      'use strict';
+
+      // do not attach if Tribute is already initialized
+      if (element.dataset.tribute === 'true') {return};
+
+      const getDataSource = function(entity) {
+        const dataSources = rm.AutoComplete.dataSources;
+
+        if (dataSources[entity]) {
+          return dataSources[entity];
+        } else {
+          return false;
+        }
+      }
+
+      const debounce = function(func, delay) {
+        let timeout;
+
+        return function(...args) {
+          const context = this;
+          clearTimeout(timeout);
+          timeout = setTimeout(() => func.apply(context, args), delay);
+        };
+      }
+
+      const remoteSearch = debounce((url, cb) => {
+        const xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function ()
+        {
+          if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+              var data = JSON.parse(xhr.responseText);
+              cb(data);
+            } else if (xhr.status === 403) {
+              cb([]);
+            }
+          }
+        };
+        xhr.open("GET", url, true);
+        xhr.send();
+      }, 200);
+
+      const tribute = new Tribute({
+        collection: [
+          {
+            trigger: '#',
+            values: function (text, cb) {
+              if (event.target.type === 'text' && element.getAttribute('autocomplete') != 'off') {
+                element.setAttribute('autocomplete', 'off');
+              }
+              // When triggered with text starting with "##", like "##a", the search term will become "#a",
+              // causing the SQL query to fail in finding issues with "a" in the subject.
+              // To avoid this, remove the first "#" from the search term.
+              if (text) {
+                text = text.replace(/^#/, '');
+              }
+              remoteSearch(getDataSource('issues') + encodeURIComponent(text), function (issues) {
+                return cb(issues);
+              });
+            },
+            lookup: 'label',
+            fillAttr: 'label',
+            requireLeadingSpace: true,
+            selectTemplate: function (issue) {
+              let leadingHash = "#"
+              // keep ## syntax which is a valid issue syntax to show issue with title.
+              if (this.currentMentionTextSnapshot.charAt(0) === "#") {
+                leadingHash = "##"
+              }
+              return leadingHash + issue.original.id;
+            },
+            menuItemTemplate: function (issue) {
+              return sanitizeHTML(issue.original.label);
+            }
+          },
+          {
+            trigger: '[[',
+            values: function (text, cb) {
+              remoteSearch(getDataSource('wiki_pages') + encodeURIComponent(text), function (wikiPages) {
+                return cb(wikiPages);
+              });
+            },
+            lookup: 'label',
+            fillAttr: 'label',
+            requireLeadingSpace: true,
+            selectTemplate: function (wikiPage) {
+              return '[[' + wikiPage.original.value + ']]';
+            },
+            menuItemTemplate: function (wikiPage) {
+              return sanitizeHTML(wikiPage.original.label);
+            }
+          },
+          {
+            trigger: '@',
+            lookup: function (user, mentionText) {
+              return user.name + user.firstname + user.lastname + user.login;
+            },
+            values: function (text, cb) {
+              const url = getDataSource('users');
+              if (url) {
+                remoteSearch(url + encodeURIComponent(text), function (users) {
+                  return cb(users);
+                });
+              }
+            },
+            menuItemTemplate: function (user) {
+              return user.original.name;
+            },
+            selectTemplate: function (user) {
+              return '@' + user.original.login;
+            }
+          }
+        ],
+        noMatchTemplate: ""
+      });
+
+      tribute.attach(element);
+  }
+});
+
+document.addEventListener("turbo:load",function(){
+  function addFormObserversForDoubleSubmit() {
+    $('form[method=post]').each(function() {
+      if (!$(this).hasClass('multiple-submit')) {
+        $(this).submit(function(form_submission) {
+          if ($(form_submission.target).attr('data-submitted')) {
+            form_submission.preventDefault();
+          } else {
+            $(form_submission.target).attr('data-submitted', true);
+          }
+        });
+      }
+    });
+  }
+});
+
+document.addEventListener("turbo:load",function(){
+  function showModal(id, width, title) {
+    var el = $('#'+id).first();
+    if (el.length === 0 || el.is(':visible')) {return;}
+    if (!title) title = el.find('h3.title').text();
+    // moves existing modals behind the transparent background
+    $(".modal").css('zIndex',99);
+    el.dialog({
+      width: width,
+      modal: true,
+      resizable: false,
+      dialogClass: 'modal',
+      title: title
+    }).on('dialogclose', function(){
+      $(".modal").css('zIndex',101);
+    });
+    el.find("input[type=text], input[type=submit]").first().focus();
+  }
+});
+
+document.addEventListener("turbo:load",setupAjaxIndicator);
+document.addEventListener("turbo:load",hideOnLoad);
+document.addEventListener("turbo:load",addFormObserversForDoubleSubmit);
+document.addEventListener("turbo:load",defaultFocus);
+document.addEventListener("turbo:load",setupAttachmentDetail);
+document.addEventListener("turbo:load",setupTabs);
+document.addEventListener("turbo:load",setupFilePreviewNavigation);
+document.addEventListener("turbo:load",setupWikiTableSortableHeader);
+document.addEventListener("turbo:load", () => {
+  document.addEventListener("focusin", (event) => {
+    const el = event.target
+    if (el.matches('[data-auto-complete="true"]')) {
+      inlineAutoComplete(el)
+    }
+  })
+})
+document.addEventListener("turbo:load",function(){
+  autoFillProjectIdentifier();
 });
