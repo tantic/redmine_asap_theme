@@ -40,7 +40,7 @@ In progress
 
 ## Screenshots
 
-![Login page](doc/screenshots/login.png | width=)
+![Login page](doc/screenshots/login.png)
 
 ![welcome page](doc/screenshots/welcome.png)
 
