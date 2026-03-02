@@ -61,11 +61,25 @@ fr:
   label_user_theme_settings: Thème
   label_user_theme_settings_light: Clair
   label_user_theme_settings_dark: Sombre
+  label_user_font_size: Taille du texte
+  label_font_size_xs: Très petit
+  label_font_size_sm: Petit
+  label_font_size_md: Normal
+  label_font_size_lg: Grand
+  label_font_size_xl: Très grand
   flash_message:
     notice: Information
     error: Erreur
     alert: Attention
   error_saving_avatar: Erreur lors de la sauvegarde de l'avatar
+  label_project_options: Options
+  label_project_logo: Logo
+  label_project_logo_current: Logo actuel
+  label_project_logo_upload: Changer le logo
+  label_project_logo_saved: Logo enregistré.
+  label_project_logo_deleted: Logo supprimé.
+  label_project_logo_error: "Erreur lors de l'enregistrement du logo."
+  label_project_logo_delete_section: Supprimer le logo
   welcome:
     tabs:
       quicklinks: Accès rapides
@@ -74,6 +88,13 @@ fr:
     projects:
       title: Projets
       all: Voir tous
+      bookmarked: Favoris
+      others: Mes projets
+      load_more: Afficher plus de projets
+      sub_projects_count:
+        one: "%{count} sous-projet"
+        other: "%{count} sous-projets"
+      remaining: "%{count} restants"
     recent_projects:
       title: Projets récents
       none: Aucun projet visité récemment.
@@ -91,9 +112,25 @@ fr:
       new_issue: Nouvelle demande
       documentation: Documentation
       help: Assistance & support
+    accordion:
+      my_issues: Mes demandes
+      no_issues: Aucune demande assignée dans ce projet.
+      all_issues: "Voir les %{count} demandes →"
+      view_project: Voir le projet
+      loading: Chargement…
+      toggle: Afficher les détails
+      due_date_prefix: "→"
     my_watched_issues:
       title: "Demandes que j'observe"
     my_assigned_issues:
       title: "Mes demandes assignées"
     my_projects:
       title: "Mes projets"
+    stats:
+      assigned: "Demandes assignées"
+      watched: "Demandes observées"
+      overdue: "En retard"
+      projects: "Projets"
+    issues:
+      none: "Aucune demande ouverte, c'est tout bon !"
+      see_all: "Voir les %{count} demandes"

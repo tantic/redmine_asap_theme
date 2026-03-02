@@ -20,6 +20,23 @@
 <div class="mb-6"><%= pref_fields.select :textarea_font, textarea_font_options %></div>
 <% end %>
 
+<div class="mb-6" data-controller="font-size">
+  <label><%= l(:label_user_font_size) %></label>
+  <%= hidden_field_tag 'pref[font_size]', @user.pref[:font_size].presence || 'md', data: { 'font-size-target': 'input' } %>
+  <div class="flex items-center gap-3 mt-2">
+    <button type="button"
+            data-action="click->font-size#decrease"
+            class="w-8 h-8 flex items-center justify-center rounded-lg border border-gray-300 dark:border-gray-600 text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition text-lg font-medium">−</button>
+    <span data-font-size-target="label"
+          class="text-sm text-gray-700 dark:text-gray-300 w-20 text-center">
+      <%= l("label_font_size_#{@user.pref[:font_size].presence || 'md'}") %>
+    </span>
+    <button type="button"
+            data-action="click->font-size#increase"
+            class="w-8 h-8 flex items-center justify-center rounded-lg border border-gray-300 dark:border-gray-600 text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition text-lg font-medium">+</button>
+  </div>
+</div>
+
  <div class="flex w-full">
       <div class="button-submit"><%= submit_tag l(:button_save) %></div>
     </div>

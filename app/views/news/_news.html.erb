@@ -1,0 +1,12 @@
+<div class="asap-news-item border-l-2 border-l-blue-400 dark:border-l-blue-500 bg-gray-50 dark:bg-gray-700/30 hover:bg-gray-100 dark:hover:bg-gray-700/50 transition px-3 py-2.5 mb-1.5">
+  <p class="text-xs font-medium leading-snug">
+    <%= link_to news.title, news_path(news), style: "color:#374151;text-decoration:none;", class: "dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400" %>
+    <% if news.comments_count > 0 %>
+      <span class="ml-1 text-2xs text-gray-400 dark:text-gray-500 font-normal">(<%= l(:label_x_comments, :count => news.comments_count) %>)</span>
+    <% end %>
+  </p>
+  <% unless news.summary.blank? %>
+    <p class="text-2xs text-gray-500 dark:text-gray-400 mt-0.5 line-clamp-2 leading-relaxed"><%= news.summary %></p>
+  <% end %>
+  <p class="text-2xs text-gray-400 dark:text-gray-500 mt-0.5"><%= authoring news.created_on, news.author %></p>
+</div>

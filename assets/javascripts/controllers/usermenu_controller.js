@@ -31,14 +31,14 @@
     }
 
     dismissOnClick(element) {
-      document.addEventListener('click', (evt) => {
-        var isClickInside = element.contains(evt.target);
-        if (!isClickInside) {
+      const handler = (evt) => {
+        if (!element.contains(evt.target)) {
           element.classList.add('hidden')
+        } else {
+          document.addEventListener('click', handler, { once: true });
         }
-      },
-      { once: true, capture: true }
-     );
+      };
+      setTimeout(() => document.addEventListener('click', handler, { once: true }), 0);
     }
 
     hide(){

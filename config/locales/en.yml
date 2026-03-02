@@ -60,11 +60,25 @@ en:
   label_user_theme_settings: Theme
   label_user_theme_settings_light: Light
   label_user_theme_settings_dark: Dark
+  label_user_font_size: Text size
+  label_font_size_xs: Very small
+  label_font_size_sm: Small
+  label_font_size_md: Normal
+  label_font_size_lg: Large
+  label_font_size_xl: Very large
   flash_message:
     notice: Information
     error: Error
     alert: Alert
   error_saving_avatar: An error occured during the avatar upload
+  label_project_options: Options
+  label_project_logo: Logo
+  label_project_logo_current: Current logo
+  label_project_logo_upload: Change logo
+  label_project_logo_saved: Logo saved.
+  label_project_logo_deleted: Logo deleted.
+  label_project_logo_error: Error saving the logo.
+  label_project_logo_delete_section: Delete logo
   welcome:
     tabs:
       quicklinks: Quick links
@@ -73,6 +87,13 @@ en:
     projects:
       title: Projects
       all: See all
+      bookmarked: Favorites
+      others: My projects
+      load_more: Load more projects
+      sub_projects_count:
+        one: "%{count} sub-project"
+        other: "%{count} sub-projects"
+      remaining: "%{count} remaining"
     recent_projects:
       title: Recents projects
       none: No recent project.
@@ -90,9 +111,25 @@ en:
       new_issue: New issue
       documentation: Documentation
       help: Help
+    accordion:
+      my_issues: My issues
+      no_issues: No assigned issues in this project.
+      all_issues: "View all %{count} issues →"
+      view_project: View project
+      loading: Loading…
+      toggle: Show details
+      due_date_prefix: "→"
     my_watched_issues:
       title: My watched issues
     my_assigned_issues:
       title: My assigned issues
     my_projects:
       title: My projects
+    stats:
+      assigned: Assigned issues
+      watched: Watched issues
+      overdue: Overdue
+      projects: Projects
+    issues:
+      none: No open issues, all clear!
+      see_all: "See all %{count} issues"

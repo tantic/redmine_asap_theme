@@ -23,26 +23,7 @@
     }
   }
 
-  .news{
-    p{
-      @apply mb-2 font-medium border-b border-gray-100 py-0.5;
-      .author{
-        @apply text-xs text-gray-500 font-light flex items-center;
-        a{
-          @apply px-1;
-        }
-        a.user.active{
-          span{
-            @apply py-0 px-1 shadow-none align-bottom border-0;
-            img{
-              @apply hidden;
-            }
-          }
-        }
-      }
-    }
-
-  }
+  /* .news styles handled by plugins/views/news/_news.html.erb */
 
   #block-projectissues, #block-projecttimeentries{
     p:last-of-type{
@@ -59,8 +40,23 @@
       >span.label{
         @apply font-bold flex w-full pb-2 dark:text-gray-300;
       }
-      >a{
-
+    }
+    /* Supprimer les marges de l'avatar dans les pills membres */
+    .flex-wrap a.user, .flex-wrap a.group {
+      display: inline-flex;
+      align-items: center;
+      gap: 2px;
+      span {
+        padding: 0 !important;
+        margin: 0 !important;
+        box-shadow: none !important;
+        border: 0 !important;
+        img {
+          width: 14px !important;
+          height: 14px !important;
+          border-radius: 50% !important;
+          vertical-align: middle;
+        }
       }
     }
   }

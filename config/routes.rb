@@ -9,8 +9,14 @@ get '/about', to: 'about#show', :as => 'show_about'
 get 'home/my-projects', :to => 'welcome#my_projects', :as => 'home_my_projects'
 get 'home/my-issues', :to => 'welcome#my_issues', :as => 'home_my_issues'
 get 'home/project/:id', :to => 'welcome#project', :as => 'home_project'
+get 'home/more-projects', :to => 'welcome#more_projects', :as => 'home_more_projects'
 post 'homepage/project/:id/bookmark', :to => 'welcome#bookmark', :as => 'welcome_bookmark_project'
 delete 'homepage/project/:id/bookmark', :to => 'welcome#bookmark', :as => 'welcome_bookmark_project_delete'
+
+# Project logo
+get    'projects/:id/logo', :to => 'projects#get_logo',    :as => 'asap_project_logo'
+post   'projects/:id/logo', :to => 'projects#save_logo',   :as => 'project_save_logo'
+delete 'projects/:id/logo', :to => 'projects#delete_logo', :as => 'project_delete_logo'
 
 
 # Local avatar and letter avatar

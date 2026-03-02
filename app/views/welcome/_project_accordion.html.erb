@@ -1,0 +1,188 @@
+<%# locals: project, my_issues, my_issues_total, sub_projects, versions, versions_issue_counts %>
+<div class="px-4 py-4 text-sm">
+
+  <%# ── Sous-projets ──────────────────────────────────────────────────── %>
+  <% if sub_projects.any? %>
+    <p class="text-2xs font-medium text-gray-400 dark:text-gray-500 uppercase tracking-wider mb-4">
+      <%= l(:label_subprojects) %>
+    </p>
+    <div class="flex flex-wrap gap-1.5 mb-6">
+      <% sub_projects.each do |sub| %>
+        <%= link_to project_path(sub),
+              class: "flex items-center gap-1.5 text-xs text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 bg-gray-50 dark:bg-gray-700/50 hover:bg-blue-50 dark:hover:bg-blue-900/20 px-2 py-1 rounded border border-gray-200 dark:border-gray-600 transition" do %>
+          <%= letter_avatar_tag(sub.name, 300, class: 'w-4 h-4 rounded-sm shrink-0') %>
+          <span class="truncate max-w-32"><%= sub.name %></span>
+        <% end %>
+      <% end %>
+    </div>
+  <% end %>
+
+  <%# ── Mes demandes assignées ────────────────────────────────────────── %>
+  <% if my_issues.any? %>
+    <p class="text-2xs font-medium text-gray-400 dark:text-gray-500 uppercase tracking-wider mb-4">
+      <%= l("welcome.accordion.my_issues") %>
+    </p>
+    <%= form_tag({}, data: { cm_url: issues_context_menu_path }) do %>
+    <div>
+      <table class="w-full">
+        <tbody>
+          <% my_issues.each do |issue| %>
+            <tr id="issue-<%= issue.id %>" class="hascontextmenu hover:bg-gray-50 dark:hover:bg-gray-700/50 transition cursor-pointer"
+                onclick="window.location='<%= issue_path(issue) %>'">
+              <td class="hidden"><%= check_box_tag 'ids[]', issue.id, false, id: nil %></td>
+              <td class="py-1.5 pr-2 align-middle w-px whitespace-nowrap">
+                <span class="inline-flex items-center px-1.5 py-0.5 rounded text-xs font-medium"
+                      style="background-color: <%= issue.tracker.bg_color.presence || '#e5e7eb' %>; color: <%= issue.tracker.text_color.presence || '#374151' %>">
+                  <%= issue.tracker.name %>
+                </span>
+              </td>
+              <td class="py-1.5 align-middle">
+                <span class="text-gray-700 dark:text-gray-300 text-sm leading-snug">
+                  <span class="text-2xs text-gray-400 dark:text-gray-500 mr-1">#<%= issue.id %></span><%= issue.subject %>
+                </span>
+              </td>
+              <% if issue.due_date %>
+                <td class="py-1.5 pl-2 align-middle w-px whitespace-nowrap">
+                  <% if issue.overdue? %>
+                    <span class="text-2xs font-medium text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-900/30 px-1.5 py-0.5 rounded">
+                      <%= format_date(issue.due_date) %>
+                    </span>
+                  <% else %>
+                    <span class="text-2xs text-gray-400 dark:text-gray-500">
+                      <%= l("welcome.accordion.due_date_prefix") %> <%= format_date(issue.due_date) %>
+                    </span>
+                  <% end %>
+                </td>
+              <% end %>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    <% end %>
+    <% if my_issues_total > 10 %>
+      <%= link_to project_issues_path(project, set_filter: 1, assigned_to_id: 'me', status_id: 'o'),
+            class: "text-2xs text-blue-500 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 mt-2 flex justify-end" do %>
+        <%= l("welcome.accordion.all_issues", count: my_issues_total) %>
+      <% end %>
+    <% end %>
+  <% else %>
+    <p class="text-2xs text-gray-400 dark:text-gray-500"><%= l("welcome.accordion.no_issues") %></p>
+  <% end %>
+
+  <%# ── Planning (versions) — Gantt custom ────────────────────────────── %>
+  <% if versions.any? %>
+    <%
+      today = Date.today
+      # Calcul de la plage temporelle du Gantt
+      all_starts = versions.map { |v| v.start_date.presence || v.effective_date }
+      all_ends   = versions.map(&:effective_date)
+      gantt_min  = ([all_starts.min, today - 30].min).beginning_of_month
+      gantt_max  = ([all_ends.max, today + 30].max).end_of_month
+      gantt_days = (gantt_max - gantt_min).to_f
+      today_pct  = [(today - gantt_min).to_f / gantt_days * 100, 0].max.round(2)
+
+      # Couleurs par statut
+      status_colors = { 'open' => '#6366f1', 'locked' => '#f59e0b', 'closed' => '#10b981' }
+    %>
+    <p class="text-2xs font-medium text-gray-400 dark:text-gray-500 uppercase tracking-wider mt-6 mb-2">
+      <%= l(:label_roadmap) %>
+    </p>
+
+    <div style="border:1px solid #e5e7eb;border-radius:10px;overflow:hidden;background:#fafafa;">
+      <%# En-tête mois %>
+      <div style="display:flex;border-bottom:1px solid #f0f0f0;background:#f9fafb;">
+        <div style="width:140px;min-width:140px;padding:6px 10px;font-size:0.65rem;font-weight:600;color:#9ca3af;text-transform:uppercase;letter-spacing:0.05em;border-right:1px solid #f0f0f0;">
+          Version
+        </div>
+        <div style="flex:1;position:relative;overflow:hidden;">
+          <%# Graduation des mois %>
+          <div style="display:flex;height:100%;">
+            <% d = gantt_min.dup %>
+            <% while d <= gantt_max %>
+              <% month_days = Date.new(d.year, d.month, -1).day %>
+              <% w_pct = month_days / gantt_days * 100 %>
+              <div style="flex:0 0 <%= w_pct.round(2) %>%;padding:4px 6px;font-size:0.6rem;color:#9ca3af;border-right:1px solid #f0f0f0;white-space:nowrap;overflow:hidden;">
+                <%= d.strftime('%b %Y') %>
+              </div>
+              <% d = d >> 1 %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+
+      <%# Lignes versions %>
+      <% versions.each_with_index do |v, i| %>
+        <% stats  = versions_issue_counts[v.id] || { total: 0, closed: 0, pct: 0 } %>
+        <% color  = status_colors[v.status] || '#6366f1' %>
+        <% v_start = (v.start_date.presence || v.effective_date) %>
+        <% v_end   = v.effective_date %>
+        <% is_milestone = v.start_date.blank? || v.start_date == v.effective_date %>
+        <% left_pct  = [(v_start - gantt_min).to_f / gantt_days * 100, 0].max.round(2) %>
+        <% right_pct = [(v_end - gantt_min).to_f / gantt_days * 100, 0].max.round(2) %>
+        <% width_pct = [right_pct - left_pct, 0.5].max.round(2) %>
+        <% row_bg = i.even? ? '#ffffff' : '#fafafa' %>
+        <div style="display:flex;align-items:center;border-bottom:1px solid #f5f5f5;background:<%= row_bg %>;">
+          <%# Nom + badge %>
+          <div style="width:140px;min-width:140px;padding:7px 10px;border-right:1px solid #f0f0f0;display:flex;align-items:center;gap:6px;overflow:hidden;">
+            <span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:<%= color %>;flex-shrink:0;"></span>
+            <%= link_to version_path(v),
+                  style: "font-size:0.72rem;font-weight:500;color:#374151;text-decoration:none;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0;",
+                  title: v.name do %>
+              <%= v.name.truncate(18) %>
+            <% end %>
+          </div>
+          <%# Barre Gantt %>
+          <div style="flex:1;position:relative;height:32px;">
+            <%# Fond grille verticale (mois) %>
+            <% d2 = gantt_min.dup; d2_offset = 0 %>
+            <% while d2 <= gantt_max %>
+              <% month_days = Date.new(d2.year, d2.month, -1).day %>
+              <% d2_pct = (d2 - gantt_min).to_f / gantt_days * 100 %>
+              <div style="position:absolute;top:0;bottom:0;left:<%= d2_pct.round(2) %>%;width:1px;background:#f0f0f0;"></div>
+              <% d2 = d2 >> 1 %>
+            <% end %>
+
+            <% if is_milestone %>
+              <%# Jalon : losange %>
+              <div style="position:absolute;top:50%;left:<%= right_pct %>%;transform:translate(-50%,-50%) rotate(45deg);width:10px;height:10px;background:<%= color %>;border-radius:2px;"
+                   title="<%= v.name %> — <%= format_date(v.effective_date) %>"></div>
+            <% else %>
+              <%# Barre avec progression %>
+              <div style="position:absolute;top:50%;left:<%= left_pct %>%;width:<%= width_pct %>%;transform:translateY(-50%);height:14px;border-radius:7px;background:<%= color %>20;overflow:hidden;"
+                   title="<%= v.name %> — <%= stats[:pct] %>%">
+                <div style="height:100%;width:<%= stats[:pct] %>%;background:<%= color %>;border-radius:7px;transition:width 0.3s;"></div>
+              </div>
+              <%# Label % %>
+              <% if stats[:total] > 0 %>
+                <span style="position:absolute;top:50%;left:<%= [right_pct + 0.5, 99].min %>%;transform:translateY(-50%);font-size:0.58rem;color:<%= color %>;font-weight:600;white-space:nowrap;">
+                  <%= stats[:pct] %>%
+                </span>
+              <% end %>
+            <% end %>
+
+            <%# Ligne aujourd'hui %>
+            <% if today_pct.between?(0, 100) %>
+              <div style="position:absolute;top:0;bottom:0;left:<%= today_pct %>%;width:1.5px;background:#ef4444;opacity:0.7;"></div>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+    <%# Légende %>
+    <div style="display:flex;align-items:center;gap:12px;margin-top:6px;padding:0 2px;">
+      <% [['open','#6366f1','Ouvert'],['locked','#f59e0b','Verrouillé'],['closed','#10b981','Fermé']].each do |st, col, label| %>
+        <span style="display:flex;align-items:center;gap:4px;font-size:0.6rem;color:#9ca3af;">
+          <span style="width:8px;height:8px;border-radius:50%;background:<%= col %>;flex-shrink:0;"></span>
+          <%= label %>
+        </span>
+      <% end %>
+      <span style="display:flex;align-items:center;gap:4px;font-size:0.6rem;color:#9ca3af;margin-left:auto;">
+        <span style="width:1.5px;height:10px;background:#ef4444;flex-shrink:0;"></span>
+        Aujourd'hui
+      </span>
+    </div>
+  <% end %>
+
+</div>

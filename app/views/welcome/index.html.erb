@@ -1,93 +1,207 @@
-<div class="container mx-auto flex flex-col bg-gray-50 dark:bg-gray-900 h-full">
+<%= context_menu %>
+<div class="container mx-auto flex flex-col bg-gray-50 dark:bg-gray-900 min-h-full pb-12">
 
-  <div class="flex flex-col md:flex-row mt-16 md:mt-8">
-    <div class="px-0 md:px-12 bg-gray-50 text-medium text-gray-800 dark:text-gray-400 dark:bg-gray-900 rounded-lg w-full">
-      <section>
-        <h2 class="mb-8 text-xs text-gray-500 font-light flex items-center">
-          <div class="flex items-center uppercase">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99" />
-            </svg>
-            <span class="ml-2"><%= l("welcome.projects.title") %></span>
-          </div>
-          <div class="ml-auto text-xs">
-            <%= link_to l("welcome.projects.all"), :controller => 'projects' %>
-          </div>
+  <div class="flex flex-col md:flex-row px-0 md:px-12 gap-8 mt-6 md:mt-8">
+
+    <%# ── Main column : projects ────────────────────────────────── %>
+    <div class="flex-1 min-w-0">
+
+      <div class="flex items-center mb-3">
+        <h2 class="text-2xs text-gray-400 dark:text-gray-500 font-semibold uppercase tracking-wider">
+          <%= l("welcome.projects.title") %>
         </h2>
-          <% if  @projects && @projects.length > 0 %>
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 xl:grid-cols-6 gap-4">
-              <% @projects.each do |project| %>
-                <%= render :partial => "welcome/details",:locals => {:project => project}  %>
-              <% end %>
+        <span class="ml-auto">
+          <%= link_to l("welcome.projects.all"), projects_path,
+                class: "text-2xs text-gray-400 dark:text-gray-500 hover:text-blue-500 dark:hover:text-blue-400 transition" %>
+        </span>
+      </div>
+
+      <% has_any = @bookmarked_projects.any? || @other_projects.any? %>
+
+      <% if has_any %>
+
+          <%# ── Bookmarks ────────────────────────────────────────────── %>
+          <% if @bookmarked_projects.any? %>
+            <div class="flex items-center gap-2 mb-2">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-3.5 h-3.5 text-amber-500 dark:text-amber-400 shrink-0">
+                <path fill-rule="evenodd" d="M6.32 2.577a49.255 49.255 0 0 1 11.36 0c1.497.174 2.57 1.46 2.57 2.93V21a.75.75 0 0 1-1.085.67L12 18.089l-7.165 3.583A.75.75 0 0 1 3.75 21V5.507c0-1.47 1.073-2.756 2.57-2.93Z" clip-rule="evenodd" />
+              </svg>
+              <span class="text-2xs font-semibold text-amber-600 dark:text-amber-400 uppercase tracking-wider"><%= l("welcome.projects.bookmarked") %></span>
+              <span class="text-2xs text-amber-400 dark:text-amber-500"><%= @bookmarked_projects.size %></span>
             </div>
-          <% else %>
-            <div class="rounded bg-gray-100 dark:bg-gray-700 p-8 flex flex-col items-center justify-center">
-              <p class="font-medium"><%= l("welcome.recent_projects.none") %></p>
-              <p class="text-gray-500">
-                <%= l("welcome.recent_projects.none_description") %>
-              </p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 mb-6">
+              <% @bookmarked_projects.each do |project| %>
+                <%= render partial: "welcome/details", locals: {
+                  project: project,
+                  jump_box: @jump_box,
+                  open_count: @projects_open_counts[project.id] || 0,
+                  children_count: @projects_children_counts[project.id] || 0,
+                  project_with_trackers: @projects_with_trackers[project.id],
+                  logo: @projects_logos[project.id],
+                  bookmarked_section: true
+                } %>
+              <% end %>
             </div>
           <% end %>
 
-      </section>
+          <%# ── Other projects ──────────────────────────────────────── %>
+          <% if @other_projects.any? %>
+            <% if @bookmarked_projects.any? %>
+              <div class="flex items-center gap-2 mb-2">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-3.5 h-3.5 text-gray-400 dark:text-gray-500 shrink-0">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6A2.25 2.25 0 0 1 6 3.75h2.25A2.25 2.25 0 0 1 10.5 6v2.25a2.25 2.25 0 0 1-2.25 2.25H6a2.25 2.25 0 0 1-2.25-2.25V6ZM3.75 15.75A2.25 2.25 0 0 1 6 13.5h2.25a2.25 2.25 0 0 1 2.25 2.25V18a2.25 2.25 0 0 1-2.25 2.25H6A2.25 2.25 0 0 1 3.75 18v-2.25ZM13.5 6a2.25 2.25 0 0 1 2.25-2.25H18A2.25 2.25 0 0 1 20.25 6v2.25A2.25 2.25 0 0 1 18 10.5h-2.25a2.25 2.25 0 0 1-2.25-2.25V6ZM13.5 15.75a2.25 2.25 0 0 1 2.25-2.25H18a2.25 2.25 0 0 1 2.25 2.25V18A2.25 2.25 0 0 1 18 20.25h-2.25A2.25 2.25 0 0 1 13.5 18v-2.25Z" />
+                </svg>
+                <span class="text-2xs font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-wider"><%= l("welcome.projects.others") %></span>
+                <span class="text-2xs text-gray-300 dark:text-gray-600"><%= @other_projects_total %></span>
+              </div>
+            <% end %>
+            <div id="other-projects-list" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+              <% @other_projects.each do |project| %>
+                <%= render partial: "welcome/details", locals: {
+                  project: project,
+                  jump_box: @jump_box,
+                  open_count: @projects_open_counts[project.id] || 0,
+                  children_count: @projects_children_counts[project.id] || 0,
+                  project_with_trackers: @projects_with_trackers[project.id],
+                  logo: @projects_logos[project.id],
+                  bookmarked_section: false
+                } %>
+              <% end %>
+            </div>
 
-      <section class="mt-12">
-        <h2 class="my-8 text-xs text-gray-500 font-light  flex items-center">
-          <div class="flex items-center uppercase">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M10.34 15.84c-.688-.06-1.386-.09-2.09-.09H7.5a4.5 4.5 0 1 1 0-9h.75c.704 0 1.402-.03 2.09-.09m0 9.18c.253.962.584 1.892.985 2.783.247.55.06 1.21-.463 1.511l-.657.38c-.551.318-1.26.117-1.527-.461a20.845 20.845 0 0 1-1.44-4.282m3.102.069a18.03 18.03 0 0 1-.59-4.59c0-1.586.205-3.124.59-4.59m0 9.18a23.848 23.848 0 0 1 8.835 2.535M10.34 6.66a23.847 23.847 0 0 0 8.835-2.535m0 0A23.74 23.74 0 0 0 18.795 3m.38 1.125a23.91 23.91 0 0 1 1.014 5.395m-1.014 8.855c-.118.38-.245.754-.38 1.125m.38-1.125a23.91 23.91 0 0 0 1.014-5.395m0-3.46c.495.413.811 1.035.811 1.73 0 .695-.316 1.317-.811 1.73m0-3.46a24.347 24.347 0 0 1 0 3.46" />
-            </svg>
-            <span class="ml-2"><%= l("welcome.news.title") %></span>
-          </div>
-          <div class="ml-auto text-xs">
-            <%= link_to l("welcome.news.all"), :controller => 'news' %>
-          </div>
+            <% other_per_page = RedmineAsapTheme::WelcomeControllerPatch::OTHER_PROJECTS_PER_PAGE %>
+            <% if @other_projects_total > other_per_page %>
+              <div id="load-more-container" class="mt-4 text-center">
+                <button data-controller="projects"
+                        data-projects-more-url-value="<%= home_more_projects_path(page: 1) %>"
+                        data-action="click->projects#loadMore"
+                        class="text-xs text-gray-400 dark:text-gray-500 hover:text-blue-500 dark:hover:text-blue-400 transition flex items-center gap-1.5 mx-auto">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-3.5 h-3.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                  </svg>
+                  <%= l("welcome.projects.load_more") %>
+                  <span class="text-gray-300 dark:text-gray-600">(<%= l("welcome.projects.remaining", count: @other_projects_total - @other_projects.size) %>)</span>
+                </button>
+              </div>
+            <% end %>
+          <% end %>
+
+      <% else %>
+        <%# No project %>
+        <div class="rounded-xl border border-dashed border-gray-200 dark:border-gray-700 p-8 flex flex-col items-center justify-center text-center">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" class="w-10 h-10 text-gray-300 dark:text-gray-600 mb-3">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6A2.25 2.25 0 0 1 6 3.75h2.25A2.25 2.25 0 0 1 10.5 6v2.25a2.25 2.25 0 0 1-2.25 2.25H6a2.25 2.25 0 0 1-2.25-2.25V6ZM3.75 15.75A2.25 2.25 0 0 1 6 13.5h2.25a2.25 2.25 0 0 1 2.25 2.25V18a2.25 2.25 0 0 1-2.25 2.25H6A2.25 2.25 0 0 1 3.75 18v-2.25ZM13.5 6a2.25 2.25 0 0 1 2.25-2.25H18A2.25 2.25 0 0 1 20.25 6v2.25A2.25 2.25 0 0 1 18 10.5h-2.25a2.25 2.25 0 0 1-2.25-2.25V6ZM13.5 15.75a2.25 2.25 0 0 1 2.25-2.25H18a2.25 2.25 0 0 1 2.25 2.25V18A2.25 2.25 0 0 1 18 20.25h-2.25A2.25 2.25 0 0 1 13.5 18v-2.25Z" />
+          </svg>
+          <p class="font-medium text-gray-500 dark:text-gray-400"><%= l("welcome.recent_projects.none") %></p>
+          <p class="text-xs text-gray-400 dark:text-gray-500 mt-1 max-w-xs"><%= l("welcome.recent_projects.none_description") %></p>
+        </div>
+      <% end %>
+
+    </div>
+
+    <%# ── Column right : news ──────────────────────────────── %>
+    <div class="w-full md:w-72 lg:w-80 shrink-0">
+      <section>
+        <h2 class="mb-4 text-2xs text-gray-400 dark:text-gray-500 font-medium uppercase tracking-wider flex items-center gap-2">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10.34 15.84c-.688-.06-1.386-.09-2.09-.09H7.5a4.5 4.5 0 1 1 0-9h.75c.704 0 1.402-.03 2.09-.09m0 9.18c.253.962.584 1.892.985 2.783.247.55.06 1.21-.463 1.511l-.657.38c-.551.318-1.26.117-1.527-.461a20.845 20.845 0 0 1-1.44-4.282m3.102.069a18.03 18.03 0 0 1-.59-4.59c0-1.586.205-3.124.59-4.59m0 9.18a23.848 23.848 0 0 1 8.835 2.535M10.34 6.66a23.847 23.847 0 0 0 8.835-2.535m0 0A23.74 23.74 0 0 0 18.795 3m.38 1.125a23.91 23.91 0 0 1 1.014 5.395m-1.014 8.855c-.118.38-.245.754-.38 1.125m.38-1.125a23.91 23.91 0 0 0 1.014-5.395m0-3.46c.495.413.811 1.035.811 1.73 0 .695-.316 1.317-.811 1.73m0-3.46a24.347 24.347 0 0 1 0 3.46" />
+          </svg>
+          <%= l("welcome.news.title") %>
+          <span class="ml-auto font-normal normal-case">
+            <%= link_to l("welcome.news.all"), { controller: 'news' }, class: "text-blue-500 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300" %>
+          </span>
         </h2>
+
         <% if @news_from_my_projects.length > 0 %>
-          <div class="grid  grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+          <div class="flex flex-col gap-2">
             <% @news_from_my_projects.each do |news| %>
-              <%= link_to news_path(news),class: "shadow hover:bg-gray-100 bg-white dark:bg-gray-700 dark:hover:bg-gray-600 flex flex-col items-start justify-center p-8" do %>
-                <div class="mb-2">
-                  <h2 class="font-medium mt-4 text-center w-full"><%= news.title %></h2>
-                  <div class="mb-4 w-full text-xs text-gray-400 flex items-center justify-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4 mr-1">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5" />
-                    </svg>
-
-                    <%= format_date(news.created_on) %>
-                  </div>
-                  <% unless news.summary.blank? %>
-                  <div class="text-gray-500 text-xs font-light my-2">
-                    <%= news.summary %>
-                  </div>
-                  <% end %>
-                </div>
-                <footer class="flex w-full mt-auto">
-                  <div class="flex items-center truncate">
-                    <%= letter_avatar_tag(news.project.name, 100, class: 'w-4 h-4 mr-2') %>
-                    <span><%= news.project  %></span>
-                  </div>
-                  <% if news.comments_count > 0 %>
-                    <div class="flex items-center ml-auto text-gray-500 text-xs">
-                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4 mr-1">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 20.25c4.97 0 9-3.694 9-8.25s-4.03-8.25-9-8.25S3 7.444 3 12c0 2.104.859 4.023 2.273 5.48.432.447.74 1.04.586 1.641a4.483 4.483 0 0 1-.923 1.785A5.969 5.969 0 0 0 6 21c1.282 0 2.47-.402 3.445-1.087.81.22 1.668.337 2.555.337Z" />
-                      </svg>
-
-                      <%= news.comments_count %>
+              <%= link_to news_path(news),
+                    class: "bg-white dark:bg-gray-800 rounded-none border border-gray-100 dark:border-gray-700 shadow-sm hover:shadow-md hover:border-gray-200 dark:hover:border-gray-600 transition block overflow-hidden" do %>
+                <div class="flex">
+                  <%# Bande colorée gauche %>
+                  <div style="width:3px;min-width:3px;background:#6366f1;flex-shrink:0;"></div>
+                  <div class="flex-1 px-3 py-3 min-w-0">
+                    <%# Ligne projet + date %>
+                    <div class="flex items-center gap-1.5 mb-1.5">
+                      <% news_logo = @news_projects_logos[news.project_id] %>
+                      <% if news_logo %>
+                        <%= image_tag download_named_attachment_path(news_logo, news_logo.filename),
+                              style: 'width:14px;height:14px;object-fit:contain;flex-shrink:0;border-radius:3px;',
+                              alt: news.project.name %>
+                      <% else %>
+                        <%= letter_avatar_tag(news.project.name, 100, style: 'width:14px;height:14px;border-radius:3px;flex-shrink:0;') %>
+                      <% end %>
+                      <span class="text-2xs text-gray-400 dark:text-gray-500 truncate flex-1"><%= news.project %></span>
+                      <span class="text-2xs text-gray-300 dark:text-gray-600 shrink-0"><%= format_date(news.created_on) %></span>
                     </div>
-                  <% end %>
-                </footer>
+                    <%# Titre %>
+                    <p class="text-xs font-medium text-gray-800 dark:text-gray-200 line-clamp-2 leading-snug"><%= news.title %></p>
+                    <%# Résumé %>
+                    <% unless news.summary.blank? %>
+                      <p class="text-2xs text-gray-400 dark:text-gray-500 mt-1 line-clamp-2 leading-relaxed"><%= news.summary %></p>
+                    <% end %>
+                    <%# Commentaires %>
+                    <% if news.comments_count > 0 %>
+                      <div class="flex items-center gap-1 mt-2 text-2xs text-gray-300 dark:text-gray-600">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                             style="width:11px;height:11px;flex-shrink:0;">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12.76c0 1.6 1.123 2.994 2.707 3.227 1.087.16 2.185.283 3.293.369V21l4.076-4.076a1.526 1.526 0 0 1 1.037-.443 48.282 48.282 0 0 0 5.68-.494c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0 0 12 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018Z" />
+                        </svg>
+                        <%= news.comments_count %>
+                      </div>
+                    <% end %>
+                  </div>
+                </div>
               <% end %>
             <% end %>
           </div>
         <% else %>
-          <div class="p-8 bg-gray-100 rounded text-gray-600 font-medium flex items-center justify-center">
-            <%= l("welcome.news.none") %>
+          <div class="rounded-xl border border-dashed border-gray-200 dark:border-gray-700 p-6 text-center">
+            <p class="text-xs text-gray-400 dark:text-gray-500"><%= l("welcome.news.none") %></p>
           </div>
         <% end %>
       </section>
-
     </div>
+
   </div>
 </div>
 
+<%# ── Side panel projet (overlay droit) ─────────────────────────────── %>
+<div id="project-side-panel-backdrop"
+     class="hidden fixed inset-0 z-40 bg-black/20 dark:bg-black/40"
+     data-controller="projects"
+     data-action="click->projects#closeSidePanel">
+</div>
+<div id="project-side-panel"
+     style="width:50vw;min-width:320px;"
+     class="hidden fixed top-0 right-0 z-50 h-full bg-white dark:bg-gray-800 shadow-2xl border-l border-gray-200 dark:border-gray-700 flex flex-col overflow-hidden">
+
+  <%# Header %>
+  <div class="flex items-center gap-3 px-5 py-4 border-b border-gray-100 dark:border-gray-700 shrink-0">
+    <div id="project-side-panel-avatar"
+         style="width:32px;height:32px;min-width:32px;max-width:32px;overflow:hidden;border-radius:6px;background:#f3f4f6;position:relative;flex-shrink:0;">
+    </div>
+    <div class="flex-1 min-w-0">
+      <div id="project-side-panel-title" class="font-semibold text-sm text-gray-800 dark:text-gray-100 truncate"></div>
+    </div>
+    <button id="project-side-panel-close"
+            class="p-1.5 rounded-lg text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition shrink-0"
+            title="Fermer">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" width="16" height="16" class="w-4 h-4">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+      </svg>
+    </button>
+  </div>
+
+  <%# Body (contenu AJAX) %>
+  <div id="project-side-panel-body" class="flex-1 overflow-y-auto">
+    <div id="project-side-panel-loading" class="flex items-center gap-2 px-5 py-6 text-xs text-gray-400 dark:text-gray-500">
+      <svg class="animate-spin w-3.5 h-3.5 shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+      </svg>
+      Chargement…
+    </div>
+  </div>
+
+</div>

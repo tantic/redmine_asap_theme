@@ -1,0 +1,179 @@
+<div class="contextual">
+  <%= bookmark_link @project %>
+
+  <%= actions_dropdown do %>
+  <% if User.current.allowed_to?(:add_subprojects, @project) %>
+    <%= link_to sprite_icon('add', l(:label_subproject_new)), new_project_path(:parent_id => @project), :class => 'icon icon-add' %>
+  <% end %>
+  <% if User.current.allowed_to?(:close_project, @project) %>
+    <% if @project.active? %>
+      <%= link_to sprite_icon('lock', l(:button_close)), close_project_path(@project), :data => { :confirm => l(:text_project_close_confirmation, @project.to_s)}, :method => :post, :class => 'icon icon-lock' %>
+    <% else %>
+      <%= link_to sprite_icon('unlock', l(:button_reopen)), reopen_project_path(@project), :data => { :confirm => l(:text_project_reopen_confirmation, @project.to_s)}, :method => :post, :class => 'icon icon-unlock' %>
+    <% end %>
+  <% end %>
+  <% if @project.deletable? %>
+    <%= link_to sprite_icon('del', l(:button_delete)), project_path(@project), :method => :delete, :class => 'icon icon-del' %>
+  <% end %>
+  <%= link_to_if_authorized sprite_icon('settings', l(:label_settings)),
+                            {:controller => 'projects', :action => 'settings', :id => @project},
+                            :class => 'icon icon-settings' if User.current.allowed_to?(:edit_project, @project) %>
+  <% end %>
+</div>
+
+<h2><%=l(:label_overview)%></h2>
+
+<% unless @project.active? %>
+  <p class="warning"><span class="icon icon-lock"><%= sprite_icon('lock', l(:text_project_closed)) %></span></p>
+<% end %>
+
+<div class="splitcontent">
+<div class="splitcontentleft">
+  <% if @project.description.present? %>
+  <div class="wiki">
+    <%= textilizable @project.description %>
+  </div>
+  <% end %>
+  <% if @project.homepage.present? || @project.visible_custom_field_values.any? { |o| o.value.present? } %>
+  <ul>
+  <% unless @project.homepage.blank? %>
+    <li><span class="label"><%=l(:field_homepage)%>:</span> <%= link_to_if uri_with_safe_scheme?(@project.homepage), @project.homepage, @project.homepage %></li>
+  <% end %>
+  <% render_custom_field_values(@project) do |custom_field, formatted| %>
+    <li class="<%= custom_field.css_classes %>"><span class="label"><%= custom_field.name %>:</span> <%= formatted %></li>
+  <% end %>
+  </ul>
+  <% end %>
+
+  <% if User.current.allowed_to?(:view_issues, @project) %>
+  <div class="issues box">
+    <h3 class="icon icon-issue">
+      <%= sprite_icon('issue', l(:label_issue_tracking)) %>&nbsp;
+      <%= link_to sprite_icon('zoom-in', l(:label_details)),
+                  project_issues_report_details_path(@project, :detail => 'tracker'),
+                  :class => 'icon-only icon-zoom-in',
+                  :title => l(:label_details) %>
+    </h3>
+    <% if @trackers.present? %>
+    <table class="list issue-report w-full">
+      <thead>
+        <tr>
+          <th></th>
+          <th class="text-center"><%=l(:label_open_issues_plural)%></th>
+          <th class="text-center"><%=l(:label_closed_issues_plural)%></th>
+          <th class="text-center font-semibold"><%=l(:label_total)%></th>
+        </tr>
+      </thead>
+      <tbody>
+      <% @trackers.each do |tracker| %>
+        <tr>
+          <td class="name">
+            <%# Badge coloré tracker %>
+            <span class="inline-flex items-center px-1.5 py-0.5 rounded text-xs font-medium mr-1"
+                  style="background-color:<%= tracker.bg_color.presence || '#e5e7eb' %>;color:<%= tracker.text_color.presence || '#374151' %>;">
+              <%= link_to tracker.name,
+                          project_issues_path(@project, :set_filter => 1, :tracker_id => tracker.id),
+                          :title => tracker.description,
+                          style: "color:inherit;text-decoration:none;" %>
+            </span>
+          </td>
+          <td class="text-center">
+            <%= link_to @open_issues_by_tracker[tracker].to_i, project_issues_path(@project, :set_filter => 1, :tracker_id => tracker.id) %>
+          </td>
+          <td class="text-center">
+            <%= link_to (@total_issues_by_tracker[tracker].to_i - @open_issues_by_tracker[tracker].to_i), project_issues_path(@project, :set_filter => 1, :tracker_id => tracker.id, :status_id => 'c') %>
+          </td>
+          <td class="text-center font-semibold">
+            <%= link_to @total_issues_by_tracker[tracker].to_i, project_issues_path(@project, :set_filter => 1, :tracker_id => tracker.id, :status_id => '*') %>
+          </td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+    <% end %>
+    <%# Boutons d'action styled %>
+    <div class="flex flex-wrap gap-1.5 mt-3">
+      <%= link_to l(:label_issue_view_all), project_issues_path(@project, :set_filter => 1),
+            class: "inline-flex items-center gap-1 text-2xs font-medium text-gray-600 dark:text-gray-300 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 px-2 py-1 rounded transition" %>
+      <%= link_to l(:field_summary), project_issues_report_path(@project),
+            class: "inline-flex items-center gap-1 text-2xs font-medium text-gray-600 dark:text-gray-300 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 px-2 py-1 rounded transition" %>
+      <% if User.current.allowed_to?(:view_calendar, @project, :global => true) %>
+        <%= link_to l(:label_calendar), project_calendar_path(@project),
+              class: "inline-flex items-center gap-1 text-2xs font-medium text-gray-600 dark:text-gray-300 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 px-2 py-1 rounded transition" %>
+      <% end %>
+      <% if User.current.allowed_to?(:view_gantt, @project, :global => true) %>
+        <%= link_to l(:label_gantt), project_gantt_path(@project),
+              class: "inline-flex items-center gap-1 text-2xs font-medium text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-900/30 hover:bg-indigo-100 dark:hover:bg-indigo-900/50 px-2 py-1 rounded transition" %>
+      <% end %>
+    </div>
+  </div>
+  <% end %>
+
+  <% if User.current.allowed_to?(:view_time_entries, @project) %>
+  <div class="spent_time box">
+    <h3 class="icon icon-time"><%= sprite_icon('time', l(:label_time_tracking)) %></h3>
+    <ul>
+      <% if @total_estimated_hours.present? %>
+        <li><%= l(:field_estimated_hours) %>: <%= l_hours(@total_estimated_hours) %></li>
+      <% end %>
+      <% if @total_hours.present? %>
+        <li><%= l(:label_spent_time) %>: <%= l_hours(@total_hours) %></li>
+      <% end %>
+    </ul>
+    <div class="flex flex-wrap gap-1.5 mt-2">
+      <% if User.current.allowed_to?(:log_time, @project) %>
+        <%= link_to l(:button_log_time), new_project_time_entry_path(@project),
+              class: "inline-flex items-center gap-1 text-2xs font-medium text-gray-600 dark:text-gray-300 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 px-2 py-1 rounded transition" %>
+      <% end %>
+      <%= link_to l(:label_details), project_time_entries_path(@project),
+            class: "inline-flex items-center gap-1 text-2xs font-medium text-gray-600 dark:text-gray-300 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 px-2 py-1 rounded transition" %>
+      <%= link_to l(:label_report), report_project_time_entries_path(@project),
+            class: "inline-flex items-center gap-1 text-2xs font-medium text-gray-600 dark:text-gray-300 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 px-2 py-1 rounded transition" %>
+    </div>
+  </div>
+<% end %>
+  <%= call_hook(:view_projects_show_left, :project => @project) %>
+</div>
+
+<div class="splitcontentright">
+  <% if @news.any? && authorize_for('news', 'index') %>
+  <div class="news box">
+    <h3 class="icon icon-news"><%= sprite_icon('news', l(:label_news_latest))%></h3>
+    <%= render :partial => 'news/news', :collection => @news %>
+    <div class="flex flex-wrap gap-1.5 mt-2">
+      <%= link_to l(:label_news_view_all), project_news_index_path(@project),
+            class: "inline-flex items-center gap-1 text-2xs font-medium text-gray-600 dark:text-gray-300 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 px-2 py-1 rounded transition" %>
+    </div>
+  </div>
+  <% end %>
+
+  <%= render :partial => 'members_box' %>
+
+  <% if @subprojects.any? %>
+  <div class="projects box">
+    <h3 class="icon icon-projects"><%= sprite_icon('projects', l(:label_subproject_plural)) %></h3>
+    <div class="flex flex-wrap gap-1.5 mt-2">
+      <% @subprojects.each do |project| %>
+        <%= link_to project_path(project),
+              class: "flex items-center gap-1.5 text-xs text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 bg-gray-50 dark:bg-gray-700/50 hover:bg-blue-50 dark:hover:bg-blue-900/20 px-2 py-1 rounded border border-gray-200 dark:border-gray-600 transition" do %>
+          <%= letter_avatar_tag(project.name, 100, style: 'width:16px;height:16px;border-radius:3px;flex-shrink:0;') %>
+          <span class="truncate max-w-32"><%= project.name %></span>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+  <% end %>
+
+  <%= call_hook(:view_projects_show_right, :project => @project) %>
+</div>
+</div>
+
+<% content_for :sidebar do %>
+  <%= call_hook(:view_projects_show_sidebar_bottom, :project => @project) %>
+<% end %>
+
+<% content_for :header_tags do %>
+<%= auto_discovery_link_tag(:atom, {:controller => 'activities', :action => 'index', :id => @project, :format => 'atom', :key => User.current.atom_key}) %>
+<% end %>
+
+<% html_title(l(:label_overview)) -%>

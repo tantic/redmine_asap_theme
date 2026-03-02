@@ -31,5 +31,12 @@
 @theme {
   --font-sans: "Inter", sans-serif;
   --font-inter: Inter, sans-serif;
-  --text-xs: 13px;
+  --text-2xs: calc(11px * var(--font-scale, 1));
+  --text-xs: calc(13px * var(--font-scale, 1));
+  --text-sm: calc(0.875rem * var(--font-scale, 1));
+  --text-base: calc(1rem * var(--font-scale, 1));
+  --text-lg: calc(1.125rem * var(--font-scale, 1));
+  --text-xl: calc(1.25rem * var(--font-scale, 1));
+  --text-2xl: calc(1.5rem * var(--font-scale, 1));
+  --text-3xl: calc(1.875rem * var(--font-scale, 1));
 }

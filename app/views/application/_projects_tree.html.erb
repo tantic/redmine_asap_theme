@@ -1,7 +1,9 @@
 <% projects.each do |project| %>
   <div class="my-1.5 flex bg-white dark:bg-gray-800 dark:text-gray-100 items-center">
     <%= link_to(project, class: 'uppercase flex items-center w-full flex py-1 text-gray-800 font-light text-sm hover:bg-gray-50') do %>
-      <%= letter_avatar_tag(project.name, 100, class: 'w-6 h-6 mr-2 rounded-sm') %>
+      <span class="shrink-0 w-6 h-6 mr-2 rounded-sm overflow-hidden bg-white dark:bg-gray-800 ring-1 ring-gray-200 dark:ring-gray-600 inline-flex items-center justify-center">
+        <%= letter_avatar_tag(project.name, 100, class: 'w-full h-full rounded-none') %>
+      </span>
       <span class="text-xs line-clamp-2"><%= project.name %></span>
     <% end %>
 

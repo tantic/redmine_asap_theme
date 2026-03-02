@@ -4,7 +4,7 @@ Redmine::Plugin.register :redmine_asap_theme do
   name 'Redmine Asap Theme plugin'
   author 'DGAC/DSNA - Tantic'
   description 'UX/UI based on Tailwindcss'
-  version '2.1.3'
+  version '2.1.4'
   url 'https://github.com/tantic/redmine_asap_theme'
   author_url 'https://github.com/tantic'
 
@@ -44,6 +44,11 @@ end
 
 require lib_dir
 
+# Load Deface overrides at boot time so Deface can pick them up via _early/early_check
+# (Redmine plugins are not Rails Engines, so Deface doesn't scan them automatically)
+overrides_path = File.join(File.dirname(__FILE__), 'app', 'overrides', '**', '*.rb')
+Dir.glob(overrides_path).each { |f| require f }
+
 include LetterAvatar::AvatarHelper
 LetterAvatar.setup do |config|
   # config.fill_color        = 'rgba(255, 255, 255, 1)' # default is 'rgba(255, 255, 255, 0.65)'
@@ -59,4 +64,5 @@ end
 Rails.configuration.to_prepare do
   require_dependency 'issues_helper'
   IssuesHelper.prepend RedmineAsapTheme::IssuesHelperPatch
+
 end

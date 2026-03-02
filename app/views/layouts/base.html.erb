@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="<%= current_language %>" class="<%= User.current.pref[:theme] %>">
+<html lang="<%= current_language %>" class="<%= User.current.pref[:theme] %> <%= User.current.pref[:font_size].present? ? "font-size-#{User.current.pref[:font_size]}" : 'font-size-md' %>">
 <head>
 <meta charset="utf-8" />
 <title><%= html_title %></title>
@@ -108,7 +108,7 @@
             </div>
         </div>
 
-        <div id="content">
+        <div id="content" class="pb-16 md:pb-0">
             <%= render_flash_messages %>
             <%= yield %>
             <%= call_hook :view_layouts_base_content %>

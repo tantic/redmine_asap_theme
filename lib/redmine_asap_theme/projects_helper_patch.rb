@@ -1,5 +1,3 @@
-require_dependency "projects_helper"
-
 module RedmineAsapTheme
   module ProjectsHelperPatch
 
@@ -26,9 +24,22 @@ module RedmineAsapTheme
       link_to text, url, remote: true, method: method, class: css
     end
 
+    def project_settings_tabs
+      tabs = super
+      tabs << {
+        name: 'options',
+        action: :edit_project,
+        partial: 'projects/settings/options',
+        label: :label_project_options
+      }
+      tabs
+    end
+
   end
 end
 
+Rails.application.config.after_initialize do
+  ProjectsHelper.prepend RedmineAsapTheme::ProjectsHelperPatch
+  ActionView::Base.include ProjectsHelper
+end
 
-ProjectsHelper.prepend RedmineAsapTheme::ProjectsHelperPatch
-ActionView::Base.prepend ProjectsHelper

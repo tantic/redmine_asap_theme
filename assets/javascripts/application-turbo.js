@@ -9,8 +9,7 @@ document.addEventListener("turbo:load", function(e) {
 
     document.addEventListener('click', function handleClickOutsideBox(event) {
       const breadcrumb = document.querySelector('#breadcrumbs');
-      if (!breadcrumb.contains(event.target)) {
-        breadcrumb.style.display = "flex"
+      if (breadcrumb && !breadcrumb.contains(event.target)) {
         toggle(breadcrumb);
       }
     });
@@ -617,7 +616,6 @@ document.addEventListener("turbo:load",function(){
 
 document.addEventListener("turbo:load",setupAjaxIndicator);
 document.addEventListener("turbo:load",hideOnLoad);
-document.addEventListener("turbo:load",addFormObserversForDoubleSubmit);
 document.addEventListener("turbo:load",defaultFocus);
 document.addEventListener("turbo:load",setupAttachmentDetail);
 document.addEventListener("turbo:load",setupTabs);

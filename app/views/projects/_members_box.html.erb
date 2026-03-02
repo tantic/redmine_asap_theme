@@ -1,0 +1,17 @@
+<% if @principals_by_role.any? %>
+<div class="members box">
+  <h3 class="icon icon-group"><%= sprite_icon('group', l(:label_member_plural)) %></h3>
+  <% @principals_by_role.keys.sort.each do |role| %>
+    <div class="mb-3">
+      <p class="text-2xs font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-wider mb-1.5"><%= role %></p>
+      <div class="flex flex-wrap gap-1.5">
+        <% @principals_by_role[role].sort.each do |principal| %>
+          <span class="inline-flex items-center gap-1 text-xs text-gray-700 dark:text-gray-300 bg-gray-50 dark:bg-gray-700/50 px-2 py-0.5 rounded-full">
+            <%= link_to_principal(principal, class: "hover:text-blue-600 dark:hover:text-blue-400") %>
+          </span>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</div>
+<% end %>

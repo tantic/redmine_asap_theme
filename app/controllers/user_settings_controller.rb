@@ -31,6 +31,9 @@ class UserSettingsController < ApplicationController
     if params[:pref] && params[:pref][:theme]
       @user.pref[:theme] = params[:pref][:theme]
     end
+    if params[:pref] && params[:pref][:font_size]
+      @user.pref[:font_size] = params[:pref][:font_size]
+    end
     if @user.save
       @user.pref.save
       set_language_if_valid @user.language

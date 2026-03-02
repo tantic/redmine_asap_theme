@@ -1,5 +1,13 @@
 
 
+/* ── Font size preference via CSS custom property ────────────────────── */
+:root { --font-scale: 1; }
+html.font-size-xs { --font-scale: 0.846; } /* ~11px base */
+html.font-size-sm { --font-scale: 0.923; } /* ~12px base */
+html.font-size-md { --font-scale: 1; }     /* 13px base – default */
+html.font-size-lg { --font-scale: 1.154; } /* ~15px base */
+html.font-size-xl { --font-scale: 1.308; } /* ~17px base */
+
 #content {
   @apply relative px-6 sm:px-12 py-8 sm:py-6 bg-gray-50 dark:bg-gray-900 flex-grow m-0 overflow-x-auto;
 }
@@ -12,7 +20,8 @@
 
 
 #sidebar h3{
-  @apply font-medium text-xs mt-6 mb-4 text-gray-500
+  @apply font-medium uppercase tracking-wider mt-6 mb-4 text-gray-500;
+  font-size: calc(11px * var(--font-scale, 1));
 }
 
 #sidebar a{

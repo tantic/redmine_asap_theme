@@ -1,0 +1,19 @@
+<%# locals: projects, jump_box, open_counts, children_counts, projects_with_trackers, logos, has_more, next_page %>
+
+<% projects.each do |project| %>
+  <%= render partial: "welcome/details", locals: {
+    project: project,
+    jump_box: jump_box,
+    open_count: open_counts[project.id] || 0,
+    children_count: children_counts[project.id] || 0,
+    project_with_trackers: projects_with_trackers[project.id],
+    logo: logos[project.id],
+    bookmarked_section: false
+  } %>
+<% end %>
+
+<% if has_more %>
+  <div id="load-more-trigger"
+       data-projects-more-url-value="<%= home_more_projects_path(page: next_page) %>">
+  </div>
+<% end %>
