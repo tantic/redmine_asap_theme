@@ -1,0 +1,26 @@
+<% query_klass = project ? EasyGantt::EasyGanttIssueQuery : EasyGantt::EasyGanttProjectQuery %>
+<% queries = query_klass.visible.global_or_on_project(project).sorted.to_a %>
+<% private_queries = queries.select(&:is_private?) %>
+<% public_queries  = queries.reject(&:is_private?) %>
+
+<% [[ l(:label_my_queries), private_queries ], [ l(:label_query_plural), public_queries ]].each do |group_title, group_queries| %>
+  <% next if group_queries.empty? %>
+  <h3><%= group_title %></h3>
+  <ul class="queries">
+    <% group_queries.each do |q| %>
+      <%
+        css = 'query'
+        css += ' selected' if q == @query
+        link_url = project ? easy_gantt_path(project, query_id: q.id) : easy_gantt_path(query_id: q.id)
+        clear_url = project ? easy_gantt_path(project, set_filter: 1) : easy_gantt_path(set_filter: 1)
+      %>
+      <li>
+        <%= link_to q.name, link_url, class: css, title: q.description %>
+        <% if q == @query %>
+          <%= link_to sprite_icon('clear-query', l(:button_clear)), clear_url,
+                class: 'icon-only icon-clear-query', title: l(:button_clear) %>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>

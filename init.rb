@@ -26,6 +26,8 @@ lib_dir = File.join(File.dirname(__FILE__), 'lib', 'redmine_asap_theme')
 # Redmine patches
 patch_path = File.join(lib_dir, '*_patch.rb')
 Dir.glob(patch_path).each do |file|
+  basename = File.basename(file)
+  next if basename.start_with?('easy_gantt') && !Redmine::Plugin.installed?(:easy_gantt)
   require file
 end
 
