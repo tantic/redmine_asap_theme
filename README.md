@@ -9,6 +9,11 @@ This version start from the original theme of Redmine so all pages works (normal
 
 If you want to test it quickly with docker, you can use the repo https://github.com/tantic/redmine_asap_docker.git
 
+This plugin is part of a suite which add features to redmine :
+* [Redmine asap theme](https://github.com/tantic/redmine_asap_theme) : new UX/UI, new navigation
+* [Redmine asap user features](https://github.com/tantic/redmine_asap_user_features) : new personal features like inbox, todo
+* Redmine asap pilot : dashboards to pilote multi-projects
+
 ## Documentation
 
 https://tantic.github.io/redmine_asap_docs/docs/theme/intro
@@ -24,7 +29,7 @@ Ready
 * New navbar for navigation and new menu for project
 * New home page
 * Local avatar or letter for users (all credits to A.Chaika and contributors of the next versions)
-* Letter avatar for projects
+* Logo or Letter avatar for projects
 * Account is now preferences and is displayed in a modal
 * Logo's color is customizable
 * Login page is customizable with picture

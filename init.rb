@@ -66,5 +66,4 @@ end
 Rails.configuration.to_prepare do
   require_dependency 'issues_helper'
   IssuesHelper.prepend RedmineAsapTheme::IssuesHelperPatch
-
 end
