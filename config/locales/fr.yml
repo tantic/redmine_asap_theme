@@ -17,6 +17,7 @@ fr:
   label_settings_general: Général
   label_settings_preferences: Préférences
   label_settings_notifications: Notifications
+  label_settings_avatar: Avatar
   label_settings_appearance: Apparence
   label_settings_keys: Clés d'accès
   label_redmine_configuration: Configuration

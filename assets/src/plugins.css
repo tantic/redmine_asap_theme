@@ -1,396 +1,470 @@
 /* Additionals */
 
-#my-page.dashboard{
-  @apply grid grid-cols-1 md:grid-cols-2 gap-4;
-  #list-top, #list-bottom{
-    @apply md:col-span-2 w-full;
-  }
-  .splitcontentright, .splitcontentleft{
-    @apply w-full;
-  }
-  .block-receiver{
-    @apply pt-0! border-0;
-    .mypage-box{
-      @apply shadow mt-0 mb-4 bg-white border border-gray-200 rounded-lg  p-8 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-200;
+#my-page.dashboard {
+    @apply grid grid-cols-1 md:grid-cols-2 gap-4;
+    #list-top,
+    #list-bottom {
+        @apply md:col-span-2 w-full;
     }
-    .mypage-box h3{
-      @apply mb-6 w-full;
+    .splitcontentright,
+    .splitcontentleft {
+        @apply w-full;
     }
-
-    .mypage-box h3 .icon-svg{
-      @apply text-gray-800 dark:text-gray-200 stroke-current;
-    }
-
-    .mypage-box h3 .icon-label{
-      @apply text-xs uppercase text-gray-800 dark:text-gray-200 font-medium;
-    }
-  }
-}
-
-#sidebar{
-  h3.dashboards{
-    @apply px-4 py-2;
-  }
-  ul.dashboards{
-    li{
-      @apply mb-1 w-full flex;
-      a{
-        @apply text-xs hover:bg-gray-100 rounded w-full px-4 py-2;
-        &.selected{
-          @apply bg-gray-100 text-blue-800  px-4 py-2;
+    .block-receiver {
+        @apply pt-0! border-0;
+        .mypage-box {
+            @apply shadow mt-0 mb-4 bg-white border border-gray-200 rounded-lg  p-8 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-200;
         }
-      }
-      .icon .icon-svg{
-        @apply fill-blue-800
-      }
+        .mypage-box h3 {
+            @apply mb-6 w-full;
+        }
+
+        .mypage-box h3 .icon-svg {
+            @apply text-gray-800 dark:text-gray-200 stroke-current;
+        }
+
+        .mypage-box h3 .icon-label {
+            @apply text-xs uppercase text-gray-800 dark:text-gray-200 font-medium;
+        }
     }
-  }
-  .active-dashboards{
-    @apply my-4 bg-gray-100 rounded px-4 py-2;
-    ul{
-      li{
-        @apply text-xs
-      }
-    }
-  }
 }
 
-#fast-desc-link.icon-edit{
-  @apply bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-300 hover:bg-blue-700 hover:text-blue-100;
+#sidebar {
+    h3.dashboards {
+        @apply px-4 py-2;
+    }
+    ul.dashboards {
+        li {
+            @apply mb-1 w-full flex;
+            a {
+                @apply text-xs hover:bg-gray-100 rounded w-full px-4 py-2;
+                &.selected {
+                    @apply bg-gray-100 text-blue-800  px-4 py-2;
+                }
+            }
+            .icon .icon-svg {
+                @apply fill-blue-800;
+            }
+        }
+    }
+    .active-dashboards {
+        @apply my-4 bg-gray-100 rounded px-4 py-2;
+        ul {
+            li {
+                @apply text-xs;
+            }
+        }
+    }
+}
+
+#fast-desc-link.icon-edit {
+    @apply bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-300 hover:bg-blue-700 hover:text-blue-100;
 }
 
 /* Aditionnals_tags */
-.tags{
+.tags {
     @apply relative;
-    #tags-data{
-      .contextual{
-        @apply relative inline-block right-auto bottom-auto top-auto;
-      }
+    #tags-data {
+        .contextual {
+            @apply relative inline-block right-auto bottom-auto top-auto;
+        }
     }
-  }
-
+}
 
 /* Redmineup agile plugin */
 
-.controller-agile_boards{
-  span.assignable-user, span.user{
-    @apply flex items-center bg-white text-xs dark:bg-gray-700 border border-gray-100 hover:bg-gray-50 rounded px-2.5 py-1 text-gray-900 hover:text-blue-800;
-    >.gravatar, >.user-avatar{
-      @apply mr-1;
-    }
-  }
-
-  .agile-board{
-    @apply mt-12;
-  }
-
-  #sidebar-wrapper{
-    span.assignable-user{
-      /* float:left; */
-    }
-    h3{
-      clear:both;
-      @apply mt-4;
-    }
-  }
-
-  #query_form{
-    @apply w-full flex flex-col mt-12;
-    h2{
-      @apply flex items-center bg-gray-50 rounded p-2 font-medium;
-      span{
-        @apply ml-3 h-full;
-        a.icon-add{
-          @apply hover:bg-gray-100 rounded-full p-2;
+.controller-agile_boards {
+    span.assignable-user,
+    span.user {
+        @apply flex items-center bg-white text-xs dark:bg-gray-700 border border-gray-100 hover:bg-gray-50 rounded px-2.5 py-1 text-gray-900 hover:text-blue-800;
+        > .gravatar,
+        > .user-avatar {
+            @apply mr-1;
         }
-      }
-    }
-  }
-  .query-totals {
-    margin-top: -3.3em;
-    padding-right: 2em;
-  }
-
-  .container-fixed{
-    @apply z-50 relative mt-4;
-    .issue-card{
-      @apply shadow-md  rounded bg-white dark:bg-gray-700 p-4 border-b border-gray-200;
-      .fields{
-        @apply flex flex-col pb-6;
-        > * {
-          @apply my-1
+        a .gravatar,
+        a .user-avatar {
+            display: none;
         }
-        .quick-edit-card{
-          @apply border-0 bottom-4;
-          > a {
-            @apply p-2 hover:bg-gray-100 rounded-full;
-          }
+        a span {
+            border: 0;
         }
-      }
     }
-  }
 
-  table.issues-board{
-    tr{
-      @apply bg-gray-50!;
-      td{
-        @apply border-r! border-gray-200!;
-      }
+    .agile-board {
+        @apply mt-12;
     }
-  }
 
-  .issue-card{
-    .fields{
-      >*:not(.issue-id){
-        @apply px-2;
-      }
-    }
-    p.name{
-      @apply py-2.5;
-      a{
-        @apply text-gray-900;
-      }
-    }
-    .sub-issues{
-      >ul{
-        @apply pl-0;
-        >li{
-          @apply py-1 hover:bg-gray-50 dark:hover:bg-gray-700;
-          >a{
-            @apply w-full;
-          }
+    #sidebar-wrapper {
+        span.assignable-user {
+            /* float:left; */
         }
-      }
+        h3 {
+            clear: both;
+            @apply mt-4;
+        }
     }
-  }
 
+    #query_form {
+        @apply w-full flex flex-col mt-12;
+        h2 {
+            @apply flex items-center bg-gray-50 rounded p-2 font-medium;
+            span {
+                @apply ml-3 h-full;
+                a.icon-add {
+                    @apply hover:bg-gray-100 rounded-full p-2;
+                }
+            }
+        }
+    }
+    .query-totals {
+        margin-top: -3.3em;
+        padding-right: 2em;
+    }
 
+    .container-fixed {
+        @apply z-50 relative mt-4;
+        .issue-card {
+            @apply shadow-md  rounded bg-white dark:bg-gray-700 p-4 border-b border-gray-200;
+            .fields {
+                @apply flex flex-col pb-6;
+                > * {
+                    @apply my-1;
+                }
+                .quick-edit-card {
+                    @apply border-0 bottom-4;
+                    > a {
+                        @apply p-2 hover:bg-gray-100 rounded-full;
+                    }
+                }
+            }
+        }
+    }
+
+    table.issues-board {
+        tr {
+            @apply bg-gray-50!;
+            td {
+                @apply border-r! border-gray-200!;
+            }
+        }
+    }
+
+    .issue-card {
+        .fields {
+            > *:not(.issue-id) {
+                @apply px-2;
+            }
+        }
+        p.name {
+            @apply py-2.5;
+            a {
+                @apply text-gray-900;
+            }
+        }
+        .sub-issues {
+            > ul {
+                @apply pl-0;
+                > li {
+                    @apply py-1 hover:bg-gray-50 dark:hover:bg-gray-700;
+                    > a {
+                        @apply w-full;
+                    }
+                }
+            }
+        }
+    }
 }
-html.agile-board-fullscreen div.agile-board{
-  @apply z-50
-}
-
-.controller-agile_versions{
-  span.assignable-user, span.user{
-    >.gravatar, >.user-avatar{
-      display:none;
-    }
-  }
-
-  .planning-board{
-    @apply relative mt-4;
-    .issue-card{
-      @apply shadow bg-white p-4 border-0;
-      .fields{
-        @apply flex flex-col;
-        > * {
-          @apply my-1
+html.agile-board-fullscreen div.agile-board {
+    @apply z-50;
+    .issues-board.sticky {
+        @apply z-50;
+        th {
+            @apply h-14;
         }
-      }
     }
-  }
 }
 
+.controller-agile_versions {
+    span.assignable-user,
+    span.user {
+        > .gravatar,
+        > .user-avatar {
+            display: none;
+        }
+    }
+
+    .planning-board {
+        @apply relative mt-4;
+        .issue-card {
+            @apply shadow bg-white p-4 border-0;
+            .fields {
+                @apply flex flex-col;
+                > * {
+                    @apply my-1;
+                }
+            }
+        }
+    }
+}
 
 /* Redmine Asap User Features */
-.controller-inbox{
-  #content{
-    padding:0px !important;
-  }
-  #attribute{
-    .splitcontentleft{
-      @apply space-y-2;
-      >div{
-        @apply flex flex-col md:flex-row;
-        .label{
-          @apply mr-3 w-full md:w-40;
+.controller-inbox {
+    #content {
+        padding: 0px !important;
+    }
+    #attribute {
+        .splitcontentleft {
+            @apply space-y-2;
+            > div {
+                @apply flex flex-col md:flex-row;
+                .label {
+                    @apply mr-3 w-full md:w-40;
+                }
+            }
         }
-      }
     }
-  }
-  #issue-menu{
-    a.icon-fav:not(#context-menu a.icon-fav) {
-      & .icon-label{
-        @apply flex! hover:bg-blue-50! dark:hover:bg-blue-700! rounded!;
-      }
+    #issue-menu {
+        a.icon-fav:not(#context-menu a.icon-fav) {
+            & .icon-label {
+                @apply flex! hover:bg-blue-50! dark:hover:bg-blue-700! rounded!;
+            }
+        }
     }
-  }
-  #issue_tree, #relations{
-    >p{
-      @apply mb-2;
+    #issue_tree,
+    #relations {
+        > p {
+            @apply mb-2;
+        }
     }
-  }
-  /* .context-menu-selection:hover, .context-menu-selection{
+    [data-inbox-target="detail"] .contextual {
+        position: relative;
+        z-index: 20;
+    }
+    /* .context-menu-selection:hover, .context-menu-selection{
     @apply bg-blue-50! text-gray-900!
   } */
-  div.journal{
-    @apply my-4;
-    .note{
-      @apply bg-white dark:bg-gray-700 shadow rounded ml-10;
-      .journal-header{
-        @apply flex items-center;
-        .journal-info{
-          @apply flex;
-        }
-        .journal-meta{
-          @apply ml-auto;
-        }
-      }
-      >.contextual{
-        @apply pr-4;
-      }
-      .note-header{
-        @apply relative py-2 px-4 border-b border-gray-100 dark:border-gray-700 text-gray-500 dark:text-gray-200 text-xs;
-        >.gravatar{
-          @apply relative top-0 float-left -ml-14 w-8 h-8;
-        }
-        a.user.active{
-          span{
-            @apply p-0 shadow-none align-bottom border-0;
-            img{
-              @apply hidden;
+    div.journal {
+        @apply my-4;
+        .note {
+            @apply bg-white dark:bg-gray-700 shadow rounded ml-10;
+            .journal-header {
+                @apply flex items-center;
+                .journal-info {
+                    @apply flex;
+                }
+                .journal-meta {
+                    @apply ml-auto;
+                }
             }
-          }
+            > .contextual {
+                @apply pr-4;
+            }
+            .note-header {
+                @apply relative py-2 px-4 border-b border-gray-100 dark:border-gray-700 text-gray-500 dark:text-gray-200 text-xs;
+                > .gravatar {
+                    @apply relative top-0 float-left -ml-14 w-8 h-8;
+                }
+                a.user.active {
+                    span {
+                        @apply p-0 shadow-none align-bottom border-0;
+                        img {
+                            @apply hidden;
+                        }
+                    }
+                }
+            }
+            .details {
+                @apply p-4 text-xs;
+            }
+            .wiki {
+                @apply p-4;
+            }
         }
-      }
-      .details{
-        @apply p-4 text-xs;
-      }
-      .wiki{
-        @apply p-4;
-      }
     }
-  }
 }
 
-.controller-my{
-  #content{
-    @apply p-0;
-  }
+.controller-my {
+    #content {
+        @apply p-0;
+    }
 }
 
-.controller-todo{
-  #content{
-    @apply p-0;
-  }
+.controller-todo {
+    #content {
+        @apply p-0;
+    }
 }
 
-.controller-portfolios{
-  #content{
-    @apply p-0;
-  }
+.controller-portfolios {
+    #content {
+        @apply p-0;
+    }
 }
-
 
 /* Redmine asap user features */
-.user-card{
-  @apply absolute bg-white dark:bg-gray-600 dark:text-gray-300 shadow p-4 rounded w-72 z-50;
-  h2.title{
-    @apply flex items-center;
-    img{
-      @apply ms-0! me-0!;
+.user-card {
+    @apply absolute bg-white dark:bg-gray-600 dark:text-gray-300 shadow p-4 rounded w-72 z-50;
+    h2.title {
+        @apply flex items-center;
+        img {
+            @apply ms-0! me-0!;
+        }
+        .username {
+            @apply ml-2! text-base font-medium;
+        }
     }
-    .username{
-      @apply ml-2! text-base font-medium;
-    }
-  }
 }
 
-.controller-inbox{
-  tr.issue td.subject {
-    white-space: normal;
-  }
+.controller-inbox {
+    tr.issue td.subject {
+        white-space: normal;
+    }
 }
-
 
 /* Aditionals Tags */
 
-#sidebar-wrapper{
-  .sidebar-tags{
-    @apply my-6;
-  }
+#sidebar-wrapper {
+    .sidebar-tags {
+        @apply my-6;
+    }
 }
 
-
 /* redmine_oauth */
-#oauth-form{
-  @apply w-full!;
-  #login-oauth-submit{
-    @apply my-2 w-full flex text-white items-center justify-center px-2.5 py-2 shadow rounded text-xs;
-    i{
-      @apply mr-2;
+#oauth-form {
+    @apply w-full!;
+    #login-oauth-submit {
+        @apply my-2 w-full flex text-white items-center justify-center px-2.5 py-2 shadow rounded text-xs;
+        i {
+            @apply mr-2;
+        }
+        b {
+            @apply ml-1;
+        }
     }
-    b{
-      @apply ml-1;
-    }
-  }
+}
+
+/* ── Vis.js Timeline (planning portfolio + pilot) ────────── */
+
+/* Permet au label de sortir au-dessus de la barre */
+.vis-item {
+    overflow: visible !important;
+}
+
+.vis-item .vis-item-content {
+    padding: 0;
+    width: 100%;
+}
+
+/* Template custom-item : conteneur interne */
+.custom-item {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+/* Label flottant AU-DESSUS de la barre */
+.item-label {
+    position: absolute;
+    top: -18px;
+    left: 0;
+    right: 0;
+    font-size: 11px;
+    font-weight: 500;
+    @apply text-gray-700 dark:text-gray-300;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    pointer-events: none;
+    line-height: 1.3;
+}
+
+/* Boîte de la barre (fond géré par vis-item lui-même) */
+.item-box {
+    width: 100%;
+    height: 100%;
+}
+
+/* visibleFrameTemplate : barre de progression + pourcentage */
+.progress-wrapper {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    padding: 0 3px;
+}
+
+.progress-bar {
+    height: 4px;
+    @apply bg-white/50;
+    border-radius: 2px;
+    transition: width 0.25s ease;
+    flex-shrink: 0;
 }
 
 /* Easy Gantt */
 
 .controller-easy_gantt {
-  .content-title{
-    @apply flex items-center;
-    #toggle-query-form{
-      @apply ml-auto;
-    }
-  }
-  #query_form_content{
-    table{
-      td{
+    .content-title {
         @apply flex items-center;
-        .buttons{
-          @apply flex;
-          input{
-            @apply p-2 hover:bg-gray-100 rounded-full dark:hover:bg-gray-600 cursor-pointer;
-          }
+        #toggle-query-form {
+            @apply ml-auto;
         }
-      }
     }
-  }
-  .redmine .gantt-menu-button{
-    display: inline-flex;
-  }
-  .redmine .push-right{
-    @apply ml-auto;
-  }
-  #checkbox_silencer{
-    @apply ml-2 mr-1;
-  }
-  .redmine a.disabled{
-    @apply text-gray-600 opacity-100;
-  }
-  #button_save{
-    @apply text-white;
-    &.disabled{
-      @apply bg-green-100 text-green-800 border-green-100;
+    #query_form_content {
+        table {
+            td {
+                @apply flex items-center;
+                .buttons {
+                    @apply flex;
+                    input {
+                        @apply p-2 hover:bg-gray-100 rounded-full dark:hover:bg-gray-600 cursor-pointer;
+                    }
+                }
+            }
+        }
     }
-  }
-  #button_task_control{
-    .icon-label{
-      display: block;
+    .redmine .gantt-menu-button {
+        display: inline-flex;
     }
-  }
-  .gantt-grid-header-collapse-buttons{
-    @apply flex items-center h-full;
-    .gantt-button-symbol{
-      @apply flex items-center justify-center p-2;
-      .icon-label{
-        display: none;
-      }
+    .redmine .push-right {
+        @apply ml-auto;
     }
-    #button_close_all_milestones svg, #button_close_all_parent_issues svg{
-        display: none;
-      }
-  }
+    #checkbox_silencer {
+        @apply ml-2 mr-1;
+    }
+    .redmine a.disabled {
+        @apply text-gray-600 opacity-100;
+    }
+    #button_save {
+        @apply text-white;
+        &.disabled {
+            @apply bg-green-100 text-green-800 border-green-100;
+        }
+    }
+    #button_task_control {
+        .icon-label {
+            display: block;
+        }
+    }
+    .gantt-grid-header-collapse-buttons {
+        @apply flex items-center h-full;
+        .gantt-button-symbol {
+            @apply flex items-center justify-center p-2;
+            .icon-label {
+                display: none;
+            }
+        }
+        #button_close_all_milestones svg,
+        #button_close_all_parent_issues svg {
+            display: none;
+        }
+    }
 }
 
 .controller-easy_wbs {
-  .content-title{
-    @apply flex items-center;
-    #toggle-query-form{
-      @apply ml-auto;
+    .content-title {
+        @apply flex items-center;
+        #toggle-query-form {
+            @apply ml-auto;
+        }
     }
-  }
 }
-

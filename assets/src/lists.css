@@ -45,15 +45,16 @@ table.list td {
 }
 
 table.list .checkbox input {
-    height: 1rem;
+    /*height: 1rem;*/
 }
 
 tr.issue td.subject {
-    white-space: nowrap;
+    /*min-width: 400px;*/
+    @apply min-w-80;
 }
 
 table.list td.subject a {
-    @apply text-gray-900 dark:text-gray-100 font-normal;
+    @apply text-gray-900 dark:text-gray-100 font-normal w-full text-wrap;
 }
 
 table.list td.author,
@@ -78,7 +79,7 @@ table.list:not(.odd-even) tbody tr:nth-child(odd),
 table.list:not(.odd-even) tbody tr:nth-child(even),
 .even,
 #issue-changesets div.changeset:nth-child(even) {
-    @apply bg-gray-50 dark:bg-gray-800;
+    @apply bg-gray-100 dark:bg-gray-800;
 }
 table.list:not(.odd-even) tbody tr:nth-child(odd):hover,
 .odd:hover,
@@ -162,5 +163,20 @@ tr.idnt-9 td.name {
 #users_for_watcher {
     label {
         @apply flex items-center;
+    }
+}
+
+.subtasks-wrapper,
+.relation-issues-wrapper {
+    /*@apply bg-gray-50 p-4 rounded;*/
+    table.issues {
+        .issue {
+            > td {
+                @apply bg-gray-50 py-0! border-gray-50!;
+            }
+            td.buttons {
+                @apply text-nowrap!;
+            }
+        }
     }
 }

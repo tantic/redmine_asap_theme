@@ -109,8 +109,12 @@
     }
   }
   pre{
-    @apply bg-gray-100 dark:bg-gray-600 rounded p-4 border-gray-200 dark:border-gray-700 my-1;
+    @apply bg-gray-100 dark:bg-gray-600 rounded p-4 border-gray-200 dark:border-gray-700 my-1 overflow-x-auto max-w-full;
+    white-space: pre-wrap;
+    word-break: break-all;
   }
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 div.wiki p{
   /* @apply text-xs; */

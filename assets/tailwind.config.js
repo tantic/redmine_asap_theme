@@ -2,7 +2,14 @@ const defaultTheme = require('tailwindcss/defaultTheme')
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ["../app/views/**/*.html.erb", "../lib/redmine_asap_theme/*.rb", "./icons/*.svg"],
+  content: [
+    "../app/views/**/*.html.erb",
+    "../lib/redmine_asap_theme/*.rb",
+    "./icons/*.svg",
+    "../../redmine_asap_user_features/app/views/**/*.html.erb",
+    "../../redmine_asap_user_features/assets/javascripts/controllers/*.js",
+    "../../redmine_asap_pilot/app/views/**/*.html.erb",
+  ],
   theme: {
     extend: {
       fontFamily: {

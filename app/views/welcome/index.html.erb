@@ -101,6 +101,15 @@
 
     <%# ── Column right : news ──────────────────────────────── %>
     <div class="w-full md:w-72 lg:w-80 shrink-0">
+
+      <% if Redmine::Plugin.installed?(:redmine_asap_user_features) %>
+        <%= render 'welcome/my_space_shortcuts' %>
+      <% end %>
+
+      <% if Redmine::Plugin.installed?(:redmine_asap_pilot) %>
+        <%= render 'welcome/pilot_shortcuts' %>
+      <% end %>
+
       <section>
         <h2 class="mb-4 text-2xs text-gray-400 dark:text-gray-500 font-medium uppercase tracking-wider flex items-center gap-2">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">

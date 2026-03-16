@@ -15,6 +15,13 @@
               </svg>
               <div><%= l(:label_settings_general) %></div>
             </div>
+            <div data-tabs-target="btn" id="avatar" data-action="click->tabs#select"  class="tab flex p-2 hover:bg-gray-200 dark:hover:bg-gray-700 cursor-pointer rounded mb-2">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mr-2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                </svg>
+
+              <div><%= l(:label_settings_avatar) %></div>
+            </div>
             <div data-tabs-target="btn" id="appearance" data-action="click->tabs#select"  class="tab flex p-2 hover:bg-gray-200 dark:hover:bg-gray-700 cursor-pointer rounded mb-2">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mr-2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
@@ -53,6 +60,9 @@
 
           <div data-tabs-target="tab" id="general" class="p-8">
             <%= render "general" %>
+          </div>
+          <div data-tabs-target="tab" id="avatar" class="p-8">
+            <%= render "avatar" %>
           </div>
           <div data-tabs-target="tab" id="appearance" class="p-8">
             <%= render "appearance" %>

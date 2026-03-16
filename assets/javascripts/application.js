@@ -3,6 +3,43 @@
 // but uses event.pageY (absolute coords). Our theme adds a fixed header (56px) which offsets
 // #content, causing the menu to appear lower than the cursor. We override contextMenuShow
 // to subtract #content's offset from the coordinates.
+// Fix Redmine's collapsibleSidebar not retaining state across Turbo navigation.
+// Root cause: `localStorageKey` in the jQuery plugin closure accumulates on every call
+// (via +=), so the key used to read state differs from the one used to write it.
+(function() {
+  var SIDEBAR_KEY = 'asap-sidebar-state';
+
+  function saveSidebarState() {
+    var main = document.getElementById('main');
+    if (!main) return;
+    localStorage.setItem(SIDEBAR_KEY, main.classList.contains('collapsedsidebar') ? 'hidden' : 'visible');
+  }
+
+  function applySavedSidebarState() {
+    var main = document.getElementById('main');
+    if (!main || !main.classList.contains('collapsiblesidebar')) return;
+    var saved = localStorage.getItem(SIDEBAR_KEY);
+    if (saved === 'hidden') {
+      main.classList.add('collapsedsidebar');
+    } else if (saved === 'visible') {
+      main.classList.remove('collapsedsidebar');
+    }
+  }
+
+  // Intercept sidebar button click to persist state under our own key
+  document.addEventListener('click', function(e) {
+    var btn = e.target.closest('#sidebar-switch-button');
+    if (!btn) return;
+    setTimeout(saveSidebarState, 0); // state toggles after click
+  });
+
+  // After each Turbo navigation, collapsibleSidebar() has already run (wrongly reset state)
+  // — re-apply our saved state
+  document.addEventListener('turbo:render', function() {
+    setTimeout(applySavedSidebarState, 0);
+  });
+})();
+
 $(document).ready(function() {
   var _origContextMenuShow = window.contextMenuShow;
   if (typeof _origContextMenuShow === 'function') {

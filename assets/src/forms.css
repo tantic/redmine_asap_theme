@@ -1,86 +1,96 @@
-select{
-  @apply block text-xs w-full mt-1 rounded-md bg-gray-100 dark:bg-gray-700 border-transparent focus:border-gray-500 focus:bg-white dark:focus:bg-gray-700 focus:ring-0
+select {
+    @apply block text-xs w-auto mt-1 rounded-md bg-gray-100 dark:bg-gray-700 border-transparent focus:border-gray-500 focus:bg-white dark:focus:bg-gray-700 focus:ring-0;
 }
 
-input[type=text],input[type=password]{
-  @apply mt-1 block w-full text-xs rounded-md bg-gray-100 dark:bg-gray-700 border-transparent focus:border-gray-500 focus:bg-white dark:focus:bg-gray-600 focus:ring-0;
+input[type="text"],
+input[type="password"] {
+    @apply mt-1 block w-auto text-xs rounded-md bg-gray-100 dark:bg-gray-700 border-transparent focus:border-gray-500 focus:bg-white dark:focus:bg-gray-600 focus:ring-0;
 }
 
-input[type=checkbox] {
-  @apply appearance-auto dark:appearance-none rounded bg-gray-200 dark:bg-gray-600! border-transparent focus:border-transparent focus:bg-gray-200 text-gray-700 dark:text-gray-100 focus:ring-1 focus:ring-offset-2 focus:ring-gray-500
+#login-form input[type="text"],
+#login-form input[type="password"] {
+    @apply w-full;
 }
 
-input[type=date]{
-  @apply mt-1 block w-full text-xs rounded-md bg-gray-100 dark:bg-gray-700 border-transparent focus:border-gray-500 focus:bg-white dark:focus:bg-gray-800 focus:ring-0
+input[type="checkbox"] {
+    @apply appearance-auto dark:appearance-none rounded bg-gray-200 dark:bg-gray-600! border-transparent focus:border-transparent focus:bg-gray-200 text-gray-700 dark:text-gray-100 focus:ring-1 focus:ring-offset-2 focus:ring-gray-500;
 }
 
-textarea{
-  @apply mt-1 block w-full rounded-md text-xs bg-gray-100 dark:bg-gray-700 border-transparent focus:border-gray-500 focus:bg-white  dark:focus:bg-gray-800 focus:ring-0
+input[type="date"] {
+    @apply mt-1 block w-full text-xs rounded-md bg-gray-100 dark:bg-gray-700 border-transparent focus:border-gray-500 focus:bg-white dark:focus:bg-gray-800 focus:ring-0;
 }
 
-input#months { @apply text-xs; }
+textarea {
+    @apply mt-1 block w-full rounded-md text-xs bg-gray-100 dark:bg-gray-700 border-transparent focus:border-gray-500 focus:bg-white  dark:focus:bg-gray-800 focus:ring-0;
+}
+
+input#months {
+    @apply text-xs;
+}
 
 input[type="file"] {
-  @apply border border-gray-200 px-4;
+    @apply border border-gray-200 px-4;
 }
 
-
-
-  select[multiple="multiple"]{
+select[multiple="multiple"] {
     @apply bg-gray-100 dark:bg-gray-700;
-  }
+}
 
-
-.controller-workflows.action-copy{
-  select[multiple="multiple"]{
-      @apply bg-gray-100 dark:bg-gray-700;
+.controller-workflows.action-copy {
+    select[multiple="multiple"] {
+        @apply bg-gray-100 dark:bg-gray-700;
     }
+}
+
+/* Prevent flash of query form on page load when it should be hidden */
+html.query-form-hidden #query_form {
+    display: none;
 }
 
 /* Query form */
 
-#query_form{
-  #filters > div{
-    @apply px-4;
-  }
-  #list-definition{
-    @apply p-4;
+#query_form {
+    #filters > div {
+        @apply px-4;
+    }
+    #list-definition {
+        @apply p-4;
 
-    label.inline{
-      @apply mr-3 ;
-    }
-    .query-columns{
-      select[multiple="multiple"]{
-        @apply bg-gray-100 dark:bg-gray-700 w-full md:min-w-96 inset-shadow-sm;
-        option{
-          @apply cursor-pointer py-1 hover:bg-gray-200 dark:hover:bg-gray-700 px-1;
+        label.inline {
+            @apply mr-3;
         }
-      }
-    }
+        .query-columns {
+            select[multiple="multiple"] {
+                @apply bg-gray-100 dark:bg-gray-700 w-full md:min-w-96 inset-shadow-sm;
+                option {
+                    @apply cursor-pointer py-1 hover:bg-gray-200 dark:hover:bg-gray-700 px-1;
+                }
+            }
+        }
 
-    >div{
-      @apply flex flex-col md:flex-row items-stretch h-full md:border-b md:border-gray-50 space-x-4;
-      .field{
-        @apply flex items-center justify-start md:justify-end px-4 w-full md:w-32 bg-gray-50 dark:bg-gray-600  py-4 my-0.5;
-      }
-      >div{
-        @apply py-4;
-      }
-      .inline{
-        @apply inline-flex items-center mr-6;
-        input{
-          @apply mr-2;
+        > div {
+            @apply flex flex-col md:flex-row items-stretch h-full md:border-b md:border-gray-50 space-x-4;
+            .field {
+                @apply flex items-center justify-start md:justify-end px-4 w-full md:w-32 bg-gray-50 dark:bg-gray-600  py-4 my-0.5;
+            }
+            > div {
+                @apply py-4;
+            }
+            .inline {
+                @apply inline-flex items-center mr-6;
+                input {
+                    @apply mr-2;
+                }
+            }
+            .buttons {
+                @apply flex flex-col space-y-2 items-center justify-center;
+                input[type="button"] {
+                    @apply border border-gray-200 dark:border-gray-800 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-800 rounded cursor-pointer p-2;
+                }
+            }
         }
-      }
-      .buttons{
-        @apply flex flex-col space-y-2 items-center justify-center;
-        input[type=button] {
-          @apply border border-gray-200 dark:border-gray-800 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-800 rounded cursor-pointer p-2;
-        }
-      }
     }
-  }
-  /* #list-definition {
+    /* #list-definition {
     margin: 0 15px;
     width: auto  ;
   }

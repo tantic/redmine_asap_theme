@@ -918,7 +918,7 @@ tr.group a.toggle-all {
     color: #aaa;
     font-size: 93%;
     display: none;
-    float: right;
+    /*float: right;*/
     margin-right: 4px;
 }
 tr.group:hover a.toggle-all {
@@ -1138,7 +1138,7 @@ input[type="submit"],
 button[type="submit"] {
     -webkit-appearance: button;
     cursor: pointer;
-    background-color: #fff;
+    /*background-color: #fff;*/
     height: 28px;
     -webkit-transition: background-color 100ms linear;
     -moz-transition: background-color 100ms linear;

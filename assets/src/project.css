@@ -1,108 +1,118 @@
-.controller-projects{
-  #content{
-    >h2{
-      /* display: none; */
-    }
-  }
-
-  ul.projects {
-    > li {
-      @apply mb-0 pb-0;
-      > div{
-        @apply flex items-center hover:bg-gray-50 rounded;
-        >a.project{
-          @apply mb-0!  flex items-center hover:bg-white!;
+.controller-projects {
+    #content {
+        > h2 {
+            /* display: none; */
         }
-        >span{
-          @apply flex items-center mx-1;
-          >svg{
-            @apply mb-0!
-          }
+    }
+
+    ul.projects {
+        > li {
+            @apply mb-0 pb-0;
+            > div {
+                @apply flex items-center hover:bg-gray-50 rounded;
+                > a.project {
+                    @apply mb-0!  flex items-center hover:bg-white!;
+                }
+                > span {
+                    @apply flex items-center mx-1;
+                    > svg {
+                        @apply mb-0!;
+                    }
+                }
+            }
         }
-      }
     }
-  }
 
-  /* .news styles handled by plugins/views/news/_news.html.erb */
+    /* .news styles handled by plugins/views/news/_news.html.erb */
 
-  #block-projectissues, #block-projecttimeentries{
-    p:last-of-type{
-      @apply mt-4 text-xs text-right text-gray-400;
-      a{
-        @apply text-gray-400 hover:text-gray-900;
-      }
-    }
-  }
-
-  .members{
-    >p{
-      @apply border-0 p-4 mb-4 bg-gray-50 dark:bg-gray-700 rounded;
-      >span.label{
-        @apply font-bold flex w-full pb-2 dark:text-gray-300;
-      }
-    }
-    /* Supprimer les marges de l'avatar dans les pills membres */
-    .flex-wrap a.user, .flex-wrap a.group {
-      display: inline-flex;
-      align-items: center;
-      gap: 2px;
-      span {
-        padding: 0 !important;
-        margin: 0 !important;
-        box-shadow: none !important;
-        border: 0 !important;
-        img {
-          width: 14px !important;
-          height: 14px !important;
-          border-radius: 50% !important;
-          vertical-align: middle;
+    #block-projectissues,
+    #block-projecttimeentries {
+        p:last-of-type {
+            @apply mt-4 text-xs text-right text-gray-400;
+            a {
+                @apply text-gray-400 hover:text-gray-900;
+            }
         }
-      }
     }
-  }
 
-  .issues{
-    .issue-report{
-      @apply mb-6;
-    }
-  }
-
-  #tab-content-issues{
-    fieldset {
-      @apply grid grid-cols-6 gap-4 relative;
-      .contextual{
-        @apply flex w-full justify-end -top-2 absolute right-8
-      }
-      .floating{
-        @apply flex;
-        input{
-          @apply mr-2;
+    .members,
+    .versions,
+    .list {
+        > p {
+            @apply border-0 p-4 mb-4 bg-gray-50 dark:bg-gray-700 rounded;
+            > span.label {
+                @apply font-bold flex w-full pb-2 dark:text-gray-300;
+            }
         }
-      }
+        td {
+            @apply px-2! py-0.5!;
+        }
+        td.buttons {
+            a.icon-edit {
+                @apply p-1!;
+            }
+        }
+        /* Supprimer les marges de l'avatar dans les pills membres */
+        .flex-wrap a.user,
+        .flex-wrap a.group {
+            display: inline-flex;
+            align-items: center;
+            gap: 2px;
+            span {
+                padding: 0 !important;
+                margin: 0 !important;
+                box-shadow: none !important;
+                border: 0 !important;
+                img {
+                    width: 14px !important;
+                    height: 14px !important;
+                    border-radius: 50% !important;
+                    vertical-align: middle;
+                }
+            }
+        }
     }
-  }
 
-  &.action-show{
-    .contextual{
-      /* display: none; */
+    .issues {
+        .issue-report {
+            @apply mb-6;
+        }
     }
-  }
 
-  p#system-ticket-message{
-    padding-left:0px;
-  }
+    #tab-content-issues {
+        fieldset {
+            @apply grid grid-cols-6 gap-x-4 relative;
+            .contextual {
+                @apply flex w-full justify-end -top-2 absolute right-8;
+            }
+            .floating {
+                @apply flex;
+                input {
+                    @apply mr-2;
+                }
+            }
+        }
+    }
+
+    &.action-show {
+        .contextual {
+            /* display: none; */
+        }
+    }
+
+    p#system-ticket-message {
+        padding-left: 0px;
+    }
 }
 
-
 .controller-activities {
-
-  #activity{
-    dl{
-      dt{
-        >img{
-          display: none;
+    #activity {
+        dl {
+            dt {
+                > img {
+                    display: none;
+                }
+            }
         }
-      }
     }
-  }
 }

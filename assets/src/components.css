@@ -30,7 +30,7 @@ body {
 }
 
 #main-menu ul li a.new-object {
-    @apply w-14 text-2xl rounded-none bg-gray-50 dark:bg-gray-700 flex items-center justify-center;
+    @apply w-14 text-2xl border-b-0 rounded-none bg-gray-50 dark:bg-gray-700 flex items-center justify-center;
 }
 
 #main-menu ul li a.selected {
@@ -352,7 +352,7 @@ span.drdn .drdn-content {
 }
 
 .box h3 .icon-label {
-    @apply text-xs uppercase text-gray-800 dark:text-gray-200 font-medium;
+    @apply text-[11px] uppercase text-gray-800 dark:text-gray-200 font-medium;
 }
 
 /* Suppress core Redmine hover underline inside our custom news items */
@@ -709,7 +709,7 @@ button.tab-right.disabled {
     @apply block rounded-full max-w-none;
 }
 
-h4 img.gravatar {
+h4 .journal-info > img.gravatar {
     @apply -ml-10 mr-6;
 }
 
@@ -793,7 +793,7 @@ div.news .reaction {
 }
 
 #sidebar {
-    @apply text-sm shrink-0 flex flex-col  bg-white dark:bg-gray-800 shadow overflow-y-auto h-auto   w-9/12 sm:w-64;
+    @apply text-sm shrink-0 flex flex-col  bg-white dark:bg-gray-800 shadow-lg overflow-y-auto h-auto   w-9/12 sm:w-64;
 }
 
 #sidebar #sidebar-wrapper {
@@ -1055,7 +1055,7 @@ div.flash svg.icon-svg,
 #errorExplanation svg.icon-svg,
 .conflict svg.icon-svg {
     margin-right: 4px;
-    margin-left: -26px;
+    /*margin-left: -26px;*/
 }
 
 div.flash.error,
@@ -1607,7 +1607,7 @@ div.attachments {
         tr {
             @apply border-t border-gray-100;
             td {
-                @apply py-1;
+                @apply py-0;
             }
         }
     }

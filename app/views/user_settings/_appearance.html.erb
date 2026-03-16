@@ -42,21 +42,3 @@
     </div>
 
   <% end %>
-
-
-<div class="my-6 shadow rounded p-8">
-  <h2><%= l(:label_avatar)%></h2>
-  <div style="width: 128px; height: 128px; border: 1px silver solid;" class="mb-8">
-  <%= avatar(@user, :size => "100") %>
-  </div>
-
-
-  <%= form_tag( { :controller => 'users',  :action => 'save_avatar', :id => @user.id }, :multipart => true) do %>
-      <div class="mb-8">
-      <%= file_field_tag "avatar" %>
-    </div>
-      <%= submit_tag l(:button_save) %>
-      <%= submit_tag l(:button_delete), :confirm => l(:are_you_sure_delete_avatar) %>
-  <% end %>
-
-</div>

@@ -16,7 +16,7 @@ module RedmineAsapTheme
       projects = projects_for_jump_box(User.current)
       if @project && @project.persisted?
         # text = @project.name_was
-        text = project_logo_avatar(@project, 'w-6 h-6 mr-2 rounded-sm') + content_tag('span', @project.name_was, :class => 'uppercase font-normal text-xs line-clamp-2')
+        text = project_logo_avatar(@project, 'w-6 h-6 mr-2 rounded-sm') + content_tag('span', @project.name_was, :class => 'font-normal text-xs line-clamp-2')
       end
       text ||= l(:label_jump_to_a_project)
       url = autocomplete_projects_path(:format => 'js', :jump => current_menu_item)
@@ -115,7 +115,7 @@ module RedmineAsapTheme
 
       content = lambda {
         project_logo_avatar(project, avatar_classes) +
-        content_tag(:span, project.name, class: "icon-plus icon-white uppercase font-normal text-xs text-gray-900 dark:text-gray-100 line-clamp-2")
+        content_tag(:span, project.name, class: "icon-plus icon-white font-normal text-xs text-gray-900 dark:text-gray-100 line-clamp-2")
       }
 
       if project.archived?
@@ -197,7 +197,7 @@ module RedmineAsapTheme
         else
           letter_avatar_tag(project.name, 300, class: 'w-6 h-6 mr-2 rounded-sm')
         end
-        text = avatar + content_tag('span', project.name, :class => 'uppercase font-normal text-xs line-clamp-2')
+        text = avatar + content_tag('span', project.name, :class => 'font-normal text-xs line-clamp-2')
         s << link_to(text, project_path(project, :jump => jump),
                      :title => project.name,
                      :style => "padding-left:#{padding}px;",

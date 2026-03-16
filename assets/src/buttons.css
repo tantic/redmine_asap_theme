@@ -1,213 +1,211 @@
-
-a.icon{
-  @apply text-gray-800 dark:text-gray-100 no-underline   font-medium rounded text-xs px-2.5 py-1.5
+a.icon {
+    @apply text-gray-800 dark:text-gray-100 no-underline   font-medium rounded px-2.5 py-1.5;
 }
 
-a.icon:hover svg, a.icon-only:hover svg {
-  stroke: oklch(0.278 0.033 256.848);
+a.icon:hover svg,
+a.icon-only:hover svg {
+    stroke: oklch(0.278 0.033 256.848);
 }
 
-a.icon-checked, a.bookmark{
-  @apply bg-gray-200 hover:bg-gray-300 focus:ring-gray-300 focus:ring-4 dark:bg-gray-600 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800
+a.icon-checked,
+a.bookmark {
+    @apply bg-gray-200 hover:bg-gray-300 focus:ring-gray-300 focus:ring-4 dark:bg-gray-600 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800;
 }
 
 a.icon-edit {
-  @apply rounded-full p-2 bg-blue-700 text-blue-100;
+    @apply rounded-full p-2 bg-blue-700 text-blue-100;
 }
 a.icon-edit:hover {
-  @apply bg-blue-800 text-blue-100!;
+    @apply bg-blue-800 text-blue-100!;
 }
 a.icon-edit:hover svg {
-
 }
 a.icon-edit .icon-label {
-  display: none;
+    display: none;
 }
 
-.controller-issues.action-show{
-  .contextual{
-    .icon-time-add {
-      .icon-label {
-        display: none;
-      }
+.controller-issues.action-show {
+    .contextual {
+        .icon-time-add {
+            .icon-label {
+                display: none;
+            }
+        }
     }
-  }
 }
 
 /* Exceptions : Pas d'effet dans .drdn-items ou dans #context-menu */
 .drdn-items a.icon-edit:hover,
 #context-menu a.icon-edit:hover {
-  /* Remets le style que tu veux pour ces contextes, si besoin */
-  color:#2A5685 !important;
-  background-color:#eef5fd !important;
-  border-radius:3px !important;
+    /* Remets le style que tu veux pour ces contextes, si besoin */
+    color: #2a5685 !important;
+    background-color: #eef5fd !important;
+    border-radius: 3px !important;
 }
 .drdn-items a.icon-edit .icon-label,
-#context-menu a.icon-edit .icon-label{
-  display: initial;
+#context-menu a.icon-edit .icon-label {
+    display: initial;
 }
 
-.drdn-items a.icon-edit .icon-svg{
-  stroke: #2A5685 !important;
+.drdn-items a.icon-edit .icon-svg {
+    stroke: #2a5685 !important;
 }
 
-a.icon-reload:not(#context-menu a.icon-reload){
-  @apply rounded-full p-2 hover:bg-gray-100 hover:text-gray-700;
-  .icon-label{
-    display: none;
-  }
+a.icon-reload:not(#context-menu a.icon-reload) {
+    @apply rounded-full p-2 hover:bg-gray-100 hover:text-gray-700;
+    .icon-label {
+        display: none;
+    }
 }
 
-a.icon-fav-off:not(#context-menu a.icon-fav-off){
-  @apply rounded-full p-2 hover:bg-yellow-400 hover:text-yellow-100;
-  .icon-label{
-    display: none;
-  }
-  &:hover svg{
-    stroke: oklch(0.973 0.071 103.193);
-  }
+a.icon-fav-off:not(#context-menu a.icon-fav-off) {
+    @apply rounded-full p-2 hover:bg-yellow-400 hover:text-yellow-100;
+    .icon-label {
+        display: none;
+    }
+    &:hover svg {
+        stroke: oklch(0.973 0.071 103.193);
+    }
 }
 
-a.icon-copy:not(#context-menu a.icon-copy){
-  @apply rounded-full p-2 hover:bg-gray-200 hover:text-gray-800  ;
-  .icon-label{
-    display: none;
-  }
-  &:hover svg{
-    stroke: oklch(0.973 0.071 103.193);
-  }
+a.icon-copy:not(#context-menu a.icon-copy) {
+    @apply rounded-full p-2 hover:bg-gray-200 hover:text-gray-800;
+    .icon-label {
+        display: none;
+    }
+    &:hover svg {
+        stroke: oklch(0.973 0.071 103.193);
+    }
 }
 
-a.icon-fav:not(#context-menu a.icon-fav){
-  @apply rounded-full p-2 hover:bg-yellow-400 hover:text-yellow-700  ;
-  .icon-label{
-    display: none;
-  }
-  /* &:hover{
+a.icon-fav:not(#context-menu a.icon-fav) {
+    @apply rounded-full p-2 hover:bg-yellow-400 hover:text-yellow-700;
+    .icon-label {
+        display: none;
+    }
+    /* &:hover{
     .icon-label{
       @apply block text-yellow-100;
     }
   } */
-  svg{
-    stroke: oklch(0.795 0.184 86.047)  ;
-  }
-  &:hover svg{
-    stroke: oklch(0.973 0.071 103.193)  ;
-  }
+    svg {
+        stroke: oklch(0.795 0.184 86.047);
+    }
+    &:hover svg {
+        stroke: oklch(0.973 0.071 103.193);
+    }
 }
 
 a.icon-del:not(#context-menu a.icon-del):not(.drdn-items a.icon-del) {
-  @apply rounded-full p-2 hover:bg-red-100 hover:text-red-700;
-  .icon-label{
-    display: none;
-  }
-  &:hover svg{
-    stroke: oklch(0.505 0.213 27.518);
-  }
-}
-
-a.icon .icon-svg, div.icon .icon-svg{
-  @apply stroke-current!
-}
-
-.contextual > a.icon-add{
-  @apply text-white no-underline bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded text-xs px-2.5 py-1.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800
-}
-
-.contextual a.icon-add .icon-svg{
-  @apply stroke-current
-}
-
-a.icon-only{
-  @apply bg-transparent
-}
-
-a.icon-checked{
-  @apply p-2;
-}
-
-fieldset{
-  legend{
-    @apply bg-gray-100 dark:bg-gray-700 dark:text-gray-300 py-1 px-2.5 rounded flex items-center;
-    a.icon-checked{
-      @apply p-0 mr-1 bg-gray-100 dark:bg-gray-800;
-      > span{
+    @apply rounded-full p-2 hover:bg-red-100 hover:text-red-700;
+    .icon-label {
         display: none;
-      }
     }
-  }
+    &:hover svg {
+        stroke: oklch(0.505 0.213 27.518);
+    }
 }
 
-.button-small{
-  @apply px-3 py-1.5 text-xs h-auto font-medium text-center text-white bg-blue-700 rounded hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800  ;
+a.icon .icon-svg,
+div.icon .icon-svg {
+    @apply stroke-current!;
 }
 
-
-input[type=submit] {
-  @apply text-white no-underline bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded text-xs px-2.5 py-1.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800  ;
+.contextual > a.icon-add {
+    @apply text-white no-underline bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded text-xs px-2.5 py-1.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800;
 }
 
+.contextual a.icon-add .icon-svg {
+    @apply stroke-current;
+}
 
+a.icon-only {
+    @apply bg-transparent;
+}
+
+a.icon-checked {
+    @apply p-2;
+}
+
+fieldset {
+    legend {
+        @apply bg-gray-100 dark:bg-gray-700 dark:text-gray-300 py-1 px-2.5 rounded flex items-center;
+        a.icon-checked {
+            @apply p-0 mr-1 bg-gray-100 dark:bg-gray-800;
+            > span {
+                display: none;
+            }
+        }
+    }
+}
+
+.button-small {
+    @apply px-3 py-1.5 text-xs h-auto font-medium text-center text-white bg-blue-700 rounded hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800;
+}
+
+input[type="submit"] {
+    @apply text-white no-underline bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded text-xs px-2.5 py-1.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800;
+}
 
 /* Buttons
 -------------------------------------------------------- */
 .jstb_strong {
-  background-image: url(/jstoolbar/bold.svg)  ;
+    background-image: url(/jstoolbar/bold.svg);
 }
 .jstb_em {
-  background-image: url(/jstoolbar/italic.svg)  ;
+    background-image: url(/jstoolbar/italic.svg);
 }
 .jstb_ins {
-  background-image: url(/jstoolbar/underline.svg)  ;
+    background-image: url(/jstoolbar/underline.svg);
 }
 .jstb_del {
-  background-image: url(/jstoolbar/strikethrough.svg)  ;
+    background-image: url(/jstoolbar/strikethrough.svg);
 }
 .jstb_code {
-  background-image: url(/jstoolbar/letter-c.svg)  ;
+    background-image: url(/jstoolbar/letter-c.svg);
 }
 .jstb_h1 {
-  background-image: url(/jstoolbar/h1.svg)  ;
+    background-image: url(/jstoolbar/h1.svg);
 }
 .jstb_h2 {
-  background-image: url(/jstoolbar/h2.svg)  ;
+    background-image: url(/jstoolbar/h2.svg);
 }
 .jstb_h3 {
-  background-image: url(/jstoolbar/h3.svg)  ;
+    background-image: url(/jstoolbar/h3.svg);
 }
 .jstb_ul {
-  background-image: url(/jstoolbar/list.svg)  ;
+    background-image: url(/jstoolbar/list.svg);
 }
 .jstb_ol {
-  background-image: url(/jstoolbar/list-numbers.svg)  ;
+    background-image: url(/jstoolbar/list-numbers.svg);
 }
 .jstb_tl {
-  background-image: url(/jstoolbar/list-check.svg)  ;
+    background-image: url(/jstoolbar/list-check.svg);
 }
 .jstb_bq {
-  background-image: url(/jstoolbar/indent-increase.svg)  ;
+    background-image: url(/jstoolbar/indent-increase.svg);
 }
 .jstb_unbq {
-  background-image: url(/jstoolbar/indent-decrease.svg)  ;
+    background-image: url(/jstoolbar/indent-decrease.svg);
 }
 .jstb_pre::before {
-  content: "pre";
-  font-size: 10px;
-  color: #333;
-  font-weight: 700
+    content: "pre";
+    font-size: 10px;
+    color: #333;
+    font-weight: 700;
 }
 .jstb_precode {
-  background-image: url(/jstoolbar/code.svg)  ;
+    background-image: url(/jstoolbar/code.svg);
 }
 .jstb_link {
-  background-image: url(/jstoolbar/wiki_link.svg)  ;
+    background-image: url(/jstoolbar/wiki_link.svg);
 }
 .jstb_img {
-  background-image: url(/jstoolbar/image.svg)  ;
+    background-image: url(/jstoolbar/image.svg);
 }
 .jstb_table {
-  background-image: url(/jstoolbar/table.svg)  ;
+    background-image: url(/jstoolbar/table.svg);
 }
 .jstb_help {
-  background-image: url(/jstoolbar/help.svg)  ;
+    background-image: url(/jstoolbar/help.svg);
 }

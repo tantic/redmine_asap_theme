@@ -46,10 +46,12 @@ function initToggleQueryForm() {
     if (isVisible) {
       form.style.display = 'none';
       localStorage.setItem('query_form_visible', 'false');
+      document.documentElement.classList.add('query-form-hidden');
       updateIcon(false);
     } else {
       form.style.display = 'block';
       localStorage.setItem('query_form_visible', 'true');
+      document.documentElement.classList.remove('query-form-hidden');
       updateIcon(true);
     }
   });
