@@ -18,10 +18,6 @@ This plugin is part of a suite which add features to redmine :
 
 https://tantic.github.io/redmine_asap_docs/docs/theme/intro
 
-## Changelog
-
-[Changelog](doc/CHANGELOG.md)
-
 ## Features
 
 Ready
@@ -49,7 +45,7 @@ Beta version
 
 ![welcome page](doc/screenshots/welcome.png)
 
-![Issues page](doc/screenshots/issues.png)
+![Issues page](doc/screenshots/issue-panel.png)
 
 ![Issue page](doc/screenshots/issue.png)
 
