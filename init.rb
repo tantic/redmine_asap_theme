@@ -4,7 +4,7 @@ Redmine::Plugin.register :redmine_asap_theme do
   name 'Redmine Asap Theme plugin'
   author 'DGAC/DSNA - Tantic'
   description 'UX/UI based on Tailwindcss'
-  version '2.1.4'
+  version '2.1.5'
   url 'https://github.com/tantic/redmine_asap_theme'
   author_url 'https://github.com/tantic'
 
@@ -28,6 +28,7 @@ patch_path = File.join(lib_dir, '*_patch.rb')
 Dir.glob(patch_path).each do |file|
   basename = File.basename(file)
   next if basename.start_with?('easy_gantt') && !Redmine::Plugin.installed?(:easy_gantt)
+  next if basename.start_with?('easy_wbs') && !Redmine::Plugin.installed?(:easy_wbs)
   require file
 end
 
@@ -66,4 +67,13 @@ end
 Rails.configuration.to_prepare do
   require_dependency 'issues_helper'
   IssuesHelper.prepend RedmineAsapTheme::IssuesHelperPatch
+end
+
+if Redmine::Plugin.installed?(:easy_wbs)
+  begin
+    EasyWbsController.include SortHelper
+    EasyWbsController.prepend RedmineAsapTheme::EasyWbsControllerPatch
+  rescue NameError => e
+    Rails.logger.warn "[redmine_asap_theme] EasyWbs patch skipped: #{e.message}"
+  end
 end

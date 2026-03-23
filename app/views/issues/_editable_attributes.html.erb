@@ -1,0 +1,277 @@
+<% editable = @issue.attributes_editable? %>
+<div class="splitcontent">
+  <div class="splitcontentleft">
+
+    <%# Status %>
+    <div class="attribute status"
+         <% if editable %>data-controller="field-edit" data-field-edit-issue-id-value="<%= @issue.id %>" data-field-edit-field-value="status_id"<% end %>>
+      <div class="label"><%= l(:field_status) %>:</div>
+      <div class="value">
+        <% if editable %>
+          <span data-field-edit-target="display" data-action="click->field-edit#edit"
+                class="cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600 px-1 rounded block -mx-1"
+                style="background-color: <%= @issue.status.bg_color %>; color: <%= @issue.status.text_color %>; display: inline-block;">
+            <%= @issue.status.name %>
+          </span>
+          <div data-field-edit-target="editor" class="hidden!">
+            <select data-field-edit-target="input" data-action="change->field-edit#save"
+                    class="border border-blue-400 rounded px-2 py-1 text-xs w-full dark:bg-gray-600 dark:text-gray-100">
+              <% @issue.new_statuses_allowed_to.each do |s| %>
+                <option value="<%= s.id %>" <%= 'selected' if s.id == @issue.status_id %>><%= s.name %></option>
+              <% end %>
+            </select>
+            <button data-action="click->field-edit#cancel"
+                    class="ml-1 mt-1 px-2 py-0.5 bg-gray-200 dark:bg-gray-600 rounded text-xs hover:bg-gray-300 cursor-pointer">✕</button>
+          </div>
+        <% else %>
+          <span style="background-color: <%= @issue.status.bg_color %>; color: <%= @issue.status.text_color %>;">
+            <%= @issue.status.name %>
+          </span>
+        <% end %>
+      </div>
+    </div>
+
+    <%# Priority %>
+    <% unless @issue.disabled_core_fields.include?('priority_id') %>
+    <div class="attribute priority"
+         <% if editable %>data-controller="field-edit" data-field-edit-issue-id-value="<%= @issue.id %>" data-field-edit-field-value="priority_id"<% end %>>
+      <div class="label"><%= l(:field_priority) %>:</div>
+      <div class="value">
+        <% if editable %>
+          <span data-field-edit-target="display" data-action="click->field-edit#edit"
+                class="cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600 px-1 rounded block -mx-1">
+            <%= @issue.priority.name %>
+          </span>
+          <div data-field-edit-target="editor" class="hidden!">
+            <select data-field-edit-target="input" data-action="change->field-edit#save"
+                    class="border border-blue-400 rounded px-2 py-1 text-xs w-full dark:bg-gray-600 dark:text-gray-100">
+              <% IssuePriority.active.each do |p| %>
+                <option value="<%= p.id %>" <%= 'selected' if p.id == @issue.priority_id %>><%= p.name %></option>
+              <% end %>
+            </select>
+            <button data-action="click->field-edit#cancel"
+                    class="ml-1 mt-1 px-2 py-0.5 bg-gray-200 dark:bg-gray-600 rounded text-xs hover:bg-gray-300 cursor-pointer">✕</button>
+          </div>
+        <% else %>
+          <%= @issue.priority.name %>
+        <% end %>
+      </div>
+    </div>
+    <% end %>
+
+    <%# Assigned to %>
+    <% unless @issue.disabled_core_fields.include?('assigned_to_id') %>
+    <div class="attribute assigned-to"
+         <% if editable %>data-controller="field-edit" data-field-edit-issue-id-value="<%= @issue.id %>" data-field-edit-field-value="assigned_to_id"<% end %>>
+      <div class="label"><%= l(:field_assigned_to) %>:</div>
+      <div class="value">
+        <% if editable %>
+          <span data-field-edit-target="display" data-action="click->field-edit#edit"
+                class="cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600 px-1 rounded block -mx-1">
+            <%= @issue.assigned_to ? @issue.assigned_to.name : '-' %>
+          </span>
+          <div data-field-edit-target="editor" class="hidden!">
+            <select data-field-edit-target="input" data-action="change->field-edit#save"
+                    class="border border-blue-400 rounded px-2 py-1 text-xs w-full dark:bg-gray-600 dark:text-gray-100">
+              <option value=""></option>
+              <% @issue.assignable_users.each do |u| %>
+                <option value="<%= u.id %>" <%= 'selected' if u.id == @issue.assigned_to_id %>><%= u.name %></option>
+              <% end %>
+            </select>
+            <button data-action="click->field-edit#cancel"
+                    class="ml-1 mt-1 px-2 py-0.5 bg-gray-200 dark:bg-gray-600 rounded text-xs hover:bg-gray-300 cursor-pointer">✕</button>
+          </div>
+        <% else %>
+          <%= @issue.assigned_to ? link_to_principal(@issue.assigned_to) : '-' %>
+        <% end %>
+      </div>
+    </div>
+    <% end %>
+
+    <%# Category %>
+    <% unless @issue.disabled_core_fields.include?('category_id') || (@issue.category.nil? && @issue.project.issue_categories.none?) %>
+    <div class="attribute category"
+         <% if editable %>data-controller="field-edit" data-field-edit-issue-id-value="<%= @issue.id %>" data-field-edit-field-value="category_id"<% end %>>
+      <div class="label"><%= l(:field_category) %>:</div>
+      <div class="value">
+        <% if editable %>
+          <span data-field-edit-target="display" data-action="click->field-edit#edit"
+                class="cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600 px-1 rounded block -mx-1">
+            <%= @issue.category ? @issue.category.name : '-' %>
+          </span>
+          <div data-field-edit-target="editor" class="hidden!">
+            <select data-field-edit-target="input" data-action="change->field-edit#save"
+                    class="border border-blue-400 rounded px-2 py-1 text-xs w-full dark:bg-gray-600 dark:text-gray-100">
+              <option value=""></option>
+              <% @issue.project.issue_categories.each do |c| %>
+                <option value="<%= c.id %>" <%= 'selected' if c.id == @issue.category_id %>><%= c.name %></option>
+              <% end %>
+            </select>
+            <button data-action="click->field-edit#cancel"
+                    class="ml-1 mt-1 px-2 py-0.5 bg-gray-200 dark:bg-gray-600 rounded text-xs hover:bg-gray-300 cursor-pointer">✕</button>
+          </div>
+        <% else %>
+          <%= @issue.category ? @issue.category.name : '-' %>
+        <% end %>
+      </div>
+    </div>
+    <% end %>
+
+    <%# Fixed version %>
+    <% unless @issue.disabled_core_fields.include?('fixed_version_id') || (@issue.fixed_version.nil? && @issue.assignable_versions.none?) %>
+    <div class="attribute fixed-version"
+         <% if editable %>data-controller="field-edit" data-field-edit-issue-id-value="<%= @issue.id %>" data-field-edit-field-value="fixed_version_id"<% end %>>
+      <div class="label"><%= l(:field_fixed_version) %>:</div>
+      <div class="value">
+        <% if editable %>
+          <span data-field-edit-target="display" data-action="click->field-edit#edit"
+                class="cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600 px-1 rounded block -mx-1">
+            <%= @issue.fixed_version ? @issue.fixed_version.name : '-' %>
+          </span>
+          <div data-field-edit-target="editor" class="hidden!">
+            <select data-field-edit-target="input" data-action="change->field-edit#save"
+                    class="border border-blue-400 rounded px-2 py-1 text-xs w-full dark:bg-gray-600 dark:text-gray-100">
+              <option value=""></option>
+              <% @issue.assignable_versions.each do |v| %>
+                <option value="<%= v.id %>" <%= 'selected' if v.id == @issue.fixed_version_id %>><%= v.name %></option>
+              <% end %>
+            </select>
+            <button data-action="click->field-edit#cancel"
+                    class="ml-1 mt-1 px-2 py-0.5 bg-gray-200 dark:bg-gray-600 rounded text-xs hover:bg-gray-300 cursor-pointer">✕</button>
+          </div>
+        <% else %>
+          <%= @issue.fixed_version ? link_to_version(@issue.fixed_version) : '-' %>
+        <% end %>
+      </div>
+    </div>
+    <% end %>
+
+  </div>
+  <div class="splitcontentleft">
+
+    <%# Start date %>
+    <% unless @issue.disabled_core_fields.include?('start_date') %>
+    <div class="attribute start-date"
+         <% if editable %>data-controller="field-edit" data-field-edit-issue-id-value="<%= @issue.id %>" data-field-edit-field-value="start_date"<% end %>>
+      <div class="label"><%= l(:field_start_date) %>:</div>
+      <div class="value">
+        <% if editable %>
+          <span data-field-edit-target="display" data-action="click->field-edit#edit"
+                class="cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600 px-1 rounded block -mx-1">
+            <%= format_date(@issue.start_date) || '-' %>
+          </span>
+          <div data-field-edit-target="editor" class="hidden!">
+            <input type="date" data-field-edit-target="input" data-action="keydown->field-edit#keydown"
+                   value="<%= @issue.start_date %>"
+                   class="border border-blue-400 rounded px-2 py-1 text-xs w-full dark:bg-gray-600 dark:text-gray-100">
+            <div class="flex gap-1 mt-1">
+              <button data-action="click->field-edit#save"
+                      class="px-2 py-0.5 bg-blue-600 text-white rounded text-xs hover:bg-blue-700 cursor-pointer">✓</button>
+              <button data-action="click->field-edit#cancel"
+                      class="px-2 py-0.5 bg-gray-200 dark:bg-gray-600 rounded text-xs hover:bg-gray-300 cursor-pointer">✕</button>
+            </div>
+          </div>
+        <% else %>
+          <%= format_date(@issue.start_date) || '-' %>
+        <% end %>
+      </div>
+    </div>
+    <% end %>
+
+    <%# Due date %>
+    <% unless @issue.disabled_core_fields.include?('due_date') %>
+    <div class="attribute due-date"
+         <% if editable %>data-controller="field-edit" data-field-edit-issue-id-value="<%= @issue.id %>" data-field-edit-field-value="due_date"<% end %>>
+      <div class="label"><%= l(:field_due_date) %>:</div>
+      <div class="value">
+        <% if editable %>
+          <span data-field-edit-target="display" data-action="click->field-edit#edit"
+                class="cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600 px-1 rounded block -mx-1 <%= 'text-red-500! font-semibold' if @issue.overdue? %>">
+            <%= format_date(@issue.due_date) || '-' %>
+          </span>
+          <div data-field-edit-target="editor" class="hidden!">
+            <input type="date" data-field-edit-target="input" data-action="keydown->field-edit#keydown"
+                   value="<%= @issue.due_date %>"
+                   class="border border-blue-400 rounded px-2 py-1 text-xs w-full dark:bg-gray-600 dark:text-gray-100">
+            <div class="flex gap-1 mt-1">
+              <button data-action="click->field-edit#save"
+                      class="px-2 py-0.5 bg-blue-600 text-white rounded text-xs hover:bg-blue-700 cursor-pointer">✓</button>
+              <button data-action="click->field-edit#cancel"
+                      class="px-2 py-0.5 bg-gray-200 dark:bg-gray-600 rounded text-xs hover:bg-gray-300 cursor-pointer">✕</button>
+            </div>
+          </div>
+        <% else %>
+          <%= issue_due_date_details(@issue) %>
+        <% end %>
+      </div>
+    </div>
+    <% end %>
+
+    <%# Done ratio %>
+    <% unless @issue.disabled_core_fields.include?('done_ratio') %>
+    <div class="attribute progress"
+         <% if editable %>data-controller="field-edit" data-field-edit-issue-id-value="<%= @issue.id %>" data-field-edit-field-value="done_ratio"<% end %>>
+      <div class="label"><%= l(:field_done_ratio) %>:</div>
+      <div class="value">
+        <% if editable %>
+          <span data-field-edit-target="display" data-action="click->field-edit#edit"
+                class="cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600 px-1 rounded block -mx-1">
+            <%= progress_bar(@issue.done_ratio, :legend => "#{@issue.done_ratio}%") %>
+          </span>
+          <div data-field-edit-target="editor" class="hidden!">
+            <select data-field-edit-target="input" data-action="change->field-edit#save"
+                    class="border border-blue-400 rounded px-2 py-1 text-xs w-full dark:bg-gray-600 dark:text-gray-100">
+              <% (0..10).map { |i| i * 10 }.each do |v| %>
+                <option value="<%= v %>" <%= 'selected' if v == @issue.done_ratio %>><%= v %>%</option>
+              <% end %>
+            </select>
+            <button data-action="click->field-edit#cancel"
+                    class="ml-1 mt-1 px-2 py-0.5 bg-gray-200 dark:bg-gray-600 rounded text-xs hover:bg-gray-300 cursor-pointer">✕</button>
+          </div>
+        <% else %>
+          <%= progress_bar(@issue.done_ratio, :legend => "#{@issue.done_ratio}%") %>
+        <% end %>
+      </div>
+    </div>
+    <% end %>
+
+    <%# Estimated hours %>
+    <% unless @issue.disabled_core_fields.include?('estimated_hours') %>
+    <div class="attribute estimated-hours"
+         <% if editable %>data-controller="field-edit" data-field-edit-issue-id-value="<%= @issue.id %>" data-field-edit-field-value="estimated_hours"<% end %>>
+      <div class="label"><%= l(:field_estimated_hours) %>:</div>
+      <div class="value">
+        <% if editable %>
+          <span data-field-edit-target="display" data-action="click->field-edit#edit"
+                class="cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600 px-1 rounded block -mx-1">
+            <%= issue_estimated_hours_details(@issue).presence || '-' %>
+          </span>
+          <div data-field-edit-target="editor" class="hidden!">
+            <input type="number" step="0.5" min="0"
+                   data-field-edit-target="input" data-action="keydown->field-edit#keydown"
+                   value="<%= @issue.estimated_hours %>"
+                   class="border border-blue-400 rounded px-2 py-1 text-xs w-full dark:bg-gray-600 dark:text-gray-100">
+            <div class="flex gap-1 mt-1">
+              <button data-action="click->field-edit#save"
+                      class="px-2 py-0.5 bg-blue-600 text-white rounded text-xs hover:bg-blue-700 cursor-pointer">✓</button>
+              <button data-action="click->field-edit#cancel"
+                      class="px-2 py-0.5 bg-gray-200 dark:bg-gray-600 rounded text-xs hover:bg-gray-300 cursor-pointer">✕</button>
+            </div>
+          </div>
+        <% else %>
+          <%= issue_estimated_hours_details(@issue) %>
+        <% end %>
+      </div>
+    </div>
+    <% end %>
+
+    <%# Spent time (read-only) %>
+    <% if User.current.allowed_to?(:view_time_entries, @project) && @issue.total_spent_hours > 0 %>
+    <div class="attribute spent-time">
+      <div class="label"><%= l(:label_spent_time) %>:</div>
+      <div class="value"><%= issue_spent_hours_details(@issue) %></div>
+    </div>
+    <% end %>
+
+  </div>
+</div>

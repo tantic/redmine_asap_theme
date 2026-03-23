@@ -1,8 +1,14 @@
 # Changelog
 
+## 2.1.5
+
+* [Beta] Open issue in a right panel. The issue is then editable online (user can activate the option in his settings)
+* [Homepage] Display projects + news + shortcuts for redmine asap user features and dashboard plugin
+* Better compatibility with plugins like EasyGantt, Additionals and Redmineup
+
 ## 2.1.4
 
-
+* Add logo to project
 
 ## 2.1.3
 

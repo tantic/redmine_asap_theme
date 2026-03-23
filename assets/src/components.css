@@ -742,11 +742,10 @@ h4 .journal-info > img.gravatar {
     color: #999;
 }
 div.issue.details .reaction {
-    float: right;
+    @apply absolute right-2 top-2;
     font-size: 0.9em;
-    margin-top: 1em;
+    /*margin-top: 1em;*/
     margin-left: 10px;
-    clear: right;
 }
 div.message .reaction {
     float: right;
@@ -1304,7 +1303,7 @@ fieldset {
 }
 
 *[id^="tab-content-"] {
-    @apply bg-white dark:bg-gray-900  p-4;
+    @apply bg-white dark:bg-gray-900;
 }
 
 /* Documents */
@@ -1600,7 +1599,7 @@ img.ui-datepicker-trigger {
 div.attachments {
     @apply relative bg-gray-50 dark:bg-gray-600 shadow p-4 rounded mt-2 mb-6;
     .contextual {
-        @apply top-0 right-4;
+        @apply top-0 right-4 mr-4;
     }
     table {
         @apply w-full mt-8;
@@ -1623,4 +1622,9 @@ div.attachments {
     #existing-attachments > span {
         @apply flex items-center;
     }
+}
+
+/* Custom field icon badge */
+.cf-icon-badge {
+    @apply inline-flex items-center gap-1 font-medium;
 }

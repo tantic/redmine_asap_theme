@@ -1,5 +1,5 @@
 
-<script>if (localStorage.getItem('query_form_visible') === 'false') { document.documentElement.classList.add('query-form-hidden'); }</script>
+<% if action_name == 'index' %><script>if (localStorage.getItem('query_form_visible') === 'false') { document.documentElement.classList.add('query-form-hidden'); }</script><% end %>
 <%= javascript_include_tag 'application.js', :type => 'module', :plugin => 'redmine_asap_theme' %>
 <%= javascript_include_tag 'filters.js', :type => 'module', :plugin => 'redmine_asap_theme' %>
 <%= javascript_include_tag 'controllers/application_controller.js', :type => 'module', :plugin => 'redmine_asap_theme' %>
@@ -10,4 +10,5 @@
 <%= javascript_include_tag 'controllers/tabs_controller.js', :type => 'module', :plugin => 'redmine_asap_theme' %>
 <%= javascript_include_tag 'controllers/members_controller.js', :type => 'module', :plugin => 'redmine_asap_theme' %>
 <%= javascript_include_tag 'controllers/font_size_controller.js', :type => 'module', :plugin => 'redmine_asap_theme' %>
+<%= javascript_include_tag 'issue_panel.js', :type => 'module', :plugin => 'redmine_asap_theme' %>
 

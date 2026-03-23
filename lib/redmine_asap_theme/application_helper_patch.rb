@@ -12,6 +12,26 @@ module RedmineAsapTheme
     end
 
 
+    def format_object(object, *args, &block)
+      if object.is_a?(CustomValue) || object.is_a?(CustomFieldValue)
+        options = args.first.is_a?(Hash) ? args.first : {}
+        html = options.fetch(:html, true)
+        if html
+          settings = Setting.plugin_redmine_asap_theme
+          cf_id = settings['cf_icon_field_id'].to_s
+          if cf_id.present? && object.custom_field&.id.to_s == cf_id
+            icon_mapping = settings['cf_icon_mapping'] || {}
+            value = object.value.to_s
+            icon = icon_mapping[value].to_s
+            if icon.present?
+              return content_tag(:span, icon, class: 'cf-icon-badge', title: h(value))
+            end
+          end
+        end
+      end
+      super
+    end
+
     def render_project_jump_box
       projects = projects_for_jump_box(User.current)
       if @project && @project.persisted?

@@ -20,9 +20,17 @@
     </div>
 
     <div class="mb-6"><%= f.text_field :mail, :required => true, class: "text-sm" %></div>
-    <%= labelled_fields_for :pref, @user.pref do |pref_fields| %>
-    <div class="mb-6 hide-email"><%= pref_fields.check_box :hide_mail %></div>
-    <% end %>
+    <div class="mb-6 hide-email">
+      <label class="flex items-center gap-3 cursor-pointer">
+        <div class="relative flex-shrink-0">
+          <%= hidden_field_tag 'pref[hide_mail]', '0' %>
+          <%= check_box_tag 'pref[hide_mail]', '1', @user.pref.hide_mail, class: 'sr-only peer', id: 'pref_hide_mail' %>
+          <div class="w-10 h-6 bg-gray-200 dark:bg-gray-600 rounded-full peer-checked:bg-blue-500 transition-colors"></div>
+          <div class="absolute top-0.5 left-0.5 w-5 h-5 bg-white rounded-full shadow transition-transform peer-checked:translate-x-4"></div>
+        </div>
+        <span class="text-sm text-gray-700 dark:text-gray-200"><%= l(:field_hide_mail) %></span>
+      </label>
+    </div>
 
     <% if Setting.twofa? -%>
     <div class="flex w-full mb-6">

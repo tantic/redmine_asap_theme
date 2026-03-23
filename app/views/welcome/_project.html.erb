@@ -12,7 +12,7 @@
 
   <% if my_issues.length > 0 %>
   <section class="px-8 mt-6 mb-12">
-    <h3 class="uppercase my-6 text-gray-500 pb-4! border-b border-gray-100">Mes demandes (<%= my_issues.count %>)</h3>
+    <h3 class="uppercase my-6 text-gray-500 pb-4! border-b border-gray-100"><%= l(:label_my_issues) %> (<%= my_issues.count %>)</h3>
     <% my_issues.each do |issue| %>
       <div class="flex my-2">
         <%= link_to_issue(issue) %>

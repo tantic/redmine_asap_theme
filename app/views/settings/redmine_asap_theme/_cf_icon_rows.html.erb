@@ -1,0 +1,36 @@
+<%# locals: cf, current_mapping, quick_icons %>
+<div class="mb-2">
+  <p class="text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">
+    <%= l(:label_redmine_asap_cf_icons_mapping) %>
+  </p>
+  <div class="flex flex-col gap-3">
+    <% cf.possible_values.each do |val| %>
+      <div class="flex items-center gap-3">
+        <span class="w-36 text-sm text-gray-700 dark:text-gray-200 truncate" title="<%= h(val) %>">
+          <%= h(val) %>
+        </span>
+        <%# Quick-pick emoji %>
+        <div class="flex items-center gap-1 flex-wrap">
+          <% quick_icons.each do |ico| %>
+            <button type="button"
+                    class="cf-icon-pick text-xl leading-none hover:scale-125 transition-transform cursor-pointer px-0.5"
+                    data-icon="<%= ico %>"
+                    title="<%= ico %>"><%= ico %></button>
+          <% end %>
+        </div>
+        <input type="text"
+               name="settings[cf_icon_mapping][<%= h(val) %>]"
+               value="<%= h(current_mapping[val].to_s) %>"
+               class="cf-icon-input w-16 text-center text-xl border border-gray-300 dark:border-gray-600 rounded px-1 py-0.5 bg-white dark:bg-gray-800"
+               placeholder="…"
+               maxlength="4">
+        <span class="text-sm text-gray-400">
+          <%= l(:label_redmine_asap_cf_icons_preview) %>
+          <span class="cf-icon-preview cf-icon-badge">
+            <%= current_mapping[val].present? ? "#{current_mapping[val]} #{val}" : '' %>
+          </span>
+        </span>
+      </div>
+    <% end %>
+  </div>
+</div>

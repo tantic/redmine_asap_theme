@@ -1,0 +1,239 @@
+<%# Prevent application-legacy.js from auto-focusing the add-note textarea at the bottom of the page %>
+<div id="issue-page-focus-guard" tabindex="-1" style="outline:none;position:absolute;opacity:0;pointer-events:none;width:0;height:0;"></div>
+<script>document.getElementById('issue-page-focus-guard')?.focus({preventScroll:true});</script>
+
+
+<div class="header flex items-center gap-2 flex-wrap mb-1">
+  <span class="text-gray-300 dark:text-gray-600 text-xs">·</span>
+  <h2 class="inline-block mb-0! pr-0!"><%= issue_heading(@issue) %></h2>
+  <%= issue_status_type_badge(@issue.status) %>
+  <% if @issue.is_private? %>
+    <span class="badge badge-private private"><%= l(:field_is_private) %></span>
+  <% end %>
+  <% if @prev_issue_id || @next_issue_id %>
+    <div class="next-prev-links contextual">
+      <%= link_to_if @prev_issue_id,
+                     "\xc2\xab #{l(:label_previous)}",
+                     (@prev_issue_id ? issue_path(@prev_issue_id) : nil),
+                     :title => "##{@prev_issue_id}",
+                     :accesskey => accesskey(:previous) %> |
+      <% if @issue_position && @issue_count %>
+        <span class="position">
+          <%= link_to_if @query_path,
+                         l(:label_item_position, :position => @issue_position, :count => @issue_count),
+                         @query_path %>
+        </span> |
+      <% end %>
+      <%= link_to_if @next_issue_id,
+                     "#{l(:label_next)} \xc2\xbb",
+                     (@next_issue_id ? issue_path(@next_issue_id) : nil),
+                     :title => "##{@next_issue_id}",
+                     :accesskey => accesskey(:next) %>
+    </div>
+  <% end %>
+  <%= render :partial => 'action_menu' %>
+</div>
+
+<div class="<%= @issue.css_classes %> details">
+
+    <header class="authoring flex">
+        <div class="avatar-with-child mr-4">
+          <%= author_avatar(@issue.author, :size => "50") %>
+          <%= assignee_avatar(@issue.assigned_to, :size => "22", :class => "avatar-child") if @issue.assigned_to %>
+        </div>
+
+        <div data-controller="sticky-issue-header" class="sticky-issue-header">
+          <div class="subject" data-sticky-issue-header-target="original">
+            <% if @issue.attributes_editable? %>
+            <div data-controller="field-edit"
+                 data-field-edit-issue-id-value="<%= @issue.id %>"
+                 data-field-edit-field-value="subject">
+              <div data-field-edit-target="display" data-action="click->field-edit#edit"
+                   class="tree cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 rounded ">
+                <%= render_issue_subject_with_tree(@issue) %>
+              </div>
+              <div data-field-edit-target="editor" class="hidden!">
+                <input type="text" id="issue-subject-edit-input" data-field-edit-target="input" data-action="keydown->field-edit#keydown"
+                       class="w-full border border-blue-400 rounded px-2 py-1 focus:outline-none dark:bg-gray-700 dark:text-gray-100">
+                <script>document.getElementById('issue-subject-edit-input').value = "<%= j(@issue.subject) %>";</script>
+                <div class="flex gap-1 mt-1">
+                  <button data-action="click->field-edit#save"
+                          class="px-2 py-0.5 bg-blue-600 text-white rounded text-xs hover:bg-blue-700 cursor-pointer">✓</button>
+                  <button data-action="click->field-edit#cancel"
+                          class="px-2 py-0.5 bg-gray-200 dark:bg-gray-600 rounded text-xs hover:bg-gray-300 cursor-pointer">✕</button>
+                </div>
+              </div>
+            </div>
+            <% else %>
+              <%= render_issue_subject_with_tree(@issue) %>
+            <% end %>
+            <p class="author text-[11px]">
+            <%= authoring @issue.created_on, @issue.author %>.
+            <% if @issue.created_on != @issue.updated_on %>
+            <%= l(:label_updated_time, time_tag(@issue.updated_on)).html_safe %>.
+            <% end %>
+            </p>
+          </div>
+          <div id="sticky-issue-header" data-sticky-issue-header-target="stickyHeader" class="issue">
+            <span class="issue-heading"><%= issue_heading(@issue) %>:</span>
+            <span class="subject"><%= @issue.subject %></span>
+          </div>
+
+        </div>
+
+
+    </header>
+
+
+
+
+
+
+
+<div class="attributes">
+    <div class="reaction">
+      <%= reaction_button @issue %>
+    </div>
+<%= render partial: 'issues/editable_attributes' %>
+<%= render_half_width_custom_fields_rows(@issue) %>
+<%= call_hook(:view_issues_show_details_bottom, :issue => @issue) %>
+</div>
+
+<% if @issue.description? || (@issue.editable? && @issue.safe_attribute?('description')) %>
+
+<div class="description">
+  <p><strong><%= l(:field_description) %></strong></p>
+  <% if @issue.attributes_editable? %>
+  <div data-controller="field-edit"
+       data-field-edit-issue-id-value="<%= @issue.id %>"
+       data-field-edit-field-value="description"
+       data-field-edit-type-value="textarea">
+    <div data-field-edit-target="display" data-action="click->field-edit#edit"
+         class="wiki cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 px-2 py-1 rounded min-h-[2rem]">
+      <% if @issue.description? %>
+        <%= textilizable(@issue, :description, :attachments => @issue.attachments) %>
+      <% else %>
+        <span class="text-gray-400 italic text-sm"><%= l(:label_no_data) %></span>
+      <% end %>
+    </div>
+    <div data-field-edit-target="editor" class="hidden!">
+      <textarea id="issue_description_inline"
+                data-field-edit-target="input"
+                data-action="keydown->field-edit#keydown"
+                rows="8"
+                class="wiki-edit w-full border border-blue-400 rounded px-2 py-1 text-sm focus:outline-none dark:bg-gray-700 dark:text-gray-100"></textarea>
+      <script>document.getElementById('issue_description_inline').value = "<%= j(@issue.description.to_s) %>";</script>
+      <%= wikitoolbar_for 'issue_description_inline', preview_issue_path(:project_id => @issue.project, :issue_id => @issue.id) %>
+      <div class="flex gap-1 mt-1">
+        <button data-action="click->field-edit#save"
+                class="px-2 py-0.5 bg-blue-600 text-white rounded text-xs hover:bg-blue-700 cursor-pointer">✓ <%= l(:button_save) %></button>
+        <button data-action="click->field-edit#cancel"
+                class="px-2 py-0.5 bg-gray-200 dark:bg-gray-600 rounded text-xs hover:bg-gray-300 cursor-pointer">✕ <%= l(:button_cancel) %></button>
+      </div>
+    </div>
+  </div>
+  <% else %>
+  <div id="issue_description_wiki" class="wiki">
+    <%= textilizable @issue, :description, :attachments => @issue.attachments %>
+  </div>
+  <% end %>
+</div>
+<% end %>
+
+<div class="shadow p-4">
+    <% issue_files = @issue.attachments %>
+    <div class="attachments-section">
+    <p class="mb-6"><strong><%=l(:label_attachment_plural)%></strong></p>
+    <% if issue_files.present? %>
+        <%= link_to_attachments @issue, :thumbnails => true %>
+    <% end %>
+    <% if @issue.attachments_addable? %>
+        <div class="border border-gray-100 rounded p-4 mb-6">
+        <%= form_tag issue_path(@issue), method: :put, multipart: true, class: 'mt-3 flex! items-center' do %>
+            <%= render :partial => 'attachments/form', :locals => {:container => @issue} %>
+            <%= hidden_field_tag 'issue[lock_version]', @issue.lock_version %>
+            <%= hidden_field_tag 'last_journal_id', @issue.last_journal_id %>
+            <div class="ml-auto">
+            <%= submit_tag l(:button_save), class: 'bg-blue-600! text-white! border-0! rounded! px-3! py-1! text-xs! hover:bg-blue-700! cursor-pointer!' %>
+            </div>
+        <% end %>
+        </div>
+    <% end %>
+    </div>
+
+    <%= render_full_width_custom_fields_rows(@issue) %>
+
+    <%= call_hook(:view_issues_show_description_bottom, :issue => @issue) %>
+
+    <% if !@issue.leaf? || User.current.allowed_to?(:manage_subtasks, @project) %>
+
+    <%= tag.div id: 'issue_tree', class: { 'with-related-issues-table-headers': Setting.display_related_issues_table_headers? } do %>
+    <%= render :partial => 'subtasks' %>
+    <% end %>
+    <% end %>
+
+    <% if @relations.present? || User.current.allowed_to?(:manage_issue_relations, @project) %>
+
+        <%= tag.div id: 'relations', class: { 'with-related-issues-table-headers': Setting.display_related_issues_table_headers? } do %>
+        <%= render :partial => 'relations' %>
+        <% end %>
+    <% end %>
+</div>
+</div>
+
+<%= render partial: 'action_menu_edit' if User.current.wants_comments_in_reverse_order? %>
+
+<div class="bloc-journals">
+<div id="history" class="journals">
+<%= render_tabs issue_history_tabs, issue_history_default_tab %>
+</div>
+
+<% if @issue.notes_addable? %>
+<div class="journals add-note-section">
+  <h3 class="text-sm font-semibold mb-3 text-gray-600 dark:text-gray-400"><%= l(:field_notes) %></h3>
+  <%= form_tag issue_path(@issue), method: :put, class: 'issue-add-note-form' do %>
+    <%= text_area_tag 'issue[notes]', '',
+        rows: 4, id: 'issue_notes_add',
+        class: 'wiki-edit w-full border border-gray-200 dark:border-gray-600 rounded px-3 py-2 text-sm dark:bg-gray-700 dark:text-gray-100 focus:outline-none focus:border-blue-400' %>
+    <%= wikitoolbar_for 'issue_notes_add', preview_issue_path(:project_id => @issue.project, :issue_id => @issue.id) %>
+    <% if @issue.safe_attribute?('private_notes') %>
+    <div class="flex items-center gap-2 mt-2 text-sm">
+      <%= check_box_tag 'issue[private_notes]', '1', false, id: 'issue_private_notes_add' %>
+      <label for="issue_private_notes_add" class="text-gray-600 dark:text-gray-400"><%= l(:field_private_notes) %></label>
+    </div>
+    <% end %>
+    <%= hidden_field_tag 'issue[lock_version]', @issue.lock_version %>
+    <%= hidden_field_tag 'last_journal_id', @issue.last_journal_id %>
+    <div class="flex justify-end mt-3">
+      <%= submit_tag l(:button_submit),
+          class: 'bg-blue-600! text-white! border-0! rounded! px-4! py-1.5! text-sm! hover:bg-blue-700! cursor-pointer!' %>
+    </div>
+  <% end %>
+</div>
+<% end %>
+</div>
+<%= render partial: 'action_menu_edit' unless User.current.wants_comments_in_reverse_order? %>
+
+<% other_formats_links do |f| %>
+  <%= f.link_to 'PDF' %>
+  <%= f.link_to 'Atom', :url => {:key => User.current.atom_key} %>
+<% end %>
+
+<% html_title "#{@issue.tracker.name} ##{@issue.id}: #{@issue.subject}" %>
+
+<% content_for :sidebar do %>
+  <%= render :partial => 'issues/sidebar' %>
+
+  <% if User.current.allowed_to?(:add_issue_watchers, @project) ||
+    (@issue.watchers.present? && User.current.allowed_to?(:view_issue_watchers, @project)) %>
+    <div id="watchers">
+      <%= render :partial => 'watchers/watchers', :locals => {:watched => @issue} %>
+    </div>
+  <% end %>
+<% end %>
+
+<% content_for :header_tags do %>
+    <%= auto_discovery_link_tag(:atom, {:format => 'atom', :key => User.current.atom_key}, :title => "#{@issue.project} - #{@issue.tracker} ##{@issue.id}: #{@issue.subject}") %>
+<% end %>
+
+<%= context_menu %>

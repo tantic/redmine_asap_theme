@@ -1,0 +1,136 @@
+<%
+  list_cfs = IssueCustomField.where(field_format: ['list', 'enumeration']).sorted.to_a
+  cf_data   = list_cfs.map { |cf| { id: cf.id.to_s, name: cf.name, values: cf.possible_values } }
+  current_cf_id  = Setting.plugin_redmine_asap_theme['cf_icon_field_id'].to_s
+  current_mapping = Setting.plugin_redmine_asap_theme['cf_icon_mapping'] || {}
+
+  quick_icons = %w[☀️ 🌤️ ⛅ ☁️ 🌦️ ⛈️ 🌩️ 🌧️ 🌈
+                   ✅ ⚠️ ❌ 🟢 🟡 🔴 🔵 ⚪
+                   🚀 🔥 💧 ⭐ 📌 🏁]
+%>
+
+<div class="mb-6">
+  <p class="text-sm text-gray-500 dark:text-gray-400 mb-4">
+    <%= l(:label_redmine_asap_cf_icons_description) %>
+  </p>
+
+  <%# Sélecteur de champ personnalisé %>
+  <div class="mb-6">
+    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+      <%= l(:label_redmine_asap_cf_icons_field) %>
+    </label>
+    <% if list_cfs.empty? %>
+      <p class="text-sm text-gray-400"><%= l(:label_redmine_asap_cf_icons_no_list_cf) %></p>
+    <% else %>
+      <select id="cf_icon_field_select"
+              name="settings[cf_icon_field_id]"
+              class="text-sm border border-gray-300 dark:border-gray-600 rounded px-2 py-1.5 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100">
+        <option value=""><%= l(:label_none) %></option>
+        <% list_cfs.each do |cf| %>
+          <option value="<%= cf.id %>" <%= cf.id.to_s == current_cf_id ? 'selected' : '' %>>
+            <%= cf.name %>
+          </option>
+        <% end %>
+      </select>
+    <% end %>
+  </div>
+
+  <%# Mapping valeurs → icônes (rendu dynamiquement) %>
+  <div id="cf_icon_mapping_section">
+    <% if current_cf_id.present? && (selected_cf = list_cfs.find { |c| c.id.to_s == current_cf_id }) %>
+      <%= render 'settings/redmine_asap_theme/cf_icon_rows',
+            cf: selected_cf,
+            current_mapping: current_mapping,
+            quick_icons: quick_icons %>
+    <% end %>
+  </div>
+</div>
+
+<script>
+(function () {
+  var cfData = <%= raw cf_data.to_json %>;
+  var quickIcons = <%= raw quick_icons.to_json %>;
+  var select = document.getElementById('cf_icon_field_select');
+  var section = document.getElementById('cf_icon_mapping_section');
+
+  if (!select) return;
+
+  select.addEventListener('change', function () {
+    var cfId = this.value;
+    var cf = cfData.find(function (c) { return c.id === cfId; });
+
+    // Vider les anciens inputs cachés de mapping
+    section.querySelectorAll('input[name^="settings[cf_icon_mapping]"]').forEach(function (el) { el.remove(); });
+    section.innerHTML = '';
+
+    if (!cf || !cf.values.length) return;
+
+    var html = buildMappingRows(cf);
+    section.innerHTML = html;
+    attachIconPickers(section);
+  });
+
+  attachIconPickers(section);
+
+  function buildMappingRows(cf) {
+    var rows = '<div class="mb-2">' +
+      '<p class="text-sm font-medium text-gray-700 dark:text-gray-300 mb-3"><%= l(:label_redmine_asap_cf_icons_mapping) %></p>' +
+      '<div class="flex flex-col gap-3">';
+
+    cf.values.forEach(function (val) {
+      rows += '<div class="flex items-center gap-3">' +
+        '<span class="w-36 text-sm text-gray-700 dark:text-gray-200 truncate" title="' + escHtml(val) + '">' + escHtml(val) + '</span>' +
+        '<div class="flex items-center gap-1 flex-wrap">' +
+        quickIcons.map(function (ico) {
+          return '<button type="button" class="cf-icon-pick text-xl leading-none hover:scale-125 transition-transform cursor-pointer px-0.5" data-icon="' + escHtml(ico) + '" title="' + escHtml(ico) + '">' + escHtml(ico) + '</button>';
+        }).join('') +
+        '</div>' +
+        '<input type="text" name="settings[cf_icon_mapping][' + escHtml(val) + ']" value=""' +
+        ' class="cf-icon-input w-16 text-center text-xl border border-gray-300 dark:border-gray-600 rounded px-1 py-0.5 bg-white dark:bg-gray-800"' +
+        ' placeholder="…" maxlength="4">' +
+        '<span class="text-sm text-gray-400"><%= l(:label_redmine_asap_cf_icons_preview) %> <span class="cf-icon-preview cf-icon-badge"></span></span>' +
+        '</div>';
+    });
+
+    rows += '</div></div>';
+    return rows;
+  }
+
+  function attachIconPickers(container) {
+    container.querySelectorAll('.cf-icon-row-group, div').forEach(function () {});
+
+    // Pour chaque ligne de mapping
+    container.querySelectorAll('input.cf-icon-input').forEach(function (input) {
+      var row = input.closest('div.flex.items-center');
+      if (!row) return;
+      var preview = row.querySelector('.cf-icon-preview');
+      var valueName = row.querySelector('span.w-36');
+
+      function updatePreview() {
+        if (preview && valueName) {
+          var icon = input.value.trim();
+          preview.textContent = icon ? icon + ' ' + valueName.textContent.trim() : '';
+        }
+      }
+
+      input.addEventListener('input', updatePreview);
+      updatePreview();
+
+      row.querySelectorAll('.cf-icon-pick').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          input.value = this.dataset.icon;
+          input.dispatchEvent(new Event('input'));
+        });
+      });
+    });
+  }
+
+  function escHtml(str) {
+    return String(str)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+  }
+})();
+</script>

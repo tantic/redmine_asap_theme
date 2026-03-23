@@ -1,65 +1,73 @@
-
-
 /* ── Font size preference via CSS custom property ────────────────────── */
-:root { --font-scale: 1; }
-html.font-size-xs { --font-scale: 0.846; } /* ~11px base */
-html.font-size-sm { --font-scale: 0.923; } /* ~12px base */
-html.font-size-md { --font-scale: 1; }     /* 13px base – default */
-html.font-size-lg { --font-scale: 1.154; } /* ~15px base */
-html.font-size-xl { --font-scale: 1.308; } /* ~17px base */
+:root {
+    --font-scale: 1;
+}
+html.font-size-xs {
+    --font-scale: 0.846;
+} /* ~11px base */
+html.font-size-sm {
+    --font-scale: 0.923;
+} /* ~12px base */
+html.font-size-md {
+    --font-scale: 1;
+} /* 13px base – default */
+html.font-size-lg {
+    --font-scale: 1.154;
+} /* ~15px base */
+html.font-size-xl {
+    --font-scale: 1.308;
+} /* ~17px base */
 
 #content {
-  @apply relative px-6 sm:px-12 py-8 sm:py-6 bg-gray-50 dark:bg-gray-900 flex-grow m-0 overflow-x-auto;
+    @apply relative px-6 sm:px-12 py-8 sm:py-6 bg-gray-50 dark:bg-gray-900 flex-grow m-0 overflow-x-auto;
 }
 
-#content .splitcontent{
-  @apply w-full;
+#content .splitcontent {
+    @apply w-full;
 }
 
-
-
-
-#sidebar h3{
-  @apply font-medium uppercase tracking-wider mt-6 mb-4 text-gray-500;
-  font-size: calc(11px * var(--font-scale, 1));
+#sidebar h3 {
+    @apply font-medium uppercase tracking-wider mt-6 mb-4 text-gray-500;
+    font-size: calc(11px * var(--font-scale, 1));
 }
 
-#sidebar a{
-  /* @apply text-gray-900 */
+#sidebar a {
+    /* @apply text-gray-900 */
 }
 
 .splitcontent {
-  @apply grid grid-cols-1 sm:grid-cols-2 gap-4
+    @apply grid grid-cols-1 sm:grid-cols-2 gap-4;
 }
 /* .splitcontentleft {flex: 1; margin-right: 5px;}
 .splitcontentright {flex: 1; margin-left: 5px;}
 .splitcontenttop {flex: 2; flex-basis: 100%;} */
 
-
-
-
-
-
 div#sticky-issue-header {
-  @apply hidden fixed top-14 left-0 right-0 bg-white dark:bg-gray-900 border-b border-gray-100 dark:border-gray-800 shadow-sm text-sm z-40 px-14 py-4
+    @apply hidden fixed top-14 left-0 right-0 bg-white dark:bg-gray-900 border-b border-gray-100 dark:border-gray-800 shadow-sm text-sm z-40 px-14 py-4;
 }
 div#sticky-issue-header.is-visible {
-  display: flex;
+    display: flex;
 }
 div#sticky-issue-header .issue-heading {
-  flex-shrink: 0;
-  white-space: nowrap;
-  margin-right: 6px;
+    flex-shrink: 0;
+    white-space: nowrap;
+    margin-right: 6px;
 }
 div#sticky-issue-header .subject {
-  font-weight: bold;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  flex-grow: 1;
+    font-weight: bold;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    flex-grow: 1;
 }
 
 #footer {
-  clear: both; border-top: 1px solid #d0d7de; font-size: 0.9em; color: #aaa; padding: 5px; text-align:center; background:#fff;
-  @apply dark:bg-gray-800 dark:border-t-gray-800;
+    clear: both;
+    border-top: 1px solid #d0d7de;
+    font-size: 0.9em;
+    color: #aaa;
+    padding: 5px;
+    text-align: center;
+    background: #fff;
+    @apply dark:bg-gray-800 dark:border-t-gray-800;
 }

@@ -63,11 +63,27 @@ fr:
   label_user_theme_settings_light: Clair
   label_user_theme_settings_dark: Sombre
   label_user_font_size: Taille du texte
+  label_issue_panel_beta: Panneau de demande (vue rapide)
+  label_issue_panel_beta_description: Ouvre la demande dans un panneau latéral au clic sur son titre dans le tableau
   label_font_size_xs: Très petit
   label_font_size_sm: Petit
   label_font_size_md: Normal
   label_font_size_lg: Grand
   label_font_size_xl: Très grand
+  label_redmine_asap_theme_cf_icons: "Icônes champs"
+  label_redmine_asap_cf_icons_description: "Associez une icône (emoji) à chaque valeur d'un champ personnalisé de type liste. L'icône sera affichée partout où la valeur est visible."
+  label_redmine_asap_cf_icons_field: "Champ personnalisé"
+  label_redmine_asap_cf_icons_no_list_cf: "Aucun champ personnalisé de type liste trouvé sur les demandes."
+  label_redmine_asap_cf_icons_mapping: "Associer une icône à chaque valeur"
+  label_redmine_asap_cf_icons_preview: "Aperçu :"
+  label_my_issues: "Mes demandes"
+  label_version_status_open: "Ouvert"
+  label_version_status_locked: "Verrouillé"
+  label_version_status_closed: "Fermé"
+  label_gantt_today: "Aujourd'hui"
+  label_subprojects_count:
+    one: "%{count} sous-projet"
+    other: "%{count} sous-projets"
   flash_message:
     notice: Information
     error: Erreur

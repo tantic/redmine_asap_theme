@@ -37,8 +37,27 @@
   </div>
 </div>
 
- <div class="flex w-full">
-      <div class="button-submit"><%= submit_tag l(:button_save) %></div>
+<div class="mb-6">
+  <label class="flex items-start gap-3 cursor-pointer">
+    <div class="relative mt-0.5">
+      <input type="hidden" name="pref[issue_panel_beta]" value="0">
+      <input type="checkbox" name="pref[issue_panel_beta]" value="1"
+             id="pref_issue_panel_beta"
+             class="sr-only peer"
+             <%= @user.pref[:issue_panel_beta].to_s == '1' ? 'checked' : '' %>>
+      <div class="w-10 h-6 bg-gray-200 dark:bg-gray-600 rounded-full peer-checked:bg-blue-500 transition-colors"></div>
+      <div class="absolute top-0.5 left-0.5 w-5 h-5 bg-white rounded-full shadow transition-transform peer-checked:translate-x-4"></div>
     </div>
+    <div>
+      <span class="text-sm font-medium text-gray-700 dark:text-gray-200"><%= l(:label_issue_panel_beta) %></span>
+      <span class="ml-1.5 inline-flex items-center px-1.5 py-0.5 rounded text-xs font-semibold bg-amber-100 text-amber-700 dark:bg-amber-900 dark:text-amber-300">Beta</span>
+      <p class="text-xs text-gray-500 dark:text-gray-400 mt-0.5"><%= l(:label_issue_panel_beta_description) %></p>
+    </div>
+  </label>
+</div>
+
+<div class="flex w-full">
+  <div class="button-submit"><%= submit_tag l(:button_save) %></div>
+</div>
 
   <% end %>

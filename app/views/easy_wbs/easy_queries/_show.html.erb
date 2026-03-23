@@ -1,0 +1,37 @@
+<div class="content-title"><%= title(easy_query_name) %></div>
+
+<%= form_tag(project_easy_wbs_index_path(@project), method: :get, id: 'query_form') do %>
+  <div id="query_form_with_buttons" class="hide-when-print">
+    <%= hidden_field_tag 'set_filter', '1' %>
+    <%= hidden_field_tag 'type', @query.class.name, disabled: true, id: 'query_type' %>
+
+    <div id="query_form_content">
+      <fieldset id="filters" class="collapsible <%= @query.new_record? ? "" : "collapsed" %>">
+        <legend onclick="toggleFieldset(this);" class="icon icon-<%= @query.new_record? ? "expanded" : "collapsed" %>">
+          <%= sprite_icon(@query.new_record? ? "angle-down" : "angle-right") %>
+          <%= l(:label_filter_plural) %>
+        </legend>
+        <div style="<%= @query.new_record? ? "" : "display: none;" %>">
+          <%= render 'queries/filters', query: @query %>
+        </div>
+      </fieldset>
+    </div>
+
+    <p class="buttons">
+      <%= link_to_function sprite_icon('checked', l(:button_apply)), '$("#query_form").submit()', class: 'icon icon-checked' %>
+      <%= link_to sprite_icon('reload', l(:button_clear)), { set_filter: 1, project_id: @project }, class: 'icon icon-reload' %>
+      <% if @query.new_record? %>
+        <% if User.current.allowed_to?(:save_queries, @project, global: true) %>
+          <%= link_to_function sprite_icon('save', l(:button_save_object, object_name: l(:label_query)).capitalize),
+                               "$('#query_type').prop('disabled',false);$('#query_form').attr('action','#{ @project ? new_project_query_path(@project) : new_query_path }').submit()",
+                               class: 'icon icon-save' %>
+        <% end %>
+      <% else %>
+        <% if @query.editable_by?(User.current) %>
+          <%= link_to sprite_icon('edit', l(:button_edit_object, object_name: l(:label_query)).capitalize), edit_query_path(@query), class: 'icon icon-edit' %>
+          <%= delete_link query_path(@query), {}, l(:button_delete_object, object_name: l(:label_query)).capitalize %>
+        <% end %>
+      <% end %>
+    </p>
+  </div>
+<% end %>

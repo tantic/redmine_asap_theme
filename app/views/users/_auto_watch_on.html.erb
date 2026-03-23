@@ -1,0 +1,14 @@
+<%= hidden_field_tag 'pref[auto_watch_on][]', '' %>
+<% auto_watch_on_options.each do |label_text, value| %>
+  <div class="mb-3">
+    <label class="flex items-center gap-3 cursor-pointer">
+      <div class="relative flex-shrink-0">
+        <%= check_box_tag 'pref[auto_watch_on][]', value, @user.pref.auto_watch_on.include?(value),
+              class: 'sr-only peer', id: "pref_auto_watch_on_#{value}" %>
+        <div class="w-10 h-6 bg-gray-200 dark:bg-gray-600 rounded-full peer-checked:bg-blue-500 transition-colors"></div>
+        <div class="absolute top-0.5 left-0.5 w-5 h-5 bg-white rounded-full shadow transition-transform peer-checked:translate-x-4"></div>
+      </div>
+      <span class="text-sm text-gray-700 dark:text-gray-200"><%= label_text %></span>
+    </label>
+  </div>
+<% end %>

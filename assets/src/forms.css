@@ -48,10 +48,43 @@ html.query-form-hidden #query_form {
 }
 
 /* Query form */
-
+#query-form {
+    .tabular label.block {
+        @apply ml-1 w-full;
+    }
+    fieldset {
+        select {
+            @apply inline-block;
+        }
+    }
+    #columns {
+        #list-definition {
+            > div {
+                @apply flex items-center gap-4;
+                > div {
+                    @apply flex items-center;
+                }
+                .buttons {
+                    @apply flex flex-col;
+                    input {
+                        @apply cursor-pointer p-2 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700;
+                    }
+                }
+                .query-columns {
+                    select {
+                        @apply min-w-54 ml-4;
+                    }
+                }
+            }
+        }
+    }
+}
 #query_form {
     #filters > div {
         @apply px-4;
+    }
+    .tabular label.block {
+        @apply mr-0!;
     }
     #list-definition {
         @apply p-4;

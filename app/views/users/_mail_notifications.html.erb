@@ -1,0 +1,58 @@
+<p>
+<%= label_tag "user_mail_notification", l(:description_user_mail_notification), :class => "hidden-for-sighted" %>
+<%= select_tag(
+      'user[mail_notification]',
+      options_for_select(
+         user_mail_notification_options(@user), @user.mail_notification),
+      :onchange => 'if (this.value == "selected") {$("#notified-projects").show();} else {$("#notified-projects").hide();}'
+     ) %>
+</p>
+<%= content_tag 'fieldset', :id => 'notified-projects', :style => (@user.mail_notification == 'selected' ? '' : 'display:none;') do %>
+  <legend><%= toggle_checkboxes_link("#notified-projects input[type=checkbox]") %><%=l(:label_project_plural)%></legend>
+  <%= render_project_nested_lists(@user.projects) do |project|
+        checked = @user.notified_projects_ids.include?(project.id)
+        content_tag(:label, class: 'flex items-center gap-2 my-1 cursor-pointer') do
+          content_tag(:div, class: 'relative flex-shrink-0') do
+            check_box_tag('user[notified_project_ids][]', project.id, checked, class: 'sr-only peer') +
+            content_tag(:div, '', class: 'w-8 h-4 bg-gray-200 dark:bg-gray-600 rounded-full peer-checked:bg-blue-500 transition-colors') +
+            content_tag(:div, '', class: 'absolute top-0 left-0 w-4 h-4 bg-white rounded-full shadow transition-transform peer-checked:translate-x-4')
+          end +
+          content_tag(:span, h(project.name), class: 'text-sm text-gray-700 dark:text-gray-200')
+        end
+      end %>
+  <%= hidden_field_tag 'user[notified_project_ids][]', '' %>
+  <p><em class="info"><%= l(:text_user_mail_option) %></em></p>
+<% end %>
+
+<%= fields_for :pref, @user.pref do |pref_fields| %>
+
+<% if IssuePriority.default_or_middle and high_priority = IssuePriority.where(['position > ?', IssuePriority.default_or_middle.position]).first %>
+<div class="mt-4 mb-3">
+  <label class="flex items-center gap-3 cursor-pointer">
+    <div class="relative flex-shrink-0">
+      <%= hidden_field_tag 'pref[notify_about_high_priority_issues]', '0' %>
+      <%= check_box_tag 'pref[notify_about_high_priority_issues]', '1',
+            @user.pref.notify_about_high_priority_issues,
+            class: 'sr-only peer', id: 'pref_notify_about_high_priority_issues' %>
+      <div class="w-10 h-6 bg-gray-200 dark:bg-gray-600 rounded-full peer-checked:bg-blue-500 transition-colors"></div>
+      <div class="absolute top-0.5 left-0.5 w-5 h-5 bg-white rounded-full shadow transition-transform peer-checked:translate-x-4"></div>
+    </div>
+    <span class="text-sm text-gray-700 dark:text-gray-200"><%= t(:label_user_mail_notify_about_high_priority_issues_html, prio: high_priority.name.downcase) %></span>
+  </label>
+</div>
+<% end %>
+
+<div class="mb-3">
+  <label class="flex items-center gap-3 cursor-pointer">
+    <div class="relative flex-shrink-0">
+      <%= hidden_field_tag 'pref[no_self_notified]', '0' %>
+      <%= check_box_tag 'pref[no_self_notified]', '1', @user.pref.no_self_notified,
+            class: 'sr-only peer', id: 'pref_no_self_notified' %>
+      <div class="w-10 h-6 bg-gray-200 dark:bg-gray-600 rounded-full peer-checked:bg-blue-500 transition-colors"></div>
+      <div class="absolute top-0.5 left-0.5 w-5 h-5 bg-white rounded-full shadow transition-transform peer-checked:translate-x-4"></div>
+    </div>
+    <span class="text-sm text-gray-700 dark:text-gray-200"><%= l(:label_user_mail_no_self_notified) %></span>
+  </label>
+</div>
+
+<% end %>

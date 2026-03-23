@@ -34,6 +34,9 @@ class UserSettingsController < ApplicationController
     if params[:pref] && params[:pref][:font_size]
       @user.pref[:font_size] = params[:pref][:font_size]
     end
+    if params[:pref]
+      @user.pref[:issue_panel_beta] = params[:pref][:issue_panel_beta].to_s == '1' ? '1' : '0'
+    end
     if @user.save
       @user.pref.save
       set_language_if_valid @user.language

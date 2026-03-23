@@ -62,11 +62,27 @@ en:
   label_user_theme_settings_light: Light
   label_user_theme_settings_dark: Dark
   label_user_font_size: Text size
+  label_issue_panel_beta: Issue panel (quick view)
+  label_issue_panel_beta_description: Opens the issue in a side panel when clicking its title in the list
   label_font_size_xs: Very small
   label_font_size_sm: Small
   label_font_size_md: Normal
   label_font_size_lg: Large
   label_font_size_xl: Very large
+  label_redmine_asap_theme_cf_icons: "Field icons"
+  label_redmine_asap_cf_icons_description: "Associate an icon (emoji) with each value of a list-type custom field. The icon will be displayed everywhere the value is visible."
+  label_redmine_asap_cf_icons_field: "Custom field"
+  label_redmine_asap_cf_icons_no_list_cf: "No list-type custom field found on issues."
+  label_redmine_asap_cf_icons_mapping: "Map an icon to each value"
+  label_redmine_asap_cf_icons_preview: "Preview:"
+  label_my_issues: "My issues"
+  label_version_status_open: "Open"
+  label_version_status_locked: "Locked"
+  label_version_status_closed: "Closed"
+  label_gantt_today: "Today"
+  label_subprojects_count:
+    one: "%{count} sub-project"
+    other: "%{count} sub-projects"
   flash_message:
     notice: Information
     error: Error

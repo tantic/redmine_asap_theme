@@ -28,7 +28,7 @@
 
 <%= stylesheet_link_tag "application.css", :plugin => 'redmine_asap_theme' %>
 </head>
-<body  data-controller="application" data-application-myaccount-value="<%= show_settings_path(User.current) %>" data-application-about-value="<%= show_about_path() %>" class="<%= body_css_classes %> dark:bg-slate-900 <%= controller_name == 'account' ? 'h-full':'' %>" data-text-formatting="<%= Setting.text_formatting %>">
+<body  data-controller="application" data-application-myaccount-value="<%= show_settings_path(User.current) %>" data-application-about-value="<%= show_about_path() %>" class="<%= body_css_classes %> dark:bg-slate-900 <%= controller_name == 'account' ? 'h-full':'' %>" data-text-formatting="<%= Setting.text_formatting %>" data-issue-panel-beta="<%= User.current.logged? && User.current.pref[:issue_panel_beta].to_s == '1' ? 'true' : 'false' %>">
 
   <% if controller_name == "account" %>
     <section class="w-full h-screen flex relative bg-gray-50">

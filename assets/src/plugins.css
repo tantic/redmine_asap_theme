@@ -76,7 +76,7 @@
 .controller-agile_boards {
     span.assignable-user,
     span.user {
-        @apply flex items-center bg-white text-xs dark:bg-gray-700 border border-gray-100 hover:bg-gray-50 rounded px-2.5 py-1 text-gray-900 hover:text-blue-800;
+        @apply inline-flex flex-wrap items-center bg-white text-xs dark:bg-gray-700 border border-gray-100 hover:bg-gray-50 rounded px-2.5 py-1 text-gray-900 hover:text-blue-800;
         > .gravatar,
         > .user-avatar {
             @apply mr-1;
@@ -85,8 +85,10 @@
         a .user-avatar {
             display: none;
         }
+
         a span {
             border: 0;
+            @apply break-words whitespace-normal;
         }
     }
 
@@ -126,7 +128,7 @@
         .issue-card {
             @apply shadow-md  rounded bg-white dark:bg-gray-700 p-4 border-b border-gray-200;
             .fields {
-                @apply flex flex-col pb-6;
+                @apply flex flex-col;
                 > * {
                     @apply my-1;
                 }
@@ -150,9 +152,15 @@
     }
 
     .issue-card {
+        .info {
+            @apply border-t border-gray-100;
+        }
+        .last-comment {
+            @apply inline-flex items-center gap-1 text-xs;
+        }
         .fields {
             > *:not(.issue-id) {
-                @apply px-2;
+                /*@apply px-2;*/
             }
         }
         p.name {
@@ -207,6 +215,36 @@ html.agile-board-fullscreen div.agile-board {
     }
 }
 
+/* Redmineup checklist plugin */
+#checklist-menu ul,
+#checklist-menu li,
+#checklist-menu a,
+#cf-checklist-menu ul,
+ul.cf-checklist-menu li,
+ul.cf-checklist-menu a {
+    @apply inline-flex w-full;
+}
+
+.controller-issues {
+    #checklist {
+        ul#checklist_items {
+            @apply my-4;
+            li {
+                @apply ml-0! border border-gray-100 px-4 mb-1 py-2;
+            }
+        }
+    }
+}
+
+#checklist_form {
+    .checklist-item.existing.show {
+        @apply flex items-center gap-1 bg-gray-50 dark:bg-gray-700 rounded px-4;
+        .checklist-remove {
+            @apply ml-auto;
+        }
+    }
+}
+
 /* Redmine Asap User Features */
 .controller-inbox {
     #content {
@@ -244,9 +282,9 @@ html.agile-board-fullscreen div.agile-board {
     @apply bg-blue-50! text-gray-900!
   } */
     div.journal {
-        @apply my-4;
+        /*@apply my-4;*/
         .note {
-            @apply bg-white dark:bg-gray-700 shadow rounded ml-10;
+            @apply bg-white dark:bg-gray-700 rounded ml-10;
             .journal-header {
                 @apply flex items-center;
                 .journal-info {
@@ -465,6 +503,29 @@ html.agile-board-fullscreen div.agile-board {
         @apply flex items-center;
         #toggle-query-form {
             @apply ml-auto;
+        }
+    }
+}
+
+/* Le table-generator jstoolbar est appendé au body : sans z-index il passe derrière le panel (z-50) */
+.table-generator {
+    @apply z-[9999];
+}
+
+/* jstoolbar dans le panel flottant (hors #content, donc les règles natives ne s'appliquent pas) */
+.issue-panel__body .jstTabs.tabs {
+    margin-bottom: -1px;
+    ul {
+        @apply border-b-0 flex;
+    }
+    li {
+        height: 42px;
+
+        a {
+            @apply flex text-[11px]! items-center justify-center text-gray-500 bg-gray-50 border-gray-100 px-2 py-1;
+        }
+        a.selected {
+            @apply text-blue-700;
         }
     }
 }

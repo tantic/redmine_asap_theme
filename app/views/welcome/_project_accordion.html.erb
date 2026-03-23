@@ -93,7 +93,7 @@
       <%# En-tête mois %>
       <div style="display:flex;border-bottom:1px solid #f0f0f0;background:#f9fafb;">
         <div style="width:140px;min-width:140px;padding:6px 10px;font-size:0.65rem;font-weight:600;color:#9ca3af;text-transform:uppercase;letter-spacing:0.05em;border-right:1px solid #f0f0f0;">
-          Version
+          <%= l(:label_version) %>
         </div>
         <div style="flex:1;position:relative;overflow:hidden;">
           <%# Graduation des mois %>
@@ -172,7 +172,7 @@
 
     <%# Légende %>
     <div style="display:flex;align-items:center;gap:12px;margin-top:6px;padding:0 2px;">
-      <% [['open','#6366f1','Ouvert'],['locked','#f59e0b','Verrouillé'],['closed','#10b981','Fermé']].each do |st, col, label| %>
+      <% [['open','#6366f1', l(:label_version_status_open)],['locked','#f59e0b', l(:label_version_status_locked)],['closed','#10b981', l(:label_version_status_closed)]].each do |st, col, label| %>
         <span style="display:flex;align-items:center;gap:4px;font-size:0.6rem;color:#9ca3af;">
           <span style="width:8px;height:8px;border-radius:50%;background:<%= col %>;flex-shrink:0;"></span>
           <%= label %>
@@ -180,7 +180,7 @@
       <% end %>
       <span style="display:flex;align-items:center;gap:4px;font-size:0.6rem;color:#9ca3af;margin-left:auto;">
         <span style="width:1.5px;height:10px;background:#ef4444;flex-shrink:0;"></span>
-        Aujourd'hui
+        <%= l(:label_gantt_today) %>
       </span>
     </div>
   <% end %>

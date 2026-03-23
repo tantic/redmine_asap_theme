@@ -40,8 +40,8 @@ Ready
 * Colors and icons on default priorities (not customisable for now)
 * Button to toggle display of the query form
 
-In progress
-* Display issue in a panel when click on an issue of the main list
+Beta version
+* Display issue in a panel when click on an issue of the main list : you can now edit online all attributes
 
 ## Screenshots
 

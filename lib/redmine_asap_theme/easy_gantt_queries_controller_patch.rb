@@ -5,11 +5,9 @@
 # "EasyGantt::EasyGanttIssueQuery".underscore produces "easy_gantt/easy_gantt_issue_query"
 # (with a slash), which is not a valid Ruby method name.
 
-if Redmine::Plugin.installed?(:easy_gantt)
-  require_dependency 'queries_controller'
-
-  module RedmineAsapTheme
-    module EasyGanttQueriesControllerPatch
+module RedmineAsapTheme
+  module EasyGanttQueriesControllerPatch
+    if Redmine::Plugin.installed?(:easy_gantt)
 
       # Override redirect_to_items to normalize the module separator slash to underscore
       # before dispatching, so "easy_gantt/easy_gantt_issue_query" becomes
@@ -33,6 +31,9 @@ if Redmine::Plugin.installed?(:easy_gantt)
 
     end
   end
+end
 
+if Redmine::Plugin.installed?(:easy_gantt)
+  require_dependency 'queries_controller'
   QueriesController.prepend RedmineAsapTheme::EasyGanttQueriesControllerPatch
 end
