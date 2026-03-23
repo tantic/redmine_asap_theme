@@ -5,7 +5,7 @@ The first version started almost from a blank page by replacing all Redmine page
 This version start from the original theme of Redmine so all pages works (normally) and the theme can be used now.
 
 * Status : first version usable but need to be used and improved (feedback appreciated)
-* Compatibility : work for Redmine >=6.1 (other versions not tested)
+* Compatibility : work for Redmine >=6.1 (other versions won't work because of importmap compatibility and many other things)
 
 If you want to test it quickly with docker, you can use the repo https://github.com/tantic/redmine_asap_docker.git
 
