@@ -1,7 +1,7 @@
 <%= context_menu %>
 <div class="container mx-auto flex flex-col bg-gray-50 dark:bg-gray-900 min-h-full pb-12">
 
-  <div class="flex flex-col md:flex-row px-0 md:px-12 gap-8 mt-6 md:mt-8">
+  <div class="flex flex-col md:flex-row px-0 md:px-12 gap-8 mt-16 lg:mt-8">
 
     <%# ── Main column : projects ────────────────────────────────── %>
     <div class="flex-1 min-w-0">
@@ -29,7 +29,7 @@
               <span class="text-2xs font-semibold text-amber-600 dark:text-amber-400 uppercase tracking-wider"><%= l("welcome.projects.bookmarked") %></span>
               <span class="text-2xs text-amber-400 dark:text-amber-500"><%= @bookmarked_projects.size %></span>
             </div>
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 mb-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 mb-6">
               <% @bookmarked_projects.each do |project| %>
                 <%= render partial: "welcome/details", locals: {
                   project: project,

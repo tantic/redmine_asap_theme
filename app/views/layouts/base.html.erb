@@ -131,6 +131,27 @@
     </div>
     <%= call_hook :view_layouts_base_body_bottom %>
 
+    <% if User.current.logged? && User.current.pref[:issue_panel_beta].to_s == '1' %>
+      <div id="issue-panel" class="issue-panel" data-controller="issue-panel">
+        <div class="issue-panel__backdrop" data-action="click->issue-panel#close"></div>
+        <div class="issue-panel__drawer">
+          <div class="issue-panel__toolbar">
+            <a class="issue-panel__external" data-issue-panel-target="external" href="#" target="_blank">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width:14px;height:14px;">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
+              </svg>
+              Ouvrir
+            </a>
+            <button class="issue-panel__close" data-action="click->issue-panel#close" aria-label="Fermer">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width:18px;height:18px;">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
+          <div class="issue-panel__body" data-issue-panel-target="body"></div>
+        </div>
+      </div>
+    <% end %>
 
   <% end %>
 </body>

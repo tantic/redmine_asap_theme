@@ -24,6 +24,17 @@
             @apply w-8 h-8 rounded-full absolute top-6;
         }
 
+        .attachments-section {
+            .attachments_form {
+                @apply w-full flex;
+                .attachments_fields {
+                    > span {
+                        @apply flex items-center gap-2;
+                    }
+                }
+            }
+        }
+
         .author {
             @apply text-gray-500 dark:text-gray-300 font-light mt-0 text-[11px];
             a.user.active {
@@ -37,7 +48,7 @@
         }
         #issue_tree,
         #relations {
-            @apply relative overflow-x-auto py-4;
+            @apply mt-6 relative overflow-x-auto p-6 shadow bg-white dark:bg-gray-600;
             > p {
                 @apply text-xs;
             }
@@ -50,11 +61,15 @@
             .subtasks-wrapper,
             .relation-issues-wrapper {
                 @apply mt-4 mb-4 flex;
+
                 table,
                 tbody {
                     @apply w-full;
+                    tr {
+                        @apply bg-gray-50 dark:bg-gray-600 hover:bg-gray-100 dark:hover:bg-gray-700;
+                    }
                     td {
-                        @apply border-gray-200 text-wrap p-1;
+                        @apply border-gray-200 text-wrap px-1 py-0!;
                         &.checkbox {
                             @apply px-2;
                         }
@@ -63,6 +78,7 @@
                         }
 
                         &.buttons {
+                            @apply my-0! flex border-0;
                             a {
                                 @apply rounded-full p-2 hover:bg-gray-50 dark:hover:bg-gray-600;
                             }
@@ -73,6 +89,15 @@
                             @apply font-bold;
                         }
                     }
+                }
+            }
+            .issues-stat {
+                @apply flex items-center;
+            }
+            .badge-issues-count {
+                @apply flex items-center mr-2;
+                a {
+                    @apply w-6 h-6 flex items-center justify-center p-1 rounded-full bg-blue-700 text-blue-100;
                 }
             }
         }
@@ -107,12 +132,12 @@
             > div {
                 @apply pb-4 ms-6;
             }
-            .user-avatar {
+            .journal-info > .user-avatar {
                 @apply absolute flex items-center justify-center w-8 h-8 rounded-full start-6;
             }
 
             .journal-header {
-                @apply text-xs bg-gray-50 border-0 flex w-full items-center mb-1;
+                @apply text-xs bg-gray-50 dark:bg-gray-700 dark:text-gray-100 border-0 flex w-full items-center mb-1;
                 .journal-info {
                     @apply flex items-center font-light dark:text-gray-100;
                     > a {
@@ -127,16 +152,16 @@
                 }
             }
             .journal-header {
-                @apply mb-0!;
+                @apply mb-0! overflow-x-auto;
             }
             .journal-content {
-                @apply dark:bg-gray-700 rounded;
+                @apply dark:bg-gray-700 rounded overflow-x-auto;
 
                 .journal-note {
                     @apply p-4;
                 }
                 .journal-details {
-                    @apply text-[11px] bg-gray-50 text-blue-900 p-4;
+                    @apply text-[11px] bg-gray-50 dark:bg-gray-700 dark:text-gray-100 text-blue-900 p-4;
                 }
             }
         }
@@ -198,7 +223,7 @@
     div.issue div.attributes {
         @apply relative mt-4 bg-gray-50 text-xs dark:bg-gray-700 rounded p-8 border border-gray-100 dark:border-gray-700 mb-6;
         div.attribute {
-            @apply flex flex-col items-center md:flex-row pl-0 py-0.5;
+            @apply flex  items-center flex-row pl-0 py-0.5;
             .value {
                 @apply flex items-center;
                 div {
@@ -215,7 +240,7 @@
         .tags {
             @apply clear-both w-full flex flex-row items-start py-0.5;
             span.label {
-                @apply w-full md:w-1/6 md:py-0 py-1 font-bold flex-shrink-0;
+                @apply w-1/3 md:w-1/6 md:py-0 py-1 font-bold flex-shrink-0;
             }
             a.tag {
                 @apply inline-flex items-center rounded px-2 py-0.5 mr-1 mb-1 text-xs font-medium;
@@ -225,7 +250,7 @@
             }
         }
         .label {
-            @apply w-full md:w-1/3 md:py-0 py-1 font-bold;
+            @apply w-1/3 md:py-0 py-1 font-bold;
         }
     }
 
@@ -280,7 +305,10 @@
 .controller-todo,
 .controller-issues.action-index {
     .header {
-        @apply px-6 border-b border-gray-100;
+        @apply px-0 md:px-6 border-b border-gray-100;
+        .badge {
+            @apply hidden md:flex;
+        }
     }
     .next-prev-links {
         @apply hidden;
@@ -314,7 +342,7 @@
     }
 
     .issue-panel__drawer {
-        @apply w-1/2 h-full bg-white dark:bg-gray-800 shadow-2xl flex flex-col overflow-hidden;
+        @apply w-full sm:w-2/3 md:w-1/2 h-full bg-white dark:bg-gray-800 shadow-2xl flex flex-col overflow-hidden;
         transform: translateX(100%);
         transition: transform 0.3s ease;
     }
@@ -358,8 +386,17 @@ body.issue-panel-open {
     h2 {
         @apply text-sm;
     }
+    .header {
+        > .contextual {
+            .icon-time-add {
+                .icon-label {
+                    @apply hidden;
+                }
+            }
+        }
+    }
     header {
-        @apply px-6;
+        @apply px-0 md:px-6;
         .sticky-issue-header {
             @apply w-full;
         }
@@ -407,15 +444,9 @@ body.issue-panel-open {
     }
     #issue_tree,
     #relations {
-        .badge-issues-count {
-            @apply w-14;
-            a {
-                @apply p-1 rounded-full bg-gray-50!;
-            }
-        }
         table tr {
             td {
-                @apply border border-gray-100!;
+                @apply border border-gray-100 dark:border-gray-500;
             }
             td.subject {
                 @apply py-2! leading-6;
@@ -447,7 +478,7 @@ body.issue-panel-open {
             @apply pb-0;
         }
         &.add-note-section {
-            @apply mx-6 py-8 pl-12 pr-4 border border-gray-100 rounded;
+            @apply mx-6 py-8 pl-12 pr-4 border border-gray-100 dark:border-gray-400 rounded;
         }
     }
     .bloc-journals {
@@ -469,7 +500,7 @@ body.issue-panel-open {
 
 .controller-issues {
     div.journals.add-note-section {
-        @apply mx-6 mb-4 mt-0! py-6 px-10 border border-gray-100 rounded;
+        @apply mx-6 mb-4 mt-0! py-6 px-10 border border-gray-100 dark:border-gray-400 rounded;
     }
     .bloc-journals {
         @apply shadow mx-0 bg-white pb-8 dark:bg-gray-700;

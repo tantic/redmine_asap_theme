@@ -259,6 +259,10 @@ span.drdn .drdn-content {
     @apply absolute top-6 right-12 flex items-center justify-end;
 }
 
+.controller-issues.action-show #content > .contextual {
+    @apply hidden;
+}
+
 .contextual #revision_selector {
     @apply flex items-center;
 }
@@ -660,6 +664,7 @@ button.tab-right.disabled {
 }
 .jstElements {
     vertical-align: middle;
+    overflow: auto;
 }
 
 /* CONTEXTUAL MENU */
@@ -1342,7 +1347,7 @@ fieldset {
 div#activity dd,
 #search-results dd {
     margin-bottom: 1em;
-    padding-left: 22px;
+    padding-left: 65px;
     font-size: 0.8125rem;
 }
 div#activity dt svg.icon-svg {
@@ -1366,7 +1371,7 @@ div#activity span.project:after,
 }
 div#activity dd span.description,
 #search-results dd span.description {
-    @apply block text-gray-900 dark:text-gray-300;
+    @apply block text-xs font-light text-gray-500 dark:text-gray-300;
 }
 div#activity dt.grouped {
     padding-left: 5em;
@@ -1597,16 +1602,16 @@ img.ui-datepicker-trigger {
 }
 
 div.attachments {
-    @apply relative bg-gray-50 dark:bg-gray-600 shadow p-4 rounded mt-2 mb-6;
+    @apply relative bg-white dark:bg-gray-600 rounded overflow-x-auto;
     .contextual {
-        @apply top-0 right-4 mr-4;
+        @apply absolute -top-12 right-4 mr-4;
     }
     table {
-        @apply w-full mt-8;
+        @apply w-full mt-4 mb-6;
         tr {
-            @apply border-t border-gray-100;
+            @apply bg-gray-50 dark:bg-gray-700 dark:hover:bg-gray-800 hover:bg-gray-100 border-b border-white;
             td {
-                @apply py-0;
+                @apply py-0 align-middle;
             }
         }
     }

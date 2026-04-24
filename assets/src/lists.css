@@ -90,55 +90,119 @@ table.list:not(.odd-even) tbody tr:nth-child(even):hover,
     @apply bg-blue-100 dark:bg-gray-600;
 }
 
-tr.idnt td.subject,
-tr.idnt td.name {
-    background: url(/arrow_right.png) no-repeat 2px 50%;
+.subtasks-wrapper {
+    tr.idnt td.subject,
+    tr.idnt td.name {
+        background-image: none;
+    }
+    tr.idnt-1 td.subject,
+    tr.idnt-1 td.name {
+        padding-left: 5px !important;
+    }
+    tr.idnt-2 td.subject,
+    tr.idnt-2 td.name {
+        padding-left: 20px !important;
+    }
+    tr.idnt-3 td.subject,
+    tr.idnt-3 td.name {
+        padding-left: 35px !important;
+    }
+    tr.idnt-4 td.subject,
+    tr.idnt-4 td.name {
+        padding-left: 50px !important;
+    }
+    tr.idnt-5 td.subject,
+    tr.idnt-5 td.name {
+        padding-left: 65px !important;
+    }
+    tr.idnt-6 td.subject,
+    tr.idnt-6 td.name {
+        padding-left: 80px !important;
+    }
+    tr.idnt-7 td.subject,
+    tr.idnt-7 td.name {
+        padding-left: 95px !important;
+    }
+    tr.idnt-8 td.subject,
+    tr.idnt-8 td.name {
+        padding-left: 110px !important;
+    }
+    tr.idnt-9 td.subject,
+    tr.idnt-9 td.name {
+        padding-left: 125px !important;
+    }
 }
-tr.idnt-1 td.subject,
-tr.idnt-1 td.name {
-    padding-left: 32px;
-    background-position: 16px 50%;
+
+.subtasks-wrapper table.issues tr.idnt td.subject,
+.subtasks-wrapper table.issues tr.idnt td.name {
+    position: relative;
 }
-tr.idnt-2 td.subject,
-tr.idnt-2 td.name {
-    padding-left: 40px;
-    background-position: 24px 50%;
+.subtasks-wrapper table.issues tr.idnt td.subject::before,
+.subtasks-wrapper table.issues tr.idnt td.name::before {
+    content: "";
+    display: inline-block;
+    vertical-align: middle;
+    width: 8px;
+    height: 10px;
+    border-left: 1.5px solid #94a3b8;
+    border-bottom: 1.5px solid #94a3b8;
+    border-radius: 0 0 0 3px;
+    margin-right: 5px;
+    position: relative;
+    top: -1px;
 }
-tr.idnt-3 td.subject,
-tr.idnt-3 td.name {
-    padding-left: 56px;
-    background-position: 40px 50%;
+/*.subtasks-wrapper table.issues tr.idnt-2 td.subject::after,
+.subtasks-wrapper table.issues tr.idnt-2 td.name::after {
+    content: "";
+    position: absolute;
+    left: 20px;
+    top: 0;
+    width: 1.5px;
+    height: 100%;
+    background: #cbd5e1;
+    pointer-events: none;
 }
-tr.idnt-4 td.subject,
-tr.idnt-4 td.name {
-    padding-left: 72px;
-    background-position: 56px 50%;
+.subtasks-wrapper table.issues tr.idnt-3 td.subject::after,
+.subtasks-wrapper table.issues tr.idnt-3 td.name::after {
+    content: "";
+    position: absolute;
+    left: 20px;
+    top: 0;
+    width: 1.5px;
+    height: 100%;
+    background: #cbd5e1;
+    box-shadow: 20px 0 0 0 #cbd5e1;
+    pointer-events: none;
 }
-tr.idnt-5 td.subject,
-tr.idnt-5 td.name {
-    padding-left: 88px;
-    background-position: 72px 50%;
+.subtasks-wrapper table.issues tr.idnt-4 td.subject::after,
+.subtasks-wrapper table.issues tr.idnt-4 td.name::after {
+    content: "";
+    position: absolute;
+    left: 20px;
+    top: 0;
+    width: 1.5px;
+    height: 100%;
+    background: #cbd5e1;
+    box-shadow:
+        20px 0 0 0 #cbd5e1,
+        40px 0 0 0 #cbd5e1;
+    pointer-events: none;
 }
-tr.idnt-6 td.subject,
-tr.idnt-6 td.name {
-    padding-left: 104px;
-    background-position: 88px 50%;
-}
-tr.idnt-7 td.subject,
-tr.idnt-7 td.name {
-    padding-left: 120px;
-    background-position: 104px 50%;
-}
-tr.idnt-8 td.subject,
-tr.idnt-8 td.name {
-    padding-left: 136px;
-    background-position: 120px 50%;
-}
-tr.idnt-9 td.subject,
-tr.idnt-9 td.name {
-    padding-left: 152px;
-    background-position: 136px 50%;
-}
+.subtasks-wrapper table.issues tr.idnt-5 td.subject::after,
+.subtasks-wrapper table.issues tr.idnt-5 td.name::after {
+    content: "";
+    position: absolute;
+    left: 20px;
+    top: 0;
+    width: 1.5px;
+    height: 100%;
+    background: #cbd5e1;
+    box-shadow:
+        20px 0 0 0 #cbd5e1,
+        40px 0 0 0 #cbd5e1,
+        60px 0 0 0 #cbd5e1;
+    pointer-events: none;
+}*/
 
 #projects-index {
     .projects > li.root {
@@ -163,20 +227,5 @@ tr.idnt-9 td.name {
 #users_for_watcher {
     label {
         @apply flex items-center;
-    }
-}
-
-.subtasks-wrapper,
-.relation-issues-wrapper {
-    /*@apply bg-gray-50 p-4 rounded;*/
-    table.issues {
-        .issue {
-            > td {
-                @apply bg-gray-50 py-0! border-gray-50!;
-            }
-            td.buttons {
-                @apply text-nowrap!;
-            }
-        }
     }
 }
