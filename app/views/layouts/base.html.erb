@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="<%= current_language %>" class="<%= User.current.pref[:theme] %> <%= User.current.pref[:font_size].present? ? "font-size-#{User.current.pref[:font_size]}" : 'font-size-md' %>">
+<html lang="<%= current_language %>" class="<%= User.current.pref[:theme] %> <%= User.current.pref[:font_size].present? ? "font-size-#{User.current.pref[:font_size]}" : 'font-size-md' %> <%= User.current.logged? && User.current.pref[:bold_assigned_to_me].to_s != '0' ? 'bold-assigned' : '' %>">
 <head>
 <meta charset="utf-8" />
 <title><%= html_title %></title>
@@ -21,14 +21,16 @@
 <!-- page specific tags -->
 <%= yield :header_tags -%>
 
-<% if Setting.plugin_redmine_asap_theme['redmine_asap_theme_turbo'] && Setting.plugin_redmine_asap_theme['redmine_asap_theme_turbo'] == 'true' %>
+<% _turbo_enabled = Setting.plugin_redmine_asap_theme['redmine_asap_theme_turbo'].to_s == 'true' %>
+<% _turbo_panel   = Setting.plugin_redmine_asap_theme['turbo_panel'].to_s == 'true' %>
+<% if _turbo_enabled || _turbo_panel %>
   <%= javascript_include_tag 'turbo.es2017-esm.min.js', :type => "module", :plugin => 'redmine_asap_theme' %>
   <%= javascript_include_tag 'application-turbo.js', :type => "module", :plugin => 'redmine_asap_theme' %>
 <% end %>
 
 <%= stylesheet_link_tag "application.css", :plugin => 'redmine_asap_theme' %>
 </head>
-<body  data-controller="application" data-application-myaccount-value="<%= show_settings_path(User.current) %>" data-application-about-value="<%= show_about_path() %>" class="<%= body_css_classes %> dark:bg-slate-900 <%= controller_name == 'account' ? 'h-full':'' %>" data-text-formatting="<%= Setting.text_formatting %>" data-issue-panel-beta="<%= User.current.logged? && User.current.pref[:issue_panel_beta].to_s == '1' ? 'true' : 'false' %>">
+<body  data-controller="application" data-application-myaccount-value="<%= show_settings_path(User.current) %>" data-application-about-value="<%= show_about_path() %>" class="<%= body_css_classes %> dark:bg-slate-900 <%= controller_name == 'account' ? 'h-full':'' %>" data-text-formatting="<%= Setting.text_formatting %>" data-issue-panel-beta="<%= User.current.logged? && User.current.pref[:issue_panel_beta].to_s == '1' ? 'true' : 'false' %>" data-turbo-panel-only="<%= (_turbo_panel && !_turbo_enabled) ? 'true' : 'false' %>">
 
   <% if controller_name == "account" %>
     <section class="w-full h-screen flex relative bg-gray-50">
@@ -148,7 +150,11 @@
               </svg>
             </button>
           </div>
-          <div class="issue-panel__body" data-issue-panel-target="body"></div>
+          <% if _turbo_panel %>
+            <turbo-frame id="issue-panel-body" class="issue-panel__body" data-issue-panel-target="body"></turbo-frame>
+          <% else %>
+            <div class="issue-panel__body" data-issue-panel-target="body"></div>
+          <% end %>
         </div>
       </div>
     <% end %>

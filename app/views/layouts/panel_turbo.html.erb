@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<%= csrf_meta_tag %>
+<%= yield :header_tags %>
+</head>
+<body>
+<turbo-frame id="issue-panel-body">
+<%= yield :header_tags %>
+<%= yield %>
+</turbo-frame>
+</body>
+</html>

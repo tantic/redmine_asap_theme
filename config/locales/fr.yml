@@ -5,6 +5,9 @@ fr:
   no_project: Vous n'avez pas encore de projets...
   my_projects: Mes projets
   label_filters: Filtres
+  placeholder_search_member: "Rechercher un membre…"
+  placeholder_search_subproject: "Rechercher un sous-projet…"
+  button_expand_all: "Tout déplier"
   label_avatar: "Avatar"
   message_avatar_uploaded: "Avatar enregistré"
   button_change_avatar: "Modifier l'avatar"
@@ -51,6 +54,7 @@ fr:
   label_redmine_asap_theme_general: Général
   label_official_site: Site officiel
   redmine_asap_theme_turbo: Activer turbo pour une expérience plus rapide (beta)
+  turbo_panel: "Activer le panneau Turbo Frames — panel latéral sans rechargement complet (beta)"
   label_description_empty: Aucune description
   see_more_projects: Voir plus de projets
   display_settings: Paramètres d'affichage
@@ -65,6 +69,8 @@ fr:
   label_user_font_size: Taille du texte
   label_issue_panel_beta: Panneau de demande (vue rapide)
   label_issue_panel_beta_description: Ouvre la demande dans un panneau latéral au clic sur son titre dans le tableau
+  label_bold_assigned_to_me: Mettre en gras mes demandes assignées
+  label_bold_assigned_to_me_description: Affiche en gras le sujet des demandes qui me sont assignées dans le tableau des demandes
   label_font_size_xs: Très petit
   label_font_size_sm: Petit
   label_font_size_md: Normal

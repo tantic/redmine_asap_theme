@@ -5,6 +5,9 @@ en:
   no_project: No projects yet...
   my_projects: My projects
   label_filters: Filters
+  placeholder_search_member: "Search member…"
+  placeholder_search_subproject: "Search subproject…"
+  button_expand_all: "Expand all"
   label_avatar: Avatar
   message_avatar_uploaded: Saved Avatar
   button_change_avatar: Edit avatar
@@ -50,6 +53,7 @@ en:
   redmine_asap_colors_logo_bg_hover: Background color on mouse over
   label_redmine_asap_theme_general: General
   redmine_asap_theme_turbo: Enable turbo for a faster experience (beta)
+  turbo_panel: "Enable Turbo Frames panel — side panel without full page reload (beta)"
   label_description_empty: No description
   see_more_projects: See more projects
   display_settings: Displays settings
@@ -64,6 +68,8 @@ en:
   label_user_font_size: Text size
   label_issue_panel_beta: Issue panel (quick view)
   label_issue_panel_beta_description: Opens the issue in a side panel when clicking its title in the list
+  label_bold_assigned_to_me: Bold my assigned issues
+  label_bold_assigned_to_me_description: Display in bold the subject of issues assigned to me in the issues list
   label_font_size_xs: Very small
   label_font_size_sm: Small
   label_font_size_md: Normal

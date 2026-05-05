@@ -59,22 +59,24 @@ $(document).ready(function() {
   }
 });
 
-$(document).ready( function(){
-  $('#menu-breadcrumb').click( function(event){
-      event.stopPropagation();
-      $('#breadcrumbs').toggle();
+// Breadcrumb toggle is handled in application-turbo.js when Turbo is enabled.
+// When both Turbo settings are disabled, application-turbo.js is not loaded — handle here.
+$(document).ready(function(){
+  if (typeof window.Turbo !== 'undefined') return;
+
+  $('#menu-breadcrumb').click(function(event){
+    event.stopPropagation();
+    $('#breadcrumbs').toggle();
+  });
+  $(document).click(function(){
+    $('#breadcrumbs').hide();
   });
 
-  $(document).click( function(){
-      $('#breadcrumbs').hide();
+  $('#menu-breadcrumb-children').click(function(event){
+    event.stopPropagation();
+    $('#breadcrumbs-children').toggle();
   });
-
-  $('#menu-breadcrumb-children').click( function(event){
-      event.stopPropagation();
-      $('#breadcrumbs-children').toggle();
-  });
-
-  $(document).click( function(){
-      $('#breadcrumbs-children').hide();
+  $(document).click(function(){
+    $('#breadcrumbs-children').hide();
   });
 });

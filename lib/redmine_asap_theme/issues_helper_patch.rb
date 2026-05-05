@@ -8,7 +8,7 @@ module RedmineAsapTheme
       content_tag(
         'span',
         text,
-        class: "rounded px-2.5 py-1 text-xs font-medium",
+        class: "rounded-r px-2.5 py-0.5 text-xs font-medium",
         style: "background-color: #{issue.tracker.bg_color}; color: #{issue.tracker.text_color};"
       )
     end

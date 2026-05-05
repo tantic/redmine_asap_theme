@@ -1,18 +1,40 @@
 
+// Panel-only mode : disable Drive so Redmine's jQuery JS is not disrupted
+if (document.body.dataset.turboPanelOnly === 'true' && window.Turbo) {
+  Turbo.session.drive = false;
+}
+
 document.addEventListener("turbo:load", function(e) {
-  if(document.querySelector('#menu-breadcrumb')){
-    document.querySelector('#menu-breadcrumb').addEventListener('click', function(event){
+  const menuBreadcrumb = document.querySelector('#menu-breadcrumb');
+  if(menuBreadcrumb){
+    menuBreadcrumb.addEventListener('click', function(event){
       event.stopPropagation();
       const breadcrumb = document.querySelector('#breadcrumbs');
-      toggle(breadcrumb)
+      toggle(breadcrumb);
     });
+  }
 
-    document.addEventListener('click', function handleClickOutsideBox(event) {
-      const breadcrumb = document.querySelector('#breadcrumbs');
-      if (breadcrumb && !breadcrumb.contains(event.target)) {
-        toggle(breadcrumb);
-      }
+  const menuChildren = document.querySelector('#menu-breadcrumb-children');
+  if(menuChildren){
+    menuChildren.addEventListener('click', function(event){
+      event.stopPropagation();
+      const breadcrumb = document.querySelector('#breadcrumbs-children');
+      toggle(breadcrumb);
     });
+  }
+});
+
+// Register once — not inside turbo:load to avoid accumulation on Turbo Drive navigations
+document.addEventListener('click', function(event) {
+  const breadcrumb = document.querySelector('#breadcrumbs');
+  if (breadcrumb && !breadcrumb.contains(event.target) &&
+      !event.target.closest('#menu-breadcrumb')) {
+    breadcrumb.style.display = 'none';
+  }
+  const breadcrumbChildren = document.querySelector('#breadcrumbs-children');
+  if (breadcrumbChildren && !breadcrumbChildren.contains(event.target) &&
+      !event.target.closest('#menu-breadcrumb-children')) {
+    breadcrumbChildren.style.display = 'none';
   }
 });
 

@@ -1,17 +1,95 @@
 <% if @principals_by_role.any? %>
 <div class="members box">
   <h3 class="icon icon-group"><%= sprite_icon('group', l(:label_member_plural)) %></h3>
+  <input type="search" class="members-global-search w-full text-xs border border-gray-200 dark:border-gray-600 rounded px-2 py-1 mb-3 dark:bg-gray-700 dark:text-gray-200 focus:outline-none focus:border-blue-400"
+         placeholder="<%= l(:placeholder_search_member) %>"
+         oninput="filterAllMembers(this)">
   <% @principals_by_role.keys.sort.each do |role| %>
-    <div class="mb-3">
-      <p class="text-2xs font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-wider mb-1.5"><%= role %></p>
-      <div class="flex flex-wrap gap-1.5">
-        <% @principals_by_role[role].sort.each do |principal| %>
-          <span class="inline-flex items-center gap-1 text-xs text-gray-700 dark:text-gray-300 bg-gray-50 dark:bg-gray-700/50 px-2 py-0.5 rounded-full">
-            <%= link_to_principal(principal, class: "hover:text-blue-600 dark:hover:text-blue-400") %>
-          </span>
-        <% end %>
+    <div class="members-role-section mb-4">
+      <div class="flex items-center mb-2 gap-2">
+        <p class="text-2xs font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-wider m-0 flex-1"><%= role %></p>
+        <button class="members-expand-btn text-gray-300 hover:text-blue-500 transition-colors"
+                title="<%= l(:button_expand_all) %>"
+                onclick="toggleMembersExpand(this)">
+          <%= sprite_icon('zoom-in', css_class: 'icon-svg w-3 h-3') %>
+        </button>
       </div>
+      <% principals = @principals_by_role[role].sort %>
+      <% visible = principals.first(10) %>
+      <% extra   = principals.drop(10) %>
+      <ul class="members-stack">
+        <% visible.each do |principal| %>
+        <li>
+          <%= avatar(principal, :size => "28", :title => principal.name) %>
+          <% url = principal.is_a?(User) ? user_path(principal) : nil %>
+          <%= url ? link_to(principal.name, url, class: "user") : content_tag(:span, principal.name, class: "user") %>
+        </li>
+        <% end %>
+        <% if extra.any? %>
+        <li class="member-more"
+            onclick="this.style.display='none'; this.parentNode.querySelectorAll('.member-extra').forEach(function(e){ e.style.display='flex'; })">
+          +<%= extra.size %>
+        </li>
+        <% extra.each do |principal| %>
+        <li class="member-extra" style="display:none">
+          <%= avatar(principal, :size => "32", :title => principal.name) %>
+          <% url = principal.is_a?(User) ? user_path(principal) : nil %>
+          <%= url ? link_to(principal.name, url, class: "user") : content_tag(:span, principal.name, class: "user") %>
+        </li>
+        <% end %>
+        <% end %>
+      </ul>
     </div>
   <% end %>
 </div>
+
+<script>
+function toggleMembersExpand(btn) {
+  var section = btn.closest('.members-role-section');
+  var stack   = section.querySelector('.members-stack');
+  var isExpanded = stack.classList.toggle('expanded');
+  if (isExpanded) {
+    var more = stack.querySelector('.member-more');
+    if (more) {
+      more.style.display = 'none';
+      stack.querySelectorAll('.member-extra').forEach(function(e) { e.style.display = 'flex'; });
+    }
+  } else {
+    var more = stack.querySelector('.member-more');
+    if (more) {
+      more.style.display = '';
+      stack.querySelectorAll('.member-extra').forEach(function(e) { e.style.display = 'none'; });
+    }
+    stack.querySelectorAll('li').forEach(function(li) { li.style.display = ''; });
+  }
+}
+
+function filterAllMembers(input) {
+  var term = input.value.toLowerCase().trim();
+  document.querySelectorAll('.members-role-section').forEach(function(section) {
+    var stack = section.querySelector('.members-stack');
+    if (term) {
+      stack.classList.add('expanded');
+      var more = stack.querySelector('.member-more');
+      if (more) {
+        more.style.display = 'none';
+        stack.querySelectorAll('.member-extra').forEach(function(e) { e.style.display = 'flex'; });
+      }
+      stack.querySelectorAll('li:not(.member-more)').forEach(function(li) {
+        var nameEl = li.querySelector('.user');
+        var match = nameEl && nameEl.textContent.toLowerCase().includes(term);
+        li.style.display = match ? 'flex' : 'none';
+      });
+    } else {
+      stack.classList.remove('expanded');
+      var more = stack.querySelector('.member-more');
+      if (more) {
+        more.style.display = '';
+        stack.querySelectorAll('.member-extra').forEach(function(e) { e.style.display = 'none'; });
+      }
+      stack.querySelectorAll('li').forEach(function(li) { li.style.display = ''; });
+    }
+  });
+}
+</script>
 <% end %>

@@ -4,10 +4,13 @@ module RedmineAsapTheme
   module ProjectsControllerPatch
 
     def self.prepended(base)
-      # :authorize vérifie User.current.allowed_to?(action_name, @project)
-      # Les actions save_logo/delete_logo/get_logo n'ont pas de permission Redmine dédiée,
-      # on désactive le filtre et on vérifie manuellement.
       base.skip_before_action :authorize, only: [:save_logo, :delete_logo, :get_logo]
+      base.before_action :load_subproject_tree, only: [:show]
+    end
+
+    def load_subproject_tree
+      return unless @project
+      @all_subprojects = @project.descendants.visible.to_a
     end
 
     def get_logo

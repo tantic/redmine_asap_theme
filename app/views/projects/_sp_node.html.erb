@@ -1,0 +1,26 @@
+<% children = (subprojects_by_parent[node.id] || []).sort %>
+<li class="sp-node" data-id="<%= node.id %>" data-name="<%= node.name.downcase %>">
+  <div class="sp-row">
+    <% if children.any? %>
+    <button class="sp-toggle" onclick="toggleSpNode(this)" aria-expanded="false" title="Déplier"></button>
+    <% else %>
+    <span class="sp-leaf"></span>
+    <% end %>
+    <%= link_to project_path(node), class: "sp-link" do %>
+      <% if logos_by_project_id[node.id] %>
+        <%= image_tag(asap_project_logo_path(node), style: 'width:16px;height:16px;border-radius:3px;flex-shrink:0;object-fit:contain;', alt: node.name) %>
+      <% else %>
+        <%= letter_avatar_tag(node.name, 100, style: 'width:16px;height:16px;border-radius:3px;flex-shrink:0;') %>
+      <% end %>
+      <span class="sp-name"><%= node.name %></span>
+    <% end %>
+  </div>
+  <% if children.any? %>
+  <ul class="sp-children" style="display:none">
+    <% children.each do |child| %>
+      <%= render partial: 'projects/sp_node',
+                 locals: { node: child, subprojects_by_parent: subprojects_by_parent, logos_by_project_id: logos_by_project_id } %>
+    <% end %>
+  </ul>
+  <% end %>
+</li>

@@ -1,13 +1,15 @@
 # Redmine ASAP Theme
 
 This plugin try to propose a new UX/UI for Redmine with new tools like Stimulus/Turbo and Tailwindcss (one day Hotwire :-)).
-The first version started almost from a blank page by replacing all Redmine pages. It worked but it's not enough progressive.
-This version start from the original theme of Redmine so all pages works (normally) and the theme can be used now.
 
 * Status : first version usable but need to be used and improved (feedback appreciated)
-* Compatibility : work for Redmine >=6.1 (other versions won't work because of importmap compatibility and many other things)
+* Compatibility :
+  * 2.1.6 work for Redmine 6.0.x
+  * 2.2.0 work for Redmine 6.0.x and 6.1.x
+
 
 If you want to test it quickly with docker, you can use the repo https://github.com/tantic/redmine_asap_docker.git
+
 
 This plugin is part of a suite which add features to redmine :
 * [Redmine asap theme](https://github.com/tantic/redmine_asap_theme) : new UX/UI, new navigation
@@ -20,53 +22,81 @@ https://tantic.github.io/redmine_asap_docs/docs/theme/intro
 
 ## Features
 
-Ready
-* New general design
+UX/UI
+* New general design based on Tailwind CSS and stimulus / turbo
 * New navbar for navigation and new menu for project
-* New home page
-* Local avatar or letter for users (all credits to A.Chaika and contributors of the next versions)
-* Logo or Letter avatar for projects
-* Account is now preferences and is displayed in a modal
+* Show / hide query form
+* New home page with bookmarked projects, project. Project overview
+* Login page is customizable with picture (some wallpapers are available)
 * Logo's color is customizable
-* Login page is customizable with picture
-* Issue statuses can be customized (background color and color)
-* Tracker can be customized (background color and color)
 * Dark theme : each user can choose light or dark theme from the settings modale
-* Responsive mode
-* Colors and icons on default priorities (not customisable for now)
-* Button to toggle display of the query form
+* Responsive mode for mobile and tablet devices
 
-Beta version
-* Display issue in a panel when click on an issue of the main list : you can now edit online all attributes
+User
+* Account is now preferences and is displayed in a modal
+* Local avatar or letter for users (all credits to A.Chaika and contributors of the next versions)
+* New options in the preferences to customize the user experience
+
+Project
+* Logo or Letter avatar for projects
+* Project homepage : member box and subproject box overrides (search...)
+
+Issues
+* Issue statuses can be customized (background color and color)
+* Notes form is displayed on the bottom of the issue page (no need to edit the issue to add a note)
+* Tracker can be customized (background color and color)
+* Colors and icons on default priorities (not customisable for now)
+* [Beta] Display issue in a panel when click on an issue of the main list : you can now edit online all attributes
 
 ## Screenshots
 
-![Login page](doc/screenshots/login.png)
+<table>
+  <tr>
+    <td align="center">
+      <a href="doc/screenshots/login.png">
+        <img src="doc/screenshots/login.png" width="200"><br>
+            Login page
+      </a>
+    </td>
+    <td align="center">
+      <a href="doc/screenshots/welcome.png">
+        <img src="doc/screenshots/welcome.png" width="200"><br>
+        Screen 2
+      </a>
+    </td>
+    <td align="center">
+      <a href="doc/screenshots/issue-panel.png">
+        <img src="doc/screenshots/issue-panel.png" width="200"><br>
+        Screen 3
+      </a>
+    </td>
+  </tr>
+</table>
 
-![welcome page](doc/screenshots/welcome.png)
+<p align="center">
 
-![Issues page](doc/screenshots/issue-panel.png)
 
-![Issue page](doc/screenshots/issue.png)
+  <a href="doc/screenshots/issue.png">
+    <img src="doc/screenshots/issue.png" width="200" />
+  </a>
+  <a href="doc/screenshots/preferences.png">
+    <img src="doc/screenshots/preferences.png" width="200" />
+  </a>
+  <a href="doc/screenshots/dark.png">
+    <img src="doc/screenshots/dark.png" width="200" />
+  </a>
+  <a href="doc/screenshots/mobile.png">
+    <img src="doc/screenshots/mobile.png" width="200" />
+  </a>
+  <a href="doc/screenshots/mobile2.png">
+    <img src="doc/screenshots/mobile2.png" width="200" />
+  </a>
+</p>
 
-![Preferences](doc/screenshots/preferences.png)
-
-![Dark](doc/screenshots/dark.png)
-
-![Mobile](doc/screenshots/mobile.png)
-
-![Mobile](doc/screenshots/mobile2.png)
 
 ## Installation
 
-### Requirements
-
-You'll need deface so if you have installed a plugin like aditionnals it will work out of the box. Otherwise I suggest that you use this plugin
-https://github.com/jbbarth/redmine_base_deface
-
-### Installation
-
-This plugin has been tested with Redmine 6.1.x
+This plugin has been tested with Redmine 6.0.x and 6.1.x
 
 ```
 cd $REDMINE_ROOT

@@ -1,0 +1,34 @@
+<% watched_klass_name = watched.class.name.underscore -%>
+<% add_allowed = User.current.allowed_to?(:"add_#{watched_klass_name}_watchers", watched.project) %>
+<% view_allowed = User.current.allowed_to?(:"view_#{watched_klass_name}_watchers", watched.project) %>
+<% remove_allowed = User.current.allowed_to?(:"delete_#{watched_klass_name}_watchers", watched.project) %>
+
+<h3><%= l(:"label_#{watched_klass_name}_watchers") %> (<%= watched.watcher_users.size %>)</h3>
+
+<% if view_allowed %>
+<% scope = watched.watcher_users %>
+<% scope = scope.includes(:email_address) if Setting.gravatar_enabled? %>
+<ul class="watchers">
+<% scope.sorted.each do |user| %>
+  <li class="user-<%= user.id %>">
+    <%= avatar(user, :size => "32", :title => user.name) %>
+    <a class="user" href="<%= user_path(user) %>"><%= user.name %></a>
+    <% if remove_allowed %>
+      <%= link_to sprite_icon('del', l(:button_delete)),
+            { :controller => 'watchers', :action => 'destroy',
+              :object_type => watched_klass_name, :object_id => watched.id, :user_id => user },
+            :remote => true, :method => 'delete',
+            :class => 'delete icon-only icon-del', :title => l(:button_delete) %>
+    <% end %>
+  </li>
+<% end %>
+</ul>
+<% end %>
+
+<% if add_allowed %>
+<%= link_to "+",
+      new_watchers_path(:object_type => watched_klass_name, :object_id => watched),
+      :remote => true, :method => 'get',
+      :class => 'add-watcher-btn',
+      :title => l(:button_add) %>
+<% end %>

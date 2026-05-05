@@ -1,0 +1,56 @@
+<% all_subs = @all_subprojects || @subprojects || [] %>
+<% if all_subs.any? %>
+<% subprojects_by_parent = all_subs.group_by(&:parent_id) %>
+<% direct_children = (subprojects_by_parent[@project.id] || []).sort %>
+<% logos_by_project_id = Attachment.where(container_type: 'Project', container_id: all_subs.map(&:id), description: 'logo').index_by(&:container_id) %>
+<div class="projects box">
+  <h3 class="icon icon-projects"><%= sprite_icon('projects', l(:label_subproject_plural)) %></h3>
+  <input type="search"
+         class="sp-search w-full text-xs border border-gray-200 dark:border-gray-600 rounded px-2 py-1 my-2 dark:bg-gray-700 dark:text-gray-200 focus:outline-none focus:border-blue-400"
+         placeholder="<%= l(:placeholder_search_subproject) %>"
+         oninput="filterSubprojects(this)">
+  <ul class="subprojects-tree">
+    <% direct_children.each do |child| %>
+      <%= render partial: 'projects/sp_node',
+                 locals: { node: child, subprojects_by_parent: subprojects_by_parent, logos_by_project_id: logos_by_project_id } %>
+    <% end %>
+  </ul>
+</div>
+
+<script>
+function toggleSpNode(btn) {
+  var li = btn.closest('.sp-node');
+  var children = li.querySelector(':scope > .sp-children');
+  if (!children) return;
+  var expanding = children.style.display === 'none';
+  children.style.display = expanding ? 'block' : 'none';
+  btn.setAttribute('aria-expanded', expanding ? 'true' : 'false');
+}
+
+function filterSubprojects(input) {
+  var term = input.value.toLowerCase().trim();
+  var tree = input.closest('.projects.box').querySelector('.subprojects-tree');
+
+  if (!term) {
+    tree.querySelectorAll('.sp-node').forEach(function(li) { li.style.display = ''; });
+    tree.querySelectorAll('.sp-children').forEach(function(ul) { ul.style.display = 'none'; });
+    tree.querySelectorAll('.sp-chevron').forEach(function(icon) { icon.style.transform = ''; });
+    return;
+  }
+
+  tree.querySelectorAll('.sp-children').forEach(function(ul) { ul.style.display = 'block'; });
+  tree.querySelectorAll('.sp-node').forEach(function(li) { li.style.display = 'none'; });
+
+  tree.querySelectorAll('.sp-node').forEach(function(li) {
+    if ((li.dataset.name || '').includes(term)) {
+      var el = li;
+      while (el && el !== tree) {
+        if (el.classList.contains('sp-node')) el.style.display = '';
+        if (el.classList.contains('sp-children')) el.style.display = 'block';
+        el = el.parentElement;
+      }
+    }
+  });
+}
+</script>
+<% end %>

@@ -26,7 +26,7 @@
 
         .attachments-section {
             .attachments_form {
-                @apply w-full flex;
+                @apply w-full flex flex-col;
                 .attachments_fields {
                     > span {
                         @apply flex items-center gap-2;
@@ -48,7 +48,7 @@
         }
         #issue_tree,
         #relations {
-            @apply mt-6 relative overflow-x-auto p-6 shadow bg-white dark:bg-gray-600;
+            @apply mt-4 relative overflow-x-auto p-6 shadow bg-white dark:bg-gray-700;
             > p {
                 @apply text-xs;
             }
@@ -69,14 +69,13 @@
                         @apply bg-gray-50 dark:bg-gray-600 hover:bg-gray-100 dark:hover:bg-gray-700;
                     }
                     td {
-                        @apply border-gray-200 text-wrap px-1 py-0!;
+                        @apply border-gray-200 dark:border-gray-500 text-nowrap text-ellipsis overflow-x-hidden px-1 py-0!;
                         &.checkbox {
                             @apply px-2;
                         }
                         &.done_ratio {
                             @apply w-20;
                         }
-
                         &.buttons {
                             @apply my-0! flex border-0;
                             a {
@@ -84,7 +83,7 @@
                             }
                         }
                     }
-                    tr.assigned-to-me {
+                    .bold-assigned tr.assigned-to-me {
                         td.subject {
                             @apply font-bold;
                         }
@@ -126,26 +125,33 @@
     }
 
     div.journals {
-        @apply px-6 pt-4 pb-0 bg-white dark:bg-gray-800;
+        @apply px-4 pb-0 bg-white dark:bg-transparent;
         #tab-content-history > div {
             @apply relative border-s-2 border-gray-200 dark:border-gray-600 ms-4;
             > div {
                 @apply pb-4 ms-6;
             }
-            .journal-info > .user-avatar {
+            .journal-info > .user-avatar,
+            .journal-info > .gravatar {
                 @apply absolute flex items-center justify-center w-8 h-8 rounded-full start-6;
             }
 
             .journal-header {
-                @apply text-xs bg-gray-50 dark:bg-gray-700 dark:text-gray-100 border-0 flex w-full items-center mb-1;
+                @apply text-xs bg-gray-200 dark:bg-gray-700 dark:text-gray-100 border-t-1 border-l-1 border-r-1 border-gray-200 dark:border-gray-500 flex w-full items-center mb-1;
                 .journal-info {
-                    @apply flex items-center font-light dark:text-gray-100;
+                    @apply flex flex-col md:flex-row items-start md:items-center font-light dark:text-gray-100  pl-4 text-[11px];
                     > a {
                         @apply mx-1 text-gray-800 dark:text-gray-100;
+                        span {
+                            @apply text-[11px];
+                            .gravatar {
+                                @apply hidden;
+                            }
+                        }
                     }
                 }
                 .journal-meta {
-                    @apply ml-auto flex items-center space-x-3;
+                    @apply ml-auto flex flex-col md:flex-row items-center space-x-3;
                     .journal-actions {
                         @apply space-x-3;
                     }
@@ -155,7 +161,7 @@
                 @apply mb-0! overflow-x-auto;
             }
             .journal-content {
-                @apply dark:bg-gray-700 rounded overflow-x-auto;
+                @apply dark:bg-gray-700  border-1 border-gray-200 dark:border-gray-500 rounded-b overflow-x-auto;
 
                 .journal-note {
                     @apply p-4;
@@ -167,10 +173,9 @@
         }
 
         .journal {
-            @apply pb-6;
+            @apply pb-0;
         }
         .note {
-            @apply border border-gray-100 rounded pb-0!;
         }
         /*
     .note{
@@ -221,7 +226,7 @@
     }
 
     div.issue div.attributes {
-        @apply relative mt-4 bg-gray-50 text-xs dark:bg-gray-700 rounded p-8 border border-gray-100 dark:border-gray-700 mb-6;
+        @apply relative mt-4 bg-gray-50 text-xs dark:bg-gray-700 rounded p-8 border border-gray-100 dark:border-gray-700 mb-4;
         div.attribute {
             @apply flex  items-center flex-row pl-0 py-0.5;
             .value {
@@ -246,7 +251,7 @@
                 @apply inline-flex items-center rounded px-2 py-0.5 mr-1 mb-1 text-xs font-medium;
             }
             #tags-data {
-                @apply bg-gray-100 rounded;
+                @apply bg-gray-100 dark:bg-gray-600 rounded px-2;
             }
         }
         .label {
@@ -255,11 +260,11 @@
     }
 
     div.issue div.wiki {
-        @apply my-6;
+        @apply my-0;
     }
 
     div.issue .subject h3 {
-        @apply font-bold text-lg mb-0 leading-6 dark:text-gray-400;
+        @apply font-bold text-base mb-0 leading-6 dark:text-gray-400;
     }
 
     div.issue .next-prev-links .position a {
@@ -305,7 +310,7 @@
 .controller-todo,
 .controller-issues.action-index {
     .header {
-        @apply px-0 md:px-6 border-b border-gray-100;
+        @apply px-0 md:px-6 border-b border-gray-100 dark:border-gray-500;
         .badge {
             @apply hidden md:flex;
         }
@@ -444,12 +449,19 @@ body.issue-panel-open {
     }
     #issue_tree,
     #relations {
+        .subtasks-wrapper,
+        .relation-issues-wrapper {
+            table {
+                width: auto;
+                min-width: 100%;
+            }
+        }
         table tr {
             td {
                 @apply border border-gray-100 dark:border-gray-500;
             }
             td.subject {
-                @apply py-2! leading-6;
+                @apply py-2! leading-6 whitespace-nowrap;
             }
         }
     }
@@ -475,14 +487,14 @@ body.issue-panel-open {
             display: none !important;
         }
         #tab-content-history {
-            @apply pb-0;
+            @apply pb-0 dark:bg-gray-800!;
         }
         &.add-note-section {
-            @apply mx-6 py-8 pl-12 pr-4 border border-gray-100 dark:border-gray-400 rounded;
+            @apply ml-2 mr-0 py-4 pl-12 pr-4 border border-gray-200 dark:border-gray-500! rounded;
         }
     }
     .bloc-journals {
-        @apply shadow mx-4;
+        @apply mx-4;
     }
     #query_form {
         @apply hidden;
@@ -503,7 +515,7 @@ body.issue-panel-open {
         @apply mx-6 mb-4 mt-0! py-6 px-10 border border-gray-100 dark:border-gray-400 rounded;
     }
     .bloc-journals {
-        @apply shadow mx-0 bg-white pb-8 dark:bg-gray-700;
+        @apply mx-0 bg-white pb-8 dark:bg-gray-800;
     }
     #issue-subject-edit-input {
         @apply w-full;

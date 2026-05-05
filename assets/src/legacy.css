@@ -311,6 +311,7 @@ a.user.user-mention {
 #sidebar .query.default {font-weight: bold;} */
 #admin-menu a {
     line-height: 1.7em;
+    @apply text-xs;
 }
 #admin-menu a.selected:not(:has(svg)) {
     padding-left: 20px;
@@ -497,10 +498,10 @@ table.list td.checkbox {
     width: 15px;
     padding: 2px 0 0 0;
 }
-table.list .checkbox input {
+/*table.list .checkbox input {
     padding: 0px;
     height: initial;
-}
+}*/
 table.list td.buttons,
 div.buttons {
     white-space: nowrap;

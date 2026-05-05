@@ -149,20 +149,7 @@
 
   <%= render :partial => 'members_box' %>
 
-  <% if @subprojects.any? %>
-  <div class="projects box">
-    <h3 class="icon icon-projects"><%= sprite_icon('projects', l(:label_subproject_plural)) %></h3>
-    <div class="flex flex-wrap gap-1.5 mt-2">
-      <% @subprojects.each do |project| %>
-        <%= link_to project_path(project),
-              class: "flex items-center gap-1.5 text-xs text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 bg-gray-50 dark:bg-gray-700/50 hover:bg-blue-50 dark:hover:bg-blue-900/20 px-2 py-1 rounded border border-gray-200 dark:border-gray-600 transition" do %>
-          <%= letter_avatar_tag(project.name, 100, style: 'width:16px;height:16px;border-radius:3px;flex-shrink:0;') %>
-          <span class="truncate max-w-32"><%= project.name %></span>
-        <% end %>
-      <% end %>
-    </div>
-  </div>
-  <% end %>
+  <%= render partial: 'subprojects_box' %>
 
   <%= call_hook(:view_projects_show_right, :project => @project) %>
 </div>

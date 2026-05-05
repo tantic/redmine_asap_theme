@@ -116,12 +116,74 @@
 
 .controller-activities {
     #activity {
+        @apply shadow my-4 bg-white border text-xs border-gray-200 rounded-lg  p-4 dark:bg-gray-800 dark:border-gray-700;
+        .description {
+            @apply text-xs!;
+        }
+        .author > a {
+            @apply text-xs!;
+        }
         dl {
+            @apply text-wrap text-ellipsis overflow-x-hidden;
             dt {
                 > img {
                     display: none;
                 }
             }
+        }
+        dd,
+        #search-results dd {
+            margin-bottom: 1em;
+            /*padding-left: 65px;*/
+            font-size: 0.8125rem;
+            @apply pl-0 md:pl-18;
+        }
+        dt svg.icon-svg {
+            margin-right: 4px;
+        }
+        dt.me .time {
+            @apply border-b border-gray-200 dark:border-gray-700;
+        }
+        dt .time {
+            @apply text-gray-900 dark:text-gray-300 mr-2;
+        }
+        dd .description,
+        #search-results dd .description {
+            font-style: italic;
+            margin: 2px 0;
+        }
+        span.project:after,
+        #search-results span.project:after {
+            content: " - ";
+            white-space: pre;
+        }
+        dd span.description,
+        #search-results dd span.description {
+            @apply block text-xs font-light text-gray-500 dark:text-gray-300;
+        }
+        dt.grouped {
+            @apply pl-0 md:pl-6;
+        }
+        dd.grouped {
+            @apply ml-0 md:ml-6;
+        }
+        h3 {
+            @apply bg-gray-100 dark:bg-gray-700 p-2;
+        }
+        dt {
+            @apply border-t border-gray-200 dark:border-gray-600;
+            padding-top: 10px;
+            width: 100%; /* Prevents border from disappearing due to inline-flex shrinking */
+            box-sizing: border-box;
+            display: flex;
+            align-items: flex-end;
+        }
+        dl dt:first-child {
+            border: 0px;
+        }
+
+        #activity_scope_form select#user_id {
+            max-width: 100%;
         }
     }
 }

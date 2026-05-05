@@ -11,8 +11,10 @@
     connect() {
       this._abort = null;
       this._cache = new Map();           // url -> { html, ts }
-      this._cacheTtl = 30_000;           // 30s
+      this._cacheTtl = 120_000;          // 2min (invalidé sur save)
       this._assetsInjected = false;
+      this._currentUrl = null;
+      this._turboMode = this.bodyTarget.tagName === 'TURBO-FRAME';
 
       this._onKeydown = (e) => { if (e.key === 'Escape') this.close(); };
       this._onFieldEditSaved = (e) => this._handleFieldEditSaved(e);
@@ -24,6 +26,26 @@
       document.addEventListener('click', this._onDocClick);
       document.addEventListener('submit', this._onDocSubmit);
 
+      if (this._turboMode) {
+        this._onTurboFrameLoad = () => this._handleTurboFrameLoad().catch(() => {});
+        this._onTurboBeforeFetch = (e) => {
+          // Ajouter ?panel=1 à toutes les requêtes du frame (navigation interne)
+          const url = e.detail.url;
+          if (url && !url.searchParams.has('panel')) {
+            url.searchParams.set('panel', '1');
+          }
+          // Mettre à jour le lien externe avec l'URL propre (sans ?panel=1)
+          if (url) {
+            const cleanUrl = new URL(url.toString());
+            cleanUrl.searchParams.delete('panel');
+            this._currentUrl = cleanUrl.toString();
+            this.externalTarget.href = this._currentUrl;
+          }
+        };
+        this.bodyTarget.addEventListener('turbo:frame-load', this._onTurboFrameLoad);
+        this.bodyTarget.addEventListener('turbo:before-fetch-request', this._onTurboBeforeFetch);
+      }
+
       // Public API consommée par gantt_controller / todo_controller / inbox_controller
       window.IssuePanel = { open: (url) => this.open(url), close: () => this.close() };
     }
@@ -34,21 +56,70 @@
       document.removeEventListener('click', this._onDocClick);
       document.removeEventListener('submit', this._onDocSubmit);
       this._abort?.abort();
+      if (this._turboMode) {
+        this.bodyTarget.removeEventListener('turbo:frame-load', this._onTurboFrameLoad);
+        this.bodyTarget.removeEventListener('turbo:before-fetch-request', this._onTurboBeforeFetch);
+      }
       if (window.IssuePanel && window.IssuePanel.open === this.open) window.IssuePanel = null;
     }
 
     // ── API publique ─────────────────────────────────────────────
     open(url) {
+      this._currentUrl = url;
       this.externalTarget.href = url;
-      this.bodyTarget.innerHTML = '<div class="issue-panel__loading">Chargement\u2026</div>';
+      this.bodyTarget.innerHTML = '<div class="issue-panel__loading">Chargement…</div>';
       this.element.classList.add('is-open');
       document.body.classList.add('issue-panel-open');
-      this._load(url);
+      if (this._turboMode) {
+        const panelUrl = url + (url.includes('?') ? '&' : '?') + 'panel=1';
+        this.bodyTarget.setAttribute('src', panelUrl);
+      } else {
+        this._load(url);
+      }
     }
 
     close() {
       this.element.classList.remove('is-open');
       document.body.classList.remove('issue-panel-open');
+    }
+
+    // ── Post-load turbo frame ────────────────────────────────────
+    async _handleTurboFrameLoad() {
+      // Turbo's activateScriptElements() starts loading external scripts (jstoolbar, etc.)
+      // but does NOT await them before running inline init scripts → race condition on first load.
+      // We detect if jstoolbar was missing, inject assets sequentially, then re-run inline scripts.
+      const toolbarMissing = typeof jsToolBar === 'undefined';
+      await this._injectFrameHeadAssets();
+      if (toolbarMissing && typeof jsToolBar !== 'undefined') {
+        this._runInlineScripts(this.bodyTarget);
+      }
+      this.bodyTarget.querySelectorAll('form').forEach(f => {
+        if (!f.hasAttribute('data-turbo')) f.setAttribute('data-turbo', 'false');
+      });
+      this._activateDefaultTab();
+      if (typeof setupFileDrop === 'function') setupFileDrop();
+      this._initAutoComplete();
+    }
+
+    // ── Injection séquentielle des assets du frame (jstoolbar, ckeditor, attachments) ──
+    async _injectFrameHeadAssets() {
+      const items = [];
+      this.bodyTarget.querySelectorAll('script[src]').forEach(s => {
+        const src = s.getAttribute('src') || '';
+        if (!src.includes('jstoolbar') && !src.toLowerCase().includes('ckeditor') && !src.includes('attachments')) return;
+        const filename = src.split('/').pop().split('?')[0];
+        if (!filename || document.head.querySelector(`script[src*="${filename}"]`)) return;
+        items.push(s.src);
+      });
+      for (const src of items) {
+        await new Promise(resolve => {
+          const ns = document.createElement('script');
+          ns.src = src;
+          ns.onload = resolve;
+          ns.onerror = resolve;
+          document.head.appendChild(ns);
+        });
+      }
     }
 
     // ── Chargement avec cache + abort ────────────────────────────
@@ -58,6 +129,8 @@
         this.bodyTarget.innerHTML = cached.html;
         this._runInlineScripts(this.bodyTarget);
         this._activateDefaultTab();
+        if (typeof setupFileDrop === 'function') setupFileDrop();
+        this._initAutoComplete();
         return;
       }
 
@@ -93,6 +166,9 @@
         this._runInlineScripts(this.bodyTarget);
         setTimeout(() => hiddenForms.forEach(el => el.style.display = ''), 200);
         this._activateDefaultTab();
+        await this._ensureAttachmentsJs(doc);
+        if (typeof setupFileDrop === 'function') setupFileDrop();
+        this._initAutoComplete();
       } catch (e) {
         if (e.name === 'AbortError') return;
         this.bodyTarget.innerHTML = '<p style="padding:2rem;color:#ef4444;">Erreur de chargement</p>';
@@ -119,7 +195,7 @@
         const src = s.getAttribute('src') || '';
         const text = s.textContent || '';
         if (src) {
-          if (!src.includes('jstoolbar') && !src.toLowerCase().includes('ckeditor')) return;
+          if (!src.includes('jstoolbar') && !src.toLowerCase().includes('ckeditor') && !src.includes('attachments')) return;
           const filename = src.split('/').pop().split('?')[0];
           if (!filename || document.querySelector('script[src*="' + filename + '"]')) return;
           items.push({ type: 'src', value: s.src });
@@ -127,7 +203,8 @@
           text.includes('CKEDITOR_BASEPATH') ||
           text.includes('CKEDITOR.plugins') ||
           text.includes('CKEditor.mentionsConfig') ||
-          text.includes('instanceReady')
+          text.includes('instanceReady') ||
+          text.includes('wikiImageMimeTypes')
         ) {
           items.push({ type: 'inline', value: text });
         }
@@ -152,6 +229,23 @@
       }
     }
 
+    // ── Chargement de attachments.js si absent (non chargé sur la page parente) ──
+    async _ensureAttachmentsJs(doc) {
+      if (typeof setupFileDrop === 'function') return;
+      const script = [...doc.querySelectorAll('head script[src]')]
+        .find(s => (s.getAttribute('src') || '').includes('attachments'));
+      if (!script) return;
+      const filename = script.src.split('/').pop().split('?')[0];
+      if (filename && document.querySelector(`script[src*="${filename}"]`)) return;
+      await new Promise(resolve => {
+        const s = document.createElement('script');
+        s.src = script.src;
+        s.onload = resolve;
+        s.onerror = resolve;
+        document.head.appendChild(s);
+      });
+    }
+
     _runInlineScripts(container) {
       container.querySelectorAll('script:not([src])').forEach(old => {
         const s = document.createElement('script');
@@ -170,6 +264,13 @@
       }
     }
 
+    _initAutoComplete() {
+      if (typeof inlineAutoComplete !== 'function') return;
+      this.bodyTarget.querySelectorAll('[data-auto-complete="true"]').forEach(el => {
+        inlineAutoComplete(el);
+      });
+    }
+
     // ── Refresh de la liste parente (hors panel) ─────────────────
     async _refreshParentList() {
       const tables = document.querySelectorAll('table.issues');
@@ -181,19 +282,26 @@
         const doc = new DOMParser().parseFromString(html, 'text/html');
         const newTable = doc.querySelector('table.issues');
         if (newTable) table.outerHTML = newTable.outerHTML;
-      } catch (e) { /* silencieux */ }
+      } catch (_) {}
     }
 
     // ── Handlers d'événements globaux ────────────────────────────
 
-    // Field-edit sauvegarde : invalide le cache de l'issue, recharge le panel si besoin, refresh liste
+    // Field-edit sauvegarde : invalide le cache, rafraîchit la liste.
+    // Rechargement du panel uniquement pour la description : textilizable côté serveur
+    // requiert @project (absent de l'action update_issue_field), donc rendered_html
+    // peut être incomplet. Les autres champs se mettent à jour localement sans problème.
     _handleFieldEditSaved(e) {
       if (!this.element.classList.contains('is-open')) return;
-      const issueUrl = this.externalTarget.href;
+      const issueUrl = this._currentUrl || this.externalTarget.href;
       this._cache.delete(issueUrl);
-      // Si le save vient de l'intérieur du panel, recharger son contenu
-      if (e.target && e.target.closest && e.target.closest('.issue-panel__body')) {
-        this._load(issueUrl);
+      if (e.target?.closest?.('.issue-panel__body') && e.detail?.field === 'description') {
+        if (this._turboMode) {
+          const panelUrl = issueUrl + (issueUrl.includes('?') ? '&' : '?') + 'panel=1';
+          this.bodyTarget.setAttribute('src', panelUrl);
+        } else {
+          this._load(issueUrl);
+        }
       }
       this._refreshParentList();
     }
@@ -201,13 +309,19 @@
     _handleDocClick(e) {
       const isOpen = this.element.classList.contains('is-open');
 
-      // Clic sur sujet d'issue dans la liste → ouvrir le panel (beta)
+      // Clic sur sujet d'issue ou bouton nouvelle demande → ouvrir le panel (beta)
       if (document.body.dataset.issuePanelBeta === 'true' &&
           !e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey) {
-        const link = e.target.closest('table.issues td.subject a');
-        if (link && !link.closest('.issue-panel')) {
+        const issueLink = e.target.closest('table.issues td.subject a');
+        if (issueLink && !issueLink.closest('.issue-panel')) {
           e.preventDefault();
-          this.open(link.href);
+          this.open(issueLink.href);
+          return;
+        }
+        const newLink = e.target.closest('a.new-issue');
+        if (newLink && !newLink.closest('.issue-panel')) {
+          e.preventDefault();
+          this.open(newLink.href);
           return;
         }
       }
@@ -240,13 +354,13 @@
         return;
       }
 
-      // Prev/next navigation dans le panel
-      if (inBody && !e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey) {
+      // Prev/next navigation dans le panel — en mode turbo, Turbo gère le clic automatiquement
+      if (!this._turboMode && inBody && !e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey) {
         const link = e.target.closest('.next-prev-links a');
         if (link && link.href) {
           e.preventDefault();
           this.externalTarget.href = link.href;
-          this.bodyTarget.innerHTML = '<div class="issue-panel__loading">Chargement\u2026</div>';
+          this.bodyTarget.innerHTML = '<div class="issue-panel__loading">Chargement…</div>';
           this._load(link.href);
         }
       }
@@ -258,8 +372,7 @@
       e.preventDefault();
 
       const form = e.target;
-      const issueUrl = this.externalTarget.href;
-      this.bodyTarget.style.opacity = '0.5';
+      const issueUrl = this._currentUrl || this.externalTarget.href;
 
       // Synchroniser les instances CKEditor du panel vers leurs textarea
       if (window.CKEDITOR) {
@@ -271,23 +384,37 @@
 
       const csrf = document.querySelector('meta[name="csrf-token"]');
       const headers = csrf ? { 'X-CSRF-Token': csrf.getAttribute('content') } : {};
+      const formData = new FormData(form, e.submitter);
+
+      form.style.opacity = '0.5';
 
       fetch(form.action, {
         method: 'POST',
-        body: new FormData(form),
+        body: formData,
         credentials: 'same-origin',
         headers
       }).then(res => {
-        this.bodyTarget.style.opacity = '';
         if (res.ok) {
+          this.bodyTarget.style.opacity = '';
           this._cache.delete(issueUrl);
-          this._load(issueUrl);
+          this._cache.delete(res.url);
+          this._currentUrl = res.url;
+          this.externalTarget.href = res.url;
+          this.bodyTarget.innerHTML = '<div class="issue-panel__loading">Chargement…</div>';
+          if (this._turboMode) {
+            const panelUrl = res.url + (res.url.includes('?') ? '&' : '?') + 'panel=1';
+            this.bodyTarget.setAttribute('src', panelUrl);
+          } else {
+            this._load(res.url);
+          }
           this._refreshParentList();
         } else {
+          this.bodyTarget.style.opacity = '';
           this.bodyTarget.innerHTML = '<p style="padding:2rem;color:#ef4444;">Erreur (' + res.status + ')</p>';
         }
       }).catch(() => {
         this.bodyTarget.style.opacity = '';
+        this.bodyTarget.innerHTML = '<p style="padding:2rem;color:#ef4444;">Erreur réseau</p>';
       });
     }
   });

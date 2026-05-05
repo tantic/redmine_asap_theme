@@ -35,7 +35,8 @@ class UserSettingsController < ApplicationController
       @user.pref[:font_size] = params[:pref][:font_size]
     end
     if params[:pref]
-      @user.pref[:issue_panel_beta] = params[:pref][:issue_panel_beta].to_s == '1' ? '1' : '0'
+      @user.pref[:issue_panel_beta]     = params[:pref][:issue_panel_beta].to_s == '1' ? '1' : '0'
+      @user.pref[:bold_assigned_to_me]  = params[:pref][:bold_assigned_to_me].to_s == '1' ? '1' : '0'
     end
     if @user.save
       @user.pref.save

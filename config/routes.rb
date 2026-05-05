@@ -19,6 +19,9 @@ post   'projects/:id/logo', :to => 'projects#save_logo',   :as => 'project_save_
 delete 'projects/:id/logo', :to => 'projects#delete_logo', :as => 'project_delete_logo'
 
 
+# Issue field inline edit
+patch 'issues/:id/field', to: 'issue_fields#update', as: :issue_field_update
+
 # Local avatar and letter avatar
 match 'my/avatar', :to => 'my#avatar', :via => [:get, :post]
 match 'my/save_avatar/:id', :to => 'my#save_avatar', :via => [:get, :post]
