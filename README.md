@@ -61,37 +61,51 @@ Issues
     <td align="center">
       <a href="doc/screenshots/welcome.png">
         <img src="doc/screenshots/welcome.png" width="200"><br>
-        Screen 2
+            Welcome page
       </a>
     </td>
     <td align="center">
+      <a href="doc/screenshots/issues.png">
+        <img src="doc/screenshots/issues.png" width="200"><br>
+            Issues list
+      </a>
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
       <a href="doc/screenshots/issue-panel.png">
         <img src="doc/screenshots/issue-panel.png" width="200"><br>
-        Screen 3
+            Issue panel
+      </a>
+    </td>
+    <td align="center">
+      <a href="doc/screenshots/preferences.png">
+        <img src="doc/screenshots/preferences.png" width="200"><br>
+            Preferences
+      </a>
+    </td>
+    <td align="center">
+      <a href="doc/screenshots/dark.png">
+        <img src="doc/screenshots/dark.png" width="200"><br>
+            Dark mode
+      </a>
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <a href="doc/screenshots/mobile.png">
+        <img src="doc/screenshots/mobile.png" width="200"><br>
+            Mobile view
+      </a>
+    </td>
+    <td align="center">
+      <a href="doc/screenshots/mobile2.png">
+        <img src="doc/screenshots/mobile2.png" width="200"><br>
+            Mobile view 2
       </a>
     </td>
   </tr>
 </table>
-
-<p align="center">
-
-
-  <a href="doc/screenshots/issue.png">
-    <img src="doc/screenshots/issue.png" width="200" />
-  </a>
-  <a href="doc/screenshots/preferences.png">
-    <img src="doc/screenshots/preferences.png" width="200" />
-  </a>
-  <a href="doc/screenshots/dark.png">
-    <img src="doc/screenshots/dark.png" width="200" />
-  </a>
-  <a href="doc/screenshots/mobile.png">
-    <img src="doc/screenshots/mobile.png" width="200" />
-  </a>
-  <a href="doc/screenshots/mobile2.png">
-    <img src="doc/screenshots/mobile2.png" width="200" />
-  </a>
-</p>
 
 
 ## Installation
