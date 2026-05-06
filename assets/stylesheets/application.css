@@ -681,8 +681,6 @@ div.table-list.boards .table-list-cell.name {
   min-width: 1em;
 }
 .query-totals {
-  text-align: right;
-  margin-top: -2.3em;
   font-size: 93%;
 }
 .query-totals > span:not(:first-child) {
@@ -6808,6 +6806,9 @@ table.list thead th a.sort {
   &:where(.dark, .dark *) {
     color: var(--color-gray-100);
   }
+  span.icon-label {
+    text-wrap: nowrap;
+  }
 }
 table.sort-by-tracker thead th a.sort, table.sort-by-id thead th a.sort {
   padding-left: calc(var(--spacing) * 4);
@@ -7008,6 +7009,14 @@ table.list:not(.odd-even) tbody tr:nth-child(odd):hover, .odd:hover, #issue-chan
     display: flex;
     align-items: center;
   }
+}
+.query-totals {
+  position: relative;
+  margin-bottom: calc(var(--spacing) * 2);
+  display: flex;
+  font-size: var(--text-sm);
+  line-height: var(--tw-leading, var(--text-sm--line-height));
+  color: var(--color-gray-600);
 }
 .controller-issues, .controller-inbox, .controller-todo, .issue-panel__body {
   .header .contextual {

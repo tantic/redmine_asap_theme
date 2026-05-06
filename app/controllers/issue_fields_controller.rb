@@ -1,5 +1,6 @@
 class IssueFieldsController < ApplicationController
   helper IssueStatusesHelper
+  helper IssuesHelper
 
   before_action :find_issue
   before_action :check_editable
@@ -86,7 +87,7 @@ class IssueFieldsController < ApplicationController
     @issue.init_journal(User.current)
     if @issue.update(custom_field_values: { cf_id.to_s => params[:value] })
       cf_value = @issue.custom_value_for(cf)
-      render json: { success: true, rendered_html: view_context.show_value(cf_value) }, status: :ok
+      render json: { success: true, rendered_html: view_context.format_object(cf_value) }, status: :ok
     else
       render json: { errors: @issue.errors.full_messages }, status: :unprocessable_entity
     end

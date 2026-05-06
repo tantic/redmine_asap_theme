@@ -1005,8 +1005,8 @@ div.table-list.boards .table-list-cell.name {
 } */
 
 .query-totals {
-    text-align: right;
-    margin-top: -2.3em;
+    /*text-align: right;*/
+    /*margin-top: -2.3em;*/
     font-size: 93%;
 }
 .query-totals > span:not(:first-child) {

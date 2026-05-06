@@ -30,6 +30,9 @@ table.list thead th a {
 
 table.list thead th a.sort {
     @apply bg-gray-200 dark:bg-gray-600 rounded text-gray-800 dark:text-gray-100 font-bold;
+    span.icon-label {
+        @apply text-nowrap;
+    }
 }
 
 table.sort-by-tracker thead th a.sort,
@@ -279,4 +282,8 @@ table.list:not(.odd-even) tbody tr:nth-child(even):hover,
     label {
         @apply flex items-center;
     }
+}
+
+.query-totals {
+    @apply text-sm text-gray-600 relative flex mb-2;
 }
