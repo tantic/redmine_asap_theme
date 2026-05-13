@@ -69,7 +69,7 @@
         <tr>
           <td class="name">
             <%# Badge coloré tracker %>
-            <span class="inline-flex items-center px-1.5 py-0.5 rounded text-xs font-medium mr-1"
+            <span class="inline-flex items-center px-1.5 py-0.5 rounded-r text-xs font-medium mr-1"
                   style="background-color:<%= tracker.bg_color.presence || '#e5e7eb' %>;color:<%= tracker.text_color.presence || '#374151' %>;">
               <%= link_to tracker.name,
                           project_issues_path(@project, :set_filter => 1, :tracker_id => tracker.id),

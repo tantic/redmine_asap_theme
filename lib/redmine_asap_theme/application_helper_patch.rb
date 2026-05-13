@@ -12,6 +12,14 @@ module RedmineAsapTheme
     end
 
 
+    def format_activity_description(text)
+      h(
+        strip_tags(text.to_s).slice(0, 10240)
+        .gsub(%r{(^>.*?(?:\r?\n))(?:>.*?(?:\r?\n)+)+}m, "\\1> ...\n")
+        .truncate(240)
+      ).gsub(/[\r\n]+/, "<br>").html_safe
+    end
+
     def format_object(object, *args, &block)
       if object.is_a?(CustomValue) || object.is_a?(CustomFieldValue)
         options = args.first.is_a?(Hash) ? args.first : {}
@@ -263,7 +271,7 @@ module RedmineAsapTheme
         content_tag(
           'span',
           "#{issue.tracker} ##{issue.id}",
-          class: "rounded-r px-2.5 py-1 text-xs font-medium",
+          class: "rounded-r px-2.5 py-0.5 text-xs font-medium",
           style: "background-color: #{issue.tracker.bg_color}; color: #{issue.tracker.text_color};"
         )
       end

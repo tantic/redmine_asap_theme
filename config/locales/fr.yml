@@ -43,6 +43,7 @@ fr:
   label_redmine_asap_theme_login: Page d'authentification
   label_redmine_asap_theme_colors: Couleurs
   label_display: Affichage
+  label_issue_open: Ouvrir en plein écran
   label_issue_general: Général
   label_issue_relations: Relations
   label_issue_progress: Avancement

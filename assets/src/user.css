@@ -1,35 +1,46 @@
-.controller-users.action-show{
-  #content{
-    >h2{
-      @apply flex flex-col items-center w-full text-xl my-6 font-medium;
-      .gravatar{
-        @apply w-24 h-24 mb-6;
-      }
-    }
-  }
-  .splitcontentleft, .splitcontentright{
-    @apply px-6;
-    >h3, h3>a, #groups >h3{
-      @apply uppercase text-gray-500 font-light;
-    }
-    >table,>ul{
-      @apply shadow my-4 bg-white border border-gray-200 rounded-lg  p-8 dark:bg-gray-800 dark:border-gray-700;
-    }
-  }
-  #activity{
-    @apply shadow my-4 bg-white border border-gray-200 rounded-lg  p-8 dark:bg-gray-800 dark:border-gray-700;
-    dl{
-      dt{
-        img.gravatar{
-          display: none;
+.controller-users.action-show {
+    #content {
+        > h2 {
+            @apply flex flex-col items-center w-full text-xl my-6 font-medium;
+            .gravatar {
+                @apply w-24 h-24 mb-6;
+            }
         }
-      }
     }
-  }
-  #groups{
-    >table,>ul{
-      @apply shadow my-4 bg-white border border-gray-200 rounded-lg  p-8 dark:bg-gray-800 dark:border-gray-700;
+    .splitcontentleft,
+    .splitcontentright {
+        @apply px-6;
+        > h3,
+        h3 > a,
+        #groups > h3 {
+            @apply uppercase text-gray-500 font-light;
+        }
+        > table,
+        > ul {
+            @apply shadow my-4 bg-white border border-gray-200 rounded-lg  p-8 dark:bg-gray-800 dark:border-gray-700;
+        }
     }
-  }
+    #activity {
+        @apply shadow my-4 bg-white border border-gray-200 rounded-lg  p-8 dark:bg-gray-800 dark:border-gray-700;
+        dl {
+            dt {
+                @apply flex items-center gap-2;
+                img.gravatar {
+                    display: none;
+                }
+            }
+            dd {
+                @apply border-l-2 border-blue-400 dark:border-gray-700 px-4 ml-2 mb-6 mt-2;
+            }
+        }
+        h3 {
+            @apply pb-4 font-medium border-b border-gray-200 dark:border-gray-700 mb-6;
+        }
+    }
+    #groups {
+        > table,
+        > ul {
+            @apply shadow my-4 bg-white border border-gray-200 rounded-lg  p-8 dark:bg-gray-800 dark:border-gray-700;
+        }
+    }
 }
-

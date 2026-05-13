@@ -131,12 +131,14 @@
                 }
             }
         }
+
         dd,
         #search-results dd {
-            margin-bottom: 1em;
+            /*margin-bottom: 1em;*/
             /*padding-left: 65px;*/
-            font-size: 0.8125rem;
-            @apply pl-0 md:pl-18;
+            /*font-size: 0.8125rem;*/
+            /*@apply pl-0 md:pl-18;*/
+            @apply border-l-2 border-blue-400 dark:border-gray-700 px-4 ml-2 mb-6 mt-2;
         }
         dt svg.icon-svg {
             margin-right: 4px;
@@ -165,7 +167,7 @@
             @apply pl-0 md:pl-6;
         }
         dd.grouped {
-            @apply ml-0 md:ml-6;
+            @apply ml-0 md:ml-8;
         }
         h3 {
             @apply bg-gray-100 dark:bg-gray-700 p-2;

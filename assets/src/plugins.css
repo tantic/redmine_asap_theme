@@ -516,13 +516,15 @@ ul.cf-checklist-menu a {
 .issue-panel__body .jstTabs.tabs {
     margin-bottom: -1px;
     ul {
-        @apply border-b-0 flex;
+        @apply border-b-0 flex overflow-x-auto;
     }
     li {
         height: 42px;
-
+        .jstElements {
+            @apply flex items-center;
+        }
         a {
-            @apply flex text-[11px]! items-center justify-center text-gray-500 bg-gray-50 border-gray-100 px-2 py-1;
+            @apply flex text-[11px]! items-center justify-center text-gray-500 bg-gray-50 dark:bg-gray-600 border-gray-100 px-2 py-1;
         }
         a.selected {
             @apply text-blue-700;
@@ -532,13 +534,13 @@ ul.cf-checklist-menu a {
 
 /* Observateurs dans le panel : avatar circulaire qui s'agrandit en pill au hover */
 .issue-panel__body .panel-watchers-section {
-    @apply bg-white dark:bg-gray-700 rounded shadow-sm px-4 py-2.5 mb-4 flex items-center gap-4;
+    @apply bg-white dark:bg-gray-900 rounded border border-gray-200 dark:border-gray-800 px-6 py-2.5 mb-4 flex items-center gap-4;
 }
 .issue-panel__body .panel-watchers-section h3 {
     @apply text-xs font-semibold m-0 whitespace-nowrap shrink-0;
 }
 .issue-panel__body .panel-watchers-section ul.watchers {
-    @apply list-none p-0 m-0 flex flex-row items-center;
+    @apply list-none py-0 m-0 flex flex-row items-center;
 }
 .issue-panel__body .panel-watchers-section ul.watchers li {
     display: flex;
@@ -842,4 +844,36 @@ body:has(#maintenance_mode_banner) #sticky-issue-header {
 #admin-menu a.redmine-maintenance-mode,
 #main-navbar #admin-menu a.icon-maintenance_mode {
     @apply pl-5 ml-3;
+}
+
+/* Inline field editor — float above grid to avoid layout shift */
+[data-controller~="field-edit"] {
+    position: relative;
+    align-self: flex-start;
+}
+.field-edit--active .value {
+    position: relative;
+}
+.field-edit--active [data-field-edit-target="editor"] {
+    position: absolute;
+    z-index: 50;
+    top: -5px;
+    left: 0;
+    width: auto;
+    /*min-width: 180px;*/
+    border: 1px solid #3b82f6;
+    border-radius: 4px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    @apply px-2  py-0.5 bg-gray-100 dark:bg-gray-800;
+    > * {
+        @apply my-0 py-0;
+    }
+}
+
+.description .field-edit--active [data-field-edit-target="editor"] {
+    position: relative;
+    top: 0px;
+}
+.dark .field-edit--active [data-field-edit-target="editor"] {
+    background: #374151;
 }

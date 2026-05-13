@@ -18,6 +18,10 @@ html.font-size-xl {
     --font-scale: 1.308;
 } /* ~17px base */
 
+ol {
+    @apply list-decimal pl-5;
+}
+
 #content {
     @apply relative px-6 sm:px-12 py-8 sm:py-6 bg-gray-50 dark:bg-gray-900 flex-grow m-0 overflow-x-auto;
 }

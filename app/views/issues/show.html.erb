@@ -88,9 +88,11 @@
     <div class="reaction">
       <%= reaction_button @issue %>
     </div>
-    <%= render partial: 'issues/editable_attributes' %>
-    <%= render_half_width_custom_fields_rows(@issue) %>
-    <%= call_hook(:view_issues_show_details_bottom, :issue => @issue) %>
+    <div class="grid grid-cols-4 gap-4">
+      <%= render partial: 'issues/editable_attributes' %>
+      <%= render_half_width_custom_fields_rows(@issue) %>
+      <%= call_hook(:view_issues_show_details_bottom, :issue => @issue) %>
+    </div>
 </div>
 
 <% if params[:panel].present? %>
@@ -104,7 +106,7 @@
 
 <% if @issue.description? || (@issue.editable? && @issue.safe_attribute?('description')) %>
 
-<div class="description shadow bg-white dark:bg-gray-700 rounded px-6 py-2 mb-4">
+<div class="description border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 rounded mb-4">
   <p><strong><%= l(:field_description) %></strong></p>
   <% if @issue.attributes_editable? %>
   <div data-controller="field-edit"
@@ -112,7 +114,7 @@
        data-field-edit-field-value="description"
        data-field-edit-type-value="textarea">
     <div data-field-edit-target="display" data-action="click->field-edit#edit"
-         class="wiki cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 px-2 py-1 rounded min-h-[2rem]">
+         class="wiki cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 px-6! py-3 rounded min-h-[2rem]">
       <% if @issue.description? %>
         <%= textilizable(@issue, :description, :attachments => @issue.attachments) %>
       <% else %>
@@ -123,12 +125,12 @@
       <textarea id="issue_description_inline_<%= @issue.id %>"
                 data-field-edit-target="input"
                 data-action="keydown->field-edit#keydown"
-                rows="8"
+                rows="16"
                 data-auto-complete = "true"
                 class="wiki-edit w-full border border-blue-400 rounded px-2 py-1 text-sm focus:outline-none dark:bg-gray-700 dark:text-gray-100"></textarea>
       <script>(function(){var e=document.getElementById('issue_description_inline_<%= @issue.id %>');if(!e)return;var v=<%= @issue.description.to_s.to_json.html_safe %>;e.value=v;e.dataset.ckValue=v;})();</script>
       <%= wikitoolbar_for "issue_description_inline_#{@issue.id}", preview_issue_path(:project_id => @issue.project, :issue_id => @issue.id) %>
-      <div class="flex gap-1 mt-1">
+      <div class="flex gap-1 py-4! mt-1">
         <button data-action="click->field-edit#save"
                 class="px-2 py-0.5 bg-blue-600 text-white rounded text-xs hover:bg-blue-700 cursor-pointer">✓ <%= l(:button_save) %></button>
         <button data-action="click->field-edit#cancel"
@@ -145,13 +147,13 @@
 <% end %>
 
 <% issue_files = @issue.attachments %>
-<div class="attachments-section shadow bg-white dark:bg-gray-700 rounded p-6">
-    <p class=""><strong><%=l(:label_attachment_plural)%></strong></p>
+<div class="attachments-section border border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-900 rounded p-6">
+    <p class="mb-2"><strong><%=l(:label_attachment_plural)%></strong></p>
     <% if issue_files.present? %>
         <%= link_to_attachments @issue, :thumbnails => true %>
     <% end %>
     <% if @issue.attachments_addable? %>
-        <div class="bg-gray-50 dark:bg-gray-600 border border-gray-200 dark:border-gray-500 p-4 rounded mt-1">
+        <div class="bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-800 p-4 rounded mt-1">
         <%= form_tag issue_path(@issue), method: :put, multipart: true, class: 'mt-0 flex! items-center overflow-x-auto' do %>
             <%= render :partial => 'attachments/form', :locals => {:container => @issue} %>
             <%= hidden_field_tag 'issue[lock_version]', @issue.lock_version %>
@@ -203,9 +205,9 @@
         <%= update_data_sources_for_auto_complete({users: watchers_autocomplete_for_mention_path(project_id: @issue.project, q: '', object_type: 'issue', object_id: @issue.id)}) %>
       <% end %>
       <%= text_area_tag 'issue[notes]', '',
-          rows: 4, id: 'issue_notes_add',
+          rows: 10, id: 'issue_notes_add',
           data: { auto_complete: true },
-          class: 'wiki-edit w-full border border-gray-200 dark:border-gray-600 rounded px-3 py-2 text-sm dark:bg-gray-700 dark:text-gray-100 focus:outline-none focus:border-blue-400' %>
+          class: 'wiki-edit w-full border border-gray-200 dark:border-gray-600 rounded px-3 py-2 text-sm dark:bg-gray-700 dark:text-gray-100 focus:outline-none focus:border-blue-400 mb-4' %>
       <%= wikitoolbar_for 'issue_notes_add', preview_issue_path(:project_id => @issue.project, :issue_id => @issue.id) %>
       <%= render :partial => 'attachments/form', :locals => {:container => @issue} %>
     </div>

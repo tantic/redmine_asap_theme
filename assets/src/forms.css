@@ -47,6 +47,10 @@ html.query-form-hidden #query_form {
     display: none;
 }
 
+html.query-form-hidden .controller-users.action-index #query_form {
+    display: flex;
+}
+
 /* Query form */
 #query-form {
     .tabular label.block {

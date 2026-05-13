@@ -59,6 +59,52 @@ $(document).ready(function() {
   }
 });
 
+// List continuation for all .wiki-edit textareas not managed by field-edit or CKEditor
+(function() {
+  function continueList(event) {
+    var input = event.target;
+    if (!input.matches('textarea.wiki-edit')) return;
+    if (event.key !== 'Enter') return;
+    // Let CKEditor handle its own textareas
+    if (window.CKEDITOR && input.id && CKEDITOR.instances[input.id]) return;
+    // Skip if field-edit controller is already handling this textarea
+    if (input.closest('[data-controller~="field-edit"]')) return;
+
+    var pos = input.selectionStart;
+    if (pos !== input.selectionEnd) return;
+
+    var text = input.value;
+    var lineStart = text.lastIndexOf('\n', pos - 1) + 1;
+    var lineEnd   = text.indexOf('\n', pos);
+    if (pos !== (lineEnd === -1 ? text.length : lineEnd)) return;
+
+    var line = text.substring(lineStart, pos);
+    var bulletEmpty   = /^(\s*)[*\-+]\s*$/.test(line);
+    var bulletMatch   = line.match(/^(\s*[*\-+] )/);
+    var numberedEmpty = /^(\s*)\d+\.\s*$/.test(line);
+    var numberedMatch = line.match(/^(\s*)(\d+)\. /);
+
+    if (bulletEmpty || numberedEmpty) {
+      event.preventDefault();
+      var newText = text.substring(0, lineStart) + '\n' + text.substring(pos);
+      input.value = newText;
+      input.setSelectionRange(lineStart + 1, lineStart + 1);
+    } else if (bulletMatch) {
+      event.preventDefault();
+      var insert = '\n' + bulletMatch[1];
+      input.value = text.substring(0, pos) + insert + text.substring(pos);
+      input.setSelectionRange(pos + insert.length, pos + insert.length);
+    } else if (numberedMatch) {
+      event.preventDefault();
+      var insert = '\n' + numberedMatch[1] + (parseInt(numberedMatch[2]) + 1) + '. ';
+      input.value = text.substring(0, pos) + insert + text.substring(pos);
+      input.setSelectionRange(pos + insert.length, pos + insert.length);
+    }
+  }
+
+  document.addEventListener('keydown', continueList);
+})();
+
 // Breadcrumb toggle is handled in application-turbo.js when Turbo is enabled.
 // When both Turbo settings are disabled, application-turbo.js is not loaded — handle here.
 $(document).ready(function(){

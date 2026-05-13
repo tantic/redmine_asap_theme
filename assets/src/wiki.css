@@ -1,121 +1,119 @@
-.controller-wiki{
-  #content {
-    > .contextual{
-      @apply -mt-2;
-    }
-    > .breadcrumb{
-      @apply -mt-4 mb-4;
-    }
-    >div.wiki{
-      @apply bg-white shadow dark:bg-gray-800 rounded p-8 mb-4 mt-8;
-      h1{
-        @apply text-xl font-medium border-b border-gray-100 pb-4 mb-4;
-      }
-      h2{
-        @apply text-lg font-medium border-b border-gray-100 pb-4 my-6;
-      }
-      h3{
-        @apply text-base font-medium mt-6 mb-2;
-      }
+.controller-wiki {
+    #content {
+        > .contextual {
+            @apply -mt-2;
+        }
+        > .breadcrumb {
+            @apply -mt-4 mb-4;
+        }
+        > div.wiki {
+            @apply bg-white shadow dark:bg-gray-800 rounded p-8 mb-4 mt-8;
+            h1 {
+                @apply text-xl font-medium border-b border-gray-100 pb-4 mb-4;
+            }
+            h2 {
+                @apply text-lg font-medium border-b border-gray-100 pb-4 my-6;
+            }
+            h3 {
+                @apply text-base font-medium mt-6 mb-2;
+            }
 
-      p{
-        @apply my-2;
-      }
-      a.project{
-        >div{
-          @apply inline-flex;
-          img{
-            display: none;
-          }
-        }
-        @apply inline-flex;
-          img{
-            display: none;
-          }
-      }
+            p {
+                @apply my-2;
+            }
+            a.project {
+                > div {
+                    @apply inline-flex;
+                    img {
+                        display: none;
+                    }
+                }
+                @apply inline-flex;
+                img {
+                    display: none;
+                }
+            }
 
-      blockquote{
-        @apply p-4 my-4 border-s-4 border-gray-300 rounded bg-gray-50 dark:border-gray-500 dark:bg-gray-800;
-      }
-      code{
-        @apply text-rose-700 text-xs bg-rose-50 border-rose-100 rounded p-0.5;
-      }
-      pre{
-        @apply my-4 mx-0 bg-gray-800 text-slate-100 shadow-xl border-gray-800 rounded p-4;
-        counter-reset: line;
-        >code{
-          @apply  text-xs bg-transparent border-none p-0;
-        }
-      }
-      .toc{
-        @apply space-y-2 list-disc ml-3 my-4 p-8 rounded border-yellow-200 bg-yellow-100 text-yellow-800;
+            blockquote {
+                @apply p-4 my-4 border-s-4 border-gray-300 rounded bg-gray-50 dark:border-gray-500 dark:bg-gray-800;
+            }
+            code {
+                @apply text-rose-700 text-xs bg-rose-50 border-rose-100 rounded p-0.5;
+            }
+            pre {
+                @apply my-4 mx-0 bg-gray-800 text-slate-100 shadow-xl border-gray-800 rounded p-4;
+                counter-reset: line;
+                > code {
+                    @apply text-gray-200 text-xs bg-transparent border-none p-0;
+                }
+            }
+            .toc {
+                @apply space-y-2 list-disc ml-3 my-4 p-8 rounded border-yellow-200 bg-yellow-100 text-yellow-800;
 
-        li{
-          @apply list-disc;
-          a{
-            @apply text-yellow-700;
-          }
+                li {
+                    @apply list-disc;
+                    a {
+                        @apply text-yellow-700;
+                    }
+                }
+                > li {
+                    @apply list-none;
+                    ul {
+                        @apply m-0 p-0;
+                    }
+                }
+            }
         }
-        >li{
-          @apply list-none;
-          ul{
-            @apply m-0 p-0;
-          }
-        }
-      }
     }
-  }
-  #sidebar-wrapper{
-    .wiki{
-      >ul{
-        padding-left: 0px;
-        ul{
-          padding-left: 15px;
+    #sidebar-wrapper {
+        .wiki {
+            > ul {
+                padding-left: 0px;
+                ul {
+                    padding-left: 15px;
+                }
+            }
         }
-      }
     }
-  }
-
 }
 
-
-.wiki{
-  @apply text-xs;
-  h1{
-    @apply text-base my-2;
-  }
-  h2{
-    @apply text-base font-bold border-b border-gray-100 pb-4 mt-4 mb-2;
-  }
-  h3{
-    @apply text-sm font-bold pb-1 mt-6 mb-0;
-  }
-  h4{
-    @apply text-sm font-medium py-1;
-  }
-  h5{
-    @apply text-xs font-medium py-1;
-  }
-  h5{
-    @apply text-xs text-gray-500 font-medium py-1;
-  }
-  p{
-    @apply py-2 ;
-  }
-  .pre-wrapper{
-    @apply relative;
-    .copy-pre-content-link{
-      @apply absolute right-2 top-2 cursor-pointer;
+.wiki {
+    @apply text-xs;
+    h1 {
+        @apply text-base my-2;
     }
-  }
-  pre{
-    @apply bg-gray-100 dark:bg-gray-600 rounded p-4 border-gray-200 dark:border-gray-700 my-1 overflow-x-auto max-w-full;
-    white-space: pre-wrap;
-    word-break: break-all;
-  }
-  overflow-wrap: anywhere;
-  word-break: break-word;
+    h2 {
+        @apply text-base font-bold border-b border-gray-100 pb-4 mt-4 mb-2;
+    }
+    h3 {
+        @apply text-sm font-bold pb-1 mt-6 mb-0;
+    }
+    h4 {
+        @apply text-sm font-medium py-1;
+    }
+    h5 {
+        @apply text-xs font-medium py-1;
+    }
+    h5 {
+        @apply text-xs text-gray-500 font-medium py-1;
+    }
+    p {
+        @apply py-2;
+    }
+    .pre-wrapper {
+        @apply relative;
+        .copy-pre-content-link {
+            @apply absolute right-2 top-2 cursor-pointer;
+        }
+    }
+    pre {
+        @apply bg-gray-100 dark:bg-gray-600 rounded p-4 border-gray-200 dark:border-gray-700 my-1 overflow-x-auto max-w-full;
+        white-space: pre-wrap;
+        word-break: break-all;
+    }
+    overflow-wrap: anywhere;
+    word-break: break-word;
 }
-div.wiki p{
-  /* @apply text-xs; */
+div.wiki p {
+    /* @apply text-xs; */
 }

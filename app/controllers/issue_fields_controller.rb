@@ -33,7 +33,9 @@ class IssueFieldsController < ApplicationController
     end
 
     if @issue.update(field => params[:value])
-      response_data = { success: true, rendered_html: render_field_html(field) }
+      response_data = { success: true, rendered_html: render_field_html(field),
+                        lock_version: @issue.lock_version,
+                        last_journal_id: @issue.journals.maximum(:id) }
 
       if field == 'priority_id'
         default_pos = IssuePriority.default&.position || 0
@@ -87,7 +89,9 @@ class IssueFieldsController < ApplicationController
     @issue.init_journal(User.current)
     if @issue.update(custom_field_values: { cf_id.to_s => params[:value] })
       cf_value = @issue.custom_value_for(cf)
-      render json: { success: true, rendered_html: view_context.format_object(cf_value) }, status: :ok
+      render json: { success: true, rendered_html: view_context.format_object(cf_value),
+                     lock_version: @issue.lock_version,
+                     last_journal_id: @issue.journals.maximum(:id) }, status: :ok
     else
       render json: { errors: @issue.errors.full_messages }, status: :unprocessable_entity
     end

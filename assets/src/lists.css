@@ -76,7 +76,8 @@ table.list {
         font-size: 95%;
         @apply text-gray-500;
     }
-    td.assigned_to {
+    td.assigned_to,
+    td.author {
         > a > span {
             @apply px-0! py-0! border-0! bg-transparent!;
         }

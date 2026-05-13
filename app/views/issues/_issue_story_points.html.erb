@@ -1,0 +1,12 @@
+<% if @issue.project.module_enabled?('agile') %>
+  <% show_sp = RedmineAgile.use_story_points? && RedmineAgile.use_story_points_for?(@issue.tracker) %>
+  <% show_sprint = @issue.agile_sprint.present? %>
+  <% if show_sp || show_sprint %>
+    <%= issue_fields_rows do |rows|
+      rows.left  l(:label_agile_story_points), (@issue.story_points || '-') if show_sp
+      rows.right l(:label_agile_sprint),       @issue.agile_sprint          if show_sprint
+    end %>
+  <% end %>
+<% end %>
+
+<%= javascript_tag "linkableAttributeFields();" %>

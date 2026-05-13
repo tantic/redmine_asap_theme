@@ -3,6 +3,30 @@ require_dependency 'issues_helper'
 module RedmineAsapTheme
   module IssuesHelperPatch
     INLINE_EDIT_CF_FORMATS = %w[list list_optional string link int float date text].freeze
+
+    def render_issue_subject_with_tree(issue)
+      ancestors = issue.root? ? [] : issue.ancestors.visible.to_a
+
+      if ancestors.any?
+        crumbs = safe_join(ancestors.map.with_index do |ancestor, i|
+          badge = content_tag(:span,
+            "#{ancestor.tracker.name} ##{ancestor.id}",
+            class: "rounded px-1.5 py-0.5 text-[11px] font-medium",
+            style: "background-color: #{ancestor.tracker.bg_color}; color: #{ancestor.tracker.text_color};"
+          )
+          item = link_to(badge, issue_path(ancestor), title: ancestor.subject, class: "hover:opacity-75")
+          i < ancestors.size - 1 ? (item + content_tag(:span, ' › ', class: "text-gray-400 dark:text-gray-500 text-xs")) : item
+        end)
+
+        content_tag(:div, class: "flex flex-col") do
+          content_tag(:div, crumbs, class: "flex items-center flex-wrap gap-x-0.5 gap-y-1 mb-1") +
+          content_tag('h3', h(issue.subject))
+        end
+      else
+        content_tag('h3', h(issue.subject))
+      end
+    end
+
     def issue_heading(issue)
       text = "#{issue.tracker.name} ##{issue.id}"
       content_tag(
@@ -46,13 +70,12 @@ module RedmineAsapTheme
       end
 
       def to_html
-        # rubocop:disable Performance/Sum
-        content =
-          content_tag('div', @left.reduce(&:+), :class => 'splitcontentleft') +
-          content_tag('div', @right.reduce(&:+), :class => 'splitcontentleft')
-        # rubocop:enable Performance/Sum
+        all_cells = interleave(@left, @right)
+        safe_join(all_cells)
+      end
 
-        content_tag('div', content, :class => 'splitcontent')
+      def interleave(left, right)
+        [left.size, right.size].max.times.flat_map { |i| [left[i], right[i]].compact }
       end
 
       def cells(label, text, options={})
@@ -88,19 +111,18 @@ module RedmineAsapTheme
       return if values.empty?
 
       editable = issue.attributes_editable?
-      half = (values.size / 2.0).ceil
-      issue_fields_rows do |rows|
-        values.each_with_index do |value, i|
-          m = (i < half ? :left : :right)
-          cf = value.custom_field
-          value_tag = if editable && INLINE_EDIT_CF_FORMATS.include?(cf.field_format)
-            inline_edit_cf_tag(issue, value)
-          else
-            custom_field_value_tag(value)
-          end
-          rows.send m, custom_field_name_tag(cf), value_tag, class: cf.css_classes
+      items = safe_join(values.map do |value|
+        cf = value.custom_field
+        value_tag = if editable && INLINE_EDIT_CF_FORMATS.include?(cf.field_format)
+          inline_edit_cf_tag(issue, value)
+        else
+          custom_field_value_tag(value)
         end
-      end
+        label = content_tag('div', custom_field_name_tag(cf).to_s + ':', class: 'label')
+        val   = content_tag('div', value_tag, class: 'value')
+        content_tag('div', label + val, class: "attribute #{cf.css_classes}".strip)
+      end)
+      items
     end
 
     def render_full_width_custom_fields_rows(issue)
@@ -136,7 +158,7 @@ module RedmineAsapTheme
       display_html = custom_field_value_tag(cf_value).presence || '-'
       display = content_tag(:span, display_html.html_safe,
         data: { field_edit_target: 'display', action: 'click->field-edit#edit' },
-        class: 'cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600 px-1 rounded block -mx-1'
+        class: 'cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-600 px-1 rounded block -mx-1'
       )
 
       input_el, extra_data = cf_input_for(cf, current)

@@ -131,6 +131,7 @@
     edit(event) {
       // Ne pas activer l'édition si le clic vient d'un lien (ex: hiérarchie parente)
       if (event?.target.closest('a')) return;
+      this.element.classList.add('field-edit--active');
       this.displayTarget.classList.add('hidden!');
       this.editorTarget.classList.remove('hidden!');
       const input = this.inputTarget;
@@ -191,6 +192,7 @@
         this._originalValue = undefined;
         this._pendingAttachments = [];
       }
+      this.element.classList.remove('field-edit--active');
       this.editorTarget.classList.add('hidden!');
       this.displayTarget.classList.remove('hidden!');
     }
@@ -224,6 +226,16 @@
           this._originalValue = value; // cancel() utilisera la valeur sauvegardée, pas l'ancienne
           this._pendingAttachments = [];
           input.dataset.ckValue = value;
+          if (data.lock_version != null) {
+            document.querySelectorAll('input[name="issue[lock_version]"]').forEach(el => {
+              el.value = data.lock_version;
+            });
+          }
+          if (data.last_journal_id != null) {
+            document.querySelectorAll('input[name="last_journal_id"]').forEach(el => {
+              el.value = data.last_journal_id;
+            });
+          }
           this.cancel();
           const savedDetail = {
             issueId: this.issueIdValue,
@@ -251,8 +263,49 @@
       if (event.key === 'Enter' && this.inputTarget.tagName !== 'TEXTAREA') {
         event.preventDefault();
         this.save();
+      } else if (event.key === 'Enter' && this.inputTarget.tagName === 'TEXTAREA') {
+        this._continueList(event);
       } else if (event.key === 'Escape') {
         this.cancel();
+      }
+    }
+
+    _continueList(event) {
+      const input = this.inputTarget;
+      // Laisser CKEditor gérer son propre Enter
+      if (window.CKEDITOR?.instances?.[input.id]) return;
+
+      const pos = input.selectionStart;
+      if (pos !== input.selectionEnd) return; // sélection active, pas de continuation
+
+      const text = input.value;
+      const lineStart = text.lastIndexOf('\n', pos - 1) + 1;
+      const lineEnd   = text.indexOf('\n', pos);
+      if (pos !== (lineEnd === -1 ? text.length : lineEnd)) return; // curseur pas en fin de ligne
+
+      const line = text.substring(lineStart, pos);
+
+      const bulletEmpty   = /^(\s*)[*\-+]\s*$/.test(line);
+      const bulletMatch   = line.match(/^(\s*[*\-+] )/);
+      const numberedEmpty = /^(\s*)\d+\.\s*$/.test(line);
+      const numberedMatch = line.match(/^(\s*)(\d+)\. /);
+
+      if (bulletEmpty || numberedEmpty) {
+        // Item vide → terminer la liste
+        event.preventDefault();
+        const newText = text.substring(0, lineStart) + '\n' + text.substring(pos);
+        input.value = newText;
+        input.setSelectionRange(lineStart + 1, lineStart + 1);
+      } else if (bulletMatch) {
+        event.preventDefault();
+        const insert = '\n' + bulletMatch[1];
+        input.value = text.substring(0, pos) + insert + text.substring(pos);
+        input.setSelectionRange(pos + insert.length, pos + insert.length);
+      } else if (numberedMatch) {
+        event.preventDefault();
+        const insert = '\n' + numberedMatch[1] + (parseInt(numberedMatch[2]) + 1) + '. ';
+        input.value = text.substring(0, pos) + insert + text.substring(pos);
+        input.setSelectionRange(pos + insert.length, pos + insert.length);
       }
     }
 
