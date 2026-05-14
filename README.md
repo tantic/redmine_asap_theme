@@ -73,36 +73,56 @@ Issues
   </tr>
   <tr>
     <td align="center">
+    <a href="doc/screenshots/issues-dark.png">
+        <img src="doc/screenshots/issues-dark.png" width="200"><br>
+            Issues list dark
+    </a>
+    </td>
+    <td align="center">
       <a href="doc/screenshots/issue-panel.png">
         <img src="doc/screenshots/issue-panel.png" width="200"><br>
             Issue panel
       </a>
     </td>
     <td align="center">
-      <a href="doc/screenshots/preferences.png">
-        <img src="doc/screenshots/preferences.png" width="200"><br>
-            Preferences
-      </a>
-    </td>
-    <td align="center">
-      <a href="doc/screenshots/dark.png">
-        <img src="doc/screenshots/dark.png" width="200"><br>
-            Dark mode
+      <a href="doc/screenshots/issue-panel-dark.png">
+        <img src="doc/screenshots/issue-panel-dark.png" width="200"><br>
+            Issue panel dark    
       </a>
     </td>
   </tr>
   <tr>
     <td align="center">
-      <a href="doc/screenshots/mobile.png">
-        <img src="doc/screenshots/mobile.png" width="200"><br>
-            Mobile view
-      </a>
+        <a href="doc/screenshots/issue-panel-edit.png">
+            <img src="doc/screenshots/issue-panel-edit.png" width="200"><br>
+                Edit inline issue
+        </a>
     </td>
     <td align="center">
-      <a href="doc/screenshots/mobile2.png">
-        <img src="doc/screenshots/mobile2.png" width="200"><br>
+        <a href="doc/screenshots/preferences.png">
+            <img src="doc/screenshots/preferences.png" width="200"><br>
+                Preferences
+        </a>
+    </td>
+    <td align="center">
+        <a href="doc/screenshots/profile.png">
+            <img src="doc/screenshots/profile.png" width="200"><br>
+                Profile page
+        </a>
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+    <a href="doc/screenshots/mobile.png">
+        <img src="doc/screenshots/mobile.png" height="100"><br>
+            Mobile view
+    </a>
+    </td>
+    <td align="center">
+    <a href="doc/screenshots/mobile2.png">
+        <img src="doc/screenshots/mobile2.png" height="100"><br>
             Mobile view 2
-      </a>
+    </a>
     </td>
   </tr>
 </table>
@@ -123,6 +143,15 @@ bundle exec rake redmine:plugins:migrate RAILS_ENV=production
 
 Go to the admin section > /settings/plugin/redmine_asap_theme to change the settings.
 Note : you can add your own wallpapers for the login page in the folder /assets/images/login and restart Redmine.
+
+* Enable "Enable Turbo Frames panel — side panel without full page reload (beta)" if you want to use the turbo frames panel. Don't enable "Enable turbo for a faster experience (beta)" option for now it's not ready yet (js incompatibility).
+* Choose a wallpaper for the login page
+* Set the color for the redmine top left logo
+* field icon if you want to add a weather field (sun, cloud...)
+
+Go to the admin section > tracker > choose a tracker to change the background and text color.
+Go to the admin section > Issue status > choose a status to change the background and text color.
+
 
 ## Contributing
 
