@@ -1,0 +1,47 @@
+<% default_action = false %>
+
+<div class="tabs">
+  <ul>
+  <% tabs.each do |tab| -%>
+    <% action = get_tab_action(tab) %>
+    <li><%= link_to (tab[:url] || { :tab => tab[:name] }),
+                    :id => "tab-#{tab[:name]}",
+                    :class => (tab[:name] != selected_tab ? nil : 'selected'),
+                    :onclick => (action.nil? ? nil : "#{ action }; return false;"),
+                    "data-turbo": (action ? "false" : nil),
+                    "data-turbo-prefetch": (action ? "false" : nil) do %>
+      <%= l(tab[:label]) %><%
+      if tab[:count] && tab[:count] > 0 %><span class="ml-1 text-[10px] bg-gray-100 dark:bg-gray-700 text-gray-400 rounded-full px-1.5 py-0.5 font-normal"><%= tab[:count] %></span><% end %>
+    <% end %></li>
+    <% default_action = action if tab[:name] == selected_tab %>
+  <% end -%>
+  </ul>
+  <div class="tabs-buttons" style="display:none;">
+    <button class="tab-left icon-only" type="button" onclick="moveTabLeft(this);">
+      <%= sprite_icon "angle-left" %>
+    </button>
+    <button class="tab-right icon-only" type="button" onclick="moveTabRight(this);">
+      <%= sprite_icon "angle-right" %>
+    </button>
+  </div>
+</div>
+
+<% tabs.each do |tab| -%>
+  <%= content_tag('div', (render(:partial => tab[:partial], :locals => {:tab => tab}) if tab[:partial]) ,
+                       :id => "tab-content-#{tab[:name]}",
+                       :style => (tab[:name] != selected_tab ? 'display:none' : nil),
+                       :class => 'tab-content') if tab[:partial] || tab[:remote] %>
+<% end -%>
+
+<% if default_action %>
+<script>
+(function() {
+  function runDefaultTab() { <%= raw default_action %> }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', runDefaultTab);
+  } else {
+    runDefaultTab();
+  }
+})();
+</script>
+<% end %>

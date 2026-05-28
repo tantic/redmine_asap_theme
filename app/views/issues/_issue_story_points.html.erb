@@ -1,12 +1,71 @@
 <% if @issue.project.module_enabled?('agile') %>
-  <% show_sp = RedmineAgile.use_story_points? && RedmineAgile.use_story_points_for?(@issue.tracker) %>
-  <% show_sprint = @issue.agile_sprint.present? %>
-  <% if show_sp || show_sprint %>
-    <%= issue_fields_rows do |rows|
-      rows.left  l(:label_agile_story_points), (@issue.story_points || '-') if show_sp
-      rows.right l(:label_agile_sprint),       @issue.agile_sprint          if show_sprint
-    end %>
+  <% show_sp = defined?(RedmineAgile) && RedmineAgile.use_story_points? && RedmineAgile.use_story_points_for?(@issue.tracker) %>
+  <% can_manage_sprints = User.current.allowed_to?(:manage_sprints, @issue.project) %>
+  <% show_sprint = @issue.agile_sprint.present? || can_manage_sprints %>
+
+  <% if show_sp %>
+    <div class="attribute agile-story-points"
+         <% if @issue.attributes_editable? %>
+           data-controller="field-edit"
+           data-field-edit-issue-id-value="<%= @issue.id %>"
+           data-field-edit-field-value="agile_story_points"
+         <% end %>>
+      <div class="label"><%= l(:label_agile_story_points) %>:</div>
+      <div class="value">
+        <% if @issue.attributes_editable? %>
+          <span data-field-edit-target="display" data-action="click->field-edit#edit"
+                class="cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-600 px-1 rounded block -mx-1">
+            <%= @issue.story_points || '-' %>
+          </span>
+          <div data-field-edit-target="editor" class="hidden!">
+            <input type="number" min="0" step="1"
+                   value="<%= @issue.story_points.to_i %>"
+                   data-field-edit-target="input"
+                   data-action="keydown->field-edit#keydown"
+                   class="border border-blue-400 rounded px-2 py-1 text-xs w-full dark:bg-gray-600 dark:text-gray-100">
+            <div class="flex gap-1 mt-1">
+              <button data-action="click->field-edit#save" type="button"
+                      class="px-2 py-0.5 bg-blue-600 text-white rounded text-xs hover:bg-blue-700 cursor-pointer">✓</button>
+              <button data-action="click->field-edit#cancel" type="button"
+                      class="px-2 py-0.5 bg-gray-200 dark:bg-gray-600 rounded text-xs hover:bg-gray-300 cursor-pointer">✕</button>
+            </div>
+          </div>
+        <% else %>
+          <%= @issue.story_points || '-' %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+
+  <% if show_sprint %>
+    <div class="attribute agile-sprint"
+         <% if can_manage_sprints %>
+           data-controller="field-edit"
+           data-field-edit-issue-id-value="<%= @issue.id %>"
+           data-field-edit-field-value="agile_sprint_id"
+         <% end %>>
+      <div class="label"><%= l(:label_agile_sprint) %>:</div>
+      <div class="value">
+        <% if can_manage_sprints %>
+          <span data-field-edit-target="display" data-action="click->field-edit#edit"
+                class="cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-600 px-1 rounded block -mx-1">
+            <%= @issue.agile_sprint&.name || '-' %>
+          </span>
+          <div data-field-edit-target="editor" class="hidden!">
+            <select data-field-edit-target="input" data-action="change->field-edit#save"
+                    class="border border-blue-400 rounded px-2 py-1 text-xs w-full dark:bg-gray-600 dark:text-gray-100">
+              <option value="">—</option>
+              <%= grouped_options_for_select(sprint_values_for_select_for(@issue.project), @issue.agile_data&.agile_sprint_id&.to_s) %>
+            </select>
+            <button data-action="click->field-edit#cancel" type="button"
+                    class="mt-1 px-2 py-0.5 bg-gray-200 dark:bg-gray-600 rounded text-xs hover:bg-gray-300 cursor-pointer">✕</button>
+          </div>
+        <% else %>
+          <%= @issue.agile_sprint&.name || '-' %>
+        <% end %>
+      </div>
+    </div>
   <% end %>
 <% end %>
 
-<%= javascript_tag "linkableAttributeFields();" %>
+<%= javascript_tag "if(typeof linkableAttributeFields === 'function') linkableAttributeFields();" %>

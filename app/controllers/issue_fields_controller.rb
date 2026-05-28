@@ -8,6 +8,7 @@ class IssueFieldsController < ApplicationController
   ALLOWED_FIELDS = %w[
     subject status_id priority_id assigned_to_id fixed_version_id
     category_id due_date start_date done_ratio estimated_hours description
+    parent_issue_id
   ].freeze
 
   def update
@@ -15,6 +16,10 @@ class IssueFieldsController < ApplicationController
 
     if field.start_with?('cf_')
       return update_custom_field(field)
+    end
+
+    if field.start_with?('agile_')
+      return update_agile_field(field)
     end
 
     unless ALLOWED_FIELDS.include?(field)
@@ -97,6 +102,39 @@ class IssueFieldsController < ApplicationController
     end
   end
 
+  def update_agile_field(field)
+    unless @issue.project.module_enabled?('agile')
+      render json: { error: 'Module agile non activé' }, status: :unprocessable_entity
+      return
+    end
+
+    agile_data = @issue.agile_data || @issue.build_agile_data
+
+    case field
+    when 'agile_story_points'
+      value = params[:value].to_s.strip.empty? ? nil : params[:value].to_i
+      if agile_data.update(story_points: value)
+        render json: { success: true, rendered_html: value&.to_s || '-' }, status: :ok
+      else
+        render json: { errors: agile_data.errors.full_messages }, status: :unprocessable_entity
+      end
+    when 'agile_sprint_id'
+      unless User.current.allowed_to?(:manage_sprints, @issue.project)
+        render json: { error: 'Non autorisé' }, status: :forbidden
+        return
+      end
+      sprint_id = params[:value].to_s.strip.empty? ? nil : params[:value].to_i
+      if agile_data.update(agile_sprint_id: sprint_id)
+        sprint = sprint_id ? AgileSprint.find_by(id: sprint_id) : nil
+        render json: { success: true, rendered_html: sprint&.to_s || '-' }, status: :ok
+      else
+        render json: { errors: agile_data.errors.full_messages }, status: :unprocessable_entity
+      end
+    else
+      render json: { error: 'Champ agile non supporté' }, status: :unprocessable_entity
+    end
+  end
+
   def render_field_html(field)
     case field
     when 'subject'          then @issue.subject
@@ -110,6 +148,14 @@ class IssueFieldsController < ApplicationController
     when 'done_ratio'       then view_context.progress_bar(@issue.done_ratio, legend: "#{@issue.done_ratio}%")
     when 'estimated_hours'  then view_context.issue_estimated_hours_details(@issue).presence || '-'
     when 'description'      then view_context.textilizable(@issue, :description)
+    when 'parent_issue_id'
+      if @issue.parent
+        view_context.link_to("##{@issue.parent.id} #{@issue.parent.subject}",
+                             view_context.issue_path(@issue.parent),
+                             class: 'text-blue-600 hover:underline text-xs')
+      else
+        '-'
+      end
     else                         params[:value].to_s.presence || '-'
     end
   end

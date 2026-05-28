@@ -22,6 +22,14 @@ delete 'projects/:id/logo', :to => 'projects#delete_logo', :as => 'project_delet
 # Issue field inline edit
 patch 'issues/:id/field', to: 'issue_fields#update', as: :issue_field_update
 
+# Checklist items (session-authenticated, bypasses API format auth restriction)
+post   'issues/:issue_id/checklist_items', to: 'checklist_items#create', as: :create_checklist_item
+patch  'checklist_items/:id', to: 'checklist_items#update', as: :update_checklist_item
+delete 'checklist_items/:id', to: 'checklist_items#destroy', as: :destroy_checklist_item
+
+# Board card positions
+post 'board_positions/reorder', to: 'board_positions#reorder', as: :board_positions_reorder
+
 # Local avatar and letter avatar
 match 'my/avatar', :to => 'my#avatar', :via => [:get, :post]
 match 'my/save_avatar/:id', :to => 'my#save_avatar', :via => [:get, :post]

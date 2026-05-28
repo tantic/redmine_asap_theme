@@ -138,17 +138,33 @@
         <div class="issue-panel__backdrop" data-action="click->issue-panel#close"></div>
         <div class="issue-panel__drawer">
           <div class="issue-panel__toolbar">
-            <a class="issue-panel__external" data-issue-panel-target="external" href="#" target="_blank">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width:14px;height:14px;">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
-              </svg>
-              <%= l(:label_issue_open) %>
-            </a>
-            <button class="issue-panel__close" data-action="click->issue-panel#close" aria-label="Fermer">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width:18px;height:18px;">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
-              </svg>
-            </button>
+            <div class="issue-panel__toolbar-left">
+              <button class="issue-panel__nav-btn" data-issue-panel-target="navPrev" data-action="click->issue-panel#goNavPrev" disabled aria-label="<%= l(:label_previous) %>">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" style="width:16px;height:16px;">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
+                </svg>
+              </button>
+              <button class="issue-panel__nav-btn" data-issue-panel-target="navNext" data-action="click->issue-panel#goNavNext" disabled aria-label="<%= l(:label_next) %>">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" style="width:16px;height:16px;">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+                </svg>
+              </button>
+              <span class="issue-panel__nav-position" data-issue-panel-target="navPosition"></span>
+            </div>
+            <div class="issue-panel__toolbar-right">
+              <a class="issue-panel__external" data-issue-panel-target="external" href="#" target="_blank">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width:14px;height:14px;">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
+                </svg>
+                <%= l(:label_issue_open) %>
+              </a>
+              <div class="issue-panel__toolbar-actions" data-issue-panel-target="actions"></div>
+              <button class="issue-panel__close" data-action="click->issue-panel#close" aria-label="Fermer">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width:18px;height:18px;">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
           </div>
           <% if _turbo_panel %>
             <turbo-frame id="issue-panel-body" class="issue-panel__body" data-issue-panel-target="body"></turbo-frame>

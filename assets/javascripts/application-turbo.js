@@ -42,10 +42,6 @@ document.addEventListener("turbo:load", function(e) {
   $('#content').on('change', 'input[data-disables], input[data-enables], input[data-shows]', toggleDisabledOnChange);
   toggleDisabledInit();
 
-  $('#content').on('click', '.toggle-multiselect', function() {
-    toggleMultiSelect($(this).siblings('select'));
-    $(this).toggleClass('icon-toggle-plus icon-toggle-minus');
-  });
   toggleMultiSelectIconInit();
 
   $('#history .tabs').on('click', 'a', function(e){

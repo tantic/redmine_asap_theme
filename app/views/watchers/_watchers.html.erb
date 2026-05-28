@@ -3,7 +3,6 @@
 <% view_allowed = User.current.allowed_to?(:"view_#{watched_klass_name}_watchers", watched.project) %>
 <% remove_allowed = User.current.allowed_to?(:"delete_#{watched_klass_name}_watchers", watched.project) %>
 
-<h3><%= l(:"label_#{watched_klass_name}_watchers") %> (<%= watched.watcher_users.size %>)</h3>
 
 <% if view_allowed %>
 <% scope = watched.watcher_users %>

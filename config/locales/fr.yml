@@ -72,6 +72,8 @@ fr:
   label_issue_panel_beta_description: Ouvre la demande dans un panneau latéral au clic sur son titre dans le tableau
   label_bold_assigned_to_me: Mettre en gras mes demandes assignées
   label_bold_assigned_to_me_description: Affiche en gras le sujet des demandes qui me sont assignées dans le tableau des demandes
+  label_board_view_enabled: Vue Kanban
+  label_board_view_enabled_description: Affiche un sélecteur Table / Board dans la liste des demandes
   label_font_size_xs: Très petit
   label_font_size_sm: Petit
   label_font_size_md: Normal

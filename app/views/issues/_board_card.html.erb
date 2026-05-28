@@ -1,0 +1,48 @@
+<div id="issue-<%= issue.id %>"
+     class="hascontextmenu board-card-wrapper"
+     draggable="true"
+     data-issue-id="<%= issue.id %>"
+     data-issue-href="<%= issue_path(issue) %>"
+     data-assignee-id="<%= issue.assigned_to&.id %>"
+     data-action="click->board#open dragstart->board#dragstart dragend->board#dragend">
+  <%= check_box_tag 'ids[]', issue.id, false, id: nil, style: 'display:none' %>
+  <div class="board-card<%= ' board-card--due-today' if issue.due_date == Date.today %>">
+    <div class="board-card__header">
+      <span class="board-card__tracker"
+            style="background-color:<%= issue.tracker.bg_color %>;color:<%= issue.tracker.text_color %>">
+        <%= issue.tracker %> #<%= issue.id %>
+      </span>
+      <% if issue.priority %>
+        <span class="board-card__priority <%= issue.priority.css_classes %>"
+              title="<%= issue.priority.name %>"></span>
+      <% end %>
+    </div>
+    <div class="board-card__subject"><%= issue.subject %></div>
+    <div class="board-card__footer">
+      <% if issue.assigned_to %>
+        <span class="board-card__assignee">
+          <%= avatar_with_local(issue.assigned_to, size: '20') %>
+        </span>
+      <% end %>
+      <% cl_info = cl_badge[issue.id] %>
+      <% if cl_info || issue.due_date %>
+      <span class="ml-auto flex items-center gap-1.5">
+        <% if cl_info %>
+          <span class="board-card__checklist<%= ' board-card__checklist--done' if cl_info[:done] %>">
+            <svg viewBox="0 0 14 14" width="10" height="10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+              <rect x="1" y="1" width="12" height="12" rx="2"/>
+              <% if cl_info[:done] %><path d="M3.5 7l2.5 2.5 4.5-5"/><% end %>
+            </svg>
+            <%= cl_info[:label] %>
+          </span>
+        <% end %>
+        <% if issue.due_date %>
+          <span class="board-card__due<%= ' overdue' if issue.overdue? %>">
+            <%= format_date(issue.due_date) %>
+          </span>
+        <% end %>
+      </span>
+      <% end %>
+    </div>
+  </div>
+</div>

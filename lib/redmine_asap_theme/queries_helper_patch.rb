@@ -69,6 +69,30 @@ module RedmineAsapTheme
       end
     end
 
+    def filter_chip_text(query, field, options)
+      label = query.label_for(field)
+      op    = options[:operator]
+      vals  = (options[:values] || []).reject(&:blank?)
+
+      valueless_ops = %w[o c !* * t ld w lw l2w m lm y nd nw nm]
+      if valueless_ops.include?(op) || vals.empty?
+        op_label = Query.operators_labels[op] || op
+        return "#{label}: #{op_label}"
+      end
+
+      filter_def = query.available_filters[field] rescue nil
+      display = vals.map do |v|
+        if filter_def && filter_def[:values].present?
+          pair = filter_def[:values].find { |p| p.is_a?(Array) && p.last.to_s == v.to_s }
+          pair ? pair.first.to_s : v.to_s
+        else
+          v.to_s
+        end
+      end.join(', ')
+
+      "#{label}: #{display}"
+    end
+
   end
 end
 

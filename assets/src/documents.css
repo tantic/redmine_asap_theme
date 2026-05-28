@@ -1,7 +1,95 @@
-.controller-documents{
-  #document-list{
-    .document-group{
-      @apply bg-white shadow dark:bg-gray-800 rounded p-8 mb-4;
+.controller-documents {
+    #document-list {
+        .document-group {
+            @apply bg-white shadow dark:bg-gray-800 rounded p-8 mb-4;
+        }
     }
-  }
+}
+
+/* ── Documents tree explorer ── */
+.docs-hidden {
+    display: none;
+}
+
+.docs-folder {
+    @apply mb-2 rounded-lg border border-gray-200 dark:border-gray-700 overflow-hidden;
+}
+
+.docs-folder__header {
+    @apply flex items-center gap-2 px-3 py-2 cursor-pointer select-none
+           bg-gray-50 dark:bg-gray-800
+           hover:bg-gray-100 dark:hover:bg-gray-700
+           transition-colors;
+}
+
+.docs-chevron {
+    @apply text-gray-400 dark:text-gray-500 text-xs transition-transform duration-200 inline-block;
+}
+
+.docs-chevron--collapsed {
+    transform: rotate(-90deg);
+}
+
+.docs-folder__icon {
+    @apply text-base leading-none;
+}
+
+.docs-folder__name {
+    @apply font-medium text-gray-700 dark:text-gray-200 flex-1 text-sm;
+}
+
+.docs-folder__count {
+    @apply text-xs text-gray-400 dark:text-gray-500 bg-gray-200 dark:bg-gray-700 rounded-full px-2 py-0.5;
+}
+
+.docs-folder__body {
+    @apply divide-y divide-gray-100 dark:divide-gray-700;
+}
+
+.docs-doc {
+    @apply px-4 py-3 bg-white dark:bg-gray-800;
+}
+
+.docs-doc__header {
+    @apply flex items-center gap-2;
+}
+
+.docs-doc__icon {
+    @apply text-base leading-none flex-shrink-0;
+}
+
+.docs-doc__title {
+    @apply flex-1 text-sm font-medium;
+}
+
+.docs-doc__title a {
+    @apply text-blue-600 dark:text-blue-400 hover:underline;
+}
+
+.docs-doc__meta {
+    @apply text-xs text-gray-400 dark:text-gray-500 flex-shrink-0;
+}
+
+.docs-doc__description {
+    @apply mt-1 ml-6 text-xs text-gray-500 dark:text-gray-400;
+}
+
+.docs-doc__files {
+    @apply mt-2 ml-6 flex flex-col gap-1;
+}
+
+.docs-file {
+    @apply flex items-center gap-1.5 text-xs;
+}
+
+.docs-file__icon {
+    @apply leading-none;
+}
+
+.docs-file__name {
+    @apply text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 hover:underline;
+}
+
+.docs-file__size {
+    @apply text-gray-400 dark:text-gray-500;
 }

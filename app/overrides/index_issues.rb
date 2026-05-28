@@ -1,6 +1,3 @@
 module IndexIssues
-  Deface::Override.new :virtual_path => "issues/index",
-                      :name => "button_filter_contextual",
-                      :insert_top => "div.contextual",
-                      :partial => "issues/toggle_filters_options"
+  # Toggle filters is now rendered directly in issues/index.html.erb
 end

@@ -1039,8 +1039,8 @@ table.progress-90 td {
         .filter {
             @apply flex items-center;
         }
-        .values span {
-            @apply flex items-center;
+        .values select.value {
+            display: inline-block;
         }
     }
 }
@@ -1576,9 +1576,9 @@ img.ui-datepicker-trigger {
 }
 
 div.attachments {
-    @apply relative bg-gray-50 dark:bg-gray-800 rounded overflow-x-auto;
+    @apply relative px-4;
     .contextual {
-        @apply absolute -top-12 right-4 mr-4;
+        @apply absolute -top-16 right-8 mr-4 z-50;
     }
     table {
         @apply w-full mt-4 mb-6;

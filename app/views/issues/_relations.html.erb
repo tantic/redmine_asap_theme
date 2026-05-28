@@ -1,19 +1,15 @@
 <div class="relations">
-
-    <div class="flex">
-        <p class="flex items-center gap-2">
-        <strong><%=l(:label_related_issues)%></strong>
-        <span class="issues-stat text-[12px]">
+    <div class="flex items-center  bg-gray-50 dark:bg-gray-700  px-6 py-2.5 border-b border-gray-100 font-semibold text-[11px] uppercase text-gray-400 tracking-wider leading-tight">
+        <%=l(:label_related_issues)%>
+        <span class="issues-stat text-[12px] ml-2">
         <%= render_relations_stats(@issue, @relations) if @relations.present? %>
         </span>
-        </p>
-    <% if User.current.allowed_to?(:manage_issue_relations, @project) %>
-    <div class="ml-auto">
-    <%= toggle_link l(:button_add), 'new-relation-form', {:focus => 'relation_issue_to_id'} %>
+        <% if User.current.allowed_to?(:manage_issue_relations, @project) %>
+        <div class="ml-auto">
+        <%= toggle_link l(:button_add), 'new-relation-form', {:focus => 'relation_issue_to_id'} %>
+        </div>
+        <% end %>
     </div>
-    <% end %>
-    </div>
-
 
 
     <% if @relations.present? %>

@@ -2,22 +2,37 @@ require_dependency 'issues_helper'
 
 module RedmineAsapTheme
   module IssuesHelperPatch
-    INLINE_EDIT_CF_FORMATS = %w[list list_optional string link int float date text].freeze
+    INLINE_EDIT_CF_FORMATS = %w[list list_optional string link int float date text version].freeze
 
     def render_issue_subject_with_tree(issue)
       ancestors = issue.root? ? [] : issue.ancestors.visible.to_a
+      panel_mode = defined?(params) && params[:panel].present?
 
-      if ancestors.any?
-        crumbs = safe_join(ancestors.map.with_index do |ancestor, i|
-          badge = content_tag(:span,
-            "#{ancestor.tracker.name} ##{ancestor.id}",
-            class: "rounded px-1.5 py-0.5 text-[11px] font-medium",
-            style: "background-color: #{ancestor.tracker.bg_color}; color: #{ancestor.tracker.text_color};"
-          )
-          item = link_to(badge, issue_path(ancestor), title: ancestor.subject, class: "hover:opacity-75")
-          i < ancestors.size - 1 ? (item + content_tag(:span, ' › ', class: "text-gray-400 dark:text-gray-500 text-xs")) : item
-        end)
+      separator = content_tag(:span, ' › ', class: "text-gray-400 dark:text-gray-500 text-xs")
 
+      ancestor_items = ancestors.map do |ancestor|
+        badge = content_tag(:span,
+          "#{ancestor.tracker.name} ##{ancestor.id}",
+          class: "rounded px-1.5 py-0.5 text-[11px] font-medium",
+          style: "background-color: #{ancestor.tracker.bg_color}; color: #{ancestor.tracker.text_color};"
+        )
+        link_to(badge, issue_path(ancestor), title: ancestor.subject, class: "hover:opacity-75")
+      end
+
+      current_badge = if panel_mode
+        content_tag(:span,
+          "#{issue.tracker.name} ##{issue.id}",
+          class: "rounded px-1.5 py-0.5 text-[11px] font-medium",
+          style: "background-color: #{issue.tracker.bg_color}; color: #{issue.tracker.text_color};"
+        )
+      end
+
+      all_items = ancestor_items + (current_badge ? [current_badge] : [])
+
+      if all_items.any?
+        crumbs = safe_join(all_items.each_with_index.map { |item, i|
+          i < all_items.size - 1 ? item + separator : item
+        })
         content_tag(:div, class: "flex flex-col") do
           content_tag(:div, crumbs, class: "flex items-center flex-wrap gap-x-0.5 gap-y-1 mb-1") +
           content_tag('h3', h(issue.subject))
@@ -99,6 +114,54 @@ module RedmineAsapTheme
    end
 
 
+    def issue_history_default_tab
+      return super unless params[:panel].present?
+
+      user_default_tab = User.current.pref.history_default_tab
+      case user_default_tab
+      when 'last_tab_visited'
+        cookies['history_last_tab'].presence || 'notes'
+      when ''
+        'notes'
+      else
+        user_default_tab
+      end
+    end
+
+    def issue_history_tabs
+      tabs = super
+      return tabs unless params[:panel].present?
+
+      # Prevent URL changes when switching tabs in panel mode
+      tabs = tabs.map do |tab|
+        next tab unless tab[:onclick]&.include?('this.href')
+        tab.merge(onclick: tab[:onclick].gsub('this.href', 'undefined'))
+      end
+
+      files_count     = @issue.attachments.size
+      subtasks_count  = @issue.leaf? ? 0 : @issue.children.visible.size
+      relations_count = (@relations || []).size
+
+      tabs << {
+        name: 'panel_files',
+        label: :label_attachment_plural,
+        onclick: 'showTab("panel_files", this.href)',
+        count: files_count > 0 ? files_count : nil
+      }
+
+      if !@issue.leaf? || User.current.allowed_to?(:manage_subtasks, @project) ||
+         @relations.present? || User.current.allowed_to?(:manage_issue_relations, @project)
+        tabs << {
+          name: 'panel_relations',
+          label: :label_relations,
+          onclick: 'showTab("panel_relations", this.href)',
+          count: (subtasks_count + relations_count) > 0 ? subtasks_count + relations_count : nil
+        }
+      end
+
+      tabs
+    end
+
    def issue_fields_rows
       issue = @issue
       r = IssueFieldsRows.new(issue)
@@ -161,7 +224,7 @@ module RedmineAsapTheme
         class: 'cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-600 px-1 rounded block -mx-1'
       )
 
-      input_el, extra_data = cf_input_for(cf, current)
+      input_el, extra_data = cf_input_for(cf, current, issue)
       cancel_btn = content_tag(:button, '✕',
         data: { action: 'click->field-edit#cancel' },
         type: 'button',
@@ -181,7 +244,7 @@ module RedmineAsapTheme
       )
     end
 
-    def cf_input_for(cf, current)
+    def cf_input_for(cf, current, issue = nil)
       input_class = 'border border-blue-400 rounded px-2 py-1 text-xs w-full dark:bg-gray-600 dark:text-gray-100'
       save_btn = content_tag(:button, '✓',
         data: { action: 'click->field-edit#save' }, type: 'button',
@@ -225,6 +288,17 @@ module RedmineAsapTheme
           data: { field_edit_target: 'input', action: 'keydown->field-edit#keydown' },
           rows: 4, class: input_class)
         [input + buttons, { field_edit_type_value: 'textarea' }]
+      when 'version'
+        versions = cf.possible_values_options(issue)
+        options_html = safe_join(
+          [content_tag(:option, '—', value: '')] +
+          versions.map { |name, id| content_tag(:option, name, value: id.to_s, selected: id.to_s == current) }
+        )
+        input = content_tag(:select, options_html,
+          data: { field_edit_target: 'input', action: 'change->field-edit#save' },
+          class: input_class
+        )
+        [input, {}]
       end
     end
   end

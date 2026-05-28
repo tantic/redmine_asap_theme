@@ -534,13 +534,14 @@ ul.cf-checklist-menu a {
 
 /* Observateurs dans le panel : avatar circulaire qui s'agrandit en pill au hover */
 .issue-panel__body .panel-watchers-section {
-    @apply bg-white dark:bg-gray-900 rounded border border-gray-200 dark:border-gray-800 px-6 py-2.5 mb-4 flex items-center gap-4;
+    /*@apply bg-white dark:bg-gray-900 rounded border border-gray-200 dark:border-gray-800 px-6 py-2.5 mb-4 flex items-center gap-4;*/
+    @apply flex items-center gap-4;
 }
 .issue-panel__body .panel-watchers-section h3 {
     @apply text-xs font-semibold m-0 whitespace-nowrap shrink-0;
 }
 .issue-panel__body .panel-watchers-section ul.watchers {
-    @apply list-none py-0 m-0 flex flex-row items-center;
+    @apply list-none pl-16 py-0 m-0 flex flex-row items-center;
 }
 .issue-panel__body .panel-watchers-section ul.watchers li {
     display: flex;
@@ -590,6 +591,7 @@ ul.cf-checklist-menu a {
     font-weight: 500;
     color: #374151;
     padding-left: 8px;
+    padding-right: 8px;
     text-decoration: none;
     white-space: nowrap;
     pointer-events: none;
@@ -849,7 +851,7 @@ body:has(#maintenance_mode_banner) #sticky-issue-header {
 /* Inline field editor — float above grid to avoid layout shift */
 [data-controller~="field-edit"] {
     position: relative;
-    align-self: flex-start;
+    /*align-self: flex-start;*/
 }
 .field-edit--active .value {
     position: relative;
@@ -857,23 +859,26 @@ body:has(#maintenance_mode_banner) #sticky-issue-header {
 .field-edit--active [data-field-edit-target="editor"] {
     position: absolute;
     z-index: 50;
-    top: -5px;
     left: 0;
     width: auto;
     /*min-width: 180px;*/
-    border: 1px solid #3b82f6;
+    /*border: 1px solid #3b82f6;*/
     border-radius: 4px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-    @apply px-2  py-0.5 bg-gray-100 dark:bg-gray-800;
+    /*box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);*/
+    @apply px-6  py-2.5 bg-gray-100 dark:bg-gray-800;
     > * {
         @apply my-0 py-0;
     }
 }
 
-.description .field-edit--active [data-field-edit-target="editor"] {
+.description .field-edit--active [data-field-edit-target="editor"],
+.field-edit--inline.field-edit--active [data-field-edit-target="editor"] {
     position: relative;
     top: 0px;
+    background: transparent;
+    padding: 0;
 }
 .dark .field-edit--active [data-field-edit-target="editor"] {
     background: #374151;
 }
+

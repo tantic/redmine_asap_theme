@@ -6,7 +6,7 @@
         <div class="value">
         <% if editable %>
             <span data-field-edit-target="display" data-action="click->field-edit#edit"
-                class="cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-600 px-1 rounded block -mx-1"
+                class="cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-600 px-1 rounded block"
                 style="background-color: <%= @issue.status.bg_color %>; color: <%= @issue.status.text_color %>; display: inline-block;">
             <%= @issue.status.name %>
             </span>
@@ -36,7 +36,7 @@
       <div class="value">
         <% if editable %>
           <span data-field-edit-target="display" data-action="click->field-edit#edit"
-                class="cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-600 px-1 rounded block -mx-1">
+                class="cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600 px-1 rounded block -mx-1">
             <%= @issue.priority.name %>
           </span>
           <div data-field-edit-target="editor" class="hidden!">
@@ -64,8 +64,13 @@
       <div class="value">
         <% if editable %>
           <span data-field-edit-target="display" data-action="click->field-edit#edit"
-                class="cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-600 px-1 rounded block -mx-1">
-            <%= @issue.assigned_to ? @issue.assigned_to.name : '-' %>
+                class="cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600 px-1 rounded block -mx-1">
+            <% if @issue.assigned_to %>
+              <span class="flex items-center gap-1.5">
+                <%= avatar(@issue.assigned_to, size: '16', class: 'rounded-full shrink-0') %>
+                <%= @issue.assigned_to.name %>
+              </span>
+            <% else %>-<% end %>
           </span>
           <div data-field-edit-target="editor" class="hidden!">
             <select data-field-edit-target="input" data-action="change->field-edit#save"
@@ -79,7 +84,12 @@
                     class="ml-1 mt-1 px-2 py-0.5 bg-gray-200 dark:bg-gray-600 rounded text-xs hover:bg-gray-300 cursor-pointer">✕</button>
           </div>
         <% else %>
-          <%= @issue.assigned_to ? link_to_principal(@issue.assigned_to) : '-' %>
+          <% if @issue.assigned_to %>
+            <span class="flex items-center gap-1.5">
+              <%= avatar(@issue.assigned_to, size: '16', class: 'rounded-full shrink-0') %>
+              <%= link_to_principal(@issue.assigned_to) %>
+            </span>
+          <% else %>-<% end %>
         <% end %>
       </div>
     </div>
@@ -93,7 +103,7 @@
       <div class="value">
         <% if editable %>
           <span data-field-edit-target="display" data-action="click->field-edit#edit"
-                class="cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-600 px-1 rounded block -mx-1">
+                class="cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600 px-1 rounded block -mx-1">
             <%= @issue.category ? @issue.category.name : '-' %>
           </span>
           <div data-field-edit-target="editor" class="hidden!">
@@ -119,15 +129,15 @@
     <div class="attribute fixed-version"
          <% if editable %>data-controller="field-edit" data-field-edit-issue-id-value="<%= @issue.id %>" data-field-edit-field-value="fixed_version_id"<% end %>>
       <div class="label"><%= l(:field_fixed_version) %>:</div>
-      <div class="value">
+      <div class="value w-auto! hover:w-full!">
         <% if editable %>
           <span data-field-edit-target="display" data-action="click->field-edit#edit"
-                class="cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-600 px-1 rounded block -mx-1">
+                class="inline-flex text-[12px] cursor-pointer w-auto items-center rounded px-2 py-0.5 text-xs font-medium border border-blue-200 text-blue-700 dark:border-blue-700 dark:text-blue-300 bg-blue-50 dark:bg-blue-900/30">
             <%= @issue.fixed_version ? @issue.fixed_version.name : '-' %>
           </span>
           <div data-field-edit-target="editor" class="hidden!">
             <select data-field-edit-target="input" data-action="change->field-edit#save"
-                    class="border border-blue-400 rounded px-2 py-1 text-xs w-full dark:bg-gray-600 dark:text-gray-100">
+                    class="border border-blue-400 rounded px-2 py-1 text-xs w-22! dark:bg-gray-600 dark:text-gray-100">
               <option value=""></option>
               <% @issue.assignable_versions.each do |v| %>
                 <option value="<%= v.id %>" <%= 'selected' if v.id == @issue.fixed_version_id %>><%= v.name %></option>
@@ -151,7 +161,7 @@
       <div class="value">
         <% if editable %>
           <span data-field-edit-target="display" data-action="click->field-edit#edit"
-                class="cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-600 px-1 rounded block -mx-1">
+                class="cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600 px-1 rounded block -mx-1">
             <%= format_date(@issue.start_date) || '-' %>
           </span>
           <div data-field-edit-target="editor" class="hidden!">
@@ -180,7 +190,7 @@
       <div class="value">
         <% if editable %>
           <span data-field-edit-target="display" data-action="click->field-edit#edit"
-                class="cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-600 px-1 rounded block -mx-1 <%= 'text-red-500! font-semibold' if @issue.overdue? %>">
+                class="cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600 px-1 rounded block -mx-1 <%= 'text-red-500! font-semibold' if @issue.overdue? %>">
             <%= format_date(@issue.due_date) || '-' %>
           </span>
           <div data-field-edit-target="editor" class="hidden!">
@@ -209,7 +219,7 @@
       <div class="value">
         <% if editable %>
           <span data-field-edit-target="display" data-action="click->field-edit#edit"
-                class="cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-600 px-1 rounded block -mx-1">
+                class="cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600 px-1 rounded block -mx-1">
             <%= progress_bar(@issue.done_ratio, :legend => "#{@issue.done_ratio}%") %>
           </span>
           <div data-field-edit-target="editor" class="hidden!">
@@ -237,7 +247,7 @@
       <div class="value">
         <% if editable %>
           <span data-field-edit-target="display" data-action="click->field-edit#edit"
-                class="cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-600 px-1 rounded block -mx-1">
+                class="cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600 px-1 rounded block -mx-1">
             <%= issue_estimated_hours_details(@issue).presence || '-' %>
           </span>
           <div data-field-edit-target="editor" class="hidden!">

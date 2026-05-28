@@ -6,7 +6,7 @@
   const { Controller } = await import('@hotwired/stimulus');
 
   Stimulus.register("issue-panel", class extends Controller {
-    static targets = ["body", "external"]
+    static targets = ["body", "external", "navPrev", "navNext", "navPosition", "actions"]
 
     connect() {
       this._abort = null;
@@ -14,6 +14,8 @@
       this._cacheTtl = 120_000;          // 2min (invalidé sur save)
       this._assetsInjected = false;
       this._currentUrl = null;
+      this._prevUrl = null;
+      this._nextUrl = null;
       this._turboMode = this.bodyTarget.tagName === 'TURBO-FRAME';
 
       this._onKeydown = (e) => { if (e.key === 'Escape') this.close(); };
@@ -29,13 +31,13 @@
       if (this._turboMode) {
         this._onTurboFrameLoad = () => this._handleTurboFrameLoad().catch(() => {});
         this._onTurboBeforeFetch = (e) => {
-          // Ajouter ?panel=1 à toutes les requêtes du frame (navigation interne)
           const url = e.detail.url;
+          if (!url) return;
           if (url && !url.searchParams.has('panel')) {
             url.searchParams.set('panel', '1');
           }
-          // Mettre à jour le lien externe avec l'URL propre (sans ?panel=1)
-          if (url) {
+          // Ne mettre à jour le lien externe que si c'est une navigation vers une issue
+          if (/\/issues\/\d+/.test(url.pathname)) {
             const cleanUrl = new URL(url.toString());
             cleanUrl.searchParams.delete('panel');
             this._currentUrl = cleanUrl.toString();
@@ -67,6 +69,12 @@
     open(url) {
       this._currentUrl = url;
       this.externalTarget.href = url;
+      this._prevUrl = null;
+      this._nextUrl = null;
+      if (this.hasNavPrevTarget) this.navPrevTarget.disabled = true;
+      if (this.hasNavNextTarget) this.navNextTarget.disabled = true;
+      if (this.hasNavPositionTarget) this.navPositionTarget.textContent = '';
+      if (this.hasActionsTarget) this.actionsTarget.innerHTML = '';
       this.bodyTarget.innerHTML = '<div class="issue-panel__loading">Chargement…</div>';
       this.element.classList.add('is-open');
       document.body.classList.add('issue-panel-open');
@@ -75,6 +83,60 @@
         this.bodyTarget.setAttribute('src', panelUrl);
       } else {
         this._load(url);
+      }
+    }
+
+    goNavPrev() { if (this._prevUrl) this._navigate(this._prevUrl); }
+    goNavNext() { if (this._nextUrl) this._navigate(this._nextUrl); }
+
+    _navigate(url) {
+      this._currentUrl = url;
+      this.externalTarget.href = url;
+      this._prevUrl = null;
+      this._nextUrl = null;
+      if (this.hasNavPrevTarget) this.navPrevTarget.disabled = true;
+      if (this.hasNavNextTarget) this.navNextTarget.disabled = true;
+      if (this.hasNavPositionTarget) this.navPositionTarget.textContent = '';
+      if (this.hasActionsTarget) this.actionsTarget.innerHTML = '';
+      if (this._turboMode) {
+        const panelUrl = url + (url.includes('?') ? '&' : '?') + 'panel=1';
+        this.bodyTarget.setAttribute('src', panelUrl);
+      } else {
+        this.bodyTarget.innerHTML = '<div class="issue-panel__loading">Chargement…</div>';
+        this._load(url);
+      }
+    }
+
+    _updateNavToolbar() {
+      const data = this.bodyTarget.querySelector('#issue-panel-nav-data');
+      this._prevUrl = data?.dataset.prev || null;
+      this._nextUrl = data?.dataset.next || null;
+      const label = data?.dataset.label || '';
+      if (this.hasNavPrevTarget) this.navPrevTarget.disabled = !this._prevUrl;
+      if (this.hasNavNextTarget) this.navNextTarget.disabled = !this._nextUrl;
+      if (this.hasNavPositionTarget) this.navPositionTarget.textContent = label;
+    }
+
+    _updateActionsToolbar() {
+      if (!this.hasActionsTarget) return;
+      this.actionsTarget.innerHTML = '';
+      const menu = this.bodyTarget.querySelector('#issue-panel-action-menu');
+      if (!menu) return;
+      // Skip the .contextual wrapper — move its children directly into the toolbar
+      const source = menu.querySelector('.contextual') || menu;
+      while (source.firstChild) this.actionsTarget.appendChild(source.firstChild);
+      menu.remove();
+
+      // The edit button has onclick="showAndScrollTo(…); return false;" which targets the
+      // inline form on the full page — that doesn't exist in panel mode. Remove the onclick
+      // and load the edit form inside the panel instead.
+      const editBtn = this.actionsTarget.querySelector('a.icon-edit');
+      if (editBtn) {
+        editBtn.removeAttribute('onclick');
+        editBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          this._navigate(editBtn.href);
+        });
       }
     }
 
@@ -96,6 +158,9 @@
       this.bodyTarget.querySelectorAll('form').forEach(f => {
         if (!f.hasAttribute('data-turbo')) f.setAttribute('data-turbo', 'false');
       });
+      this._fixPanelLinks();
+      this._updateNavToolbar();
+      this._updateActionsToolbar();
       this._activateDefaultTab();
       if (typeof setupFileDrop === 'function') setupFileDrop();
       this._initAutoComplete();
@@ -128,6 +193,9 @@
       if (cached && Date.now() - cached.ts < this._cacheTtl) {
         this.bodyTarget.innerHTML = cached.html;
         this._runInlineScripts(this.bodyTarget);
+        this._fixPanelLinks();
+        this._updateNavToolbar();
+        this._updateActionsToolbar();
         this._activateDefaultTab();
         if (typeof setupFileDrop === 'function') setupFileDrop();
         this._initAutoComplete();
@@ -165,6 +233,9 @@
         hiddenForms.forEach(el => el.style.display = 'block');
         this._runInlineScripts(this.bodyTarget);
         setTimeout(() => hiddenForms.forEach(el => el.style.display = ''), 200);
+        this._fixPanelLinks();
+        this._updateNavToolbar();
+        this._updateActionsToolbar();
         this._activateDefaultTab();
         await this._ensureAttachmentsJs(doc);
         if (typeof setupFileDrop === 'function') setupFileDrop();
@@ -275,14 +346,80 @@
     async _refreshParentList() {
       const tables = document.querySelectorAll('table.issues');
       const table = Array.from(tables).find(t => !t.closest('.issue-panel'));
-      if (!table) return;
+      const board = document.querySelector('.board-view:not(.issue-panel .board-view)');
+      if (!table && !board) return;
       try {
         const res = await fetch(window.location.href, { credentials: 'same-origin' });
         const html = await res.text();
         const doc = new DOMParser().parseFromString(html, 'text/html');
-        const newTable = doc.querySelector('table.issues');
-        if (newTable) table.outerHTML = newTable.outerHTML;
+        if (table) {
+          const newTable = doc.querySelector('table.issues');
+          if (newTable) table.outerHTML = newTable.outerHTML;
+        }
+        if (board) {
+          const newBoard = doc.querySelector('.board-view');
+          if (newBoard) board.outerHTML = newBoard.outerHTML;
+        }
       } catch (_) {}
+    }
+
+    // ── Fix des liens dans le panel ──────────────────────────────
+    // - href="#" (boutons Stimulus : quote, réactions…) : Turbo intercepte href="#" dans une
+    //   turbo-frame et recharge la frame → panneau blanc. data-turbo="false" désactive l'interception.
+    //   preventDefault empêche le scroll-to-top du navigateur ; Stimulus reçoit toujours le click.
+    // - data-remote="true" (edit/delete journal) : sans rails-ujs, Turbo navigue la frame vers
+    //   l'URL → réponse .js rendue comme HTML → blanc. On remplace par un fetch AJAX + eval.
+    // - Autres liens non-issue (wiki, diff, externe…) : ouvrir dans un nouvel onglet.
+    _fixPanelLinks() {
+      this.bodyTarget.querySelectorAll('a[href]').forEach(a => {
+        const href = a.getAttribute('href') || '';
+        if (!href) return;
+
+        // href="#" exact (Stimulus, onclick copy links…) : remplacer par javascript:void(0)
+        // pour que la barre de statut n'affiche pas l'URL courante avec # en suffixe.
+        // Turbo ignore les hrefs javascript: nativement ; pas besoin de data-turbo="false".
+        if (href === '#') {
+          a.setAttribute('href', 'javascript:void(0)');
+          return;
+        }
+
+        // Ancres internes "#note-X" : laisser le navigateur gérer nativement
+        // (scroll + mise à jour de l'URL). data-turbo="false" empêche Turbo de recharger la frame.
+        if (href.startsWith('#')) {
+          a.setAttribute('data-turbo', 'false');
+          return;
+        }
+
+        if (href.startsWith('javascript:') || href.startsWith('data:')) return;
+
+        try {
+          const url = new URL(href, window.location.origin);
+
+          // Liens issue : Turbo navigue la frame normalement
+          if (/\/issues\/\d+/.test(url.pathname)) return;
+
+          // data-remote="true" : rails-ujs absent → fetch AJAX + eval JS
+          if (a.dataset.remote === 'true') {
+            a.setAttribute('data-turbo', 'false');
+            a.addEventListener('click', (e) => {
+              e.preventDefault();
+              const method = (a.dataset.method || 'get').toUpperCase();
+              const csrf = document.querySelector('meta[name="csrf-token"]');
+              const headers = { 'Accept': 'text/javascript, application/javascript', 'X-Requested-With': 'XMLHttpRequest' };
+              if (csrf) headers['X-CSRF-Token'] = csrf.getAttribute('content');
+              fetch(a.href, { method, credentials: 'same-origin', headers })
+                .then(r => r.text())
+                .then(js => { try { (0, eval)(js); } catch (_) {} })
+                .catch(() => {});
+            });
+            return;
+          }
+
+          // Autres liens non-issue : ouvrir dans un nouvel onglet
+          a.setAttribute('target', '_blank');
+          if (!a.getAttribute('rel')) a.setAttribute('rel', 'noopener noreferrer');
+        } catch (_) {}
+      });
     }
 
     // ── Handlers d'événements globaux ────────────────────────────
@@ -398,14 +535,15 @@
           this.bodyTarget.style.opacity = '';
           this._cache.delete(issueUrl);
           this._cache.delete(res.url);
-          this._currentUrl = res.url;
-          this.externalTarget.href = res.url;
+          const destUrl = /\/issues\/\d+/.test(new URL(res.url).pathname) ? res.url : issueUrl;
+          this._currentUrl = destUrl;
+          this.externalTarget.href = destUrl;
           this.bodyTarget.innerHTML = '<div class="issue-panel__loading">Chargement…</div>';
           if (this._turboMode) {
-            const panelUrl = res.url + (res.url.includes('?') ? '&' : '?') + 'panel=1';
+            const panelUrl = destUrl + (destUrl.includes('?') ? '&' : '?') + 'panel=1';
             this.bodyTarget.setAttribute('src', panelUrl);
           } else {
-            this._load(res.url);
+            this._load(destUrl);
           }
           this._refreshParentList();
         } else {

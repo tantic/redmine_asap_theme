@@ -1,0 +1,15 @@
+<div class="contextual">
+<%= link_to sprite_icon('edit', l(:button_edit)), edit_issue_path(@issue),
+            :class => 'icon icon-edit ', :accesskey => accesskey(:edit) if @issue.editable? %>
+<%= link_to sprite_icon('time-add', l(:button_log_time)), new_issue_time_entry_path(@issue),
+            :class => 'icon icon-time-add ' if @issue.time_loggable? %>
+<%= watcher_link(@issue, User.current) %>
+<%= link_to sprite_icon('copy', l(:button_copy)), project_copy_issue_path(@project, @issue),
+            :class => 'icon icon-copy ' if User.current.allowed_to?(:copy_issues, @project) && Issue.allowed_target_projects.any? %>
+<%= actions_dropdown do %>
+  <%= copy_object_url_link(issue_url(@issue, only_path: false)) %>
+  <%= link_to sprite_icon('del', l(:button_delete_object, object_name: l(:label_issue)).capitalize), issue_path(@issue),
+              :data => {:confirm => issues_destroy_confirmation_message(@issue)},
+              :method => :delete, :class => 'icon icon-del ' if @issue.deletable? %>
+<% end %>
+</div>

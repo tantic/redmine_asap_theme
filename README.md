@@ -46,7 +46,8 @@ Issues
 * Notes form is displayed on the bottom of the issue page (no need to edit the issue to add a note)
 * Tracker can be customized (background color and color)
 * Colors and icons on default priorities (not customisable for now)
-* [Beta] Display issue in a panel when click on an issue of the main list : you can now edit online all attributes
+* Display issue in a panel when click on an issue of the main list : you can now edit online all attributes
+* [beta] Kanban board for issues with drag and drop support between status and in the same column
 
 ## Screenshots
 
@@ -112,6 +113,12 @@ Issues
     </td>
   </tr>
   <tr>
+    <td align="center">
+        <a href="doc/screenshots/issues-board-view.png">
+            <img src="doc/screenshots/issues-board-view.png" width="200"><br>
+                Kanban board view
+        </a>
+    </td>
     <td align="center">
     <a href="doc/screenshots/mobile.png">
         <img src="doc/screenshots/mobile.png" height="100"><br>

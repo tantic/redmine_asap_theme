@@ -35,8 +35,15 @@ class UserSettingsController < ApplicationController
       @user.pref[:font_size] = params[:pref][:font_size]
     end
     if params[:pref]
-      @user.pref[:issue_panel_beta]     = params[:pref][:issue_panel_beta].to_s == '1' ? '1' : '0'
-      @user.pref[:bold_assigned_to_me]  = params[:pref][:bold_assigned_to_me].to_s == '1' ? '1' : '0'
+      if params[:pref].key?(:issue_panel_beta)
+        @user.pref[:issue_panel_beta] = params[:pref][:issue_panel_beta].to_s == '1' ? '1' : '0'
+      end
+      if params[:pref].key?(:bold_assigned_to_me)
+        @user.pref[:bold_assigned_to_me] = params[:pref][:bold_assigned_to_me].to_s == '1' ? '1' : '0'
+      end
+      if params[:pref].key?(:board_view_enabled)
+        @user.pref[:board_view_enabled] = params[:pref][:board_view_enabled].to_s == '1' ? '1' : '0'
+      end
     end
     if @user.save
       @user.pref.save

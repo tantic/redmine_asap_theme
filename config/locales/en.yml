@@ -71,6 +71,8 @@ en:
   label_issue_panel_beta_description: Opens the issue in a side panel when clicking its title in the list
   label_bold_assigned_to_me: Bold my assigned issues
   label_bold_assigned_to_me_description: Display in bold the subject of issues assigned to me in the issues list
+  label_board_view_enabled: Kanban view
+  label_board_view_enabled_description: Shows a Table / Board switcher in the issues list
   label_font_size_xs: Very small
   label_font_size_sm: Small
   label_font_size_md: Normal

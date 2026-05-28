@@ -1,10 +1,18 @@
+<% filter_count = defined?(@query) && @query&.filters&.any? ? @query.filters.size : 0 %>
 <%= link_to "#",
       id: "toggle-query-form",
-      class: "rounded-full p-2 hover:bg-gray-200 dark:hover:bg-gray-700 relative" do %>
-  <span id="icon-on"  style="display:none">
-    <%= sprite_icon('adjustments', plugin: 'redmine_asap_theme', css_class: 's18 h-5 icon-svg icon-rtl') %>
+      class: "inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-700 text-sm text-gray-800! dark:text-gray-300!" do %>
+  <span id="icon-on" style="display:none">
+    <%= sprite_icon('adjustments-off', plugin: 'redmine_asap_theme', css_class: 's16 h-4 w-4 icon-svg icon-rtl') %>
   </span>
   <span id="icon-off" style="display:inline">
-    <%= sprite_icon('adjustments-off', plugin: 'redmine_asap_theme', css_class: 's18 h-5 icon-svg icon-rtl') %>
+    <%= sprite_icon('adjustments', plugin: 'redmine_asap_theme', css_class: 's16 h-4 w-4 icon-svg icon-rtl') %>
   </span>
+  <%= l(:label_filter_plural) %>
+  <% if filter_count > 0 %>
+    <span id="filter-count-badge"
+          class="bg-blue-600 text-white text-[10px] font-bold rounded-full min-w-[18px] h-[18px] flex items-center justify-center px-1 leading-none">
+      <%= filter_count %>
+    </span>
+  <% end %>
 <% end %>

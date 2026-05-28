@@ -1171,7 +1171,8 @@ input:placeholder-shown {
     text-overflow: ellipsis;
 }
 
-select[multiple="multiple"] {
+select[multiple] {
+    appearance: auto;
     background: #fff;
     padding-right: initial;
     height: auto;
