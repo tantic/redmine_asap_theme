@@ -4,7 +4,7 @@ select {
 
 input[type="text"],
 input[type="password"] {
-    @apply mt-1 block w-auto text-xs rounded-md bg-gray-100 dark:bg-gray-700 border-transparent focus:border-gray-500 focus:bg-white dark:focus:bg-gray-600 focus:ring-0;
+    @apply mt-1 block w-auto text-xs rounded-md bg-gray-100 dark:bg-gray-700 border-transparent focus:border-blue-300 focus:bg-white dark:focus:bg-gray-600 focus:ring-0;
 }
 
 #login-form input[type="text"],

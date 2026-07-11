@@ -1,11 +1,29 @@
 class ChecklistItemsController < ApplicationController
   before_action :check_plugin
-  before_action :find_issue, only: [:create]
+  before_action :find_issue, only: [:create, :templates, :reorder]
   before_action :find_item, only: [:update, :destroy]
   before_action :authorize_edit
 
+  def reorder
+    ids = Array(params[:ids]).map(&:to_i)
+    ids.each_with_index do |id, index|
+      Checklist.where(id: id, issue_id: @issue.id).update_all(position: index + 1)
+    end
+    head :ok
+  end
+
+  def templates
+    tpls = ChecklistTemplate.visible
+                            .in_project_and_global(@issue.project)
+                            .for_tracker_and_global(@issue.tracker)
+    render json: tpls.map { |t|
+      { id: t.id, name: t.name, items: t.checklists.map { |c| { subject: c.subject, is_section: c.is_section } } }
+    }
+  end
+
   def create
-    item = Checklist.new(subject: params.dig(:checklist, :subject).to_s.strip)
+    is_section = params.dig(:checklist, :is_section).in?([true, 'true', '1'])
+    item = Checklist.new(subject: params.dig(:checklist, :subject).to_s.strip, is_section: is_section)
     item.issue = @issue
     if item.save
       render json: { id: item.id, subject: item.subject, is_done: item.is_done,

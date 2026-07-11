@@ -44,11 +44,24 @@ class UserSettingsController < ApplicationController
       if params[:pref].key?(:board_view_enabled)
         @user.pref[:board_view_enabled] = params[:pref][:board_view_enabled].to_s == '1' ? '1' : '0'
       end
+      if params[:pref].key?(:inapp_notifications_enabled)
+        @user.pref[:inapp_notifications_enabled] = params[:pref][:inapp_notifications_enabled].to_s == '1' ? '1' : '0'
+      end
     end
     if @user.save
       @user.pref.save
       set_language_if_valid @user.language
       redirect_back(fallback_location:"/")
     end
+  end
+
+  ALLOWED_PREF_KEYS = %w[keyboard_shortcuts_enabled issue_panel_beta bold_assigned_to_me board_view_enabled inapp_notifications_enabled].freeze
+
+  def update_pref
+    key = params[:key].to_s
+    return head :forbidden unless ALLOWED_PREF_KEYS.include?(key)
+    User.current.pref[key.to_sym] = params[:value].to_s == '1' ? '1' : '0'
+    User.current.pref.save
+    head :ok
   end
 end

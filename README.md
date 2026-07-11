@@ -5,7 +5,7 @@ This plugin try to propose a new UX/UI for Redmine with new tools like Stimulus/
 * Status : first version usable but need to be used and improved (feedback appreciated)
 * Compatibility :
   * 2.1.6 work for Redmine 6.0.x
-  * 2.2.0 work for Redmine 6.0.x and 6.1.x
+  * >= 2.2.0 work for Redmine 6.1.x only
 
 
 If you want to test it quickly with docker, you can use the repo https://github.com/tantic/redmine_asap_docker.git
@@ -25,21 +25,25 @@ https://tantic.github.io/redmine_asap_docs/docs/theme/intro
 UX/UI
 * New general design based on Tailwind CSS and stimulus / turbo
 * New navbar for navigation and new menu for project
-* Show / hide query form
+* New user menu on the navbar
+* Toggle display of the query form and store it in the session
 * New home page with bookmarked projects, project. Project overview
 * Login page is customizable with picture (some wallpapers are available)
 * Logo's color is customizable
-* Dark theme : each user can choose light or dark theme from the settings modale
+* Dark theme : each user can choose light or dark theme from the user preferences
 * Responsive mode for mobile and tablet devices
+* keyboard shortcuts : Shift+? to access modal help, CTRL+k for quick navigation
 
 User
 * Account is now preferences and is displayed in a modal
 * Local avatar or letter for users (all credits to A.Chaika and contributors of the next versions)
-* New options in the preferences to customize the user experience
+* New options in the preferences to customize the user experience : dark/light theme, font size, bold issues assigned to me or not, issue panel for quick access to issues, kanban view
+* Notifications center : display notifications in the main navbar (top right corner)
+* Ability to enable/disable keyboard shortcuts from the shortcuts modal (stored in user preferences) SHIFT+? to access modal help
 
 Project
 * Logo or Letter avatar for projects
-* Project homepage : member box and subproject box overrides (search...)
+* Project homepage : member box and subprojects box overrides (search and tree...)
 
 Issues
 * Issue statuses can be customized (background color and color)
@@ -47,7 +51,8 @@ Issues
 * Tracker can be customized (background color and color)
 * Colors and icons on default priorities (not customisable for now)
 * Display issue in a panel when click on an issue of the main list : you can now edit online all attributes
-* [beta] Kanban board for issues with drag and drop support between status and in the same column
+* "Create and continue" button on issue show page to create a new note and continue editing with fields pre-filled
+* [beta] Kanban board for issues with drag and drop support between status and in the same column, customizable columns and swim lanes
 
 ## Screenshots
 

@@ -38,7 +38,7 @@
                 @apply p-4 my-4 border-s-4 border-gray-300 rounded bg-gray-50 dark:border-gray-500 dark:bg-gray-800;
             }
             code {
-                @apply text-rose-700 text-xs bg-rose-50 border-rose-100 rounded p-0.5;
+                @apply text-rose-700 dark:text-rose-300 text-xs bg-rose-50 dark:bg-rose-950 border-rose-100 dark:border-rose-800 rounded p-0.5;
             }
             pre {
                 @apply my-4 mx-0 bg-gray-800 text-slate-100 shadow-xl border-gray-800 rounded p-4;
@@ -77,7 +77,8 @@
     }
 }
 
-.wiki {
+.wiki,
+.wiki-preview {
     @apply text-xs;
     h1 {
         @apply text-xl font-medium border-b border-gray-100 pb-4 mb-4;
@@ -94,11 +95,17 @@
     h5 {
         @apply text-xs font-medium py-1;
     }
-    h5 {
+    h6 {
         @apply text-xs text-gray-500 font-medium py-1;
     }
     p {
         @apply py-2;
+    }
+    ul {
+        @apply list-disc px-4 py-0 m-0;
+    }
+    ol {
+        @apply list-decimal px-4 py-0 m-0;
     }
     blockquote {
         @apply p-4 my-4 border-s-4 border-gray-300 rounded bg-gray-50 dark:border-gray-500 dark:bg-gray-800;

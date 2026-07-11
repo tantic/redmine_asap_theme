@@ -1,16 +1,202 @@
-<div class="">
+<style>
+.avatar-crop-viewport {
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  overflow: hidden;
+  position: relative;
+  cursor: grab;
+  background: #e5e7eb;
+  flex-shrink: 0;
+}
+.avatar-crop-viewport:active { cursor: grabbing; }
+.avatar-crop-viewport img {
+  position: absolute;
+  top: 0; left: 0;
+  transform-origin: top left;
+  user-select: none;
+  pointer-events: none;
+  max-width: none;
+}
+.avatar-crop-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  box-shadow: 0 0 0 9999px rgba(0,0,0,0.45);
+  pointer-events: none;
+  z-index: 2;
+}
+.avatar-crop-outer {
+  position: relative;
+  width: 220px;
+  height: 220px;
+  flex-shrink: 0;
+}
+.avatar-crop-outer::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  box-shadow: 0 0 0 9999px rgba(0,0,0,0.35);
+  pointer-events: none;
+  z-index: 1;
+}
+</style>
+
+<div>
   <h2><%= l(:label_avatar)%></h2>
-  <div style="width: 128px; height: 128px; border: 1px silver solid;" class="mb-8">
-  <%= avatar(@user, :size => "100") %>
-  </div>
 
+  <%= form_tag({ controller: 'users', action: 'save_avatar', id: @user.id }, multipart: true, id: 'avatar-form') do %>
 
-  <%= form_tag( { :controller => 'users',  :action => 'save_avatar', :id => @user.id }, :multipart => true) do %>
-      <div class="mb-8">
-      <%= file_field_tag "avatar" %>
+    <div class="flex gap-6 items-start mb-6">
+      <%# Current avatar %>
+      <div class="flex flex-col items-center gap-2">
+        <p class="text-xs text-gray-400 mb-1">Actuel</p>
+        <%= avatar(@user, size: "80") %>
+      </div>
+
+      <%# Crop UI — hidden until file chosen %>
+      <div id="avatar-crop-area" class="hidden flex flex-col gap-3">
+        <p class="text-xs text-gray-400">Faites glisser pour cadrer, zoomez avec le curseur</p>
+        <div class="avatar-crop-outer">
+          <div class="avatar-crop-viewport" id="avatar-crop-viewport">
+            <img id="avatar-crop-img" draggable="false" alt="">
+          </div>
+        </div>
+        <div class="flex items-center gap-2">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-gray-400 flex-shrink-0"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input type="range" id="avatar-zoom" min="0" max="1" step="any" value="0.5" class="flex-1 cursor-pointer">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-gray-400 flex-shrink-0"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+        </div>
+        <canvas id="avatar-canvas" class="hidden" width="256" height="256"></canvas>
+      </div>
     </div>
-      <%= submit_tag l(:button_save) %>
-      <%= submit_tag l(:button_delete), :confirm => l(:are_you_sure_delete_avatar) %>
-  <% end %>
 
+    <div class="flex items-center gap-4 flex-wrap">
+      <%= file_field_tag "avatar", id: 'avatar-file-input', accept: 'image/*' %>
+      <%= submit_tag l(:button_save), id: 'avatar-save-btn',
+            class: 'bg-blue-600! text-white! border-0! rounded! px-4! py-1.5! text-sm! hover:bg-blue-700! cursor-pointer! whitespace-nowrap!' %>
+      <%= submit_tag l(:button_delete), id: 'avatar-delete-btn',
+            class: 'text-red-500! cursor-pointer! text-sm!',
+            data: { confirm: l(:are_you_sure_delete_avatar) } %>
+    </div>
+  <% end %>
 </div>
+
+<script>
+(function () {
+  var VIEWPORT = 220;
+  var OUTPUT   = 256;
+
+  var fileInput   = document.getElementById('avatar-file-input');
+  var cropArea    = document.getElementById('avatar-crop-area');
+  var viewport    = document.getElementById('avatar-crop-viewport');
+  var img         = document.getElementById('avatar-crop-img');
+  var zoomSlider  = document.getElementById('avatar-zoom');
+  var canvas      = document.getElementById('avatar-canvas');
+  var form        = document.getElementById('avatar-form');
+  var deleteBtn   = document.getElementById('avatar-delete-btn');
+
+  var natW = 0, natH = 0, posX = 0, posY = 0, scale = 1;
+  var minScale = 1, maxScale = 4;
+  var dragging = false, sx, sy, spx, spy;
+
+  function clamp() {
+    var w = natW * scale, h = natH * scale;
+    posX = Math.min(posX, 0);
+    posY = Math.min(posY, 0);
+    posX = Math.max(posX, VIEWPORT - w);
+    posY = Math.max(posY, VIEWPORT - h);
+  }
+
+  function render() {
+    clamp();
+    img.style.transform = 'translate(' + posX + 'px,' + posY + 'px) scale(' + scale + ')';
+  }
+
+  fileInput.addEventListener('change', function () {
+    var file = fileInput.files[0];
+    if (!file) return;
+    var reader = new FileReader();
+    reader.onload = function (e) {
+      img.src = e.target.result;
+      img.onload = function () {
+        natW = img.naturalWidth;
+        natH = img.naturalHeight;
+        minScale = VIEWPORT / Math.min(natW, natH);
+        maxScale = minScale * 4;
+        scale = minScale;
+        zoomSlider.value = 0;
+        posX = (VIEWPORT - natW * scale) / 2;
+        posY = (VIEWPORT - natH * scale) / 2;
+        render();
+        cropArea.classList.remove('hidden');
+      };
+    };
+    reader.readAsDataURL(file);
+  });
+
+  zoomSlider.addEventListener('input', function () {
+    var prev = scale;
+    scale = minScale + parseFloat(zoomSlider.value) * (maxScale - minScale);
+    posX += (natW * prev - natW * scale) / 2;
+    posY += (natH * prev - natH * scale) / 2;
+    render();
+  });
+
+  // Mouse drag
+  viewport.addEventListener('mousedown', function (e) {
+    dragging = true; sx = e.clientX; sy = e.clientY; spx = posX; spy = posY;
+    e.preventDefault();
+  });
+  document.addEventListener('mousemove', function (e) {
+    if (!dragging) return;
+    posX = spx + (e.clientX - sx);
+    posY = spy + (e.clientY - sy);
+    render();
+  });
+  document.addEventListener('mouseup', function () { dragging = false; });
+
+  // Touch drag
+  viewport.addEventListener('touchstart', function (e) {
+    if (e.touches.length !== 1) return;
+    dragging = true; sx = e.touches[0].clientX; sy = e.touches[0].clientY; spx = posX; spy = posY;
+  }, { passive: true });
+  document.addEventListener('touchmove', function (e) {
+    if (!dragging || e.touches.length !== 1) return;
+    posX = spx + (e.touches[0].clientX - sx);
+    posY = spy + (e.touches[0].clientY - sy);
+    render();
+  }, { passive: true });
+  document.addEventListener('touchend', function () { dragging = false; });
+
+  // Intercept submit: crop then POST
+  form.addEventListener('submit', function (e) {
+    if (e.submitter && e.submitter.id === 'avatar-delete-btn') return;
+    if (!fileInput.files[0] || cropArea.classList.contains('hidden')) return;
+    e.preventDefault();
+
+    var ctx = canvas.getContext('2d');
+    var srcX = -posX / scale;
+    var srcY = -posY / scale;
+    var srcW = VIEWPORT / scale;
+    var srcH = VIEWPORT / scale;
+    ctx.clearRect(0, 0, OUTPUT, OUTPUT);
+    ctx.drawImage(img, srcX, srcY, srcW, srcH, 0, 0, OUTPUT, OUTPUT);
+
+    canvas.toBlob(function (blob) {
+      var fd = new FormData(form);
+      fd.set('avatar', blob, 'avatar.png');
+      fetch(form.action, {
+        method: 'POST',
+        body: fd,
+        credentials: 'same-origin'
+      }).then(function (res) {
+        window.location.href = res.redirected ? res.url : window.location.href;
+      }).catch(function () {
+        form.submit();
+      });
+    }, 'image/png');
+  });
+})();
+</script>

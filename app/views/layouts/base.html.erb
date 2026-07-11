@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="<%= current_language %>" class="<%= User.current.pref[:theme] %> <%= User.current.pref[:font_size].present? ? "font-size-#{User.current.pref[:font_size]}" : 'font-size-md' %> <%= User.current.logged? && User.current.pref[:bold_assigned_to_me].to_s != '0' ? 'bold-assigned' : '' %>">
 <head>
-<meta charset="utf-8" />
+<meta charset="utf-8">
 <title><%= html_title %></title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="<%= Redmine::Info.app_name %>" />
-<meta name="keywords" content="issue,bug,tracker" />
+<meta name="description" content="<%= Redmine::Info.app_name %>">
+<meta name="keywords" content="issue,bug,tracker">
 <%= csrf_meta_tag %>
 <%= favicon %>
 <%= stylesheet_link_tag 'jquery/jquery-ui-1.13.2', 'tribute-5.1.3', :media => 'all' %>
@@ -30,7 +30,7 @@
 
 <%= stylesheet_link_tag "application.css", :plugin => 'redmine_asap_theme' %>
 </head>
-<body  data-controller="application" data-application-myaccount-value="<%= show_settings_path(User.current) %>" data-application-about-value="<%= show_about_path() %>" class="<%= body_css_classes %> dark:bg-slate-900 <%= controller_name == 'account' ? 'h-full':'' %>" data-text-formatting="<%= Setting.text_formatting %>" data-issue-panel-beta="<%= User.current.logged? && User.current.pref[:issue_panel_beta].to_s == '1' ? 'true' : 'false' %>" data-turbo-panel-only="<%= (_turbo_panel && !_turbo_enabled) ? 'true' : 'false' %>">
+<body  data-controller="application keyboard-shortcuts" data-application-myaccount-value="<%= show_settings_path(User.current) %>" data-application-about-value="<%= show_about_path() %>" class="<%= body_css_classes %> dark:bg-slate-900 <%= controller_name == 'account' ? 'h-full':'' %>" data-text-formatting="<%= Setting.text_formatting %>" data-issue-panel-beta="<%= User.current.logged? && User.current.pref[:issue_panel_beta].to_s == '1' ? 'true' : 'false' %>" data-turbo-panel-only="<%= (_turbo_panel && !_turbo_enabled) ? 'true' : 'false' %>" data-keyboard-shortcuts-enabled="<%= User.current.logged? && User.current.pref[:keyboard_shortcuts_enabled].to_s != '0' ? 'true' : 'false' %>">
 
   <% if controller_name == "account" %>
     <section class="w-full h-screen flex relative bg-gray-50">
@@ -175,6 +175,121 @@
       </div>
     <% end %>
 
+  <% end %>
+
+  <% if User.current.logged? %>
+  <div data-controller="quick-nav" class="hidden fixed inset-0 z-[10000]"
+       data-quick-nav-section-actions-value="<%= l('quick_nav.section_actions') %>"
+       data-quick-nav-section-issues-value="<%= l('quick_nav.section_issues') %>"
+       data-quick-nav-section-projects-value="<%= l('quick_nav.section_projects') %>"
+       data-quick-nav-section-wiki-pages-value="<%= l('quick_nav.section_wiki_pages') %>"
+       data-quick-nav-section-documents-value="<%= l('quick_nav.section_documents') %>"
+       data-quick-nav-section-users-value="<%= l('quick_nav.section_users') %>"
+       data-quick-nav-no-results-value="<%= l('quick_nav.no_results') %>">
+    <div class="absolute inset-0 bg-black/70" data-action="click->quick-nav#close"></div>
+    <div class="absolute inset-0 flex items-start justify-center" style="padding-top:15vh">
+      <div class="relative rounded-xl shadow-2xl w-[580px] max-h-[60vh] flex flex-col overflow-hidden bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700">
+        <div class="flex items-center gap-3 py-2 px-4 border-b border-gray-200 dark:border-gray-700">
+          <svg class="w-4 h-4 text-gray-400 dark:text-gray-500 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"/></svg>
+          <input data-quick-nav-target="input"
+                 data-action="input->quick-nav#search keydown->quick-nav#keydown"
+                 type="text"
+                 placeholder="<%= l('keyboard_shortcuts.quick_nav_placeholder') %>"
+                 class="p-4 flex-1 text-sm outline-none bg-transparent text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500">
+          <kbd class="text-[10px] text-gray-400 dark:text-gray-500 bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-600 rounded px-1.5 py-0.5 shrink-0">Esc</kbd>
+        </div>
+        <div data-quick-nav-target="results" class="overflow-y-auto flex-1"></div>
+      </div>
+    </div>
+  </div>
+
+  <div data-keyboard-shortcuts-target="modal" class="hidden fixed inset-0 z-[9999]">
+    <div class="absolute inset-0 bg-black/70" data-action="click->keyboard-shortcuts#closeModal"></div>
+    <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+    <div class="pointer-events-auto relative bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 rounded-xl shadow-2xl w-[680px] max-h-[90vh] overflow-y-auto">
+      <div class="flex items-center justify-between px-6 py-4 border-b border-gray-200 dark:border-gray-700">
+        <h2 class="text-sm font-semibold"><%= l('keyboard_shortcuts.modal_title') %></h2>
+        <label class="flex items-center gap-2 cursor-pointer">
+          <span class="text-xs text-gray-500 dark:text-gray-400"><%= l('keyboard_shortcuts.toggle_label') %></span>
+          <div class="relative">
+            <input type="checkbox" data-keyboard-shortcuts-target="enableToggle" data-action="change->keyboard-shortcuts#toggleEnabled" class="sr-only peer">
+            <div class="w-9 h-5 bg-gray-300 dark:bg-gray-600 rounded-full peer peer-checked:bg-green-500 after:content-[''] after:absolute after:top-0.5 after:start-0.5 after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:after:translate-x-4"></div>
+          </div>
+        </label>
+      </div>
+      <div class="grid grid-cols-2 divide-x divide-gray-200 dark:divide-gray-700">
+        <div class="p-6 space-y-6">
+          <div>
+            <h3 class="text-[10px] font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-wider mb-3"><%= l('keyboard_shortcuts.section_global') %></h3>
+            <div class="space-y-2.5">
+              <% [
+                [l('keyboard_shortcuts.quick_nav'),      ['Ctrl', 'K']],
+                [l('keyboard_shortcuts.quick_search'),   ['/']],
+                [l('keyboard_shortcuts.create_issue'),   ['c']],
+                [l('keyboard_shortcuts.shortcut_modal'), ['?']],
+                [l('keyboard_shortcuts.go_issues'),      ['g', 'i']],
+                [l('keyboard_shortcuts.go_projects'),    ['g', 'p']],
+                [l('keyboard_shortcuts.toggle_sidebar'), ['[']],
+                [l('keyboard_shortcuts.close_panel'),    ['Esc']],
+              ].each do |label, keys| %>
+                <div class="flex items-center justify-between gap-4 text-xs">
+                  <span class="text-gray-600 dark:text-gray-300"><%= label %></span>
+                  <span class="flex items-center gap-1 shrink-0">
+                    <% keys.each_with_index do |k, i| %>
+                      <% if i > 0 %><span class="text-gray-300 dark:text-gray-600 text-[10px]"><%= l('keyboard_shortcuts.then') %></span><% end %>
+                      <kbd class="bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded px-1.5 py-0.5 text-[11px] font-mono text-gray-700 dark:text-gray-200 min-w-[20px] text-center"><%= k %></kbd>
+                    <% end %>
+                  </span>
+                </div>
+              <% end %>
+            </div>
+          </div>
+          <div>
+            <h3 class="text-[10px] font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-wider mb-3"><%= l('keyboard_shortcuts.section_issue') %></h3>
+            <div class="space-y-2.5">
+              <% [
+                [l('keyboard_shortcuts.comment'), ['m']],
+                [l('keyboard_shortcuts.edit'),    ['e']],
+              ].each do |label, keys| %>
+                <div class="flex items-center justify-between gap-4 text-xs">
+                  <span class="text-gray-600 dark:text-gray-300"><%= label %></span>
+                  <span class="flex items-center gap-1 shrink-0">
+                    <% keys.each do |k| %>
+                      <kbd class="bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded px-1.5 py-0.5 text-[11px] font-mono text-gray-700 dark:text-gray-200 min-w-[20px] text-center"><%= k %></kbd>
+                    <% end %>
+                  </span>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+        <div class="p-6">
+          <h3 class="text-[10px] font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-wider mb-3"><%= l('keyboard_shortcuts.section_nav') %></h3>
+          <div class="space-y-2.5">
+            <% [
+              [l('keyboard_shortcuts.nav_next'),       ['j']],
+              [l('keyboard_shortcuts.nav_prev'),       ['k']],
+              [l('keyboard_shortcuts.open_selected'),  ['o']],
+              [l('keyboard_shortcuts.open_after_nav'), ['Enter']],
+            ].each do |label, keys| %>
+              <div class="flex items-center justify-between gap-4 text-xs">
+                <span class="text-gray-600 dark:text-gray-300"><%= label %></span>
+                <span class="flex items-center gap-1 shrink-0">
+                  <% keys.each do |k| %>
+                    <kbd class="bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded px-1.5 py-0.5 text-[11px] font-mono text-gray-700 dark:text-gray-200 min-w-[20px] text-center"><%= k %></kbd>
+                  <% end %>
+                </span>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+      <div class="px-6 py-3 border-t border-gray-200 dark:border-gray-700 flex justify-end">
+        <button data-action="click->keyboard-shortcuts#closeModal" class="px-4 py-1.5 text-xs bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 rounded text-gray-700 dark:text-gray-200 cursor-pointer transition-colors"><%= l('keyboard_shortcuts.close') %></button>
+      </div>
+    </div>
+    </div>
+  </div>
   <% end %>
 </body>
 </html>

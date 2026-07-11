@@ -15,4 +15,9 @@
 <%= javascript_include_tag 'controllers/board_controller.js', :type => 'module', :plugin => 'redmine_asap_theme' %>
 <%= javascript_include_tag 'controllers/documents_controller.js', :type => 'module', :plugin => 'redmine_asap_theme' %>
 <%= javascript_include_tag 'controllers/checklist_controller.js', :type => 'module', :plugin => 'redmine_asap_theme' %>
+<%= javascript_include_tag 'controllers/keyboard_shortcuts_controller.js', :type => 'module', :plugin => 'redmine_asap_theme' %>
+<%= javascript_include_tag 'controllers/quick_nav_controller.js', :type => 'module', :plugin => 'redmine_asap_theme' %>
+<% if User.current.logged? %>
+<%= javascript_include_tag 'controllers/notifications_controller.js', :type => 'module', :plugin => 'redmine_asap_theme' %>
+<% end %>
 

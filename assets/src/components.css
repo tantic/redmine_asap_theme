@@ -565,8 +565,14 @@ a img {
 a.issue.closed,
 a.issue.closed:link,
 a.issue.closed:visited {
-    color: #999;
-    text-decoration: line-through;
+    text-decoration: none;
+    opacity: 0.55;
+}
+tr.issue.closed td {
+    opacity: 0.45;
+}
+tr.issue.closed td.subject a {
+    color: #6b7280;
 }
 a.project.closed,
 a.project.closed:link,
@@ -725,7 +731,7 @@ button.tab-right.disabled {
 }
 
 .gravatar {
-    @apply block rounded-full max-w-none;
+    @apply block rounded-full max-w-none object-cover;
 }
 
 h4 .journal-info > img.gravatar {
@@ -1191,6 +1197,12 @@ div.flash.warning svg.icon-svg,
 .markdown-alert-tip .markdown-alert-title svg {
     stroke: #005f00;
 }
+:where(.dark, .dark *) .markdown-alert-tip .markdown-alert-title {
+    color: #6ee7a0;
+}
+:where(.dark, .dark *) .markdown-alert-tip .markdown-alert-title svg {
+    stroke: #6ee7a0;
+}
 
 .markdown-alert-important {
     border-color: #800080;
@@ -1200,6 +1212,12 @@ div.flash.warning svg.icon-svg,
 }
 .markdown-alert-important .markdown-alert-title svg {
     stroke: #4b006e;
+}
+:where(.dark, .dark *) .markdown-alert-important .markdown-alert-title {
+    color: #d8a8f5;
+}
+:where(.dark, .dark *) .markdown-alert-important .markdown-alert-title svg {
+    stroke: #d8a8f5;
 }
 
 .markdown-alert-caution {
@@ -1211,6 +1229,12 @@ div.flash.warning svg.icon-svg,
 .markdown-alert-caution .markdown-alert-title svg {
     stroke: #880000;
 }
+:where(.dark, .dark *) .markdown-alert-caution .markdown-alert-title {
+    color: #f5a3a3;
+}
+:where(.dark, .dark *) .markdown-alert-caution .markdown-alert-title svg {
+    stroke: #f5a3a3;
+}
 
 .markdown-alert-warning {
     border-color: #e4bc4b;
@@ -1221,6 +1245,12 @@ div.flash.warning svg.icon-svg,
 .markdown-alert-warning .markdown-alert-title svg {
     stroke: #a7760c;
 }
+:where(.dark, .dark *) .markdown-alert-warning .markdown-alert-title {
+    color: #f0cf74;
+}
+:where(.dark, .dark *) .markdown-alert-warning .markdown-alert-title svg {
+    stroke: #f0cf74;
+}
 
 .markdown-alert-note {
     border-color: #169;
@@ -1230,6 +1260,12 @@ div.flash.warning svg.icon-svg,
 }
 .markdown-alert-note .markdown-alert-title svg {
     stroke: #1e40af;
+}
+:where(.dark, .dark *) .markdown-alert-note .markdown-alert-title {
+    color: #93c5fd;
+}
+:where(.dark, .dark *) .markdown-alert-note .markdown-alert-title svg {
+    stroke: #93c5fd;
 }
 
 .controller-admin,
@@ -1364,11 +1400,13 @@ fieldset {
     }
 }
 
-.wiki {
+.wiki,
+.wiki-preview {
     ul {
         @apply list-disc px-4 py-0 m-0;
-        li {
-        }
+    }
+    ol {
+        @apply list-decimal px-4 py-0 m-0;
     }
 }
 

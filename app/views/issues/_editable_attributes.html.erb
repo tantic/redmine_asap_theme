@@ -84,12 +84,7 @@
                     class="ml-1 mt-1 px-2 py-0.5 bg-gray-200 dark:bg-gray-600 rounded text-xs hover:bg-gray-300 cursor-pointer">✕</button>
           </div>
         <% else %>
-          <% if @issue.assigned_to %>
-            <span class="flex items-center gap-1.5">
-              <%= avatar(@issue.assigned_to, size: '16', class: 'rounded-full shrink-0') %>
-              <%= link_to_principal(@issue.assigned_to) %>
-            </span>
-          <% else %>-<% end %>
+          <%= @issue.assigned_to ? link_to_principal(@issue.assigned_to) : '-' %>
         <% end %>
       </div>
     </div>
@@ -132,7 +127,7 @@
       <div class="value w-auto! hover:w-full!">
         <% if editable %>
           <span data-field-edit-target="display" data-action="click->field-edit#edit"
-                class="inline-flex text-[12px] cursor-pointer w-auto items-center rounded px-2 py-0.5 text-xs font-medium border border-blue-200 text-blue-700 dark:border-blue-700 dark:text-blue-300 bg-blue-50 dark:bg-blue-900/30">
+                class="cursor-pointer inline-flex text-[calc(12px*var(--font-scale,1))] w-auto items-center rounded px-2 py-0.5 text-xs font-medium border border-blue-200 text-blue-700 dark:border-blue-700 dark:text-blue-300 bg-blue-50 dark:bg-blue-900/30">
             <%= @issue.fixed_version ? @issue.fixed_version.name : '-' %>
           </span>
           <div data-field-edit-target="editor" class="hidden!">

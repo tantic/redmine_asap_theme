@@ -5,11 +5,60 @@
   const { Controller } = await import('@hotwired/stimulus');
 
   Stimulus.register("checklist", class extends Controller {
-    static targets = ["list", "newInput"]
+    static targets = ["list", "newInput", "actionMenu"]
     static values = {
       issueId: Number,
       canEdit: Boolean,
       canDone: Boolean
+    }
+
+    async connect() {
+      this._closeMenuBound = (e) => {
+        if (this.hasActionMenuTarget && !this.element.contains(e.target)) {
+          this.actionMenuTarget.classList.add('hidden');
+        }
+      };
+      if (this.canEditValue) {
+        await this._initSortable();
+      }
+    }
+
+    disconnect() {
+      document.removeEventListener('click', this._closeMenuBound);
+      if (this._sortable) { this._sortable.destroy(); this._sortable = null; }
+    }
+
+    async _initSortable() {
+      if (!window.Sortable) {
+        await new Promise((resolve, reject) => {
+          const script = document.createElement('script');
+          script.src = '/plugin_assets/redmine_asap_theme/javascripts/vendor/sortable.min.js';
+          script.onload = resolve;
+          script.onerror = () => resolve(); // degrade gracefully
+          document.head.appendChild(script);
+        });
+      }
+      if (!window.Sortable) return;
+      this._sortable = new window.Sortable(this.listTarget, {
+        animation: 150,
+        handle: '.cl-handle',
+        ghostClass: 'opacity-40',
+        onEnd: () => this._onReorder()
+      });
+    }
+
+    async _onReorder() {
+      const ids = Array.from(this.listTarget.children).map(li => li.dataset.id).filter(Boolean);
+      fetch(`/issues/${this.issueIdValue}/checklist_items/reorder`, {
+        method: 'POST',
+        credentials: 'same-origin',
+        headers: {
+          'X-CSRF-Token': this._csrf(),
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({ ids })
+      });
     }
 
     _csrf() {
@@ -50,10 +99,71 @@
     }
 
     async addItem() {
-      const input = this.newInputTarget;
-      const subject = input.value.trim();
-      if (!subject) return;
+      await this._createItem({ subject: this.newInputTarget.value.trim() });
+    }
 
+    async addSection() {
+      this.actionMenuTarget?.classList.add('hidden');
+      await this._createItem({ subject: this.newInputTarget.value.trim(), is_section: true });
+    }
+
+    async toggleActionMenu() {
+      if (!this.hasActionMenuTarget) return;
+      const menu = this.actionMenuTarget;
+
+      if (menu.classList.contains('hidden')) {
+        if (!this._templatesLoaded) {
+          this._templatesLoaded = true;
+          const res = await fetch(`/issues/${this.issueIdValue}/checklist_items/templates`, {
+            credentials: 'same-origin',
+            headers: { 'Accept': 'application/json' }
+          });
+          const templates = res.ok ? await res.json() : [];
+          if (templates.length) {
+            const divider = document.createElement('div');
+            divider.className = 'border-t border-gray-100 dark:border-gray-700 my-1';
+            menu.appendChild(divider);
+            templates.forEach(tpl => {
+              const btn = document.createElement('button');
+              btn.type = 'button';
+              btn.className = 'block w-full text-left text-xs px-3 py-1.5 hover:bg-gray-100 dark:hover:bg-gray-600 cursor-pointer';
+              btn.textContent = '📋 ' + tpl.name;
+              btn.addEventListener('click', () => {
+                menu.classList.add('hidden');
+                this._applyTemplate(tpl);
+              });
+              menu.appendChild(btn);
+            });
+          }
+        }
+        menu.classList.remove('hidden');
+        setTimeout(() => document.addEventListener('click', this._closeMenuBound, { once: true }), 0);
+      } else {
+        menu.classList.add('hidden');
+      }
+    }
+
+    async _applyTemplate(template) {
+      for (const item of template.items) {
+        const res = await fetch(`/issues/${this.issueIdValue}/checklist_items`, {
+          method: 'POST',
+          credentials: 'same-origin',
+          headers: {
+            'X-CSRF-Token': this._csrf(),
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify({ checklist: { subject: item.subject, is_section: item.is_section } })
+        });
+        if (res.ok) {
+          this._appendItem(await res.json());
+          this._notifyChange();
+        }
+      }
+    }
+
+    async _createItem({ subject, is_section = false }) {
+      if (!subject) return;
       const res = await fetch(`/issues/${this.issueIdValue}/checklist_items`, {
         method: 'POST',
         credentials: 'same-origin',
@@ -62,14 +172,13 @@
           'Content-Type': 'application/json',
           'Accept': 'application/json'
         },
-        body: JSON.stringify({ checklist: { subject } })
+        body: JSON.stringify({ checklist: { subject, is_section } })
       });
 
       if (res.ok) {
-        const data = await res.json();
-        this._appendItem(data.checklist || data);
-        input.value = '';
-        input.focus();
+        this._appendItem(await res.json());
+        this.newInputTarget.value = '';
+        this.newInputTarget.focus();
         this._notifyChange();
       } else {
         alert("Impossible d'ajouter l'élément.");
@@ -109,9 +218,7 @@
           body: JSON.stringify({ checklist: { subject: newSubject } })
         });
 
-        if (res.ok) {
-          textEl.textContent = newSubject;
-        }
+        if (res.ok) { textEl.textContent = newSubject; }
         restore();
       };
 
@@ -143,6 +250,13 @@
       li.dataset.id = item.id;
       li.className = 'flex items-center gap-2 py-1.5 group';
 
+      if (this.canEditValue) {
+        const handle = document.createElement('span');
+        handle.className = 'cl-handle text-gray-300 hover:text-gray-500 cursor-grab text-xs select-none flex-shrink-0';
+        handle.textContent = '⠿';
+        li.appendChild(handle);
+      }
+
       if (!item.is_section) {
         const cb = document.createElement('input');
         cb.type = 'checkbox';
@@ -156,11 +270,15 @@
       const span = document.createElement('span');
       span.setAttribute('data-item-text', '');
       span.textContent = item.subject;
-      span.className = 'text-xs flex-1' + (item.is_done ? ' line-through text-gray-400' : '');
+      span.className = item.is_section
+        ? 'font-semibold text-xs text-gray-700 dark:text-gray-300 flex-1'
+        : 'text-xs flex-1' + (item.is_done ? ' line-through text-gray-400' : '');
       li.appendChild(span);
 
-      if (this.canEditValue && !item.is_section) {
-        li.appendChild(this._makeBtn('✏', 'Modifier', 'hover:text-blue-600', (e) => this.startEdit(e)));
+      if (this.canEditValue) {
+        if (!item.is_section) {
+          li.appendChild(this._makeBtn('✏', 'Modifier', 'hover:text-blue-600', (e) => this.startEdit(e)));
+        }
         li.appendChild(this._makeBtn('×', 'Supprimer', 'hover:text-red-500 ml-1', (e) => this.deleteItem(e)));
       }
 

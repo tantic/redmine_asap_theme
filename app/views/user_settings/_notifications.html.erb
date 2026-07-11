@@ -2,6 +2,18 @@
                               :url => { :action => "update" },
                               :html => { :id => 'update_settings_form',
                                           :method => :put, :multipart => true } do |f| %>
+  <div class="mb-6">
+    <h4 class="text-sm font-semibold text-gray-700 dark:text-gray-200 mb-3"><%= l('asap_notifications.inapp_section_title') %></h4>
+    <label class="flex items-center gap-3 cursor-pointer">
+      <input type="hidden" name="pref[inapp_notifications_enabled]" value="0">
+      <input type="checkbox" name="pref[inapp_notifications_enabled]" value="1"
+             <%= User.current.pref[:inapp_notifications_enabled].to_s == '0' ? '' : 'checked' %>
+             class="w-4 h-4 text-blue-600 rounded border-gray-300 dark:border-gray-600 focus:ring-blue-500">
+      <span class="text-sm text-gray-700 dark:text-gray-300"><%= l('asap_notifications.inapp_toggle_label') %></span>
+    </label>
+    <p class="mt-1 text-xs text-gray-400 dark:text-gray-500 ml-7"><%= l('asap_notifications.inapp_toggle_hint') %></p>
+  </div>
+
   <fieldset class="">
     <%= render :partial => 'users/mail_notifications' %>
   </fieldset>

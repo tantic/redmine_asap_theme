@@ -71,8 +71,16 @@ en:
   label_issue_panel_beta_description: Opens the issue in a side panel when clicking its title in the list
   label_bold_assigned_to_me: Bold my assigned issues
   label_bold_assigned_to_me_description: Display in bold the subject of issues assigned to me in the issues list
+  label_board: Columns
   label_board_view_enabled: Kanban view
   label_board_view_enabled_description: Shows a Table / Board switcher in the issues list
+  label_board_columns: Columns
+  label_board_column_by: By
+  label_board_column_type: Group columns by
+  label_board_column_status: Status
+  label_board_column_version: Version
+  label_board_status_columns: Visible
+  label_board_columns_auto: "Default: non-empty columns only"
   label_font_size_xs: Very small
   label_font_size_sm: Small
   label_font_size_md: Normal
@@ -159,3 +167,53 @@ en:
     issues:
       none: No open issues, all clear!
       see_all: "See all %{count} issues"
+  asap_notifications:
+    assigned: "%{actor} assigned you %{title}"
+    mentioned: "%{actor} mentioned you in %{title}"
+    mark_all_read: Mark all as read
+    empty: No new notifications
+    title: Notifications
+    inapp_section_title: In-app notifications
+    inapp_toggle_label: Enable in-app notifications
+    inapp_toggle_hint: Shows a bell icon in the navigation bar with your latest notifications.
+  keyboard_shortcuts:
+    menu_label: Keyboard shortcuts
+    modal_title: Keyboard shortcuts
+    toggle_label: Keyboard shortcuts enabled
+    close: Close
+    then: then
+    section_global: Global shortcuts
+    section_issue: On an issue
+    section_nav: List / kanban navigation
+    quick_nav: Quick navigation
+    quick_search: Quick search
+    create_issue: Create issue
+    shortcut_modal: Keyboard shortcuts
+    go_issues: Go to issues
+    go_projects: Go to projects
+    toggle_sidebar: Toggle sidebar
+    close_panel: Close panel / modal
+    comment: Comment
+    edit: Edit
+    nav_next: Next issue
+    nav_prev: Previous issue
+    open_selected: Open selected issue
+    open_after_nav: "Open (after j/k)"
+    quick_nav_placeholder: "Go to… (#123, @user or free text)"
+  warning_board_too_many_issues: "This view contains %{count} issues. The board may be slow to load."
+  quick_nav:
+    section_actions: Actions
+    section_issues: Issues
+    section_projects: Projects
+    section_wiki_pages: Wiki pages
+    section_documents: Documents
+    section_users: Users
+    no_results: No results
+    action_new_issue: Create an issue
+    action_my_profile: My profile
+    action_my_issues: My issues
+    action_my_page: My page
+    action_my_todos: My tasks (Todo)
+    action_inbox: Inbox
+    action_my_notes: My notes
+    action_admin: Administration

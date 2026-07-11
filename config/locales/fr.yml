@@ -72,8 +72,16 @@ fr:
   label_issue_panel_beta_description: Ouvre la demande dans un panneau latéral au clic sur son titre dans le tableau
   label_bold_assigned_to_me: Mettre en gras mes demandes assignées
   label_bold_assigned_to_me_description: Affiche en gras le sujet des demandes qui me sont assignées dans le tableau des demandes
+  label_board: Colonnes
   label_board_view_enabled: Vue Kanban
   label_board_view_enabled_description: Affiche un sélecteur Table / Board dans la liste des demandes
+  label_board_columns: Colonnes
+  label_board_column_by: Par
+  label_board_column_type: Colonnes par
+  label_board_column_status: Statut
+  label_board_column_version: Version
+  label_board_status_columns: Visibles
+  label_board_columns_auto: "Par défaut : colonnes non vides uniquement"
   label_font_size_xs: Très petit
   label_font_size_sm: Petit
   label_font_size_md: Normal
@@ -160,3 +168,53 @@ fr:
     issues:
       none: "Aucune demande ouverte, c'est tout bon !"
       see_all: "Voir les %{count} demandes"
+  asap_notifications:
+    assigned: "%{actor} vous a assigné %{title}"
+    mentioned: "%{actor} vous a mentionné dans %{title}"
+    mark_all_read: Tout marquer lu
+    empty: Aucune nouvelle notification
+    title: Notifications
+    inapp_section_title: Notifications dans l'application
+    inapp_toggle_label: Activer les notifications dans l'application
+    inapp_toggle_hint: Affiche une cloche dans la barre de navigation avec les dernières notifications.
+  keyboard_shortcuts:
+    menu_label: Raccourcis clavier
+    modal_title: Raccourcis clavier
+    toggle_label: Raccourcis clavier activés
+    close: Fermer
+    then: puis
+    section_global: Raccourcis globaux
+    section_issue: Sur une demande
+    section_nav: Navigation liste / kanban
+    quick_nav: Navigation rapide
+    quick_search: Recherche rapide
+    create_issue: Créer une demande
+    shortcut_modal: Raccourcis clavier
+    go_issues: Aller aux demandes
+    go_projects: Aller aux projets
+    toggle_sidebar: Basculer la barre latérale
+    close_panel: Fermer panneau / modal
+    comment: Commenter
+    edit: Modifier
+    nav_next: Demande suivante
+    nav_prev: Demande précédente
+    open_selected: Ouvrir la demande sélectionnée
+    open_after_nav: "Ouvrir (après j/k)"
+    quick_nav_placeholder: "Aller à… (#123, @utilisateur ou texte libre)"
+  warning_board_too_many_issues: "Cette vue contient %{count} demandes. Le board peut être lent à charger."
+  quick_nav:
+    section_actions: Actions
+    section_issues: Demandes
+    section_projects: Projets
+    section_wiki_pages: Pages wiki
+    section_documents: Documents
+    section_users: Utilisateurs
+    no_results: Aucun résultat
+    action_new_issue: Créer une demande
+    action_my_profile: Mon profil
+    action_my_issues: Mes demandes
+    action_my_page: Ma page
+    action_my_todos: Mes tâches (Todo)
+    action_inbox: Boîte de réception
+    action_my_notes: Mes notes
+    action_admin: Administration

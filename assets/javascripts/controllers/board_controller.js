@@ -7,6 +7,38 @@
 
   Stimulus.register("board", class extends Controller {
 
+    connect() {
+      this._restoreCollapsed();
+    }
+
+    // ── Swimlane toggle ──────────────────────────────────────────
+    toggleGroup(e) {
+      const row = e.currentTarget.closest('.board-grouped__row');
+      if (!row) return;
+      row.classList.toggle('is-collapsed');
+      this._saveCollapsed();
+    }
+
+    _storageKey() {
+      return `board_collapsed:${window.location.pathname}`;
+    }
+
+    _saveCollapsed() {
+      const ids = Array.from(this.element.querySelectorAll('.board-grouped__row.is-collapsed'))
+                       .map(r => r.dataset.groupId);
+      localStorage.setItem(this._storageKey(), JSON.stringify(ids));
+    }
+
+    _restoreCollapsed() {
+      try {
+        const ids = JSON.parse(localStorage.getItem(this._storageKey()) || '[]');
+        if (!ids.length) return;
+        this.element.querySelectorAll('.board-grouped__row').forEach(row => {
+          if (ids.includes(row.dataset.groupId)) row.classList.add('is-collapsed');
+        });
+      } catch (_) {}
+    }
+
     // ── Card click → open panel ──────────────────────────────────
     open(e) {
       if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
@@ -84,7 +116,7 @@
       e.preventDefault();
       const targetCards  = e.currentTarget;
       const targetColumn = targetCards.closest('.board-column');
-      const toStatusId   = targetColumn.dataset.statusId;
+      const toColumnId   = targetColumn.dataset.columnId;
       const projectId    = this.element.dataset.projectId;
       const card         = this._dragging;
 
@@ -93,7 +125,6 @@
 
       if (!card) return;
 
-      // Insert at the right position in DOM
       if (this._dropTarget) {
         const { card: ref, before } = this._dropTarget;
         targetCards.insertBefore(card, before ? ref : ref.nextSibling);
@@ -102,15 +133,27 @@
       }
       this._dropTarget = null;
 
-      if (targetColumn === this._fromColumn) {
-        // Intra-column reorder only
-        this._savePositions(targetCards, toStatusId, projectId);
+      const fromRow  = this._fromColumn.closest('.board-grouped__row');
+      const toRow    = targetColumn.closest('.board-grouped__row');
+      const groupBy  = this.element.dataset.groupBy;
+      const crossRow = fromRow && toRow && fromRow !== toRow && groupBy;
+
+      if (targetColumn === this._fromColumn && !crossRow) {
+        this._savePositions(targetCards, toColumnId, projectId);
       } else {
-        // Inter-column: change status + save positions in target column
         this._updateCount(targetColumn);
         this._updateCount(this._fromColumn);
-        this._patchStatus(card.dataset.issueId, toStatusId, targetColumn);
-        this._savePositions(targetCards, toStatusId, projectId);
+        if (crossRow) {
+          this._updateGroupCount(fromRow);
+          this._updateGroupCount(toRow);
+        }
+        const extraFields = {};
+        if (crossRow) {
+          const gid = toRow.dataset.groupId;
+          extraFields[groupBy] = gid ? parseInt(gid) : null;
+        }
+        this._patchColumn(card.dataset.issueId, toColumnId, targetColumn, extraFields);
+        this._savePositions(targetCards, toColumnId, projectId);
       }
     }
 
@@ -120,30 +163,46 @@
       });
     }
 
-    async _patchStatus(issueId, statusId, targetColumn) {
-      const card  = this._dragging;
-      const token = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || '';
+    async _patchColumn(issueId, columnId, targetColumn, extraFields = {}) {
+      const card       = this._dragging;
+      const token      = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || '';
+      const columnType = this.element.dataset.columnType || 'status';
+
+      const body = { issue_id: issueId, column_id: columnId, column_type: columnType, ...extraFields };
+      if (columnType === 'version') {
+        body.fixed_version_id = columnId === '0' ? null : parseInt(columnId);
+      } else {
+        body.status_id = parseInt(columnId);
+      }
+
       try {
-        const res = await fetch(`/issues/${issueId}`, {
+        const res = await fetch('/board_positions/update_card', {
           method: 'PATCH',
           credentials: 'same-origin',
-          redirect: 'manual',
-          headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-            'X-CSRF-Token': token
-          },
-          body: new URLSearchParams({ 'issue[status_id]': statusId, 'authenticity_token': token }).toString()
+          headers: { 'Content-Type': 'application/json', 'X-CSRF-Token': token },
+          body: JSON.stringify(body)
         });
-        if (res.type !== 'opaqueredirect') {
+
+        if (!res.ok) {
           this._revert(card, targetColumn);
+          return;
         }
+
+        const data = await res.json();
+        if (!data.applied) {
+          this._revert(card, targetColumn);
+          return;
+        }
+
+        window.IssuePanel?.invalidate?.(issueId);
       } catch (_) {
         this._revert(card, targetColumn);
       }
     }
 
-    async _savePositions(cards, statusId, projectId) {
+    async _savePositions(cards, columnId, projectId) {
       if (!projectId) return;
+      const columnType = this.element.dataset.columnType || 'status';
       const issueIds = Array.from(cards.querySelectorAll('.board-card-wrapper'))
                             .map(c => c.dataset.issueId);
       const token = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || '';
@@ -155,7 +214,7 @@
             'Content-Type': 'application/json',
             'X-CSRF-Token': token
           },
-          body: JSON.stringify({ status_id: statusId, project_id: projectId, issue_ids: issueIds })
+          body: JSON.stringify({ column_id: columnId, column_type: columnType, project_id: projectId, issue_ids: issueIds })
         });
       } catch (_) {}
     }
@@ -172,6 +231,13 @@
       if (!column) return;
       const count = column.querySelector('.board-column__cards').childElementCount;
       const badge = column.querySelector('.board-column__count');
+      if (badge) badge.textContent = count;
+    }
+
+    _updateGroupCount(row) {
+      if (!row) return;
+      const count = row.querySelectorAll('.board-card-wrapper').length;
+      const badge = row.querySelector('.board-grouped__group-count');
       if (badge) badge.textContent = count;
     }
   });

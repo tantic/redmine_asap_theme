@@ -49,7 +49,19 @@
       }
 
       // Public API consommée par gantt_controller / todo_controller / inbox_controller
-      window.IssuePanel = { open: (url) => this.open(url), close: () => this.close() };
+      window.IssuePanel = {
+        open:       (url) => this.open(url),
+        close:      ()    => this.close(),
+        invalidate: (issueId) => {
+          for (const key of this._cache.keys()) {
+            if (key.includes(`/issues/${issueId}`)) this._cache.delete(key);
+          }
+          if (this._currentUrl?.includes(`/issues/${issueId}`)) {
+            this.bodyTarget.innerHTML = '<div class="issue-panel__loading">Chargement…</div>';
+            this._load(this._currentUrl);
+          }
+        }
+      };
     }
 
     disconnect() {
@@ -531,23 +543,23 @@
         credentials: 'same-origin',
         headers
       }).then(res => {
+        form.style.opacity = '';
         if (res.ok) {
-          this.bodyTarget.style.opacity = '';
           this._cache.delete(issueUrl);
           this._cache.delete(res.url);
-          const destUrl = /\/issues\/\d+/.test(new URL(res.url).pathname) ? res.url : issueUrl;
+          const destPath = new URL(res.url).pathname;
+          const destUrl = /\/issues\/(new|\d+)/.test(destPath) ? res.url : issueUrl;
           this._currentUrl = destUrl;
           this.externalTarget.href = destUrl;
           this.bodyTarget.innerHTML = '<div class="issue-panel__loading">Chargement…</div>';
+          const addPanel = (u) => u.includes('panel=') ? u : u + (u.includes('?') ? '&' : '?') + 'panel=1';
           if (this._turboMode) {
-            const panelUrl = destUrl + (destUrl.includes('?') ? '&' : '?') + 'panel=1';
-            this.bodyTarget.setAttribute('src', panelUrl);
+            this.bodyTarget.setAttribute('src', addPanel(destUrl));
           } else {
             this._load(destUrl);
           }
           this._refreshParentList();
         } else {
-          this.bodyTarget.style.opacity = '';
           this.bodyTarget.innerHTML = '<p style="padding:2rem;color:#ef4444;">Erreur (' + res.status + ')</p>';
         }
       }).catch(() => {

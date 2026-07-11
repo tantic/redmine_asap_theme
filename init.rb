@@ -4,7 +4,7 @@ Redmine::Plugin.register :redmine_asap_theme do
   name 'Redmine Asap Theme plugin'
   author 'DGAC/DSNA - Tantic'
   description 'UX/UI based on Tailwindcss'
-  version '2.3.0'
+  version '2.4.0'
   url 'https://github.com/tantic/redmine_asap_theme'
   author_url 'https://github.com/tantic'
 
@@ -40,6 +40,7 @@ require rat_helpers
 libraries =
   [
     'hooks',
+    'notification_listener',
   ]
 libraries.each do |library|
   require_dependency File.expand_path(library, lib_dir)

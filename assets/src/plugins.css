@@ -1,3 +1,69 @@
+/* Quick nav (command palette) */
+.qn-section {
+    @apply px-4 pt-3 pb-1 text-[10px] font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-wider;
+}
+.qn-item {
+    @apply flex items-center gap-3 px-4 py-2.5 cursor-pointer;
+}
+.qn-item:hover,
+.qn-item.qn-active {
+    @apply bg-gray-100 dark:bg-gray-800;
+}
+.qn-id {
+    @apply text-[10px] font-mono text-gray-400 dark:text-gray-500 shrink-0 w-12;
+}
+.qn-label {
+    @apply text-sm text-gray-800 dark:text-gray-100 truncate flex-1;
+}
+.qn-meta {
+    @apply text-[10px] text-gray-500 dark:text-gray-400 shrink-0 truncate max-w-[140px] bg-gray-100 dark:bg-gray-700 rounded px-1.5 py-0.5;
+}
+.qn-project-icon {
+    @apply w-4 h-4 text-gray-400 dark:text-gray-500 shrink-0;
+}
+.qn-empty {
+    @apply px-4 py-8 text-sm text-gray-400 dark:text-gray-500 text-center;
+}
+
+/* Notifications */
+.notif-item {
+    @apply flex items-start gap-3 px-4 py-3 border-b border-gray-100 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors;
+}
+.notif-icon {
+    @apply w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5;
+}
+.notif-icon--assigned  { @apply bg-blue-100 text-blue-600 dark:bg-blue-900/40 dark:text-blue-400; }
+.notif-icon--mentioned { @apply bg-purple-100 text-purple-600 dark:bg-purple-900/40 dark:text-purple-400; }
+.notif-body { @apply flex-1 min-w-0; }
+.notif-message {
+    @apply text-xs text-gray-700 dark:text-gray-200 leading-snug;
+}
+.notif-ago {
+    @apply text-[10px] text-gray-400 dark:text-gray-500 mt-0.5;
+}
+.notif-dismiss {
+    @apply flex-shrink-0 w-5 h-5 rounded flex items-center justify-center text-gray-300 hover:text-gray-500 dark:text-gray-600 dark:hover:text-gray-300 transition-colors cursor-pointer;
+}
+
+/* Keyboard shortcuts — selected item highlight */
+tr.issue.ks-selected {
+    background-color: rgb(239 246 255) !important;
+    outline: 2px solid rgb(96 165 250);
+    outline-offset: -2px;
+}
+.dark tr.issue.ks-selected {
+    background-color: rgb(30 58 138 / 0.2) !important;
+    outline-color: rgb(59 130 246);
+}
+.board-card-wrapper.ks-selected {
+    outline: 2px solid rgb(96 165 250);
+    outline-offset: -2px;
+    border-radius: 6px;
+}
+.dark .board-card-wrapper.ks-selected {
+    outline-color: rgb(59 130 246);
+}
+
 /* Additionals */
 
 #my-page.dashboard {
@@ -356,6 +422,13 @@ ul.cf-checklist-menu a {
 .controller-inbox {
     tr.issue td.subject {
         white-space: normal;
+    }
+}
+
+/* Notes */
+.controller-notes {
+    #content {
+        padding: 0px !important;
     }
 }
 
@@ -882,3 +955,89 @@ body:has(#maintenance_mode_banner) #sticky-issue-header {
     background: #374151;
 }
 
+/* ── Todo (redmine_asap_user_features) ──────────────────────────────── */
+.todo-add-input {
+    @apply w-full px-3 py-1.5 text-xs text-gray-500 dark:text-gray-400
+           bg-transparent border border-dashed border-gray-200 dark:border-gray-700
+           rounded-lg outline-none
+           placeholder:text-gray-400 dark:placeholder:text-gray-500
+           focus:border-blue-300 dark:focus:border-blue-600
+           focus:bg-white dark:focus:bg-gray-800
+           focus:text-gray-900 dark:focus:text-gray-100
+           transition-colors;
+}
+
+/* ── Todo card (redmine_asap_user_features) ──────────────────────────── */
+.todo-card {
+    padding-left: 0.625rem;
+}
+.todo-card__top {
+    @apply flex items-start gap-2;
+    input[type="checkbox"] {
+        margin-top: 1px;
+    }
+}
+.todo-card__footer {
+    @apply flex items-center gap-2 mt-1.5;
+}
+
+/* ── Notes (redmine_asap_user_features) ──────────────────────────────── */
+.notes-panel {
+    @apply w-64 shrink-0 border-r border-gray-200 dark:border-gray-700
+           flex flex-col h-full bg-gray-50 dark:bg-gray-900;
+}
+.notes-panel__header {
+    @apply flex items-center justify-between px-4 py-4
+           border-b border-gray-200 dark:border-gray-700;
+}
+.notes-panel__title {
+    @apply text-sm font-semibold text-gray-700 dark:text-gray-200;
+}
+.notes-list-item {
+    @apply py-1.5 cursor-pointer border-b border-gray-100 dark:border-gray-800
+           hover:bg-white dark:hover:bg-gray-800
+           select-none transition-colors;
+}
+.notes-list-item.is-active {
+    @apply bg-white dark:bg-gray-800;
+    box-shadow: inset 2px 0 0 #3b82f6;
+}
+.notes-list-item__title {
+    @apply block text-sm font-medium text-gray-800 dark:text-gray-200 truncate;
+}
+.notes-list-item__date {
+    @apply block text-[10px] text-gray-400 dark:text-gray-500;
+}
+.notes-title-input {
+    @apply w-full text-xl font-bold text-gray-900 dark:text-gray-100
+           bg-transparent border-none outline-none
+           placeholder:text-gray-300 dark:placeholder:text-gray-600;
+}
+.notes-content-input {
+    @apply w-full grow min-h-0 resize-none text-sm text-gray-700 dark:text-gray-300
+           bg-transparent border-none outline-none
+           leading-relaxed font-mono
+           placeholder:text-gray-300 dark:placeholder:text-gray-600;
+}
+/* jsToolBar wrapper chain must also grow to fill the flex column */
+[data-notes-target="editPane"] .jstBlock,
+[data-notes-target="editPane"] .jstEditor {
+    flex: 1 1 0;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+}
+.notes-preview-pane {
+    @apply p-4 cursor-text bg-white mx-8 dark:bg-gray-800 shadow rounded-lg;
+    min-height: 10rem;
+}
+.notes-preview-pane[data-empty]::before {
+    content: "Cliquez pour rédiger...";
+    @apply text-gray-300 dark:text-gray-600 text-sm italic;
+}
+.notes-list-add-child {
+    @apply shrink-0 p-0.5 rounded text-gray-400
+           hover:bg-gray-200 dark:hover:bg-gray-600
+           hover:text-gray-600 dark:hover:text-gray-200
+           transition-colors;
+}

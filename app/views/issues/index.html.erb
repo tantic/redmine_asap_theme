@@ -1,15 +1,22 @@
 <% board_enabled = User.current.pref[:board_view_enabled].to_s == '1' %>
-<% view_mode = (board_enabled && params[:view].presence) || 'table' %>
+<% view_mode = (board_enabled && (params[:view].presence || @query.try(:board_view))) || 'table' %>
 <% if board_enabled %>
 <script>
 (function() {
   var url = new URL(window.location.href);
   if (url.searchParams.has('view')) {
     localStorage.setItem('issues_view_mode', url.searchParams.get('view'));
+    var bct = url.searchParams.get('query[board_column_type]');
+    if (bct) localStorage.setItem('issues_board_column_type', bct);
+    // intentionally do NOT remove when absent — preserves last chosen column type
   } else {
     var stored = localStorage.getItem('issues_view_mode');
     if (stored === 'board') {
       url.searchParams.set('view', 'board');
+      var storedBct = localStorage.getItem('issues_board_column_type');
+      if (storedBct && storedBct !== 'status') {
+        url.searchParams.set('query[board_column_type]', storedBct);
+      }
       window.location.replace(url.toString());
     }
   }
@@ -28,7 +35,7 @@
     <%= link_to request.params.merge('view' => 'board', 'page' => nil),
           class: "view-switcher__btn#{' active' if view_mode == 'board'}" do %>
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 4.5v15m6-15v15m-10.875 0h15.75c.621 0 1.125-.504 1.125-1.125V5.625c0-.621-.504-1.125-1.125-1.125H4.125C3.504 4.5 3 5.004 3 5.625v12.75c0 .621.504 1.125 1.125 1.125z" /></svg>
-      Board
+      <%= l(:label_board) %>
     <% end %>
   </div>
   <% end %>
@@ -53,7 +60,8 @@
 <% html_title(@query.new_record? ? l(:label_issue_plural) : @query.name) %>
 <%= @query.persisted? && @query.description.present? ? content_tag('p', @query.description, class: 'subtitle') : '' %>
 
-<%= form_tag(_project_issues_path(@project), :method => :get, :id => 'query_form') do %>
+<%= form_tag(_project_issues_path(@project), :method => :get, :id => 'query_form',
+      class: view_mode == 'board' ? 'board-view-mode' : nil) do %>
   <%= hidden_field_tag 'view', view_mode if view_mode != 'table' %>
   <%= render :partial => 'queries/query_form' %>
 <% end %>
@@ -84,7 +92,7 @@
     <%= query_as_hidden_field_tags(@query) %>
     <%= hidden_field_tag('query_name', @query.name) %>
     <p>
-      <label><%= radio_button_tag 'c[]', '', true %> <%= l(:description_selected_columns) %></label><br />
+      <label><%= radio_button_tag 'c[]', '', true %> <%= l(:description_selected_columns) %></label><br>
       <label><%= radio_button_tag 'c[]', 'all_inline' %> <%= l(:description_all_columns) %></label>
     </p>
     <% if @query.available_block_columns.any? %>

@@ -38,6 +38,7 @@ class IssueFieldsController < ApplicationController
     end
 
     if @issue.update(field => params[:value])
+      AsapNotification.create_for_issue_update(@issue, @issue.current_journal) rescue nil
       response_data = { success: true, rendered_html: render_field_html(field),
                         lock_version: @issue.lock_version,
                         last_journal_id: @issue.journals.maximum(:id) }

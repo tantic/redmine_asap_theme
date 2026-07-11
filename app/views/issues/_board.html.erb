@@ -1,5 +1,5 @@
-<% board_issues = query.issues(limit: 500, include: [:assigned_to, :tracker, :priority, :category, :fixed_version]) %>
-<% board_statuses = board_issues.map(&:status).uniq.sort_by(&:position) %>
+<% board_issue_count = query.issue_count %>
+<% board_issues = query.issues(include: [:assigned_to, :tracker, :priority, :category, :fixed_version, :parent]) %>
 <% cl_badge = {}
    if defined?(Checklist)
      _ids    = board_issues.map(&:id)
@@ -8,59 +8,124 @@
      _totals.each { |id, t| cl_badge[id] = { label: "#{_done[id].to_i}/#{t}", done: _done[id].to_i == t } }
    end %>
 <% is_grouped = query.grouped? %>
+<% board_column_type = query.respond_to?(:board_column_type) ? query.board_column_type : 'status' %>
+<% group_field_map = {
+     'fixed_version' => 'fixed_version_id',
+     'category'      => 'category_id',
+     'assigned_to'   => 'assigned_to_id',
+     'priority'      => 'priority_id',
+     'tracker'       => 'tracker_id',
+     'status'        => 'status_id',
+     'parent_issue'  => 'parent_issue_id',
+   }
+   group_by_field = is_grouped ? group_field_map[query.group_by_column.name.to_s].to_s : '' %>
+
+<%# Build column list and helpers depending on column type %>
+<% if board_column_type == 'version'
+     project_versions = project ? project.versions.to_a : []
+     if query.respond_to?(:board_version_ids) && query.board_version_ids.present?
+       board_columns = project_versions
+                         .select { |v| query.board_version_ids.include?(v.id) }
+                         .sort_by { |v| [v.effective_date.to_s, v.name] }
+     else
+       used_version_ids = board_issues.map(&:fixed_version_id).compact.uniq
+       board_columns = project_versions
+                         .select { |v| used_version_ids.include?(v.id) }
+                         .sort_by { |v| [v.effective_date.to_s, v.name] }
+     end
+     board_columns = [nil] + board_columns if board_issues.any? { |i| i.fixed_version_id.nil? }
+     col_id_for     = ->(col) { col&.id || 0 }
+     col_name_for   = ->(col) { col ? col.name : l(:label_none) }
+     col_issues_for = ->(col, issues) { issues.select { |i| i.fixed_version_id == col&.id } }
+     new_issue_params = ->(col) { { fixed_version_id: col&.id }.compact }
+   else
+     if query.respond_to?(:board_status_ids) && query.board_status_ids.present?
+       board_columns = IssueStatus.where(id: query.board_status_ids).sort_by(&:position)
+     else
+       used_status_ids = board_issues.map(&:status_id).uniq
+       board_columns = IssueStatus.where(id: used_status_ids).sort_by(&:position)
+     end
+     col_id_for     = ->(col) { col.id }
+     col_name_for   = ->(col) { col.name }
+     col_issues_for = ->(col, issues) { issues.select { |i| i.status_id == col.id } }
+     new_issue_params = ->(col) { { status_id: col.id } }
+   end %>
+
 <% if is_grouped
      grouped_issues = board_issues.group_by { |i| query.group_by_column.value(i) }
-                                  .sort_by { |v, _| [v.nil? ? 1 : 0, v.respond_to?(:position) ? v.position.to_i : v.to_s] }
+                                  .sort_by { |v, _| [v.nil? ? 1 : 0, v.is_a?(Issue) ? v.id.to_i : (v.respond_to?(:position) ? v.position.to_i : v.to_s)] }
    end %>
-<% pos_map = project ? BoardCardPosition.positions_for(board_issues.map(&:id), project.id) : {} %>
+<% pos_map = project ? BoardCardPosition.positions_for(board_issues.map(&:id), project.id, board_column_type) : {} %>
 
+<% if board_issue_count > 1000 %>
+  <div class="flash warning"><%= l(:warning_board_too_many_issues, count: board_issue_count) %></div>
+<% end %>
 <%= form_tag({}, data: {cm_url: issues_context_menu_path}) do %>
   <%= hidden_field_tag 'back_url', url_for(params: request.query_parameters), id: nil %>
 
   <% if is_grouped %>
     <div class="board-view board-view--grouped" data-controller="board"
-         data-project-id="<%= project&.id %>">
-      <div class="board-grouped__header-row">
-        <div class="board-grouped__group-label"></div>
-        <% board_statuses.each do |status| %>
-          <div class="board-grouped__col-header">
-            <%= status.name %>
-          </div>
+         data-project-id="<%= project&.id %>"
+         data-column-type="<%= board_column_type %>"
+         data-group-by="<%= group_by_field %>">
+      <div class="board-grouped__inner">
+      <div class="board-grouped__col-headers">
+        <% board_columns.each do |col| %>
+          <div class="board-grouped__col-header"><%= col_name_for.(col) %></div>
         <% end %>
       </div>
       <% grouped_issues.each do |group_value, group_issues| %>
-        <% group_label = group_value.respond_to?(:name) ? group_value.name : group_value.to_s %>
-        <% group_label = l(:label_none) if group_label.blank? %>
-        <div class="board-grouped__row">
-          <div class="board-grouped__group-label"><%= group_label %></div>
-          <% board_statuses.each do |status| %>
-            <div class="board-column board-column--cell" data-status-id="<%= status.id %>">
-              <div class="board-column__cards"
-                   data-action="dragover->board#dragover dragleave->board#dragleave drop->board#drop">
-                <% group_issues.select { |i| i.status_id == status.id }
-                               .sort_by { |i| pos_map[[i.id, status.id]]&.position || Float::INFINITY }
-                               .each do |issue| %>
-                  <%= render partial: 'issues/board_card', locals: { issue: issue, cl_badge: cl_badge } %>
-                <% end %>
+        <% group_label = if group_value.is_a?(Issue)
+                           group_value.subject
+                         elsif group_value.respond_to?(:name)
+                           group_value.name
+                         else
+                           group_value.to_s
+                         end
+           group_label = l(:label_none) if group_label.blank?
+           group_tooltip = group_value.is_a?(Issue) ? "##{group_value.id} - #{group_value.subject}" : group_label %>
+        <div class="board-grouped__row" data-group-id="<%= group_value.respond_to?(:id) ? group_value.id.to_s : '' %>">
+          <div class="board-grouped__group-header" data-action="click->board#toggleGroup" title="<%= group_tooltip %>">
+            <svg class="board-grouped__chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+            <span class="board-grouped__group-name"><%= group_label %></span>
+            <span class="board-grouped__group-count"><%= group_issues.size %></span>
+          </div>
+          <div class="board-grouped__columns-row">
+            <% board_columns.each do |col| %>
+              <div class="board-column board-column--cell" data-column-id="<%= col_id_for.(col) %>">
+                <div class="board-column__cards"
+                     data-action="dragover->board#dragover dragleave->board#dragleave drop->board#drop">
+                  <% col_issues_for.(col, group_issues)
+                                    .sort_by { |i| pos_map[[i.id, col_id_for.(col)]]&.position || Float::INFINITY }
+                                    .each do |issue| %>
+                    <%= render partial: 'issues/board_card', locals: { issue: issue, cl_badge: cl_badge } %>
+                  <% end %>
+                </div>
               </div>
-            </div>
-          <% end %>
+            <% end %>
+          </div>
         </div>
       <% end %>
+      </div>
     </div>
   <% else %>
-    <div class="board-view" data-controller="board" data-project-id="<%= project&.id %>">
-      <% board_issues.group_by(&:status).sort_by { |s, _| s.position }.each do |status, col_issues| %>
-        <% sorted = col_issues.sort_by { |i| pos_map[[i.id, status.id]]&.position || Float::INFINITY } %>
-        <div class="board-column" data-status-id="<%= status.id %>">
+    <div class="board-view" data-controller="board"
+         data-project-id="<%= project&.id %>"
+         data-column-type="<%= board_column_type %>">
+      <% board_columns.each do |col| %>
+        <% col_issues = col_issues_for.(col, board_issues) %>
+        <% sorted = col_issues.sort_by { |i| pos_map[[i.id, col_id_for.(col)]]&.position || Float::INFINITY } %>
+        <div class="board-column" data-column-id="<%= col_id_for.(col) %>">
           <div class="board-column__header">
-            <span class="board-column__title"><%= status.name %></span>
+            <span class="board-column__title"><%= col_name_for.(col) %></span>
             <div class="flex items-center gap-1.5">
               <span class="board-column__count"><%= col_issues.count %></span>
-              <a href="<%= _new_project_issue_path(project, issue: {status_id: status.id}) %>"
-                 class="board-column__add"
-                 title="<%= l(:label_issue_new) %>"
-                 data-action="click->board#newIssue">+</a>
+              <% if project %>
+                <a href="<%= _new_project_issue_path(project, issue: new_issue_params.(col)) %>"
+                   class="board-column__add"
+                   title="<%= l(:label_issue_new) %>"
+                   data-action="click->board#newIssue">+</a>
+              <% end %>
             </div>
           </div>
           <div class="board-column__cards"

@@ -7,7 +7,7 @@
     }
     div.issue,
     div.tab-content {
-        @apply relative bg-white dark:bg-gray-800 shadow p-8 border border-gray-100 dark:border-gray-800;
+        @apply relative bg-white dark:bg-gray-900 shadow p-8 border border-gray-100 dark:border-gray-800;
         .time_entry.journal {
             .journal-info {
                 > .gravatar {
@@ -43,10 +43,10 @@
         }
 
         .author {
-            @apply text-gray-500 dark:text-gray-300 font-light mt-0 text-[11px];
+            @apply text-gray-500 dark:text-gray-300 font-light mt-0 text-2xs;
             a.user.active {
                 span {
-                    @apply p-0 shadow-none align-bottom border-0 text-[11px]!;
+                    @apply p-0 shadow-none align-bottom border-0 text-2xs!;
                     img {
                         @apply w-4 h-4;
                     }
@@ -98,7 +98,7 @@
                 }
             }
             .issues-stat {
-                @apply flex items-center text-[11px];
+                @apply flex items-center text-2xs;
             }
             .badge-issues-count {
                 @apply flex items-center mr-2;
@@ -179,11 +179,11 @@
             .journal-header {
                 @apply text-xs bg-gray-50 border-b-0 rounded-t dark:bg-gray-900 dark:text-gray-100 border-t-1 border-l-1 border-r-1 border-gray-200 dark:border-gray-700 flex w-full items-center mb-1;
                 .journal-info {
-                    @apply flex flex-row md:flex-col md:flex-row items-center items-center font-light dark:text-gray-100  pl-4 text-[11px];
+                    @apply flex flex-row md:flex-col md:flex-row items-center items-center font-light dark:text-gray-100  pl-4 text-2xs;
                     > a {
                         @apply mx-1 text-gray-800 dark:text-gray-100;
                         span {
-                            @apply text-[11px];
+                            @apply text-2xs;
                             .gravatar {
                                 @apply hidden;
                             }
@@ -192,7 +192,7 @@
                     > a.user {
                         @apply px-0;
                         > span {
-                            @apply px-0! border-0! bg-gray-50! dark:bg-gray-700;
+                            @apply px-0! border-0! bg-gray-50! dark:bg-gray-700!;
                         }
                     }
                 }
@@ -215,16 +215,16 @@
                 @apply mb-0! overflow-x-auto;
             }
             .journal-content {
-                @apply dark:bg-gray-900  border border-r border-l border-b border-gray-200 dark:border-gray-700 rounded-b overflow-x-auto;
+                @apply dark:bg-gray-800  border border-r border-l border-b border-gray-200 dark:border-gray-700 rounded-b overflow-x-auto;
 
                 .journal-note {
                     @apply py-2 px-4;
                 }
                 .journal-details {
-                    @apply text-[11px] list-disc pl-6  dark:text-gray-100 text-blue-900 pr-4 py-4;
+                    @apply text-2xs list-disc pl-6  dark:text-gray-100 text-blue-900 pr-4 py-4;
                     a.issue {
                         > span {
-                            @apply text-[11px];
+                            @apply text-2xs;
                         }
                     }
                 }
@@ -285,25 +285,25 @@
     }
 
     div.issue div.attributes {
-        @apply relative mt-4 bg-white dark:bg-gray-900 rounded-lg border border-gray-200 dark:border-gray-800 mb-4 overflow-hidden;
+        @apply relative mt-4 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-900 mb-4 overflow-hidden;
     }
 
     .attributes-grid {
         align-items: stretch;
         /* le row-gap expose le background du container = ligne séparatrice */
-        @apply md:grid md:grid-cols-2 gap-[1px] bg-gray-200 dark:bg-gray-700;
+        @apply md:grid md:grid-cols-2 gap-[1px] bg-gray-200 dark:bg-gray-800;
 
         div.attribute {
-            @apply flex items-stretch gap-0 min-w-0 bg-white dark:bg-gray-900;
+            @apply flex items-stretch gap-0 min-w-0 bg-white dark:bg-gray-700;
             /* Override Redmine core: clear:left, min-height:1.8em, padding-left:180px */
             clear: none !important;
             min-height: 0 !important;
             align-self: stretch;
             .label {
-                @apply flex items-center text-[12px] px-6 py-2.5 bg-gray-50 dark:bg-gray-800 w-22 md:w-44 text-gray-500 dark:text-gray-400 shrink-0 self-stretch;
+                @apply flex items-center text-[calc(12px*var(--font-scale,1))] px-6 py-2.5 bg-gray-50 dark:bg-gray-800 w-22 md:w-44 text-gray-500 dark:text-gray-400 shrink-0 self-stretch;
             }
             .value {
-                @apply flex text-[12px] items-center flex-1 relative min-w-0;
+                @apply flex text-[calc(12px*var(--font-scale,1))] items-center flex-1 relative min-w-0;
                 > span,
                 > div > span {
                     @apply min-w-0 w-full px-6 py-2.5;
@@ -319,6 +319,10 @@
                     @apply hidden;
                 }
             }
+        }
+        div.attribute:last-child:nth-child(odd),
+        div.attribute:nth-child(odd):has(+ .tags) {
+            grid-column: span 2;
         }
         div.attribute.version_cf,
         div.attribute.link_cf {
@@ -359,9 +363,9 @@
         }
         .tags {
             grid-column: span 2;
-            @apply flex! flex-row! items-stretch! px-0! py-0! gap-0! min-w-0 bg-white! dark:bg-gray-900!;
+            @apply flex! flex-row! items-stretch! px-0! py-0! gap-0! min-w-0 bg-white! dark:bg-gray-800!;
             span.label {
-                @apply flex items-center text-[12px] px-6 py-2.5 w-22 md:w-44 bg-gray-50 dark:bg-gray-800 text-gray-500 dark:text-gray-400 shrink-0 self-stretch font-normal!;
+                @apply flex items-center text-[calc(12px*var(--font-scale,1))] px-6 py-2.5 w-22 md:w-44 bg-gray-50 dark:bg-gray-800 text-gray-500 dark:text-gray-400 shrink-0 self-stretch font-normal!;
             }
             #tags-data,
             #edit-tags-form {
@@ -371,7 +375,7 @@
                 @apply inline-flex items-center rounded px-2 py-0.5 mr-1 mb-1 text-xs font-medium;
             }
             #tags-data {
-                @apply hover:bg-yellow-50 dark:bg-gray-900 dark:hover:bg-gray-800 rounded pr-2;
+                @apply hover:bg-yellow-50 dark:bg-gray-700 dark:hover:bg-gray-700 rounded pr-2;
             }
             .select2-selection__choice {
                 @apply dark:bg-gray-800;
@@ -387,7 +391,7 @@
                         @apply border border-gray-100 dark:border-gray-500 mr-2;
                     }
                     .button-small {
-                        @apply py-0 text-[12px] px-1 mr-2;
+                        @apply py-0 text-[calc(12px*var(--font-scale,1))] px-1 mr-2;
                     }
                 }
             }
@@ -482,7 +486,7 @@
     }
 
     .issue-panel__drawer {
-        @apply w-full sm:w-2/3 md:w-1/2 h-full bg-white dark:bg-gray-800 shadow-2xl flex flex-col overflow-hidden;
+        @apply w-full sm:w-2/3 md:w-1/2 h-full bg-white dark:bg-gray-900 shadow-2xl flex flex-col overflow-hidden;
         transform: translateX(100%);
         transition: transform 0.3s ease;
     }
@@ -544,7 +548,7 @@
             .attribute {
                 .label {
                     a {
-                        @apply pointer-events-none cursor-default no-underline text-[12px] text-gray-500;
+                        @apply pointer-events-none cursor-default no-underline text-[calc(12px*var(--font-scale,1))] text-gray-500;
                     }
                 }
             }
@@ -563,7 +567,7 @@ body.issue-panel-open {
 
 .add-note-section {
     .box {
-        @apply shadow-none! p-0! border-none!;
+        @apply shadow-none! p-0! border-none! dark:bg-gray-900;
     }
 }
 
@@ -676,7 +680,7 @@ body.issue-panel-open {
             /*display: none !important;*/
         }
         #tab-content-history {
-            @apply pb-0 dark:bg-gray-800! pl-4;
+            @apply pb-0  pl-4;
         }
         &.add-note-section {
             @apply ml-0 mr-0 py-4 rounded;
@@ -706,14 +710,42 @@ body.issue-panel-open {
             @apply w-44 md:w-1/2 lg:w-44;
         }
     }
+
+    /* New issue form — override tabular layout to stack labels above fields */
+    .box.tabular,
+    fieldset.tabular {
+        p {
+            padding-left: 0 !important;
+            clear: both;
+            overflow: visible;
+        }
+        label:not(.floating):not(.block):not(.inline):not(.no-css) {
+            float: none !important;
+            margin-left: 0 !important;
+            width: auto !important;
+            text-align: left !important;
+            display: block;
+            margin-bottom: 2px;
+        }
+        input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]),
+        select,
+        textarea {
+            max-width: 100% !important;
+            width: 100% !important;
+            box-sizing: border-box;
+        }
+        .select2-container {
+            width: 100% !important;
+        }
+    }
 }
 
 .controller-issues {
     div.journals.add-note-section {
-        @apply mx-6 mb-4 mt-0! py-6 px-10 border border-gray-100 dark:border-gray-400 rounded;
+        @apply mx-6 mb-4 mt-0! py-6 px-10 border border-gray-100 dark:border-gray-700 rounded;
     }
     .bloc-journals {
-        @apply mx-0 bg-white pb-8 dark:bg-gray-800;
+        @apply mx-0 bg-white pb-8 dark:bg-gray-900;
     }
     #issue-subject-edit-input {
         @apply w-full;
@@ -742,6 +774,46 @@ body.issue-panel-open {
         &.active {
             @apply bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 shadow-sm;
         }
+    }
+}
+
+/* ── Board mode: masquer les options non pertinentes du query form ─ */
+form.board-view-mode #list-definition > div:has(div.query-columns),
+form.board-view-mode
+    #list-definition
+    > div:has(input[type="checkbox"][name="c[]"]) {
+    display: none !important;
+}
+
+/* ── Board column options ───────────────────────────────────────── */
+#board-options {
+    #board-options-inner {
+        margin: 0 15px;
+    }
+    .board-options__row {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        gap: 5px 10px;
+        margin: 6px 0;
+        > .field {
+            width: 160px;
+            label {
+                @apply font-normal;
+            }
+        }
+    }
+    .board-status-list {
+        @apply flex flex-col gap-0.5;
+    }
+    .board-status-picker__item {
+        @apply flex items-center gap-1.5 text-sm font-normal py-0.5 cursor-pointer;
+        input[type="checkbox"] {
+            @apply flex-shrink-0;
+        }
+    }
+    .board-status-hint {
+        @apply text-xs text-gray-400 dark:text-gray-500 italic mb-1;
     }
 }
 
@@ -856,13 +928,17 @@ body.issue-panel-open {
 /* Drag & drop insertion indicator */
 .board-card-wrapper.drop-before::before,
 .board-card-wrapper.drop-after::after {
-    content: '';
+    content: "";
     display: block;
     height: 2px;
     @apply bg-blue-500 rounded-full;
 }
-.board-card-wrapper.drop-before::before { margin-bottom: 0.375rem; }
-.board-card-wrapper.drop-after::after   { margin-top: 0.375rem; }
+.board-card-wrapper.drop-before::before {
+    margin-bottom: 0.375rem;
+}
+.board-card-wrapper.drop-after::after {
+    margin-top: 0.375rem;
+}
 
 /* Column + button */
 .board-column__add {
@@ -877,11 +953,15 @@ body.issue-panel-open {
 
 /* Grouped board layout */
 .board-view--grouped {
-    @apply flex-col gap-0 overflow-x-auto;
+    @apply overflow-x-auto;
 }
 
-.board-grouped__header-row {
-    @apply flex gap-3 items-center pb-1 sticky top-0 bg-white dark:bg-gray-950 z-10;
+.board-grouped__inner {
+    @apply flex flex-col gap-0 min-w-max;
+}
+
+.board-grouped__col-headers {
+    @apply flex gap-3 pb-2 sticky top-0 bg-white dark:bg-gray-950 z-10;
 }
 
 .board-grouped__col-header {
@@ -889,18 +969,74 @@ body.issue-panel-open {
            text-xs font-semibold text-gray-600 dark:text-gray-300 uppercase tracking-wide;
 }
 
-.board-grouped__group-label {
-    @apply w-36 shrink-0 text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide;
+.board-grouped__row {
+    @apply flex flex-col mb-1;
 }
 
-.board-grouped__row {
-    @apply flex gap-3 items-start py-2 border-b border-gray-100 dark:border-gray-800;
-    .board-grouped__group-label {
-        @apply pt-2;
+.board-grouped__group-header {
+    @apply flex items-center gap-2 px-3 py-2
+           border-b-2 border-gray-200 dark:border-gray-700
+           cursor-pointer select-none
+           hover:bg-gray-50 dark:hover:bg-gray-900 transition-colors;
+}
+
+.board-grouped__chevron {
+    @apply shrink-0 transition-transform duration-200 text-gray-400 dark:text-gray-500;
+}
+
+.board-grouped__group-name {
+    @apply text-sm font-semibold text-gray-700 dark:text-gray-200 truncate;
+}
+
+.board-grouped__group-count {
+    @apply shrink-0 text-[10px] font-normal bg-gray-200 dark:bg-gray-700
+           text-gray-500 dark:text-gray-400 rounded-full px-1.5 py-0.5;
+}
+
+.board-grouped__columns-row {
+    @apply flex gap-3 items-start py-2 mb-1;
+}
+
+.board-grouped__row.is-collapsed {
+    .board-grouped__chevron {
+        @apply -rotate-90;
+    }
+    .board-grouped__columns-row {
+        @apply hidden;
     }
 }
 
 .board-column--cell {
     @apply w-64 shrink-0;
     max-height: none;
+}
+
+/* Bouton crayon dans le header de la description */
+.field-edit-pencil--header {
+    opacity: 0.45;
+    color: #6b7280;
+    width: 28px;
+    height: 28px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.25rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition:
+        opacity 0.15s,
+        background-color 0.15s;
+    flex-shrink: 0;
+}
+.field-edit-pencil--header:hover,
+[data-controller~="field-edit"]:hover .field-edit-pencil--header {
+    opacity: 1;
+    background-color: #e5e7eb;
+    color: #3b82f6;
+    @apply dark:bg-gray-900;
+}
+.field-edit--active .field-edit-pencil--header {
+    opacity: 0;
+    pointer-events: none;
 }

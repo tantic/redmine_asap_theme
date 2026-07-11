@@ -1,6 +1,10 @@
 <?xml version="1.0"?>
 <svg xmlns="http://www.w3.org/2000/svg" class="icon--sprite">
   <defs>
+    <symbol viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" id="icon--keyboard">
+      <rect x="2" y="4" width="20" height="16" rx="2"/>
+      <path d="M6 8h.01M10 8h.01M14 8h.01M18 8h.01M8 12h.01M12 12h.01M16 12h.01M7 16h10"/>
+    </symbol>
     <symbol viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" id="icon--adjustments">
       <path d="M4 10a2 2 0 1 0 4 0a2 2 0 0 0 -4 0"/>
       <path d="M6 4v4"/>
