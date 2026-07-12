@@ -142,13 +142,13 @@ Issues
     <td align="center">
         <a href="doc/screenshots/issues-dark.png">
             <img src="doc/screenshots/issues-dark.png" width="200"><br>
-                Kanban board view
+                Dark theme issues
         </a>
     </td>
     <td align="center">
     <a href="doc/screenshots/shortcuts.png">
         <img src="doc/screenshots/shortcuts.png" height="100"><br>
-            Mobile view
+            Shortcuts
     </a>
     </td>
     
