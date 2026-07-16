@@ -5,7 +5,8 @@ This plugin try to propose a new UX/UI for Redmine with new tools like Stimulus/
 * Status : first version usable but need to be used and improved (feedback appreciated)
 * Compatibility :
   * 2.1.6 work for Redmine 6.0.x
-  * >= 2.2.0 work for Redmine 6.1.x only
+  * `>=` 2.2.0 work for Redmine 6.1.x only
+  * 2.4.0 should work for Redmine 7.0 (need to be more tested)
 
 
 If you want to test it quickly with docker, you can use the repo https://github.com/tantic/redmine_asap_docker.git
@@ -136,6 +137,15 @@ Issues
             Mobile view 2
     </a>
     </td>
+  </tr>
+ <tr>
+    <td align="center">
+    <a href="doc/screenshots/shortcuts.png">
+        <img src="doc/screenshots/shortcuts.png" height="100"><br>
+            Shortcuts
+    </a>
+    </td>
+    
   </tr>
 </table>
 
