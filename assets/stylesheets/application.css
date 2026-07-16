@@ -5186,6 +5186,61 @@ div.flash.warning svg.icon-svg, .conflict svg.icon-svg {
 :where(.dark, .dark *) .markdown-alert-note .markdown-alert-title svg {
   stroke: #93c5fd;
 }
+:where(.dark, .dark *) table.filecontent {
+  border-color: #374151;
+  background-color: #111827;
+  color: #d1d5db;
+}
+:where(.dark, .dark *) table.filecontent th {
+  border-color: #374151;
+  background-color: #1f2937;
+}
+:where(.dark, .dark *) table.filecontent th.filename {
+  background-color: #27303f;
+}
+:where(.dark, .dark *) table.filecontent tr.spacing td {
+  background: #1f2937;
+}
+:where(.dark, .dark *) table.filecontent th.line-num {
+  color: #6b7280;
+}
+:where(.dark, .dark *) table.filecontent tr:target th.line-num {
+  background-color: #374151;
+  color: #9ca3af;
+}
+:where(.dark, .dark *) table.filecontent tr:target td.line-code {
+  background-color: #1e3a5f;
+}
+:where(.dark, .dark *) table.annotate td.line-code {
+  background-color: #111827;
+  border-left-color: #374151;
+}
+:where(.dark, .dark *) .diff_out {
+  background: #5c2323;
+}
+:where(.dark, .dark *) .diff_out span {
+  background: #7a2f2f;
+}
+:where(.dark, .dark *) .diff_in {
+  background: #1f4d2e;
+}
+:where(.dark, .dark *) .diff_in span {
+  background: #2d6b40;
+}
+:where(.dark, .dark *) .tribute-container ul {
+  background-color: #1f2937;
+  border-color: #374151;
+}
+:where(.dark, .dark *) .tribute-container li {
+  color: #d1d5db;
+}
+:where(.dark, .dark *) .tribute-container li.highlight {
+  background-color: #3b5f8a;
+  color: #fff;
+}
+:where(.dark, .dark *) .tribute-container li.no-match {
+  color: #6b7280;
+}
 .controller-admin, .controller-projects {
   table.projects {
     tr.project {
@@ -7968,7 +8023,7 @@ table.list:not(.odd-even) tbody tr:nth-child(odd):hover, .odd:hover, #issue-chan
     transform: translateX(0);
   }
   .issue-panel__toolbar {
-    z-index: 10;
+    z-index: 50;
     display: flex;
     height: calc(var(--spacing) * 14);
     flex-shrink: 0;
