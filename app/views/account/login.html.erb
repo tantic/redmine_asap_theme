@@ -30,9 +30,11 @@
           <%= password_field_tag 'password', nil, :tabindex => '2', :autocomplete => 'current-password', :autofocus => params[:username].present? %>
           <%= link_to l(:label_password_lost), lost_password_path, :class => "lost_password ml-auto text-blue-700 hover:text-blue-800 dark:text-blue-100 dark:hover:text-blue-200 text-xs" if Setting.lost_password? %>
         </div>
-
+       
         <% if Setting.autologin? %>
-          <label for="autologin"><%= check_box_tag 'autologin', 1, false, :tabindex => 4 %> <%= l(:label_stay_logged_in) %></label>
+          <div class="mb-6">
+            <label for="autologin"><%= check_box_tag 'autologin', 1, false, :tabindex => 4 %> <%= l(:label_stay_logged_in) %></label>
+          </div>
         <% end %>
 
         <input type="submit" name="login" value="<%=l(:button_login)%>" tabindex="5" id="login-submit" class="w-full cursor-pointer flex text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded text-sm px-3 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" />
